@@ -1,0 +1,73 @@
+/*------------------------------------------------------------------
+[Dynamic styles for Twitter widget]
+[Table of contents]
+
+1. Shared styles
+2. RTL styles
+3. Footer styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.wproto_tweets_widget {
+	.tweets-block i.fa {
+		margin-right: 20px;
+	}
+	i.fa {
+		color: @color_accent_blue;
+	}
+	.item {
+		margin-bottom: 18px;
+		padding-left: 35px;
+		position: relative;
+		i.fa {
+			position: absolute;
+			top: 4px;
+			left: 0;
+		}
+	}
+	.item:last-of-type {
+		margin-bottom: 0;
+	}
+	.time {
+		display: block;
+		color: @color_text_lighten;
+		@text_font_size: @primary_font_size - 4;
+		font-size: ~'@{text_font_size}px';
+		line-height: 1.4em;
+		padding-top: 5px;
+	}
+}
+
+/*------------------------------------------------------------------
+	2. RTL styles
+-------------------------------------------------------------------*/
+body.rtl .wproto_tweets_widget {
+	.tweets-block i.fa {
+		margin-left: 20px;
+		margin-right: 0;
+	}
+	.item {
+		padding-right: 35px;
+		padding-left: 0;
+		i.fa {
+			left: auto;
+			right: 0;
+		}
+	}
+}
+
+/*------------------------------------------------------------------
+	3. Footer styles
+-------------------------------------------------------------------*/
+#footer-widgets {
+	.wproto_tweets_widget {
+		i.fa {
+			color: @footer_accent_color;
+		}
+		.time {
+			color: @footer_headers_color;
+		}
+	}
+}

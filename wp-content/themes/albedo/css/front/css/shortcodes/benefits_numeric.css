@@ -1,0 +1,78 @@
+/*------------------------------------------------------------------
+[BENEFITS_NUMERIC.CSS - Benefits shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-numeric-benefits a {
+  text-decoration: none;
+}
+.shortcode-numeric-benefits h4 {
+  margin-bottom: 18px;
+  transition: all 0.3s;
+}
+.shortcode-numeric-benefits .item-inside {
+  position: relative;
+  margin-bottom: 70px;
+}
+.shortcode-numeric-benefits .benefit-text {
+  padding-left: 40px;
+  padding-top: 10px;
+  position: relative;
+  z-index: 2;
+}
+.shortcode-numeric-benefits .item-inside {
+  position: relative;
+}
+.shortcode-numeric-benefits .number {
+  font-size: 120px;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  font-weight: bold;
+}
+.shortcode-numeric-benefits .button {
+  margin-top: 20px;
+}
+body.rtl .shortcode-numeric-benefits .benefit-text {
+  padding-right: 40px;
+  padding-left: 0;
+}
+body.rtl .shortcode-numeric-benefits .number {
+  left: auto;
+  right: 0;
+}
+.shortcode-numeric-benefits.style-photo .item {
+  padding: 120px 140px 100px 140px;
+  margin-bottom: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.shortcode-numeric-benefits.style-photo .item:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.85);
+  transition: all 0.3s;
+}
+.shortcode-numeric-benefits.style-photo .item-inside {
+  margin: 0;
+}
+@media screen and (max-width: 1600px) {
+  .shortcode-numeric-benefits.style-photo .item {
+    padding: 120px 90px 100px 90px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .shortcode-numeric-benefits.style-photo .item {
+    padding: 120px 30px 100px 30px;
+  }
+}

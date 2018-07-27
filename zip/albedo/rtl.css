@@ -1,0 +1,116 @@
+/*------------------------------------------------------------------
+[RTL.CSS - Right-to-left styles]
+[Table of contents]
+
+1. Shared styles, typography
+2. Forms
+3. Lightbox
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles, typography
+-------------------------------------------------------------------*/
+body {
+	direction: rtl;
+	unicode-bidi: embed;
+}
+.dropcap p:first-child:first-letter {
+	float: right;
+	margin-right: 0;
+	margin-left: 30px;
+}
+ul li:before {
+	margin-right: 0;
+	margin-left: 25px;
+	left: auto;
+	right: 0;
+}
+ul, ol {
+	margin-left: 0;
+	margin-right: 18px;
+}
+ul li, ol li {
+	padding-right: 35px;
+	padding-left: 0;
+}
+ol li:before {
+	right: 0;
+	left: auto;
+}
+img.alignright, .wp-caption.alignright {
+	float: left;
+	margin: 0 34px 34px 0;
+}
+img.alignleft, .wp-caption.alignleft {
+	float: right;
+	margin: 0 0 34px 34px;
+}
+.alignright {
+	float: left;
+}
+.alignleft {
+	float: right;
+}
+.button-align-left {
+	text-align: right;
+}
+.button-align-right {
+	text-align: left;
+}
+.icon-position-right i {
+	margin-right: 10px;
+}
+.icon-position-left i {
+	margin-left: 10px;
+}
+table th {
+	text-align: right;
+}
+.fw-pricing.style-3 .desc-col {
+	text-align: left;
+}
+@media screen and (max-width: 992px) {
+	.fw-pricing.style-3 .desc-col {
+		text-align: center;	
+	}
+}
+/*------------------------------------------------------------------
+	2. Forms
+-------------------------------------------------------------------*/
+.fs-dropdown button.fs-dropdown-item,
+.fs-dropdown button.fs-dropdown-selected {
+	text-align: right;
+}
+.fs-dropdown button.fs-dropdown-selected {
+	background-position: 30px center;
+	padding: 13px 28px 13px 40px;
+}
+.fs-dropdown button.fs-dropdown-item {
+	background-position: 22px center;
+	padding: 14px 20px 14px 40px;
+}
+.fs-checkbox-marker {
+	float: right;
+	margin: 0 0 10px 10px;
+}
+.fs-checkbox-flag:before {
+	margin: 1px 4px 0 0;
+}
+.fs-checkbox-toggle .fs-checkbox-state_on {
+  float: right;
+}
+.fs-checkbox-toggle .fs-checkbox-state_off {
+  float: left;
+}
+ul.fw-form-errors {
+	margin-right: 0;
+}
+ul.fw-form-errors li {
+	padding-left: 0;
+	padding-right: 18px;
+}
+/*------------------------------------------------------------------
+	3. Lightbox
+-------------------------------------------------------------------*/
+.lg-toolbar .lg-icon { float: left; }
+#lg-counter { padding-right: 20px; padding-left: 0; }

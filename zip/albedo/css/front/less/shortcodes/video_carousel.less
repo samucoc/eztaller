@@ -1,0 +1,46 @@
+/*------------------------------------------------------------------
+[VIDEO_CAROUSEL.CSS - Video Carousel shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-videos-carousel {
+	.swiper-container {
+		padding: 0 0 30px 0;
+		cursor: pointer;
+	}
+	.swiper-slide-prev, .swiper-slide-next {
+		opacity: 0.5;
+	}
+	.pagination-buttons, .slide-content {
+		text-align: center;
+	}
+	.pagination-btn {
+		position: static;
+		display: inline-block;
+		width: 17px;
+		height: 32px;
+		background-size: 23px auto;
+		background-repeat: no-repeat;
+		background-position: center center;
+		margin: 0 5px;
+	}
+	figure {
+		position: relative;
+	}
+	figure:after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-left: -30px;
+		margin-top: -30px;
+		width: 60px;
+		height: 60px;
+		background-size: 60px auto;
+	}
+}

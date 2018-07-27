@@ -1,0 +1,194 @@
+/*------------------------------------------------------------------
+[TESTIMONIALS.CSS - Quotes / Testimonials shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+2. White / Dark styles
+3. Grey styles
+4. Blue styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-testimonials.style-simple_white,
+.shortcode-testimonials.style-simple_dark {
+	position: relative;
+	margin-bottom: 34px;
+}
+.shortcode-testimonials.style-simple_white .swiper-nav-button,
+.shortcode-testimonials.style-simple_dark .swiper-nav-button {
+	display: none;
+}
+.shortcode-testimonials.style-simple_white .swiper-pagination-bullet,
+.shortcode-testimonials.style-simple_dark .swiper-pagination-bullet {
+	transition: all 0.3s;
+}
+.shortcode-testimonials.style-simple_white .content-photo img,
+.shortcode-testimonials.style-simple_dark .content-photo img {
+	border-radius: 100%;
+	width: 80px;
+	height: 80px;
+	margin-bottom: 18px;
+}
+.shortcode-testimonials.style-simple_white .slide-content:before,
+.shortcode-testimonials.style-simple_dark .slide-content:before,
+.shortcode-testimonials.style-simple_grey .slide-content:before {
+	content: '';
+	width: 40px;
+	height: 40px;
+	background-size: 40px auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+	position: absolute;
+}
+.shortcode-testimonials.style-simple_white .signature,
+.shortcode-testimonials.style-simple_dark .signature {
+	margin-bottom: 18px;
+}
+.shortcode-testimonials .slide-content {
+	cursor: move;
+}
+.shortcode-testimonials.style-simple_grey,
+.shortcode-testimonials.style-simple_blue {
+	margin-bottom: 34px;
+	.slide-content {
+		padding: 35px 40px 70px 40px;
+	}
+	.about-author {
+		margin-top: 45px;
+	}
+}
+/*------------------------------------------------------------------
+	2. White / Dark styles
+-------------------------------------------------------------------*/
+.shortcode-testimonials.style-simple_white,
+.shortcode-testimonials.style-simple_dark {
+	.slide-content {
+		padding: 35px 35px 70px 110px;
+	}
+	.slide-content:before {
+		left: 40px;
+		top: 35px;
+	}
+	.text {
+		line-height: 1.4em;
+		margin-bottom: 24px;
+	}
+	.author {
+		margin-bottom: 3px;
+		font-weight: bold;
+	}
+	.swiper-pagination {
+		left: 110px;
+		right: 35px;
+		bottom: 25px;
+		text-align: left;
+	}
+}
+.shortcode-testimonials.style-simple_white.no-pagination,
+.shortcode-testimonials.style-simple_dark.no-pagination {
+	.slide-content {
+		padding: 35px 35px 35px 110px;
+	}
+}
+@media screen and (max-width: 992px) {
+	.shortcode-testimonials.style-simple_white.no-pagination,
+	.shortcode-testimonials.style-simple_dark.no-pagination {
+		.slide-content {
+			padding-left: 35px;
+		}
+		.slide-content:before {
+			display: none;
+		}
+	}
+}
+body.rtl {
+	.shortcode-testimonials.style-simple_white,
+	.shortcode-testimonials.style-simple_dark {
+		.slide-content {
+			padding: 35px 110px 70px 35px;
+		}
+		.slide-content:before {
+			left: auto;
+			right: 40px;
+		}
+		.swiper-pagination {
+			right: 110px;
+			left: 35px;
+			text-align: right;
+		}
+	}
+	.shortcode-testimonials.style-simple_white.no-pagination,
+	.shortcode-testimonials.style-simple_dark.no-pagination {
+		.slide-content {
+			padding: 35px 110px 35px 35px;
+		}
+	}
+}
+@media screen and (max-width: 992px) {
+	body.rtl .shortcode-testimonials.style-simple_white.no-pagination,
+	body.rtl .shortcode-testimonials.style-simple_dark.no-pagination {
+		.slide-content {
+			padding-right: 35px;
+			padding-left: 35px;
+		}
+	}
+}
+/*------------------------------------------------------------------
+	3. Grey styles
+-------------------------------------------------------------------*/
+.shortcode-testimonials.style-simple_grey {
+	text-align: center;
+	.author, .text {
+		text-transform: uppercase;
+	}
+	.swiper-pagination {
+		left: 15px;
+		right: 15px;
+		bottom: 25px;
+		text-align: center;
+	}
+	.slide-content {
+		padding-top: 100px;
+	}
+	.slide-content:before {
+		position: absolute;
+		top: 25px;
+		left: 50%;
+		width: 60px;
+		height: 60px;
+		background-size: 60px auto;
+		margin-left: -30px;
+	}
+}
+.shortcode-testimonials.style-simple_grey.no-pagination {
+	.slide-content {
+		padding: 100px 40px 35px 40px;
+	}
+}
+/*------------------------------------------------------------------
+	4. Blue styles
+-------------------------------------------------------------------*/
+.shortcode-testimonials.style-simple_blue {
+	position: relative;
+	.author {
+		font-weight: bold;
+	}
+	.swiper-pagination {
+		left: 40px;
+		right: 40px;
+		bottom: 25px;
+		text-align: left;
+	}
+}
+.shortcode-testimonials.style-simple_blue.no-pagination {
+	.slide-content {
+		padding: 40px;
+	}
+}
+body.rtl .shortcode-testimonials.style-simple_blue {
+	.swiper-pagination {
+		text-align: right;
+	}
+}

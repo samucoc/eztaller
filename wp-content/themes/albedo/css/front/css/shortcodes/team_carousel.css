@@ -1,0 +1,77 @@
+/*------------------------------------------------------------------
+[TEAM_CAROUSEL.CSS - Team cards shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.team-carousel img {
+  display: block;
+}
+.team-carousel .swiper-slide-prev .photo,
+.team-carousel .swiper-slide-next .photo {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+}
+.team-carousel .swiper-slide-prev .toggle-text,
+.team-carousel .swiper-slide-next .toggle-text {
+  max-height: 0;
+  transition: max-height 0.5s;
+}
+.team-carousel .text-content {
+  padding: 50px 60px;
+  transition: all 0.3s;
+  text-align: center;
+}
+.team-carousel .text-inside {
+  overflow: hidden;
+}
+.team-carousel .swiper-slide {
+  transition: margin 0.3s;
+}
+.team-carousel .swiper-slide-active {
+  z-index: 10;
+  margin-top: -50px;
+}
+.team-carousel .swiper-slide-active .toggle-text {
+  max-height: 300px;
+}
+.team-carousel .swiper-slide-active .text-content {
+  margin-top: -20px;
+}
+.team-carousel .photo {
+  z-index: 1;
+  position: relative;
+}
+.team-carousel .photo img {
+  margin: 0 auto;
+}
+.team-carousel .text-content {
+  z-index: 5;
+  position: relative;
+}
+.team-carousel .swiper-container {
+  padding-bottom: 15px;
+  padding-top: 50px;
+}
+.team-carousel .name {
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+.team-carousel .position {
+  padding-bottom: 16px;
+}
+.team-carousel .text {
+  padding-bottom: 24px;
+}
+.team-carousel .social a {
+  margin: 0 4px;
+  font-size: 16px;
+}
+@media screen and (max-width: 767px) {
+  .team-carousel .text-content {
+    padding: 30px;
+  }
+}

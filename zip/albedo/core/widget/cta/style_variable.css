@@ -1,0 +1,64 @@
+/*------------------------------------------------------------------
+[Call to action widget styles]
+[Table of contents]
+
+1. Shared styles
+2. Responsive styles
+-------------------------------------------------------------------*/
+/** preloader colors **/
+/** layout **/
+/** base typography **/
+/** links colors **/
+/** boxes **/
+/** content elements **/
+/** dropcaps **/
+/** accent colors **/
+/** gradients **/
+/** borders and backgrounds **/
+/** buttons **/
+/** forms **/
+/** top bar **/
+/** menu styles **/
+/** submenu styles **/
+/** second menu **/
+/** second menu **/
+/** breadcrumbs **/
+/** header **/
+/** header text color **/
+/** menu container **/
+/** footer **/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.wproto_cta_widget .centered {
+  text-align: center;
+}
+.wproto_cta_widget .widget-title {
+  margin-bottom: 0;
+  font-size: 36px !important;
+  line-height: 46px !important;
+}
+.wproto_cta_widget .button {
+  margin-top: 10px;
+}
+.wproto_cta_widget .free_text {
+  margin-top: 50px;
+}
+.wproto_cta_widget .share-links {
+  margin-top: 24px;
+}
+.wproto_cta_widget .share-links i {
+  margin: 0 7px;
+}
+/*------------------------------------------------------------------
+	2. Responsive styles
+-------------------------------------------------------------------*/
+@media screen and (max-width: 995px) {
+  .wproto_cta_widget .widget-title {
+    font-size: 28px !important;
+    line-height: 38px !important;
+  }
+  .wproto_cta_widget .widget-title br {
+    display: none;
+  }
+}

@@ -1,0 +1,44 @@
+/*------------------------------------------------------------------
+[BENEFITS_NUMERIC_VARIABLE.CSS - Benefits shortcode variable styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-numeric-benefits {
+	h4 {
+		color: @h4_font_color;
+		@text_font_size: @primary_font_size + 4;
+		font-size: ~'@{text_font_size}px';
+		line-height: 1.4em;
+	}
+	.desc {
+		color: @primary_font_color;
+	}
+	.item:hover {
+		h4 {
+			color: @color_accent_grey;
+		}
+	}
+	.number {
+		color: rgba( red( @color_accent_light_grey ), green( @color_accent_light_grey ), blue( @color_accent_light_grey ), 0.5 );
+		font-family: @secondary_font_family;
+	}
+}
+.shortcode-numeric-benefits.style-photo {
+	.item {
+		background-color: @color_accent_black;
+	}
+	h4, .desc, .item:hover h4 {
+		color :#fff;
+	}
+	.number {
+		color: rgba(255,255,255,0.2);
+	}
+	.item:hover:before {
+		background: @color_accent_blue;
+	}
+}

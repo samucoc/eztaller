@@ -1,0 +1,36 @@
+/*------------------------------------------------------------------
+[BLOG_SCROLL_POSTS_VARIABLE.CSS - Scroll posts block variable styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-blog-scroll-posts {
+	background-color: @box_bg_color;
+	box-shadow: ~'@{box_shadow_h_length}px @{box_shadow_v_length}px @{box_shadow_blur_radius}px 0px @{box_shadow_color}';
+	border-radius: ~'@{content_elements_radius}px';
+	border: ~'@{box_border_size}px solid @{box_border_color}';
+	h4 a {
+		color: @color_text_darken;
+	}
+	h4 a:hover {
+		color: @color_text_lighten;
+	}
+	.item:after {
+		background-color: @color_accent_light_grey;
+	}
+	h4, .post-excerpt {
+		font-size: ~'@{smaller_font_size}px';
+		line-height: ~'@{smaller_font_line_height}px';
+	}
+	.post-data {
+		font-size: ~'@{small_font_size}px';
+		line-height: ~'@{small_font_line_height}px';
+	}
+	.date {
+		color: @color_text_lighten;
+	}
+}

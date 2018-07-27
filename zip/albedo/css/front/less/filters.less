@@ -1,0 +1,141 @@
+/*------------------------------------------------------------------
+[FILTERS.CSS - Portfolio / filters block]
+[Table of contents]
+
+1. Shared styles
+2. Minimal style
+3. Minimal alt style
+4. Minimal third style
+5. Active button style
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.posts-filters {
+	margin-bottom: 55px;
+	a {
+		text-decoration: none;
+		transition: color 0.3s;
+		display: inline-block;
+	}
+}
+.posts-filters.filters-align-center {
+	text-align: center;
+}
+
+/*------------------------------------------------------------------
+	2. Minimal style
+-------------------------------------------------------------------*/
+.posts-filters.filters-style-minimal,
+.posts-filters.filters-style-minimal_alt,
+.posts-filters.filters-style-minimal_third,
+.posts-filters.filters-style-active_button {
+	a {
+		margin-right: 40px;
+		margin-bottom: 5px;
+		color: @color_text_darken;
+		font-weight: bold;
+		font-size: ~'@{smaller_font_size}px';
+		text-transform: uppercase;
+	}
+	a:hover, a.current {
+		color: @color_text_lighten;
+	}
+	.separator {
+		display: none;
+	}
+}
+body.rtl {
+	.posts-filters.filters-style-minimal a,
+	.posts-filters.filters-style-minimal_alt a {
+		margin-right: 0;
+		margin-left: 40px;
+	}
+}
+.posts-filters.filters-style-minimal.filters-align-center,
+.posts-filters.filters-style-minimal_alt.filters-align-center {
+	a {
+		margin: 0 20px 5px 20px;
+	}
+}
+
+/*------------------------------------------------------------------
+	3. Minimal alt style
+-------------------------------------------------------------------*/
+.posts-filters.filters-style-minimal_alt {
+	span.icon {
+		margin-right: 40px;
+		margin-bottom: 5px;
+		display: inline-block;
+		width: 30px;
+		height: 20px;
+		@color_escaped: escape( ~'@{color_accent_grey}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20viewBox%3D%220%200%20458.379%20458.379%22%20style%3D%22enable-background%3Anew%200%200%20458.379%20458.379%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cg%3E%0A%09%3Cg%3E%0A%09%09%3Cg%3E%0A%09%09%09%3Ccircle%20fill%3D%22@{color_escaped}%22%20cx%3D%2253.792%22%20cy%3D%2253.311%22%20r%3D%2253.311%22%2F%3E%0A%09%09%09%3Ccircle%20fill%3D%22@{color_escaped}%22%20cx%3D%22404.908%22%20cy%3D%2253.311%22%20r%3D%2253.311%22%2F%3E%0A%09%09%09%3Ccircle%20fill%3D%22@{color_escaped}%22%20cx%3D%22229.35%22%20cy%3D%2253.311%22%20r%3D%2253.311%22%2F%3E%0A%09%09%09%3Ccircle%20fill%3D%22@{color_escaped}%22%20cx%3D%2253.472%22%20cy%3D%22229.19%22%20r%3D%2253.312%22%2F%3E%0A%09%09%09%3Ccircle%20fill%3D%22@{color_escaped}%22%20cx%3D%22404.587%22%20cy%3D%22229.19%22%20r%3D%2253.312%22%2F%3E%0A%09%09%09%3Ccircle%20fill%3D%22@{color_escaped}%22%20cx%3D%22229.03%22%20cy%3D%22229.19%22%20r%3D%2253.312%22%2F%3E%0A%09%09%09%3Ccircle%20fill%3D%22@{color_escaped}%22%20cx%3D%2253.472%22%20cy%3D%22405.068%22%20r%3D%2253.311%22%2F%3E%0A%09%09%09%3Ccircle%20fill%3D%22@{color_escaped}%22%20cx%3D%22404.587%22%20cy%3D%22405.068%22%20r%3D%2253.311%22%2F%3E%0A%09%09%09%3Ccircle%20fill%3D%22@{color_escaped}%22%20cx%3D%22229.03%22%20cy%3D%22405.068%22%20r%3D%2253.311%22%2F%3E%0A%09%09%3C%2Fg%3E%0A%09%3C%2Fg%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A")';
+		background-size: 30px auto;
+		background-repeat: no-repeat;
+	}
+	a, span {
+		vertical-align: middle;
+	}
+}
+body.rtl {
+	.posts-filters.filters-style-minimal_alt span.icon {
+		margin-right: 0;
+		margin-left: 40px;
+	}
+}
+.posts-filters.filters-style-minimal_alt.filters-align-center {
+	span.icon {
+		margin: 0 20px 5px 20px;
+	}
+}
+
+/*------------------------------------------------------------------
+	3. Minimal third style
+-------------------------------------------------------------------*/
+.posts-filters.filters-style-minimal_third {
+	a {
+		margin: 0 0 5px 0;
+	}
+	a:hover, a.current {
+		color: @color_accent_blue;
+	}
+	.separator {
+		margin: 0 20px 5px 20px;
+		display: inline-block;
+		vertical-align: middle;
+		font-weight: lighter;
+		color: @color_text_lighten;
+		@font_size: @primary_font_size + 4;
+		font-size: ~'@{font_size}px';
+		line-height: normal;
+	}
+	.separator:last-of-type {
+		display: none;
+	}
+}
+
+/*------------------------------------------------------------------
+	4. Active button style
+-------------------------------------------------------------------*/
+.posts-filters.filters-style-active_button {
+	a {
+		padding: 10px 25px;
+		margin: 0 0 5px 0;
+		line-height: normal;
+		font-family: @medium_button_font_family;
+		font-weight: @medium_button_font_weight;
+		font-style: @medium_button_font_style;
+		text-transform: @medium_button_font_transform;
+		font-size: ~'@{medium_button_font_size}px';
+	}
+	a.current {
+		@medium_button_animation_time_real: @medium_button_animation_time / 1000;
+		border: ~'@{medium_button_border} solid @{color_accent_blue}';
+		border-radius: ~'@{medium_button_radius}px';
+		color: @color_accent_inner;
+		background-color: @color_accent_blue;
+		box-shadow: ~'@{medium_button_shadow_h_length}px @{medium_button_shadow_v_length}px @{medium_button_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+	}
+}

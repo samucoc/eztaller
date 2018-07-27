@@ -1,0 +1,83 @@
+/*------------------------------------------------------------------
+[TESTIMONIALS_GRID.CSS - Testimonials shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-testimonials-grid ul.grid,
+.shortcode-testimonials-grid ul.grid > li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.shortcode-testimonials-grid ul.grid > li:before {
+  display: none;
+}
+.shortcode-testimonials-grid ul.grid {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.shortcode-testimonials-grid ul.grid > li {
+  display: block;
+  float: left;
+  padding: 15px;
+  opacity: 0;
+}
+.shortcode-testimonials-grid ul.grid > li.shown {
+  opacity: 1;
+}
+.shortcode-testimonials-grid .text {
+  margin-bottom: 20px;
+}
+.shortcode-testimonials-grid .author {
+  font-weight: bold;
+}
+.shortcode-testimonials-grid .item-content {
+  padding: 60px 40px 40px 40px;
+  background-size: 40px auto;
+  background-position: right 40px bottom 40px;
+  background-repeat: no-repeat;
+  margin-bottom: 70px;
+  position: relative;
+}
+.shortcode-testimonials-grid .photo {
+  position: absolute;
+  top: -30px;
+}
+.shortcode-testimonials-grid .photo img {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  display: block;
+}
+body.rtl .shortcode-testimonials-grid .item-content {
+  background-position: left 40px bottom 40px;
+}
+.shortcode-testimonials-grid.cols-4 ul.grid > li {
+  width: 25%;
+}
+.shortcode-testimonials-grid.cols-3 ul.grid > li {
+  width: 33.33333%;
+}
+.shortcode-testimonials-grid.cols-2 ul.grid > li {
+  width: 50%;
+}
+.shortcode-testimonials-grid.cols-1 ul.grid > li {
+  width: 100%;
+}
+@media screen and (max-width: 992px) {
+  .shortcode-testimonials-grid.cols-4 ul.grid li,
+  .shortcode-testimonials-grid.cols-3 ul.grid li {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .shortcode-testimonials-grid.cols-4 ul.grid li,
+  .shortcode-testimonials-grid.cols-3 ul.grid li,
+  .shortcode-testimonials-grid.cols-2 ul.grid li {
+    width: 100%;
+  }
+}

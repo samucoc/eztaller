@@ -1,0 +1,67 @@
+/*------------------------------------------------------------------
+[BENEFITS_CAROUSEL.CSS - Benefits carousel shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-benefits-carousel .swiper-slide {
+  text-align: center;
+  padding-bottom: 90px;
+}
+.shortcode-benefits-carousel .icon {
+  margin-bottom: 25px;
+}
+.shortcode-benefits-carousel .icon i {
+  font-size: 70px;
+}
+.shortcode-benefits-carousel .icon img,
+.shortcode-benefits-carousel .icon svg {
+  width: 60px;
+}
+.shortcode-benefits-carousel .icon svg {
+  height: 60px;
+}
+.shortcode-benefits-carousel .swiper-pagination {
+  left: 0;
+  right: 0;
+  bottom: 25px;
+  text-align: center;
+}
+.shortcode-benefits-carousel .swiper-container {
+  overflow: visible;
+}
+.shortcode-benefits-carousel .swiper-container .swiper-slide {
+  opacity: 0;
+}
+.shortcode-benefits-carousel .swiper-container .swiper-slide-active,
+.shortcode-benefits-carousel .swiper-container .swiper-slide-next,
+.shortcode-benefits-carousel .swiper-container .swiper-slide-prev {
+  opacity: 1;
+}
+.shortcode-benefits-carousel a {
+  text-decoration: none;
+}
+.shortcode-benefits-carousel .benefit-text {
+  padding: 30px;
+  position: relative;
+}
+.shortcode-benefits-carousel .benefit-text:after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 16px 16px 16px;
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  margin-left: -16px;
+}
+.shortcode-benefits-carousel h4 {
+  margin-bottom: 18px;
+}
+.shortcode-benefits-carousel.no-pagination {
+  margin-bottom: 35px;
+}

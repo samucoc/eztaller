@@ -1,0 +1,88 @@
+/*------------------------------------------------------------------
+[PORTFOLIO_MASONRY.CSS - Portfolio masonry shortcode variable styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.portfolio-masonry-posts {
+	.bg-layer-1 {
+		background-color: rgba( red( @box_bg_color ), green( @box_bg_color ), blue( @box_bg_color ), 0.4 );
+	}
+	.bg-layer-2 {
+		background-color: rgba( red( @box_bg_color ), green( @box_bg_color ), blue( @box_bg_color ), 0.4 );
+	}
+	.bg-layer-1, .bg-layer-2 {
+		border-radius: ~'@{content_elements_radius}px';
+	}
+	.item {
+		box-shadow: ~'@{box_shadow_h_length}px @{box_shadow_v_length}px @{box_shadow_blur_radius}px 0px @{box_shadow_color}';
+	}
+	h4, a {
+		color: @color_accent_inner;
+	}
+	h4 {
+		font-size: ~'@{primary_font_size}px';
+		line-height: normal;
+	}
+	.post-categories a {
+		font-size: ~'@{smaller_font_size}px';
+		line-height: ~'@{smaller_font_line_height}px';
+	}
+	.post-link a {
+		@color_escaped: escape( ~'@{color_accent_inner}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%0A%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20viewBox%3D%220%200%20270.415%20270.415%22%20style%3D%22enable-background%3Anew%200%200%20270.415%20270.415%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cg%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M15%2C270.414c3.839%2C0%2C7.678-1.464%2C10.606-4.393l39.948-39.949c12.166%2C8.078%2C26.432%2C12.419%2C41.367%2C12.42%0A%09%09c0.002%2C0%2C0.001%2C0%2C0.002%2C0c20.025%2C0%2C38.852-7.797%2C53.014-21.951c0.006-0.006%2C0.013-0.011%2C0.018-0.017l28.266-28.266%0A%09%09c0.007-0.007%2C0.015-0.013%2C0.021-0.019l28.281-28.284c0.007-0.007%2C0.012-0.015%2C0.02-0.02c14.154-14.163%2C21.948-32.988%2C21.948-53.012%0A%09%09c0-14.936-4.342-29.202-12.419-41.367l39.948-39.949c5.858-5.857%2C5.858-15.354%2C0-21.213c-5.857-5.857-15.356-5.857-21.213%2C0%0A%09%09L204.86%2C44.343c-12.164-8.078-26.432-12.42-41.368-12.42c-20.026%2C0-38.856%2C7.797-53.019%2C21.953%0A%09%09c-0.006%2C0.006-0.012%2C0.01-0.017%2C0.016L82.184%2C82.166c-0.004%2C0.004-0.008%2C0.006-0.011%2C0.01l-28.276%2C28.277%0A%09%09c-0.002%2C0.001-0.004%2C0.002-0.005%2C0.004c-25.611%2C25.611-28.792%2C65.288-9.542%2C94.395L4.394%2C244.807%0A%09%09c-5.858%2C5.858-5.858%2C15.355%2C0%2C21.214C7.323%2C268.95%2C11.161%2C270.414%2C15%2C270.414z%20M75.105%2C131.67c0.001-0.001%2C0.003-0.003%2C0.005-0.005%0A%09%09l28.266-28.268c0.004-0.004%2C0.008-0.006%2C0.011-0.01l28.276-28.277c0.004-0.004%2C0.008-0.006%2C0.011-0.01%0A%09%09c8.499-8.498%2C19.799-13.178%2C31.818-13.178c6.829%2C0%2C13.425%2C1.516%2C19.408%2C4.379l-22.943%2C22.943c-5.858%2C5.858-5.858%2C15.355%2C0%2C21.214%0A%09%09c2.929%2C2.929%2C6.768%2C4.394%2C10.607%2C4.394c3.839%2C0%2C7.678-1.465%2C10.606-4.394l22.942-22.942c2.865%2C5.982%2C4.38%2C12.577%2C4.38%2C19.406%0A%09%09c0%2C12.02-4.682%2C23.32-13.182%2C31.819l-0.001%2C0.001l0%2C0l-28.26%2C28.263c-0.007%2C0.007-0.014%2C0.013-0.021%2C0.019l-28.278%2C28.277%0A%09%09c-0.003%2C0.004-0.006%2C0.006-0.01%2C0.01c-8.498%2C8.499-19.798%2C13.18-31.817%2C13.18c-6.829-0.001-13.425-1.516-19.407-4.38l22.942-22.942%0A%09%09c5.858-5.858%2C5.858-15.355%2C0-21.214c-5.857-5.857-15.355-5.857-21.213%2C0L66.321%2C182.88%0A%09%09C58.355%2C166.156%2C61.277%2C145.498%2C75.105%2C131.67z%22%2F%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A")';
+	}
+	.post-likes {
+		a:before {
+			@color: rgba( red( @color_accent_inner ), green( @color_accent_inner ), blue( @color_accent_inner ), 0.7 );
+			@color_escaped: escape( ~'@{color}' );
+			background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20viewBox%3D%220%200%20511.626%20511.626%22%20style%3D%22enable-background%3Anew%200%200%20511.626%20511.626%3B%22%0A%09%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cg%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M475.366%2C71.949c-24.175-23.606-57.575-35.404-100.215-35.404c-11.8%2C0-23.843%2C2.046-36.117%2C6.136%0A%09%09c-12.279%2C4.093-23.702%2C9.615-34.256%2C16.562c-10.568%2C6.945-19.65%2C13.467-27.269%2C19.556c-7.61%2C6.091-14.845%2C12.564-21.696%2C19.414%0A%09%09c-6.854-6.85-14.087-13.323-21.698-19.414c-7.616-6.089-16.702-12.607-27.268-19.556c-10.564-6.95-21.985-12.468-34.261-16.562%0A%09%09c-12.275-4.089-24.316-6.136-36.116-6.136c-42.637%2C0-76.039%2C11.801-100.211%2C35.404C12.087%2C95.55%2C0%2C128.286%2C0%2C170.16%0A%09%09c0%2C12.753%2C2.24%2C25.891%2C6.711%2C39.398c4.471%2C13.514%2C9.566%2C25.031%2C15.275%2C34.546c5.708%2C9.514%2C12.181%2C18.792%2C19.414%2C27.834%0A%09%09c7.233%2C9.041%2C12.519%2C15.272%2C15.846%2C18.698c3.33%2C3.426%2C5.948%2C5.903%2C7.851%2C7.427L243.25%2C469.938%0A%09%09c3.427%2C3.426%2C7.614%2C5.144%2C12.562%2C5.144s9.138-1.718%2C12.563-5.144l177.87-171.31c43.588-43.58%2C65.38-86.406%2C65.38-128.472%0A%09%09C511.626%2C128.279%2C499.54%2C95.546%2C475.366%2C71.949z%20M421.405%2C271.795L255.813%2C431.391L89.938%2C271.507%0A%09%09C54.344%2C235.922%2C36.55%2C202.133%2C36.55%2C170.156c0-15.415%2C2.046-29.026%2C6.136-40.824c4.093-11.8%2C9.327-21.177%2C15.703-28.124%0A%09%09c6.377-6.949%2C14.132-12.607%2C23.268-16.988c9.141-4.377%2C18.086-7.328%2C26.84-8.85c8.754-1.52%2C18.079-2.281%2C27.978-2.281%0A%09%09c9.896%2C0%2C20.557%2C2.424%2C31.977%2C7.279c11.418%2C4.853%2C21.934%2C10.944%2C31.545%2C18.271c9.613%2C7.332%2C17.845%2C14.183%2C24.7%2C20.557%0A%09%09c6.851%2C6.38%2C12.559%2C12.229%2C17.128%2C17.559c3.424%2C4.189%2C8.091%2C6.283%2C13.989%2C6.283c5.9%2C0%2C10.562-2.094%2C13.99-6.283%0A%09%09c4.568-5.33%2C10.28-11.182%2C17.131-17.559c6.852-6.374%2C15.085-13.222%2C24.694-20.557c9.613-7.327%2C20.129-13.418%2C31.553-18.271%0A%09%09c11.416-4.854%2C22.08-7.279%2C31.977-7.279s19.219%2C0.761%2C27.977%2C2.281c8.757%2C1.521%2C17.702%2C4.473%2C26.84%2C8.85%0A%09%09c9.137%2C4.38%2C16.892%2C10.042%2C23.267%2C16.988c6.376%2C6.947%2C11.612%2C16.324%2C15.705%2C28.124c4.086%2C11.798%2C6.132%2C25.409%2C6.132%2C40.824%0A%09%09C475.078%2C202.133%2C457.19%2C236.016%2C421.405%2C271.795z%22%2F%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A")';
+		}
+		a:after, a.clicked:before {
+			@color_escaped: escape( ~'@{color_accent_red}' );
+			background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20viewBox%3D%220%200%20511.626%20511.627%22%20style%3D%22enable-background%3Anew%200%200%20511.626%20511.627%3B%22%0A%09%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cg%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M475.366%2C71.951c-24.175-23.606-57.575-35.404-100.215-35.404c-11.8%2C0-23.843%2C2.046-36.117%2C6.136%0A%09%09c-12.279%2C4.093-23.702%2C9.615-34.256%2C16.562c-10.568%2C6.945-19.65%2C13.467-27.269%2C19.556c-7.61%2C6.091-14.845%2C12.564-21.696%2C19.414%0A%09%09c-6.854-6.85-14.087-13.323-21.698-19.414c-7.616-6.089-16.702-12.607-27.268-19.556c-10.564-6.95-21.985-12.468-34.261-16.562%0A%09%09c-12.275-4.089-24.316-6.136-36.116-6.136c-42.637%2C0-76.039%2C11.801-100.211%2C35.404C12.087%2C95.552%2C0%2C128.288%2C0%2C170.162%0A%09%09c0%2C12.753%2C2.24%2C25.889%2C6.711%2C39.398c4.471%2C13.514%2C9.566%2C25.031%2C15.275%2C34.546c5.708%2C9.514%2C12.181%2C18.796%2C19.414%2C27.837%0A%09%09c7.233%2C9.042%2C12.519%2C15.27%2C15.846%2C18.699c3.33%2C3.422%2C5.948%2C5.899%2C7.851%2C7.419L243.25%2C469.937c3.427%2C3.429%2C7.614%2C5.144%2C12.562%2C5.144%0A%09%09s9.138-1.715%2C12.563-5.137l177.87-171.307c43.588-43.583%2C65.38-86.41%2C65.38-128.475C511.626%2C128.288%2C499.537%2C95.552%2C475.366%2C71.951%0A%09%09z%22%2F%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A")';
+		}
+	}
+}
+.portfolio-masonry-posts.shadows-hidden {
+	.item {
+		box-shadow: none !important;
+	}
+}
+.portfolio-masonry-posts.overlay-blue .overlay {
+	background-color: rgba( red( @color_accent_blue ), green( @color_accent_blue ), blue( @color_accent_blue ), 0.8 );
+}
+.portfolio-masonry-posts.overlay-black .overlay {
+	background-color: rgba( red( @color_accent_black ), green( @color_accent_black ), blue( @color_accent_black ), 0.8 );
+}
+.portfolio-masonry-posts.overlay-grey .overlay {
+	background-color: rgba( red( @color_accent_grey ), green( @color_accent_grey ), blue( @color_accent_grey ), 0.8 );
+}
+.portfolio-masonry-posts.overlay-light_grey .overlay {
+	background-color: rgba( red( @color_accent_light_grey ), green( @color_accent_light_grey ), blue( @color_accent_light_grey ), 0.8 );
+}
+.portfolio-masonry-posts.overlay-red .overlay {
+	background-color: rgba( red( @color_accent_red ), green( @color_accent_red ), blue( @color_accent_red ), 0.8 );
+}
+.portfolio-masonry-posts.overlay-orange .overlay {
+	background-color: rgba( red( @color_accent_orange ), green( @color_accent_orange ), blue( @color_accent_orange ), 0.8 );
+}
+.portfolio-masonry-posts.overlay-green .overlay {
+	background-color: rgba( red( @color_accent_green ), green( @color_accent_green ), blue( @color_accent_green ), 0.8 );
+}
+.portfolio-masonry-posts.overlay-turquoise .overlay {
+	background-color: rgba( red( @color_accent_turquoise ), green( @color_accent_turquoise ), blue( @color_accent_turquoise ), 0.8 );
+}
+.portfolio-masonry-posts.overlay-yellow .overlay {
+	background-color: rgba( red( @color_accent_yellow ), green( @color_accent_yellow ), blue( @color_accent_yellow ), 0.8 );
+}
+.portfolio-masonry-posts.overlay-purple .overlay {
+	background-color: rgba( red( @color_accent_purple ), green( @color_accent_purple ), blue( @color_accent_purple ), 0.8 );
+}
+.portfolio-masonry-posts.overlay-dark_purple .overlay {
+	background-color: rgba( red( @color_accent_dark_purple ), green( @color_accent_dark_purple ), blue( @color_accent_dark_purple ), 0.8 );
+}

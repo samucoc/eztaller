@@ -1,0 +1,57 @@
+/*------------------------------------------------------------------
+[PHOTO_FULLSCREEN_CAROUSEL.CSS - Fullscreen photos carousel static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.photo-fullscreen-carousel {
+	overflow-x: hidden;
+	figure {
+		position: relative;
+		z-index: 1;
+		img {
+			max-height: 100%;
+			height: initial;
+			display: block;
+			margin: 0 auto;
+		}
+	}
+	.swiper-slide {
+		max-height: 100%;
+	}
+	.swiper-container {
+		padding-bottom: 80px;
+		overflow: visible;
+	}
+	figcaption {
+		position: absolute;
+		z-index: 10;
+		bottom: 60px;
+		left: 60px;
+		right: 60px;
+	}
+	h2 {
+		margin-bottom: 0;
+	}
+	.swiper-slide-prev, .swiper-slide-next {
+		figure:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			top: 0;
+			background: rgba(17,17,17,0.8);
+		}
+	}
+	.swiper-pagination {
+		left: 0;
+		right: 0;
+		bottom: 0;
+		text-align: center;
+	}
+}

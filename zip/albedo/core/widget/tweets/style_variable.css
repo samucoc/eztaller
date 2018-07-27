@@ -1,0 +1,83 @@
+/*------------------------------------------------------------------
+[Dynamic styles for Twitter widget]
+[Table of contents]
+
+1. Shared styles
+2. RTL styles
+3. Footer styles
+-------------------------------------------------------------------*/
+/** preloader colors **/
+/** layout **/
+/** base typography **/
+/** links colors **/
+/** boxes **/
+/** content elements **/
+/** dropcaps **/
+/** accent colors **/
+/** gradients **/
+/** borders and backgrounds **/
+/** buttons **/
+/** forms **/
+/** top bar **/
+/** menu styles **/
+/** submenu styles **/
+/** second menu **/
+/** second menu **/
+/** breadcrumbs **/
+/** header **/
+/** header text color **/
+/** menu container **/
+/** footer **/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.wproto_tweets_widget .tweets-block i.fa {
+  margin-right: 20px;
+}
+.wproto_tweets_widget i.fa {
+  color: #0081ff;
+}
+.wproto_tweets_widget .item {
+  margin-bottom: 18px;
+  padding-left: 35px;
+  position: relative;
+}
+.wproto_tweets_widget .item i.fa {
+  position: absolute;
+  top: 4px;
+  left: 0;
+}
+.wproto_tweets_widget .item:last-of-type {
+  margin-bottom: 0;
+}
+.wproto_tweets_widget .time {
+  display: block;
+  color: #8799a3;
+  font-size: 14px;
+  line-height: 1.4em;
+  padding-top: 5px;
+}
+/*------------------------------------------------------------------
+	2. RTL styles
+-------------------------------------------------------------------*/
+body.rtl .wproto_tweets_widget .tweets-block i.fa {
+  margin-left: 20px;
+  margin-right: 0;
+}
+body.rtl .wproto_tweets_widget .item {
+  padding-right: 35px;
+  padding-left: 0;
+}
+body.rtl .wproto_tweets_widget .item i.fa {
+  left: auto;
+  right: 0;
+}
+/*------------------------------------------------------------------
+	3. Footer styles
+-------------------------------------------------------------------*/
+#footer-widgets .wproto_tweets_widget i.fa {
+  color: #0081ff;
+}
+#footer-widgets .wproto_tweets_widget .time {
+  color: #ffffff;
+}

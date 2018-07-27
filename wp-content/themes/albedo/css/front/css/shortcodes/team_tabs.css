@@ -1,0 +1,91 @@
+/*------------------------------------------------------------------
+[TEAM_TABS.CSS - Team tabs shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.team-members-tabs {
+  font-size: 0;
+}
+.team-members-tabs .tm-tabs-left,
+.team-members-tabs .tm-tabs-right {
+  display: inline-block;
+  float: none;
+}
+.team-members-tabs .previews {
+  padding-bottom: 70px;
+}
+.team-members-tabs .col-text {
+  padding-top: 70px;
+}
+.team-members-tabs .previews a {
+  float: left;
+  margin: 0 20px 20px 0;
+  position: relative;
+}
+.team-members-tabs .previews a img,
+.team-members-tabs .previews a .placeholder {
+  display: block;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.team-members-tabs .placeholder {
+  background-size: 25px auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.team-members-tabs .previews a:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 50%;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+.team-members-tabs .previews a.current:before,
+.team-members-tabs .previews a:hover:before {
+  opacity: 1;
+}
+.team-members-tabs .tm-tabs-left h3 {
+  margin-bottom: 18px;
+}
+.team-members-tabs .tm-tabs-left .desc {
+  margin-bottom: 45px;
+}
+.team-members-tabs .tm-tabs-right {
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.team-members-tabs .tm-tabs-right h4 {
+  margin-bottom: 0;
+}
+.team-members-tabs .tm-tabs-right .position {
+  margin-bottom: 18px;
+}
+.team-members-tabs .tm-tabs-right .text {
+  margin-bottom: 24px;
+}
+.team-members-tabs .tm-tabs-right .social {
+  margin-bottom: 18px;
+}
+.team-members-tabs .tm-tabs-right .social a {
+  margin-right: 16px;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+.team-members-tabs .col-big-photo img {
+  display: block;
+}
+@media screen and (max-width: 992px) {
+  .team-members-tabs .col-text {
+    padding-top: 18px;
+    padding-bottom: 34px;
+  }
+}

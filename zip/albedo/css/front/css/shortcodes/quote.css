@@ -1,0 +1,68 @@
+/*------------------------------------------------------------------
+[QUOTE.CSS - Quote shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+2. White styles
+3. Dark styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-quote {
+  padding: 95px 200px 70px 60px;
+  background-size: cover;
+  background-image: none;
+}
+.shortcode-quote .text,
+.shortcode-quote .signature {
+  margin-bottom: 35px;
+}
+.shortcode-quote .signature img {
+  width: auto !important;
+  height: auto !important;
+}
+.shortcode-quote > div:last-of-type {
+  margin-bottom: 0;
+}
+body.rtl .shortcode-quote {
+  padding: 95px 60px 70px 200px;
+}
+/*------------------------------------------------------------------
+	2. White styles
+-------------------------------------------------------------------*/
+.shortcode-quote.style-white .text {
+  font-weight: bolder;
+}
+.shortcode-quote.style-white .author {
+  font-weight: bold;
+}
+@media screen and (max-width: 992px) {
+  .shortcode-quote.style-white {
+    padding: 95px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .shortcode-quote.style-white {
+    padding: 50px;
+  }
+}
+/*------------------------------------------------------------------
+	3. Dark styles
+-------------------------------------------------------------------*/
+.shortcode-quote.style-dark {
+  padding: 75px 100px 75px 600px;
+}
+.shortcode-quote.style-dark .author {
+  font-weight: bold;
+}
+@media screen and (max-width: 992px) {
+  .shortcode-quote.style-dark {
+    padding: 75px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .shortcode-quote.style-dark {
+    padding: 50px;
+  }
+}

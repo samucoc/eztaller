@@ -1,0 +1,73 @@
+/*------------------------------------------------------------------
+[PROGRESS_VARIABLE.CSS - Progress bars shortcode variable styles]
+[Table of contents]
+
+1. Shared styles
+2. Accent colors
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.progress-bar {
+	.progress-bar-title, .num {
+		color: @color_text_darken;
+		font-size: ~'@{smaller_font_size}px';
+		line-height: ~'@{smaller_font_line_height}px';
+	}
+	.progress-bar-value-inner {
+		background-color: rgba( red( @color_accent_light_grey ), green( @color_accent_light_grey ), blue( @color_accent_light_grey ), 0.5 );
+	}
+}
+.progress-bar.style-type-3d {
+	.progress-bar-value-inner {
+		.value:after {
+			@shadow_color: rgba( red( @color_accent_grey ), green( @color_accent_grey ), blue( @color_accent_grey ), 0.4 );
+			box-shadow: ~'0px 3px 20px 0px @{shadow_color}';
+			background-color: @box_bg_color;
+		}
+	}
+}
+/*------------------------------------------------------------------
+	2. Accent colors
+-------------------------------------------------------------------*/
+.progress-bar.style-blue .value,
+.progress-bar.style-type-3d.blue .value {
+	background-color: @color_accent_blue;
+}
+.progress-bar.style-black .value,
+.progress-bar.style-type-3d.black .value {
+	background-color: @color_accent_black;
+}
+.progress-bar.style-grey .value,
+.progress-bar.style-type-3d.grey .value {
+	background-color: @color_accent_grey;
+}
+.progress-bar.style-red .value,
+.progress-bar.style-type-3d.red .value {
+	background-color: @color_accent_red;
+}
+.progress-bar.style-orange .value,
+.progress-bar.style-type-3d.orange .value {
+	background-color: @color_accent_orange;
+}
+.progress-bar.style-green .value,
+.progress-bar.style-type-3d.green .value {
+	background-color: @color_accent_green;
+}
+.progress-bar.style-turquoise .value,
+.progress-bar.style-type-3d.turquoise .value {
+	background-color: @color_accent_turquoise;
+}
+.progress-bar.style-yellow .value,
+.progress-bar.style-type-3d.yellow .value {
+	background-color: @color_accent_yellow;
+}
+.progress-bar.style-purple .value,
+.progress-bar.style-type-3d.purple .value {
+	background-color: @color_accent_purple;
+}
+.progress-bar.style-dark-purple .value,
+.progress-bar.style-type-3d.dark-purple .value {
+	background-color: @color_accent_dark_purple;
+}

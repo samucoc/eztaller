@@ -1,0 +1,69 @@
+/*------------------------------------------------------------------
+[QUOTE.CSS - Quote shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+2. White styles
+3. Dark styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-quote {
+	border-radius: ~'@{content_elements_radius}px';
+	box-shadow: ~'@{box_shadow_h_length}px @{box_shadow_v_length}px @{box_shadow_blur_radius}px 0px @{box_shadow_color}';
+	background-color: @box_bg_color;
+}
+/*------------------------------------------------------------------
+	2. White styles
+-------------------------------------------------------------------*/
+.shortcode-quote.style-white {
+	.text {
+		color: @color_text_darken;
+		@text_font_size: @primary_font_size + 18;
+		font-size: ~'@{text_font_size}px';
+		line-height: 1.25em;
+		font-family: @secondary_font_family;
+	}
+	.author {
+		color: @color_accent_blue;
+	}
+	.author, .position {
+		font-size: ~'@{smaller_font_size}px';
+		line-height: ~'@{smaller_font_line_height}px';
+	}
+}
+@media screen and (max-width: 992px) {
+	.shortcode-quote.style-white {
+		.text {
+			@text_font_size: @primary_font_size + 4;
+			font-size: ~'@{text_font_size}px';
+			line-height: 1.45em;
+		}
+	}
+}
+/*------------------------------------------------------------------
+	3. Dark styles
+-------------------------------------------------------------------*/
+.shortcode-quote.style-dark {
+	.text {
+		color: @color_accent_inner;
+		@text_font_size: @primary_font_size + 18;
+		font-size: ~'@{text_font_size}px';
+		line-height: 1.25em;
+		font-family: @secondary_font_family;
+	}
+	.author, .position {
+		color: @color_accent_inner;
+	}
+}
+@media screen and (max-width: 992px) {
+	.shortcode-quote.style-dark {
+		.text {
+			@text_font_size: @primary_font_size + 4;
+			font-size: ~'@{text_font_size}px';
+			line-height: 1.45em;
+		}
+	}
+}

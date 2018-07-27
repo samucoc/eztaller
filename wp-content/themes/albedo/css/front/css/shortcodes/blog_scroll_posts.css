@@ -1,0 +1,47 @@
+/*------------------------------------------------------------------
+[BLOG_SCROLL_POSTS.CSS - Scroll posts block static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-blog-scroll-posts {
+  padding: 20px;
+  box-sizing: border-box;
+}
+.shortcode-blog-scroll-posts .item {
+  padding: 25px 20px;
+  position: relative;
+}
+.shortcode-blog-scroll-posts .item:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  width: 60px;
+  height: 2px;
+  opacity: 0.5;
+}
+.shortcode-blog-scroll-posts h4,
+.shortcode-blog-scroll-posts .post-excerpt {
+  margin-bottom: 14px;
+}
+.shortcode-blog-scroll-posts a {
+  transition: all 0.3s;
+  text-decoration: none;
+}
+.shortcode-blog-scroll-posts .author {
+  margin-right: 25px;
+}
+body.rtl .shortcode-blog-scroll-posts .item:after {
+  left: auto;
+  right: 20px;
+}
+body.rtl .shortcode-blog-scroll-posts .author {
+  margin-right: 0;
+}
+body.rtl .shortcode-blog-scroll-posts .date {
+  margin-left: 25px;
+}

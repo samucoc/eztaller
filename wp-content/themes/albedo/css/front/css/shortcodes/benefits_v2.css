@@ -1,0 +1,178 @@
+/*------------------------------------------------------------------
+[BENEFITS_V2.CSS - Benefits shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+2. Default styles
+3. Alternate styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-benefits-v2 .is_stuck {
+  transition: all 0.3s;
+}
+.shortcode-benefits-v2 .grid,
+.shortcode-benefits-v2 .grid > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.shortcode-benefits-v2 .masonry-grid {
+  padding-top: 0;
+}
+.shortcode-benefits-v2 .grid {
+  position: relative;
+  margin: 0 -15px;
+}
+.shortcode-benefits-v2 .grid li:before {
+  display: none;
+}
+.shortcode-benefits-v2 a {
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.shortcode-benefits-v2 h2 {
+  margin-bottom: 12px;
+}
+.shortcode-benefits-v2 .grid .item {
+  padding: 15px;
+  margin-bottom: 80px;
+  text-align: center;
+  position: absolute;
+}
+.shortcode-benefits-v2 .grid .item p:last-of-type {
+  margin-bottom: 0;
+}
+.shortcode-benefits-v2 .item-inside {
+  position: relative;
+}
+.shortcode-benefits-v2 .icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-top: -40px;
+  margin-left: -40px;
+  text-align: center;
+  line-height: 80px;
+  transition: all 0.3s;
+}
+.shortcode-benefits-v2 .icon img {
+  width: 80px;
+}
+.shortcode-benefits-v2 .icon svg {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.shortcode-benefits-v2 .icon i {
+  font-size: 45px;
+  line-height: 80px;
+}
+.shortcode-benefits-v2 .item-text {
+  padding: 65px 35px 30px 35px;
+}
+.shortcode-benefits-v2 .col-nav nav {
+  position: relative;
+}
+.shortcode-benefits-v2 .col-nav {
+  margin-bottom: 40px;
+}
+.shortcode-benefits-v2 .col-nav nav {
+  z-index: 10;
+}
+/*------------------------------------------------------------------
+	2. Default styles
+-------------------------------------------------------------------*/
+.shortcode-benefits-v2.style-default .col-nav nav:before,
+.shortcode-benefits-v2.style-default .col-nav a:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 6px;
+  z-index: 1;
+  border-radius: 3px;
+  transition: all 0.3s;
+}
+.shortcode-benefits-v2.style-default .col-nav a {
+  display: block;
+  padding: 15px 60px;
+  position: relative;
+}
+.shortcode-benefits-v2.style-default .col-nav a .title {
+  font-weight: bold;
+  transition: all 0.3s;
+}
+.shortcode-benefits-v2.style-default .col-nav a .desc {
+  margin-top: 5px;
+}
+.shortcode-benefits-v2.style-default .col-nav a .title,
+.shortcode-benefits-v2.style-default .col-nav a .desc {
+  display: block;
+}
+body.rtl .shortcode-benefits-v2.style-default .col-nav nav:before,
+body.rtl .shortcode-benefits-v2.style-default .col-nav a:before {
+  right: 0;
+  left: auto;
+}
+body.rtl .shortcode-benefits-v2.style-default .col-nav {
+  float: right;
+}
+/*------------------------------------------------------------------
+	3. Alternate styles
+-------------------------------------------------------------------*/
+.shortcode-benefits-v2.style-alt .col-nav a {
+  display: block;
+  padding: 5px 60px 5px 0px;
+  position: relative;
+}
+.shortcode-benefits-v2.style-alt .col-nav a .num {
+  font-weight: bold;
+}
+.shortcode-benefits-v2.style-alt .col-nav a .title {
+  font-weight: bold;
+  transition: all 0.3s;
+  padding-left: 30px;
+}
+.shortcode-benefits-v2.style-alt .col-nav a .desc {
+  display: none;
+}
+.shortcode-benefits-v2.style-alt .col-nav a:after {
+  content: '';
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  margin-top: -10px;
+  background-repeat: no-repeat;
+  background-size: 20px auto;
+  width: 20px;
+  height: 20px;
+}
+body.rtl .shortcode-benefits-v2.style-alt .col-nav {
+  float: right;
+}
+body.rtl .shortcode-benefits-v2.style-alt .col-nav a {
+  padding: 5px 0px 5px 60px;
+}
+body.rtl .shortcode-benefits-v2.style-alt .col-nav a .title {
+  padding-left: 0;
+  padding-right: 30px;
+}
+body.rtl .shortcode-benefits-v2.style-alt .col-nav a:after {
+  right: auto;
+  left: 30px;
+  transform: rotate(180deg);
+}
+@media screen and (max-width: 992px) {
+  .shortcode-benefits-v2.style-alt .col-nav,
+  .shortcode-benefits-v2.style-default .col-nav {
+    float: none !important;
+    margin-bottom: 60px;
+  }
+}

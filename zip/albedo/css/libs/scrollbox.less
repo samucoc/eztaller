@@ -1,0 +1,72 @@
+/*!
+ * Scrollbox v4.0.0
+ * (c) 2013-2017, Max Invis1ble
+ * Licensed under MIT (https://opensource.org/licenses/mit-license.php)
+ */
+.scrollbox-wrapper {
+  position: relative;
+}
+.scrollbox-wrapper .scrollbox-overflowed {
+  overflow: hidden;
+}
+.scrollbox-wrapper > :first-child {
+  -webkit-backface-visibility: hidden;
+     -moz-backface-visibility: hidden;
+          backface-visibility: hidden;
+  will-change: scroll-position;
+}
+.scrollbox-rail,
+.scrollbox-bar {
+  display: none;
+  position: absolute;
+  z-index: 10;
+}
+.scrollbox-horizontal-rail,
+.scrollbox-horizontal-bar {
+  bottom: 0;
+  left: 0;
+}
+.scrollbox-vertical-rail,
+.scrollbox-vertical-bar {
+  top: 0;
+  right: 0;
+}
+.scrollbox-rail-in,
+.scrollbox-bar-in {
+  display: block;
+}
+.scrollbox-horizontal-bar {
+  -webkit-backface-visibility: hidden;
+     -moz-backface-visibility: hidden;
+          backface-visibility: hidden;
+  will-change: left;
+}
+.scrollbox-vertical-bar {
+  -webkit-backface-visibility: hidden;
+     -moz-backface-visibility: hidden;
+          backface-visibility: hidden;
+  will-change: top;
+}
+.scrollbox-rail {
+  border-radius: 5px;
+}
+.scrollbox-bar {
+  background-color: @color_accent_light_grey;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+.scrollbox-horizontal-rail {
+  height: 6px;
+}
+.scrollbox-vertical-rail {
+  width: 6px;
+}
+.scrollbox-horizontal-bar {
+  min-width: 20px;
+  height: 6px;
+}
+.scrollbox-vertical-bar {
+  min-height: 20px;
+  width: 6px;
+}

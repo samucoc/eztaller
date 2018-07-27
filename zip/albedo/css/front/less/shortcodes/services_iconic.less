@@ -1,0 +1,101 @@
+/*------------------------------------------------------------------
+[SERVICES_ICONIC.CSS - Iconic services shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-services-iconic {
+	.item {
+		margin-bottom: 50px;
+	}
+	h4 {
+		margin-bottom: 18px;
+	}
+	.desc {
+		margin-bottom: 28px;
+	}
+	.item-inside {
+		position: relative;
+	}
+	.text {
+		padding-left: 100px;
+	}
+	a {
+		text-decoration: none;
+	}
+	.icon {
+		position: absolute;
+		left: 0;
+		top: 5px;
+		i {
+			font-size: 70px;
+		}
+		img, svg {
+			width: 60px;
+		}
+		svg {
+			height: 60px;
+		}
+	}
+	ul {
+		margin-top: 22px;
+		margin-bottom: 22px;
+		margin-left: 0;
+		padding-left: 0;
+		margin-right: 0;
+		padding-right: 0;
+		li {
+			margin-bottom: 8px;
+			padding-left: 20px;
+		}
+		li:before {
+			content: '';
+			top: 8px;
+			width: 10px;
+			height: 10px;
+			background-size: 10px auto;
+			background-position: left top;
+			background-repeat: no-repeat;
+		}
+	}
+}
+
+body.rtl .shortcode-services-iconic {
+	.text {
+		padding-left: 0;
+		padding-right: 100px;
+	}
+	.icon {
+		left: auto;
+		right: 0;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.shortcode-services-iconic {
+		.icon {
+			i {
+				font-size: 50px;
+			}
+			img, svg {
+				width: 40px;
+			}
+			svg {
+				height: 40px;
+			}
+		}
+		.text {
+			padding-left: 60px;
+		}
+	}
+	body.rtl .shortcode-services-iconic {
+		.text {
+			padding-left: 0;
+			padding-right: 60px;
+		}
+	}
+}

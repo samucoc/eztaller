@@ -1,0 +1,21 @@
+/*------------------------------------------------------------------
+[Minimal social icons and free text widget styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.wproto_social_text_widget {
+  text-align: center;
+}
+.wproto_social_text_widget .share-links a {
+  margin: 0 7px;
+}
+.wproto_social_text_widget .share-links a i {
+  font-size: 22px;
+}
+.wproto_social_text_widget .share-links {
+  margin-bottom: 40px;
+}

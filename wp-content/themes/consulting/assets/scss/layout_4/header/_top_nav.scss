@@ -8,10 +8,6 @@
     background: $stm_base_color;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.52);
     > ul {
-      font: {
-        family: "Montserrat", sans-serif;
-        weight: 700;
-      }
       list-style: none;
       margin: 0;
       padding: 0 35px;
@@ -189,7 +185,6 @@
       color: #fff;
       font-size: 18px;
       font-weight: 700 !important;
-      font-family: "Montserrat", sans-serif;
       a {
         color: #fff;
         font-size: 18px;
@@ -202,7 +197,7 @@
 }
 
 body.sticky_menu {
-  &.header_style_1, &.header_style_3, &.header_style_4{
+  &.header_style_1, &.header_style_3, &.header_style_4, &.header_style_5, &.header_style_6 {
     &.admin-bar {
       #header {
         .top_nav {
@@ -229,7 +224,7 @@ body.sticky_menu {
       }
     }
   }
-  &.header_style_2{
+  &.header_style_2, &.header_style_6 {
     &.admin-bar {
       #header {
         .header_top {
@@ -253,6 +248,35 @@ body.sticky_menu {
           .top_nav{
             padding: 22px 0;
           }
+        }
+      }
+    }
+  }
+  &.header_style_5 {
+    #header{
+      .top_nav {
+        &.affix {
+          background-color: #fff;
+          box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2) !important;
+        }
+      }
+    }
+  }
+}
+
+.header_style_1, .header_style_2, .header_style_3, .header_style_4, .header_style_5, .header_style_6, .header_style_7, .header_style_8 {
+  #header{
+    .top_nav {
+      .icon_text {
+        strong {
+          display: block;
+        }
+      }
+    }
+    .header_top {
+      .icon_text {
+        strong {
+          display: block;
         }
       }
     }

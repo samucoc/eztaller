@@ -1,0 +1,211 @@
+/*------------------------------------------------------------------
+[BLOG.CSS - Blog list shortcode static styles]
+[Table of contents]
+
+1. Modern / shared styles
+2. Classic style
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Modern / shared styles
+-------------------------------------------------------------------*/
+.shortcode-blog {
+  margin-bottom: 60px;
+  transition: all 0.3s;
+}
+.shortcode-blog article {
+  margin-bottom: 40px;
+  padding: 50px 60px;
+}
+.shortcode-blog article.format-quote {
+  padding: 60px 0 0 0;
+  text-align: center;
+}
+.shortcode-blog article.format-quote blockquote {
+  padding-top: 20px;
+}
+.shortcode-blog article.format-link {
+  padding: 60px 70px 40px 70px;
+  text-align: center;
+}
+.shortcode-blog article.format-link .icon-link {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background-size: 35px auto;
+  background-repeat: no-repeat;
+  margin-bottom: 14px;
+}
+.shortcode-blog article.format-link .post-excerpt {
+  margin-bottom: 0;
+}
+.shortcode-blog .post-media {
+  margin: -50px -60px 40px -60px;
+  position: relative;
+}
+.shortcode-blog .post-media iframe {
+  margin-bottom: 0;
+}
+.shortcode-blog .post-date {
+  font-weight: bold;
+}
+.shortcode-blog .post-date,
+.shortcode-blog h2,
+.shortcode-blog .post-excerpt {
+  margin-bottom: 14px;
+}
+.shortcode-blog a {
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.shortcode-blog .swiper-pagination {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  text-align: center;
+}
+.shortcode-blog .post-comments,
+.shortcode-blog .post-likes {
+  position: absolute;
+  z-index: 7;
+  left: 60px;
+}
+.shortcode-blog .post-comments {
+  bottom: 55px;
+  font-weight: normal;
+}
+.shortcode-blog .post-comments .icon-comments {
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+  background-size: 16px auto;
+  background-repeat: no-repeat;
+  margin-right: 7px;
+}
+.shortcode-blog .post-likes {
+  bottom: 90px;
+}
+.shortcode-blog .post-likes .like-post {
+  position: relative;
+  display: inline-block;
+  padding-left: 27px;
+}
+.shortcode-blog .post-likes .like-post span {
+  display: inline-block;
+  vertical-align: middle;
+}
+.shortcode-blog .post-likes a:before,
+.shortcode-blog .post-likes a:after {
+  content: "";
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 16px auto;
+  transform: translateY(-50%);
+}
+.shortcode-blog .post-likes a:after {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 0;
+  top: 3px;
+  z-index: 1;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  opacity: 0;
+  -webkit-transition: none;
+  -moz-transition: none;
+  transition: none;
+}
+.shortcode-blog .post-likes a:before {
+  position: absolute;
+  width: 16px;
+  left: 0;
+  top: 50%;
+  height: 16px;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.shortcode-blog .post-likes a.activated:after,
+.shortcode-blog .post-likes a:hover:after {
+  -webkit-animation: scaleFade 0.5s forwards;
+  -moz-animation: scaleFade 0.5s forwards;
+  animation: scaleFade 0.5s forwards;
+}
+.no-unyson .shortcode-blog .format-audio .post-media,
+.no-unyson .shortcode-blog .format-video .post-media {
+  margin: 0 0 40px 0;
+}
+.no-unyson .shortcode-blog .format-video iframe {
+  width: 100%;
+  height: 500px;
+}
+@media screen and (max-width: 992px) {
+  .shortcode-blog article {
+    padding: 30px;
+  }
+  .shortcode-blog article .post-media {
+    margin: -50px -30px 40px -30px;
+  }
+}
+body.rtl .shortcode-blog .post-likes {
+  text-align: left;
+}
+body.rtl .shortcode-blog .post-likes a {
+  padding-left: 0;
+  padding-right: 27px;
+}
+body.rtl .shortcode-blog .post-likes a:after,
+body.rtl .shortcode-blog .post-likes a:before {
+  left: auto;
+  right: 0;
+}
+body.rtl .shortcode-blog .post-comments .icon-comments {
+  margin-right: 0;
+  margin-left: 7px;
+}
+body.rtl .shortcode-blog .post-likes,
+body.rtl .shortcode-blog .post-comments {
+  left: auto;
+  right: 60px;
+}
+.shortcode-blog.loading {
+  opacity: 0.5;
+}
+@-webkit-keyframes scaleFade {
+  30% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2.5);
+  }
+}
+@-moz-keyframes scaleFade {
+  30% {
+    opacity: 1;
+    -moz-transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: scale(2.5);
+  }
+}
+@keyframes scaleFade {
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+/*------------------------------------------------------------------
+	2. Classic style
+-------------------------------------------------------------------*/

@@ -1,0 +1,54 @@
+/*------------------------------------------------------------------
+[TEAM_CARDS_VARIABLE.CSS - Team cards shortcode variable styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.team-cards {
+	.item-content {
+		background-color: @box_bg_color;
+		border-radius: ~'@{content_elements_radius}px';
+		border: ~'@{box_border_size}px solid @{box_border_color}';
+	}
+	.item-content {
+		box-shadow: ~'@{box_shadow_h_length}px @{box_shadow_v_length}px @{box_shadow_blur_radius}px 0px @{box_shadow_color}';
+	}
+	.photo {
+		box-shadow: ~'@{box_shadow_h_length}px @{box_shadow_v_length}px @{box_shadow_blur_radius}px 0px @{box_shadow_color}';
+	}
+	.placeholder {
+		@color_escaped: escape( ~'@{color_accent_light_grey}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20129%20129%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20enable-background%3D%22new%200%200%20129%20129%22%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Cg%3E%0A%20%20%20%20%20%20%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22m64.3%2C71.6c18%2C0%2032.6-14.6%2032.6-32.6s-14.6-32.5-32.6-32.5-32.6%2C14.6-32.6%2C32.5%2014.6%2C32.6%2032.6%2C32.6zm0-56.6c13.2%2C0%2024%2C10.8%2024%2C24s-10.8%2C24-24%2C24-24-10.8-24-24%2010.8-24%2024-24z%22%2F%3E%0A%20%20%20%20%20%20%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22m7.9%2C122.5h113.2c2.4%2C0%204.3-1.9%204.3-4.3%200-22.5-18.3-40.9-40.9-40.9h-40c-22.5%2C0-40.9%2C18.3-40.9%2C40.9-1.33227e-15%2C2.4%201.9%2C4.3%204.3%2C4.3zm36.6-36.6h40c16.4%2C0%2029.9%2C12.2%2032%2C28h-104c2.1-15.7%2015.6-28%2032-28z%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A")';
+	}
+	.name {
+		color: @color_accent_blue;
+		@font_size: @primary_font_size + 2;
+		font-size: ~'@{font_size}px';
+		line-height: 1.4em;
+		font-family: @secondary_font_family;
+	}
+	.position {
+		font-size: ~'@{smaller_font_size}px';
+		line-height: ~'@{smaller_font_line_height}px';
+		color: @color_accent_grey;
+	}
+	.item-content:hover .name {
+		color: @color_accent_grey;
+	}
+	.swiper-pagination-bullet {
+		background-color: rgba( red(@color_accent_grey), green(@color_accent_grey), blue(@color_accent_grey), 0.3 );
+	}
+	.swiper-pagination-bullet-active {
+		background-color: @color_accent_grey;
+	}
+	.social a {
+		color: lighten( @color_accent_grey, 10% );
+	}
+	.social a:hover {
+		color: @color_accent_grey;
+	}
+}

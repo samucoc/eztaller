@@ -1,0 +1,132 @@
+/*------------------------------------------------------------------
+[TESTIMONIALS_CAROUSEL.CSS - Testimonials carousel shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+2. Dark styles
+3. White styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-testimonials-carousel {
+  text-align: center;
+  position: relative;
+  padding: 0 30px 0 30px;
+  background-position: center 15px;
+  background-repeat: no-repeat;
+  margin-bottom: 34px;
+}
+.shortcode-testimonials-carousel .swiper-button-prev {
+  left: -70px;
+  background-size: 27px auto;
+}
+.shortcode-testimonials-carousel .swiper-button-next {
+  right: -70px;
+  background-size: 27px auto;
+}
+.shortcode-testimonials-carousel .swiper-pagination {
+  bottom: -70px;
+}
+.shortcode-testimonials-carousel .about-author {
+  margin-top: 25px;
+}
+.shortcode-testimonials-carousel .slide-content {
+  padding: 0 30px;
+}
+.shortcode-testimonials-carousel .about-author.with-thumb .photo,
+.shortcode-testimonials-carousel .about-author.with-thumb .about-author-text {
+  display: inline-block;
+  vertical-align: middle;
+}
+.shortcode-testimonials-carousel .about-author.with-thumb .photo img {
+  display: block;
+  margin-right: 20px;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+}
+.shortcode-testimonials-carousel .about-author.with-thumb .about-author-text {
+  text-align: left;
+}
+.shortcode-testimonials-carousel .author {
+  font-weight: bold;
+}
+.shortcode-testimonials-carousel .swiper-pagination {
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+body.rtl .shortcode-testimonials-carousel .about-author.with-thumb .photo img {
+  margin-right: 0;
+  margin-left: 20px;
+}
+body.rtl .shortcode-testimonials-carousel .about-author.with-thumb .about-author-text {
+  text-align: right;
+}
+@media screen and (max-width: 992px) {
+  .shortcode-testimonials-carousel .swiper-button-next,
+  .shortcode-testimonials-carousel .swiper-button-prev {
+    display: none;
+  }
+}
+.shortcode-testimonials-carousel.thumbs-pagination {
+  background-image: none !important;
+}
+.shortcode-testimonials-carousel-thumbs-pagination {
+  text-align: center;
+}
+.shortcode-testimonials-carousel-thumbs-pagination .thumb {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  vertical-align: middle;
+  background-size: cover;
+  border-radius: 100%;
+  transition: all 0.5s;
+}
+.shortcode-testimonials-carousel-thumbs-pagination .current-slide-thumb {
+  width: 120px;
+  height: 120px;
+  margin: 0 55px;
+}
+.shortcode-testimonials-carousel-thumbs-pagination .current-slide-thumb:after {
+  display: none;
+}
+@media screen and (max-width: 992px) {
+  .shortcode-testimonials-carousel-thumbs-pagination .thumb {
+    width: 30px;
+    height: 30px;
+  }
+  .shortcode-testimonials-carousel-thumbs-pagination .current-slide-thumb {
+    width: 60px;
+    height: 60px;
+    margin: 0 15px;
+  }
+}
+/*------------------------------------------------------------------
+	2. Dark styles
+-------------------------------------------------------------------*/
+.shortcode-testimonials-carousel.style-dark {
+  padding-top: 35px;
+  background-size: 55px auto;
+}
+@media screen and (max-width: 767px) {
+  .shortcode-testimonials-carousel.style-dark .about-author.with-thumb .photo,
+  .shortcode-testimonials-carousel.style-dark .about-author.with-thumb .about-author-text {
+    display: block;
+    text-align: center;
+  }
+  .shortcode-testimonials-carousel.style-dark .about-author.with-thumb .photo img {
+    display: inline-block;
+    margin: 0 auto;
+  }
+}
+/*------------------------------------------------------------------
+	3. White styles
+-------------------------------------------------------------------*/
+.shortcode-testimonials-carousel.style-white {
+  padding-top: 35px;
+  background-size: 115px auto;
+}

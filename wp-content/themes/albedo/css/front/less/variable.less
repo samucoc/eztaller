@@ -1,0 +1,1996 @@
+/*------------------------------------------------------------------
+[VARIABLE.CSS - Variable shared styles, contains only colors, fonts,
+and another options that may be changed via LESS vars / theme options]
+[Table of contents]
+
+1. Preloader colors
+2. Body background
+3. Layout
+4. Helper classes
+5. Typography
+	5.1 Dropcaps
+	5.2 Lists
+6. Forms and buttons
+7. Tables
+8. Custom SVG / Font icons
+9. Media
+10. Pagination
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Preloader colors
+-------------------------------------------------------------------*/
+#preloader {
+	background: @preloader_bg;
+}
+#preloader-inner > div {
+	background-color: @preloader_color;
+}
+
+/*------------------------------------------------------------------
+	2. Body background
+-------------------------------------------------------------------*/
+body {
+	background: @body_bg_image_attachment @body_bg_color @body_bg_image_src @body_bg_image_position @body_bg_image_repeat;
+	background-size: @body_bg_image_cover;
+}
+/** boxed background **/
+body.layout-type-framed, body.layout-type-boxed {
+	background: @boxed_bg_image_attachment @boxed_bg_color @boxed_bg_image_src @boxed_bg_image_position @boxed_bg_image_repeat;
+	background-size: @boxed_bg_image_cover;
+	#wrap {
+		padding: @box_top_padding @box_right_padding @box_bottom_padding @box_left_padding;
+		max-width: @layout_width;
+		background: @body_bg_image_attachment @body_bg_color @body_bg_image_src @body_bg_image_position @body_bg_image_repeat;
+		background-size: @body_bg_image_cover;
+		box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{boxed_framed_shadow_color}';
+
+	}
+}
+body.layout-type-framed #wrap {
+	margin: @framed_margins auto;
+	border-radius: @framed_corners;
+}
+body.layout-type-boxed #wrap {
+	margin: 0 auto;
+}
+
+body.layout-type-framed,
+body.layout-type-boxed {
+	.stretch_row, .stretch_row_content, .stretch_row_content_no_paddings {
+		@val_r: @box_right_padding + @layout_column_padding;
+		@val_l: @box_left_padding + @layout_column_padding;
+		margin-left: ~'-@{val_l}';
+		margin-right: ~'-@{val_r}';
+		> .container, > .container-fluid, > .centered-content-wrapper {
+			padding-left: ~'@{val_l}';
+			padding-right: ~'@{val_r}';
+		}
+	}
+}
+
+/*------------------------------------------------------------------
+	3. Layout
+-------------------------------------------------------------------*/
+.container, .container-fluid, .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12,
+.fw-col-xs-1, .fw-col-sm-1, .fw-col-md-1, .fw-col-lg-1, .fw-col-xs-2, .fw-col-sm-2, .fw-col-md-2, .fw-col-lg-2, .fw-col-xs-3, .fw-col-sm-3, .fw-col-md-3, .fw-col-lg-3, .fw-col-xs-4, .fw-col-sm-4, .fw-col-md-4, .fw-col-lg-4, .fw-col-xs-5, .fw-col-sm-5, .fw-col-md-5, .fw-col-lg-5, .fw-col-xs-6, .fw-col-sm-6, .fw-col-md-6, .fw-col-lg-6, .fw-col-xs-7, .fw-col-sm-7, .fw-col-md-7, .fw-col-lg-7, .fw-col-xs-8, .fw-col-sm-8, .fw-col-md-8, .fw-col-lg-8, .fw-col-xs-9, .fw-col-sm-9, .fw-col-md-9, .fw-col-lg-9, .fw-col-xs-10, .fw-col-sm-10, .fw-col-md-10, .fw-col-lg-10, .fw-col-xs-11, .fw-col-sm-11, .fw-col-md-11, .fw-col-lg-11, .fw-col-xs-12, .fw-col-sm-12, .fw-col-md-12, .fw-col-lg-12 {
+	padding-left: ~'@{layout_column_padding}px';
+	padding-right: ~'@{layout_column_padding}px';
+}
+body .stretch_row_content.pb-section > .container-fluid {
+	padding-left: ~'@{layout_column_padding}px';
+	padding-right: ~'@{layout_column_padding}px';
+}
+.row, .fw-row {
+	margin-left: ~'-@{layout_column_padding}px';
+	margin-right: ~'-@{layout_column_padding}px';
+}
+@media (min-width: @layout_width) {
+	.container {
+		max-width: @layout_width;
+	}
+}
+@media (min-width: @layout_width) {
+	.bgimage-hidden-lg {
+		background-image: none !important;
+	}
+}
+@media (max-width: @layout_width) {
+	.bgimage-hidden-md {
+		background-image: none !important;
+	}
+}
+@media (min-width: 992px) and (max-width: @layout_width) {
+	.visible-md {
+		display: block !important;
+	}
+	table.visible-md {
+		display: table !important;
+	}
+	tr.visible-md {
+		display: table-row !important;
+	}
+	th.visible-md,
+	td.visible-md {
+		display: table-cell !important;
+	}
+}
+@media (min-width: 992px) and (max-width: @layout_width) {
+	.visible-md-block {
+		display: block !important;
+	}
+}
+@media (min-width: 992px) and (max-width: @layout_width) {
+	.visible-md-inline {
+		display: inline !important;
+	}
+}
+@media (min-width: 992px) and (max-width: @layout_width) {
+	.visible-md-inline-block {
+		display: inline-block !important;
+	}
+}
+@media (min-width: @layout_width) {
+	.visible-lg {
+		display: block !important;
+	}
+}
+@media (min-width: @layout_width) {
+	.visible-lg-block {
+		display: block !important;
+	}
+}
+@media (min-width: @layout_width) {
+	.visible-lg-inline {
+		display: inline !important;
+	}
+}
+@media (min-width: @layout_width) {
+	.visible-lg-inline-block {
+		display: inline-block !important;
+	}
+}
+@media (min-width: 992px) and (max-width: @layout_width) {
+	.hidden-md {
+		display: none !important;
+	}
+}
+@media (min-width: @layout_width) {
+	.hidden-lg {
+		display: none !important;
+	}
+}
+/** Background layers **/
+.bg-layers {
+	background-color: @box_bg_color;
+}
+.bg-layers .bg-layer-1 {
+	background-color: rgba( red( @box_bg_color ), green( @box_bg_color ), blue( @box_bg_color ), 0.4 );
+}
+.bg-layers .bg-layer-2 {
+	background-color: rgba( red( @box_bg_color ), green( @box_bg_color ), blue( @box_bg_color ), 0.4 );
+}
+.corners {
+	.bg-layers {
+		border-radius: ~'@{content_elements_radius}px';
+		.bg-layer-1, .bg-layer-2 {
+			border-radius: ~'@{content_elements_radius}px';
+		}
+	}
+}
+/*------------------------------------------------------------------
+	4. Helper classes
+-------------------------------------------------------------------*/
+.color-white {
+	color: #fff !important;
+	> a, > a:hover {
+		color: #fff !important;
+	}
+}
+.bg-color-white {
+	background-color: #fff;
+}
+.color-lighten {
+	color: @color_text_lighten !important;
+}
+.color-darken {
+	color: @color_text_darken !important;
+}
+.color-blue {
+	color: @color_accent_blue !important;
+	> a, > a:hover {
+		color: @color_accent_blue !important;
+	}
+}
+.bg-color-blue  {
+	background-color: @color_accent_blue;
+}
+.color-black {
+	color: @color_accent_black !important;
+	> a, > a:hover {
+		color: @color_accent_black !important;
+	}
+}
+.bg-color-black {
+	background-color: @color_accent_black;
+}
+.color-grey {
+	color: @color_accent_grey !important;
+	> a, > a:hover {
+		color: @color_accent_grey !important;
+	}
+}
+.bg-color-grey {
+	background-color: @color_accent_grey;
+}
+.color-light-grey {
+	color: @color_accent_light_grey !important;
+	> a, > a:hover {
+		color: @color_accent_light_grey !important;
+	}
+}
+.bg-color-light-grey {
+	background-color: @color_accent_light_grey;
+}
+.color-red {
+	color: @color_accent_red !important;
+	> a, > a:hover {
+		color: @color_accent_red !important;
+	}
+}
+.bg-color-red {
+	background-color: @color_accent_red;
+}
+.color-orange {
+	color: @color_accent_orange !important;
+	> a, > a:hover {
+		color: @color_accent_orange !important;
+	}
+}
+.bg-color-orange {
+	background-color: @color_accent_orange;
+}
+.color-green {
+	color: @color_accent_green !important;
+	> a, > a:hover {
+		color: @color_accent_green !important;
+	}
+}
+.bg-color-green {
+	background-color: @color_accent_green;
+}
+.color-pink {
+	color: @color_accent_pink !important;
+	> a, > a:hover {
+		color: @color_accent_pink !important;
+	}
+}
+.bg-color-pink {
+	background-color: @color_accent_pink;
+}
+.color-turquoise {
+	color: @color_accent_turquoise !important;
+	> a, > a:hover {
+		color: @color_accent_turquoise !important;
+	}
+}
+.bg-color-turquoise {
+	background-color: @color_accent_turquoise;
+}
+.color-yellow {
+	color: @color_accent_yellow !important;
+	> a, > a:hover {
+		color: @color_accent_yellow !important;
+	}
+}
+.bg-color-yellow {
+	background-color: @color_accent_yellow;
+}
+.color-purple {
+	color: @color_accent_purple !important;
+	> a, > a:hover {
+		color: @color_accent_purple !important;
+	}
+}
+.bg-color-purple {
+	background-color: @color_accent_purple;
+}
+.color-dark-purple {
+	color: @color_accent_dark_purple !important;
+	> a, > a:hover {
+		color: @color_accent_dark_purple !important;
+	}
+}
+.bg-color-dark-purple {
+	background-color: @color_accent_dark_purple;
+}
+
+.shadow-color-white {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px rgba(255,255,255,0.7))';
+}
+.shadow-color-blue  {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+.shadow-color-black {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.shadow-color-grey {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.shadow-color-light-grey {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.shadow-color-red {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.shadow-color-orange {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.shadow-color-green {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.shadow-color-pink {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{color_accent_pink_shadow}';
+}
+.shadow-color-turquoise {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.shadow-color-yellow {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.shadow-color-purple {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.shadow-color-dark-purple {
+	box-shadow: ~'@{boxed_framed_shadow_h_length}px @{boxed_framed_shadow_v_length}px @{boxed_framed_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+/*------------------------------------------------------------------
+	5. Typography
+-------------------------------------------------------------------*/
+::selection {
+	background: @color_accent_blue;
+	color: @color_accent_inner;
+}
+::-moz-selection {
+	background: @color_accent_blue;
+	color: @color_accent_inner;
+}
+body {
+	color: @primary_font_color;
+	font-size: ~'@{primary_font_size}px';
+	font-weight: ~'@{primary_font_weight}';
+	font-style: ~'@{primary_font_style}';
+	font-family: ~'@{primary_font_family}';
+	line-height: ~'@{primary_font_line_height}px';
+}
+pre {
+	font-size: ~'@{smaller_font_size}px';
+	line-height: ~'@{smaller_font_line_height}px';
+	background-color: @color_bg_alt;
+	border-radius: ~'@{content_elements_radius}px';
+}
+.font-size-bigger {
+	font-size: ~'@{bigger_font_size}px';
+	line-height: ~'@{bigger_font_line_height}px';
+}
+@media screen and (max-width: 767px) {
+	body {
+		font-size: ~'@{primary_font_size_mobile}px';
+		line-height: ~'@{primary_font_line_height_mobile}px';
+	}
+}
+a {
+	color: @color_link;
+}
+a:hover {
+	color: @color_link_hover;
+}
+mark {
+	color: @color_accent_inner;
+	background-color: @color_accent_blue;
+}
+blockquote, q {
+	@color_escaped: escape( ~'@{color_accent_light_grey}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%2295.333px%22%20height%3D%2295.332px%22%20viewBox%3D%220%200%2095.333%2095.332%22%20style%3D%22enable-background%3Anew%200%200%2095.333%2095.332%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M30.512%2C43.939c-2.348-0.676-4.696-1.019-6.98-1.019c-3.527%2C0-6.47%2C0.806-8.752%2C1.793%20c2.2-8.054%2C7.485-21.951%2C18.013-23.516c0.975-0.145%2C1.774-0.85%2C2.04-1.799l2.301-8.23c0.194-0.696%2C0.079-1.441-0.318-2.045%20s-1.035-1.007-1.75-1.105c-0.777-0.106-1.569-0.16-2.354-0.16c-12.637%2C0-25.152%2C13.19-30.433%2C32.076%20c-3.1%2C11.08-4.009%2C27.738%2C3.627%2C38.223c4.273%2C5.867%2C10.507%2C9%2C18.529%2C9.313c0.033%2C0.001%2C0.065%2C0.002%2C0.098%2C0.002%20c9.898%2C0%2C18.675-6.666%2C21.345-16.209c1.595-5.705%2C0.874-11.688-2.032-16.851C40.971%2C49.307%2C36.236%2C45.586%2C30.512%2C43.939z%22%2F%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M92.471%2C54.413c-2.875-5.106-7.61-8.827-13.334-10.474c-2.348-0.676-4.696-1.019-6.979-1.019%20c-3.527%2C0-6.471%2C0.806-8.753%2C1.793c2.2-8.054%2C7.485-21.951%2C18.014-23.516c0.975-0.145%2C1.773-0.85%2C2.04-1.799l2.301-8.23%20c0.194-0.696%2C0.079-1.441-0.318-2.045c-0.396-0.604-1.034-1.007-1.75-1.105c-0.776-0.106-1.568-0.16-2.354-0.16%20c-12.637%2C0-25.152%2C13.19-30.434%2C32.076c-3.099%2C11.08-4.008%2C27.738%2C3.629%2C38.225c4.272%2C5.866%2C10.507%2C9%2C18.528%2C9.312%20c0.033%2C0.001%2C0.065%2C0.002%2C0.099%2C0.002c9.897%2C0%2C18.675-6.666%2C21.345-16.209C96.098%2C65.559%2C95.376%2C59.575%2C92.471%2C54.413z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+
+	p, .text {
+		@text_font_size: @primary_font_size + 6;
+		font-size: ~'@{text_font_size}px';
+		line-height: 1.4em;
+		color: @color_text_darken;
+	}
+	.author {
+		color: @color_accent_blue;
+	}
+	.position {
+		font-size: ~'@{smaller_font_size}px';
+		line-height: ~'@{smaller_font_line_height}px';
+	}
+}
+blockquote.style-accent, .post_format-post-format-quote blockquote {
+	background-color: @color_accent_blue;
+	color: @color_accent_inner;
+	p, .text {
+		color: @color_accent_inner;
+	}
+	.author, cite {
+		color: @color_accent_yellow;
+		font-size: ~'@{smaller_font_size}px';
+		line-height: ~'@{smaller_font_line_height}px';
+	}
+}
+@media screen and (max-width: 992px) {
+	blockquote, q, blockquote.style-accent {
+		p, .text {
+			font-size: ~'@{primary_font_size}px';
+			line-height: 1.4em;
+		}
+	}
+}
+.font-secondary {
+	font-family: ~'@{secondary_font_family}';
+}
+h1, .h1 {
+	color: @h1_font_color;
+	font-family: ~'@{h1_font_family}';
+	font-weight: @h1_font_weight;
+	font-style: @h1_font_style;
+	font-size: ~'@{h1_font_size}px';
+	line-height: ~'@{h1_font_line_height}px';
+	text-transform: @h1_font_transform;
+}
+h2, .h2 {
+	color: @h2_font_color;
+	font-family: ~'@{h2_font_family}';
+	font-weight: @h2_font_weight;
+	font-style: @h2_font_style;
+	font-size: ~'@{h2_font_size}px';
+	line-height: ~'@{h2_font_line_height}px';
+	text-transform: @h2_font_transform;
+}
+h3, .h3 {
+	color: @h3_font_color;
+	font-family: ~'@{h3_font_family}';
+	font-weight: @h3_font_weight;
+	font-style: @h3_font_style;
+	font-size: ~'@{h3_font_size}px';
+	line-height: ~'@{h3_font_line_height}px';
+	text-transform: @h3_font_transform;
+}
+h4, .h4 {
+	color: @h4_font_color;
+	font-family: ~'@{h4_font_family}';
+	font-weight: @h4_font_weight;
+	font-style: @h4_font_style;
+	font-size: ~'@{h4_font_size}px';
+	line-height: ~'@{h4_font_line_height}px';
+	text-transform: @h4_font_transform;
+}
+h5, .h5 {
+	color: @h5_font_color;
+	font-family: ~'@{h5_font_family}';
+	font-weight: @h5_font_weight;
+	font-style: @h5_font_style;
+	font-size: ~'@{h5_font_size}px';
+	line-height: ~'@{h5_font_line_height}px';
+	text-transform: @h5_font_transform;
+}
+h6, .h6 {
+	color: @h6_font_color;
+	font-family: ~'@{h6_font_family}';
+	font-weight: @h6_font_weight;
+	font-style: @h6_font_style;
+	font-size: ~'@{h6_font_size}px';
+	line-height: ~'@{h6_font_line_height}px';
+	text-transform: @h6_font_transform;
+}
+@media (max-width: 767px) {
+	h1, .h1 {
+		font-size: ~'@{h1_font_size_mobile}px';
+		line-height: ~'@{h1_font_line_height_mobile}px';
+	}
+	h2, .h2 {
+		font-size: ~'@{h2_font_size_mobile}px';
+		line-height: ~'@{h2_font_line_height_mobile}px';
+	}
+	h3, .h3 {
+		font-size: ~'@{h3_font_size_mobile}px';
+		line-height: ~'@{h3_font_line_height_mobile}px';
+	}
+	h4, .h4 {
+		font-size: ~'@{h4_font_size_mobile}px';
+		line-height: ~'@{h4_font_line_height_mobile}px';
+	}
+	h5, .h5 {
+		font-size: ~'@{h5_font_size_mobile}px';
+		line-height: ~'@{h5_font_line_height_mobile}px';
+	}
+	h6, .h6 {
+		font-size: ~'@{h6_font_size_mobile}px';
+		line-height: ~'@{h6_font_line_height_mobile}px';
+	}
+}
+/*------------------------------------------------------------------
+	5.1 Dropcaps
+-------------------------------------------------------------------*/
+.dropcap {
+	p:first-child:first-letter {
+		font-family: ~'@{h1_font_family}';
+	}
+}
+.dropcap.style-blue p:first-child:first-letter {
+	color: @color_accent_blue;
+}
+.dropcap.style-black p:first-child:first-letter {
+	color: @color_accent_black;
+}
+.dropcap.style-grey p:first-child:first-letter {
+	color: @color_accent_grey;
+}
+.dropcap.style-light-grey p:first-child:first-letter {
+	color: @color_accent_light_grey;
+}
+.dropcap.style-red p:first-child:first-letter {
+	color: @color_accent_red;
+}
+.dropcap.style-orange p:first-child:first-letter {
+	color: @color_accent_orange;
+}
+.dropcap.style-green p:first-child:first-letter {
+	color: @color_accent_green;
+}
+.dropcap.style-pink p:first-child:first-letter {
+	color: @color_accent_pink;
+}
+.dropcap.style-turquoise p:first-child:first-letter {
+	color: @color_accent_turquoise;
+}
+.dropcap.style-yellow p:first-child:first-letter {
+	color: @color_accent_yellow;
+}
+.dropcap.style-purple p:first-child:first-letter {
+	color: @color_accent_purple;
+}
+.dropcap.style-dark-purple p:first-child:first-letter {
+	color: @color_accent_dark_purple;
+}
+
+.dropcap.with-shadow p:first-child:first-letter {
+	color: @color_accent_inner;
+}
+.dropcap.style-blue.with-shadow p:first-child:first-letter {
+	background-color: @color_accent_blue;
+	box-shadow: ~'@{smallbox_shadow_h_length}px @{smallbox_shadow_v_length}px @{smallbox_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+.dropcap.style-black.with-shadow p:first-child:first-letter {
+	background-color: @color_accent_black;
+	box-shadow: ~'@{smallbox_shadow_h_length}px @{smallbox_shadow_v_length}px @{smallbox_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.dropcap.style-grey.with-shadow p:first-child:first-letter {
+	background-color: @color_accent_grey;
+	box-shadow: ~'@{smallbox_shadow_h_length}px @{smallbox_shadow_v_length}px @{smallbox_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.dropcap.style-light-grey.with-shadow p:first-child:first-letter {
+	background-color: @color_accent_light_grey;
+	box-shadow: ~'@{smallbox_shadow_h_length}px @{smallbox_shadow_v_length}px @{smallbox_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.dropcap.style-red.with-shadow p:first-child:first-letter {
+	background-color: @color_accent_red;
+	box-shadow: ~'@{smallbox_shadow_h_length}px @{smallbox_shadow_v_length}px @{smallbox_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.dropcap.style-orange.with-shadow p:first-child:first-letter {
+	background-color: @color_accent_orange;
+	box-shadow: ~'@{smallbox_shadow_h_length}px @{smallbox_shadow_v_length}px @{smallbox_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.dropcap.style-green.with-shadow p:first-child:first-letter {
+	background-color: @color_accent_green;
+	box-shadow: ~'@{smallbox_shadow_h_length}px @{smallbox_shadow_v_length}px @{smallbox_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.dropcap.style-pink.with-shadow p:first-child:first-letter {
+	background-color: @color_accent_pink;
+	box-shadow: ~'@{smallbox_shadow_h_length}px @{smallbox_shadow_v_length}px @{smallbox_shadow_blur_radius}px 0px @{color_accent_pink_shadow}';
+}
+.dropcap.style-turquoise.with-shadow p:first-child:first-letter {
+	background-color: @color_accent_turquoise;
+	box-shadow: ~'@{smallbox_shadow_h_length}px @{smallbox_shadow_v_length}px @{smallbox_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.dropcap.style-yellow.with-shadow p:first-child:first-letter {
+	background-color: @color_accent_yellow;
+	box-shadow: ~'@{smallbox_shadow_h_length}px @{smallbox_shadow_v_length}px @{smallbox_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.dropcap.style-purple.with-shadow p:first-child:first-letter {
+	background-color: @color_accent_purple;
+	box-shadow: ~'@{smallbox_shadow_h_length}px @{smallbox_shadow_v_length}px @{smallbox_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.dropcap.style-dark-purple.with-shadow p:first-child:first-letter {
+	background-color: @color_accent_dark_purple;
+	box-shadow: ~'@{smallbox_shadow_h_length}px @{smallbox_shadow_v_length}px @{smallbox_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+/** boxes **/
+.box-element, figure.wp-caption {
+	background-color: @box_bg_color;
+	border: ~'@{box_border_size}px solid @{box_border_color}';
+	border-radius: @box_radius_top_left @box_radius_top_right @box_radius_bottom_right @box_radius_bottom_left;
+	box-shadow: ~'@{box_shadow_h_length}px @{box_shadow_v_length}px @{box_shadow_blur_radius}px 0px @{box_shadow_color}';
+}
+.box-element.box-style-dark {
+	background-color: @color_accent_black;
+	color: @color_accent_grey;
+	h1, h2, h3, h4, h5, h6 {
+		color: @color_accent_inner;
+	}
+}
+.box-element.box-square {
+	border-radius: 0;
+}
+.box-element.box-rounded-all {
+
+}
+.box-rounded {
+	border-radius: ~'@{content_elements_radius}px';
+}
+/** hr **/
+hr {
+	background-color: @color_hr_border;
+}
+/*------------------------------------------------------------------
+	5.2 Lists
+-------------------------------------------------------------------*/
+ul li:before {
+	color: @color_accent_blue;
+}
+ol {
+	li:before {
+		font-family: ~'@{h1_font_family}';
+	}
+}
+ol.darken, ul.darken {
+	li {
+		color: @color_text_darken;
+	}
+}
+ol.lighten, ul.lighten {
+	li {
+		color: @color_text_lighten;
+	}
+}
+dl {
+	dt {
+		font-family: ~'@{h1_font_family}';
+		color: @color_text_darken;
+	}
+}
+ul.custom-bullets li:before {
+	@color_escaped: escape( ~'@{color_accent_blue}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20width%3D%2245.701px%22%20height%3D%2245.7px%22%20viewBox%3D%220%200%2045.701%2045.7%22%20style%3D%22enable-background%3Anew%200%200%2045.701%2045.7%3B%22%20xml%3Aspace%3D%22preserve%22%0A%09%3E%0A%3Cg%3E%0A%09%3Cg%3E%0A%09%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M20.687%2C38.332c-2.072%2C2.072-5.434%2C2.072-7.505%2C0L1.554%2C26.704c-2.072-2.071-2.072-5.433%2C0-7.504%0A%09%09%09c2.071-2.072%2C5.433-2.072%2C7.505%2C0l6.928%2C6.927c0.523%2C0.522%2C1.372%2C0.522%2C1.896%2C0L36.642%2C7.368c2.071-2.072%2C5.433-2.072%2C7.505%2C0%0A%09%09%09c0.995%2C0.995%2C1.554%2C2.345%2C1.554%2C3.752c0%2C1.407-0.559%2C2.757-1.554%2C3.752L20.687%2C38.332z%22%2F%3E%0A%09%3C%2Fg%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A")';
+}
+/*------------------------------------------------------------------
+	6. Forms and buttons
+-------------------------------------------------------------------*/
+input[placeholder]          { color: @form_1_input_placeholder_color; }
+::-webkit-input-placeholder { color: @form_1_input_placeholder_color; }
+input::-moz-placeholder     { color: @form_1_input_placeholder_color; }
+input:-moz-placeholder      { color: @form_1_input_placeholder_color; }
+input:-ms-input-placeholder { color: @form_1_input_placeholder_color; }
+label {
+	font-size: ~'@{small_font_size}px';
+	line-height: ~'@{small_font_line_height}px';
+	color: @color_text_lighten;
+}
+input[type=text], input[type=email], input[type=password], input[type=url], input[type=number], input[type=search], input[type=tel], textarea, select {
+	font-size: ~'@{small_font_size}px';
+	line-height: ~'@{small_font_line_height}px';
+	color: @form_1_input_text_color;
+	border-width: ~'@{form_1_input_border_size}px';
+	border-radius: ~'@{form_1_input_border_radius}px';
+	border-color: @form_1_input_border_color;
+	background-color: @form_1_input_bg_color;
+	font-family: @primary_font_family;
+	transition: ~'all @{form_1_animation_time}ms';
+}
+input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=url]:hover, input[type=number]:hover, input[type=search]:hover, input[type=tel]:hover, textarea:hover, select:hover,
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=url]:focus, input[type=number]:focus, input[type=search]:focus, input[type=tel]:focus, textarea:focus, select:focus {
+	color: @form_1_hover_input_text_color;
+	background-color: @form_1_hover_input_bg_color;
+	border-color: @form_1_hover_input_border_color;
+	border-radius: ~'@{form_1_hover_input_border_radius}px';
+}
+.field-radio .options label, .field-checkbox .options label {
+	color: @color_text_lighten;
+}
+.form-error, ul.fw-form-errors {
+	color: @color_accent_red !important;
+}
+ul.fw-form-errors {
+	font-size: ~'@{small_font_size}px';
+	line-height: ~'@{small_font_line_height}px';
+}
+/** Unyson Forms **/
+form.fw_form_fw_form {
+	h2 {
+		font-size: ~'@{h5_font_size}px';
+		line-height: ~'@{h5_font_line_height}px';
+	}
+	.form-builder-item {
+		font-size: ~'@{primary_font_size}px';
+	}
+	.form-builder-item p, span.form-error {
+		font-size: ~'@{small_font_size}px';
+		line-height: ~'@{small_font_line_height}px';
+		color: @color_text_lighten;
+	}
+	.header p {
+		font-size: ~'@{smaller_font_size}px';
+		line-height: ~'@{smaller_font_line_height}px';
+	}
+}
+
+/** custom dropdown **/
+.fs-dropdown button.fs-dropdown-selected {
+	font-size: ~'@{small_font_size}px';
+	line-height: ~'@{small_font_line_height}px';
+	color: @form_1_input_text_color;
+	border-width: ~'@{form_1_input_border_size}px';
+	border-radius: ~'@{form_1_input_border_radius}px';
+	border-color: @form_1_input_border_color;
+	background-color: @form_1_input_bg_color;
+	font-family: @primary_font_family;
+	transition: ~'border-color @{form_1_animation_time}ms';
+
+	@color_escaped: escape( ~'@{form_1_input_icon_color}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22444.819px%22%20height%3D%22444.819px%22%20viewBox%3D%220%200%20444.819%20444.819%22%20style%3D%22enable-background%3Anew%200%200%20444.819%20444.819%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M434.252%2C114.203l-21.409-21.416c-7.419-7.04-16.084-10.561-25.975-10.561c-10.095%2C0-18.657%2C3.521-25.7%2C10.561%20L222.41%2C231.549L83.653%2C92.791c-7.042-7.04-15.606-10.561-25.697-10.561c-9.896%2C0-18.559%2C3.521-25.979%2C10.561l-21.128%2C21.416%20C3.615%2C121.436%2C0%2C130.099%2C0%2C140.188c0%2C10.277%2C3.619%2C18.842%2C10.848%2C25.693l185.864%2C185.865c6.855%2C7.23%2C15.416%2C10.848%2C25.697%2C10.848%20c10.088%2C0%2C18.75-3.617%2C25.977-10.848l185.865-185.865c7.043-7.044%2C10.567-15.608%2C10.567-25.693%20C444.819%2C130.287%2C441.295%2C121.629%2C434.252%2C114.203z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+}
+.fs-dropdown.fs-dropdown-open button.fs-dropdown-selected {
+	@color_escaped: escape( ~'@{form_1_input_icon_color}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22444.819px%22%20height%3D%22444.819px%22%20viewBox%3D%220%200%20444.819%20444.819%22%20style%3D%22enable-background%3Anew%200%200%20444.819%20444.819%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M433.968%2C278.657L248.387%2C92.79c-7.419-7.044-16.08-10.566-25.977-10.566c-10.088%2C0-18.652%2C3.521-25.697%2C10.566%20L10.848%2C278.657C3.615%2C285.887%2C0%2C294.549%2C0%2C304.637c0%2C10.28%2C3.619%2C18.843%2C10.848%2C25.693l21.411%2C21.413%20c6.854%2C7.23%2C15.42%2C10.852%2C25.697%2C10.852c10.278%2C0%2C18.842-3.621%2C25.697-10.852L222.41%2C213.271L361.168%2C351.74%20c6.848%2C7.228%2C15.413%2C10.852%2C25.7%2C10.852c10.082%2C0%2C18.747-3.624%2C25.975-10.852l21.409-21.412%20c7.043-7.043%2C10.567-15.608%2C10.567-25.693C444.819%2C294.545%2C441.205%2C285.884%2C433.968%2C278.657z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+}
+.fs-dropdown-options {
+	background: @form_1_dropdown_bg_color;
+	box-shadow: ~'@{dropdown_shadow_h_length}px @{dropdown_shadow_v_length}px @{dropdown_shadow_blur_radius}px 0px @{form_1_dropdown_shadow_color}';
+	border-radius: ~'@{content_elements_radius}px';
+}
+.fs-dropdown button.fs-dropdown-item {
+	border-radius: ~'@{form_1_dropdown_accent_radius}px';
+	color: @form_1_input_text_color;
+	transition: ~'background @{form_1_animation_time}ms';
+
+	@color_escaped: escape( ~'@{form_1_dropdown_bg_color}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22415.582px%22%20height%3D%22415.582px%22%20viewBox%3D%220%200%20415.582%20415.582%22%20style%3D%22enable-background%3Anew%200%200%20415.582%20415.582%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M411.47%2C96.426l-46.319-46.32c-5.482-5.482-14.371-5.482-19.853%2C0L152.348%2C243.058l-82.066-82.064%20c-5.48-5.482-14.37-5.482-19.851%2C0l-46.319%2C46.32c-5.482%2C5.481-5.482%2C14.37%2C0%2C19.852l138.311%2C138.31%20c2.741%2C2.742%2C6.334%2C4.112%2C9.926%2C4.112c3.593%2C0%2C7.186-1.37%2C9.926-4.112L411.47%2C116.277c2.633-2.632%2C4.111-6.203%2C4.111-9.925%20C415.582%2C102.628%2C414.103%2C99.059%2C411.47%2C96.426z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+}
+.fs-dropdown button.fs-dropdown-item:hover,
+.fs-dropdown button.fs-dropdown-item_selected {
+	background-color: @form_1_dropdown_accent_color;
+	color: @form_1_dropdown_accent_inner_color;
+
+	@color_escaped: escape( ~'@{form_1_dropdown_accent_inner_color}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22415.582px%22%20height%3D%22415.582px%22%20viewBox%3D%220%200%20415.582%20415.582%22%20style%3D%22enable-background%3Anew%200%200%20415.582%20415.582%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M411.47%2C96.426l-46.319-46.32c-5.482-5.482-14.371-5.482-19.853%2C0L152.348%2C243.058l-82.066-82.064%20c-5.48-5.482-14.37-5.482-19.851%2C0l-46.319%2C46.32c-5.482%2C5.481-5.482%2C14.37%2C0%2C19.852l138.311%2C138.31%20c2.741%2C2.742%2C6.334%2C4.112%2C9.926%2C4.112c3.593%2C0%2C7.186-1.37%2C9.926-4.112L411.47%2C116.277c2.633-2.632%2C4.111-6.203%2C4.111-9.925%20C415.582%2C102.628%2C414.103%2C99.059%2C411.47%2C96.426z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+}
+
+/** custom checkboxes **/
+.fs-checkbox-label {
+	line-height: ~'@{primary_font_size}px';
+}
+.fs-checkbox-marker {
+	border: 2px solid @form_1_input_border_color;
+	transition: ~'border-color @{form_1_animation_time}ms';
+}
+.fs-checkbox-flag:before {
+	border-color: @form_1_input_border_color;
+}
+.fs-checkbox:hover {
+	.fs-checkbox-marker {
+		border-color: @color_accent_blue;
+	}
+}
+.fs-checkbox-checked {
+	.fs-checkbox-marker {
+		border-color: @color_accent_blue;
+		background-color: @color_accent_blue;
+	}
+	.fs-checkbox-flag:before {
+		border-color: @color_accent_inner;
+	}
+}
+
+/** custom radios **/
+.fs-checkbox-radio .fs-checkbox-flag,
+.fs-checkbox-toggle .fs-checkbox-flag {
+	background: @color_accent_inner;
+}
+
+/**
+	Form style 2
+**/
+.form-style-white_alt {
+
+	input[placeholder]          { color: @form_2_input_placeholder_color; }
+	::-webkit-input-placeholder { color: @form_2_input_placeholder_color; }
+	input::-moz-placeholder     { color: @form_2_input_placeholder_color; }
+	input:-moz-placeholder      { color: @form_2_input_placeholder_color; }
+	input:-ms-input-placeholder { color: @form_2_input_placeholder_color; }
+
+	input[type=text], input[type=email], input[type=password], input[type=url], input[type=number], input[type=search], input[type=tel], textarea, select {
+		color: @form_2_input_text_color;
+		border-width: ~'@{form_2_input_border_size}px';
+		border-radius: ~'@{form_2_input_border_radius}px';
+		border-color: @form_2_input_border_color;
+		background-color: @form_2_input_bg_color;
+		transition: ~'all @{form_2_animation_time}ms';
+	}
+	input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=url]:hover, input[type=number]:hover, input[type=search]:hover, input[type=tel]:hover, textarea:hover, select:hover,
+	input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=url]:focus, input[type=number]:focus, input[type=search]:focus, input[type=tel]:focus, textarea:focus, select:focus {
+		color: @form_2_hover_input_text_color;
+		background-color: @form_2_hover_input_bg_color;
+		border-color: @form_2_hover_input_border_color;
+		border-radius: ~'@{form_2_hover_input_border_radius}px';
+	}
+
+	/** custom dropdown **/
+	.fs-dropdown button.fs-dropdown-selected {
+		color: @form_2_input_text_color;
+		border-width: ~'@{form_2_input_border_size}px';
+		border-radius: ~'@{form_2_input_border_radius}px';
+		border-color: @form_2_input_border_color;
+		background-color: @form_2_input_bg_color;
+		transition: ~'border-color @{form_2_animation_time}ms';
+
+		@color_escaped: escape( ~'@{form_2_input_icon_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22444.819px%22%20height%3D%22444.819px%22%20viewBox%3D%220%200%20444.819%20444.819%22%20style%3D%22enable-background%3Anew%200%200%20444.819%20444.819%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M434.252%2C114.203l-21.409-21.416c-7.419-7.04-16.084-10.561-25.975-10.561c-10.095%2C0-18.657%2C3.521-25.7%2C10.561%20L222.41%2C231.549L83.653%2C92.791c-7.042-7.04-15.606-10.561-25.697-10.561c-9.896%2C0-18.559%2C3.521-25.979%2C10.561l-21.128%2C21.416%20C3.615%2C121.436%2C0%2C130.099%2C0%2C140.188c0%2C10.277%2C3.619%2C18.842%2C10.848%2C25.693l185.864%2C185.865c6.855%2C7.23%2C15.416%2C10.848%2C25.697%2C10.848%20c10.088%2C0%2C18.75-3.617%2C25.977-10.848l185.865-185.865c7.043-7.044%2C10.567-15.608%2C10.567-25.693%20C444.819%2C130.287%2C441.295%2C121.629%2C434.252%2C114.203z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+	.fs-dropdown.fs-dropdown-open button.fs-dropdown-selected {
+		@color_escaped: escape( ~'@{form_2_input_icon_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22444.819px%22%20height%3D%22444.819px%22%20viewBox%3D%220%200%20444.819%20444.819%22%20style%3D%22enable-background%3Anew%200%200%20444.819%20444.819%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M433.968%2C278.657L248.387%2C92.79c-7.419-7.044-16.08-10.566-25.977-10.566c-10.088%2C0-18.652%2C3.521-25.697%2C10.566%20L10.848%2C278.657C3.615%2C285.887%2C0%2C294.549%2C0%2C304.637c0%2C10.28%2C3.619%2C18.843%2C10.848%2C25.693l21.411%2C21.413%20c6.854%2C7.23%2C15.42%2C10.852%2C25.697%2C10.852c10.278%2C0%2C18.842-3.621%2C25.697-10.852L222.41%2C213.271L361.168%2C351.74%20c6.848%2C7.228%2C15.413%2C10.852%2C25.7%2C10.852c10.082%2C0%2C18.747-3.624%2C25.975-10.852l21.409-21.412%20c7.043-7.043%2C10.567-15.608%2C10.567-25.693C444.819%2C294.545%2C441.205%2C285.884%2C433.968%2C278.657z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+	.fs-dropdown-options {
+		background: @form_2_dropdown_bg_color;
+		box-shadow: ~'@{dropdown_shadow_h_length}px @{dropdown_shadow_v_length}px @{dropdown_shadow_blur_radius}px 0px @{form_2_dropdown_shadow_color}';
+	}
+	.fs-dropdown button.fs-dropdown-item {
+		border-radius: ~'@{form_2_dropdown_accent_radius}px';
+		color: @form_2_input_text_color;
+		transition: ~'background @{form_2_animation_time}ms';
+
+		@color_escaped: escape( ~'@{form_2_dropdown_bg_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22415.582px%22%20height%3D%22415.582px%22%20viewBox%3D%220%200%20415.582%20415.582%22%20style%3D%22enable-background%3Anew%200%200%20415.582%20415.582%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M411.47%2C96.426l-46.319-46.32c-5.482-5.482-14.371-5.482-19.853%2C0L152.348%2C243.058l-82.066-82.064%20c-5.48-5.482-14.37-5.482-19.851%2C0l-46.319%2C46.32c-5.482%2C5.481-5.482%2C14.37%2C0%2C19.852l138.311%2C138.31%20c2.741%2C2.742%2C6.334%2C4.112%2C9.926%2C4.112c3.593%2C0%2C7.186-1.37%2C9.926-4.112L411.47%2C116.277c2.633-2.632%2C4.111-6.203%2C4.111-9.925%20C415.582%2C102.628%2C414.103%2C99.059%2C411.47%2C96.426z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+	.fs-dropdown button.fs-dropdown-item:hover,
+	.fs-dropdown button.fs-dropdown-item_selected {
+		background-color: @form_2_dropdown_accent_color;
+		color: @form_2_dropdown_accent_inner_color;
+
+		@color_escaped: escape( ~'@{form_2_dropdown_accent_inner_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22415.582px%22%20height%3D%22415.582px%22%20viewBox%3D%220%200%20415.582%20415.582%22%20style%3D%22enable-background%3Anew%200%200%20415.582%20415.582%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M411.47%2C96.426l-46.319-46.32c-5.482-5.482-14.371-5.482-19.853%2C0L152.348%2C243.058l-82.066-82.064%20c-5.48-5.482-14.37-5.482-19.851%2C0l-46.319%2C46.32c-5.482%2C5.481-5.482%2C14.37%2C0%2C19.852l138.311%2C138.31%20c2.741%2C2.742%2C6.334%2C4.112%2C9.926%2C4.112c3.593%2C0%2C7.186-1.37%2C9.926-4.112L411.47%2C116.277c2.633-2.632%2C4.111-6.203%2C4.111-9.925%20C415.582%2C102.628%2C414.103%2C99.059%2C411.47%2C96.426z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+
+	/** custom checkboxes **/
+	.fs-checkbox-marker {
+		border-color: @form_2_input_border_color;
+		transition: ~'border-color @{form_2_animation_time}ms';
+	}
+	.fs-checkbox-flag:before {
+		border-color: @form_2_input_border_color;
+	}
+	.fs-checkbox:hover {
+		.fs-checkbox-marker {
+			border-color: @color_accent_blue;
+		}
+	}
+	.fs-checkbox-checked {
+		.fs-checkbox-marker {
+			border-color: @color_accent_blue;
+			background-color: @color_accent_blue;
+		}
+		.fs-checkbox-flag:before {
+			border-color: @color_accent_inner;
+		}
+	}
+
+	/** custom radios **/
+	.fs-checkbox-radio .fs-checkbox-flag,
+	.fs-checkbox-toggle .fs-checkbox-flag {
+		background: @color_accent_inner;
+	}
+
+}
+
+/**
+	Form style 3
+**/
+.form-style-dark {
+
+	input[placeholder]          { color: @form_3_input_placeholder_color; }
+	::-webkit-input-placeholder { color: @form_3_input_placeholder_color; }
+	input::-moz-placeholder     { color: @form_3_input_placeholder_color; }
+	input:-moz-placeholder      { color: @form_3_input_placeholder_color; }
+	input:-ms-input-placeholder { color: @form_3_input_placeholder_color; }
+
+	input[type=text], input[type=email], input[type=password], input[type=url], input[type=number], input[type=search], input[type=tel], textarea, select {
+		color: @form_3_input_text_color;
+		border-width: ~'@{form_3_input_border_size}px';
+		border-radius: ~'@{form_3_input_border_radius}px';
+		border-color: @form_3_input_border_color;
+		background-color: @form_3_input_bg_color;
+		transition: ~'all @{form_3_animation_time}ms';
+	}
+	input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=url]:hover, input[type=number]:hover, input[type=search]:hover, input[type=tel]:hover, textarea:hover, select:hover,
+	input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=url]:focus, input[type=number]:focus, input[type=search]:focus, input[type=tel]:focus, textarea:focus, select:focus {
+		color: @form_3_hover_input_text_color;
+		background-color: @form_3_hover_input_bg_color;
+		border-color: @form_3_hover_input_border_color;
+		border-radius: ~'@{form_3_hover_input_border_radius}px';
+	}
+
+	.button {
+		box-shadow: none !important;
+	}
+
+	/** custom dropdown **/
+	.fs-dropdown button.fs-dropdown-selected {
+		color: @form_3_input_text_color;
+		border-width: ~'@{form_3_input_border_size}px';
+		border-radius: ~'@{form_3_input_border_radius}px';
+		border-color: @form_3_input_border_color;
+		background-color: @form_3_input_bg_color;
+		transition: ~'border-color @{form_3_animation_time}ms';
+
+		@color_escaped: escape( ~'@{form_3_input_icon_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22444.819px%22%20height%3D%22444.819px%22%20viewBox%3D%220%200%20444.819%20444.819%22%20style%3D%22enable-background%3Anew%200%200%20444.819%20444.819%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M434.252%2C114.203l-21.409-21.416c-7.419-7.04-16.084-10.561-25.975-10.561c-10.095%2C0-18.657%2C3.521-25.7%2C10.561%20L222.41%2C231.549L83.653%2C92.791c-7.042-7.04-15.606-10.561-25.697-10.561c-9.896%2C0-18.559%2C3.521-25.979%2C10.561l-21.128%2C21.416%20C3.615%2C121.436%2C0%2C130.099%2C0%2C140.188c0%2C10.277%2C3.619%2C18.842%2C10.848%2C25.693l185.864%2C185.865c6.855%2C7.23%2C15.416%2C10.848%2C25.697%2C10.848%20c10.088%2C0%2C18.75-3.617%2C25.977-10.848l185.865-185.865c7.043-7.044%2C10.567-15.608%2C10.567-25.693%20C444.819%2C130.287%2C441.295%2C121.629%2C434.252%2C114.203z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+	.fs-dropdown.fs-dropdown-open button.fs-dropdown-selected {
+
+		@color_escaped: escape( ~'@{form_3_input_icon_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22444.819px%22%20height%3D%22444.819px%22%20viewBox%3D%220%200%20444.819%20444.819%22%20style%3D%22enable-background%3Anew%200%200%20444.819%20444.819%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M433.968%2C278.657L248.387%2C92.79c-7.419-7.044-16.08-10.566-25.977-10.566c-10.088%2C0-18.652%2C3.521-25.697%2C10.566%20L10.848%2C278.657C3.615%2C285.887%2C0%2C294.549%2C0%2C304.637c0%2C10.28%2C3.619%2C18.843%2C10.848%2C25.693l21.411%2C21.413%20c6.854%2C7.23%2C15.42%2C10.852%2C25.697%2C10.852c10.278%2C0%2C18.842-3.621%2C25.697-10.852L222.41%2C213.271L361.168%2C351.74%20c6.848%2C7.228%2C15.413%2C10.852%2C25.7%2C10.852c10.082%2C0%2C18.747-3.624%2C25.975-10.852l21.409-21.412%20c7.043-7.043%2C10.567-15.608%2C10.567-25.693C444.819%2C294.545%2C441.205%2C285.884%2C433.968%2C278.657z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+	.fs-dropdown-options {
+		background: @form_3_dropdown_bg_color;
+		box-shadow: ~'@{dropdown_shadow_h_length}px @{dropdown_shadow_v_length}px @{dropdown_shadow_blur_radius}px 0px @{form_3_dropdown_shadow_color}';
+	}
+	.fs-dropdown button.fs-dropdown-item {
+		border-radius: ~'@{form_3_dropdown_accent_radius}px';
+		color: @form_3_input_text_color;
+		transition: ~'background @{form_3_animation_time}ms';
+
+		@color_escaped: escape( ~'@{form_3_dropdown_bg_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22415.582px%22%20height%3D%22415.582px%22%20viewBox%3D%220%200%20415.582%20415.582%22%20style%3D%22enable-background%3Anew%200%200%20415.582%20415.582%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M411.47%2C96.426l-46.319-46.32c-5.482-5.482-14.371-5.482-19.853%2C0L152.348%2C243.058l-82.066-82.064%20c-5.48-5.482-14.37-5.482-19.851%2C0l-46.319%2C46.32c-5.482%2C5.481-5.482%2C14.37%2C0%2C19.852l138.311%2C138.31%20c2.741%2C2.742%2C6.334%2C4.112%2C9.926%2C4.112c3.593%2C0%2C7.186-1.37%2C9.926-4.112L411.47%2C116.277c2.633-2.632%2C4.111-6.203%2C4.111-9.925%20C415.582%2C102.628%2C414.103%2C99.059%2C411.47%2C96.426z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+	.fs-dropdown button.fs-dropdown-item:hover,
+	.fs-dropdown button.fs-dropdown-item_selected {
+		background-color: @form_3_dropdown_accent_color;
+		color: @form_3_dropdown_accent_inner_color;
+
+		@color_escaped: escape( ~'@{form_3_dropdown_accent_inner_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22415.582px%22%20height%3D%22415.582px%22%20viewBox%3D%220%200%20415.582%20415.582%22%20style%3D%22enable-background%3Anew%200%200%20415.582%20415.582%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M411.47%2C96.426l-46.319-46.32c-5.482-5.482-14.371-5.482-19.853%2C0L152.348%2C243.058l-82.066-82.064%20c-5.48-5.482-14.37-5.482-19.851%2C0l-46.319%2C46.32c-5.482%2C5.481-5.482%2C14.37%2C0%2C19.852l138.311%2C138.31%20c2.741%2C2.742%2C6.334%2C4.112%2C9.926%2C4.112c3.593%2C0%2C7.186-1.37%2C9.926-4.112L411.47%2C116.277c2.633-2.632%2C4.111-6.203%2C4.111-9.925%20C415.582%2C102.628%2C414.103%2C99.059%2C411.47%2C96.426z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+
+	/** custom checkboxes **/
+	.fs-checkbox-marker {
+		border-color: @form_3_input_border_color;
+		transition: ~'border-color @{form_3_animation_time}ms';
+	}
+	.fs-checkbox-flag:before {
+		border-color: @form_3_input_border_color;
+	}
+	.fs-checkbox:hover {
+		.fs-checkbox-marker {
+			border-color: @color_accent_blue;
+		}
+	}
+	.fs-checkbox-checked {
+		.fs-checkbox-marker {
+			border-color: @color_accent_blue;
+			background-color: @color_accent_blue;
+		}
+		.fs-checkbox-flag:before {
+			border-color: @color_accent_inner;
+		}
+	}
+
+	/** custom radios **/
+	.fs-checkbox-radio .fs-checkbox-flag,
+	.fs-checkbox-toggle .fs-checkbox-flag {
+		background: @color_accent_inner;
+	}
+
+}
+
+/**
+	Form style 4
+**/
+.form-style-dark_alt {
+
+	input[placeholder]          { color: @form_4_input_placeholder_color; }
+	::-webkit-input-placeholder { color: @form_4_input_placeholder_color; }
+	input::-moz-placeholder     { color: @form_4_input_placeholder_color; }
+	input:-moz-placeholder      { color: @form_4_input_placeholder_color; }
+	input:-ms-input-placeholder { color: @form_4_input_placeholder_color; }
+
+	input[type=text], input[type=email], input[type=password], input[type=url], input[type=number], input[type=search], input[type=tel], textarea, select {
+		color: @form_4_input_text_color;
+		border-width: ~'@{form_4_input_border_size}px';
+		border-radius: ~'@{form_4_input_border_radius}px';
+		border-color: @form_4_input_border_color;
+		background-color: @form_4_input_bg_color;
+		transition: ~'all @{form_4_animation_time}ms';
+	}
+	input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=url]:hover, input[type=number]:hover, input[type=search]:hover, input[type=tel]:hover, textarea:hover, select:hover,
+	input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=url]:focus, input[type=number]:focus, input[type=search]:focus, input[type=tel]:focus, textarea:focus, select:focus {
+		color: @form_4_hover_input_text_color;
+		background-color: @form_4_hover_input_bg_color;
+		border-color: @form_4_hover_input_border_color;
+		border-radius: ~'@{form_4_hover_input_border_radius}px';
+	}
+
+	.button {
+		box-shadow: none !important;
+	}
+
+	/** custom dropdown **/
+	.fs-dropdown button.fs-dropdown-selected {
+		color: @form_4_input_text_color;
+		border-width: ~'@{form_4_input_border_size}px';
+		border-radius: ~'@{form_4_input_border_radius}px';
+		border-color: @form_4_input_border_color;
+		background-color: @form_4_input_bg_color;
+		transition: ~'border-color @{form_4_animation_time}ms';
+
+		@color_escaped: escape( ~'@{form_4_input_icon_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22444.819px%22%20height%3D%22444.819px%22%20viewBox%3D%220%200%20444.819%20444.819%22%20style%3D%22enable-background%3Anew%200%200%20444.819%20444.819%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M434.252%2C114.203l-21.409-21.416c-7.419-7.04-16.084-10.561-25.975-10.561c-10.095%2C0-18.657%2C3.521-25.7%2C10.561%20L222.41%2C231.549L83.653%2C92.791c-7.042-7.04-15.606-10.561-25.697-10.561c-9.896%2C0-18.559%2C3.521-25.979%2C10.561l-21.128%2C21.416%20C3.615%2C121.436%2C0%2C130.099%2C0%2C140.188c0%2C10.277%2C3.619%2C18.842%2C10.848%2C25.693l185.864%2C185.865c6.855%2C7.23%2C15.416%2C10.848%2C25.697%2C10.848%20c10.088%2C0%2C18.75-3.617%2C25.977-10.848l185.865-185.865c7.043-7.044%2C10.567-15.608%2C10.567-25.693%20C444.819%2C130.287%2C441.295%2C121.629%2C434.252%2C114.203z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+	.fs-dropdown.fs-dropdown-open button.fs-dropdown-selected {
+
+		@color_escaped: escape( ~'@{form_4_input_icon_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22444.819px%22%20height%3D%22444.819px%22%20viewBox%3D%220%200%20444.819%20444.819%22%20style%3D%22enable-background%3Anew%200%200%20444.819%20444.819%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M433.968%2C278.657L248.387%2C92.79c-7.419-7.044-16.08-10.566-25.977-10.566c-10.088%2C0-18.652%2C3.521-25.697%2C10.566%20L10.848%2C278.657C3.615%2C285.887%2C0%2C294.549%2C0%2C304.637c0%2C10.28%2C3.619%2C18.843%2C10.848%2C25.693l21.411%2C21.413%20c6.854%2C7.23%2C15.42%2C10.852%2C25.697%2C10.852c10.278%2C0%2C18.842-3.621%2C25.697-10.852L222.41%2C213.271L361.168%2C351.74%20c6.848%2C7.228%2C15.413%2C10.852%2C25.7%2C10.852c10.082%2C0%2C18.747-3.624%2C25.975-10.852l21.409-21.412%20c7.043-7.043%2C10.567-15.608%2C10.567-25.693C444.819%2C294.545%2C441.205%2C285.884%2C433.968%2C278.657z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+	.fs-dropdown-options {
+		background: @form_4_dropdown_bg_color;
+		box-shadow: ~'@{dropdown_shadow_h_length}px @{dropdown_shadow_v_length}px @{dropdown_shadow_blur_radius}px 0px @{form_4_dropdown_shadow_color}';
+	}
+	.fs-dropdown button.fs-dropdown-item {
+		border-radius: ~'@{form_4_dropdown_accent_radius}px';
+		color: @form_4_input_text_color;
+		transition: ~'background @{form_4_animation_time}ms';
+
+		@color_escaped: escape( ~'@{form_4_dropdown_bg_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22415.582px%22%20height%3D%22415.582px%22%20viewBox%3D%220%200%20415.582%20415.582%22%20style%3D%22enable-background%3Anew%200%200%20415.582%20415.582%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M411.47%2C96.426l-46.319-46.32c-5.482-5.482-14.371-5.482-19.853%2C0L152.348%2C243.058l-82.066-82.064%20c-5.48-5.482-14.37-5.482-19.851%2C0l-46.319%2C46.32c-5.482%2C5.481-5.482%2C14.37%2C0%2C19.852l138.311%2C138.31%20c2.741%2C2.742%2C6.334%2C4.112%2C9.926%2C4.112c3.593%2C0%2C7.186-1.37%2C9.926-4.112L411.47%2C116.277c2.633-2.632%2C4.111-6.203%2C4.111-9.925%20C415.582%2C102.628%2C414.103%2C99.059%2C411.47%2C96.426z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+	.fs-dropdown button.fs-dropdown-item:hover,
+	.fs-dropdown button.fs-dropdown-item_selected {
+		background-color: @form_4_dropdown_accent_color;
+		color: @form_4_dropdown_accent_inner_color;
+
+		@color_escaped: escape( ~'@{form_4_dropdown_accent_inner_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22415.582px%22%20height%3D%22415.582px%22%20viewBox%3D%220%200%20415.582%20415.582%22%20style%3D%22enable-background%3Anew%200%200%20415.582%20415.582%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M411.47%2C96.426l-46.319-46.32c-5.482-5.482-14.371-5.482-19.853%2C0L152.348%2C243.058l-82.066-82.064%20c-5.48-5.482-14.37-5.482-19.851%2C0l-46.319%2C46.32c-5.482%2C5.481-5.482%2C14.37%2C0%2C19.852l138.311%2C138.31%20c2.741%2C2.742%2C6.334%2C4.112%2C9.926%2C4.112c3.593%2C0%2C7.186-1.37%2C9.926-4.112L411.47%2C116.277c2.633-2.632%2C4.111-6.203%2C4.111-9.925%20C415.582%2C102.628%2C414.103%2C99.059%2C411.47%2C96.426z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+
+	/** custom checkboxes **/
+	.fs-checkbox-marker {
+		border-color: @form_4_input_border_color;
+		transition: ~'border-color @{form_4_animation_time}ms';
+	}
+	.fs-checkbox-flag:before {
+		border-color: @form_4_input_border_color;
+	}
+	.fs-checkbox:hover {
+		.fs-checkbox-marker {
+			border-color: @color_accent_blue;
+		}
+	}
+	.fs-checkbox-checked {
+		.fs-checkbox-marker {
+			border-color: @color_accent_blue;
+			background-color: @color_accent_blue;
+		}
+		.fs-checkbox-flag:before {
+			border-color: @color_accent_inner;
+		}
+	}
+
+	/** custom radios **/
+	.fs-checkbox-radio .fs-checkbox-flag,
+	.fs-checkbox-toggle .fs-checkbox-flag {
+		background: @color_accent_inner;
+	}
+
+}
+
+.button, input[type=reset], input[type=submit], button, input[type=button] {
+
+	@medium_button_animation_time_real: @medium_button_animation_time / 1000;
+
+	font-family: @medium_button_font_family;
+	font-size: ~'@{medium_button_font_size}px';
+	line-height: ~'@{medium_button_font_line_height}px';
+	font-weight: @medium_button_font_weight;
+	font-style: @medium_button_font_style;
+	text-transform: @medium_button_font_transform;
+	transition: ~'all @{medium_button_animation_time_real}s';
+	border: ~'@{medium_button_border} solid @{color_accent_blue}';
+	border-radius: ~'@{medium_button_radius}px';
+	color: @color_accent_inner;
+	background-color: @color_accent_blue;
+	box-shadow: ~'@{medium_button_shadow_h_length}px @{medium_button_shadow_v_length}px @{medium_button_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+.button:hover, input[type=reset]:hover, input[type=submit]:hover, button:hover, input[type=button]:hover {
+	color: @color_accent_inner;
+	border: ~'@{medium_button_hover_border} solid @{color_accent_blue}';
+	border-radius: ~'@{medium_button_hover_radius}px';
+	box-shadow: ~'@{medium_button_hover_shadow_h_length}px @{medium_button_hover_shadow_v_length}px @{medium_button_hover_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+.button:active, input[type=reset]:active, input[type=submit]:active, button:active, input[type=button]:active {
+	border: ~'@{medium_button_click_border} solid @{color_accent_blue}';
+	border-radius: ~'@{medium_button_click_radius}px';
+	box-shadow: ~'@{medium_button_click_shadow_h_length}px @{medium_button_click_shadow_v_length}px @{medium_button_click_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+
+.button.size-small, input[type=reset].size-small, input[type=submit].size-small, button.size-small, input[type=button].size-small {
+
+	@small_button_animation_time_real: @small_button_animation_time / 1000;
+
+	font-family: @small_button_font_family;
+	font-size: ~'@{small_button_font_size}px';
+	line-height: ~'@{small_button_font_line_height}px';
+	font-weight: @small_button_font_weight;
+	font-style: @small_button_font_style;
+	text-transform: @small_button_font_transform;
+	transition: ~'all @{small_button_animation_time_real}s';
+	border: ~'@{small_button_border} solid @{color_accent_blue}';
+	border-radius: ~'@{small_button_radius}px';
+	color: @color_accent_inner;
+	background-color: @color_accent_blue;
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+.button.size-small:hover, input[type=reset].size-small:hover, input[type=submit].size-small:hover, button.size-small:hover, input[type=button].size-small:hover {
+	color: @color_accent_inner;
+	border: ~'@{small_button_hover_border} solid @{color_accent_blue}';
+	border-radius: ~'@{small_button_hover_radius}px';
+	box-shadow: ~'@{small_button_hover_shadow_h_length}px @{small_button_hover_shadow_v_length}px @{small_button_hover_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+.button.size-small:active, input[type=reset].size-small:active, input[type=submit].size-small:active, button.size-small:active, input[type=button].size-small:active {
+	border: ~'@{small_button_click_border} solid @{color_accent_blue}';
+	border-radius: ~'@{small_button_click_radius}px';
+	box-shadow: ~'@{small_button_click_shadow_h_length}px @{small_button_click_shadow_v_length}px @{small_button_click_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+
+.button.size-large, input[type=reset].size-large, input[type=submit].size-large, button.size-large, input[type=button].size-large {
+
+	@large_button_animation_time_real: @large_button_animation_time / 1000;
+
+	font-family: @large_button_font_family;
+	font-size: ~'@{large_button_font_size}px';
+	line-height: ~'@{large_button_font_line_height}px';
+	font-weight: @large_button_font_weight;
+	font-style: @large_button_font_style;
+	text-transform: @large_button_font_transform;
+	transition: ~'all @{large_button_animation_time_real}s';
+	border: ~'@{large_button_border} solid @{color_accent_blue}';
+	border-radius: ~'@{large_button_radius}px';
+	color: @color_accent_inner;
+	background-color: @color_accent_blue;
+	box-shadow: ~'@{large_button_shadow_h_length}px @{large_button_shadow_v_length}px @{large_button_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+.button.size-large:hover, input[type=reset].size-large:hover, input[type=submit].size-large:hover, button.size-large:hover, input[type=button].size-large:hover {
+	color: @color_accent_inner;
+	border: ~'@{large_button_hover_border} solid @{color_accent_blue}';
+	border-radius: ~'@{large_button_hover_radius}px';
+	box-shadow: ~'@{large_button_hover_shadow_h_length}px @{large_button_hover_shadow_v_length}px @{large_button_hover_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+.button.size-large:active, input[type=reset].size-large:active, input[type=submit].size-large:active, button.size-large:active, input[type=button].size-large:active {
+	border: ~'@{large_button_click_border} solid @{color_accent_blue}';
+	border-radius: ~'@{large_button_click_radius}px';
+	box-shadow: ~'@{large_button_click_shadow_h_length}px @{large_button_click_shadow_v_length}px @{large_button_click_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+
+.button.size-xlarge, input[type=reset].size-xlarge, input[type=submit].size-xlarge, button.size-xlarge, input[type=button].size-xlarge {
+
+	@xlarge_button_animation_time_real: @xlarge_button_animation_time / 1000;
+
+	font-family: @xlarge_button_font_family;
+	font-size: ~'@{xlarge_button_font_size}px';
+	line-height: ~'@{xlarge_button_font_line_height}px';
+	font-weight: @xlarge_button_font_weight;
+	font-style: @xlarge_button_font_style;
+	text-transform: @xlarge_button_font_transform;
+	transition: ~'all @{xlarge_button_animation_time_real}s';
+	border: ~'@{xlarge_button_border} solid @{color_accent_blue}';
+	border-radius: ~'@{xlarge_button_radius}px';
+	color: @color_accent_inner;
+	background-color: @color_accent_blue;
+	box-shadow: ~'@{xlarge_button_shadow_h_length}px @{xlarge_button_shadow_v_length}px @{xlarge_button_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+.button.size-xlarge:hover, input[type=reset].size-xlarge:hover, input[type=submit].size-xlarge:hover, button.size-xlarge:hover, input[type=button].size-xlarge:hover {
+	color: @color_accent_inner;
+	border: ~'@{xlarge_button_hover_border} solid @{color_accent_blue}';
+	border-radius: ~'@{xlarge_button_hover_radius}px';
+	box-shadow: ~'@{xlarge_button_hover_shadow_h_length}px @{xlarge_button_hover_shadow_v_length}px @{xlarge_button_hover_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+.button.size-xlarge:active, input[type=reset].size-xlarge:active, input[type=submit].size-xlarge:active, button.size-xlarge:active, input[type=button].size-xlarge:active {
+	border: ~'@{xlarge_button_click_border} solid @{color_accent_blue}';
+	border-radius: ~'@{xlarge_button_click_radius}px';
+	box-shadow: ~'@{xlarge_button_click_shadow_h_length}px @{xlarge_button_click_shadow_v_length}px @{xlarge_button_click_shadow_blur_radius}px 0px @{color_accent_blue_shadow}';
+}
+
+/** grey button color **/
+.button.style-grey, input[type=reset].style-grey, input[type=submit].style-grey, button.style-grey, input[type=button].style-grey,
+.button.style-grey:hover, input[type=reset].style-grey:hover, input[type=submit].style-grey:hover, button.style-grey:hover, input[type=button].style-grey:hover,
+.button.style-grey:active, input[type=reset].style-grey:active, input[type=submit].style-grey:active, button.style-grey:active, input[type=button].style-grey:active {
+	background-color: @color_accent_grey;
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.button.style-grey:hover, input[type=reset].style-grey:hover, input[type=submit].style-grey:hover, button.style-grey:hover, input[type=button].style-grey:hover {
+	box-shadow: ~'@{medium_button_hover_shadow_h_length}px @{medium_button_hover_shadow_v_length}px @{medium_button_hover_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.button.style-grey:active, input[type=reset].style-grey:active, input[type=submit].style-grey:active, button.style-grey:active, input[type=button].style-grey:active {
+	box-shadow: ~'@{medium_button_click_shadow_h_length}px @{medium_button_click_shadow_v_length}px @{medium_button_click_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.button.style-grey.size-small, input[type=reset].style-grey.size-small, input[type=submit].style-grey.size-small, button.style-grey.size-small, input[type=button].style-grey.size-small {
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.button.style-grey.size-small:hover, input[type=reset].style-grey.size-small:hover, input[type=submit].style-grey.size-small:hover, button.style-grey.size-small:hover, input[type=button].style-grey.size-small:hover {
+	box-shadow: ~'@{small_button_hover_shadow_h_length}px @{small_button_hover_shadow_v_length}px @{small_button_hover_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.button.style-grey.size-small:active, input[type=reset].style-grey.size-small:active, input[type=submit].style-grey.size-small:active, button.style-grey.size-small:active, input[type=button].style-grey.size-small:active {
+	box-shadow: ~'@{small_button_click_shadow_h_length}px @{small_button_click_shadow_v_length}px @{small_button_click_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.button.style-grey.size-large, input[type=reset].style-grey.size-large, input[type=submit].style-grey.size-large, button.style-grey.size-large, input[type=button].style-grey.size-large {
+	box-shadow: ~'@{large_button_shadow_h_length}px @{large_button_shadow_v_length}px @{large_button_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.button.style-grey.size-large:hover, input[type=reset].style-grey.size-large:hover, input[type=submit].style-grey.size-large:hover, button.style-grey.size-large:hover, input[type=button].style-grey.size-large:hover {
+	box-shadow: ~'@{large_button_hover_shadow_h_length}px @{large_button_hover_shadow_v_length}px @{large_button_hover_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.button.style-grey.size-large:active, input[type=reset].style-grey.size-large:active, input[type=submit].style-grey.size-large:active, button.style-grey.size-large:active, input[type=button].style-grey.size-large:active {
+	box-shadow: ~'@{large_button_click_shadow_h_length}px @{large_button_click_shadow_v_length}px @{large_button_click_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.button.style-grey.size-xlarge, input[type=reset].style-grey.size-xlarge, input[type=submit].style-grey.size-xlarge, button.style-grey.size-xlarge, input[type=button].style-grey.size-xlarge {
+	box-shadow: ~'@{xlarge_button_shadow_h_length}px @{xlarge_button_shadow_v_length}px @{xlarge_button_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.button.style-grey.size-xlarge:hover, input[type=reset].style-grey.size-xlarge:hover, input[type=submit].style-grey.size-xlarge:hover, button.style-grey.size-xlarge:hover, input[type=button].style-grey.size-xlarge:hover {
+	box-shadow: ~'@{xlarge_button_hover_shadow_h_length}px @{xlarge_button_hover_shadow_v_length}px @{xlarge_button_hover_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+.button.style-grey.size-xlarge:active, input[type=reset].style-grey.size-xlarge:active, input[type=submit].style-grey.size-xlarge:active, button.style-grey.size-xlarge:active, input[type=button].style-grey.size-xlarge:active {
+	box-shadow: ~'@{xlarge_button_click_shadow_h_length}px @{xlarge_button_click_shadow_v_length}px @{xlarge_button_click_shadow_blur_radius}px 0px @{color_accent_grey_shadow}';
+}
+
+/** black button color **/
+.button.style-black, input[type=reset].style-black, input[type=submit].style-black, button.style-black, input[type=button].style-black,
+.button.style-black:hover, input[type=reset].style-black:hover, input[type=submit].style-black:hover, button.style-black:hover, input[type=button].style-black:hover,
+.button.style-black:active, input[type=reset].style-black:active, input[type=submit].style-black:active, button.style-black:active, input[type=button].style-black:active {
+	background-color: @color_accent_black;
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.button.style-black:hover, input[type=reset].style-black:hover, input[type=submit].style-black:hover, button.style-black:hover, input[type=button].style-black:hover {
+	box-shadow: ~'@{medium_button_hover_shadow_h_length}px @{medium_button_hover_shadow_v_length}px @{medium_button_hover_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.button.style-black:active, input[type=reset].style-black:active, input[type=submit].style-black:active, button.style-black:active, input[type=button].style-black:active {
+	box-shadow: ~'@{medium_button_click_shadow_h_length}px @{medium_button_click_shadow_v_length}px @{medium_button_click_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.button.style-black.size-small, input[type=reset].style-black.size-small, input[type=submit].style-black.size-small, button.style-black.size-small, input[type=button].style-black.size-small {
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.button.style-black.size-small:hover, input[type=reset].style-black.size-small:hover, input[type=submit].style-black.size-small:hover, button.style-black.size-small:hover, input[type=button].style-black.size-small:hover {
+	box-shadow: ~'@{small_button_hover_shadow_h_length}px @{small_button_hover_shadow_v_length}px @{small_button_hover_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.button.style-black.size-small:active, input[type=reset].style-black.size-small:active, input[type=submit].style-black.size-small:active, button.style-black.size-small:active, input[type=button].style-black.size-small:active {
+	box-shadow: ~'@{small_button_click_shadow_h_length}px @{small_button_click_shadow_v_length}px @{small_button_click_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.button.style-black.size-large, input[type=reset].style-black.size-large, input[type=submit].style-black.size-large, button.style-black.size-large, input[type=button].style-black.size-large {
+	box-shadow: ~'@{large_button_shadow_h_length}px @{large_button_shadow_v_length}px @{large_button_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.button.style-black.size-large:hover, input[type=reset].style-black.size-large:hover, input[type=submit].style-black.size-large:hover, button.style-black.size-large:hover, input[type=button].style-black.size-large:hover {
+	box-shadow: ~'@{large_button_hover_shadow_h_length}px @{large_button_hover_shadow_v_length}px @{large_button_hover_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.button.style-black.size-large:active, input[type=reset].style-black.size-large:active, input[type=submit].style-black.size-large:active, button.style-black.size-large:active, input[type=button].style-black.size-large:active {
+	box-shadow: ~'@{large_button_click_shadow_h_length}px @{large_button_click_shadow_v_length}px @{large_button_click_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.button.style-black.size-xlarge, input[type=reset].style-black.size-xlarge, input[type=submit].style-black.size-xlarge, button.style-black.size-xlarge, input[type=button].style-black.size-xlarge {
+	box-shadow: ~'@{xlarge_button_shadow_h_length}px @{xlarge_button_shadow_v_length}px @{xlarge_button_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.button.style-black.size-xlarge:hover, input[type=reset].style-black.size-xlarge:hover, input[type=submit].style-black.size-xlarge:hover, button.style-black.size-xlarge:hover, input[type=button].style-black.size-xlarge:hover {
+	box-shadow: ~'@{xlarge_button_hover_shadow_h_length}px @{xlarge_button_hover_shadow_v_length}px @{xlarge_button_hover_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+.button.style-black.size-xlarge:active, input[type=reset].style-black.size-xlarge:active, input[type=submit].style-black.size-xlarge:active, button.style-black.size-xlarge:active, input[type=button].style-black.size-xlarge:active {
+	box-shadow: ~'@{xlarge_button_click_shadow_h_length}px @{xlarge_button_click_shadow_v_length}px @{xlarge_button_click_shadow_blur_radius}px 0px @{color_accent_black_shadow}';
+}
+
+/** red button color **/
+.button.style-red, input[type=reset].style-red, input[type=submit].style-red, button.style-red, input[type=button].style-red,
+.button.style-red:hover, input[type=reset].style-red:hover, input[type=submit].style-red:hover, button.style-red:hover, input[type=button].style-red:hover,
+.button.style-red:active, input[type=reset].style-red:active, input[type=submit].style-red:active, button.style-red:active, input[type=button].style-red:active {
+	background-color: @color_accent_red;
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.button.style-red:hover, input[type=reset].style-red:hover, input[type=submit].style-red:hover, button.style-red:hover, input[type=button].style-red:hover {
+	box-shadow: ~'@{medium_button_hover_shadow_h_length}px @{medium_button_hover_shadow_v_length}px @{medium_button_hover_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.button.style-red:active, input[type=reset].style-red:active, input[type=submit].style-red:active, button.style-red:active, input[type=button].style-red:active {
+	box-shadow: ~'@{medium_button_click_shadow_h_length}px @{medium_button_click_shadow_v_length}px @{medium_button_click_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.button.style-red.size-small, input[type=reset].style-red.size-small, input[type=submit].style-red.size-small, button.style-red.size-small, input[type=button].style-red.size-small {
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.button.style-red.size-small:hover, input[type=reset].style-red.size-small:hover, input[type=submit].style-red.size-small:hover, button.style-red.size-small:hover, input[type=button].style-red.size-small:hover {
+	box-shadow: ~'@{small_button_hover_shadow_h_length}px @{small_button_hover_shadow_v_length}px @{small_button_hover_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.button.style-red.size-small:active, input[type=reset].style-red.size-small:active, input[type=submit].style-red.size-small:active, button.style-red.size-small:active, input[type=button].style-red.size-small:active {
+	box-shadow: ~'@{small_button_click_shadow_h_length}px @{small_button_click_shadow_v_length}px @{small_button_click_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.button.style-red.size-large, input[type=reset].style-red.size-large, input[type=submit].style-red.size-large, button.style-red.size-large, input[type=button].style-red.size-large {
+	box-shadow: ~'@{large_button_shadow_h_length}px @{large_button_shadow_v_length}px @{large_button_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.button.style-red.size-large:hover, input[type=reset].style-red.size-large:hover, input[type=submit].style-red.size-large:hover, button.style-red.size-large:hover, input[type=button].style-red.size-large:hover {
+	box-shadow: ~'@{large_button_hover_shadow_h_length}px @{large_button_hover_shadow_v_length}px @{large_button_hover_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.button.style-red.size-large:active, input[type=reset].style-red.size-large:active, input[type=submit].style-red.size-large:active, button.style-red.size-large:active, input[type=button].style-red.size-large:active {
+	box-shadow: ~'@{large_button_click_shadow_h_length}px @{large_button_click_shadow_v_length}px @{large_button_click_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.button.style-red.size-xlarge, input[type=reset].style-red.size-xlarge, input[type=submit].style-red.size-xlarge, button.style-red.size-xlarge, input[type=button].style-red.size-xlarge {
+	box-shadow: ~'@{xlarge_button_shadow_h_length}px @{xlarge_button_shadow_v_length}px @{xlarge_button_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.button.style-red.size-xlarge:hover, input[type=reset].style-red.size-xlarge:hover, input[type=submit].style-red.size-xlarge:hover, button.style-red.size-xlarge:hover, input[type=button].style-red.size-xlarge:hover {
+	box-shadow: ~'@{xlarge_button_hover_shadow_h_length}px @{xlarge_button_hover_shadow_v_length}px @{xlarge_button_hover_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+.button.style-red.size-xlarge:active, input[type=reset].style-red.size-xlarge:active, input[type=submit].style-red.size-xlarge:active, button.style-red.size-xlarge:active, input[type=button].style-red.size-xlarge:active {
+	box-shadow: ~'@{xlarge_button_click_shadow_h_length}px @{xlarge_button_click_shadow_v_length}px @{xlarge_button_click_shadow_blur_radius}px 0px @{color_accent_red_shadow}';
+}
+
+/** orange button color **/
+.button.style-orange, input[type=reset].style-orange, input[type=submit].style-orange, button.style-orange, input[type=button].style-orange,
+.button.style-orange:hover, input[type=reset].style-orange:hover, input[type=submit].style-orange:hover, button.style-orange:hover, input[type=button].style-orange:hover,
+.button.style-orange:active, input[type=reset].style-orange:active, input[type=submit].style-orange:active, button.style-orange:active, input[type=button].style-orange:active {
+	background-color: @color_accent_orange;
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.button.style-orange:hover, input[type=reset].style-orange:hover, input[type=submit].style-orange:hover, button.style-orange:hover, input[type=button].style-orange:hover {
+	box-shadow: ~'@{medium_button_hover_shadow_h_length}px @{medium_button_hover_shadow_v_length}px @{medium_button_hover_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.button.style-orange:active, input[type=reset].style-orange:active, input[type=submit].style-orange:active, button.style-orange:active, input[type=button].style-orange:active {
+	box-shadow: ~'@{medium_button_click_shadow_h_length}px @{medium_button_click_shadow_v_length}px @{medium_button_click_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.button.style-orange.size-small, input[type=reset].style-orange.size-small, input[type=submit].style-orange.size-small, button.style-orange.size-small, input[type=button].style-orange.size-small {
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.button.style-orange.size-small:hover, input[type=reset].style-orange.size-small:hover, input[type=submit].style-orange.size-small:hover, button.style-orange.size-small:hover, input[type=button].style-orange.size-small:hover {
+	box-shadow: ~'@{small_button_hover_shadow_h_length}px @{small_button_hover_shadow_v_length}px @{small_button_hover_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.button.style-orange.size-small:active, input[type=reset].style-orange.size-small:active, input[type=submit].style-orange.size-small:active, button.style-orange.size-small:active, input[type=button].style-orange.size-small:active {
+	box-shadow: ~'@{small_button_click_shadow_h_length}px @{small_button_click_shadow_v_length}px @{small_button_click_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.button.style-orange.size-large, input[type=reset].style-orange.size-large, input[type=submit].style-orange.size-large, button.style-orange.size-large, input[type=button].style-orange.size-large {
+	box-shadow: ~'@{large_button_shadow_h_length}px @{large_button_shadow_v_length}px @{large_button_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.button.style-orange.size-large:hover, input[type=reset].style-orange.size-large:hover, input[type=submit].style-orange.size-large:hover, button.style-orange.size-large:hover, input[type=button].style-orange.size-large:hover {
+	box-shadow: ~'@{large_button_hover_shadow_h_length}px @{large_button_hover_shadow_v_length}px @{large_button_hover_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.button.style-orange.size-large:active, input[type=reset].style-orange.size-large:active, input[type=submit].style-orange.size-large:active, button.style-orange.size-large:active, input[type=button].style-orange.size-large:active {
+	box-shadow: ~'@{large_button_click_shadow_h_length}px @{large_button_click_shadow_v_length}px @{large_button_click_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.button.style-orange.size-xlarge, input[type=reset].style-orange.size-xlarge, input[type=submit].style-orange.size-xlarge, button.style-orange.size-xlarge, input[type=button].style-orange.size-xlarge {
+	box-shadow: ~'@{xlarge_button_shadow_h_length}px @{xlarge_button_shadow_v_length}px @{xlarge_button_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.button.style-orange.size-xlarge:hover, input[type=reset].style-orange.size-xlarge:hover, input[type=submit].style-orange.size-xlarge:hover, button.style-orange.size-xlarge:hover, input[type=button].style-orange.size-xlarge:hover {
+	box-shadow: ~'@{xlarge_button_hover_shadow_h_length}px @{xlarge_button_hover_shadow_v_length}px @{xlarge_button_hover_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+.button.style-orange.size-xlarge:active, input[type=reset].style-orange.size-xlarge:active, input[type=submit].style-orange.size-xlarge:active, button.style-orange.size-xlarge:active, input[type=button].style-orange.size-xlarge:active {
+	box-shadow: ~'@{xlarge_button_click_shadow_h_length}px @{xlarge_button_click_shadow_v_length}px @{xlarge_button_click_shadow_blur_radius}px 0px @{color_accent_orange_shadow}';
+}
+
+/** green button color **/
+.button.style-green, input[type=reset].style-green, input[type=submit].style-green, button.style-green, input[type=button].style-green,
+.button.style-green:hover, input[type=reset].style-green:hover, input[type=submit].style-green:hover, button.style-green:hover, input[type=button].style-green:hover,
+.button.style-green:active, input[type=reset].style-green:active, input[type=submit].style-green:active, button.style-green:active, input[type=button].style-green:active {
+	background-color: @color_accent_green;
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.button.style-green:hover, input[type=reset].style-green:hover, input[type=submit].style-green:hover, button.style-green:hover, input[type=button].style-green:hover {
+	box-shadow: ~'@{medium_button_hover_shadow_h_length}px @{medium_button_hover_shadow_v_length}px @{medium_button_hover_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.button.style-green:active, input[type=reset].style-green:active, input[type=submit].style-green:active, button.style-green:active, input[type=button].style-green:active {
+	box-shadow: ~'@{medium_button_click_shadow_h_length}px @{medium_button_click_shadow_v_length}px @{medium_button_click_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.button.style-green.size-small, input[type=reset].style-green.size-small, input[type=submit].style-green.size-small, button.style-green.size-small, input[type=button].style-green.size-small {
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.button.style-green.size-small:hover, input[type=reset].style-green.size-small:hover, input[type=submit].style-green.size-small:hover, button.style-green.size-small:hover, input[type=button].style-green.size-small:hover {
+	box-shadow: ~'@{small_button_hover_shadow_h_length}px @{small_button_hover_shadow_v_length}px @{small_button_hover_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.button.style-green.size-small:active, input[type=reset].style-green.size-small:active, input[type=submit].style-green.size-small:active, button.style-green.size-small:active, input[type=button].style-green.size-small:active {
+	box-shadow: ~'@{small_button_click_shadow_h_length}px @{small_button_click_shadow_v_length}px @{small_button_click_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.button.style-green.size-large, input[type=reset].style-green.size-large, input[type=submit].style-green.size-large, button.style-green.size-large, input[type=button].style-green.size-large {
+	box-shadow: ~'@{large_button_shadow_h_length}px @{large_button_shadow_v_length}px @{large_button_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.button.style-green.size-large:hover, input[type=reset].style-green.size-large:hover, input[type=submit].style-green.size-large:hover, button.style-green.size-large:hover, input[type=button].style-green.size-large:hover {
+	box-shadow: ~'@{large_button_hover_shadow_h_length}px @{large_button_hover_shadow_v_length}px @{large_button_hover_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.button.style-green.size-large:active, input[type=reset].style-green.size-large:active, input[type=submit].style-green.size-large:active, button.style-green.size-large:active, input[type=button].style-green.size-large:active {
+	box-shadow: ~'@{large_button_click_shadow_h_length}px @{large_button_click_shadow_v_length}px @{large_button_click_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.button.style-green.size-xlarge, input[type=reset].style-green.size-xlarge, input[type=submit].style-green.size-xlarge, button.style-green.size-xlarge, input[type=button].style-green.size-xlarge {
+	box-shadow: ~'@{xlarge_button_shadow_h_length}px @{xlarge_button_shadow_v_length}px @{xlarge_button_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.button.style-green.size-xlarge:hover, input[type=reset].style-green.size-xlarge:hover, input[type=submit].style-green.size-xlarge:hover, button.style-green.size-xlarge:hover, input[type=button].style-green.size-xlarge:hover {
+	box-shadow: ~'@{xlarge_button_hover_shadow_h_length}px @{xlarge_button_hover_shadow_v_length}px @{xlarge_button_hover_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+.button.style-green.size-xlarge:active, input[type=reset].style-green.size-xlarge:active, input[type=submit].style-green.size-xlarge:active, button.style-green.size-xlarge:active, input[type=button].style-green.size-xlarge:active {
+	box-shadow: ~'@{xlarge_button_click_shadow_h_length}px @{xlarge_button_click_shadow_v_length}px @{xlarge_button_click_shadow_blur_radius}px 0px @{color_accent_green_shadow}';
+}
+
+/** turquoise button color **/
+.button.style-turquoise, input[type=reset].style-turquoise, input[type=submit].style-turquoise, button.style-turquoise, input[type=button].style-turquoise,
+.button.style-turquoise:hover, input[type=reset].style-turquoise:hover, input[type=submit].style-turquoise:hover, button.style-turquoise:hover, input[type=button].style-turquoise:hover,
+.button.style-turquoise:active, input[type=reset].style-turquoise:active, input[type=submit].style-turquoise:active, button.style-turquoise:active, input[type=button].style-turquoise:active {
+	background-color: @color_accent_turquoise;
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.button.style-turquoise:hover, input[type=reset].style-turquoise:hover, input[type=submit].style-turquoise:hover, button.style-turquoise:hover, input[type=button].style-turquoise:hover {
+	box-shadow: ~'@{medium_button_hover_shadow_h_length}px @{medium_button_hover_shadow_v_length}px @{medium_button_hover_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.button.style-turquoise:active, input[type=reset].style-turquoise:active, input[type=submit].style-turquoise:active, button.style-turquoise:active, input[type=button].style-turquoise:active {
+	box-shadow: ~'@{medium_button_click_shadow_h_length}px @{medium_button_click_shadow_v_length}px @{medium_button_click_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.button.style-turquoise.size-small, input[type=reset].style-turquoise.size-small, input[type=submit].style-turquoise.size-small, button.style-turquoise.size-small, input[type=button].style-turquoise.size-small {
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.button.style-turquoise.size-small:hover, input[type=reset].style-turquoise.size-small:hover, input[type=submit].style-turquoise.size-small:hover, button.style-turquoise.size-small:hover, input[type=button].style-turquoise.size-small:hover {
+	box-shadow: ~'@{small_button_hover_shadow_h_length}px @{small_button_hover_shadow_v_length}px @{small_button_hover_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.button.style-turquoise.size-small:active, input[type=reset].style-turquoise.size-small:active, input[type=submit].style-turquoise.size-small:active, button.style-turquoise.size-small:active, input[type=button].style-turquoise.size-small:active {
+	box-shadow: ~'@{small_button_click_shadow_h_length}px @{small_button_click_shadow_v_length}px @{small_button_click_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.button.style-turquoise.size-large, input[type=reset].style-turquoise.size-large, input[type=submit].style-turquoise.size-large, button.style-turquoise.size-large, input[type=button].style-turquoise.size-large {
+	box-shadow: ~'@{large_button_shadow_h_length}px @{large_button_shadow_v_length}px @{large_button_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.button.style-turquoise.size-large:hover, input[type=reset].style-turquoise.size-large:hover, input[type=submit].style-turquoise.size-large:hover, button.style-turquoise.size-large:hover, input[type=button].style-turquoise.size-large:hover {
+	box-shadow: ~'@{large_button_hover_shadow_h_length}px @{large_button_hover_shadow_v_length}px @{large_button_hover_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.button.style-turquoise.size-large:active, input[type=reset].style-turquoise.size-large:active, input[type=submit].style-turquoise.size-large:active, button.style-turquoise.size-large:active, input[type=button].style-turquoise.size-large:active {
+	box-shadow: ~'@{large_button_click_shadow_h_length}px @{large_button_click_shadow_v_length}px @{large_button_click_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.button.style-turquoise.size-xlarge, input[type=reset].style-turquoise.size-xlarge, input[type=submit].style-turquoise.size-xlarge, button.style-turquoise.size-xlarge, input[type=button].style-turquoise.size-xlarge {
+	box-shadow: ~'@{xlarge_button_shadow_h_length}px @{xlarge_button_shadow_v_length}px @{xlarge_button_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.button.style-turquoise.size-xlarge:hover, input[type=reset].style-turquoise.size-xlarge:hover, input[type=submit].style-turquoise.size-xlarge:hover, button.style-turquoise.size-xlarge:hover, input[type=button].style-turquoise.size-xlarge:hover {
+	box-shadow: ~'@{xlarge_button_hover_shadow_h_length}px @{xlarge_button_hover_shadow_v_length}px @{xlarge_button_hover_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+.button.style-turquoise.size-xlarge:active, input[type=reset].style-turquoise.size-xlarge:active, input[type=submit].style-turquoise.size-xlarge:active, button.style-turquoise.size-xlarge:active, input[type=button].style-turquoise.size-xlarge:active {
+	box-shadow: ~'@{xlarge_button_click_shadow_h_length}px @{xlarge_button_click_shadow_v_length}px @{xlarge_button_click_shadow_blur_radius}px 0px @{color_accent_turquoise_shadow}';
+}
+
+/** yellow button color **/
+.button.style-yellow, input[type=reset].style-yellow, input[type=submit].style-yellow, button.style-yellow, input[type=button].style-yellow,
+.button.style-yellow:hover, input[type=reset].style-yellow:hover, input[type=submit].style-yellow:hover, button.style-yellow:hover, input[type=button].style-yellow:hover,
+.button.style-yellow:active, input[type=reset].style-yellow:active, input[type=submit].style-yellow:active, button.style-yellow:active, input[type=button].style-yellow:active {
+	background-color: @color_accent_yellow;
+	color: @color_accent_black;
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.button.style-yellow:hover, input[type=reset].style-yellow:hover, input[type=submit].style-yellow:hover, button.style-yellow:hover, input[type=button].style-yellow:hover {
+	box-shadow: ~'@{medium_button_hover_shadow_h_length}px @{medium_button_hover_shadow_v_length}px @{medium_button_hover_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.button.style-yellow:active, input[type=reset].style-yellow:active, input[type=submit].style-yellow:active, button.style-yellow:active, input[type=button].style-yellow:active {
+	box-shadow: ~'@{medium_button_click_shadow_h_length}px @{medium_button_click_shadow_v_length}px @{medium_button_click_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.button.style-yellow.size-small, input[type=reset].style-yellow.size-small, input[type=submit].style-yellow.size-small, button.style-yellow.size-small, input[type=button].style-yellow.size-small {
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.button.style-yellow.size-small:hover, input[type=reset].style-yellow.size-small:hover, input[type=submit].style-yellow.size-small:hover, button.style-yellow.size-small:hover, input[type=button].style-yellow.size-small:hover {
+	box-shadow: ~'@{small_button_hover_shadow_h_length}px @{small_button_hover_shadow_v_length}px @{small_button_hover_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.button.style-yellow.size-small:active, input[type=reset].style-yellow.size-small:active, input[type=submit].style-yellow.size-small:active, button.style-yellow.size-small:active, input[type=button].style-yellow.size-small:active {
+	box-shadow: ~'@{small_button_click_shadow_h_length}px @{small_button_click_shadow_v_length}px @{small_button_click_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.button.style-yellow.size-large, input[type=reset].style-yellow.size-large, input[type=submit].style-yellow.size-large, button.style-yellow.size-large, input[type=button].style-yellow.size-large {
+	box-shadow: ~'@{large_button_shadow_h_length}px @{large_button_shadow_v_length}px @{large_button_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.button.style-yellow.size-large:hover, input[type=reset].style-yellow.size-large:hover, input[type=submit].style-yellow.size-large:hover, button.style-yellow.size-large:hover, input[type=button].style-yellow.size-large:hover {
+	box-shadow: ~'@{large_button_hover_shadow_h_length}px @{large_button_hover_shadow_v_length}px @{large_button_hover_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.button.style-yellow.size-large:active, input[type=reset].style-yellow.size-large:active, input[type=submit].style-yellow.size-large:active, button.style-yellow.size-large:active, input[type=button].style-yellow.size-large:active {
+	box-shadow: ~'@{large_button_click_shadow_h_length}px @{large_button_click_shadow_v_length}px @{large_button_click_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.button.style-yellow.size-xlarge, input[type=reset].style-yellow.size-xlarge, input[type=submit].style-yellow.size-xlarge, button.style-yellow.size-xlarge, input[type=button].style-yellow.size-xlarge {
+	box-shadow: ~'@{xlarge_button_shadow_h_length}px @{xlarge_button_shadow_v_length}px @{xlarge_button_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.button.style-yellow.size-xlarge:hover, input[type=reset].style-yellow.size-xlarge:hover, input[type=submit].style-yellow.size-xlarge:hover, button.style-yellow.size-xlarge:hover, input[type=button].style-yellow.size-xlarge:hover {
+	box-shadow: ~'@{xlarge_button_hover_shadow_h_length}px @{xlarge_button_hover_shadow_v_length}px @{xlarge_button_hover_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+.button.style-yellow.size-xlarge:active, input[type=reset].style-yellow.size-xlarge:active, input[type=submit].style-yellow.size-xlarge:active, button.style-yellow.size-xlarge:active, input[type=button].style-yellow.size-xlarge:active {
+	box-shadow: ~'@{xlarge_button_click_shadow_h_length}px @{xlarge_button_click_shadow_v_length}px @{xlarge_button_click_shadow_blur_radius}px 0px @{color_accent_yellow_shadow}';
+}
+
+/** purple button color **/
+.button.style-purple, input[type=reset].style-purple, input[type=submit].style-purple, button.style-purple, input[type=button].style-purple,
+.button.style-purple:hover, input[type=reset].style-purple:hover, input[type=submit].style-purple:hover, button.style-purple:hover, input[type=button].style-purple:hover,
+.button.style-purple:active, input[type=reset].style-purple:active, input[type=submit].style-purple:active, button.style-purple:active, input[type=button].style-purple:active {
+	background-color: @color_accent_purple;
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.button.style-purple:hover, input[type=reset].style-purple:hover, input[type=submit].style-purple:hover, button.style-purple:hover, input[type=button].style-purple:hover {
+	box-shadow: ~'@{medium_button_hover_shadow_h_length}px @{medium_button_hover_shadow_v_length}px @{medium_button_hover_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.button.style-purple:active, input[type=reset].style-purple:active, input[type=submit].style-purple:active, button.style-purple:active, input[type=button].style-purple:active {
+	box-shadow: ~'@{medium_button_click_shadow_h_length}px @{medium_button_click_shadow_v_length}px @{medium_button_click_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.button.style-purple.size-small, input[type=reset].style-purple.size-small, input[type=submit].style-purple.size-small, button.style-purple.size-small, input[type=button].style-purple.size-small {
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.button.style-purple.size-small:hover, input[type=reset].style-purple.size-small:hover, input[type=submit].style-purple.size-small:hover, button.style-purple.size-small:hover, input[type=button].style-purple.size-small:hover {
+	box-shadow: ~'@{small_button_hover_shadow_h_length}px @{small_button_hover_shadow_v_length}px @{small_button_hover_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.button.style-purple.size-small:active, input[type=reset].style-purple.size-small:active, input[type=submit].style-purple.size-small:active, button.style-purple.size-small:active, input[type=button].style-purple.size-small:active {
+	box-shadow: ~'@{small_button_click_shadow_h_length}px @{small_button_click_shadow_v_length}px @{small_button_click_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.button.style-purple.size-large, input[type=reset].style-purple.size-large, input[type=submit].style-purple.size-large, button.style-purple.size-large, input[type=button].style-purple.size-large {
+	box-shadow: ~'@{large_button_shadow_h_length}px @{large_button_shadow_v_length}px @{large_button_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.button.style-purple.size-large:hover, input[type=reset].style-purple.size-large:hover, input[type=submit].style-purple.size-large:hover, button.style-purple.size-large:hover, input[type=button].style-purple.size-large:hover {
+	box-shadow: ~'@{large_button_hover_shadow_h_length}px @{large_button_hover_shadow_v_length}px @{large_button_hover_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.button.style-purple.size-large:active, input[type=reset].style-purple.size-large:active, input[type=submit].style-purple.size-large:active, button.style-purple.size-large:active, input[type=button].style-purple.size-large:active {
+	box-shadow: ~'@{large_button_click_shadow_h_length}px @{large_button_click_shadow_v_length}px @{large_button_click_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.button.style-purple.size-xlarge, input[type=reset].style-purple.size-xlarge, input[type=submit].style-purple.size-xlarge, button.style-purple.size-xlarge, input[type=button].style-purple.size-xlarge {
+	box-shadow: ~'@{xlarge_button_shadow_h_length}px @{xlarge_button_shadow_v_length}px @{xlarge_button_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.button.style-purple.size-xlarge:hover, input[type=reset].style-purple.size-xlarge:hover, input[type=submit].style-purple.size-xlarge:hover, button.style-purple.size-xlarge:hover, input[type=button].style-purple.size-xlarge:hover {
+	box-shadow: ~'@{xlarge_button_hover_shadow_h_length}px @{xlarge_button_hover_shadow_v_length}px @{xlarge_button_hover_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+.button.style-purple.size-xlarge:active, input[type=reset].style-purple.size-xlarge:active, input[type=submit].style-purple.size-xlarge:active, button.style-purple.size-xlarge:active, input[type=button].style-purple.size-xlarge:active {
+	box-shadow: ~'@{xlarge_button_click_shadow_h_length}px @{xlarge_button_click_shadow_v_length}px @{xlarge_button_click_shadow_blur_radius}px 0px @{color_accent_purple_shadow}';
+}
+
+/** dark purple button color **/
+.button.style-dark-purple, input[type=reset].style-dark-purple, input[type=submit].style-dark-purple, button.style-dark-purple, input[type=button].style-dark-purple,
+.button.style-dark-purple:hover, input[type=reset].style-dark-purple:hover, input[type=submit].style-dark-purple:hover, button.style-dark-purple:hover, input[type=button].style-dark-purple:hover,
+.button.style-dark-purple:active, input[type=reset].style-dark-purple:active, input[type=submit].style-dark-purple:active, button.style-dark-purple:active, input[type=button].style-dark-purple:active {
+	background-color: @color_accent_dark_purple;
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+.button.style-dark-purple:hover, input[type=reset].style-dark-purple:hover, input[type=submit].style-dark-purple:hover, button.style-dark-purple:hover, input[type=button].style-dark-purple:hover {
+	box-shadow: ~'@{medium_button_hover_shadow_h_length}px @{medium_button_hover_shadow_v_length}px @{medium_button_hover_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+.button.style-dark-purple:active, input[type=reset].style-dark-purple:active, input[type=submit].style-dark-purple:active, button.style-dark-purple:active, input[type=button].style-dark-purple:active {
+	box-shadow: ~'@{medium_button_click_shadow_h_length}px @{medium_button_click_shadow_v_length}px @{medium_button_click_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+.button.style-dark-purple.size-small, input[type=reset].style-dark-purple.size-small, input[type=submit].style-dark-purple.size-small, button.style-dark-purple.size-small, input[type=button].style-dark-purple.size-small {
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+.button.style-dark-purple.size-small:hover, input[type=reset].style-dark-purple.size-small:hover, input[type=submit].style-dark-purple.size-small:hover, button.style-dark-purple.size-small:hover, input[type=button].style-dark-purple.size-small:hover {
+	box-shadow: ~'@{small_button_hover_shadow_h_length}px @{small_button_hover_shadow_v_length}px @{small_button_hover_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+.button.style-dark-purple.size-small:active, input[type=reset].style-dark-purple.size-small:active, input[type=submit].style-dark-purple.size-small:active, button.style-dark-purple.size-small:active, input[type=button].style-dark-purple.size-small:active {
+	box-shadow: ~'@{small_button_click_shadow_h_length}px @{small_button_click_shadow_v_length}px @{small_button_click_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+.button.style-dark-purple.size-large, input[type=reset].style-dark-purple.size-large, input[type=submit].style-dark-purple.size-large, button.style-dark-purple.size-large, input[type=button].style-dark-purple.size-large {
+	box-shadow: ~'@{large_button_shadow_h_length}px @{large_button_shadow_v_length}px @{large_button_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+.button.style-dark-purple.size-large:hover, input[type=reset].style-dark-purple.size-large:hover, input[type=submit].style-dark-purple.size-large:hover, button.style-dark-purple.size-large:hover, input[type=button].style-dark-purple.size-large:hover {
+	box-shadow: ~'@{large_button_hover_shadow_h_length}px @{large_button_hover_shadow_v_length}px @{large_button_hover_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+.button.style-dark-purple.size-large:active, input[type=reset].style-dark-purple.size-large:active, input[type=submit].style-dark-purple.size-large:active, button.style-dark-purple.size-large:active, input[type=button].style-dark-purple.size-large:active {
+	box-shadow: ~'@{large_button_click_shadow_h_length}px @{large_button_click_shadow_v_length}px @{large_button_click_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+.button.style-dark-purple.size-xlarge, input[type=reset].style-dark-purple.size-xlarge, input[type=submit].style-dark-purple.size-xlarge, button.style-dark-purple.size-xlarge, input[type=button].style-dark-purple.size-xlarge {
+	box-shadow: ~'@{xlarge_button_shadow_h_length}px @{xlarge_button_shadow_v_length}px @{xlarge_button_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+.button.style-dark-purple.size-xlarge:hover, input[type=reset].style-dark-purple.size-xlarge:hover, input[type=submit].style-dark-purple.size-xlarge:hover, button.style-dark-purple.size-xlarge:hover, input[type=button].style-dark-purple.size-xlarge:hover {
+	box-shadow: ~'@{xlarge_button_hover_shadow_h_length}px @{xlarge_button_hover_shadow_v_length}px @{xlarge_button_hover_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+.button.style-dark-purple.size-xlarge:active, input[type=reset].style-dark-purple.size-xlarge:active, input[type=submit].style-dark-purple.size-xlarge:active, button.style-dark-purple.size-xlarge:active, input[type=button].style-dark-purple.size-xlarge:active {
+	box-shadow: ~'@{xlarge_button_click_shadow_h_length}px @{xlarge_button_click_shadow_v_length}px @{xlarge_button_click_shadow_blur_radius}px 0px @{color_accent_dark_purple_shadow}';
+}
+/** white button color **/
+.button.style-white, input[type=reset].style-white, input[type=submit].style-white, button.style-white, input[type=button].style-white,
+.button.style-white:hover, input[type=reset].style-white:hover, input[type=submit].style-white:hover, button.style-white:hover, input[type=button].style-white:hover,
+.button.style-white:active, input[type=reset].style-white:active, input[type=submit].style-white:active, button.style-white:active, input[type=button].style-white:active {
+	background-color: #fff;
+	color: @color_accent_grey;
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.button.style-white:hover, input[type=reset].style-white:hover, input[type=submit].style-white:hover, button.style-white:hover, input[type=button].style-white:hover {
+	background-color: @color_accent_grey;
+	color: @color_accent_inner;
+	box-shadow: ~'@{medium_button_hover_shadow_h_length}px @{medium_button_hover_shadow_v_length}px @{medium_button_hover_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.button.style-white:active, input[type=reset].style-white:active, input[type=submit].style-white:active, button.style-white:active, input[type=button].style-white:active {
+	box-shadow: ~'@{medium_button_click_shadow_h_length}px @{medium_button_click_shadow_v_length}px @{medium_button_click_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.button.style-white.size-small, input[type=reset].style-white.size-small, input[type=submit].style-white.size-small, button.style-white.size-small, input[type=button].style-white.size-small {
+	box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.button.style-white.size-small:hover, input[type=reset].style-white.size-small:hover, input[type=submit].style-white.size-small:hover, button.style-white.size-small:hover, input[type=button].style-white.size-small:hover {
+	box-shadow: ~'@{small_button_hover_shadow_h_length}px @{small_button_hover_shadow_v_length}px @{small_button_hover_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.button.style-white.size-small:active, input[type=reset].style-white.size-small:active, input[type=submit].style-white.size-small:active, button.style-white.size-small:active, input[type=button].style-white.size-small:active {
+	box-shadow: ~'@{small_button_click_shadow_h_length}px @{small_button_click_shadow_v_length}px @{small_button_click_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.button.style-white.size-large, input[type=reset].style-white.size-large, input[type=submit].style-white.size-large, button.style-white.size-large, input[type=button].style-white.size-large {
+	box-shadow: ~'@{large_button_shadow_h_length}px @{large_button_shadow_v_length}px @{large_button_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.button.style-white.size-large:hover, input[type=reset].style-white.size-large:hover, input[type=submit].style-white.size-large:hover, button.style-white.size-large:hover, input[type=button].style-white.size-large:hover {
+	box-shadow: ~'@{large_button_hover_shadow_h_length}px @{large_button_hover_shadow_v_length}px @{large_button_hover_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.button.style-white.size-large:active, input[type=reset].style-white.size-large:active, input[type=submit].style-white.size-large:active, button.style-white.size-large:active, input[type=button].style-white.size-large:active {
+	box-shadow: ~'@{large_button_click_shadow_h_length}px @{large_button_click_shadow_v_length}px @{large_button_click_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.button.style-white.size-xlarge, input[type=reset].style-white.size-xlarge, input[type=submit].style-white.size-xlarge, button.style-white.size-xlarge, input[type=button].style-white.size-xlarge {
+	box-shadow: ~'@{xlarge_button_shadow_h_length}px @{xlarge_button_shadow_v_length}px @{xlarge_button_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.button.style-white.size-xlarge:hover, input[type=reset].style-white.size-xlarge:hover, input[type=submit].style-white.size-xlarge:hover, button.style-white.size-xlarge:hover, input[type=button].style-white.size-xlarge:hover {
+	box-shadow: ~'@{xlarge_button_hover_shadow_h_length}px @{xlarge_button_hover_shadow_v_length}px @{xlarge_button_hover_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+.button.style-white.size-xlarge:active, input[type=reset].style-white.size-xlarge:active, input[type=submit].style-white.size-xlarge:active, button.style-white.size-xlarge:active, input[type=button].style-white.size-xlarge:active {
+	box-shadow: ~'@{xlarge_button_click_shadow_h_length}px @{xlarge_button_click_shadow_v_length}px @{xlarge_button_click_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+}
+/** stroke styles **/
+.button.stroke, input[type=reset].stroke, input[type=submit].stroke, button.stroke, input[type=button].stroke,
+.button.stroke:hover, input[type=reset].stroke:hover, input[type=submit].stroke:hover, button.stroke:hover, input[type=button].stroke:hover,
+.button.stroke:active, input[type=reset].stroke:active, input[type=submit].stroke:active, button.stroke:active, input[type=button].stroke:active {
+	background-color: transparent;
+	border-width: 2px;
+	border-style: solid;
+	color: @color_accent_black;
+}
+/** blue stroke button color **/
+.button.stroke.style-blue {
+	border-color: @color_accent_blue;
+}
+.header-menu .button.stroke.style-blue {
+	color: @color_accent_blue;
+}
+/** grey stroke button color **/
+.button.stroke.style-grey {
+	border-color: @color_accent_grey;
+}
+.header-menu .button.stroke.style-grey {
+	color: @color_accent_grey;
+}
+/** black stroke button color **/
+.button.stroke.style-black {
+	border-color: @color_accent_black;
+}
+.header-menu .button.stroke.style-black {
+	color: @color_accent_black;
+}
+/** red stroke button color **/
+.button.stroke.style-red {
+	border-color: @color_accent_red;
+}
+.header-menu .button.stroke.style-red {
+	color: @color_accent_red;
+}
+/** orange stroke button color **/
+.button.stroke.style-orange {
+	border-color: @color_accent_orange;
+}
+.header-menu .button.stroke.style-orange {
+	color: @color_accent_orange;
+}
+/** green stroke button color **/
+.button.stroke.style-green {
+	border-color: @color_accent_green;
+}
+.header-menu .button.stroke.style-green {
+	color: @color_accent_green;
+}
+/** turquoise stroke button color **/
+.button.stroke.style-turquoise {
+	border-color: @color_accent_turquoise;
+}
+.header-menu .button.stroke.style-turquoise {
+	color: @color_accent_turquoise;
+}
+/** yellow stroke button color **/
+.button.stroke.style-yellow {
+	border-color: @color_accent_yellow;
+}
+.header-menu .button.stroke.style-yellow {
+	color: @color_accent_yellow;
+}
+/** purple stroke button color **/
+.button.stroke.style-purple {
+	border-color: @color_accent_purple;
+}
+.header-menu .button.stroke.style-purple {
+	color: @color_accent_purple;
+}
+/** dark purple stroke button color **/
+.button.stroke.style-dark-purple {
+	border-color: @color_accent_dark_purple;
+}
+.header-menu .button.stroke.style-dark-purple {
+	color: @color_accent_dark_purple;
+}
+
+/** gradients & gradient buttons **/
+.style-red-gradient, .gradient-red {
+	background: @gradient_red_from;
+	background-image: linear-gradient( to right, @gradient_red_from, @gradient_red_to );
+}
+.style-violet-gradient, .gradient-violet {
+	background: @gradient_violet_from;
+	background-image: linear-gradient( to right, @gradient_violet_from, @gradient_violet_to );
+}
+.style-turquoise-gradient, .gradient-turquoise {
+	background: @gradient_turquoise_from;
+	background-image: linear-gradient( to right, @gradient_turquoise_from, @gradient_turquoise_to );
+}
+.style-blue-gradient, .gradient-blue {
+	background: @gradient_blue_from;
+	background-image: linear-gradient( to right, @gradient_blue_from, @gradient_blue_to );
+}
+.style-grey-gradient, .gradient-grey {
+	background: @gradient_grey_from;
+	background-image: linear-gradient( to right, @gradient_grey_from, @gradient_grey_to );
+}
+.style-orange-gradient, .gradient-orange {
+	background: @gradient_orange_from;
+	background-image: linear-gradient( to right, @gradient_orange_from, @gradient_orange_to );
+}
+.style-green-gradient, .gradient-green {
+	background: @gradient_green_from;
+	background-image: linear-gradient( to right, @gradient_green_from, @gradient_green_to );
+}
+.style-purple-gradient, .gradient-purple {
+	background: @gradient_purple_from;
+	background-image: linear-gradient( to right, @gradient_purple_from, @gradient_purple_to );
+}
+.style-blue-gradient:hover, .style-violet-gradient:hover, .style-turquoise-gradient:hover, .style-red-gradient:hover,
+.style-grey-gradient:hover, .style-orange-gradient:hover, .style-green-gradient:hover, .style-green-purple:hover  {
+	background-size: 200%;
+}
+
+/** autocomplete / AJAX search **/
+.autocomplete-suggestions {
+	font-size: ~'@{small_font_size}px';
+	line-height: ~'@{small_font_line_height}px';
+	border-width: ~'@{form_1_input_border_size}px';
+	border-radius: ~'@{content_elements_radius}px';
+	border-color: @form_1_input_border_color;
+	background-color: @form_1_input_bg_color;
+	font-family: @primary_font_family;
+	transition: ~'border-color @{form_1_animation_time}ms';
+	box-shadow: ~'@{dropdown_shadow_h_length}px @{dropdown_shadow_v_length}px @{dropdown_shadow_blur_radius}px 0px @{form_1_dropdown_shadow_color}';
+}
+.autocomplete-selected {
+	background-color: @form_1_hover_input_bg_color;
+}
+.autocomplete-suggestions strong {
+	color: @color_accent_blue;
+}
+.autocomplete-suggestion {
+	border-radius: ~'@{form_1_dropdown_accent_radius}px';
+	color: @form_1_input_text_color;
+	transition: ~'background @{form_1_animation_time}ms';
+	@color_escaped: escape( ~'@{form_1_dropdown_bg_color}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22415.582px%22%20height%3D%22415.582px%22%20viewBox%3D%220%200%20415.582%20415.582%22%20style%3D%22enable-background%3Anew%200%200%20415.582%20415.582%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M411.47%2C96.426l-46.319-46.32c-5.482-5.482-14.371-5.482-19.853%2C0L152.348%2C243.058l-82.066-82.064%20c-5.48-5.482-14.37-5.482-19.851%2C0l-46.319%2C46.32c-5.482%2C5.481-5.482%2C14.37%2C0%2C19.852l138.311%2C138.31%20c2.741%2C2.742%2C6.334%2C4.112%2C9.926%2C4.112c3.593%2C0%2C7.186-1.37%2C9.926-4.112L411.47%2C116.277c2.633-2.632%2C4.111-6.203%2C4.111-9.925%20C415.582%2C102.628%2C414.103%2C99.059%2C411.47%2C96.426z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+}
+.autocomplete-suggestion:hover {
+	background-color: @form_1_dropdown_accent_color;
+	color: @form_1_dropdown_accent_inner_color;
+	@color_escaped: escape( ~'@{form_1_dropdown_accent_inner_color}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22415.582px%22%20height%3D%22415.582px%22%20viewBox%3D%220%200%20415.582%20415.582%22%20style%3D%22enable-background%3Anew%200%200%20415.582%20415.582%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M411.47%2C96.426l-46.319-46.32c-5.482-5.482-14.371-5.482-19.853%2C0L152.348%2C243.058l-82.066-82.064%20c-5.48-5.482-14.37-5.482-19.851%2C0l-46.319%2C46.32c-5.482%2C5.481-5.482%2C14.37%2C0%2C19.852l138.311%2C138.31%20c2.741%2C2.742%2C6.334%2C4.112%2C9.926%2C4.112c3.593%2C0%2C7.186-1.37%2C9.926-4.112L411.47%2C116.277c2.633-2.632%2C4.111-6.203%2C4.111-9.925%20C415.582%2C102.628%2C414.103%2C99.059%2C411.47%2C96.426z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+}
+.autocomplete-group, .autocomplete-group strong {
+	color: @color_text_darken;
+	font-family: @secondary_font_family;
+}
+form .fw-flash-type-error {
+	color: @color_accent_red;
+}
+/*------------------------------------------------------------------
+	7. Tables
+-------------------------------------------------------------------*/
+table {
+
+	font-size: ~'@{smaller_font_size}px';
+	line-height: ~'@{smaller_font_line_height}px';
+	thead, tfoot, thead th {
+		font-family: @secondary_font_family;
+		color: @color_text_darken;
+	}
+	thead {
+		border-bottom: 2px solid @color_hr_border;
+	}
+	td.desc-col {
+		font-family: @primary_font_family;
+		color: @color_text_darken;
+	}
+	tr:nth-child(even) td, tbody tr:nth-child(even) th {
+		background-color: @color_hr_border;
+	}
+}
+
+/*------------------------------------------------------------------
+	8. Custom SVG / Font icons
+-------------------------------------------------------------------*/
+.custom-icon i {
+	color: @color_accent_black;
+}
+.custom-icon svg {
+	path, rect, polygon {
+		fill: @color_accent_black;
+	}
+}
+
+/*------------------------------------------------------------------
+	9. Media
+-------------------------------------------------------------------*/
+.img-shortcode-wrapper.style-polaroid figcaption,
+.wp-caption figcaption {
+	background: @color_bg_white;
+	color: @color_text_lighten;
+	font-size: ~'@{small_font_size}px';
+}
+.img-shortcode-wrapper, .video-shortcode-wrapper {
+	.img-wrapper:after {
+		/* IE10+ */
+		background-image: -ms-radial-gradient(center, ellipse closest-side, rgba(255,255,255,0) 20%, rgba(red(@color_accent_black),green(@color_accent_black),blue(@color_accent_black),0.7) 100%);
+		/* Mozilla Firefox */
+		background-image: -moz-radial-gradient(center, ellipse closest-side, rgba(255,255,255,0) 20%, rgba(red(@color_accent_black),green(@color_accent_black),blue(@color_accent_black),0.7) 100%);
+		/* Opera */
+		background-image: -o-radial-gradient(center, ellipse closest-side, rgba(255,255,255,0) 20%, rgba(red(@color_accent_black),green(@color_accent_black),blue(@color_accent_black),0.7) 100%);
+		/* Webkit (Safari/Chrome 10) */
+		background-image: -webkit-gradient(radial, center center, 0, center center, 125, color-stop(20, rgba(255,255,255,0)), color-stop(100, rgba(red(@color_accent_black),green(@color_accent_black),blue(@color_accent_black),0.7)));
+		/* Webkit (Chrome 11+) */
+		background-image: -webkit-radial-gradient(center, ellipse closest-side, rgba(255,255,255,0) 20%, rgba(red(@color_accent_black),green(@color_accent_black),blue(@color_accent_black),0.7) 100%);
+		/* W3C Markup */
+		background-image: radial-gradient(ellipse closest-side at center, rgba(255,255,255,0) 20%, rgba(red(@color_accent_black),green(@color_accent_black),blue(@color_accent_black),0.7) 100%);
+	}
+}
+.img-shortcode-wrapper .img-wrapper:before {
+	@color_escaped: escape( ~'#fff' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20enable-background%3D%22new%200%200%20512%20512%22%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Cg%3E%0A%20%20%20%20%20%20%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22m289.8%2C200.2h-49.3v-49.3c0-11.3-9.1-20.4-20.4-20.4-11.3%2C0-20.4%2C9.1-20.4%2C20.4v49.3h-49.3c-11.3%2C0-20.4%2C9.1-20.4%2C20.4%200%2C11.3%209.1%2C20.4%2020.4%2C20.4h49.3v49.3c0%2C11.3%209.1%2C20.4%2020.4%2C20.4%2011.3%2C0%2020.4-9.1%2020.4-20.4v-49.3h49.3c11.3%2C0%2020.4-9.1%2020.4-20.4%200-11.3-9.2-20.4-20.4-20.4z%22%2F%3E%0A%20%20%20%20%20%20%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22m220.2%2C388.7c-92.9%2C0-168.2-75.2-168.2-168.1s75.3-168.1%20168.2-168.1%20168.1%2C75.3%20168.1%2C168.1-75.3%2C168.1-168.1%2C168.1zm274.8%2C78l-113.3-113.3c29.7-36.1%2047.6-82.4%2047.6-132.8%200-115.5-93.6-209.2-209.2-209.2s-209.1%2C93.7-209.1%2C209.2%2093.6%2C209.2%20209.2%2C209.2c50.4%2C0%2096.6-17.8%20132.7-47.5l113.3%2C113.3c5.2%2C5.3%2021.1%2C7.9%2028.9%2C0%207.9-8%207.9-20.9-0.1-28.9z%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A")';
+}
+.img-shortcode-wrapper.effect-disabled  {
+	.img-wrapper:before,
+	.img-wrapper:after {
+		display: none;
+	}
+}
+.video-shortcode-wrapper .img-wrapper:before {
+	@color_escaped: escape( ~'#fff' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20id%3D%22Capa_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20viewBox%3D%220%200%2030.051%2030.051%22%20style%3D%22enable-background%3Anew%200%200%2030.051%2030.051%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cg%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M19.982%2C14.438l-6.24-4.536c-0.229-0.166-0.533-0.191-0.784-0.062c-0.253%2C0.128-0.411%2C0.388-0.411%2C0.669v9.069%0A%09%09c0%2C0.284%2C0.158%2C0.543%2C0.411%2C0.671c0.107%2C0.054%2C0.224%2C0.081%2C0.342%2C0.081c0.154%2C0%2C0.31-0.049%2C0.442-0.146l6.24-4.532%0A%09%09c0.197-0.145%2C0.312-0.369%2C0.312-0.607C20.295%2C14.803%2C20.177%2C14.58%2C19.982%2C14.438z%22%2F%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M15.026%2C0.002C6.726%2C0.002%2C0%2C6.728%2C0%2C15.028c0%2C8.297%2C6.726%2C15.021%2C15.026%2C15.021c8.298%2C0%2C15.025-6.725%2C15.025-15.021%0A%09%09C30.052%2C6.728%2C23.324%2C0.002%2C15.026%2C0.002z%20M15.026%2C27.542c-6.912%2C0-12.516-5.601-12.516-12.514c0-6.91%2C5.604-12.518%2C12.516-12.518%0A%09%09c6.911%2C0%2C12.514%2C5.607%2C12.514%2C12.518C27.541%2C21.941%2C21.937%2C27.542%2C15.026%2C27.542z%22%2F%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A")';
+}
+.lg-image, .lg-outer .lg-thumb-item, .lg-outer .lg-thumb-item:before {
+	border-radius: ~'@{content_elements_radius}px';
+}
+.lg-image {
+	box-shadow: ~'@{box_shadow_h_length}px @{box_shadow_v_length}px @{box_shadow_blur_radius}px 0px #000';
+}
+.lg-outer .lg-thumb-item.active,
+.lg-outer .lg-thumb-item:hover {
+	border-color: @color_accent_blue;
+}
+.lg-actions .lg-next:hover, .lg-actions .lg-prev:hover,
+.lg-toolbar .lg-icon:hover, .lg-outer .lg-toogle-thumb:hover {
+	color: @color_accent_blue;
+}
+.justified-gallery figure > .caption,
+.images-masonry-gallery figure > .caption {
+	@color_escaped: escape( ~'#fff' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20width%3D%2255.312px%22%20height%3D%2255.312px%22%20viewBox%3D%220%200%2055.312%2055.312%22%20style%3D%22enable-background%3Anew%200%200%2055.312%2055.312%3B%22%0A%09%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cg%3E%0A%09%3Cg%3E%0A%09%09%3Cg%3E%0A%09%09%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M28.042%2C45.438c-9.428%2C0-18.675-5.251-27.485-15.606c-0.684-0.804-0.744-1.965-0.148-2.835%0A%09%09%09%09c0.479-0.7%2C11.914-17.124%2C27.963-17.124c9.511%2C0%2C18.429%2C5.75%2C26.506%2C17.089c0.564%2C0.793%2C0.579%2C1.852%2C0.037%2C2.659%0A%09%09%09%09C54.482%2C30.266%2C44.105%2C45.438%2C28.042%2C45.438z%20M5.348%2C28.211c7.487%2C8.332%2C15.115%2C12.553%2C22.694%2C12.553%0A%09%09%09%09c11.041%2C0%2C19.297-9.045%2C22.025-12.465c-6.859-9.126-14.151-13.752-21.694-13.752C17.329%2C14.546%2C8.36%2C24.447%2C5.348%2C28.211z%22%2F%3E%0A%09%09%3C%2Fg%3E%0A%09%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M27.656%2C16.407c-6.212%2C0-11.247%2C5.035-11.247%2C11.248c0%2C6.211%2C5.035%2C11.247%2C11.247%2C11.247%0A%09%09%09c6.211%2C0%2C11.247-5.036%2C11.247-11.247C38.903%2C21.443%2C33.868%2C16.407%2C27.656%2C16.407z%20M31.685%2C27.822%0A%09%09%09c-2.503%2C0-4.532-2.029-4.532-4.531c0-2.504%2C2.029-4.533%2C4.532-4.533c2.504%2C0%2C4.533%2C2.029%2C4.533%2C4.533%0A%09%09%09C36.218%2C25.792%2C34.188%2C27.822%2C31.685%2C27.822z%22%2F%3E%0A%09%3C%2Fg%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E")';
+}
+.images-gallery.overlay-color-accent .caption {
+	background-color: rgba( red(@color_accent_blue), green(@color_accent_blue), blue(@color_accent_blue), 0.7 );
+}
+.images-gallery.overlay-color-dark figure:before {
+	@color_darken: darken( @color_accent_black, 10% );
+	-webkit-box-shadow: inset 0px 10px 160px 0px rgba( red(@color_darken), green(@color_darken), blue(@color_darken), 0.7 );
+	-moz-box-shadow: inset 0px 10px 160px 0px rgba( red(@color_darken), green(@color_darken), blue(@color_darken), 0.7 );
+	box-shadow: inset 0px 10px 160px 0px rgba( red(@color_darken), green(@color_darken), blue(@color_darken), 0.7 );
+}
+.images-gallery.overlay-color-accent figure:before {
+	@color_darken: darken( @color_accent_blue, 10% );
+	-webkit-box-shadow: inset 0px 30px 260px 0px rgba( red(@color_darken), green(@color_darken), blue(@color_darken), 0.7 );
+	-moz-box-shadow: inset 0px 30px 260px 0px rgba( red(@color_darken), green(@color_darken), blue(@color_darken), 0.7 );
+	box-shadow: inset 0px 30px 260px 0px rgba( red(@color_darken), green(@color_darken), blue(@color_darken), 0.7 );
+}
+.images-gallery.with-shadows {
+	figure {
+		box-shadow: ~'0 10px 50px 0px @{box_shadow_color}';
+	}
+}
+.link-box {
+	@color: rgba( 255,255,255,0.7);
+	@color_escaped: escape( ~'@{color}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20viewBox%3D%220%200%20270.415%20270.415%22%20style%3D%22enable-background%3Anew%200%200%20270.415%20270.415%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cg%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M15%2C270.414c3.839%2C0%2C7.678-1.464%2C10.606-4.393l39.948-39.949c12.166%2C8.078%2C26.432%2C12.419%2C41.367%2C12.42%0A%09%09c0.002%2C0%2C0.001%2C0%2C0.002%2C0c20.025%2C0%2C38.852-7.797%2C53.014-21.951c0.006-0.006%2C0.013-0.011%2C0.018-0.017l28.266-28.266%0A%09%09c0.007-0.007%2C0.015-0.013%2C0.021-0.019l28.281-28.284c0.007-0.007%2C0.012-0.015%2C0.02-0.02c14.154-14.163%2C21.948-32.988%2C21.948-53.012%0A%09%09c0-14.936-4.342-29.202-12.419-41.367l39.948-39.949c5.858-5.857%2C5.858-15.354%2C0-21.213c-5.857-5.857-15.356-5.857-21.213%2C0%0A%09%09L204.86%2C44.343c-12.164-8.078-26.432-12.42-41.368-12.42c-20.026%2C0-38.856%2C7.797-53.019%2C21.953%0A%09%09c-0.006%2C0.006-0.012%2C0.01-0.017%2C0.016L82.184%2C82.166c-0.004%2C0.004-0.008%2C0.006-0.011%2C0.01l-28.276%2C28.277%0A%09%09c-0.002%2C0.001-0.004%2C0.002-0.005%2C0.004c-25.611%2C25.611-28.792%2C65.288-9.542%2C94.395L4.394%2C244.807%0A%09%09c-5.858%2C5.858-5.858%2C15.355%2C0%2C21.214C7.323%2C268.95%2C11.161%2C270.414%2C15%2C270.414z%20M75.105%2C131.67c0.001-0.001%2C0.003-0.003%2C0.005-0.005%0A%09%09l28.266-28.268c0.004-0.004%2C0.008-0.006%2C0.011-0.01l28.276-28.277c0.004-0.004%2C0.008-0.006%2C0.011-0.01%0A%09%09c8.499-8.498%2C19.799-13.178%2C31.818-13.178c6.829%2C0%2C13.425%2C1.516%2C19.408%2C4.379l-22.943%2C22.943c-5.858%2C5.858-5.858%2C15.355%2C0%2C21.214%0A%09%09c2.929%2C2.929%2C6.768%2C4.394%2C10.607%2C4.394c3.839%2C0%2C7.678-1.465%2C10.606-4.394l22.942-22.942c2.865%2C5.982%2C4.38%2C12.577%2C4.38%2C19.406%0A%09%09c0%2C12.02-4.682%2C23.32-13.182%2C31.819l-0.001%2C0.001l0%2C0l-28.26%2C28.263c-0.007%2C0.007-0.014%2C0.013-0.021%2C0.019l-28.278%2C28.277%0A%09%09c-0.003%2C0.004-0.006%2C0.006-0.01%2C0.01c-8.498%2C8.499-19.798%2C13.18-31.817%2C13.18c-6.829-0.001-13.425-1.516-19.407-4.38l22.942-22.942%0A%09%09c5.858-5.858%2C5.858-15.355%2C0-21.214c-5.857-5.857-15.355-5.857-21.213%2C0L66.321%2C182.88%0A%09%09C58.355%2C166.156%2C61.277%2C145.498%2C75.105%2C131.67z%22%2F%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E")';
+	.title {
+		@text_font_size: @primary_font_size + 14;
+		font-size: ~'@{text_font_size}px';
+		line-height: 1.4em;
+		font-family: @secondary_font_family;
+	}
+	.link {
+		opacity: 0.7;
+	}
+}
+@media screen and (max-width: 992px) {
+	.link-box .title {
+		@text_font_size: @primary_font_size + 2;
+		font-size: ~'@{text_font_size}px';
+		line-height: 1.4em;
+	}
+}
+/*------------------------------------------------------------------
+	10. Pagination
+-------------------------------------------------------------------*/
+.pagination.style-prev-next {
+	a {
+		color: @color_text_darken;
+	}
+	a:hover {
+		color: @color_accent_blue;
+	}
+}
+.pagination.style-post {
+	background-color: @color_bg_alt;
+	border-radius: ~'@{content_elements_radius}px';
+	color: @color_text_lighten;
+	font-size: ~'@{smaller_font_size}px';
+	line-height: ~'@{smaller_font_line_height}px';
+	a {
+		color: @color_text_darken;
+	}
+	a:hover {
+		color: @color_accent_blue;
+	}
+}
+.pagination.style-numeric {
+	background-color: @body_bg_color;
+	box-shadow: ~'@{box_shadow_h_length}px @{box_shadow_v_length}px @{box_shadow_blur_radius}px 0px @{box_shadow_color}';
+	font-size: ~'@{smaller_font_size}px';
+	line-height: ~'@{smaller_font_line_height}px';
+	border-radius: @box_radius_top_left @box_radius_top_right @box_radius_bottom_right @box_radius_bottom_left;
+	a {
+		color: @color_text_darken;
+	}
+	a.next {
+		border-left: 1px solid @color_hr_border;
+	}
+	a.prev {
+		border-right: 1px solid @color_hr_border;
+	}
+	.next, .prev {
+		color: @color_text_lighten;
+	}
+	a:hover {
+		color: @color_accent_blue;
+	}
+	.current {
+		color: @color_accent_inner;
+		background-color: @color_accent_grey;
+		box-shadow: ~'10px 10px 30px 0px @{box_shadow_color}';
+	}
+}
+.pagination.style-numeric .prev,
+.pagination.style-prev-next .alignleft a,
+body.rtl .pagination.style-numeric .next,
+body.rtl .pagination.style-prev-next .alignright a {
+	@color_escaped: escape( ~'@{color_accent_grey}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%2232.027px%22%20height%3D%2232.027px%22%20viewBox%3D%220%200%2032.027%2032.027%22%20style%3D%22enable-background%3Anew%200%200%2032.027%2032.027%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cg%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M16.307%2C16.734c-0.189-0.189-0.293-0.44-0.293-0.707c0-0.27%2C0.104-0.52%2C0.291-0.705l8.537-8.494%20c0.755-0.755%2C1.172-1.76%2C1.172-2.828c0-1.067-0.416-2.071-1.172-2.828C24.086%2C0.416%2C23.082%2C0%2C22.014%2C0s-2.072%2C0.416-2.816%2C1.16%20L7.479%2C12.492c-0.944%2C0.944-1.465%2C2.199-1.465%2C3.535c0%2C1.336%2C0.521%2C2.592%2C1.479%2C3.551l10.083%2C9.671l1.606%2C1.606%20c0.756%2C0.756%2C1.761%2C1.172%2C2.828%2C1.172s2.073-0.416%2C2.828-1.172c0.756-0.756%2C1.172-1.761%2C1.172-2.828s-0.416-2.072-1.174-2.832%20L16.307%2C16.734z%20M23.428%2C29.441c-0.756%2C0.756-2.074%2C0.756-2.83%2C0L8.893%2C18.148c-0.567-0.566-0.879-1.32-0.879-2.121%20c0-0.802%2C0.312-1.555%2C0.867-2.109L20.599%2C2.586C20.976%2C2.208%2C21.478%2C2%2C22.014%2C2c0.533%2C0%2C1.035%2C0.208%2C1.414%2C0.586%20c0.377%2C0.378%2C0.586%2C0.88%2C0.586%2C1.414s-0.209%2C1.036-0.584%2C1.412l-8.537%2C8.494c-0.567%2C0.567-0.879%2C1.32-0.879%2C2.121%20c0%2C0.801%2C0.312%2C1.555%2C0.882%2C2.123l8.532%2C8.463c0.377%2C0.378%2C0.586%2C0.881%2C0.586%2C1.414C24.014%2C28.562%2C23.805%2C29.062%2C23.428%2C29.441z%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+}
+.pagination.style-numeric .prev:hover,
+.pagination.style-prev-next .alignleft a:hover,
+body.rtl .pagination.style-numeric .next:hover,
+body.rtl .pagination.style-prev-next .alignright a:hover {
+	@color_escaped: escape( ~'@{color_accent_blue}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%2232.027px%22%20height%3D%2232.027px%22%20viewBox%3D%220%200%2032.027%2032.027%22%20style%3D%22enable-background%3Anew%200%200%2032.027%2032.027%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cg%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M16.307%2C16.734c-0.189-0.189-0.293-0.44-0.293-0.707c0-0.27%2C0.104-0.52%2C0.291-0.705l8.537-8.494%20c0.755-0.755%2C1.172-1.76%2C1.172-2.828c0-1.067-0.416-2.071-1.172-2.828C24.086%2C0.416%2C23.082%2C0%2C22.014%2C0s-2.072%2C0.416-2.816%2C1.16%20L7.479%2C12.492c-0.944%2C0.944-1.465%2C2.199-1.465%2C3.535c0%2C1.336%2C0.521%2C2.592%2C1.479%2C3.551l10.083%2C9.671l1.606%2C1.606%20c0.756%2C0.756%2C1.761%2C1.172%2C2.828%2C1.172s2.073-0.416%2C2.828-1.172c0.756-0.756%2C1.172-1.761%2C1.172-2.828s-0.416-2.072-1.174-2.832%20L16.307%2C16.734z%20M23.428%2C29.441c-0.756%2C0.756-2.074%2C0.756-2.83%2C0L8.893%2C18.148c-0.567-0.566-0.879-1.32-0.879-2.121%20c0-0.802%2C0.312-1.555%2C0.867-2.109L20.599%2C2.586C20.976%2C2.208%2C21.478%2C2%2C22.014%2C2c0.533%2C0%2C1.035%2C0.208%2C1.414%2C0.586%20c0.377%2C0.378%2C0.586%2C0.88%2C0.586%2C1.414s-0.209%2C1.036-0.584%2C1.412l-8.537%2C8.494c-0.567%2C0.567-0.879%2C1.32-0.879%2C2.121%20c0%2C0.801%2C0.312%2C1.555%2C0.882%2C2.123l8.532%2C8.463c0.377%2C0.378%2C0.586%2C0.881%2C0.586%2C1.414C24.014%2C28.562%2C23.805%2C29.062%2C23.428%2C29.441z%22%20%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+}
+.pagination.style-numeric .next,
+.pagination.style-prev-next .alignright a,
+body.rtl .pagination.style-numeric .prev,
+body.rtl .pagination.style-prev-next .alignleft a {
+	@color_escaped: escape( ~'@{color_accent_grey}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%2232.027px%22%20height%3D%2232.027px%22%20viewBox%3D%220%200%2032.027%2032.027%22%20style%3D%22enable-background%3Anew%200%200%2032.027%2032.027%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cg%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M24.55%2C12.492L12.831%2C1.16C12.087%2C0.416%2C11.083%2C0%2C10.015%2C0C8.946%2C0%2C7.942%2C0.416%2C7.187%2C1.172%20C6.431%2C1.928%2C6.015%2C2.932%2C6.015%2C4s0.416%2C2.073%2C1.172%2C2.828l8.536%2C8.494c0.188%2C0.188%2C0.291%2C0.438%2C0.291%2C0.705%20c0%2C0.267-0.104%2C0.518-0.293%2C0.707l-8.531%2C8.461c-0.759%2C0.76-1.175%2C1.765-1.175%2C2.832s0.416%2C2.072%2C1.172%2C2.828%20c0.755%2C0.756%2C1.76%2C1.172%2C2.828%2C1.172s2.073-0.416%2C2.829-1.172l1.606-1.606l10.084-9.671c0.959-0.959%2C1.479-2.215%2C1.479-3.551%20C26.013%2C14.691%2C25.493%2C13.436%2C24.55%2C12.492z%20M23.136%2C18.148L11.43%2C29.441c-0.756%2C0.756-2.073%2C0.756-2.829%2C0%20c-0.378-0.379-0.586-0.879-0.586-1.414c0-0.533%2C0.208-1.036%2C0.586-1.414l8.531-8.463c0.568-0.568%2C0.882-1.322%2C0.882-2.123%20c0-0.802-0.312-1.555-0.879-2.121L8.599%2C5.412C8.223%2C5.036%2C8.015%2C4.534%2C8.015%2C4s0.208-1.036%2C0.586-1.414S9.48%2C2%2C10.015%2C2%20s1.036%2C0.208%2C1.414%2C0.586l11.718%2C11.332c0.556%2C0.555%2C0.867%2C1.308%2C0.867%2C2.109C24.014%2C16.828%2C23.702%2C17.582%2C23.136%2C18.148z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+}
+.pagination.style-numeric .next:hover,
+.pagination.style-prev-next .alignright a:hover,
+body.rtl .pagination.style-numeric .prev:hover,
+body.rtl .pagination.style-prev-next .alignleft a:hover {
+	@color_escaped: escape( ~'@{color_accent_blue}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%2232.027px%22%20height%3D%2232.027px%22%20viewBox%3D%220%200%2032.027%2032.027%22%20style%3D%22enable-background%3Anew%200%200%2032.027%2032.027%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cg%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M24.55%2C12.492L12.831%2C1.16C12.087%2C0.416%2C11.083%2C0%2C10.015%2C0C8.946%2C0%2C7.942%2C0.416%2C7.187%2C1.172%20C6.431%2C1.928%2C6.015%2C2.932%2C6.015%2C4s0.416%2C2.073%2C1.172%2C2.828l8.536%2C8.494c0.188%2C0.188%2C0.291%2C0.438%2C0.291%2C0.705%20c0%2C0.267-0.104%2C0.518-0.293%2C0.707l-8.531%2C8.461c-0.759%2C0.76-1.175%2C1.765-1.175%2C2.832s0.416%2C2.072%2C1.172%2C2.828%20c0.755%2C0.756%2C1.76%2C1.172%2C2.828%2C1.172s2.073-0.416%2C2.829-1.172l1.606-1.606l10.084-9.671c0.959-0.959%2C1.479-2.215%2C1.479-3.551%20C26.013%2C14.691%2C25.493%2C13.436%2C24.55%2C12.492z%20M23.136%2C18.148L11.43%2C29.441c-0.756%2C0.756-2.073%2C0.756-2.829%2C0%20c-0.378-0.379-0.586-0.879-0.586-1.414c0-0.533%2C0.208-1.036%2C0.586-1.414l8.531-8.463c0.568-0.568%2C0.882-1.322%2C0.882-2.123%20c0-0.802-0.312-1.555-0.879-2.121L8.599%2C5.412C8.223%2C5.036%2C8.015%2C4.534%2C8.015%2C4s0.208-1.036%2C0.586-1.414S9.48%2C2%2C10.015%2C2%20s1.036%2C0.208%2C1.414%2C0.586l11.718%2C11.332c0.556%2C0.555%2C0.867%2C1.308%2C0.867%2C2.109C24.014%2C16.828%2C23.702%2C17.582%2C23.136%2C18.148z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+}
+.pagination.style-infinite:after {
+	@color_escaped: escape( ~'@{color_accent_grey}' );
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20viewBox%3D%220%200%20330%20330%22%20style%3D%22enable-background%3Anew%200%200%20330%20330%3B%22%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cg%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M97.5%2C165c0-8.284-6.716-15-15-15h-60c-8.284%2C0-15%2C6.716-15%2C15s6.716%2C15%2C15%2C15h60%0A%09%09C90.784%2C180%2C97.5%2C173.284%2C97.5%2C165z%22%2F%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M307.5%2C150h-30c-8.284%2C0-15%2C6.716-15%2C15s6.716%2C15%2C15%2C15h30c8.284%2C0%2C15-6.716%2C15-15S315.784%2C150%2C307.5%2C150z%22%0A%09%09%2F%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M172.5%2C90c8.284%2C0%2C15-6.716%2C15-15V15c0-8.284-6.716-15-15-15s-15%2C6.716-15%2C15v60%0A%09%09C157.5%2C83.284%2C164.216%2C90%2C172.5%2C90z%22%2F%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M172.501%2C240c-8.284%2C0-15%2C6.716-15%2C15v60c0%2C8.284%2C6.716%2C15%2C15%2C15c8.284%2C0%2C15-6.716%2C15-15v-60%0A%09%09C187.501%2C246.716%2C180.785%2C240%2C172.501%2C240z%22%2F%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M77.04%2C48.327c-5.856-5.858-15.354-5.857-21.213%2C0c-5.858%2C5.858-5.858%2C15.355%2C0%2C21.213l42.427%2C42.428%0A%09%09c2.929%2C2.929%2C6.768%2C4.394%2C10.606%2C4.394c3.838%2C0%2C7.678-1.465%2C10.606-4.393c5.858-5.858%2C5.858-15.355%2C0-21.213L77.04%2C48.327z%22%2F%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M246.746%2C218.034c-5.857-5.857-15.355-5.857-21.213%2C0c-5.858%2C5.858-5.857%2C15.355%2C0%2C21.213l42.428%2C42.426%0A%09%09c2.929%2C2.929%2C6.768%2C4.393%2C10.607%2C4.393c3.839%2C0%2C7.678-1.465%2C10.606-4.393c5.858-5.858%2C5.858-15.355%2C0-21.213L246.746%2C218.034z%22%2F%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M98.254%2C218.034L55.828%2C260.46c-5.858%2C5.858-5.858%2C15.355%2C0%2C21.213c2.929%2C2.929%2C6.768%2C4.393%2C10.607%2C4.393%0A%09%09c3.839%2C0%2C7.678-1.464%2C10.606-4.393l42.426-42.426c5.858-5.858%2C5.858-15.355%2C0-21.213%0A%09%09C113.609%2C212.176%2C104.111%2C212.176%2C98.254%2C218.034z%22%2F%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A")';
+}

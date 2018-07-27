@@ -1,0 +1,45 @@
+/*------------------------------------------------------------------
+[TESTIMONIALS_CAROUSEL3.CSS - Testimonials carousel shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-testimonials-carousel3 {
+  padding-bottom: 70px;
+}
+.shortcode-testimonials-carousel3 .text {
+  margin-bottom: 60px;
+  padding-top: 45px;
+}
+.shortcode-testimonials-carousel3 .swiper-pagination {
+  text-align: center;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+.shortcode-testimonials-carousel3 .swiper-button-next {
+  right: -30px;
+  background-size: 27px auto;
+}
+.shortcode-testimonials-carousel3 .swiper-button-prev {
+  left: -30px;
+  background-size: 27px auto;
+}
+.shortcode-testimonials-carousel3 img {
+  display: block;
+}
+.shortcode-testimonials-carousel3 .sign {
+  margin-bottom: 34px;
+}
+.shortcode-testimonials-carousel3.no-pagination {
+  padding-bottom: 0;
+}
+@media screen and (max-width: 992px) {
+  .shortcode-testimonials-carousel3 .swiper-button-next,
+  .shortcode-testimonials-carousel3 .swiper-button-prev {
+    display: none;
+  }
+}

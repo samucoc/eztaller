@@ -1,0 +1,35 @@
+/*------------------------------------------------------------------
+[VISUAL_COMPOSER.CSS - Styles for Visual Composer Plugins]
+[Table of contents]
+
+1. Compatibility tweaks
+-------------------------------------------------------------------*/
+li.vc_pagination-item:before {
+  display: none;
+}
+.vc_albedo_contact_form .vc_controls-out-tl,
+.vc_albedo_accordion .vc_controls-out-tl,
+.vc_albedo_tabs .vc_controls-out-tl,
+.vc_albedo_facts_in_digits .vc_controls-out-tl {
+  top: 0 !important;
+  z-index: 2000 !important;
+}
+.wpb_revslider_element {
+  margin-bottom: 0 !important;
+}
+.vc_albedo_tabs .vc_albedo_tabs_single,
+.vc_albedo_tabs_iconic .vc_albedo_tabs_iconic_single {
+  min-height: 0;
+}
+.vc_empty-placeholder {
+  display: none;
+}
+.vc_editor.compose-mode #content .parallax-scene {
+  z-index: 0;
+}
+.vc_chart-legend li:before {
+  display: none;
+}
+.vc_chart-legend li {
+  padding-left: 0;
+}

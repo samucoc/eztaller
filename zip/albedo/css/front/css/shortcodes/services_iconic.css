@@ -1,0 +1,90 @@
+/*------------------------------------------------------------------
+[SERVICES_ICONIC.CSS - Iconic services shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-services-iconic .item {
+  margin-bottom: 50px;
+}
+.shortcode-services-iconic h4 {
+  margin-bottom: 18px;
+}
+.shortcode-services-iconic .desc {
+  margin-bottom: 28px;
+}
+.shortcode-services-iconic .item-inside {
+  position: relative;
+}
+.shortcode-services-iconic .text {
+  padding-left: 100px;
+}
+.shortcode-services-iconic a {
+  text-decoration: none;
+}
+.shortcode-services-iconic .icon {
+  position: absolute;
+  left: 0;
+  top: 5px;
+}
+.shortcode-services-iconic .icon i {
+  font-size: 70px;
+}
+.shortcode-services-iconic .icon img,
+.shortcode-services-iconic .icon svg {
+  width: 60px;
+}
+.shortcode-services-iconic .icon svg {
+  height: 60px;
+}
+.shortcode-services-iconic ul {
+  margin-top: 22px;
+  margin-bottom: 22px;
+  margin-left: 0;
+  padding-left: 0;
+  margin-right: 0;
+  padding-right: 0;
+}
+.shortcode-services-iconic ul li {
+  margin-bottom: 8px;
+  padding-left: 20px;
+}
+.shortcode-services-iconic ul li:before {
+  content: '';
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  background-size: 10px auto;
+  background-position: left top;
+  background-repeat: no-repeat;
+}
+body.rtl .shortcode-services-iconic .text {
+  padding-left: 0;
+  padding-right: 100px;
+}
+body.rtl .shortcode-services-iconic .icon {
+  left: auto;
+  right: 0;
+}
+@media screen and (max-width: 767px) {
+  .shortcode-services-iconic .icon i {
+    font-size: 50px;
+  }
+  .shortcode-services-iconic .icon img,
+  .shortcode-services-iconic .icon svg {
+    width: 40px;
+  }
+  .shortcode-services-iconic .icon svg {
+    height: 40px;
+  }
+  .shortcode-services-iconic .text {
+    padding-left: 60px;
+  }
+  body.rtl .shortcode-services-iconic .text {
+    padding-left: 0;
+    padding-right: 60px;
+  }
+}

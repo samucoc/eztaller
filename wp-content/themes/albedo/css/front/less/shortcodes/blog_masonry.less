@@ -1,0 +1,149 @@
+/*------------------------------------------------------------------
+[BLOG_MASONRY.CSS - Blog masonry shortcode static styles]
+[Table of contents]
+
+1. Grid styles
+2. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Grid styles
+-------------------------------------------------------------------*/
+@media screen and (min-width: 992px) {
+	.blog-masonry-posts.cols-4 .grid-item {
+		width: 25%;
+	}
+	.blog-masonry-posts.cols-3 .grid-item {
+		width: 33.33333%;
+	}
+	.blog-masonry-posts.cols-2 .grid-item {
+		width: 50%;
+	}
+	.blog-masonry-posts.cols-1 .grid-item {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.blog-masonry-posts.medium-cols-4 .grid-item {
+		width: 25%;
+	}
+	.blog-masonry-posts.medium-cols-3 .grid-item {
+		width: 33.33333%;
+	}
+	.blog-masonry-posts.medium-cols-2 .grid-item {
+		width: 50%;
+	}
+	.blog-masonry-posts.medium-cols-1 .grid-item {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.blog-masonry-posts.small-cols-4 .grid-item {
+		width: 25%;
+	}
+	.blog-masonry-posts.small-cols-3 .grid-item {
+		width: 33.33333%;
+	}
+	.blog-masonry-posts.small-cols-2 .grid-item {
+		width: 50%;
+	}
+	.blog-masonry-posts.small-cols-1 .grid-item {
+		width: 100%;
+	}
+}
+
+/*------------------------------------------------------------------
+	2. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-blog-masonry {
+	margin-bottom: 60px;
+	transition: opacity 0.3s;
+	.blog-masonry-posts {
+		margin-bottom: 60px;
+	}
+	.post-media {
+		margin: -30px -40px 30px -40px;
+		position: relative;
+		iframe {
+			margin-bottom: 0;
+		}
+	}
+	.overlay {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		transition: all 0.3s;
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.6) 75%, rgba(0, 0, 0, 0.7) 85%, rgba(0, 0, 0, 0.8) 90%, rgba(0, 0, 0, 0.9) 100%);
+		opacity: 0;
+		z-index: 2;
+	}
+	.item:hover .overlay {
+		opacity: 1;
+	}
+	.item {
+		padding: 30px 40px;
+	}
+	.post-date {
+		font-weight: bold;
+		margin-bottom: 14px;
+	}
+	a {
+		text-decoration: none;
+		transition: all 0.3s;
+	}
+	h4, .post-excerpt {
+		margin-bottom: 14px;
+	}
+	.post-categories a {
+		margin-right: 10px;
+		padding: 5px 25px;
+	}
+	.post-link {
+		text-align: right;
+	}
+	.post-link a {
+		display: inline-block;
+		width: 13px;
+		height: 13px;
+		background-size: 13px auto;
+		background-repeat: no-repeat;
+		margin-top: 12px;
+	}
+	.cats-link-table {
+		display: table;
+		width: 100%;
+		.post-categories, .post-link {
+			display: table-cell;
+			vertical-align: top;
+		}
+	}
+	.swiper-pagination {
+		position: absolute;
+		z-index: 5;
+		left: 0;
+		right: 0;
+		bottom: 30px;
+		text-align: center;
+	}
+}
+
+.shortcode-blog-masonry.loading {
+	opacity: 0.5;
+}
+
+body.rtl .shortcode-blog-masonry {
+	.post-link {
+		text-align: left;
+	}
+	.post-categories {
+		text-align: right;
+		a {
+			margin-right: 0;
+			margin-left: 10px;
+		}
+	}
+}

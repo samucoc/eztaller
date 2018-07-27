@@ -1,0 +1,93 @@
+/*------------------------------------------------------------------
+[HEAD-STYLE_4_VARIABLE.CSS - Header style, variable styles, variation #4]
+[Table of contents]
+
+1. Shared styles
+2. Page title, description and breadcrumbs
+3. Second menu
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+body.layout-type-boxed, body.layout-type-framed {
+	#header {
+		margin-right: ~'-@{box_right_padding}';
+		margin-left: ~'-@{box_left_padding}';
+		padding-left: @box_left_padding;
+		padding-right: @box_right_padding;
+	}
+	#header.slider-mode {
+		margin-right: 0;
+		margin-left: 0;
+	}
+}
+#header {
+	background-color: @header_bg_gradient_from;
+	background: ~'linear-gradient( @{header_bg_pos}, @{header_bg_gradient_from}, @{header_bg_gradient_to})';
+	background-image: @header_bg_image_src;
+	background-position: @header_bg_image_position;
+	background-repeat: @header_bg_image_repeat;
+	box-shadow: ~'@{header_shadow_h_length}px @{header_shadow_v_length}px @{header_shadow_blur_radius}px 0px @{header_shadow_color}';
+}
+#header.no-bg-image {
+	background-color: @header_bg_gradient_from;
+	background: ~'linear-gradient( @{header_bg_pos}, @{header_bg_gradient_from}, @{header_bg_gradient_to})';
+	background-position: @header_bg_image_position;
+	background-repeat: @header_bg_image_repeat;
+	box-shadow: ~'@{header_shadow_h_length}px @{header_shadow_v_length}px @{header_shadow_blur_radius}px 0px @{header_shadow_color}';
+}
+#header-bg-overlay {
+	background-color: @header_bg_overlay_color;
+}
+
+#header.header-layout-style_5 .header-menu-wrapper {
+	box-shadow: ~'@{menu_container_shadow_h_length}px @{menu_container_shadow_v_length}px @{menu_container_shadow_blur_radius}px 0px @{menu_container_shadow_color}';
+}
+
+/*------------------------------------------------------------------
+	2. Page title, description and breadcrumbs
+-------------------------------------------------------------------*/
+#header-title-desc {
+	h1 {
+		color: @header_page_title_color;
+	}
+	h6 {
+		color: @header_page_desc_text_color;
+	}
+}
+#header-breadcrumbs {
+	color: @breadcrumbs_text_color;
+	font-size: ~'@{small_font_size}px';
+	a {
+		color: @breadcrumbs_text_color;
+	}
+	a:hover, .last-item {
+		color: @breadcrumbs_active_color;
+	}
+	.separator {
+		@color_escaped: escape( ~'@{breadcrumbs_separator_color}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20width%3D%22268.832px%22%20height%3D%22268.832px%22%20viewBox%3D%220%200%20268.832%20268.832%22%20style%3D%22enable-background%3Anew%200%200%20268.832%20268.832%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cg%3E%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M265.171%2C125.577l-80-80c-4.881-4.881-12.797-4.881-17.678%2C0c-4.882%2C4.882-4.882%2C12.796%2C0%2C17.678l58.661%2C58.661H12.5%20c-6.903%2C0-12.5%2C5.597-12.5%2C12.5c0%2C6.902%2C5.597%2C12.5%2C12.5%2C12.5h213.654l-58.659%2C58.661c-4.882%2C4.882-4.882%2C12.796%2C0%2C17.678%20c2.44%2C2.439%2C5.64%2C3.661%2C8.839%2C3.661s6.398-1.222%2C8.839-3.661l79.998-80C270.053%2C138.373%2C270.053%2C130.459%2C265.171%2C125.577z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")';
+	}
+}
+
+/*------------------------------------------------------------------
+	3. Second menu
+-------------------------------------------------------------------*/
+#header-second-menu {
+	background-color: @header_second_menu_bg_gradient_from;
+	background: ~'linear-gradient( @{header_second_menu_bg_pos}, @{header_second_menu_bg_gradient_from}, @{header_second_menu_bg_gradient_to})';
+	background-image: @header_second_menu_bg_image_src;
+	background-position: @header_second_menu_bg_image_position;
+	background-repeat: @header_second_menu_bg_image_repeat;
+	box-shadow: ~'@{header_second_menu_shadow_h_length}px @{header_second_menu_shadow_v_length}px @{header_second_menu_shadow_blur_radius}px 0px @{header_second_menu_shadow_color}';
+	color: @header_second_menu_text_color;
+	font-size: ~'@{small_font_size}px';
+	a {
+		color: @header_second_menu_text_color;
+	}
+	a:hover, .current-menu-item a {
+		color: @header_second_menu_active_color;
+		border-color: @header_second_menu_active_color;
+	}
+}

@@ -1,0 +1,173 @@
+/*------------------------------------------------------------------
+[TABS.CSS - Tabs shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+2. Simple horizontal / vertical styles
+3. Modern horizontal / vertical styles
+4. Modern horizontal / vertical Alternate styles
+5. Responsive styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.theme-tabs {
+	margin-bottom: 34px;
+	h4.title {
+		margin-bottom: 18px;
+	}
+	i.tab-icon {
+		margin-right: 10px;
+	}
+	.nav-mobile {
+		display: none;
+	}
+}
+.theme-tabs.tabs-style-modern,
+.theme-tabs.tabs-style-modern_alt {
+	.tab-content-wrapper {
+		display: table;
+	}
+	.tab-content-image .img-preloader,
+	.tab-content-image img {
+		display: block;
+	}
+	.tab-content-image,
+	.tab-content-text {
+		display: table-cell;
+		vertical-align: top;
+	}
+	.tab-content-text {
+		padding: 30px 40px 10px 40px;
+	}
+	nav {
+		padding: 30px 40px;
+	}
+	nav a {
+		text-decoration: none;
+		display: inline-block;
+		padding: 5px 30px;
+	}
+}
+.theme-tabs.tabs-style-modern.tabs-type-vertical,
+.theme-tabs.tabs-style-modern_alt.tabs-type-vertical,
+.theme-tabs.tabs-style-simple.tabs-type-vertical {
+	display: table;
+	width: 100%;
+	.nav-desktop, .tabs {
+		display: table-cell;
+		position: relative;
+		vertical-align: top;
+	}
+	.nav-desktop {
+		z-index: 2;
+		a {
+			display: block;
+			float: none;
+			width: 100%;
+			margin-right: 0;
+			margin-bottom: 2px;
+			white-space: nowrap;
+		}
+		a:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+	.tabs {
+		z-index: 1;
+	}
+}
+.theme-tabs.tabs-style-modern.tabs-type-vertical,
+.theme-tabs.tabs-style-modern_alt.tabs-type-vertical {
+	.nav-desktop a {
+		display: block;
+		margin-bottom: 20px;
+	}
+}
+/*------------------------------------------------------------------
+	2. Simple horizontal / vertical styles
+-------------------------------------------------------------------*/
+.theme-tabs.tabs-style-simple {
+	.tabs {
+		clear: both;
+		padding: 50px 60px 30px 60px;
+	}
+	nav a {
+		float: left;
+		padding: 15px 30px;
+		text-decoration: none;
+		margin-right: 2px;
+		white-space: nowrap;
+	}
+	nav a:last-of-type {
+		margin-right: 0;
+	}
+}
+/*------------------------------------------------------------------
+	3. Modern horizontal / vertical styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	4. Modern horizontal / vertical Alternate styles
+-------------------------------------------------------------------*/
+.theme-tabs.tabs-style-modern_alt.tabs-type-horizontal {
+	.tab-content-text {
+		padding: 0 40px;
+	}
+	.tab-content-image {
+		padding: 5px 0 40px 40px;
+	}
+}
+body.rtl .theme-tabs.tabs-style-modern_alt.tabs-type-horizontal {
+	.tab-content-image {
+		padding: 5px 40px 40px 0;
+	}
+}
+.theme-tabs.tabs-style-modern_alt.tabs-type-horizontal.mobile,
+body.rtl .theme-tabs.tabs-style-modern_alt.tabs-type-horizontal.mobile {
+	.tab-content-text {
+		padding-top: 40px;
+	}
+}
+.theme-tabs.tabs-style-modern_alt.tabs-type-vertical {
+	.tab-content-image {
+		padding: 40px 40px 40px 0;
+	}
+}
+body.rtl .theme-tabs.tabs-style-modern_alt.tabs-type-vertical {
+	.tab-content-image {
+		padding: 40px 0 40px 40px;
+	}
+}
+.theme-tabs.tabs-style-modern_alt {
+	nav.nav-mobile {
+		padding-bottom: 0;
+	}
+}
+/*------------------------------------------------------------------
+	5. Responsive styles
+-------------------------------------------------------------------*/
+@media screen and (max-width: 767px) {
+	.theme-tabs.tabs-style-simple .tabs {
+		padding: 0;
+	}
+	.theme-tabs .tab-content-text {
+		padding: 30px 30px 15px 30px !important;
+	}
+}
+.theme-tabs.mobile.tabs-type-vertical {
+	display: block;
+	.tabs {
+		display: block;
+	}
+}
+.theme-tabs {
+	nav.nav-mobile {
+		padding: 30px;
+	}
+}
+
+.tab_content:before {
+	display: none !important;
+}

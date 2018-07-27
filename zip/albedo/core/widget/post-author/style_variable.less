@@ -1,0 +1,80 @@
+/*------------------------------------------------------------------
+[About post author widget]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.wproto_post_author_widget {
+	position: relative;
+	.author-info {
+		display: table;
+		width: 100%;
+		margin-bottom: 24px;
+	}
+	.author-avatar, .author-name {
+		display: table-cell;
+		vertical-align: middle;
+	}
+	.author-name {
+		padding-left: 20px;
+		color: @color_text_lighten;
+		line-height: 1.35em;
+		a {
+			color: @color_link;
+		}
+		a:hover {
+			color: @color_link_hover;
+		}
+		span {
+			display: block;
+		}
+	}
+	.author-avatar {
+		width: 50px;
+		img {
+			display: block;
+			border-radius: 50%;
+		}
+	}
+	.author-social-icons {
+		margin-top: 24px;
+		a {
+			color: @color_text_lighten;
+			margin-right: 10px;
+		}
+		a:hover {
+			color: @color_text_darken;
+		}
+	}
+}
+body.rtl {
+	.wproto_post_author_widget {
+		.author-social-icons {
+			a {
+				margin-right: 0;
+				margin-left: 10px;
+			}
+		}
+	}
+}
+.wproto_post_author_widget:after {
+	content: '';
+	position: absolute;
+	top: 50px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 14px 16px 14px 0;
+	border-color: transparent @box_bg_color transparent transparent;
+	left: -16px;
+}
+.sidebar-pos-left .wproto_post_author_widget:after {
+	left: auto;
+	right: -16px;
+	border-width: 14px 0 14px 16px;
+	border-color: transparent transparent transparent @box_bg_color;
+}

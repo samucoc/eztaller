@@ -1,0 +1,182 @@
+/*------------------------------------------------------------------
+[HEAD-STYLE_3.CSS - Header style, static styles, variation #3]
+[Table of contents]
+
+1. Shared styles
+2. Page title, description and breadcrumbs
+3. Second menu
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+#header {
+  margin-bottom: 100px;
+  position: relative;
+}
+#header .pg-canvas {
+  z-index: 5;
+}
+#header .parallax-scene {
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#header .parallax-scene > li {
+  width: 120%;
+  height: 120%;
+}
+#header.parallax-js-section {
+  overflow: visible !important;
+}
+#header-particlegroud {
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.slider-mode #header-bg-overlay {
+  display: none;
+}
+.error404 #header {
+  margin-bottom: 0;
+}
+#header.slider-mode {
+  position: absolute;
+  margin-bottom: 0;
+  left: 0;
+  right: 0;
+  background: none;
+}
+.error404 #header.slider-mode {
+  box-shadow: none;
+}
+#header-bg-overlay {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+#sub-header {
+  position: relative;
+  z-index: 2;
+}
+.header-menu-wrapper {
+  position: relative;
+}
+/*------------------------------------------------------------------
+	2. Page title, description and breadcrumbs
+-------------------------------------------------------------------*/
+#header-title-desc {
+  padding: 90px 0;
+}
+#header-title-desc h1 {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+  line-height: 1.35em;
+  text-transform: uppercase;
+}
+#header-title-desc h6 {
+  margin: 0 0 14px 0;
+  font-size: 18px;
+  line-height: 1.35em;
+  font-weight: normal;
+}
+#header-title-desc .subheader-container {
+  display: table;
+  width: 100%;
+}
+#header-title-desc .subheader-text,
+#header-title-desc .subheader-button {
+  display: table-cell;
+  vertical-align: middle;
+}
+#header-title-desc .subheader-button {
+  text-align: right;
+}
+#header-breadcrumbs a {
+  text-decoration: none;
+}
+#header-breadcrumbs a,
+#header-breadcrumbs span {
+  display: inline-block;
+}
+#header-breadcrumbs .separator {
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 14px;
+  text-indent: 5555em;
+  background-size: 11px auto;
+  margin: 0 12px;
+}
+body.rtl #header-title-desc .subheader-button {
+  text-align: left;
+}
+body.rtl #header-breadcrumbs .separator {
+  transform: rotate(180deg);
+}
+@media screen and (max-width: 767px) {
+  #header-title-desc .subheader-container,
+  #header-title-desc .subheader-text,
+  #header-title-desc .subheader-cta {
+    display: block;
+  }
+  #header-title-desc .subheader-button .button {
+    margin-top: 18px;
+  }
+}
+/*------------------------------------------------------------------
+	3. Second menu
+-------------------------------------------------------------------*/
+#header-second-menu {
+  position: relative;
+}
+#header-second-menu a {
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-right: 30px;
+  display: block;
+  padding: 25px 0;
+  font-weight: bold;
+  transition: all 0.3s;
+  border-bottom: 2px solid transparent;
+}
+#header-second-menu li:last-of-type a {
+  margin-right: 0;
+}
+#header-second-menu .col-md-12 {
+  padding-right: 0;
+  padding-left: 0;
+}
+#header-second-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#header-second-menu ul li {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+#header-second-menu ul ul,
+#header-second-menu ul li:before {
+  display: none;
+}
+body.rtl #header-second-menu a {
+  margin-right: 0;
+  margin-left: 30px;
+}
+body.rtl #header-second-menu li:last-of-type a {
+  margin-left: 0;
+}
+@media screen and (max-width: 992px) {
+  #header-second-menu {
+    display: none;
+  }
+}

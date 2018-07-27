@@ -1,0 +1,59 @@
+/*------------------------------------------------------------------
+[CONTACT_INFO.CSS - Dynamic styles for Contact Info widget]
+[Table of contents]
+
+1. Shared styles
+2. Footer styles
+-------------------------------------------------------------------*/
+/** preloader colors **/
+/** layout **/
+/** base typography **/
+/** links colors **/
+/** boxes **/
+/** content elements **/
+/** dropcaps **/
+/** accent colors **/
+/** gradients **/
+/** borders and backgrounds **/
+/** buttons **/
+/** forms **/
+/** top bar **/
+/** menu styles **/
+/** submenu styles **/
+/** second menu **/
+/** second menu **/
+/** breadcrumbs **/
+/** header **/
+/** header text color **/
+/** menu container **/
+/** footer **/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.wproto_contact_info_widget .content-row {
+  margin-bottom: 24px;
+  color: #8799a3;
+}
+.wproto_contact_info_widget .row-text {
+  color: #252525;
+}
+.wproto_contact_info_widget .share-links i.fa {
+  margin-right: 15px;
+}
+body.rtl .wproto_contact_info_widget .share-links i.fa {
+  margin-left: 15px;
+  margin-right: 0;
+}
+/*------------------------------------------------------------------
+	2. Footer styles
+-------------------------------------------------------------------*/
+#footer-widgets .wproto_contact_info_widget .content-row {
+  color: #464646;
+}
+#footer-widgets .wproto_contact_info_widget .row-text,
+#footer-widgets .wproto_contact_info_widget .row-text a {
+  color: #ffffff;
+}
+#footer-widgets .wproto_contact_info_widget .row-text a:hover {
+  color: #8799a3;
+}

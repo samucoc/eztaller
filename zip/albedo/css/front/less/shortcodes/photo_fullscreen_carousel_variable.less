@@ -1,0 +1,31 @@
+/*------------------------------------------------------------------
+[PHOTO_FULLSCREEN_CAROUSEL_VARIABLE.CSS - Fullscreen photos carousel variable styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.photo-fullscreen-carousel {
+	h2 {
+		color: #fff;
+	}
+	figure {
+		box-shadow: ~'20px 30px 40px 0px rgba(0,0,0,0.2)';
+	}
+	figcaption {
+		color: rgba( 255,255,255,0.5 );
+		font-size: ~'@{smaller_font_size}px';
+		line-height: ~'@{smaller_font_line_height}px';
+	}
+	.swiper-pagination {
+		.swiper-pagination-bullet {
+			background-color: rgba(255,255,255,0.2);
+		}
+		.swiper-pagination-bullet-active {
+			background-color: @color_accent_grey;
+		}
+	}
+}

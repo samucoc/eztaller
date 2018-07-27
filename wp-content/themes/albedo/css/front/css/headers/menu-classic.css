@@ -1,0 +1,242 @@
+/*------------------------------------------------------------------
+[MENU-CLASSIC.CSS - Classic menu style, static styles]
+[Table of contents]
+
+1. Styles for desktop device
+2. Styles for mobiles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Styles for desktop device
+-------------------------------------------------------------------*/
+.header-menu-wrapper {
+  position: relative;
+  -webkit-transform: translateZ(0);
+  z-index: 898;
+  /** header menu items **/
+  /** hamburger menu icon styles **/
+}
+.header-menu-wrapper .header-menu {
+  position: relative;
+  transition: all 0.3s;
+  /** logo styles **/
+}
+.header-menu-wrapper .header-menu .menu-layout-item {
+  position: relative;
+  float: right;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.header-menu-wrapper .header-menu .item-logo {
+  float: left;
+}
+.header-menu-wrapper .header-menu .item-logo img {
+  display: block;
+  width: auto;
+  height: auto;
+}
+.header-menu-wrapper .header-menu .item-logo a,
+.header-menu-wrapper .header-menu .item-logo span {
+  display: block;
+  text-decoration: none;
+}
+.header-menu-wrapper .header-menu .item-logo .title {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+}
+.header-menu-wrapper .header-menu .item-logo .tagline {
+  font-size: 14px;
+  line-height: 18px;
+}
+.header-menu-wrapper .header-menu .item-cta {
+  margin-left: 70px;
+}
+.header-menu-wrapper .header-menu .item-search,
+.header-menu-wrapper .header-menu .item-cart,
+.header-menu-wrapper .header-menu .item-overlay-menu {
+  margin-left: 30px;
+}
+.header-menu-wrapper .header-menu .item-search .toggler,
+.header-menu-wrapper .header-menu .item-cart .toggler,
+.header-menu-wrapper .header-menu .item-overlay-menu .toggler {
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  background-size: 22px auto;
+}
+.header-menu-wrapper .header-menu .item-cart .header-cart-toggle span {
+  position: absolute;
+  font-size: 8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  right: -3px;
+  top: 50%;
+  margin-top: -8px;
+  text-decoration: none;
+  text-align: center;
+  line-height: 17px;
+}
+.header-menu-wrapper .menu-toggler {
+  display: inline-block;
+  vertical-align: middle;
+  width: 22px;
+  height: 22px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.header-menu-wrapper .menu-toggler span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  border-radius: 2px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: all 0.3s ease-in-out;
+}
+.header-menu-wrapper .menu-toggler span:nth-child(1) {
+  top: 4px;
+}
+.header-menu-wrapper .menu-toggler span:nth-child(2),
+.header-menu-wrapper .menu-toggler span:nth-child(3) {
+  top: 12px;
+}
+.header-menu-wrapper .menu-toggler span:nth-child(4) {
+  top: 20px;
+}
+.header-menu-wrapper .menu-toggler.open span:nth-child(1) {
+  top: 7px;
+  width: 0%;
+  left: 50%;
+}
+.header-menu-wrapper .menu-toggler.open span:nth-child(2) {
+  transform: rotate(45deg);
+}
+.header-menu-wrapper .menu-toggler.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+.header-menu-wrapper .menu-toggler.open span:nth-child(4) {
+  top: 10px;
+  width: 0%;
+  left: 50%;
+}
+.header-menu-wrapper.responsive-mode-off {
+  /** menu elements, only top level elements **/
+}
+.header-menu-wrapper.responsive-mode-off .item-responsive-menu-toggler {
+  display: none;
+}
+.header-menu-wrapper.responsive-mode-off .menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.header-menu-wrapper.responsive-mode-off .menu > .menu-item {
+  margin: 0 30px 0 0;
+  padding: 25px 0;
+  float: left;
+  position: relative;
+}
+.header-menu-wrapper.responsive-mode-off .menu .menu-item > a:before {
+  font-family: FontAwesome;
+}
+.header-menu-wrapper.responsive-mode-off .menu .menu-item-has-icon > a {
+  padding-left: 24px;
+}
+.header-menu-wrapper.responsive-mode-off .menu .menu-item-has-icon > a:before {
+  left: 0;
+  position: absolute;
+  transition: color 0.3s;
+}
+.header-menu-wrapper.responsive-mode-off .menu > .menu-item:last-of-type {
+  margin-right: 0;
+}
+.header-menu-wrapper.responsive-mode-off .menu > .menu-item:before {
+  display: none;
+}
+.header-menu-wrapper.responsive-mode-off .menu > .menu-item > a {
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+/** RTL styles **/
+body.rtl .header-menu-wrapper .header-menu .item-responsive-menu-toggler,
+body.rtl .header-menu-wrapper .header-menu .item-search,
+body.rtl .header-menu-wrapper .header-menu .item-cart,
+body.rtl .header-menu-wrapper .header-menu .item-overlay-menu,
+body.rtl .header-menu-wrapper .header-menu .item-cta {
+  margin-left: 0;
+  margin-right: 35px;
+}
+body.rtl .header-menu-wrapper .header-menu {
+  /** logo styles **/
+}
+body.rtl .header-menu-wrapper .header-menu .widget-holder {
+  right: auto;
+  left: 0;
+}
+body.rtl .header-menu-wrapper .header-menu .menu-layout-item {
+  float: left;
+}
+body.rtl .header-menu-wrapper .header-menu .item-logo {
+  float: right;
+}
+body.rtl .header-menu-wrapper .header-menu .item-cta {
+  margin-right: 70px;
+  margin-left: 0;
+}
+body.rtl .header-menu-wrapper.responsive-mode-off .menu-item-has-icon > a {
+  padding-right: 24px;
+  padding-left: 0;
+}
+body.rtl .header-menu-wrapper.responsive-mode-off .menu-item-has-icon > a:before {
+  right: 0;
+  left: auto;
+}
+/**
+	Slider Header Mode
+**/
+.header-menu-wrapper .header-menu a.transp-logo {
+  display: none !important;
+}
+.header-menu-wrapper.slider-header-mode .header-menu a.logo {
+  display: none !important;
+}
+.header-menu-wrapper.slider-header-mode .header-menu a.transp-logo,
+.header-menu-wrapper.slider-header-mode .header-menu a.logo-title,
+.header-menu-wrapper.slider-header-mode .header-menu a.logo-title-tagline {
+  display: block !important;
+}
+.header-menu-wrapper.slider-header-mode.scrolled .header-menu a.logo {
+  display: block !important;
+}
+.header-menu-wrapper.slider-header-mode.scrolled .header-menu a.transp-logo {
+  display: none !important;
+}
+/*------------------------------------------------------------------
+	2. Styles for mobiles
+-------------------------------------------------------------------*/
+.header-menu-wrapper.responsive-mode-on .item-responsive-menu-toggler {
+  display: block;
+}
+.header-menu-wrapper.responsive-mode-on .menu-layout-item.item-cta,
+.header-menu-wrapper.responsive-mode-on .menu-layout-item.item-cart,
+.header-menu-wrapper.responsive-mode-on .menu-layout-item.item-search {
+  display: none;
+}
+.header-menu-wrapper.responsive-mode-on .header-menu .menu-layout-item.item-responsive-menu-toggler {
+  margin-right: 0;
+}
+.header-menu-wrapper.responsive-mode-on .menu-layout-item .menu {
+  margin: 0 -18px 0 0;
+}
+body.rtl .header-menu-wrapper.responsive-mode-on .menu-layout-item .menu {
+  margin: 0 0 0 -18px;
+}

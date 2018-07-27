@@ -1,0 +1,414 @@
+/*------------------------------------------------------------------
+[SINGLE_DEFAULT.CSS - Default Static styles for single blog post]
+[Table of contents]
+
+1. Shared styles
+2. Comments
+3. Likes
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Single post, Boxed style
+-------------------------------------------------------------------*/
+.single-blog-post-container .pb-section > .container-fluid,
+.single-blog-post-container .pb-section > .container {
+  padding-left: 0;
+  padding-right: 0;
+}
+.single-blog-post-container.style-default .content-wrapper {
+  z-index: 10;
+  position: relative;
+}
+.single-blog-post-container.style-default .single-post-excerpt {
+  margin-bottom: 34px;
+}
+.single-blog-post-container.style-default #wplab-albedo-single-post-link {
+  background-image: none;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.single-blog-post-container.style-default #wplab-albedo-single-post-link a.title {
+  font-weight: bold;
+}
+.single-blog-post-container.style-default .content-featured-image-wrapper,
+.single-blog-post-container.style-default #wplab-albedo-post-single-gallery,
+.single-blog-post-container.style-default #wplab-albedo-single-post-link {
+  margin: 0 0 50px 0;
+}
+.single-blog-post-container.style-default .single-blockquote-wrapper {
+  margin: 0 0 34px 0;
+}
+.single-blog-post-container.style-default .post-date {
+  font-weight: bold;
+  margin-bottom: 22px;
+}
+.single-blog-post-container.style-default .post-title {
+  margin-bottom: 22px;
+}
+.single-blog-post-container.style-default .post-data {
+  margin-bottom: 30px;
+}
+.single-blog-post-container.style-default .post-data .item {
+  margin-right: 50px;
+  white-space: nowrap;
+}
+.single-blog-post-container.style-default .post-data .item.post-cats {
+  white-space: normal;
+  display: block;
+}
+.single-blog-post-container.style-default .post-data .item:last-of-type {
+  margin-right: 0;
+}
+.single-blog-post-container.style-default .post-data a,
+.single-blog-post-container.style-default footer a {
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.single-blog-post-container.style-default footer {
+  margin-bottom: 55px;
+}
+.single-blog-post-container.style-default footer strong {
+  text-transform: uppercase;
+  display: inline-block;
+  width: 100px;
+}
+.single-blog-post-container.style-default .tags-list {
+  margin-bottom: 18px;
+}
+.single-blog-post-container.style-default .share-links a {
+  margin-right: 10px;
+}
+.single-blog-post-container.style-default .about-author-wrapper {
+  margin: 0 0 50px 0;
+  padding: 50px 60px;
+}
+.single-blog-post-container.style-default .about-author-wrapper .about-author {
+  display: table;
+}
+.single-blog-post-container.style-default .about-author-wrapper .author_image,
+.single-blog-post-container.style-default .about-author-wrapper .author_text {
+  display: table-cell;
+  vertical-align: middle;
+}
+.single-blog-post-container.style-default .about-author-wrapper .author_image {
+  width: 140px;
+}
+.single-blog-post-container.style-default .about-author-wrapper .author_image img {
+  border-radius: 50%;
+  display: block;
+}
+.single-blog-post-container.style-default .about-author-wrapper .name {
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-weight: bold;
+  display: inline-block;
+}
+.single-blog-post-container.style-default .iframe-wrapper {
+  width: 100%;
+  position: relative;
+  padding-top: 56.25%;
+  /* 16:9 */
+  height: 0;
+}
+.single-blog-post-container.style-default .iframe-wrapper > iframe {
+  margin-bottom: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.single-blog-post-container.style-default.comments-closed .about-author-wrapper {
+  margin-bottom: 0;
+}
+.single-blog-post-container.style-default.comments-closed .content-wrapper {
+  padding-bottom: 0;
+}
+#disqus_thread iframe {
+  box-shadow: none !important;
+}
+#wplab-albedo-post-single-gallery {
+  position: relative;
+}
+#wplab-albedo-post-single-gallery img {
+  display: block;
+}
+#wplab-albedo-post-single-gallery .swiper-pagination {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 30px;
+  text-align: center;
+}
+.ie .content-featured-image-wrapper img {
+  width: 100%;
+}
+body.rtl .single-blog-post-container.style-default .post-data .item,
+body.rtl .single-blog-post-container.style-default .post-data .item:last-of-type {
+  margin-right: 0;
+  margin-left: 50px;
+}
+body.rtl .single-blog-post-container.style-default .post-data .item:first-of-type {
+  margin-left: 0;
+}
+@media (max-width: 767px) {
+  .single-blog-post-container.style-default footer strong {
+    width: auto;
+  }
+  .single-blog-post-container.style-default .content-wrapper {
+    padding: 30px;
+  }
+  .single-blog-post-container.style-default .content-featured-image-wrapper,
+  .single-blog-post-container.style-default #wplab-albedo-post-single-gallery,
+  .single-blog-post-container.style-default #wplab-albedo-single-post-link {
+    margin: 0 0 30px 0;
+  }
+  .single-blog-post-container.style-default .single-blockquote-wrapper {
+    margin: 0 0 34px 0;
+  }
+  .single-blog-post-container.style-default .about-author-wrapper {
+    margin: 0 0 30px 0;
+    display: block;
+    padding: 30px;
+  }
+  .single-blog-post-container.style-default .about-author-wrapper .author_image {
+    margin-bottom: 28px;
+  }
+  .single-blog-post-container.style-default .about-author-wrapper .author_image,
+  .single-blog-post-container.style-default .about-author-wrapper .author_text {
+    display: block;
+  }
+  .single-blog-post-container.style-default .about-author-wrapper .author_image img {
+    width: 80px;
+    height: auto;
+  }
+  .single-blog-post-container.style-default .post-data .item,
+  .single-blog-post-container.style-default .post-data .item:last-of-type {
+    margin: 0;
+    display: block;
+  }
+}
+/*------------------------------------------------------------------
+	2. Comments
+-------------------------------------------------------------------*/
+#comments {
+  margin-top: 70px;
+}
+#comments .form-submit {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 0;
+}
+#comments .author-name {
+  font-weight: bold;
+}
+#comments #cancel-comment-reply-link {
+  float: right;
+  text-decoration: none;
+  margin-top: 10px;
+}
+#comments .comment-body {
+  position: relative;
+  margin-bottom: 30px;
+}
+#comments ul.comments-list {
+  list-style: none;
+  margin: 0 0 45px 0;
+  padding: 0;
+}
+#comments ul.comments-list li.comment:before {
+  display: none;
+}
+#comments ul.comments-list li.comment {
+  padding-left: 0;
+  padding-right: 0;
+}
+#comments ul.comments-list .children {
+  list-style: none;
+  margin: 0 0 30px 0;
+  padding: 0 0 0 100px;
+}
+#comments ul.comments-list .children .comment-body {
+  border-bottom: 0;
+}
+#comments ul.comments-list .children .children {
+  border-bottom: 0;
+}
+#comments ul.comments-list .photo img {
+  position: absolute;
+  border-radius: 50%;
+}
+#comments ul.comments-list .comment-text {
+  padding-left: 100px;
+  min-height: 70px;
+}
+#comments ul.comments-list .comment-text .comment-text > ul,
+#comments ul.comments-list .comment-text .comment-text > ol {
+  margin-bottom: 30px;
+}
+#comments ul.comments-list .comment-text p:last-of-type {
+  margin-bottom: 0;
+}
+#comments ul.comments-list footer {
+  margin-top: -8px;
+  margin-bottom: 30px;
+}
+#comments ul.comments-list header {
+  margin-bottom: 22px;
+}
+#comments ul.comments-list .comment-reply-link {
+  float: right;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+#comments.no-avatars ul.comments-list .comment-text {
+  padding-left: 0;
+}
+#comments-nav {
+  margin-bottom: 70px;
+}
+body.rtl #comments #cancel-comment-reply-link {
+  float: left;
+}
+body.rtl #comments ul.comments-list .children {
+  padding: 0 100px 0 0;
+}
+body.rtl #comments ul.comments-list .comment-text {
+  padding-left: 0;
+  padding-right: 100px;
+}
+body.rtl #comments ul.comments-list .comment-reply-link {
+  float: left;
+}
+body.rtl #comments.no-avatars ul.comments-list .comment-text {
+  padding-right: 0;
+}
+@media screen and (max-width: 992px) {
+  #comments form label {
+    line-height: normal;
+  }
+}
+@media screen and (max-width: 767px) {
+  #comments ul.comments-list .children {
+    padding-left: 0;
+  }
+  #comments ul.comments-list .photo img {
+    width: 50px;
+  }
+  #comments ul.comments-list .comment-text {
+    padding-left: 70px;
+    min-height: 50px;
+  }
+  #comments #cancel-comment-reply-link,
+  body.rtl #comments #cancel-comment-reply-link {
+    float: none;
+    display: block;
+  }
+  #comments ul.comments-list .comment-reply-link,
+  body.rtl #comments ul.comments-list .comment-reply-link {
+    float: none;
+    display: inline-block;
+    margin-top: 12px;
+  }
+  #comments header .alignleft,
+  body.rtl #comments header .alignleft {
+    float: none;
+  }
+}
+@media screen and (max-width: 767px) {
+  body.rtl #comments ul.comments-list .children,
+  #comments ul.comments-list .children,
+  body.rtl #comments ul.comments-list .comment-text,
+  #comments ul.comments-list .comment-text {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  body.rtl #comments ul.comments-list .photo,
+  #comments ul.comments-list .photo {
+    display: none;
+  }
+}
+/*------------------------------------------------------------------
+	3. Likes
+-------------------------------------------------------------------*/
+#post-likes {
+  text-align: center;
+  padding-top: 25px;
+}
+#post-likes a {
+  text-decoration: none;
+  display: inline-block;
+  padding-top: 32px;
+  position: relative;
+}
+#post-likes a:before,
+#post-likes a:after {
+  content: "";
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 30px auto;
+}
+#post-likes a:after {
+  position: absolute;
+  width: 100%;
+  height: 28px;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  opacity: 0;
+  -webkit-transition: none;
+  -moz-transition: none;
+  transition: none;
+}
+#post-likes a:before {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 28px;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+#post-likes a.activated:after,
+#post-likes a:hover:after {
+  -webkit-animation: scaleFade 0.5s forwards;
+  -moz-animation: scaleFade 0.5s forwards;
+  animation: scaleFade 0.5s forwards;
+}
+@-webkit-keyframes scaleFade {
+  30% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2.5);
+  }
+}
+@-moz-keyframes scaleFade {
+  30% {
+    opacity: 1;
+    -moz-transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: scale(2.5);
+  }
+}
+@keyframes scaleFade {
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}

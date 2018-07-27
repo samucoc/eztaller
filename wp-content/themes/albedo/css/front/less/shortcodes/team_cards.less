@@ -1,0 +1,105 @@
+/*------------------------------------------------------------------
+[TEAM_CARDS.CSS - Team cards shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.team-cards {
+	padding: 0 60px 0 60px;
+	margin: 0 -60px 0 -60px;
+	overflow-x: hidden;
+	.swiper-slide {
+		opacity: 0;
+		transition: opacity 0.3s;
+	}
+	.swiper-slide {
+		transition: opacity 0.3s !important;
+		opacity: 0 !important;
+	}
+	.swiper-slide-active, .swiper-slide-next, .swiper-slide-prev {
+		opacity: 1 !important;
+	}
+	.item-content {
+		text-align: center;
+		padding: 60px;
+	}
+	.swiper-container {
+		overflow: visible;
+	}
+	.photo {
+		display: inline-block;
+		margin-bottom: 34px;
+		border-radius: 50%;
+		width: 140px;
+		height: 140px;
+		overflow: hidden;
+
+		img, .placeholder {
+			display: block;
+			border-radius: 50%;
+			width: 140px;
+			height: 140px;
+		}
+	}
+	.name {
+		font-weight: bold;
+		margin-bottom: 6px;
+		transition: color 0.3s;
+	}
+	.position {
+		margin-bottom: 22px;
+	}
+	.text {
+		margin-bottom: 34px;
+	}
+	.social a {
+		margin: 0 7px;
+		font-size: 14px;
+	}
+	.placeholder {
+		background-size: 55px auto;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+	.swiper-pagination {
+		text-align: center;
+		right: 0;
+		left: 0;
+		bottom: 0;
+	}
+}
+.team-cards.not-centered {
+	padding-left: 0;
+	padding-right: 0;
+	margin-left: 0;
+	margin-right: 0;
+	.slide-content {
+		box-shadow: none !important;
+	}
+	.swiper-slide {
+		opacity: 1 !important;
+	}
+}
+.team-cards.with-pagination .swiper-wrapper {
+	padding-bottom: 70px;
+}
+@media screen and (max-width: 767px) {
+	.team-cards {
+		.item-content {
+			padding: 50px 30px;
+		}
+		.photo {
+			width: 90px;
+			height: 90px;
+
+			img, .placeholder {
+				width: 90px;
+				height: 90px;
+			}
+		}
+	}
+}

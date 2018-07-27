@@ -1,0 +1,47 @@
+/*------------------------------------------------------------------
+[CONTACT_INFO.CSS - Contact information shortcode static styles]
+[Table of contents]
+
+1. Iconic style
+2. Boxed style
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Iconic style
+-------------------------------------------------------------------*/
+.contact-info.style-iconic {
+	.text {
+		color: @color_text_darken;
+		span {
+			color: @color_text_lighten;
+		}
+	}
+	svg {
+		path, rect, polygon, circle {
+			fill: @color_accent_blue;
+		}
+	}
+}
+/*------------------------------------------------------------------
+	2. Boxed style
+-------------------------------------------------------------------*/
+.contact-info.style-grid {
+	dl {
+		margin-bottom: 0;
+	}
+	dl dt {
+		font-family: @primary_font_family;
+		color: @primary_font_color;
+	}
+	dl dd {
+		color: @color_text_darken;
+	}
+	.inside:hover {
+		box-shadow: ~'@{box_shadow_h_length}px @{box_shadow_v_length}px @{box_shadow_blur_radius}px 0px @{box_shadow_color}';
+		background-color: @box_bg_color;
+		border-radius: ~'@{content_elements_radius}px';
+		h4 {
+			color: @primary_font_color;
+		}
+	}
+}

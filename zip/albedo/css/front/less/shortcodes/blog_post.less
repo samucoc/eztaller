@@ -1,0 +1,115 @@
+/*------------------------------------------------------------------
+[BLOG_POST.CSS - Single blog post block static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-blog-post {
+	.post-table {
+		dispay: table;
+		height: 100%;
+	}
+	.flexbox {
+		display: flex;
+		justify-content: center;
+		height: 100%;
+		z-index: 2;
+		position: relative;
+		.flex-item {
+			align-self: center;
+			width: 100%;
+		}
+	}
+	.inside {
+		position: relative;
+		height: 100%;
+		padding: 35px 40px;
+		transition: background 0.3s linear;
+	}
+	.overlay {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		transition: all 0.3s;
+		opacity: 0;
+	}
+	a {
+		text-decoration: none;
+		transition: all 0.3s;
+	}
+	.inside.with-thumb {
+		background-size: cover;
+	}
+	.post-date {
+		font-weight: bold;
+	}
+	.post-date, h4 {
+		margin-bottom: 14px;
+	}
+	.post-icon {
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		background-size: 40px auto;
+		background-repeat: no-repeat;
+	}
+}
+.shortcode-blog-post .with-thumb:hover {
+	.overlay {
+		opacity: 1;
+	}
+}
+.shortcode-blog-post.text-align-center {
+	text-align: center;
+}
+.shortcode-blog-post.text-align-left {
+	text-align: left;
+}
+.shortcode-blog-post.text-align-right {
+	text-align: right;
+}
+
+.shortcode-blog-post.post-format-quote {
+	blockquote {
+		background: none;
+		padding: 0;
+		margin: 0;
+		p:last-of-type {
+			margin-bottom: 0;
+		}
+		cite {
+			display: block;
+			padding-top: 14px;
+		}
+	}
+}
+
+.shortcode-blog-post.post-format-gallery {
+	.gallery-pagination {
+		a {
+			display: inline-block;
+			margin: 0 3px;
+			width: 20px;
+			height: 6px;
+			border-radius: 3px;
+		}
+		a:first-of-type {
+			margin-left: 0;
+		}
+		a:last-of-type {
+			margin-right: 0;
+		}
+	}
+}
+
+.shortcode-blog-post.post-format-gallery .inside:hover {
+	.overlay {
+		opacity: 0;
+	}
+}
