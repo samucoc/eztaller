@@ -1,0 +1,1 @@
+C:\wamp\bin\php\php5.2.6\php.exe C:\wamp\www\sgcopec\sitio\scripts\envio_correos\envio_seguros.php

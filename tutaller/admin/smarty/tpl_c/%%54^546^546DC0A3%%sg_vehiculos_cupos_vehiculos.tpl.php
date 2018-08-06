@@ -1,0 +1,223 @@
+<?php /* Smarty version 2.6.18, created on 2016-03-17 17:01:24
+         compiled from sg_vehiculos_cupos_vehiculos.tpl */ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<HEAD>
+		
+		<?php echo $this->_tpl_vars['xajax_js']; ?>
+
+		
+		<title></title>
+       <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		
+		<!-- validaciones de javascript -->
+			<script type="text/javascript" src="../includes_js/funciones.js"></script>
+		
+		<!-- librerias para popup submodal -->
+			<link rel="stylesheet" type="text/css" href="submodal/subModal.css" /> 
+			<script type="text/javascript" src="submodal/common.js"></script>
+			<script type="text/javascript" src="submodal/subModal.js"></script>
+		
+		<!-- aqui se puede agregar el cod. para la norma de las p�ginas... -->
+		<link rel="stylesheet" type="text/css" media="all" href="calendario/calendar-brown.css" />
+		<!-- librer�a principal del calendario -->
+		<script type="text/javascript" src="calendario/calendar.js"></script>
+		<!-- librer�a para cargar el lenguaje deseado --> 
+		<script type="text/javascript" src="calendario/lang/calendar-es.js"></script>
+		<!-- librer�a que declara la funci�n Calendar.setup, que ayuda a generar un calendario en unas pocas l�neas de c�digo -->
+		<script type="text/javascript" src="calendario/calendar-setup.js"></script>
+                
+                <!-- estilos -->
+			<LINK href="../estilos/estilo.css" type="text/css" rel="stylesheet">
+			<LINK href="../estilos/smoothness/jquery-ui-1.10.0.custom.css" type="text/css" rel="stylesheet">	
+                            
+		<!-- atajos de teclado -->
+			<script type="text/javascript" src="../includes_js/shortshut.js"></script>
+
+			<script type="text/javascript" src="../includes_js/jqueryui/js/jquery-1.9.0.js"></script>
+			<script type="text/javascript" src="../includes_js/jqueryui/js/jquery-ui-1.10.0.custom.js"></script>
+			<script type="text/javascript" src="../includes_js/jquery.maskedinput.1.3.1.js"></script>
+		
+		<?php echo '
+		
+		<script type="text/javascript">
+			$(function($) { 
+				$(\'#OBLI-txtFecha\').mask("99/99/9999");
+				}
+			); 		
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function() { 
+                            $.datepicker.regional[\'es\'] = {
+                                  closeText: \'Cerrar\',
+                                  prevText: \'<Ant\',
+                                  nextText: \'Sig>\',
+                                  currentText: \'Hoy\',
+                                  monthNames: [\'Enero\', \'Febrero\', \'Marzo\', \'Abril\', \'Mayo\', \'Junio\', \'Julio\', \'Agosto\', \'Septiembre\', \'Octubre\', \'Noviembre\', \'Diciembre\'],
+                                  monthNamesShort: [\'Ene\',\'Feb\',\'Mar\',\'Abr\', \'May\',\'Jun\',\'Jul\',\'Ago\',\'Sep\', \'Oct\',\'Nov\',\'Dic\'],
+                                  dayNames: [\'Domingo\', \'Lunes\', \'Martes\', \'Mi�rcoles\', \'Jueves\', \'Viernes\', \'S�bado\'],
+                                  dayNamesShort: [\'Dom\',\'Lun\',\'Mar\',\'Mi�\',\'Juv\',\'Vie\',\'S�b\'],
+                                  dayNamesMin: [\'Do\',\'Lu\',\'Ma\',\'Mi\',\'Ju\',\'Vi\',\'S�\'],
+                                  weekHeader: \'Sm\',
+                                  dateFormat: \'dd/mm/yy\',
+                                  firstDay: 1,
+                                  isRTL: false,
+                                  showMonthAfterYear: false,
+                                  yearSuffix: \'\'};
+                           $.datepicker.setDefaults($.datepicker.regional[\'es\']);                            
+                            $("#cboPersona").autocomplete({
+                                source : \'busquedas/busqueda_persona.php\',
+                                select: function( event, ui ) {
+                                    var rut = ui.item.id;
+                                    document.getElementById(\'OBLI-txtCodCobrador\').value = rut;
+					$.ajax({
+                                          url: "busquedas/buscar_cupo_persona.php?rut="+rut,
+                                          success: function(datos){
+                                                document.getElementById(\'OBLItxtMonto_1\').value = datos;
+                                            }
+                                        });
+					}
+                                });
+                            var rut =  document.getElementById(\'OBLI-txtCodCobrador\').value ;
+                            $.ajax({
+	                              url: "busquedas/buscar_cupo_persona.php?rut="+rut,
+	                              success: function(datos){
+	                                    document.getElementById(\'OBLItxtMonto_1\').value = datos;
+	                                }
+	                            });
+                            }); 		
+		</script>
+		<script type="text/javascript" > 
+			function ImprimeDiv(id)
+			{
+					var c, tmp;
+				
+				   c = document.getElementById(id);
+					  
+				   tmp = window.open(" ","Impresi�n.");
+				  
+				   tmp.document.open();
+				   tmp.document.write(\'<head><link href="../estilos/estilo.css" type="text/css" rel="stylesheet"/></head>\'); //Esto es omitible
+				   tmp.document.write(c.innerHTML);
+				   tmp.document.close();
+				   tmp.print();
+				   tmp.close();
+			}
+			function exportar_excel(id_form, id_tabla)
+			{
+				 // Obtiene el contenido de la tabla indicada
+				 var tabla = $("#" + id_tabla).html();
+				 // A�ade los tags de tabla
+				 tabla = "<table>" + tabla + "</table>";
+				 // Almacena en el campo oculto los datos a exportar
+				 $("#datos_a_enviar").val( tabla );
+				 // Activa el formulario, el cual lanza el c�digo en PHP
+				 $("#" + id_form).submit();
+			}
+ 		</script> 
+
+		'; ?>
+
+	
+	</HEAD>
+	<body onload="xajax_CargaPagina(xajax.getFormValues('Form1'));" style="background:#ffffff;"> 
+					
+		<div id="divcontenedor" align="left" style="margin:2px; padding: 2px;">
+			<table class="curvar" cellpadding="2" cellspacing="2" style="WIDTH: 99%; float: left; border: 1pt solid #B9B9B9; background:#ffffff">
+				<tr>
+					<td>
+						<form id="Form1" name="Form1" method="post" runat="server">
+							<br>
+							<table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+								<tr align="left" valign="middle">
+									<td style="width: 7%" align='right'><img width="48" height="48" src="../images/SURTIDOR GASOIL 2.bmp"></td>
+									<td style="width: 93%"><label class="form-titulo">&nbsp;&nbsp;Carga de Cupos Autorizados</label></td>
+								</tr>
+							</table>
+							<br>
+							<table class="tabla-alycar" cellpadding="0" cellspacing="0" style="width: 100%">
+								<tr align="left">
+									<td class="tabla-alycar-label" style="width: 15%">Trabajador:</td>
+									<td class="tabla-alycar-texto" style="width: 85%">
+	                                    <input name="cboPersona" id="cboPersona" value="<?php echo $this->_tpl_vars['carga_nom_pers']; ?>
+" />
+	                                    <input type="hidden" name="OBLI-txtCodCobrador" id="OBLI-txtCodCobrador" value="<?php echo $this->_tpl_vars['carga_pers']; ?>
+"></input>
+									</td>	
+								</tr>
+								<tr align="left">
+
+<tr align="left">
+									<td class="tabla-alycar-label" style="width: 15%">Cupo Anterior:<label class="requerido"> * </label></td>
+	<td class="tabla-alycar-texto" style="width: 85%">
+	<INPUT type="text" id="OBLItxtMonto_1" name="OBLItxtMonto_1"  onKeyPress="return SoloNumeros(this, event, 0)"  />
+
+</td>	
+								</tr>
+<tr align="left">
+									<td class="tabla-alycar-label" style="width: 15%">Cupo Actual:<label class="requerido"> * </label></td>
+	<td class="tabla-alycar-texto" style="width: 85%">
+	<INPUT type="text" id="OBLItxtMonto_2" name="OBLItxtMonto_2"  onKeyPress="return SoloNumeros(this, event, 0)"  />
+
+</td>	
+								</tr>
+								<tr align="left">
+					<td class="tabla-alycar-label" style="width: 20%">Mes / Anio:</td>
+					<td class="tabla-alycar-texto" style="width: 80%">
+						Mes:
+						<SELECT id="cboMes" name="cboMes" onKeyPress="return Tabula(this, event, 0)">
+							<option value=''>- - Seleccione - -</option>
+							<option value='01'>Enero</option>
+							<option value='02'>Febrero</option>
+							<option value='03'>Marzo</option>
+							<option value='04'>Abril</option>
+							<option value='05'>Mayo</option>
+							<option value='06'>Junio</option>
+							<option value='07'>Julio</option>
+							<option value='08'>Agosto</option>
+							<option value='09'>Septiembre</option>
+							<option value='10'>Octubre</option>
+							<option value='11'>Noviembre</option>
+							<option value='12'>Diciembre</option>
+						</SELECT>
+						&nbsp;&nbsp;
+						Anio:
+						<SELECT id="cboAnio" name="cboAnio" onKeyPress="return Tabula(this, event, 0)">
+							<option value=''>- - Seleccione - -</option>
+							<option value='2010'>2010</option>
+							<option value='2011'>2011</option>
+							<option value='2012'>2012</option>
+							<option value='2013'>2013</option>
+							<option value='2014'>2014</option>
+							<option value='2015'>2015</option>
+							<option value='2016'>2016</option>
+						</SELECT>
+						
+					</td>	
+				</TR>							
+								
+								<tr align="left">
+									<td colspan="2" class="tabla-alycar-fila-botones">
+										<input style="float:left" type="button" name="btnGrabar" value="Grabar" class="boton" onclick="javascript: ValidaFormularioMantenedor();">
+										<input style="display: none;float:left" type="button" name="btnVolver" id="btnVolver" value="Volver" class="boton floatLeft" onclick="document.location.href='<?php echo $this->_tpl_vars['pagina_volver']; ?>
+?carga_veh=<?php echo $this->_tpl_vars['carga_veh']; ?>
+&carga_nom_pers=<?php echo $this->_tpl_vars['carga_nom_pers']; ?>
+&carga_pers=<?php echo $this->_tpl_vars['carga_pers']; ?>
+&carga_monto=<?php echo $this->_tpl_vars['carga_monto']; ?>
+&carga_fecha=<?php echo $this->_tpl_vars['carga_fecha']; ?>
+&pers_asig=<?php echo $this->_tpl_vars['pers_asig']; ?>
+&monto_dispo=<?php echo $this->_tpl_vars['monto_dispo']; ?>
+&cargado=<?php echo $this->_tpl_vars['cargado']; ?>
+'">
+									</td>
+								</tr>
+							
+							</table>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</div>		
+	</body>
+</HTML>
