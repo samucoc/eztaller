@@ -1,0 +1,49 @@
+/*------------------------------------------------------------------
+[TEAM_CAROUSEL_VARIABLE.CSS - Team cards shortcode variable styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.team-carousel {
+	.swiper-slide-active .text-content {
+		box-shadow: ~'@{box_shadow_h_length}px @{box_shadow_v_length}px @{box_shadow_blur_radius}px 0px @{box_shadow_color}';
+		background-color: @box_bg_color;
+	}
+	.swiper-slide-prev,
+	.swiper-slide-next {
+		.text-content {
+			background-color: @color_bg_white;
+		}
+	}
+	.name {
+		@font_size: @primary_font_size + 2;
+		font-size: ~'@{font_size}px';
+		line-height: 1.4em;
+		font-family: @secondary_font_family;
+		color: @color_text_darken;
+	}
+	.swiper-slide-active .name {
+		color: @color_accent_blue;
+	}
+	.swiper-pagination-bullet {
+		background-color: rgba( red(@color_accent_grey), green(@color_accent_grey), blue(@color_accent_grey), 0.3 );
+	}
+	.swiper-pagination-bullet-active {
+		background-color: @color_accent_grey;
+	}
+	.social a {
+		color: lighten( @color_accent_grey, 10% );
+	}
+	.social a:hover {
+		color: @color_accent_grey;
+	}
+	.position {
+		font-size: ~'@{smaller_font_size}px';
+		line-height: ~'@{smaller_font_line_height}px';
+		color: @color_text_lighten;
+	}
+}

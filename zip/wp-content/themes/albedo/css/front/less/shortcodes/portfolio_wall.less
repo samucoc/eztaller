@@ -1,0 +1,97 @@
+/*------------------------------------------------------------------
+[PORTFOLIO_WALL.CSS - Portfolio wall shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.portfolio-wall-shortcode {
+	.col {
+		background-size: cover;
+		position: relative;
+		padding: 0;
+	}
+	.overlay {
+		z-index: 1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		transition: all 0.3s;
+		background-color: rgba(0,0,0,0.3);
+	}
+	.inside {
+		position: relative;
+		z-index: 2;
+		height: 100%;
+	}
+	.text-item {
+		position: absolute;
+		transition: all 0.3s;
+		left: 7%;
+		right: 7%;
+	}
+	.item-categories {
+		transition-delay: 0.2s;
+		opacity: 0;
+		top: 10%;
+		font-weight: bold;
+	}
+	.item-title {
+		bottom: 10%;
+	}
+	.item-zoom {
+		transition-delay: 0.2s;
+		opacity: 0;
+		bottom: 10%;
+	}
+	h4 {
+		margin-bottom: 0;
+		a {
+			text-decoration: none;
+		}
+	}
+	.lightbox-link a {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		background-size: 20px auto;
+		background-repeat: no-repeat;
+	}
+	.left-side {
+		.text-item {
+			text-align: right;
+		}
+	}
+	.col:hover {
+		.item-title {
+			bottom: 50%;
+			transform: translateY(50%);
+		}
+		.item-zoom, .item-categories {
+			opacity: 1;
+		}
+	}
+}
+
+.portfolio-wall-shortcode.wide-style {
+	.left-side, .right-side {
+		.text-item {
+			left: 15%;
+			right: 15%;
+			text-align: left;
+		}
+	}
+}
+
+body.rtl .portfolio-wall-shortcode.wide-style {
+	.left-side, .right-side {
+		.text-item {
+			text-align: right;
+		}
+	}
+}

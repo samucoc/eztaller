@@ -1,0 +1,110 @@
+/*------------------------------------------------------------------
+[TESTIMONIALS_MODERN.CSS - Testimonials Modern shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-testimonials.style-modern {
+	box-shadow: none !important;
+	text-align: center;
+	.swiper-button-prev {
+		left: -150px;
+	}
+	.swiper-button-next {
+		right: -150px;
+	}
+	.swiper-pagination {
+		text-align: center;
+		left: 0;
+		right: 0;
+	}
+	.photo img {
+		position: absolute;
+		z-index: 10;
+		border-radius: 100%;
+		top: -60px;
+		margin-left: -60px;
+		left: 50%;
+		width: 120px;
+		height: 120px;
+	}
+	.swiper-slide {
+		padding-top: 60px;
+		padding-bottom: 60px;
+	}
+	.slide-content {
+		position: relative;
+	}
+	.about-author {
+		margin-top: 22px;
+	}
+	.author {
+		font-weight: bold;
+	}
+	.swiper-button-prev,
+	.swiper-button-next {
+		background-size: 30px auto;
+		width: auto;
+		height: auto;
+		min-height: 33px;
+	}
+	.swiper-button-prev {
+		padding-left: 40px;
+		background-position: left center;
+		text-align: left;
+	}
+	.swiper-button-next {
+		padding-right: 40px;
+		background-position: right center;
+		text-align: right;
+	}
+	.swiper-nav-btn .name {
+		font-weight: bold;
+		display: block;
+		transition: color 0.3s;
+	}
+	.swiper-nav-btn .title {
+		display: inline-block;
+		line-height: 1;
+		vertical-align: middle;
+	}
+	.slide-content {
+		padding: 90px 100px 50px 100px;
+	}
+}
+
+.shortcode-testimonials.style-modern.corners {
+	.slide-content {
+		padding-top: 50px;
+	}
+	.photo img {
+		display: block;
+		position: static;
+		margin: 0 auto 34px auto;
+		width: 80px;
+		height: 80px;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.shortcode-testimonials.style-modern {
+		.swiper-button-prev,
+		.swiper-button-next {
+			display: none;
+		}
+		.slide-content {
+			padding: 60px 30px 30px 30px;
+		}
+		.photo img {
+			width: 80px;
+			height: 80px;
+			top: -40px;
+			margin-left: -40px;
+			left: 50%;
+		}
+	}
+}

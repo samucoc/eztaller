@@ -1,0 +1,403 @@
+/*------------------------------------------------------------------
+[TABLE.CSS - Table / Pricing Tables shortcode styles]
+[Table of contents]
+
+1. Simple tables
+2. Pricing tables
+	2.1 Pricing table style 1
+	2.2 Pricing table style 2
+	2.3 Pricing table style 3
+	2.4 Pricing table style 4
+	2.5 Pricing table style 5
+	2.6 Pricing table style 6
+	2.7 Pricing table style 7
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Simple tables
+-------------------------------------------------------------------*/
+.fw-table td {
+  transition: all 0.2s;
+}
+.fw-table.style-2 table,
+.fw-table.style-2 table td {
+  border: 0;
+}
+.fw-table.style-4 table thead,
+.fw-table.style-5 table thead {
+  border-bottom: 0;
+}
+/*------------------------------------------------------------------
+	2. Pricing tables
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	2.1 Pricing table style 1
+-------------------------------------------------------------------*/
+.fw-pricing.style-1 .fw-package {
+  text-align: center;
+}
+.fw-pricing.style-1 .fw-heading-row,
+.fw-pricing.style-1 .fw-pricing-row {
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+.fw-pricing.style-1 .fw-term-row,
+.fw-pricing.style-1 .fw-pricing-row {
+  margin-bottom: 28px;
+}
+.fw-pricing.style-1 .fw-default-row {
+  margin-bottom: 34px;
+}
+.fw-pricing.style-1 .default-col,
+.fw-pricing.style-1 .highlight-col {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  transition: all 0.2s;
+}
+.fw-pricing.style-1 .highlight-col {
+  border-radius: 10px;
+  z-index: 10;
+}
+/*------------------------------------------------------------------
+	2.2 Pricing table style 2
+-------------------------------------------------------------------*/
+.fw-pricing.style-2 .fw-package {
+  text-align: center;
+  border-radius: 5px;
+  padding-bottom: 35px;
+}
+.fw-pricing.style-2 .fw-heading-row {
+  font-weight: bold;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.fw-pricing.style-2 .fw-pricing-row {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  font-weight: 900;
+}
+.fw-pricing.style-2 .fw-pricing-row small {
+  margin-top: 5px;
+  display: block;
+  font-weight: normal;
+}
+.fw-pricing.style-2 .fw-default-row {
+  margin-bottom: 0;
+}
+.fw-pricing.style-2 .fw-button-row {
+  margin-top: 34px;
+}
+.fw-pricing.style-2 .highlight-col,
+.fw-pricing.style-2 .default-col {
+  position: relative;
+  transition: all 0.3s;
+}
+.fw-pricing.style-2 .highlight-col,
+.fw-pricing.style-2 .default-col:hover {
+  margin-top: -20px;
+}
+@media screen and (max-width: 992px) {
+  .fw-pricing.style-2 .highlight-col,
+  .fw-pricing.style-2 .default-col:hover {
+    margin-top: 0;
+  }
+}
+/*------------------------------------------------------------------
+	2.3 Pricing table style 3
+-------------------------------------------------------------------*/
+.fw-pricing.style-3 .desc-col {
+  text-align: right;
+}
+.fw-pricing.style-3 .default-col,
+.fw-pricing.style-3 .highlight-col {
+  text-align: center;
+}
+.fw-pricing.style-3 .default-col,
+.fw-pricing.style-3 .highlight-col,
+.fw-pricing.style-3 .desc-col {
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
+.fw-pricing.style-3 .highlight-col {
+  margin-top: -20px;
+  padding-top: 85px;
+  padding-bottom: 80px;
+  border-radius: 10px;
+  z-index: 10;
+}
+.fw-pricing.style-3 .fw-heading-row,
+.fw-pricing.style-3 .fw-pricing-row {
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+.fw-pricing.style-3 .fw-term-row {
+  margin-bottom: 28px;
+}
+.fw-pricing.style-3 .fw-pricing-row {
+  margin-bottom: 34px;
+}
+.fw-pricing.style-3 .fw-button-row {
+  margin-top: 34px;
+}
+.fw-pricing.style-3 > div:last-of-type {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.fw-pricing.style-3 .desc-col {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+@media screen and (max-width: 992px) {
+  .fw-pricing.style-3 .desc-col {
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: none !important;
+  }
+  .fw-pricing.style-3 .highlight-col {
+    margin-top: 0;
+  }
+}
+/*------------------------------------------------------------------
+	2.4 Pricing table style 4
+-------------------------------------------------------------------*/
+.fw-pricing.style-4 {
+  text-align: center;
+}
+.fw-pricing.style-4 .default-col,
+.fw-pricing.style-4 .highlight-col {
+  padding-top: 25px;
+  padding-bottom: 50px;
+}
+.fw-pricing.style-4 .highlight-col {
+  margin-top: -20px;
+  padding-top: 45px;
+  padding-bottom: 70px;
+  border-radius: 10px;
+  z-index: 10;
+}
+.fw-pricing.style-4 > div:first-child,
+.fw-pricing.style-4 > div:first-child .fw-heading-row {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.fw-pricing.style-4 > div:last-of-type,
+.fw-pricing.style-4 div:last-of-type .fw-heading-row {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.fw-pricing.style-4 .fw-icon-row {
+  margin-top: -40px;
+  margin-bottom: 30px;
+}
+.fw-pricing.style-4 .custom-icon {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  text-align: center;
+  transition: all 0.3s;
+}
+.fw-pricing.style-4 .custom-icon i,
+.fw-pricing.style-4 .custom-icon svg {
+  display: inline-block;
+  vertical-align: middle;
+  transition: all 0.3s;
+}
+.fw-pricing.style-4 .fw-heading-row {
+  padding-top: 30px;
+  padding-bottom: 70px;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-top: -25px;
+  font-weight: 900;
+}
+.fw-pricing.style-4 .highlight-col .fw-heading-row {
+  margin-top: -45px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding-top: 50px;
+  padding-bottom: 70px;
+}
+.fw-pricing.style-4 .fw-pricing-row {
+  margin-bottom: 34px;
+}
+.fw-pricing.style-4 .fw-pricing-row span {
+  font-weight: 900;
+}
+.fw-pricing.style-4 .fw-pricing-row small {
+  display: block;
+  text-transform: uppercase;
+}
+.fw-pricing.style-4 .fw-button-row {
+  margin-top: 35px;
+}
+@media screen and (max-width: 992px) {
+  .fw-pricing.style-4 .highlight-col {
+    margin-top: 0;
+  }
+}
+/*------------------------------------------------------------------
+	2.5 Pricing table style 5
+-------------------------------------------------------------------*/
+.fw-pricing.style-5 {
+  text-align: center;
+}
+.fw-pricing.style-5 .default-col .fw-package,
+.fw-pricing.style-5 .highlight-col .fw-package {
+  border-radius: 10px;
+  padding: 50px 40px;
+  transition: all 0.3s;
+}
+.fw-pricing.style-5 .fw-heading-row {
+  margin-bottom: 30px;
+  font-weight: 900;
+}
+.fw-pricing.style-5 .fw-pricing-row {
+  margin-bottom: 30px;
+}
+.fw-pricing.style-5 .fw-pricing-row span {
+  font-size: 60px;
+  font-weight: 900;
+}
+.fw-pricing.style-5 .fw-pricing-row small {
+  font-size: 18px;
+}
+.fw-pricing.style-5 .fw-term-row,
+.fw-pricing.style-5 .fw-button-row {
+  margin-bottom: 34px;
+}
+@media screen and (max-width: 992px) {
+  .fw-pricing.style-5 .default-col .fw-package,
+  .fw-pricing.style-5 .highlight-col .fw-package {
+    padding: 20px 15px;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  .fw-pricing.style-5 .fw-heading-row span {
+    font-size: 30px;
+  }
+}
+/*------------------------------------------------------------------
+	2.6 Pricing table style 6
+-------------------------------------------------------------------*/
+.fw-pricing.style-6 {
+  text-align: center;
+}
+.fw-pricing.style-6 .default-col .fw-package,
+.fw-pricing.style-6 .highlight-col .fw-package {
+  border-radius: 10px;
+  padding: 50px 40px;
+  transition: all 0.3s;
+}
+.fw-pricing.style-6 .fw-pricing-row {
+  margin-bottom: 25px;
+}
+.fw-pricing.style-6 .fw-pricing-row span {
+  font-size: 60px;
+  font-weight: 900;
+  transition: all 0.3s;
+}
+.fw-pricing.style-6 .fw-pricing-row small {
+  font-size: 18px;
+  transition: all 0.3s;
+}
+.fw-pricing.style-6 .fw-heading-row {
+  margin-bottom: 25px;
+  letter-spacing: 8px;
+  transition: all 0.3s;
+}
+.fw-pricing.style-6 .fw-button-row {
+  margin-top: 34px;
+}
+.fw-pricing.style-6 .fw-default-row {
+  padding: 10px 15px;
+  margin-left: -40px;
+  margin-right: -40px;
+}
+@media screen and (max-width: 992px) {
+  .fw-pricing.style-6 .default-col .fw-package,
+  .fw-pricing.style-6 .highlight-col .fw-package {
+    padding: 40px 15px;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  .fw-pricing.style-6 .fw-heading-row span {
+    font-size: 20px;
+  }
+  .fw-pricing.style-6 .fw-default-row {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+}
+/*------------------------------------------------------------------
+	2.7 Pricing table style 7
+-------------------------------------------------------------------*/
+.fw-pricing.style-7 .default-col,
+.fw-pricing.style-7 .highlight-col {
+  text-align: center;
+}
+.fw-pricing.style-7 .default-col,
+.fw-pricing.style-7 .highlight-col {
+  padding-top: 70px;
+  padding-bottom: 50px;
+  transition: all 0.3s;
+}
+.fw-pricing.style-7 .highlight-col {
+  margin-top: -30px;
+  padding-top: 85px;
+  padding-bottom: 80px;
+  border-radius: 10px;
+  z-index: 10;
+}
+.fw-pricing.style-7 .fw-icon-row {
+  margin-bottom: 25px;
+}
+.fw-pricing.style-7 .fw-icon-row i,
+.fw-pricing.style-7 .fw-icon-row svg {
+  display: inline-block;
+}
+.fw-pricing.style-7 .fw-icon-row svg {
+  width: 63px;
+  height: 63px;
+}
+.fw-pricing.style-7 .fw-icon-row i {
+  font-size: 63px;
+}
+.fw-pricing.style-7 .fw-heading-row,
+.fw-pricing.style-7 .fw-pricing-row {
+  font-weight: 900;
+  margin-bottom: 25px;
+}
+.fw-pricing.style-7 .fw-term-row {
+  margin-bottom: 28px;
+}
+.fw-pricing.style-7 .fw-pricing-row {
+  margin-bottom: 34px;
+}
+.fw-pricing.style-7 .fw-pricing-row span {
+  font-size: 48px;
+  line-height: 1em;
+}
+.fw-pricing.style-7 .fw-button-row {
+  margin-top: 34px;
+}
+.fw-pricing.style-7 > div:last-of-type {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.fw-pricing.style-7 > div:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+@media screen and (max-width: 992px) {
+  .fw-pricing.style-7 .highlight-col {
+    margin-top: 0;
+  }
+}
+@media screen and (max-width: 992px) {
+  .fw-pricing .fw-package-wrap {
+    margin-bottom: 34px;
+  }
+}

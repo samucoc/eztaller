@@ -1,0 +1,59 @@
+/*------------------------------------------------------------------
+[FACTS_IN_DIGITS.CSS - Facts in digits shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.facts-in-digits {
+	.vc_row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.item {
+		position: relative;
+		margin-bottom: 34px;
+	}
+	.icon {
+		position: absolute;
+		left: 0;
+		top: 10px;
+		i {
+			font-size: 70px;
+		}
+		svg {
+			width: 60px;
+			height: 60px;
+		}
+	}
+	.item-text {
+		padding-left: 80px;
+	}
+	.no-icon .item-text {
+		padding-left: 0;
+	}
+	.typed:after {
+		top: 0;
+	}
+	.number {
+		font-size: 50px;
+		line-height: 50px;
+		margin-bottom: 10px;
+	}
+}
+body.rtl {
+	.item {
+		text-align: right;
+	}
+	.item-text {
+		padding-left: 0;
+		padding-right: 80px;
+	}
+	.icon {
+		right: 0;
+		left: auto;
+	}
+}

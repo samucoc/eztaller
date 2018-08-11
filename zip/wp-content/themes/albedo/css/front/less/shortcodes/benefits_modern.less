@@ -1,0 +1,85 @@
+/*------------------------------------------------------------------
+[BENEFITS_MODERN.CSS - Benefits shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-benefits-modern {
+	.line {
+		position: absolute;
+		top: 30px;
+		right: 15px;
+		left: 100px;
+		border-radius: 3px;
+		height: 6px;
+		transition: all 0.3s;
+	}
+	.no-icon .line {
+		left: 0;
+	}
+	.icon {
+		position: absolute;
+		left: 0;
+		top: 0;
+		i {
+			font-size: 70px;
+		}
+		svg, img {
+			width: 60px;
+		}
+		svg {
+			height: 60px;
+		}
+	}
+	a {
+		text-decoration: none;
+	}
+	h4 {
+		margin-bottom: 18px;
+		transition: all 0.3s;
+	}
+	.item-inside {
+		position: relative;
+		padding-top: 95px;
+	}
+	.item {
+		margin-bottom: 70px;
+		position: relative;
+	}
+	.btn {
+		margin-top: 34px;
+		display: inline-block;
+		width: 15px;
+		height: 20px;
+		background-size: 15px auto;
+		background-repeat: no-repeat;
+	}
+	.benefit-text {
+		padding-right: 70px;
+	}
+}
+body.rtl .shortcode-benefits-modern {
+	.line {
+		left: 15px;
+		right: 100px;
+	}
+	.no-icon .line {
+		right: 0;
+		left: 15px;
+	}
+	.icon {
+		right: 0;
+		left: auto;
+	}
+	.benefit-text {
+		padding-left: 70px;
+		padding-right: 0;
+	}
+	.btn {
+		transform: rotate(180deg);
+	}
+}

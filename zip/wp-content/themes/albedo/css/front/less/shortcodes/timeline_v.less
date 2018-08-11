@@ -1,0 +1,172 @@
+/*------------------------------------------------------------------
+[TIMELINE_V.CSS - Vertical timeline shortcode static styles]
+[Table of contents]
+
+1. Shortcode markup
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shortcode markup
+-------------------------------------------------------------------*/
+.vertical-timeline {
+	font-size: 0px;
+	.events {
+		position: relative;
+	}
+	.col {
+		float: none;
+		display: inline-block;
+		vertical-align: top;
+	}
+	.is_stuck {
+		z-index: 10;
+	}
+	.event {
+		display: block;
+		padding: 65px 70px 35px 30px;
+		text-align: right;
+		text-decoration: none;
+		position: relative;
+		span {
+			display: block;
+		}
+	}
+	.event:first-of-type:after {
+		border-top-right-radius: 4px;
+		border-top-left-radius: 4px;
+	}
+	.event:last-of-type:after {
+		border-bottom-right-radius: 4px;
+		border-bottom-left-radius: 4px;
+	}
+	.event:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 11px;
+		bottom: 0;
+		width: 8px;
+		z-index: 1;
+	}
+	.event .dot {
+		content: '';
+		position: absolute;
+		z-index: 2;
+		border-width: 12px;
+		top: 50%;
+		right: 0;
+		margin-top: -15px;
+		height: 30px;
+		width: 30px;
+		border-radius: 50%;
+		-webkit-transition: background-color 0.3s, border-color 0.3s;
+		-moz-transition: background-color 0.3s, border-color 0.3s;
+		transition: background-color 0.3s, border-color 0.3s;
+	}
+	.item-content {
+		display: none;
+		opacity: 0;
+		transition: opacity 0.3s;
+	}
+	.item-content.selected {
+		display: block;
+		opacity: 1;
+	}
+	.date, .title {
+		font-weight: bold;
+		transition: color 0.3s;
+	}
+	.date .date-mobile {
+		display: none;
+	}
+}
+
+body.rtl {
+	.vertical-timeline {
+		.event {
+			text-align: left;
+			padding: 65px 30px 35px 70px;
+		}
+		.event:after {
+			right: auto;
+			left: 11px;
+		}
+		.event .dot {
+			left: 0;
+			right: auto;
+		}
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.vertical-timeline {
+		.title {
+			display: none !important;
+		}
+		.event {
+			padding: 30px 50px 30px 0;
+		}
+	}
+	body.rtl {
+		.vertical-timeline {
+			.event {
+				padding: 30px 0 30px 50px;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.vertical-timeline {
+		.sticky {
+			position: relative !important;
+		}
+		.event {
+			width: 25%;
+		}
+		.col-events, .col-content {
+			width: 100% !important;
+		}
+		.date .date-mobile {
+			display: block;
+		}
+		.date .date-desktop {
+			display: none;
+		}
+		.events {
+			font-size: 0;
+		}
+		.event {
+			display: inline-block;
+			padding: 10px 15px 10px 40px;
+			text-align: left;
+			.dot {
+				left: 0;
+				right: auto;
+			}
+		}
+		.event:after {
+			display: none;
+		}
+	}
+	body.rtl {
+		.vertical-timeline {
+			.event {
+				padding: 10px 40px 10px 15px;
+				text-align: right;
+				.dot {
+					right: 0;
+					left: auto;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.vertical-timeline {
+		.event {
+			width: 50%;
+		}
+	}
+}

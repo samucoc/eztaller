@@ -1,0 +1,335 @@
+/*------------------------------------------------------------------
+[ASIDE.CSS - Contains sidebar and widget styles]
+[Table of contents]
+
+1. Base sidebar markup
+2. Boxed widget styles
+3. Separator widget styles
+4. Standard WP Widgets
+5. Custom Albedo Widgets
+6. Third-party widgets
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Base sidebar markup
+-------------------------------------------------------------------*/
+body.sidebar-left {
+	#content, .aside-gap {
+		float: right;
+	}
+	.aside {
+		float: left;
+	}
+}
+body.sidebar-left_right {
+	.aside {
+		float: left;
+	}
+	#sidebar-second {
+		float: right;
+	}
+}
+
+body.sidebar-left_left {
+	#content {
+		float: right;
+	}
+	.aside {
+		float: left;
+	}
+}
+
+@media screen and (max-width: 995px) {
+	body.sidebar-left,
+	body.sidebar-right,
+	body.sidebar-left_right,
+	body.sidebar-left_left {
+		#content, .aside, #sidebar-second {
+			float: none;
+		}
+	}
+}
+@media screen and (max-width: 767px) {
+	body.hide-side-on-mobiles {
+		.aside {
+			display: none;
+		}
+	}
+}
+
+@media screen and (max-width: 992px) {
+	aside {
+		margin-top: 70px;
+	}
+}
+
+.widget {
+	margin-bottom: 40px;
+}
+
+
+/*------------------------------------------------------------------
+	2. Boxed widget styles
+-------------------------------------------------------------------*/
+.aside.widgets-style-boxed .widget {
+	padding: 40px;
+}
+@media (max-width: 767px) {
+	.aside.widgets-style-boxed .widget {
+		padding: 30px;
+	}
+}
+.aside.widgets-style-boxed {
+	.widget-title {
+		margin-bottom: 22px;
+		padding-bottom: 22px;
+	}
+}
+/*------------------------------------------------------------------
+	3. Separator widget styles
+-------------------------------------------------------------------*/
+.aside.widgets-style-separator .widget {
+	padding-bottom: 40px;
+}
+.aside.widgets-style-separator {
+	.widget-title {
+		margin-bottom: 22px;
+	}
+}
+/*------------------------------------------------------------------
+	4. Standard WP Widgets
+-------------------------------------------------------------------*/
+.widget ul li {
+	position: relative;
+}
+.widget ul li:before {
+	content: '';
+	background-repeat: no-repeat;
+	background-size: 8px auto;
+	transform: rotate(180deg);
+	width: 10px;
+	height: 8px;
+	top: 8px;
+}
+body.rtl .widget ul li:before {
+	transform: rotate(0);
+}
+.widget a {
+	text-decoration: none;
+}
+.widget ul, .widget ol {
+	margin: 0 0 18px 0;
+	ul, ol {
+		margin: 18px 0 18px 0;
+	}
+	li {
+		margin-bottom: 10px;
+		padding-left: 28px;
+	}
+	li:last-of-type {
+		margin-bottom: 0;
+	}
+}
+
+body.rtl {
+	.widget ul, .widget ol {
+
+		li {
+			padding-left: 0;
+			padding-right: 28px;
+		}
+	}
+}
+
+.widget_archive {
+	label {
+		display: none;
+	}
+	form {
+		margin-bottom: 0;
+	}
+}
+
+.widget_calendar {
+	table {
+		margin-bottom: 0;
+	}
+	td, th {
+		padding: 5px;
+	}
+}
+
+.widget_recent_entries .post-date,
+.widget_rss .rss-date {
+	display: block;
+}
+
+.widget_rss {
+	.rsswidget, .rss-date {
+		margin-bottom: 8px;
+		display: block;
+	}
+	.rss-date {
+		font-weight: bold;
+	}
+	.rsswidget > img {
+		display: none;
+	}
+	.widget-title > .rsswidget:first-child {
+		display: none;
+	}
+}
+
+.widget_text p:last-of-type, .widget_search form {
+	margin-bottom: 0;
+}
+
+.widget_mc4wp_form_widget {
+	form {
+		margin-bottom: 0;
+	}
+	p:last-of-type {
+		margin-bottom: 0;
+	}
+}
+.widget_categories {
+	label {
+		display: block;
+		margin-bottom: 10px;
+	}
+}
+.widget_archive, .widget_categories, .widget_nav_menu, .widget_meta, .widget_pages,
+.widget_recent_comments, .widget_recent_entries, .widget_rss, .widget-wedocs {
+	.widget-content > ul, .widget-content > div > ul, .widget-inside > ul {
+		margin-bottom: 0;
+	}
+	li, ul.menu > li > a {
+		font-weight: bold;
+	}
+	.sub-menu li {
+		font-weight: normal;
+	}
+	.sub-menu li:before {
+		top: 5px;
+	}
+	.sub-menu {
+		margin-bottom: 10px;
+	}
+	.widget-inside > ul {
+		> li:before {
+			display: none;
+		}
+		> li {
+			padding-left: 0;
+			padding-bottom: 10px;
+		}
+		ul {
+			margin-bottom: 10px;
+		}
+		> li:last-of-type {
+			border-bottom: 0 !important;
+			margin-bottom: 0 !important;
+			.sub-menu {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+.widget_nav_menu {
+	.menu {
+		margin-bottom: 0;
+		> li:last-of-type {
+			border-bottom: 0 !important;
+			margin-bottom: 0 !important;
+			.sub-menu {
+				margin-bottom: 0;
+			}
+		}
+	}
+	.menu > li:before {
+		display: none;
+	}
+	.menu > li {
+		padding-left: 0;
+		padding-bottom: 10px;
+	}
+	li {
+		font-weight: bold;
+	}
+	.sub-menu li {
+		font-weight: normal;
+	}
+	.sub-menu li:before {
+		top: 5px;
+	}
+	.sub-menu {
+		margin-bottom: 10px;
+	}
+}
+
+body.rtl .widget_nav_menu {
+	.menu > li {
+		padding-right: 0;
+	}
+}
+
+.widget_recent_comments {
+	ul li:before {
+		background-size: 16px auto;
+		width: 16px;
+		height: 16px;
+		transform: rotate(0deg);
+		top: 6px;
+	}
+}
+
+.widget_tag_cloud {
+	a {
+		display: inline-block;
+		padding: 5px 24px;
+		border: 2px solid;
+		margin: 0 10px 10px 0;
+	}
+}
+/*------------------------------------------------------------------
+	5. Custom Albedo Widgets
+-------------------------------------------------------------------*/
+.aside .widget.wproto_image_ad_widget, .aside .widgets-style-boxed .widget.wproto_image_ad_widget {
+	padding: 0 !important;
+	box-shadow: none !important;
+	background-color: transparent !important;
+}
+.wproto_image_ad_widget img {
+	display: block;
+	margin: 0 auto;
+}
+.widget.wproto_menu_two_cols_widget {
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		border-bottom: 0;
+		padding: 0;
+		margin: 0 0 12px 0;
+		width: 50%;
+		float: left;
+	}
+	li:before {
+		display: none;
+	}
+}
+@media screen and (max-width: 460px) {
+	.widget.wproto_menu_two_cols_widget {
+		width: 100%;
+		float: none;
+	}
+}
+/*------------------------------------------------------------------
+	6. Third-party widgets
+-------------------------------------------------------------------*/
+.wedocs-search-widget {
+	form > div {
+		margin-bottom: 18px;
+	}
+}

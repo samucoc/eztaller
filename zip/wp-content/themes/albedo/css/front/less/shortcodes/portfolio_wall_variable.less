@@ -1,0 +1,68 @@
+/*------------------------------------------------------------------
+[PORTFOLIO_WALL.CSS - Portfolio wall shortcode variable styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.portfolio-wall-shortcode {
+	*, *:hover {
+		color: @color_accent_inner;
+	}
+	.item-categories {
+		font-size: ~'@{small_font_size}px';
+		line-height: ~'@{small_font_line_height}px';
+	}
+	h4 {
+		font-size: ~'@{bigger_font_size}px';
+		line-height: ~'@{bigger_font_line_height}px';
+	}
+	.lightbox-link a {
+		@color_escaped: escape( ~'#fff' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20enable-background%3D%22new%200%200%2024%2024%22%3E%0A%20%20%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22m23%2C10h-8.5c-0.3%2C0-0.5-0.2-0.5-0.5v-8.5c0-0.6-0.4-1-1-1h-2c-0.6%2C0-1%2C0.4-1%2C1v8.5c0%2C0.3-0.2%2C0.5-0.5%2C0.5h-8.5c-0.6%2C0-1%2C0.4-1%2C1v2c0%2C0.6%200.4%2C1%201%2C1h8.5c0.3%2C0%200.5%2C0.2%200.5%2C0.5v8.5c0%2C0.6%200.4%2C1%201%2C1h2c0.6%2C0%201-0.4%201-1v-8.5c0-0.3%200.2-0.5%200.5-0.5h8.5c0.6%2C0%201-0.4%201-1v-2c0-0.6-0.4-1-1-1z%22%2F%3E%0A%3C%2Fsvg%3E%0A")';
+	}
+}
+
+.portfolio-wall-shortcode.wide-style {
+	h4 {
+		font-size: ~'@{primary_font_size}px';
+		line-height: ~'@{primary_font_line_height}px';
+	}
+}
+
+.portfolio-wall-shortcode.overlay-blue .col:hover .overlay {
+	background-color: rgba( red( @color_accent_blue ), green( @color_accent_blue ), blue( @color_accent_blue ), 0.8 );
+}
+.portfolio-wall-shortcode.overlay-black .col:hover .overlay {
+	background-color: rgba( red( @color_accent_black ), green( @color_accent_black ), blue( @color_accent_black ), 0.8 );
+}
+.portfolio-wall-shortcode.overlay-grey .col:hover .overlay {
+	background-color: rgba( red( @color_accent_grey ), green( @color_accent_grey ), blue( @color_accent_grey ), 0.8 );
+}
+.portfolio-wall-shortcode.overlay-light_grey .col:hover .overlay {
+	background-color: rgba( red( @color_accent_light_grey ), green( @color_accent_light_grey ), blue( @color_accent_light_grey ), 0.8 );
+}
+.portfolio-wall-shortcode.overlay-red .col:hover .overlay {
+	background-color: rgba( red( @color_accent_red ), green( @color_accent_red ), blue( @color_accent_red ), 0.8 );
+}
+.portfolio-wall-shortcode.overlay-orange .col:hover .overlay {
+	background-color: rgba( red( @color_accent_orange ), green( @color_accent_orange ), blue( @color_accent_orange ), 0.8 );
+}
+.portfolio-wall-shortcode.overlay-green .col:hover .overlay {
+	background-color: rgba( red( @color_accent_green ), green( @color_accent_green ), blue( @color_accent_green ), 0.8 );
+}
+.portfolio-wall-shortcode.overlay-turquoise .col:hover .overlay {
+	background-color: rgba( red( @color_accent_turquoise ), green( @color_accent_turquoise ), blue( @color_accent_turquoise ), 0.8 );
+}
+.portfolio-wall-shortcode.overlay-yellow .col:hover .overlay {
+	background-color: rgba( red( @color_accent_yellow ), green( @color_accent_yellow ), blue( @color_accent_yellow ), 0.8 );
+}
+.portfolio-wall-shortcode.overlay-purple .col:hover .overlay {
+	background-color: rgba( red( @color_accent_purple ), green( @color_accent_purple ), blue( @color_accent_purple ), 0.8 );
+}
+.portfolio-wall-shortcode.overlay-dark_purple .col:hover .overlay {
+	background-color: rgba( red( @color_accent_dark_purple ), green( @color_accent_dark_purple ), blue( @color_accent_dark_purple ), 0.8 );
+}

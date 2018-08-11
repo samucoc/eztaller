@@ -1,0 +1,35 @@
+/*------------------------------------------------------------------
+[FACTS_IN_DIGITS_VARIABLE.CSS - Facts in digits shortcode variable styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.facts-in-digits {
+	.number {
+		color: @color_accent_turquoise;
+		font-family: @secondary_font_family;
+		font-weight: 900;
+		span {
+			font-family: @secondary_font_family;
+			font-weight: 900;
+		}
+	}
+	.text {
+		color: @color_text_darken;
+		@text_font_size: @primary_font_size + 2;
+		font-size: ~'@{text_font_size}px';
+		line-height: 1.4em;
+	}
+	.icon {
+		color: @color_accent_grey;
+	}
+	.icon svg {
+		path, rect, polygon, circle {
+			fill: @color_accent_grey;
+		}
+	}
+}

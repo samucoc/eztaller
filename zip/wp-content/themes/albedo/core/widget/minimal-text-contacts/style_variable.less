@@ -1,0 +1,68 @@
+/*------------------------------------------------------------------
+[Dynamic styles for Minimal / Text / Contacts widget]
+[Table of contents]
+
+1. Shared styles
+2. Mobile styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.wproto_minimal_text_contacts_widget {
+	.widget-elements {
+		display: table;
+		width: 100%;
+		.elem {
+			display: table-cell;
+		}
+		.elem:last-of-type {
+			text-align: right;
+		}
+		i.fa {
+			margin-right: 7px;
+		}
+	}
+}
+body.rtl .wproto_minimal_text_contacts_widget {
+	.widget-elements .elem:last-of-type {
+		text-align: left;
+	}
+	i.fa {
+		margin-right: 0;
+		margin-left: 7px;
+	}
+}
+#footer-widgets .wproto_minimal_text_contacts_widget {
+	.phone, .share-links a, .mail a, .mail {
+		color: @footer_headers_color;
+	}
+	.share-links a:hover, .mail a:hover {
+		color: @footer_link_hover_color;
+	}
+}
+
+/*------------------------------------------------------------------
+	2. Mobile styles
+-------------------------------------------------------------------*/
+@media screen and (max-width: 992px) {
+	.wproto_minimal_text_contacts_widget {
+		.widget-elements, .widget-elements .elem,
+		.widget-elements .elem:last-of-type {
+			display: block;
+			text-align: left;
+		}
+		.elem {
+			margin-bottom: 10px;
+		}
+		.elem:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+	body.rtl .wproto_minimal_text_contacts_widget {
+		.widget-elements, .elem,
+		.widget-elements .elem:last-of-type {
+			text-align: right;
+		}
+	}
+}

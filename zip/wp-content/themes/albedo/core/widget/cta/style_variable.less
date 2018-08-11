@@ -1,0 +1,47 @@
+/*------------------------------------------------------------------
+[Call to action widget styles]
+[Table of contents]
+
+1. Shared styles
+2. Responsive styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.wproto_cta_widget {
+	.centered {
+		text-align: center;
+	}
+	.widget-title {
+		margin-bottom: 0;
+		font-size: ~'@{h2_font_size}px' !important;
+		line-height: ~'@{h2_font_line_height}px' !important;
+	}
+	.button {
+		margin-top: 10px;
+	}
+	.free_text {
+		margin-top: 50px;
+	}
+	.share-links {
+		margin-top: 24px;
+	}
+	.share-links i {
+		margin: 0 7px;
+	}
+}
+/*------------------------------------------------------------------
+	2. Responsive styles
+-------------------------------------------------------------------*/
+@media screen and (max-width: 995px) {
+	.wproto_cta_widget {
+		.widget-title {
+			font-size: ~'@{h4_font_size}px' !important;
+			line-height: ~'@{h4_font_line_height}px' !important;
+			br {
+				display: none;
+			}
+		}
+	}
+}

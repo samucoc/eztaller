@@ -1,0 +1,326 @@
+/*------------------------------------------------------------------
+[TESTIMONIALS.CSS - Quotes / Testimonials shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+2. Default style
+3. Parallax style
+4. Gradient style
+5. Simple style
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-testimonials.style-default,
+.shortcode-testimonials.style-parallax {
+  position: relative;
+  margin-bottom: 34px;
+}
+.shortcode-testimonials.style-default .swiper-nav-button,
+.shortcode-testimonials.style-parallax .swiper-nav-button {
+  display: none;
+}
+.shortcode-testimonials.style-default .swiper-pagination-bullet,
+.shortcode-testimonials.style-parallax .swiper-pagination-bullet {
+  transition: all 0.3s;
+}
+.shortcode-testimonials.style-default .content-photo img,
+.shortcode-testimonials.style-parallax .content-photo img {
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 18px;
+}
+.shortcode-testimonials.style-default .slide-content:before,
+.shortcode-testimonials.style-parallax .slide-content:before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  background-size: 40px auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: absolute;
+}
+.shortcode-testimonials.style-default .signature,
+.shortcode-testimonials.style-parallax .signature {
+  margin-bottom: 18px;
+}
+.shortcode-testimonials .slide-content {
+  cursor: move;
+}
+/*------------------------------------------------------------------
+	2. Default style
+-------------------------------------------------------------------*/
+.shortcode-testimonials.style-default .slide-content {
+  text-align: center;
+}
+.shortcode-testimonials.style-default .author {
+  font-weight: bold;
+}
+.shortcode-testimonials.style-default .text {
+  padding: 50px 40px 80px 40px;
+  font-weight: normal;
+}
+.shortcode-testimonials.style-default .swiper-pagination {
+  left: 0;
+  right: 0;
+  bottom: 35px;
+}
+.shortcode-testimonials.style-default .header-text {
+  position: absolute;
+  bottom: 65px;
+  left: 0;
+  right: 0;
+  padding: 0 15px;
+}
+.shortcode-testimonials.style-default header {
+  position: relative;
+}
+.shortcode-testimonials.style-default header img {
+  display: block;
+}
+.shortcode-testimonials.style-default header:after {
+  content: '';
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  margin-top: -40px;
+  left: 50%;
+  margin-left: -35px;
+  border-radius: 100%;
+  background-size: 20px auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.shortcode-testimonials.style-default .signature {
+  margin-top: 18px;
+  margin-bottom: 0;
+}
+.shortcode-testimonials.style-default.no-pagination .text {
+  padding: 50px 40px;
+}
+/*------------------------------------------------------------------
+	3. Parallax style
+-------------------------------------------------------------------*/
+.shortcode-testimonials.style-parallax {
+  overflow: hidden;
+}
+.shortcode-testimonials.style-parallax .parallax-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 130%;
+  height: 100%;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center;
+}
+.shortcode-testimonials.style-parallax .parallax-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.7;
+}
+.shortcode-testimonials.style-parallax .slide-content {
+  padding: 120px 35px 100px 35px;
+}
+.shortcode-testimonials.style-parallax .swiper-pagination {
+  left: 35px;
+  right: 35px;
+  bottom: 45px;
+  text-align: left;
+}
+.shortcode-testimonials.style-parallax .text {
+  margin-bottom: 60px;
+}
+.shortcode-testimonials.style-parallax .author {
+  font-weight: bold;
+}
+.shortcode-testimonials.style-parallax .position {
+  opacity: 0.8;
+}
+.shortcode-testimonials.style-parallax .slide-content:before {
+  left: 35px;
+  top: 55px;
+}
+.shortcode-testimonials.style-parallax.no-pagination .slide-content {
+  padding: 120px 35px 80px 35px;
+}
+body.rtl .shortcode-testimonials.style-parallax .parallax-bg {
+  left: auto;
+  right: 0;
+}
+body.rtl .shortcode-testimonials.style-parallax .swiper-pagination {
+  text-align: right;
+}
+body.rtl .shortcode-testimonials.style-parallax .slide-content:before {
+  left: auto;
+  right: 35px;
+  transform: rotate(180deg);
+}
+/*------------------------------------------------------------------
+	4. Gradient style
+-------------------------------------------------------------------*/
+.shortcode-testimonials.style-gradient {
+  text-align: center;
+  margin-bottom: 34px;
+}
+.shortcode-testimonials.style-gradient header {
+  padding: 50px 55px 65px 55px;
+  position: relative;
+  z-index: 1;
+  background-position: center center;
+  background-size: cover;
+}
+.shortcode-testimonials.style-gradient .about-author {
+  padding: 60px 60px 100px 60px;
+}
+.shortcode-testimonials.style-gradient .gradient-overlay {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  opacity: 0.5;
+  z-index: 2;
+}
+.shortcode-testimonials.style-gradient .text,
+.shortcode-testimonials.style-gradient .photo img {
+  position: relative;
+  z-index: 3;
+}
+.shortcode-testimonials.style-gradient .photo img {
+  border-radius: 100%;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  margin-left: -40px;
+  margin-bottom: -40px;
+  width: 80px;
+  height: 80px;
+}
+.shortcode-testimonials.style-gradient .swiper-pagination {
+  left: 35px;
+  right: 35px;
+  bottom: 80px;
+  text-align: center;
+}
+.shortcode-testimonials.style-gradient .author {
+  font-weight: bold;
+}
+.shortcode-testimonials.style-gradient.no-pagination .about-author {
+  padding: 60px;
+}
+/*------------------------------------------------------------------
+	5. Simple style
+-------------------------------------------------------------------*/
+.shortcode-testimonials.style-simple_photo {
+  position: relative;
+  margin-bottom: 34px;
+}
+.shortcode-testimonials.style-simple_photo .slide-content {
+  padding: 65px 40px 80px 180px;
+  position: relative;
+}
+.shortcode-testimonials.style-simple_photo .slide-content:before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: 165px;
+  top: 30px;
+  background-size: 65px auto;
+  background-repeat: no-repeat;
+  background-position: left top;
+  width: 65px;
+  height: 65px;
+  opacity: 0.5;
+}
+.shortcode-testimonials.style-simple_photo .photo img {
+  border-radius: 100%;
+  position: absolute;
+  left: 40px;
+  top: 40px;
+  width: 100px;
+  height: 100px;
+  z-index: 2;
+}
+.shortcode-testimonials.style-simple_photo .about-author {
+  margin-top: 45px;
+  position: relative;
+  z-index: 2;
+}
+.shortcode-testimonials.style-simple_photo .text {
+  position: relative;
+  z-index: 2;
+}
+.shortcode-testimonials.style-simple_photo .swiper-pagination {
+  left: 180px;
+  right: 40px;
+  bottom: 35px;
+  text-align: left;
+}
+.shortcode-testimonials.style-simple_photo .author {
+  font-weight: bold;
+}
+.shortcode-testimonials.style-simple_photo.no-pagination .slide-content {
+  padding: 65px 40px 40px 180px !important;
+}
+@media screen and (max-width: 992px) {
+  .shortcode-testimonials.style-simple_photo .photo img {
+    display: none;
+  }
+  .shortcode-testimonials.style-simple_photo .slide-content {
+    padding: 65px 40px 80px 40px !important;
+  }
+  .shortcode-testimonials.style-simple_photo .swiper-pagination {
+    left: 40px;
+    right: 15px;
+    text-align: left;
+  }
+  .shortcode-testimonials.style-simple_photo .slide-content:before {
+    left: 30px;
+  }
+  .shortcode-testimonials.style-simple_photo.no-pagination .slide-content {
+    padding: 65px 40px 80px 40px !important;
+  }
+}
+body.rtl .shortcode-testimonials.style-simple_photo .slide-content {
+  padding: 65px 180px 80px 40px;
+}
+body.rtl .shortcode-testimonials.style-simple_photo .slide-content:before {
+  background-position: right top;
+  left: auto;
+  right: 165px;
+}
+body.rtl .shortcode-testimonials.style-simple_photo .photo img {
+  left: auto;
+  right: 40px;
+}
+body.rtl .shortcode-testimonials.style-simple_photo .swiper-pagination {
+  right: 180px;
+  left: 40px;
+  text-align: right;
+}
+body.rtl .shortcode-testimonials.style-simple_photo.no-pagination .slide-content {
+  padding: 65px 180px 40px 40px !important;
+}
+@media screen and (max-width: 992px) {
+  body.rtl .shortcode-testimonials.style-simple_photo .slide-content {
+    padding: 65px 40px 80px 40px !important;
+  }
+  body.rtl .shortcode-testimonials.style-simple_photo .swiper-pagination {
+    right: 40px;
+    left: 15px;
+    text-align: right;
+  }
+  body.rtl .shortcode-testimonials.style-simple_photo .slide-content:before {
+    right: 30px;
+    left: auto;
+  }
+  body.rtl .shortcode-testimonials.style-simple_photo.no-pagination .slide-content {
+    padding: 65px 40px 80px 40px !important;
+  }
+}

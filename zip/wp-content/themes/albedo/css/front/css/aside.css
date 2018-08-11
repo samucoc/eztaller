@@ -1,0 +1,399 @@
+/*------------------------------------------------------------------
+[ASIDE.CSS - Contains sidebar and widget styles]
+[Table of contents]
+
+1. Base sidebar markup
+2. Boxed widget styles
+3. Separator widget styles
+4. Standard WP Widgets
+5. Custom Albedo Widgets
+6. Third-party widgets
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Base sidebar markup
+-------------------------------------------------------------------*/
+body.sidebar-left #content,
+body.sidebar-left .aside-gap {
+  float: right;
+}
+body.sidebar-left .aside {
+  float: left;
+}
+body.sidebar-left_right .aside {
+  float: left;
+}
+body.sidebar-left_right #sidebar-second {
+  float: right;
+}
+body.sidebar-left_left #content {
+  float: right;
+}
+body.sidebar-left_left .aside {
+  float: left;
+}
+@media screen and (max-width: 995px) {
+  body.sidebar-left #content,
+  body.sidebar-right #content,
+  body.sidebar-left_right #content,
+  body.sidebar-left_left #content,
+  body.sidebar-left .aside,
+  body.sidebar-right .aside,
+  body.sidebar-left_right .aside,
+  body.sidebar-left_left .aside,
+  body.sidebar-left #sidebar-second,
+  body.sidebar-right #sidebar-second,
+  body.sidebar-left_right #sidebar-second,
+  body.sidebar-left_left #sidebar-second {
+    float: none;
+  }
+}
+@media screen and (max-width: 767px) {
+  body.hide-side-on-mobiles .aside {
+    display: none;
+  }
+}
+@media screen and (max-width: 992px) {
+  aside {
+    margin-top: 70px;
+  }
+}
+.widget {
+  margin-bottom: 40px;
+}
+/*------------------------------------------------------------------
+	2. Boxed widget styles
+-------------------------------------------------------------------*/
+.aside.widgets-style-boxed .widget {
+  padding: 40px;
+}
+@media (max-width: 767px) {
+  .aside.widgets-style-boxed .widget {
+    padding: 30px;
+  }
+}
+.aside.widgets-style-boxed .widget-title {
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+}
+/*------------------------------------------------------------------
+	3. Separator widget styles
+-------------------------------------------------------------------*/
+.aside.widgets-style-separator .widget {
+  padding-bottom: 40px;
+}
+.aside.widgets-style-separator .widget-title {
+  margin-bottom: 22px;
+}
+/*------------------------------------------------------------------
+	4. Standard WP Widgets
+-------------------------------------------------------------------*/
+.widget ul li {
+  position: relative;
+}
+.widget ul li:before {
+  content: '';
+  background-repeat: no-repeat;
+  background-size: 8px auto;
+  transform: rotate(180deg);
+  width: 10px;
+  height: 8px;
+  top: 8px;
+}
+body.rtl .widget ul li:before {
+  transform: rotate(0);
+}
+.widget a {
+  text-decoration: none;
+}
+.widget ul,
+.widget ol {
+  margin: 0 0 18px 0;
+}
+.widget ul ul,
+.widget ol ul,
+.widget ul ol,
+.widget ol ol {
+  margin: 18px 0 18px 0;
+}
+.widget ul li,
+.widget ol li {
+  margin-bottom: 10px;
+  padding-left: 28px;
+}
+.widget ul li:last-of-type,
+.widget ol li:last-of-type {
+  margin-bottom: 0;
+}
+body.rtl .widget ul li,
+body.rtl .widget ol li {
+  padding-left: 0;
+  padding-right: 28px;
+}
+.widget_archive label {
+  display: none;
+}
+.widget_archive form {
+  margin-bottom: 0;
+}
+.widget_calendar table {
+  margin-bottom: 0;
+}
+.widget_calendar td,
+.widget_calendar th {
+  padding: 5px;
+}
+.widget_recent_entries .post-date,
+.widget_rss .rss-date {
+  display: block;
+}
+.widget_rss .rsswidget,
+.widget_rss .rss-date {
+  margin-bottom: 8px;
+  display: block;
+}
+.widget_rss .rss-date {
+  font-weight: bold;
+}
+.widget_rss .rsswidget > img {
+  display: none;
+}
+.widget_rss .widget-title > .rsswidget:first-child {
+  display: none;
+}
+.widget_text p:last-of-type,
+.widget_search form {
+  margin-bottom: 0;
+}
+.widget_mc4wp_form_widget form {
+  margin-bottom: 0;
+}
+.widget_mc4wp_form_widget p:last-of-type {
+  margin-bottom: 0;
+}
+.widget_categories label {
+  display: block;
+  margin-bottom: 10px;
+}
+.widget_archive .widget-content > ul,
+.widget_categories .widget-content > ul,
+.widget_nav_menu .widget-content > ul,
+.widget_meta .widget-content > ul,
+.widget_pages .widget-content > ul,
+.widget_recent_comments .widget-content > ul,
+.widget_recent_entries .widget-content > ul,
+.widget_rss .widget-content > ul,
+.widget-wedocs .widget-content > ul,
+.widget_archive .widget-content > div > ul,
+.widget_categories .widget-content > div > ul,
+.widget_nav_menu .widget-content > div > ul,
+.widget_meta .widget-content > div > ul,
+.widget_pages .widget-content > div > ul,
+.widget_recent_comments .widget-content > div > ul,
+.widget_recent_entries .widget-content > div > ul,
+.widget_rss .widget-content > div > ul,
+.widget-wedocs .widget-content > div > ul,
+.widget_archive .widget-inside > ul,
+.widget_categories .widget-inside > ul,
+.widget_nav_menu .widget-inside > ul,
+.widget_meta .widget-inside > ul,
+.widget_pages .widget-inside > ul,
+.widget_recent_comments .widget-inside > ul,
+.widget_recent_entries .widget-inside > ul,
+.widget_rss .widget-inside > ul,
+.widget-wedocs .widget-inside > ul {
+  margin-bottom: 0;
+}
+.widget_archive li,
+.widget_categories li,
+.widget_nav_menu li,
+.widget_meta li,
+.widget_pages li,
+.widget_recent_comments li,
+.widget_recent_entries li,
+.widget_rss li,
+.widget-wedocs li,
+.widget_archive ul.menu > li > a,
+.widget_categories ul.menu > li > a,
+.widget_nav_menu ul.menu > li > a,
+.widget_meta ul.menu > li > a,
+.widget_pages ul.menu > li > a,
+.widget_recent_comments ul.menu > li > a,
+.widget_recent_entries ul.menu > li > a,
+.widget_rss ul.menu > li > a,
+.widget-wedocs ul.menu > li > a {
+  font-weight: bold;
+}
+.widget_archive .sub-menu li,
+.widget_categories .sub-menu li,
+.widget_nav_menu .sub-menu li,
+.widget_meta .sub-menu li,
+.widget_pages .sub-menu li,
+.widget_recent_comments .sub-menu li,
+.widget_recent_entries .sub-menu li,
+.widget_rss .sub-menu li,
+.widget-wedocs .sub-menu li {
+  font-weight: normal;
+}
+.widget_archive .sub-menu li:before,
+.widget_categories .sub-menu li:before,
+.widget_nav_menu .sub-menu li:before,
+.widget_meta .sub-menu li:before,
+.widget_pages .sub-menu li:before,
+.widget_recent_comments .sub-menu li:before,
+.widget_recent_entries .sub-menu li:before,
+.widget_rss .sub-menu li:before,
+.widget-wedocs .sub-menu li:before {
+  top: 5px;
+}
+.widget_archive .sub-menu,
+.widget_categories .sub-menu,
+.widget_nav_menu .sub-menu,
+.widget_meta .sub-menu,
+.widget_pages .sub-menu,
+.widget_recent_comments .sub-menu,
+.widget_recent_entries .sub-menu,
+.widget_rss .sub-menu,
+.widget-wedocs .sub-menu {
+  margin-bottom: 10px;
+}
+.widget_archive .widget-inside > ul > li:before,
+.widget_categories .widget-inside > ul > li:before,
+.widget_nav_menu .widget-inside > ul > li:before,
+.widget_meta .widget-inside > ul > li:before,
+.widget_pages .widget-inside > ul > li:before,
+.widget_recent_comments .widget-inside > ul > li:before,
+.widget_recent_entries .widget-inside > ul > li:before,
+.widget_rss .widget-inside > ul > li:before,
+.widget-wedocs .widget-inside > ul > li:before {
+  display: none;
+}
+.widget_archive .widget-inside > ul > li,
+.widget_categories .widget-inside > ul > li,
+.widget_nav_menu .widget-inside > ul > li,
+.widget_meta .widget-inside > ul > li,
+.widget_pages .widget-inside > ul > li,
+.widget_recent_comments .widget-inside > ul > li,
+.widget_recent_entries .widget-inside > ul > li,
+.widget_rss .widget-inside > ul > li,
+.widget-wedocs .widget-inside > ul > li {
+  padding-left: 0;
+  padding-bottom: 10px;
+}
+.widget_archive .widget-inside > ul ul,
+.widget_categories .widget-inside > ul ul,
+.widget_nav_menu .widget-inside > ul ul,
+.widget_meta .widget-inside > ul ul,
+.widget_pages .widget-inside > ul ul,
+.widget_recent_comments .widget-inside > ul ul,
+.widget_recent_entries .widget-inside > ul ul,
+.widget_rss .widget-inside > ul ul,
+.widget-wedocs .widget-inside > ul ul {
+  margin-bottom: 10px;
+}
+.widget_archive .widget-inside > ul > li:last-of-type,
+.widget_categories .widget-inside > ul > li:last-of-type,
+.widget_nav_menu .widget-inside > ul > li:last-of-type,
+.widget_meta .widget-inside > ul > li:last-of-type,
+.widget_pages .widget-inside > ul > li:last-of-type,
+.widget_recent_comments .widget-inside > ul > li:last-of-type,
+.widget_recent_entries .widget-inside > ul > li:last-of-type,
+.widget_rss .widget-inside > ul > li:last-of-type,
+.widget-wedocs .widget-inside > ul > li:last-of-type {
+  border-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+.widget_archive .widget-inside > ul > li:last-of-type .sub-menu,
+.widget_categories .widget-inside > ul > li:last-of-type .sub-menu,
+.widget_nav_menu .widget-inside > ul > li:last-of-type .sub-menu,
+.widget_meta .widget-inside > ul > li:last-of-type .sub-menu,
+.widget_pages .widget-inside > ul > li:last-of-type .sub-menu,
+.widget_recent_comments .widget-inside > ul > li:last-of-type .sub-menu,
+.widget_recent_entries .widget-inside > ul > li:last-of-type .sub-menu,
+.widget_rss .widget-inside > ul > li:last-of-type .sub-menu,
+.widget-wedocs .widget-inside > ul > li:last-of-type .sub-menu {
+  margin-bottom: 0;
+}
+.widget_nav_menu .menu {
+  margin-bottom: 0;
+}
+.widget_nav_menu .menu > li:last-of-type {
+  border-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+.widget_nav_menu .menu > li:last-of-type .sub-menu {
+  margin-bottom: 0;
+}
+.widget_nav_menu .menu > li:before {
+  display: none;
+}
+.widget_nav_menu .menu > li {
+  padding-left: 0;
+  padding-bottom: 10px;
+}
+.widget_nav_menu li {
+  font-weight: bold;
+}
+.widget_nav_menu .sub-menu li {
+  font-weight: normal;
+}
+.widget_nav_menu .sub-menu li:before {
+  top: 5px;
+}
+.widget_nav_menu .sub-menu {
+  margin-bottom: 10px;
+}
+body.rtl .widget_nav_menu .menu > li {
+  padding-right: 0;
+}
+.widget_recent_comments ul li:before {
+  background-size: 16px auto;
+  width: 16px;
+  height: 16px;
+  transform: rotate(0deg);
+  top: 6px;
+}
+.widget_tag_cloud a {
+  display: inline-block;
+  padding: 5px 24px;
+  border: 2px solid;
+  margin: 0 10px 10px 0;
+}
+/*------------------------------------------------------------------
+	5. Custom Albedo Widgets
+-------------------------------------------------------------------*/
+.aside .widget.wproto_image_ad_widget,
+.aside .widgets-style-boxed .widget.wproto_image_ad_widget {
+  padding: 0 !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+.wproto_image_ad_widget img {
+  display: block;
+  margin: 0 auto;
+}
+.widget.wproto_menu_two_cols_widget ul {
+  margin: 0;
+  padding: 0;
+}
+.widget.wproto_menu_two_cols_widget li {
+  border-bottom: 0;
+  padding: 0;
+  margin: 0 0 12px 0;
+  width: 50%;
+  float: left;
+}
+.widget.wproto_menu_two_cols_widget li:before {
+  display: none;
+}
+@media screen and (max-width: 460px) {
+  .widget.wproto_menu_two_cols_widget {
+    width: 100%;
+    float: none;
+  }
+}
+/*------------------------------------------------------------------
+	6. Third-party widgets
+-------------------------------------------------------------------*/
+.wedocs-search-widget form > div {
+  margin-bottom: 18px;
+}

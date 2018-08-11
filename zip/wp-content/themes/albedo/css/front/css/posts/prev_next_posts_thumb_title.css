@@ -1,0 +1,51 @@
+/*------------------------------------------------------------------
+[PREV_NEXT_POSTS_THUMB_TITLE.CSS - Static styles for pre/next posts links block]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+.prev-next-posts-wrapper.style-thumb_title {
+  display: table;
+  width: 100%;
+  margin-top: 100px;
+}
+.prev-next-posts-wrapper.style-thumb_title a {
+  display: table-cell;
+  width: 50%;
+  text-align: center;
+  padding: 90px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.prev-next-posts-wrapper.style-thumb_title a:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 7;
+  transition: all 0.5s;
+}
+.prev-next-posts-wrapper.style-thumb_title span {
+  font-weight: bold;
+  display: block;
+  position: relative;
+  z-index: 10;
+}
+.prev-next-posts-wrapper.style-thumb_title .desc {
+  text-transform: uppercase;
+}
+.prev-next-posts-wrapper.style-thumb_title .layer-bg {
+  background-size: cover;
+}
+@media screen and (max-width: 767px) {
+  .prev-next-posts-wrapper.style-thumb_title {
+    display: block;
+  }
+  .prev-next-posts-wrapper.style-thumb_title a {
+    display: block;
+    padding: 45px 30px;
+  }
+}

@@ -1,0 +1,182 @@
+/*------------------------------------------------------------------
+[TABS_ICONIC.CSS - Iconic Tabs shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.theme-iconic-tabs h1,
+.theme-iconic-tabs h2,
+.theme-iconic-tabs h3,
+.theme-iconic-tabs h4,
+.theme-iconic-tabs h5,
+.theme-iconic-tabs h6 {
+  margin-bottom: 24px;
+}
+.theme-iconic-tabs nav a {
+  display: inline-block;
+  margin: 0 100px 90px 50px;
+  text-decoration: none;
+  position: relative;
+  z-index: 2;
+}
+.theme-iconic-tabs nav {
+  position: relative;
+}
+.theme-iconic-tabs nav:after {
+  content: '';
+  opacity: 0.3;
+  height: 6px;
+  left: 0;
+  right: 0;
+  top: 46px;
+  margin-top: -3px;
+  border-radius: 3px;
+  position: absolute;
+  z-index: 1;
+}
+.theme-iconic-tabs nav a:last-of-type {
+  margin-right: 0;
+}
+.theme-iconic-tabs .tab-icon {
+  display: block;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 20px auto;
+  border-radius: 100%;
+  line-height: 90px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.theme-iconic-tabs .tab-icon i,
+.theme-iconic-tabs .tab-icon svg {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 100%;
+}
+.theme-iconic-tabs .tab-icon i {
+  font-size: 50px;
+}
+.theme-iconic-tabs .tab-icon svg {
+  width: 40px;
+}
+.theme-iconic-tabs .tab-content-wrapper {
+  display: table;
+}
+.theme-iconic-tabs .tab-content-wrapper > div {
+  display: table-cell;
+  vertical-align: top;
+}
+.theme-iconic-tabs .tab-content-text {
+  padding: 10px 40px;
+}
+.theme-iconic-tabs .tab-content-image img {
+  display: block;
+}
+body.rtl .theme-iconic-tabs nav a {
+  margin: 0 50px 90px 100px;
+}
+body.rtl .theme-iconic-tabs nav a:first-of-type {
+  margin-left: 100px;
+}
+body.rtl .theme-iconic-tabs nav a:last-of-type {
+  margin-left: 0;
+}
+.theme-iconic-tabs.mobile nav {
+  clear: both;
+}
+.theme-iconic-tabs.mobile nav a {
+  margin: 0 0 20px 0;
+  float: left;
+  text-align: left;
+  position: relative;
+  z-index: 2;
+  width: 50%;
+}
+.theme-iconic-tabs.mobile nav a:after {
+  content: '';
+  opacity: 0.3;
+  height: 6px;
+  left: 0;
+  right: 0;
+  top: 35px;
+  margin-top: -3px;
+  border-radius: 3px;
+  position: absolute;
+  z-index: -1;
+  transition: all 0.3s;
+}
+.theme-iconic-tabs.mobile nav:after {
+  display: none;
+}
+.theme-iconic-tabs.mobile .tab-icon {
+  display: inline-block;
+  margin: 0 20px;
+}
+.theme-iconic-tabs.mobile .tab-content-wrapper,
+.theme-iconic-tabs.mobile .tab-content-text,
+.theme-iconic-tabs.mobile .tab-content-image {
+  display: block;
+  width: 100% !important;
+}
+.theme-iconic-tabs.mobile .tab-content-image {
+  margin-bottom: 20px;
+}
+.theme-iconic-tabs.mobile .tab-content-text {
+  padding-left: 0;
+  padding-right: 0;
+}
+.theme-iconic-tabs.mobile .tab-icon {
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+}
+.theme-iconic-tabs.mobile .tab-icon i {
+  font-size: 40px;
+}
+.theme-iconic-tabs.mobile .tab-icon svg {
+  width: 35px;
+}
+.theme-iconic-tabs.mobile nav .title {
+  display: inline-block;
+  padding: 3px 5px;
+}
+.theme-iconic-tabs.mobile .tabs {
+  clear: both;
+}
+body.rtl .theme-iconic-tabs.mobile nav a {
+  text-align: right;
+  float: right;
+  margin: 0 0 20px 0;
+}
+@media screen and (max-width: 767px) {
+  .theme-iconic-tabs nav a,
+  .theme-iconic-tabs.mobile nav a,
+  body.rtl .theme-iconic-tabs.mobile nav a,
+  body.rtl .theme-iconic-tabs nav a {
+    text-align: center;
+    width: 100%;
+  }
+  .theme-iconic-tabs nav .tab-icon,
+  .theme-iconic-tabs.mobile nav .tab-icon,
+  body.rtl .theme-iconic-tabs.mobile nav .tab-icon,
+  body.rtl .theme-iconic-tabs nav .tab-icon,
+  .theme-iconic-tabs nav .title,
+  .theme-iconic-tabs.mobile nav .title,
+  body.rtl .theme-iconic-tabs.mobile nav .title,
+  body.rtl .theme-iconic-tabs nav .title {
+    display: block;
+    margin: 0 auto;
+  }
+  .theme-iconic-tabs nav .tab-icon,
+  .theme-iconic-tabs.mobile nav .tab-icon,
+  body.rtl .theme-iconic-tabs.mobile nav .tab-icon,
+  body.rtl .theme-iconic-tabs nav .tab-icon {
+    margin-bottom: 20px;
+  }
+}
+.tab_content:before {
+  display: none !important;
+}

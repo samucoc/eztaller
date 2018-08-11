@@ -1,0 +1,256 @@
+/*------------------------------------------------------------------
+[MENU-CLASSIC.CSS - Classic menu style, static styles]
+[Table of contents]
+
+1. Styles for desktop device
+2. Styles for mobiles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Styles for desktop device
+-------------------------------------------------------------------*/
+.header-menu-wrapper {
+	position: relative;
+	-webkit-transform: translateZ(0);
+	z-index: 898;
+
+	/** header menu items **/
+	.header-menu {
+		position: relative;
+		transition: all 0.3s;
+		.menu-layout-item {
+			position: relative;
+			float: right;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		/** logo styles **/
+		.item-logo {
+			float: left;
+			img {
+				display: block;
+				width: auto;
+				height: auto;
+			}
+			a, span {
+				display: block;
+				text-decoration: none;
+			}
+			.title {
+				font-weight: bold;
+				font-size: 18px;
+				line-height: 22px;
+			}
+			.tagline {
+				font-size: 14px;
+				line-height: 18px;
+			}
+		}
+		.item-cta {
+			margin-left: 70px;
+		}
+		.item-search, .item-cart, .item-overlay-menu {
+			margin-left: 30px;
+		}
+		.item-search .toggler,
+		.item-cart .toggler,
+		.item-overlay-menu .toggler {
+			width: 22px;
+			height: 22px;
+			line-height: 22px;
+			display: inline-block;
+			vertical-align: middle;
+			position: relative;
+			background-size: 22px auto;
+		}
+		.item-cart .header-cart-toggle span {
+			position: absolute;
+			font-size: 8px;
+			width: 16px;
+			height: 16px;
+			border-radius: 50%;
+			right: -3px;
+			top: 50%;
+			margin-top: -8px;
+			text-decoration: none;
+			text-align: center;
+			line-height: 17px;
+		}
+	}
+
+	/** hamburger menu icon styles **/
+	.menu-toggler {
+		display: inline-block;
+		vertical-align: middle;
+		width: 22px;
+		height: 22px;
+		position: relative;
+		transform: rotate(0deg);
+		transition: all .3s ease-in-out;
+		cursor: pointer;
+		span {
+			display: block;
+			position: absolute;
+			height: 2px;
+			width: 100%;
+			border-radius: 2px;
+			opacity: 1;
+			left: 0;
+			transform: rotate(0deg);
+			transition: all .3s ease-in-out;
+		}
+	}
+	.menu-toggler span:nth-child(1) {
+		top: 4px;
+	}
+	.menu-toggler span:nth-child(2), .menu-toggler span:nth-child(3) {
+		top: 12px;
+	}
+	.menu-toggler span:nth-child(4) {
+		top: 20px;
+	}
+	.menu-toggler.open span:nth-child(1) {
+		top: 7px;
+		width: 0%;
+		left: 50%;
+	}
+	.menu-toggler.open span:nth-child(2) {
+		transform: rotate(45deg);
+	}
+	.menu-toggler.open span:nth-child(3) {
+		transform: rotate(-45deg);
+	}
+	.menu-toggler.open span:nth-child(4) {
+		top: 10px;
+		width: 0%;
+		left: 50%;
+	}
+}
+.header-menu-wrapper.responsive-mode-off {
+	.item-responsive-menu-toggler {
+		display: none;
+	}
+	/** menu elements, only top level elements **/
+	.menu {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		> .menu-item {
+			margin: 0 30px 0 0;
+			padding: 25px 0;
+			float: left;
+			position: relative;
+		}
+		.menu-item > a:before {
+			font-family: FontAwesome;
+		}
+		.menu-item-has-icon > a {
+			padding-left: 24px;
+		}
+		.menu-item-has-icon > a:before {
+			left: 0;
+			position: absolute;
+			transition: color 0.3s;
+		}
+		> .menu-item:last-of-type {
+			margin-right: 0;
+		}
+		> .menu-item:before {
+			display: none;
+		}
+		> .menu-item > a {
+			text-decoration: none;
+			font-weight: bold;
+			transition: color 0.3s;
+		}
+	}
+}
+
+/** RTL styles **/
+body.rtl {
+	.header-menu-wrapper {
+		.header-menu {
+			.item-responsive-menu-toggler, .item-search, .item-cart, .item-overlay-menu, .item-cta {
+				margin-left: 0;
+				margin-right: 35px;
+			}
+		}
+		.header-menu {
+			.widget-holder {
+				right: auto;
+				left: 0;
+			}
+			.menu-layout-item {
+				float: left;
+			}
+			/** logo styles **/
+			.item-logo {
+				float: right;
+			}
+			.item-cta {
+				margin-right: 70px;
+				margin-left: 0;
+			}
+		}
+	}
+	.header-menu-wrapper.responsive-mode-off {
+		.menu-item-has-icon > a {
+			padding-right: 24px;
+			padding-left: 0;
+		}
+		.menu-item-has-icon > a:before {
+			right: 0;
+			left: auto;
+		}
+	}
+}
+
+/**
+	Slider Header Mode
+**/
+.header-menu-wrapper .header-menu {
+	a.transp-logo {
+		display: none !important;
+	}
+}
+.header-menu-wrapper.slider-header-mode .header-menu {
+	a.logo {
+		display: none !important;
+	}
+	a.transp-logo, a.logo-title, a.logo-title-tagline {
+		display: block !important;
+	}
+}
+.header-menu-wrapper.slider-header-mode.scrolled .header-menu {
+	a.logo {
+		display: block !important;
+	}
+	a.transp-logo {
+		display: none !important;
+	}
+}
+
+/*------------------------------------------------------------------
+	2. Styles for mobiles
+-------------------------------------------------------------------*/
+.header-menu-wrapper.responsive-mode-on {
+	.item-responsive-menu-toggler {
+		display: block;
+	}
+	.menu-layout-item.item-cta,
+	.menu-layout-item.item-cart,
+	.menu-layout-item.item-search {
+		display: none;
+	}
+	.header-menu .menu-layout-item.item-responsive-menu-toggler {
+		margin-right: 0;
+	}
+	.menu-layout-item .menu {
+		margin: 0 -18px 0 0;
+	}
+}
+body.rtl .header-menu-wrapper.responsive-mode-on {
+	.menu-layout-item .menu {
+		margin: 0 0 0 -18px;
+	}
+}

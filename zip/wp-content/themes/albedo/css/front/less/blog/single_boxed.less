@@ -1,0 +1,441 @@
+/*------------------------------------------------------------------
+[SINGLE_BOXED.CSS - Boxed Static styles for single blog post]
+[Table of contents]
+
+1. Shared styles
+2. Comments
+3. Likes
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Single post, Boxed style
+-------------------------------------------------------------------*/
+.single-blog-post-container .pb-section > .container-fluid,
+.single-blog-post-container .pb-section > .container {
+	padding-left: 0;
+	padding-right: 0;
+}
+.single-blog-post-container.style-boxed {
+	.content-wrapper {
+		padding: 40px 60px;
+		z-index: 10;
+		position: relative;
+	}
+	.single-post-excerpt {
+		margin-bottom: 34px;
+	}
+	.content-featured-image-wrapper, #wplab-albedo-post-single-gallery, #wplab-albedo-single-post-link {
+		margin: -40px -60px 50px -60px;
+	}
+	.single-blockquote-wrapper {
+		margin: 0 -60px 34px -60px;
+	}
+	.post-date {
+		font-weight: bold;
+		margin-bottom: 22px;
+	}
+	.post-title {
+		margin-bottom: 22px;
+	}
+	.post-data {
+		margin-bottom: 30px;
+		.item {
+			margin-right: 50px;
+			white-space: nowrap;
+		}
+		.item.post-cats {
+			white-space: normal;
+			display: block;
+		}
+		.item:last-of-type {
+			margin-right: 0;
+		}
+	}
+	.post-data, footer {
+		a {
+			text-decoration: none;
+			transition: color 0.3s;
+		}
+	}
+	footer {
+		margin-bottom: 55px;
+		strong {
+			text-transform: uppercase;
+			display: inline-block;
+			width: 100px;
+		}
+	}
+	.tags-list {
+		margin-bottom: 18px;
+	}
+	.share-links a {
+		margin-right: 10px;
+	}
+	.about-author-wrapper {
+		margin: 0 -60px 50px -60px;
+		padding: 50px 60px;
+		.about-author {
+			display: table;
+		}
+		.author_image,
+		.author_text {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.author_image {
+			width: 140px;
+		}
+		.author_image img {
+			border-radius: 50%;
+			display: block;
+		}
+		.name {
+			text-decoration: none;
+			text-transform: uppercase;
+			margin-bottom: 5px;
+			font-weight: bold;
+			display: inline-block;
+		}
+	}
+	.iframe-wrapper {
+		width: 100%;
+		position: relative;
+		padding-top: 56.25%; /* 16:9 */
+		height: 0;
+	}
+	.iframe-wrapper > iframe {
+		margin-bottom: 0;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.ie .content-featured-image-wrapper img {
+	width: 100%;
+}
+
+.single-blog-post-container.style-boxed.comments-closed {
+	.about-author-wrapper {
+		margin-bottom: 0;
+	}
+	.content-wrapper {
+		padding-bottom: 0;
+	}
+}
+
+#disqus_thread iframe {
+	box-shadow: none !important;
+}
+
+#wplab-albedo-post-single-gallery {
+	position: relative;
+	img {
+		display: block;
+	}
+	.swiper-pagination {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 30px;
+		text-align: center;
+		z-index: 10;
+	}
+}
+
+body.rtl .single-blog-post-container.style-boxed {
+	.post-data {
+		.item, .item:last-of-type {
+			margin-right: 0;
+			margin-left: 50px;
+		}
+		.item:first-of-type {
+			margin-left: 0;
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	.single-blog-post-container.style-boxed {
+		footer strong {
+			width: auto;
+		}
+		.content-wrapper {
+			padding: 30px;
+		}
+		.content-featured-image-wrapper, #wplab-albedo-post-single-gallery, #wplab-albedo-single-post-link {
+			margin: -30px -30px 30px -30px;
+		}
+		.single-blockquote-wrapper {
+			margin: 0 -30px 34px -30px;
+		}
+		.about-author-wrapper {
+			margin: 0 -30px 30px -30px;
+			display: block;
+			padding: 30px;
+			.author_image {
+				margin-bottom: 28px;
+			}
+			.author_image,
+			.author_text {
+				display: block;
+			}
+			.author_image img {
+				width: 80px;
+				height: auto;
+			}
+		}
+		.post-data {
+			.item, .item:last-of-type {
+				margin: 0;
+				display: block;
+			}
+		}
+	}
+}
+
+/*------------------------------------------------------------------
+	2. Comments
+-------------------------------------------------------------------*/
+#comments {
+	margin-top: 70px;
+	.form-submit {
+		display: inline-block;
+		position: relative;
+		margin-bottom: 0;
+	}
+	.author-name {
+		font-weight: bold;
+	}
+	#cancel-comment-reply-link {
+		float: right;
+		text-decoration: none;
+		margin-top: 10px;
+	}
+	.comment-body {
+		position: relative;
+		margin-bottom: 30px;
+	}
+	ul.comments-list {
+		list-style: none;
+		margin: 0 0 45px 0;
+		padding: 0;
+		li.comment:before {
+			display: none;
+		}
+		li.comment {
+			padding-left: 0;
+			padding-right: 0;
+		}
+		.children {
+			list-style: none;
+			margin: 0 0 30px 0;
+			padding: 0 0 0 100px;
+			.comment-body {
+				border-bottom: 0;
+			}
+			.children {
+				border-bottom: 0;
+			}
+		}
+		.photo {
+			img {
+				position: absolute;
+				border-radius: 50%;
+			}
+		}
+		.comment-text {
+			padding-left: 100px;
+			min-height: 70px;
+			.comment-text > ul, .comment-text > ol {
+				margin-bottom: 30px;
+			}
+			p:last-of-type {
+				margin-bottom: 0;
+			}
+		}
+		footer {
+			margin-top: -8px;
+			margin-bottom: 30px;
+		}
+		header {
+			margin-bottom: 22px;
+		}
+		.comment-reply-link {
+			float: right;
+			padding-right: 30px;
+			padding-left: 30px;
+		}
+	}
+}
+#comments.no-avatars {
+	ul.comments-list .comment-text {
+		padding-left: 0;
+	}
+}
+#comments-nav {
+	margin-bottom: 70px;
+}
+
+body.rtl {
+	#comments {
+		#cancel-comment-reply-link {
+			float: left;
+		}
+		ul.comments-list {
+			.children {
+				padding: 0 100px 0 0;
+			}
+			.comment-text {
+				padding-left: 0;
+				padding-right: 100px;
+			}
+			.comment-reply-link {
+				float: left;
+			}
+		}
+	}
+	#comments.no-avatars {
+		ul.comments-list .comment-text {
+			padding-right: 0;
+		}
+	}
+}
+
+@media screen and (max-width: 992px) {
+	#comments {
+		form label {
+			line-height: normal;
+		}
+	}
+}
+@media screen and (max-width: 767px) {
+	#comments {
+		ul.comments-list .children {
+			padding-left: 0;
+		}
+		ul.comments-list .photo img {
+			width: 50px;
+		}
+		ul.comments-list {
+			.comment-text {
+				padding-left: 70px;
+				min-height: 50px;
+			}
+		}
+	}
+	#comments #cancel-comment-reply-link, body.rtl #comments #cancel-comment-reply-link {
+		float: none;
+		display: block;
+	}
+	#comments ul.comments-list .comment-reply-link, body.rtl #comments ul.comments-list .comment-reply-link {
+		float: none;
+		display: inline-block;
+		margin-top: 12px;
+	}
+	#comments header .alignleft, body.rtl #comments header .alignleft {
+		float: none;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	body.rtl #comments, #comments {
+		ul.comments-list .children, ul.comments-list .comment-text {
+			padding-left: 0;
+			padding-right: 0;
+		}
+		ul.comments-list .photo {
+			display: none;
+		}
+	}
+}
+
+
+
+/*------------------------------------------------------------------
+	3. Likes
+-------------------------------------------------------------------*/
+#post-likes {
+	text-align: center;
+	padding-top: 25px;
+	a {
+		text-decoration: none;
+		display: inline-block;
+		padding-top: 32px;
+		position: relative;
+	}
+	a:before, a:after {
+		content: "";
+		background-repeat: no-repeat;
+		background-position: center top;
+		background-size: 30px auto;
+	}
+	a:after {
+		position: absolute;
+		width: 100%;
+		height: 28px;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		-webkit-transform: scale(0);
+		-moz-transform: scale(0);
+		-ms-transform: scale(0);
+		transform: scale(0);
+		opacity: 0;
+		-webkit-transition: none;
+		-moz-transition: none;
+		transition: none;
+	}
+	a:before {
+		position: absolute;
+		width: 100%;
+		left: 0;
+		top: 0;
+		height: 28px;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+	a.activated:after, a:hover:after {
+		-webkit-animation: scaleFade 0.5s forwards;
+		-moz-animation: scaleFade 0.5s forwards;
+		animation: scaleFade 0.5s forwards;
+	}
+}
+
+@-webkit-keyframes scaleFade {
+	30% {
+		opacity: 1;
+		-webkit-transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(2.5);
+	}
+}
+
+@-moz-keyframes scaleFade {
+	30% {
+		opacity: 1;
+		-moz-transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		-moz-transform: scale(2.5);
+	}
+}
+
+@keyframes scaleFade {
+	30% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(2.5);
+	}
+}

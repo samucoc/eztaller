@@ -1,0 +1,108 @@
+/*------------------------------------------------------------------
+[SINGLE_VARIABLE.CSS - Dynamic styles for Single Portfolio Post]
+-------------------------------------------------------------------*/
+
+/**
+	Post Thumbnail
+**/
+.single-portfolio-post-container {
+	.post-thumbnail {
+		img {
+			box-shadow: ~'@{box_shadow_h_length}px @{box_shadow_v_length}px @{box_shadow_blur_radius}px 0px @{box_shadow_color}';
+		}
+	}
+}
+
+/**
+	Post details
+**/
+.portfolio-details {
+	dt, dd {
+		font-size: ~'@{small_font_size}px';
+		line-height: ~'@{small_font_line_height}px';
+	}
+	dt {
+		color: @color_text_darken;
+	}
+	dd, dd a {
+		color: @color_text_lighten;
+	}
+	dd a:hover {
+		color: @color_accent_blue;
+	}
+}
+
+/**
+	Post likes
+**/
+#post-likes {
+	a:before {
+		@color_escaped: escape( ~'@{color_accent_red}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20viewBox%3D%220%200%20511.626%20511.626%22%20style%3D%22enable-background%3Anew%200%200%20511.626%20511.626%3B%22%0A%09%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cg%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M475.366%2C71.949c-24.175-23.606-57.575-35.404-100.215-35.404c-11.8%2C0-23.843%2C2.046-36.117%2C6.136%0A%09%09c-12.279%2C4.093-23.702%2C9.615-34.256%2C16.562c-10.568%2C6.945-19.65%2C13.467-27.269%2C19.556c-7.61%2C6.091-14.845%2C12.564-21.696%2C19.414%0A%09%09c-6.854-6.85-14.087-13.323-21.698-19.414c-7.616-6.089-16.702-12.607-27.268-19.556c-10.564-6.95-21.985-12.468-34.261-16.562%0A%09%09c-12.275-4.089-24.316-6.136-36.116-6.136c-42.637%2C0-76.039%2C11.801-100.211%2C35.404C12.087%2C95.55%2C0%2C128.286%2C0%2C170.16%0A%09%09c0%2C12.753%2C2.24%2C25.891%2C6.711%2C39.398c4.471%2C13.514%2C9.566%2C25.031%2C15.275%2C34.546c5.708%2C9.514%2C12.181%2C18.792%2C19.414%2C27.834%0A%09%09c7.233%2C9.041%2C12.519%2C15.272%2C15.846%2C18.698c3.33%2C3.426%2C5.948%2C5.903%2C7.851%2C7.427L243.25%2C469.938%0A%09%09c3.427%2C3.426%2C7.614%2C5.144%2C12.562%2C5.144s9.138-1.718%2C12.563-5.144l177.87-171.31c43.588-43.58%2C65.38-86.406%2C65.38-128.472%0A%09%09C511.626%2C128.279%2C499.54%2C95.546%2C475.366%2C71.949z%20M421.405%2C271.795L255.813%2C431.391L89.938%2C271.507%0A%09%09C54.344%2C235.922%2C36.55%2C202.133%2C36.55%2C170.156c0-15.415%2C2.046-29.026%2C6.136-40.824c4.093-11.8%2C9.327-21.177%2C15.703-28.124%0A%09%09c6.377-6.949%2C14.132-12.607%2C23.268-16.988c9.141-4.377%2C18.086-7.328%2C26.84-8.85c8.754-1.52%2C18.079-2.281%2C27.978-2.281%0A%09%09c9.896%2C0%2C20.557%2C2.424%2C31.977%2C7.279c11.418%2C4.853%2C21.934%2C10.944%2C31.545%2C18.271c9.613%2C7.332%2C17.845%2C14.183%2C24.7%2C20.557%0A%09%09c6.851%2C6.38%2C12.559%2C12.229%2C17.128%2C17.559c3.424%2C4.189%2C8.091%2C6.283%2C13.989%2C6.283c5.9%2C0%2C10.562-2.094%2C13.99-6.283%0A%09%09c4.568-5.33%2C10.28-11.182%2C17.131-17.559c6.852-6.374%2C15.085-13.222%2C24.694-20.557c9.613-7.327%2C20.129-13.418%2C31.553-18.271%0A%09%09c11.416-4.854%2C22.08-7.279%2C31.977-7.279s19.219%2C0.761%2C27.977%2C2.281c8.757%2C1.521%2C17.702%2C4.473%2C26.84%2C8.85%0A%09%09c9.137%2C4.38%2C16.892%2C10.042%2C23.267%2C16.988c6.376%2C6.947%2C11.612%2C16.324%2C15.705%2C28.124c4.086%2C11.798%2C6.132%2C25.409%2C6.132%2C40.824%0A%09%09C475.078%2C202.133%2C457.19%2C236.016%2C421.405%2C271.795z%22%2F%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A")';
+	}
+	a:after, a.clicked:before {
+		@color_escaped: escape( ~'@{color_accent_red}' );
+		background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20viewBox%3D%220%200%20511.626%20511.627%22%20style%3D%22enable-background%3Anew%200%200%20511.626%20511.627%3B%22%0A%09%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cg%3E%0A%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M475.366%2C71.951c-24.175-23.606-57.575-35.404-100.215-35.404c-11.8%2C0-23.843%2C2.046-36.117%2C6.136%0A%09%09c-12.279%2C4.093-23.702%2C9.615-34.256%2C16.562c-10.568%2C6.945-19.65%2C13.467-27.269%2C19.556c-7.61%2C6.091-14.845%2C12.564-21.696%2C19.414%0A%09%09c-6.854-6.85-14.087-13.323-21.698-19.414c-7.616-6.089-16.702-12.607-27.268-19.556c-10.564-6.95-21.985-12.468-34.261-16.562%0A%09%09c-12.275-4.089-24.316-6.136-36.116-6.136c-42.637%2C0-76.039%2C11.801-100.211%2C35.404C12.087%2C95.552%2C0%2C128.288%2C0%2C170.162%0A%09%09c0%2C12.753%2C2.24%2C25.889%2C6.711%2C39.398c4.471%2C13.514%2C9.566%2C25.031%2C15.275%2C34.546c5.708%2C9.514%2C12.181%2C18.796%2C19.414%2C27.837%0A%09%09c7.233%2C9.042%2C12.519%2C15.27%2C15.846%2C18.699c3.33%2C3.422%2C5.948%2C5.899%2C7.851%2C7.419L243.25%2C469.937c3.427%2C3.429%2C7.614%2C5.144%2C12.562%2C5.144%0A%09%09s9.138-1.715%2C12.563-5.137l177.87-171.307c43.588-43.583%2C65.38-86.41%2C65.38-128.475C511.626%2C128.288%2C499.537%2C95.552%2C475.366%2C71.951%0A%09%09z%22%2F%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A")';
+	}
+}
+
+/**
+	Similar / Related posts
+**/
+.similar-posts-wrapper img, .similar-posts-wrapper .caption {
+	border-radius: ~'@{content_elements_radius}px';
+}
+.similar-posts-wrapper .caption, .single-portfolio-images .caption {
+	@color_escaped: escape( ~'#fff' );
+	background-color: @color_accent_black;
+	color: #fff;
+	background-image: ~'url("data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20width%3D%2255.312px%22%20height%3D%2255.312px%22%20viewBox%3D%220%200%2055.312%2055.312%22%20style%3D%22enable-background%3Anew%200%200%2055.312%2055.312%3B%22%0A%09%20xml%3Aspace%3D%22preserve%22%3E%0A%3Cg%3E%0A%09%3Cg%3E%0A%09%09%3Cg%3E%0A%09%09%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M28.042%2C45.438c-9.428%2C0-18.675-5.251-27.485-15.606c-0.684-0.804-0.744-1.965-0.148-2.835%0A%09%09%09%09c0.479-0.7%2C11.914-17.124%2C27.963-17.124c9.511%2C0%2C18.429%2C5.75%2C26.506%2C17.089c0.564%2C0.793%2C0.579%2C1.852%2C0.037%2C2.659%0A%09%09%09%09C54.482%2C30.266%2C44.105%2C45.438%2C28.042%2C45.438z%20M5.348%2C28.211c7.487%2C8.332%2C15.115%2C12.553%2C22.694%2C12.553%0A%09%09%09%09c11.041%2C0%2C19.297-9.045%2C22.025-12.465c-6.859-9.126-14.151-13.752-21.694-13.752C17.329%2C14.546%2C8.36%2C24.447%2C5.348%2C28.211z%22%2F%3E%0A%09%09%3C%2Fg%3E%0A%09%09%3Cpath%20fill%3D%22@{color_escaped}%22%20d%3D%22M27.656%2C16.407c-6.212%2C0-11.247%2C5.035-11.247%2C11.248c0%2C6.211%2C5.035%2C11.247%2C11.247%2C11.247%0A%09%09%09c6.211%2C0%2C11.247-5.036%2C11.247-11.247C38.903%2C21.443%2C33.868%2C16.407%2C27.656%2C16.407z%20M31.685%2C27.822%0A%09%09%09c-2.503%2C0-4.532-2.029-4.532-4.531c0-2.504%2C2.029-4.533%2C4.532-4.533c2.504%2C0%2C4.533%2C2.029%2C4.533%2C4.533%0A%09%09%09C36.218%2C25.792%2C34.188%2C27.822%2C31.685%2C27.822z%22%2F%3E%0A%09%3C%2Fg%3E%0A%3C%2Fg%3E%0A%3C%2Fsvg%3E")';
+}
+.similar-posts-wrapper, .shortcode-images-carousel2, .shortcode-images-carousel {
+	.swiper-pagination-bullet {
+		background: rgba( 0,0,0,0.3 );
+	}
+	.swiper-pagination-bullet-active {
+		background-color: @color_accent_grey;
+	}
+}
+
+.single-portfolio-post-container.layout-style_1,
+.single-portfolio-post-container.layout-style_2,
+.single-portfolio-post-container.layout-style_10,
+.single-portfolio-post-container.layout-style_11 {
+	.single-post-categories {
+		a {
+			background-color: @color_accent_light_grey;
+			color: @color_accent_grey;
+			border-radius: ~'@{medium_button_radius}px';
+			font-size: ~'@{medium_button_font_size}px';
+			line-height: ~'@{medium_button_font_line_height}px';
+		}
+		a:hover {
+			box-shadow: ~'@{small_button_shadow_h_length}px @{small_button_shadow_v_length}px @{small_button_shadow_blur_radius}px 0px @{color_accent_light_grey_shadow}';
+		}
+	}
+	#post-likes a span {
+		color: @color_text_lighten;
+		font-size: ~'@{smaller_font_size}px';
+	}
+}
+
+.single-portfolio-post-container.layout-style_4 {
+	.single-portfolio-images {
+		figure {
+			box-shadow: ~'@{box_shadow_h_length}px @{box_shadow_v_length}px @{box_shadow_blur_radius}px 0px @{box_shadow_color}';
+		}
+	}
+}
+
+.single-portfolio-post-container.layout-style_9 {
+	dl {
+		border-bottom: 2px solid @color_accent_black;
+	}
+	dl:last-of-type {
+		border-bottom: 0;
+		padding-bottom: 0;
+	}
+}

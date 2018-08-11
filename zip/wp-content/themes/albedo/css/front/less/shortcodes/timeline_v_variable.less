@@ -1,0 +1,68 @@
+/*------------------------------------------------------------------
+[TIMELINE_V_VARIABLE.CSS - Vertical timeline shortcode variable styles]
+[Table of contents]
+
+1. Timeline colors
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Timeline colors
+-------------------------------------------------------------------*/
+.vertical-timeline {
+	.col {
+		font-size: ~'@{primary_font_size}px';
+	}
+	.event:after {
+		background-color: @color_bg_alt;
+	}
+	.event .dot, .event.date-before .dot {
+		background-color: @color_accent_light_grey;
+		border: 11px solid @color_accent_inner;
+		box-shadow: ~'0 5px 15px 0px @{box_shadow_color}';
+	}
+	.event.selected .dot, .event.date-before .dot {
+		background-color: @color_accent_inner;
+		border: 11px solid @color_accent_blue;
+		box-shadow: ~'0 5px 15px 0px @{color_accent_blue_shadow}';
+	}
+	.event.selected:after {
+		background-color: @color_accent_blue;
+		background: -moz-linear-gradient(top, @color_accent_blue 0%, @color_accent_blue 70%, @color_accent_blue 71%, @color_bg_alt 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top, @color_accent_blue 0%,@color_accent_blue 70%,@color_accent_blue 71%,@color_bg_alt 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom, @color_accent_blue 0%, @color_accent_blue 70%,@color_accent_blue 71%, @color_bg_alt 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@color_accent_blue', endColorstr='@color_bg_alt',GradientType=0 ); /* IE6-8 */
+	}
+	.event.date-before:after {
+		background-color: @color_accent_blue;
+	}
+	.date {
+		color: @color_text_lighten;
+		font-family: @secondary_font_family;
+		font-size: ~'@{smaller_font_size}px';
+		line-height: ~'@{smaller_font_line_height}px';
+	}
+	.title {
+		color: @color_text_darken;
+		font-family: @secondary_font_family;
+		@font_size: @primary_font_size + 2;
+		font-size: ~'@{font_size}px';
+		line-height: 1.5em;
+	}
+	.selected, .event:hover {
+		.date {
+			color: @primary_font_color;
+		}
+		.title {
+			color: @color_accent_blue;
+		}
+	}
+
+}
+
+@media screen and (max-width: 767px) {
+	.vertical-timeline {
+		.event {
+			font-size: ~'@{primary_font_size}px';
+		}
+	}
+}

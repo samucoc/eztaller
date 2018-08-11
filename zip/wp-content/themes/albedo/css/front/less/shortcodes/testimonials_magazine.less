@@ -1,0 +1,104 @@
+/*------------------------------------------------------------------
+[TESTIMONIALS_MAGAZINE.CSS - Testimonials magazine shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-testimonials-magazine {
+	position: relative;
+	.slide-content {
+		padding: 85px 110px 50px 500px;
+	}
+	.photo {
+		position: absolute;
+		left: 55px;
+		bottom: 0;
+		img {
+			display: block;
+			width: auto !important;
+			height: auto !important;
+		}
+	}
+	.text {
+		margin: -25px 0 25px -25px;
+		background-size: 60px auto;
+		background-repeat: no-repeat;
+		padding: 25px 0 0 25px;
+	}
+	.author {
+		font-weight: bold;
+	}
+	.swiper-button-next, .swiper-button-prev {
+		bottom: 55px;
+		top: auto;
+		left: auto;
+	}
+	.swiper-button-next {
+		right: 60px;
+	}
+	.swiper-button-prev {
+		right: 90px;
+	}
+}
+body.rtl .shortcode-testimonials-magazine {
+	.slide-content {
+		padding: 85px 500px 50px 110px;
+	}
+	.photo {
+		right: 55px;
+		left: auto;
+	}
+	.text {
+		margin: -25px -25px 25px 0;
+		padding: 25px 25px 0 0;
+		background-position: right top;
+	}
+	.swiper-button-next {
+		left: 90px;
+		right: auto;
+	}
+	.swiper-button-prev {
+		left: 60px;
+		right: auto;
+	}
+}
+@media screen and (max-width: 992px) {
+	.shortcode-testimonials-magazine {
+		.slide-content {
+			padding: 30px 30px 90px 30px;
+		}
+		.photo {
+			display: none;
+		}
+		.swiper-button-next, .swiper-button-prev {
+			bottom: 30px;
+			right: auto;
+		}
+		.swiper-button-next {
+			left: 60px;
+		}
+		.swiper-button-prev {
+			left: 30px;
+		}
+		.text {
+			background-image: none !important;
+		}
+	}
+	body.rtl .shortcode-testimonials-magazine {
+		.slide-content {
+			padding: 30px 30px 90px 30px;
+		}
+		.swiper-button-next {
+			right: 30px;
+			left: auto;
+		}
+		.swiper-button-prev {
+			right: 60px;
+			left: auto;
+		}
+	}
+}

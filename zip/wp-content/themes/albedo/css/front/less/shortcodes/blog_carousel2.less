@@ -1,0 +1,97 @@
+/*------------------------------------------------------------------
+[BLOG_CAROUSEL2.CSS - Blog posts carousel static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.shortcode-blog-carousel2 {
+	margin-bottom: 60px;
+	.container-fluid {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.thumb {
+		overflow: hidden;
+		img {
+			transition: filter 0.5s, transform 0.5s !important;
+			display: block;
+		}
+	}
+	.slide-content, .thumb {
+		position: relative;
+	}
+	.post-date {
+		font-weight: bold;
+	}
+	.overlay {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+		transition: opacity 0.3s;
+		opacity: 0;
+		background-size: 20px auto;
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+	a {
+		text-decoration: none;
+		transition: all 0.3s;
+	}
+	h4, .post-date, .post-excerpt {
+		margin: 0 0 18px 0;
+	}
+	.thumb:hover {
+		.overlay {
+			opacity: 1;
+		}
+		img {
+			-webkit-filter: blur(3px) grayscale(100%);
+			filter: blur(3px) grayscale(100%);
+			transform: scale(1.1, 1.1);
+			-ms-transform: scale(1.1, 1.1);
+			-webkit-transform: scale(1.1, 1.1);
+		}
+	}
+	.slider-pagination {
+		position: relative;
+		padding-top: 30px;
+		.pagination-btn {
+			display: inline-block;
+			position: static;
+			top: auto;
+			right: auto;
+			bottom: auto;
+			left: auto;
+			margin: 0;
+			background-size: 27px auto;
+		}
+	}
+	.slider-pagination.pagination-pos-center {
+		text-align: center;
+	}
+	.slider-pagination.pagination-pos-left {
+		text-align: left;
+	}
+	.slider-pagination.pagination-pos-right {
+		text-align: right;
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.shortcode-blog-carousel2 {
+		.thumb {
+			float: left;
+			margin-bottom: 24px;
+		}
+		.post-text {
+			clear: both;
+		}
+	}
+}

@@ -1,0 +1,96 @@
+/*------------------------------------------------------------------
+[TEAM_CARDS2.CSS - Team cards shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.team-cards2 {
+	.swiper-container {
+		overflow: visible;
+		padding-left: 60px;
+		padding-right: 60px;
+		margin-left: -60px;
+		margin-right: -60px;
+	}
+	.swiper-slide {
+		transition: opacity 0.3s;
+		opacity: 0;
+	}
+	.swiper-slide-prev,
+	.swiper-slide-active,
+	.swiper-slide-next {
+		opacity: 1;
+	}
+	.photo img {
+		display: block;
+		width: 100%;
+	}
+	.item-content {
+		position: relative;
+	}
+	.name {
+		font-weight: bold;
+		padding-bottom: 6px;
+		transition: color 0.3s;
+	}
+	.text {
+		padding-bottom: 34px;
+	}
+	.position {
+		padding-bottom: 18px;
+	}
+	.social {
+		padding-bottom: 18px;
+	}
+	.social a {
+		margin: 0 7px;
+		font-size: 14px;
+	}
+	.swiper-pagination {
+		text-align: center;
+		right: 0;
+		left: 0;
+		bottom: 0;
+	}
+	.text-content {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 30px 40px 12px 40px;
+	}
+	.text-inside {
+		overflow: hidden;
+	}
+	.toggle-text {
+		max-height: 0;
+		transition: all 0.7s;
+	}
+	.item-content:hover .toggle-text {
+		max-height: 300px;
+	}
+}
+.team-cards2.not-centered {
+	padding-left: 0;
+	padding-right: 0;
+	margin-left: 0;
+	margin-right: 0;
+	.slide-content {
+		box-shadow: none !important;
+	}
+	.swiper-slide {
+		opacity: 1;
+	}
+}
+.team-cards2[data-loop=yes] {
+	.swiper-slide {
+		transition: none;
+	}
+}
+.team-cards2.with-pagination .swiper-wrapper {
+	padding-bottom: 70px;
+}

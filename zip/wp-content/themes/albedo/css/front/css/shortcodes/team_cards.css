@@ -1,0 +1,104 @@
+/*------------------------------------------------------------------
+[TEAM_CARDS.CSS - Team cards shortcode static styles]
+[Table of contents]
+
+1. Shared styles
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+	1. Shared styles
+-------------------------------------------------------------------*/
+.team-cards {
+  padding: 0 60px 0 60px;
+  margin: 0 -60px 0 -60px;
+  overflow-x: hidden;
+}
+.team-cards .swiper-slide {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.team-cards .swiper-slide {
+  transition: opacity 0.3s !important;
+  opacity: 0 !important;
+}
+.team-cards .swiper-slide-active,
+.team-cards .swiper-slide-next,
+.team-cards .swiper-slide-prev {
+  opacity: 1 !important;
+}
+.team-cards .item-content {
+  text-align: center;
+  padding: 60px;
+}
+.team-cards .swiper-container {
+  overflow: visible;
+}
+.team-cards .photo {
+  display: inline-block;
+  margin-bottom: 34px;
+  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+  overflow: hidden;
+}
+.team-cards .photo img,
+.team-cards .photo .placeholder {
+  display: block;
+  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+}
+.team-cards .name {
+  font-weight: bold;
+  margin-bottom: 6px;
+  transition: color 0.3s;
+}
+.team-cards .position {
+  margin-bottom: 22px;
+}
+.team-cards .text {
+  margin-bottom: 34px;
+}
+.team-cards .social a {
+  margin: 0 7px;
+  font-size: 14px;
+}
+.team-cards .placeholder {
+  background-size: 55px auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.team-cards .swiper-pagination {
+  text-align: center;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+.team-cards.not-centered {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+.team-cards.not-centered .slide-content {
+  box-shadow: none !important;
+}
+.team-cards.not-centered .swiper-slide {
+  opacity: 1 !important;
+}
+.team-cards.with-pagination .swiper-wrapper {
+  padding-bottom: 70px;
+}
+@media screen and (max-width: 767px) {
+  .team-cards .item-content {
+    padding: 50px 30px;
+  }
+  .team-cards .photo {
+    width: 90px;
+    height: 90px;
+  }
+  .team-cards .photo img,
+  .team-cards .photo .placeholder {
+    width: 90px;
+    height: 90px;
+  }
+}
