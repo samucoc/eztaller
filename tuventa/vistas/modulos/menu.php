@@ -10,7 +10,7 @@
 
 			echo '<li class="active">
 
-				<a href="?ruta=?ruta=inicio">
+				<a href="?ruta=inicio">
 
 					<i class="fa fa-home"></i>
 					<span>Inicio</span>
