@@ -19,6 +19,14 @@
                             <input name="mod_email" id="mod_email" type="text" class="form-control has-feedback-left" required>
                             <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
                         </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <select class="form-control" required name="mod_perfil" id="mod_perfil">
+                                <option value="0" selected>-- Selecciona perfil --</option>
+                                <option value="1" >Cliente</option>
+                                <option value="2" >Técnico</option>  
+                                <option value="3" >Administrador</option>  
+                            </select>
+                        </div>
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                             <select class="form-control" required name="mod_status" id="mod_status">
                                     <option value="" selected>-- Selecciona estado --</option>

@@ -1,9 +1,4 @@
-<?php
-    $title ="Usuarios | ";
-    include "head.php";
-    include "sidebar.php";
-?>  
-    <div class="right_col" role="main"><!-- page content -->
+    <div class="" role="main"><!-- page content -->
         <div class="">
             <div class="page-title">
                 <div class="clearfix"></div>
@@ -54,8 +49,6 @@
         </div>
     </div><!-- /page content -->
 
-<?php include "footer.php" ?>
-
 <script type="text/javascript" src="js/users.js"></script>
 
 <script>
@@ -104,10 +97,12 @@ $( "#upd_user" ).submit(function( event ) {
     function obtener_datos(id){
             var name = $("#name"+id).val();
             var email = $("#email"+id).val();
+            var perfil = $("#perfil"+id).val();
             var status = $("#status"+id).val();
             $("#mod_id").val(id);
             $("#mod_name").val(name);
             $("#mod_email").val(email);
+            $("#mod_perfil").val(perfil);
             $("#mod_status").val(status);
         }
 </script>

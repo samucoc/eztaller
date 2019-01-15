@@ -20,11 +20,19 @@
                             <input name="lastname" type="text" class="form-control" placeholder="Apellidos" required>
                             <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                         </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <select class="form-control" required name="perfil">
+                                <option value="0" selected>-- Selecciona perfil --</option>
+                                <option value="1" >Cliente</option>
+                                <option value="2" >Técnico</option>  
+                                <option value="3" >Administrador</option>  
+                            </select>
+                        </div>
                         <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                             <input name="email" type="text" class="form-control has-feedback-left" placeholder="Correo Electronico" required>
                             <span class="fa fa-envelope form-control-feedback left" aria-hidden="true"></span>
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                             <select class="form-control" required name="status">
                                     <option value="" selected>-- Selecciona estado --</option>
                                     <option value="1" >Activo</option>
@@ -33,7 +41,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Contraseña<span class="required">*</span>
-                            </label>
+                            </label>    
                             <div class="col-md-9 col-sm-9 col-xs-12">
                                 <input type="password" id="password" name="password" required class="form-control col-md-7 col-xs-12">
                             </div>

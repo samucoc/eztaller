@@ -30,7 +30,7 @@
         // escaping, additionally removing everything that could be (html/javascript-) code
          $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
          $aColumns = array('name', 'email');//Columnas de busqueda
-         $sTable = "user";
+         $sTable = "user inner join perfiles on user.perfil = perfiles.p_ncorr";
          $sWhere = "";
         if ( $_GET['q'] != "" )
         {
@@ -66,7 +66,9 @@
                 <thead>
                     <tr class="headings">
                         <th class="column-title">Nombre </th>
+                        <th class="column-title">Nombre Usuario</th>
                         <th class="column-title">Correo Electrónico </th>
+                        <th class="column-title">Perfil </th>
                         <th class="column-title">Estado </th>
                         <th class="column-title">Fecha </th>
                         <th class="column-title no-link last"><span class="nobr"></span></th>
@@ -79,17 +81,22 @@
                             $status=$r['is_active'];
                                 if ($status==1){$status_f="Activo";}else {$status_f="Inactivo";}
 
+                            $username=$r['username'];
                             $name=$r['name'];
                             $email=$r['email'];
+                            $perfil=$r['nombre'];
                             $created_at=date('d/m/Y', strtotime($r['created_at']));
                 ?>
                     <input type="hidden" value="<?php echo $name;?>" id="name<?php echo $id;?>">
+                    <input type="hidden" value="<?php echo $perfil;?>" id="perfil<?php echo $id;?>">
                     <input type="hidden" value="<?php echo $email;?>" id="email<?php echo $id;?>">
-                     <input type="hidden" value="<?php echo $status;?>" id="status<?php echo $id;?>">
+                    <input type="hidden" value="<?php echo $status;?>" id="status<?php echo $id;?>">
 
                     <tr class="even pointer">
                         <td><?php echo $name;?></td>
+                        <td><?php echo $username;?></td>
                         <td><?php echo $email;?></td>
+                        <td><?php echo $perfil;?></td>
                         <td ><?php echo $status_f; ?></td>
                         <td><?php echo $created_at;?></td>
                         <td ><span class="pull-right">

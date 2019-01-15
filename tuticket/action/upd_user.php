@@ -9,7 +9,9 @@
 			$errors[] = "Correo Vacio vacío";
 		} else if ($_POST['mod_status']==""){
 			$errors[] = "Selecciona el estado";
-		}else if (
+		}  else if ($_POST['mod_perfil']==""){
+			$errors[] = "Selecciona perfil";
+		} else if (
 			!empty($_POST['mod_name']) &&
 			!empty($_POST['mod_email']) &&
 			$_POST['mod_status']!=""
@@ -19,11 +21,12 @@
 
 		$name=mysqli_real_escape_string($con,(strip_tags($_POST["mod_name"],ENT_QUOTES)));
 		$email=$_POST["mod_email"];
+		$perfil=intval($_POST['mod_perfil']);
 		$password=mysqli_real_escape_string($con,(strip_tags(sha1(md5($_POST["password"])),ENT_QUOTES)));
 		$status=intval($_POST['mod_status']);
 		$id=$_POST['mod_id'];
 
-		$sql="UPDATE user SET name=\"$name\", email=\"$email\",is_active=$status  WHERE id=$id";
+		$sql="UPDATE user SET name=\"$name\", email=\"$email\",perfil=\"$perfil\",is_active=$status  WHERE id=$id";
 		$query_update = mysqli_query($con,$sql);
 			if ($query_update){
 				$messages[] = "Datos actualizados satisfactoriamente.";
