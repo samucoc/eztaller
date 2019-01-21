@@ -460,3 +460,6 @@ Route::get('proyectos/getdatatable',
 Route::get('ventas/getdatatable', 
 'VentasController@getDataTableVentas'
 )->name('ventas/getdatatable')->middleware('auth');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

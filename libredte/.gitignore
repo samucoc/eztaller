@@ -1,0 +1,10 @@
+# contenido propio de la instancia
+data/certs
+data/firma_electronica
+data/static
+data/var
+extensions
+tmp
+website/Config/core.php
+website/Config/routes.php
+website/Vendor

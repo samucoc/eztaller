@@ -481,9 +481,9 @@ function sumarTotalPrecios(){
 
 	var sumaTotalPrecio = arraySumaPrecio.reduce(sumaArrayPrecios);
 	
-	$("#nuevoTotalVenta").val(sumaTotalPrecio);
+	$("#nuevoTotalVenta").val(Math.round(sumaTotalPrecio,2));
 	$("#totalVenta").val(sumaTotalPrecio);
-	$("#nuevoTotalVenta").attr("total",sumaTotalPrecio);
+	$("#nuevoTotalVenta").attr("total",Math.round(sumaTotalPrecio,2));
 
 
 }
@@ -501,12 +501,9 @@ function agregarImpuesto(){
 
 	var totalConImpuesto = Number(precioImpuesto) + Number(precioTotal);
 	
-	$("#nuevoTotalVenta").val(totalConImpuesto);
-
-	$("#totalVenta").val(totalConImpuesto);
-
+	$("#nuevoTotalVenta").val(Math.round(totalConImpuesto,2));
+	$("#totalVenta").val(Math.round(totalConImpuesto,2));
 	$("#nuevoPrecioImpuesto").val(precioImpuesto);
-
 	$("#nuevoPrecioNeto").val(precioTotal);
 
 }

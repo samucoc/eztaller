@@ -5,13 +5,14 @@
                         $id=$_SESSION['user_id'];
                         $query=mysqli_query($con,"select  nombre, link , icono
                                                     from menus
-                                                    where p_ncorr in (select menu 
+                                                    where m_ncorr in (select menu 
                                                                         from  perfiles_tienen_menus
                                                                         where perfil in (SELECT perfil 
                                                                                         from user 
                                                                                         where id=$id)
                                                                         )
-                                                        and estado = '1'");
+                                                        and estado = '1'
+                                                    order by orden");
                         while ($row=mysqli_fetch_array($query)) {
                     ?>    
                     <li >
