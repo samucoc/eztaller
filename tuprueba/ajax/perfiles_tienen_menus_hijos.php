@@ -5,9 +5,9 @@
     $action = (isset($_REQUEST['action']) && $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
     if (isset($_GET['id'])){
         $id_expence=intval($_GET['id']);
-        $query=mysqli_query($con, "SELECT * from menus_hijos where mh_ncorr='".$id_expence."'");
+        $query=mysqli_query($con, "SELECT * from perfiles_tienen_menus_hijos where ptm_ncorr='".$id_expence."'");
         $count=mysqli_num_rows($query);
-            if ($delete1=mysqli_query($con,"DELETE FROM menus_hijos WHERE mh_ncorr='".$id_expence."'")){
+            if ($delete1=mysqli_query($con,"DELETE FROM perfiles_tienen_menus_hijos WHERE ptm_ncorr='".$id_expence."'")){
             ?>
             <div class="alert alert-success alert-dismissible" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -29,8 +29,8 @@
     if($action == 'ajax'){
         // escaping, additionally removing everything that could be (html/javascript-) code
         $q = mysqli_real_escape_string($con,(strip_tags($_REQUEST['q'], ENT_QUOTES)));
-        $aColumns = array('mh_ncorr','m_ncorr', ' menus_hijos.nombre', ' menus_hijos.descripcion',' menus_hijos.icono', ' menus_hijos.link',' menus_hijos.estado', ' menus_hijos.orden');//Columnas de busqueda
-        $sTable = "menus_hijos";
+        $aColumns = array('ptm','perfil', 'menu_hijo');//Columnas de busqueda
+        $sTable = "perfiles_tienen_menus_hijos";
         $sWhere = "";
         if ( isset($q) && $q!='undefined' && $_GET['q'] != "" )
         {
@@ -42,7 +42,7 @@
             $sWhere = substr_replace( $sWhere, "", -3 );
             $sWhere .= ')';
         }
-        $sWhere.=" order by m_ncorr, orden";
+        $sWhere.=" order by ptm_ncorr";
         
         include 'pagination.php'; //include pagination file
         //pagination variables
@@ -55,7 +55,7 @@
         $row= mysqli_fetch_array($count_query);
         $numrows = $row['numrows'];
         $total_pages = ceil($numrows/$per_page);
-        $reload = './menus_hijos.php';
+        $reload = './perfiles_tienen_menus_hijos.php';
         //main query to fetch the data
         $sql="SELECT * FROM  $sTable $sWhere LIMIT $offset,$per_page";
         $query = mysqli_query($con, $sql);
@@ -66,53 +66,42 @@
             <table class="table table-striped jambo_table bulk_action">
                 <thead>
                     <tr class="headings">
-                        <th class="column-title">Menú Padre </th>
-                        <th class="column-title">Nombre </th>
-                        <th class="column-title">Descripción</th>
-                        <th class="column-title">Icono </th>
-                        <th class="column-title">Link</th>
-                        <th class="column-title">Estado </th>
-                        <th class="column-title">Orden</th>
+                        <th class="column-title">Id </th>
+                        <th class="column-title">Perfil </th>
+                        <th class="column-title">Menú Hijo</th>
                         <th class="column-title no-link last"><span class="nobr"></span></th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php 
                         while ($r=mysqli_fetch_array($query)) {
-                            $query_papa=mysqli_query($con,"select nombre
-                                                        from menus
-                                                        where m_ncorr = '".$r['m_ncorr']."'");
-                            $papa = 'NA';
-                            while ($row=mysqli_fetch_array($query_papa)) {
-                                $papa=$row['nombre'];
+                            $id=$r['ptm_ncorr'];
+                            $query_perfil=mysqli_query($con,"select nombre
+                                                        from perfiles
+                                                        where p_ncorr = '".$r['perfil']."'");
+                            $str_perfil = 'NA';
+                            while ($row=mysqli_fetch_array($query_perfil)) {
+                                $str_perfil=$row['nombre'];
                             }
-                            $id = $r['mh_ncorr'];
-                            $m_ncorr = $r['m_ncorr'];
-                            $nombre=$r['nombre'];
-                            $nombre=$r['nombre'];
-                            $descripcion=$r['descripcion'];
-                            $icono=$r['icono'];
-                            $link=$r['link'];
-                            $estado=$r['estado']=='1'? 'Habilitado' : 'Deshabilitado';
-                            $orden=$r['orden'];
+                            $p_ncorr=$r['perfil'];
+                            
+                            $query_menu=mysqli_query($con,"select nombre
+                                                        from menus_hijos
+                                                        where mh_ncorr = '".$r['menu_hijo']."'");
+                            $str_menu = 'NA';
+                            while ($row=mysqli_fetch_array($query_menu)) {
+                                $str_menu=$row['nombre'];
+                            }
+                            $mh_ncorr=$r['menu_hijo'];
                             
                 ?>
-                    <input type="hidden" value="<?php echo $m_ncorr;?>" id="m_ncorr<?php echo $id;?>">
-                    <input type="hidden" value="<?php echo $nombre;?>" id="nombre<?php echo $id;?>">
-                    <input type="hidden" value="<?php echo $descripcion;?>" id="descripcion<?php echo $id;?>">
-                    <input type="hidden" value="<?php echo $icono;?>" id="icono<?php echo $id;?>">
-                    <input type="hidden" value="<?php echo $link;?>" id="link<?php echo $id;?>">
-                    <input type="hidden" value="<?php echo $r['estado'];?>" id="estado<?php echo $id;?>">
-                    <input type="hidden" value="<?php echo $orden;?>" id="orden<?php echo $id;?>">
+                    <input type="hidden" value="<?php echo $p_ncorr;?>" id="p_ncorr<?php echo $id;?>">
+                    <input type="hidden" value="<?php echo $mh_ncorr;?>" id="mh_ncorr<?php echo $id;?>">
 
                     <tr class="even pointer">
-                        <td><?php echo utf8_encode($papa);?></td>
-                        <td><?php echo utf8_encode($nombre);?></td>
-                        <td><?php echo utf8_encode($descripcion);?></td>
-                        <td><?php echo utf8_encode($icono);?></td>
-                        <td><?php echo utf8_encode($link);?></td>
-                        <td><?php echo utf8_encode($estado);?></td>
-                        <td><?php echo utf8_encode($orden);?></td>
+                        <td><?php echo utf8_encode($id);?></td>
+                        <td><?php echo utf8_encode($str_perfil);?></td>
+                        <td><?php echo utf8_encode($str_menu);?></td>
                         <td ><span class="pull-right">
                         <a href="#" class='btn btn-default' title='Editar Perfil' onclick="obtener_datos('<?php echo $id;?>');" data-toggle="modal" data-target=".bs-example-modal-lg-upd"><i class="glyphicon glyphicon-edit"></i></a> 
                         <a href="#" class='btn btn-default' title='Borrar Perfil' onclick="eliminar('<?php echo $id; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>

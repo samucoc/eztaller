@@ -5,9 +5,9 @@
     $action = (isset($_REQUEST['action']) && $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
     if (isset($_GET['id'])){
         $id_expence=intval($_GET['id']);
-        $query=mysqli_query($con, "SELECT * from perfiles where id='".$id_expence."'");
+        $query=mysqli_query($con, "SELECT * from perfiles where p_ncorr='".$id_expence."'");
         $count=mysqli_num_rows($query);
-            if ($delete1=mysqli_query($con,"DELETE FROM perfiles WHERE id='".$id_expence."'")){
+            if ($delete1=mysqli_query($con,"DELETE FROM perfiles WHERE p_ncorr='".$id_expence."'")){
             ?>
             <div class="alert alert-success alert-dismissible" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

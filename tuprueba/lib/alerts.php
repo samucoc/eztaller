@@ -1,6 +1,5 @@
 <?php 
 
-//function de alertas by abisoft https://github.com/amnersaucedososa
     function profile(){
         $success=sha1(md5("datos actualizados"));
         if (isset($_GET['success']) && $_GET['success']==$success) {

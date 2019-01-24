@@ -17,7 +17,7 @@
     } else if (empty($_POST['mod_orden'])){
 		$errors[] = "Orden vacío";
 	} else if (
-		!empty($_POST['m_ncorr']) &&
+		!empty($_POST['mod_m_ncorr']) &&
 		!empty($_POST['mod_nombre']) &&
 		!empty($_POST['mod_descripcion']) &&
 		!empty($_POST['mod_icono']) &&
