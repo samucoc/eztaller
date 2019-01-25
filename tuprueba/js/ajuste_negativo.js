@@ -27,6 +27,8 @@
         $("#descripcion").val('');
         $("#cantidad").val('');
 
+        $("#codigo").focus();
+
     });
     
     function buscarDescripcion(){
@@ -36,6 +38,7 @@
             url: "action/find_descripcion.php?codigo="+codigo,
         }).done(function(e){
             $("#descripcion").val(e);
+            $("#cantidad").focus();
         });
     }
     
