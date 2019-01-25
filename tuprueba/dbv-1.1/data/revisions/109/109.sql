@@ -1,0 +1,1 @@
+ALTER TABLE `movim_detalle` CHANGE `created` `created` DATETIME NULL DEFAULT NULL;

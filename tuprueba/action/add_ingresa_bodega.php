@@ -41,15 +41,14 @@
 		$query_new_insert = mysqli_query($con,$sql);
 			if ($query_new_insert){
  				$m_ncorr = mysqli_insert_id($con);
- 				echo $_POST["arr_codigo"];
-				$arr_codigo = explode(',',$_POST["arr_codigo"]);
+ 				$arr_codigo = explode(',',$_POST["arr_codigo"]);
 				$arr_cantidad = explode(',',$_POST["arr_cantidad"]);
 				$arr_descripcion = explode(',',$_POST["arr_descripcion"]);
 
-				for($i=0;$i<count($arr_codigo);$i++){
+				for($i=1;$i<count($arr_codigo);$i++){
 					$sql_1="INSERT INTO `movim_detalle`( `m_ncorr`, `codigo`, `descr`, `cantidad`, `created`) VALUES 
-						  VALUES ('".$m_ncorr."','".$arr_codigo[$i]."','".$arr_descripcion[$i]."',
-						  			'".$arr_cantidad[$i]."',".date("Y-m-d H:i:s")."')";
+						   ('".$m_ncorr."','".$arr_codigo[$i]."','".$arr_descripcion[$i]."',
+						  			'".$arr_cantidad[$i]."','".date("Y-m-d H:i:s")."')";
 					$query_new_insert_1 = mysqli_query($con,$sql_1);
 					if ($query_new_insert_1){
 												
