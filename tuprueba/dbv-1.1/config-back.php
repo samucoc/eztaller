@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1); 
+error_reporting(E_ALL);
 
 /**
  * Your database authentication information goes here
@@ -7,7 +9,7 @@
 define('DB_HOST', 'localhost');
 define('DB_PORT', 3306);
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'ypUNvkW3MrM23s');
 define('DB_NAME', 'eztaller_pruebase');
 
 /**
@@ -37,7 +39,7 @@ define('DBV_META_PATH', DBV_DATA_PATH . DS . 'meta');
 
 
 ini_set('magic_quotes_gpc', 'Off');
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
 
 /**
  * I18n support
