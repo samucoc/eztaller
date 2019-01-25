@@ -46,7 +46,7 @@
 						estado=\"$estado\", 
 						orden=\"$orden\"  ,
 						updated = '".date("Y-m-d H:i:s")."',
-						usuario = '".$_SESSION['user_id']."
+						usuario = '".$_SESSION['user_id']."'
 			WHERE mh_ncorr=$id";
 		$query_update = mysqli_query($con,$sql);
 			if ($query_update){

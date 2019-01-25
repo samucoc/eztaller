@@ -11,6 +11,7 @@
                 <div class="modal-body">
                     <form class="form-horizontal form-label-left input_mask" id="upd_user" name="upd_user">
                         <div id="result_user"></div>
+                        <input type="hidden" id="mod_id" name="mod_id">
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                             <select name="mod_p_ncorr" id="mod_p_ncorr" required type="text" class="form-control" placeholder="Perfiles">
                                 <?php 

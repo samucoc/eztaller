@@ -10,6 +10,7 @@
                 <div class="modal-body">
                     <form class="form-horizontal form-label-left input_mask" id="upd_user" name="upd_user">
                         <div id="result_user"></div>
+                        <input type="hidden" id="mod_id" name="mod_id">
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                                 <input name="mod_nombre" id="mod_nombre" required type="text" class="form-control" placeholder="Nombre">
                                 <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
