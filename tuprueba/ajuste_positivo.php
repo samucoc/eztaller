@@ -10,7 +10,7 @@
         <div class="">
             <div class="page-title">
                 <div class="clearfix"></div>
-                <h3>Ingreso a Bodega</h3>
+                <h3>Ajuste (+)</h3>
                 <div id="resultado_accion"></div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
@@ -78,7 +78,7 @@
         </div>
     </div><!-- /page content -->
 
-<script type="text/javascript" src="js/ingreso_bodega.js"></script>
+<script type="text/javascript" src="js/ajuste_positivo.js"></script>
 
 <script>
     $(function () {
@@ -93,7 +93,7 @@
                              };
             $.ajax({
                     type: "POST",
-                    url: "action/add_ingresa_bodega.php",
+                    url: "action/add_ajuste_positivo.php",
                     data: parametros,
                     beforeSend: function(objeto){
                         $("#result_user").html("Mensaje: Cargando...");
