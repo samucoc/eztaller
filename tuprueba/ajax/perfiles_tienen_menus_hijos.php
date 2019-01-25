@@ -68,6 +68,7 @@
                     <tr class="headings">
                         <th class="column-title">Id </th>
                         <th class="column-title">Perfil </th>
+                        <th class="column-title">Menú</th>
                         <th class="column-title">Menú Hijo</th>
                         <th class="column-title no-link last"><span class="nobr"></span></th>
                     </tr>
@@ -86,22 +87,34 @@
                             $p_ncorr=$r['perfil'];
                             
                             $query_menu=mysqli_query($con,"select nombre
-                                                        from menus_hijos
-                                                        where mh_ncorr = '".$r['menu_hijo']."'");
+                                                        from menus
+                                                        where m_ncorr = '".$r['menu']."'");
                             $str_menu = 'NA';
                             while ($row=mysqli_fetch_array($query_menu)) {
                                 $str_menu=$row['nombre'];
+                            }
+                            $m_ncorr=$r['menu'];
+                           
+
+                            $query_menu=mysqli_query($con,"select nombre
+                                                        from menus_hijos
+                                                        where mh_ncorr = '".$r['menu_hijo']."'");
+                            $str_menu_h = 'NA';
+                            while ($row=mysqli_fetch_array($query_menu)) {
+                                $str_menu_h=$row['nombre'];
                             }
                             $mh_ncorr=$r['menu_hijo'];
                             
                 ?>
                     <input type="hidden" value="<?php echo $p_ncorr;?>" id="p_ncorr<?php echo $id;?>">
                     <input type="hidden" value="<?php echo $mh_ncorr;?>" id="mh_ncorr<?php echo $id;?>">
+                    <input type="hidden" value="<?php echo $m_ncorr;?>" id="m_ncorr<?php echo $id;?>">
 
                     <tr class="even pointer">
                         <td><?php echo utf8_encode($id);?></td>
                         <td><?php echo utf8_encode($str_perfil);?></td>
                         <td><?php echo utf8_encode($str_menu);?></td>
+                        <td><?php echo utf8_encode($str_menu_h);?></td>
                         <td ><span class="pull-right">
                         <a href="#" class='btn btn-default' title='Editar Perfil' onclick="obtener_datos('<?php echo $id;?>');" data-toggle="modal" data-target=".bs-example-modal-lg-upd"><i class="glyphicon glyphicon-edit"></i></a> 
                         <a href="#" class='btn btn-default' title='Borrar Perfil' onclick="eliminar('<?php echo $id; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>

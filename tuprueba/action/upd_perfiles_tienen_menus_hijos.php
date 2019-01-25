@@ -25,7 +25,7 @@
 		$sql="UPDATE  perfiles_tienen_menus_hijos
 					SET menu=\"$m_ncorr\", 
 						menu_hijo=\"$mh_ncorr\", 
-						perfil=\"$p_ncorr\
+						perfil=\"$p_ncorr\"
 			WHERE ptm_ncorr=$id";
 		$query_update = mysqli_query($con,$sql);
 			if ($query_update){

@@ -20,9 +20,10 @@
                                                                         from menus_hijos
                                                                         where mh_ncorr in (select menu_hijo
                                                                                             from  perfiles_tienen_menus_hijos
-                                                                                            where perfil in (SELECT perfil 
-                                                                                                            from user 
-                                                                                                            where id=$id)
+                                                                                            where perfil in (select perfil from user where id= $id)
+                                                                                                and menu in (select m_ncorr 
+                                                                                                            from menus 
+                                                                                                            where link = 'configuration_main.php')
                                                                                             )
                                                                             
                                                                             and estado = '1'");

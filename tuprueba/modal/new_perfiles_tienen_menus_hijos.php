@@ -41,14 +41,14 @@
                         </div>
                         
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                            <select name="m_ncorr" required type="text" class="form-control" placeholder="Menús">
+                            <select name="mh_ncorr" required type="text" class="form-control" placeholder="Menús">
                                 <?php 
                                     $query=mysqli_query($con,"select nombre, mh_ncorr
                                                                         from menus_hijos
                                                                         where estado = '1'");
                                     while ($row=mysqli_fetch_array($query)) {
                                                 ?>
-                                    <option value="<?php echo $row['m_ncorr']?>"><?php echo utf8_encode($row['nombre'])?></option>
+                                    <option value="<?php echo $row['mh_ncorr']?>"><?php echo utf8_encode($row['nombre'])?></option>
                                 <?php }?>
                             </select>    
                             <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>

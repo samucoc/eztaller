@@ -20,13 +20,11 @@
                                                                         from menus_hijos
                                                                         where mh_ncorr in (select menu_hijo
                                                                                             from  perfiles_tienen_menus_hijos
-                                                                                            where perfil in (SELECT perfil 
-                                                                                                            from user 
-                                                                                                            where id=$id)
-                                                                                            )
-                                                                            and m_ncorr in (select m_ncorr 
-                                                                                            from menues 
+                                                                                            where perfil in (select perfil from user where id= $id)
+                                                                                and menu in (select m_ncorr 
+                                                                                            from menus 
                                                                                             where link = 'mantenedores_main.php')
+                                                                                            )
                                                                             and estado = '1'");
                                             if ($query){
                                                 while ($row=mysqli_fetch_array($query)) {

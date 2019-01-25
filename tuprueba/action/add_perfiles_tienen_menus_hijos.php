@@ -3,7 +3,7 @@
 	session_start();
 	/*Inicia validacion del lado del servidor*/
 	if (empty($_POST['mh_ncorr'])){
-		$errors[] = "Menu vacío";
+		$errors[] = "Menu hijo vacío";
 	} if (empty($_POST['m_ncorr'])){
 		$errors[] = "Menu vacío";
 	} else if (empty($_POST['p_ncorr'])){
