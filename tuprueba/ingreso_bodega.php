@@ -11,13 +11,14 @@
             <div class="page-title">
                 <div class="clearfix"></div>
                 <h3>Ingreso a Bodega</h3>
+                <div id="resultado_accion"></div>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                         <input type="text" name="fecha" id="fecha" class="form-control pull-right" >
                         <span class="fa fa-calendar form-control-feedback right" aria-hidden="true"></span>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
-                        <select name="movim_bodega" required type="text" class="form-control" placeholder="Menús">
+                        <select name="movim_bodega" id="movim_bodega" required type="text" class="form-control" placeholder="Menús">
                             <?php 
                                 $query=mysqli_query($con,"select nombre, b_ncorr from bodegas");
                                 while ($row=mysqli_fetch_array($query)) {
@@ -95,10 +96,11 @@
                     data: parametros,
                     beforeSend: function(objeto){
                         $("#result_user").html("Mensaje: Cargando...");
-                        },
-                    success: function(datos){
-                        load(1);
                         }
+            }).done(function (datos){
+                
+                $("#resultado_accion").html(datos);
+
             });
           event.preventDefault();
         })
