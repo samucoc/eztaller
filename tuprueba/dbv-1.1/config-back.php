@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1); 
-error_reporting(E_ALL);
-
 /**
  * Your database authentication information goes here
  * @see http://dbv.vizuina.com/documentation/
@@ -39,7 +36,7 @@ define('DBV_META_PATH', DBV_DATA_PATH . DS . 'meta');
 
 
 ini_set('magic_quotes_gpc', 'Off');
-//error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(E_ALL ^ E_NOTICE);
 
 /**
  * I18n support
