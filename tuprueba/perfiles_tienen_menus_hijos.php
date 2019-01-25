@@ -77,10 +77,12 @@ $( "#upd_user" ).submit(function( event ) {
 })
 
     function obtener_datos(id){
+            var m_ncorr = $("#m_ncorr"+id).val();
             var mh_ncorr = $("#mh_ncorr"+id).val();
             var p_ncorr = $("#p_ncorr"+id).val();
             $("#mod_id").val(id);
             $("#mod_mh_ncorr").val(mh_ncorr);
+            $("#mod_m_ncorr").val(m_ncorr);
             $("#mod_p_ncorr").val(p_ncorr);
         }
 </script>

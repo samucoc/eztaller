@@ -4,22 +4,27 @@
 	/*Inicia validacion del lado del servidor*/
 	if (empty($_POST['mod_mh_ncorr'])){
 		$errors[] = "Menu vacío";
+	} if (empty($_POST['mod_m_ncorr'])){
+		$errors[] = "Menu vacío";
 	} else if (empty($_POST['mod_p_ncorr'])){
 		$errors[] = "Perfil vacío";
 	} else if (
+		!empty($_POST['mod_m_ncorr']) &&
 		!empty($_POST['mod_mh_ncorr']) &&
 		!empty($_POST['mod_p_ncorr']) 
 	){
 
 		include "../config/config.php";//Contiene funcion que conecta a la base de datos
 
+		$m_ncorr=$_POST["mod_m_ncorr"];
 		$mh_ncorr=$_POST["mod_mh_ncorr"];
 		$p_ncorr=$_POST["mod_p_ncorr"];
 		
 		$id=$_POST['mod_id'];
 
 		$sql="UPDATE  perfiles_tienen_menus_hijos
-					SET menu_hijo=\"$mh_ncorr\", 
+					SET menu=\"$m_ncorr\", 
+						menu_hijo=\"$mh_ncorr\", 
 						perfil=\"$p_ncorr\
 			WHERE ptm_ncorr=$id";
 		$query_update = mysqli_query($con,$sql);

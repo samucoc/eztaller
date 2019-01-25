@@ -1,5 +1,5 @@
 <?php
-    $title ="Configuración | ";
+    $title ="Mantenedores | ";
     include "head.php";
     include "sidebar.php";
 ?>
@@ -24,7 +24,9 @@
                                                                                                             from user 
                                                                                                             where id=$id)
                                                                                             )
-                                                                            
+                                                                            and m_ncorr in (select m_ncorr 
+                                                                                            from menues 
+                                                                                            where link = 'mantenedores_main.php')
                                                                             and estado = '1'");
                                             if ($query){
                                                 while ($row=mysqli_fetch_array($query)) {
@@ -34,8 +36,7 @@
                                         </li>
                                         <?php 
                                                 }
-                                            }
-                                        ?>
+                                            }                                        ?>
                                     </ul>
                                 </div>
                             </div>
@@ -45,7 +46,7 @@
                         <div class="panel panel-default bg-white">
                             <div class="panel-body">
                                 <div class="tab-content tab-content-slide tab-content-slide-fix">
-                                    <div class="tab-pane fade in active" id="vistaConfiguration"></div>
+                                    <div class="tab-pane fade in active" id="vistaMantenedores"></div>
                                 </div>    
                             </div>
                         </div>
@@ -61,7 +62,7 @@
 <script>
     $(document).on('click', '.configuration', function () {
         var link = $(this).data('link')
-        $('#vistaConfiguration').load(link);
+        $('#vistaMantenedores').load(link);
     });
 
 </script>

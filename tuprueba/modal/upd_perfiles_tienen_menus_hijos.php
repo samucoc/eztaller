@@ -26,6 +26,20 @@
                         </div>
                         
                         <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+                            <select name="mod_m_ncorr" id="mod_m_ncorr" required type="text" class="form-control" placeholder="Menús">
+                                <?php 
+                                    $query_papa=mysqli_query($con,"select nombre, m_ncorr
+                                                                        from menus
+                                                                        where estado = '1'");
+                                    while ($row_papa=mysqli_fetch_array($query_papa)) {
+                                                ?>
+                                    <option value="<?php echo $row_papa['m_ncorr']?>"><?php echo utf8_encode($row_papa['nombre'])?></option>
+                                <?php }?>
+                            </select>    
+                            <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
+                        </div>
+                        
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
                             <select name="mod_mh_ncorr" id="mod_mh_ncorr" required type="text" class="form-control" placeholder="Menús Hijos">
                                 <?php 
                                     $query_papa=mysqli_query($con,"select nombre, mh_ncorr
