@@ -117,7 +117,7 @@
 	foreach($arr_toma_inventario as $producto){
     	echo "<tr>";
     	foreach($producto as $producto_by_bodega){
-    		echo "<td>".$producto_by_bodega."</td>";
+    		echo "<td>".($producto_by_bodega)."</td>";
     		}
     	echo "</tr>";
     }

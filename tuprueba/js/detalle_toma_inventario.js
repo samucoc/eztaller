@@ -1,9 +1,10 @@
     $("#save_line").click(function(){
         var fecha1 = $("#fecha1").val();
         var fecha2 = $("#fecha2").val();
+        var codigo = $("#codigo").val();
         $.ajax({
             type: "GET",
-            url: "action/detalle_toma_inventario.php?fecha1="+fecha1+"&fecha2="+fecha2,
+            url: "action/detalle_toma_inventario.php?fecha1="+fecha1+"&fecha2="+fecha2+"&codigo="+codigo,
         }).done(function(e){
             $("#resultados").html(e);
         });

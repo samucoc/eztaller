@@ -74,6 +74,7 @@
 
 	$q1 = $_GET['fecha1'];
 	$q2 = $_GET['fecha2'];
+	$q3 = $_GET['codigo'];
 
 	list($d,$m,$a) = explode('-',$q1);
 	$q1 = $a.'-'.$m.'-'.$d;
@@ -81,7 +82,8 @@
 	$q2 = $a.'-'.$m.'-'.$d;
 
 	$and_codigo = '';
-	$q1!='' && $q2!='' ? $and_codigo = "where fecha between '".$q1."' and '".$q2."' " :  '';
+	$q1!='' && $q2!='' ? $and_codigo = " and fecha between '".$q1."' and '".$q2."' " :  '';
+	$q3 != '' ?  $and_codigo .= " and codigo = '".$q3."' " : '' ;
 
 	$arr_toma_inventario = [];
 
@@ -93,7 +95,6 @@
     $arr_toma_inventario[0]['cantidad']='Cantidad';
     $arr_toma_inventario[0]['observacion']='Observación';
     
-
     $query=mysqli_query($con,"select movim_detalle.md_ncorr, fecha, bodegas.nombre as nombre_bodega, 
     								movim_tipos.nombre as nombre_tipo, mt_ncorr , 
     								codigo, descr, cantidad, observacion
@@ -104,15 +105,15 @@
 										on movim.movim_bodega = bodegas.b_ncorr
 									inner join movim_tipos 
 										on movim_tipos.mt_ncorr	= movim.movim_tipo	
-							 $and_codigo");
+							 where 1 $and_codigo");
     while ($row=mysqli_fetch_array($query)) {
     	list($d,$m,$a) = explode('-',$row['fecha']);
 		$row['fecha'] = $a.'-'.$m.'-'.$d;
 		$arr_toma_inventario[$row['md_ncorr']]['fecha']=$row['fecha'];
-		$arr_toma_inventario[$row['md_ncorr']]['nombre_bodega']=$row['nombre_bodega'];
-		$arr_toma_inventario[$row['md_ncorr']]['nombre_tipo']=$row['nombre_tipo'];
+		$arr_toma_inventario[$row['md_ncorr']]['nombre_bodega']=utf8_encode($row['nombre_bodega']);
+		$arr_toma_inventario[$row['md_ncorr']]['nombre_tipo']=utf8_encode($row['nombre_tipo']);
 		$arr_toma_inventario[$row['md_ncorr']]['codigo']=$row['codigo'];
-	    $arr_toma_inventario[$row['md_ncorr']]['descr']=$row['descr'];
+	    $arr_toma_inventario[$row['md_ncorr']]['descr']=utf8_encode($row['descr']);
 	   	$row['mt_ncorr']=='1' || $row['mt_ncorr']=='3' || $row['mt_ncorr']=='4' ?
 		    $arr_toma_inventario[$row['md_ncorr']]['cantidad']=$row['cantidad'] : 
 		    $arr_toma_inventario[$row['md_ncorr']]['cantidad']=$row['cantidad'] *(-1) ;
@@ -125,7 +126,7 @@
 	foreach($arr_toma_inventario as $producto){
     	echo "<tr>";
     	foreach($producto as $producto_by_bodega){
-    		echo "<td>".$producto_by_bodega."</td>";
+    		echo "<td>".($producto_by_bodega)."</td>";
     		}
     	echo "</tr>";
     }
