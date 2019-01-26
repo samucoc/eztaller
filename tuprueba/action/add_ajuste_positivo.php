@@ -33,6 +33,8 @@
 
 		// escaping, additionally removing everything that could be (html/javascript-) code
 		$fecha=$_POST["fecha"];
+		list($d,$m,$a) = explode('-',$fecha);
+		$fecha = $a.'-'.$m.'-'.$d;
 		$obervacion=$_POST["obervacion"];
 		$movim_bodega=$_POST["movim_bodega"];
 
