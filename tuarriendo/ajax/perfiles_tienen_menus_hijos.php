@@ -88,12 +88,12 @@
                             
                             $query_menu=mysqli_query($con,"select nombre
                                                         from menus
-                                                        where m_ncorr = '".$r['menu_hijo']."'");
+                                                        where m_ncorr = '".$r['menu']."'");
                             $str_menu = 'NA';
                             while ($row=mysqli_fetch_array($query_menu)) {
                                 $str_menu=$row['nombre'];
                             }
-                            $m_ncorr=$r['menu_hijo'];
+                            $m_ncorr=$r['menu'];
                            
 
                             $query_menu=mysqli_query($con,"select nombre

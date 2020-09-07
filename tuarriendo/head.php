@@ -29,7 +29,7 @@
         <!-- Bootstrap -->
         <link href="css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Font Awesome -->
-        <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/fa_5.14/css/all.min.css" rel="stylesheet">
         <!-- NProgress -->
         <link href="css/nprogress/nprogress.css" rel="stylesheet">
           <!-- iCheck -->
