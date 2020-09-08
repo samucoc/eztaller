@@ -114,7 +114,7 @@ CUERPO DOCUMENTO
  
   <?php
 
-  if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
+ // if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
 
    echo '<div class="wrapper">';
 
@@ -169,11 +169,11 @@ CUERPO DOCUMENTO
 
     echo '</div>';
 
-  }else{
+  // }else{
 
-    include "modulos/login.php";
+  //   include "modulos/login.php";
 
-  }
+  // }
 
   ?>
 
