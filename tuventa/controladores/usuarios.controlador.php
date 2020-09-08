@@ -21,7 +21,7 @@ class ControladorUsuarios{
 
 				$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
 
-				if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
+				//if($respuesta["usuario"] == $_POST["ingUsuario"] && $respuesta["password"] == $encriptar){
 
 					if($respuesta["estado"] == 1){
 
@@ -68,11 +68,11 @@ class ControladorUsuarios{
 
 					}		
 
-				}else{
+				// }else{
 
-					echo '<br><div class="alert alert-danger">Error al ingresar, vuelve a intentarlo</div>';
+				// 	echo '<br><div class="alert alert-danger">Error al ingresar, vuelve a intentarlo</div>';
 
-				}
+				// }
 
 			}	
 

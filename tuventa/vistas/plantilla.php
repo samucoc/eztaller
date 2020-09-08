@@ -113,8 +113,8 @@ CUERPO DOCUMENTO
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">
  
   <?php
-
- // if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
+  //$_SESSION["iniciarSesion"] = "ok";
+  if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
 
    echo '<div class="wrapper">';
 
@@ -169,11 +169,11 @@ CUERPO DOCUMENTO
 
     echo '</div>';
 
-  // }else{
+  }else{
 
-  //   include "modulos/login.php";
+    include "modulos/login.php";
 
-  // }
+  }
 
   ?>
 
