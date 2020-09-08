@@ -336,7 +336,7 @@ class ControladorVentas{
 					$nuevasVentas_2 = ModeloProductos::mdlActualizarProducto($tablaProductos_2, $item1a_2, $valor1a_2, $valor_2);
 
 					$item1b_2 = "stock";
-					$valor1b_2 = $value["stock"];
+					$valor1b_2 = $traerProducto_2["stock"] - $value["cantidad"];
 
 					$nuevoStock_2 = ModeloProductos::mdlActualizarProducto($tablaProductos_2, $item1b_2, $valor1b_2, $valor_2);
 
