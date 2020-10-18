@@ -27,9 +27,9 @@ $respuestaVenta = ControladorVentas::ctrMostrarVentas($itemVenta, $valorVenta);
 
 $fecha = substr($respuestaVenta["fecha"],0,-8);
 $productos = json_decode($respuestaVenta["productos"], true);
-$neto = number_format($respuestaVenta["neto"],2);
-$impuesto = number_format($respuestaVenta["impuesto"],2);
-$total = number_format($respuestaVenta["total"],2);
+$neto = number_format($respuestaVenta["neto"],0,',','.');
+$impuesto = number_format($respuestaVenta["impuesto"],0,',','.');
+$total = number_format($respuestaVenta["total"],0,',','.');
 
 //TRAEMOS LA INFORMACIÓN DEL CLIENTE
 
@@ -184,9 +184,9 @@ $orden = null;
 
 $respuestaProducto = ControladorProductos::ctrMostrarProductos($itemProducto, $valorProducto, $orden);
 
-$valorUnitario = number_format($respuestaProducto["precio_venta"], 2);
+$valorUnitario = number_format($respuestaProducto["precio_venta"],0,',','.');
 
-$precioTotal = number_format($item["total"], 2);
+$precioTotal = number_format($item["total"],0,',','.');
 
 $bloque4 = <<<EOF
 
