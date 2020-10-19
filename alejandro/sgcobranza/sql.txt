@@ -1,0 +1,877 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.2.2
+-- http://www.phpmyadmin.net
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 27-08-2013 a las 15:23:47
+-- Versión del servidor: 5.5.27
+-- Versión de PHP: 5.4.7
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de datos: `sgtrabajadores`
+--
+CREATE DATABASE `sgtrabajadores` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `sgtrabajadores`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mantenedores`
+--
+
+CREATE TABLE IF NOT EXISTS `mantenedores` (
+  `mantenedores_ncorr` int(11) NOT NULL,
+  `mant_tabla` varchar(100) NOT NULL,
+  `mant_titulo` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `mantenedores`
+--
+
+INSERT INTO `mantenedores` (`mantenedores_ncorr`, `mant_tabla`, `mant_titulo`) VALUES
+(0, 'proveedores', 'Proveedores'),
+(0, 'clientes', 'Clientes'),
+(0, 'menues', 'Menus'),
+(0, 'menues_hijos', 'SubMenus'),
+(0, 'perfiles', 'Perfiles'),
+(0, 'prestadores', 'Prestadores'),
+(0, 'usuarios', 'Usuarios'),
+(0, 'sub_menus', 'Grupos de Aplicaciones'),
+(0, 'usuarios_sistema', 'Usuarios del Sistema'),
+(0, 'trabajadores', 'Trabajadores');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `menues`
+--
+
+CREATE TABLE IF NOT EXISTS `menues` (
+  `menu_ncorr` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `menu_desc` varchar(100) NOT NULL COMMENT 'Descripcion',
+  `tper_ncorr` int(11) NOT NULL COMMENT 'CBOPerfil Acceso',
+  `menu_orden` int(11) NOT NULL COMMENT 'Orden Menu',
+  PRIMARY KEY (`menu_ncorr`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Volcado de datos para la tabla `menues`
+--
+
+INSERT INTO `menues` (`menu_ncorr`, `menu_desc`, `tper_ncorr`, `menu_orden`) VALUES
+(5, 'Mantenedores', 1, 4),
+(6, 'Seguridad', 1, 5),
+(11, 'Informes', 1, 3),
+(12, 'Recursos', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `menues_hijos`
+--
+
+CREATE TABLE IF NOT EXISTS `menues_hijos` (
+  `mhij_ncorr` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `menu_ncorr` int(10) unsigned NOT NULL COMMENT 'CBOMenu Padre',
+  `menu_sub` int(11) NOT NULL COMMENT 'CBOSubdivision',
+  `mhij_desc` varchar(100) NOT NULL COMMENT 'Descripcion',
+  `mhij_link` varchar(100) NOT NULL COMMENT 'Link de Acceso',
+  `mhij_perfil` int(10) unsigned NOT NULL COMMENT 'CBOPerfil de Acceso',
+  `mhij_orden` int(11) DEFAULT NULL COMMENT 'Orden',
+  `mhij_mostrar` varchar(2) NOT NULL COMMENT 'Mostrar',
+  PRIMARY KEY (`mhij_ncorr`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+
+--
+-- Volcado de datos para la tabla `menues_hijos`
+--
+
+INSERT INTO `menues_hijos` (`mhij_ncorr`, `menu_ncorr`, `menu_sub`, `mhij_desc`, `mhij_link`, `mhij_perfil`, `mhij_orden`, `mhij_mostrar`) VALUES
+(15, 6, 1, 'Cambio de Clave', 'sg_cambio_clave.php', 1, 1, 'SI'),
+(16, 6, 1, 'Cerrar Sesión', 'sg_cerrar_sesion.php', 1, 2, 'SI'),
+(25, 5, 1, 'Usuarios del Sistema', 'sg_mant_tablas.php?tbl=usuarios_sistema', 99, 97, 'SI'),
+(26, 5, 1, 'Perfiles de Usuarios', 'sg_mant_tablas.php?tbl=perfiles', 99, 98, 'SI'),
+(28, 5, 1, 'Menus', 'sg_mant_tablas.php?tbl=menues', 99, 95, 'SI'),
+(29, 5, 1, 'Sub menus', 'sg_mant_tablas.php?tbl=menues_hijos', 99, 96, 'SI'),
+(69, 11, 1, 'Informe de Horarios', 'sg_informe_horarios.php', 1, 1, 'SI'),
+(70, 12, 1, 'Ingresar Permiso', 'sg_recursos_permisos.php', 1, 1, 'SI'),
+(71, 5, 1, 'Trabajadores', 'sg_mant_trabajadores.php?tbl=trabajadores', 99, 1, 'SI');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `perfiles`
+--
+
+CREATE TABLE IF NOT EXISTS `perfiles` (
+  `perfil_ncorr` int(11) NOT NULL AUTO_INCREMENT,
+  `perfil_codigo` int(11) NOT NULL COMMENT 'Codigo Perfil',
+  `perfil_nombre` varchar(50) NOT NULL COMMENT 'Nombre',
+  `perfil_desc` varchar(100) NOT NULL COMMENT 'Descripcion',
+  PRIMARY KEY (`perfil_ncorr`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `perfiles`
+--
+
+INSERT INTO `perfiles` (`perfil_ncorr`, `perfil_codigo`, `perfil_nombre`, `perfil_desc`) VALUES
+(1, 99, 'Super Administrador', 'Tiene una vision completa del sistema'),
+(2, 1, 'Usuario', 'USUARIO DEL SISTEMA. VISUALIZA E INGRESA DATOS AL SISTEMA'),
+(3, 50, 'Administrador', 'Administra el sistema');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sub_menus`
+--
+
+CREATE TABLE IF NOT EXISTS `sub_menus` (
+  `submenu_ncorr` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) NOT NULL COMMENT 'Nombre',
+  PRIMARY KEY (`submenu_ncorr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `sub_menus`
+--
+
+INSERT INTO `sub_menus` (`submenu_ncorr`, `nombre`) VALUES
+(1, 'Sin Menu'),
+(2, 'Ventas'),
+(3, 'Compras');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `trabajadores`
+--
+
+CREATE TABLE IF NOT EXISTS `trabajadores` (
+  `trabajador_ncorr` int(11) NOT NULL AUTO_INCREMENT,
+  `nombres` varchar(255) NOT NULL COMMENT 'Nombres',
+  `apellido_pat` varchar(255) NOT NULL COMMENT 'Apellido Paterno',
+  `apellido_mat` varchar(250) DEFAULT NULL COMMENT 'Apellido Materno',
+  `rut` int(11) NOT NULL COMMENT 'Rut',
+  `empresa_contr` int(11) NOT NULL COMMENT 'CBOEmpresa',
+  `empresa` int(11) NOT NULL COMMENT 'MLTEmpresas de Ventas',
+  `cod_vendedor` int(11) DEFAULT NULL COMMENT 'TBLCodigo Vendedor',
+  `sector_vendedor` int(11) DEFAULT NULL COMMENT 'TBLSector Vendedor',
+  `zona_vendedor` int(11) DEFAULT NULL COMMENT 'TBLZona',
+  `comision_vendedor` int(11) DEFAULT NULL COMMENT 'TBLComision Vendedor',
+  `cod_cobrador` int(11) DEFAULT NULL COMMENT 'OPCCodigo Cobrador',
+  `sector_cobrador` int(11) DEFAULT NULL COMMENT 'OPCSector Cobrador',
+  `comision_cobrador` int(11) DEFAULT NULL COMMENT 'OPCComision Cobrador',
+  `cod_supervisor` int(11) DEFAULT NULL COMMENT 'OPCCodigo Supervisor',
+  `sector_supervisor` int(11) DEFAULT NULL COMMENT 'OPCSector Supervisor',
+  `comision_supervisor` int(11) DEFAULT NULL COMMENT 'OPCComision Supervisor',
+  `fondos_rendir` int(11) DEFAULT NULL COMMENT 'CHKFondos por Rendir',
+  `vehiculos` int(11) DEFAULT NULL COMMENT 'CHKVehiculos',
+  `cuentas_personales` int(11) DEFAULT NULL COMMENT 'CHKCuentas Personales',
+  `ventas` int(11) DEFAULT NULL COMMENT 'CHKVentas',
+  `cargo` int(11) NOT NULL COMMENT 'CBOCargo',
+  PRIMARY KEY (`trabajador_ncorr`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=779 ;
+
+--
+-- Volcado de datos para la tabla `trabajadores`
+--
+
+INSERT INTO `trabajadores` (`trabajador_ncorr`, `nombres`, `apellido_pat`, `apellido_mat`, `rut`, `empresa_contr`, `empresa`, `cod_vendedor`, `sector_vendedor`, `zona_vendedor`, `comision_vendedor`, `cod_cobrador`, `sector_cobrador`, `comision_cobrador`, `cod_supervisor`, `sector_supervisor`, `comision_supervisor`, `fondos_rendir`, `vehiculos`, `cuentas_personales`, `ventas`, `cargo`) VALUES
+(1, 'SAMUEL FELIPE', 'SILVA', 'DIAZ', 15829807, 78748930, 0, 0, 0, 2, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 4),
+(5, 'Javier', 'Ruz', NULL, 15126287, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(547, 'ARTURO ALEJANDRO', 'ARACENA', 'OLGUIN ', 9434060, 76112370, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(548, 'OMAR BERNARDO', 'CERDA', 'GONZALEZ', 9296449, 78748930, 0, 0, 0, 0, NULL, 1, 1, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(549, 'MARIO', 'PINTO', 'FERRER ', 0, 76112370, 0, 0, 0, 0, NULL, 2, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(550, 'RICARDO FELIX', 'FUENTES', 'GARCIA', 0, 78748930, 0, 0, 0, 0, NULL, 2, 37, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(552, 'MARIO GUILLERMO', 'CERDA', 'GONZALEZ', 7147066, 78748930, 0, 0, 0, 0, NULL, 3, 3, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(553, 'MARCELO GMO.', 'VILLANEA', 'CABRERA', 0, 78748930, 0, 0, 0, 0, NULL, 4, 4, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(554, 'ALEJANDRO', 'SOTO ', 'VIVAR', 9090, 76112370, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 1, 1, 1, 1, 0),
+(555, 'BERNARDO', 'OLAVE', 'CALDERON', 16, 78748930, 0, 0, 0, 0, 0, 0, 37, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(556, 'CLAUDIO', 'BUSTAMANTE', 'LOBOS', 18, 76112370, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(557, 'FERNANDO IVAN ', 'SILVA ', 'VILLARROEL', 10435781, 78748930, 0, 0, 0, 0, 0, 0, 6, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(558, 'JUAN CARLOS', 'MOYA ', 'SOTO ', 0, 76112370, 0, 0, 0, 0, NULL, 6, 0, 9, 0, 0, NULL, 1, 1, 1, 1, 0),
+(559, 'GERARDO ENRIQUE ', 'ACOSTA ', 'DEVOTTO', 0, 78748930, 0, 0, 0, 0, NULL, 7, 7, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(560, 'SERGIO HERNAN', 'NIETO ', 'OLIVARES ', 9078125, 76112370, 0, 0, 0, 0, NULL, 7, 6, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(561, 'LEONEL ', 'GONZALEZ', ' ', 0, 76112370, 0, 0, 0, 0, NULL, 8, 0, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(562, 'MARCOS AURELIO', 'MEZA ', 'PALACIOS', 11332262, 78748930, 0, 0, 0, 0, NULL, 8, 8, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(563, 'LUIS AMERICO', 'FERNANDEZ ', 'ANDRADE', 12954858, 76112370, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 1, 1, 1, 1, 2),
+(564, 'FRUCTUOSO SGDO.', 'ARAYA ', 'CONTRERAS', 33, 78748930, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(565, 'ARTURO SEGUNDO', 'ALVARADO ', 'VELASQUEZ', 8064570, 78748930, 0, 0, 0, 0, 0, 0, 25, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(566, 'ALVARO CESAR', 'FIGUEROA ', 'MEDINA ', 7554410, 76112370, 0, 0, 0, 3, 0, 0, 0, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(567, 'ALFREDO ', 'ROJAS ', 'ALVAREZ', 8910211, 76112370, 0, 0, 0, 3, 0, 0, 0, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(568, 'IVAN ROBERTO ', 'OLMOS ', 'MATURANA', 10429927, 78748930, 0, 0, 0, 0, NULL, 11, 9, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(569, 'EDISON ENRIQUE', 'ORTEGA ', 'PEREZ ', 9567268, 76112370, 0, 0, 0, 0, NULL, 12, 0, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(570, 'RAUL ARMANDO ', 'ROBLERO ', 'ASTORGA', 10597439, 78748930, 0, 0, 0, 0, NULL, 12, 27, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(571, 'CRISTIAN O. ', 'ZEBALLOS ', 'LONCONAO', 25, 78748930, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(572, 'LEONEL PATRICI', 'SANTANDER', 'JOFRE ', 0, 76112370, 0, 0, 0, 0, NULL, 13, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(573, 'RUBEN ENRIQUE', 'ARAYA ', 'SAAVEDRA', 7098518, 78748930, 0, 0, 0, 0, NULL, 14, 14, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(574, 'IVAN MARCELO', 'TRONCOSO ', 'LEVERONE ', 9932899, 76112370, 0, 0, 0, 0, NULL, 14, 0, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(575, 'TOMAS LEONARDO ', 'BRAVO ', 'MORALES', 9930313, 78748930, 0, 0, 0, 0, NULL, 15, 15, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(576, 'VICENCIO LIZAMA ', 'MAURICIO ', 'ENRIQ', 0, 76112370, 0, 0, 0, 0, NULL, 15, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(577, 'JORGE ALEX ', 'CERDA ', 'BRAVO', 0, 78748930, 0, 0, 0, 0, NULL, 16, 16, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(578, 'JOSE LUIS', 'TABILO ', 'OLGUIN', 8942943, 76112370, 0, 0, 0, 0, NULL, 16, 0, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(579, 'JUAN MARCELO ', 'GONZALEZ ', 'CABRERA', 0, 78748930, 0, 0, 0, 0, NULL, 17, 18, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(580, 'JUAN', 'LOPEZ ', 'OLIVARES ', 8163590, 76112370, 0, 0, 0, 0, NULL, 17, 0, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(581, 'MARIN', 'GUILLERMO ', 'NAVARRO ', 0, 76112370, 0, 0, 0, 0, NULL, 18, 0, 9, 0, 0, NULL, 1, 1, 1, 1, 0),
+(582, 'MOISES ALEJANDRO ', 'CUELLO ', 'SAA', 0, 78748930, 0, 0, 0, 0, NULL, 18, 6, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(583, 'EDUARDO ', 'BASAEZ ', 'OSORIO', 29, 78748930, 0, 0, 0, 0, 0, 0, 19, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(584, 'JAIME ALBERTO', 'VICENCIO ', 'LIZAMA ', 7767374, 76112370, 0, 0, 0, 0, NULL, 19, 0, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(585, 'ROBINSON URBINA ALFARO', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 20, 20, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(586, 'JORGE', 'ROJAS', 'LAZO', 0, 76112370, 0, 0, 0, 0, 0, 20, 0, 0, 1, 0, 0, 1, 1, 1, 1, 3),
+(587, 'GUILLERMO NAVARRO MARIN', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 21, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(588, 'JORGE CORNEJO TORO', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 22, 21, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(589, 'PABLO TONCOSO', '', NULL, 0, 76112370, 0, NULL, NULL, NULL, NULL, 22, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(590, 'CRISTIAN RODRIGO', 'UGALDE ', 'VALDEBENITO', 14416046, 76112370, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(591, 'IVAN TRONCOSO LEVERONE', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 23, 23, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(592, 'AMERICO', ' SALINAS', ' ', 11, 78748930, 0, 0, 0, 0, 0, 0, 37, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(593, 'CLAUDIO ALADINO', 'ROBLES', 'VENEGAS', 16109216, 76112370, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(594, 'JUAN CARLOS ', 'PACHECO', 'VASQUEZ', 15097833, 76112370, 0, 0, 0, 0, NULL, 25, 0, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(595, 'MARIO MANZO BARRAZA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 25, 25, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(596, 'JORGE FERNANDEZ MORALES', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 26, 38, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(597, 'PEDRO GARCIA HENRIQUEZ', '', NULL, 0, 76112370, 0, NULL, NULL, NULL, NULL, 26, 0, 6, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(598, 'JAIME QUIÑONES', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 27, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(599, 'JAIRO JESUS MORALES CARUNCHO', '', NULL, 0, 76112370, 0, NULL, NULL, NULL, NULL, 27, 0, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(600, 'PEREZ SAINTIS ALVARO', '', NULL, 0, 76112370, 0, NULL, NULL, NULL, NULL, 28, 0, 9, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(601, 'VICTOR SILVA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 28, 35, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(602, 'RAMON ALEXIS', 'CARROZA ', 'COFRE ', 10259898, 76112370, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(603, 'JIMMY ANTONIO CABRERA CARROZA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 29, 43, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(604, 'JORGE', 'FLORES ', 'GUTIERREZ ', 30, 76112370, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 1, 1, 1, 1, 2),
+(605, 'LUIS SOTO', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 30, 35, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(606, 'MAURICIO ENRIQUE', 'VICENCIO ', 'LIZAMA', 6888286, 78748930, 0, 0, 0, 0, NULL, 31, 30, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(607, 'SAAVEDRA HECTOR', '', NULL, 0, 76112370, 0, NULL, NULL, NULL, NULL, 31, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(608, 'RICARDO ARSENIO DONOSO MUÑOZ', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 32, 43, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(609, 'SALINAS MANUEL', '', NULL, 0, 76112370, 0, NULL, NULL, NULL, NULL, 32, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(610, 'MARCO ANTONIO PALACIOS FLORES', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 33, 18, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(611, 'LARRY ENZO FUENTES PINTO', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 34, 34, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(612, 'MIGUEL ANGEL', 'LOBOS ', 'MIRANDA', 8588136, 78748930, 0, 0, 0, 0, NULL, 35, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(613, 'DARWIN ', 'BOZO ', 'MOLINA', 28, 78748930, 0, 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(614, 'LEONEL ENRIQUE', 'NIETO ', 'OLIVARES', 9933549, 78748930, 0, 0, 0, 0, NULL, 37, 42, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(615, 'JAIME PATRICIO QUIÑONES ASTUDI', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 38, 35, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(616, 'DANIEL ', 'ABARCA', '  ', 26, 78748930, 0, 0, 0, 0, 0, 0, 37, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(617, 'MIGUEL ANGEL ', 'RIOS', 'BECERRA', 15061453, 78748930, 0, 0, 0, 0, NULL, 40, 18, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(618, 'GUILLERMO', 'ARRATIA ', 'ARMIJO', 4319694, 78748930, 0, 0, 0, 0, NULL, 41, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(619, 'JUAN BERNALES LOPEZ', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 42, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(620, 'JOSE CACERES GOMEZ', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 43, 1, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(621, 'PEDRO MIGUEL', 'CACERES ', 'GOMEZ', 10004005, 78748930, 0, 0, 0, 0, NULL, 44, 24, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(622, 'MARCO ALEJANDRO', 'CORTES ', 'DONOSO', 14461020, 78748930, 0, 0, 0, 0, NULL, 45, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(623, 'JAVIER ELIAS', 'CORTES ', 'CORTES', 11384637, 78748930, 0, 0, 0, 0, NULL, 46, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(624, 'VICTOR OLIVARES LEON', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 47, 17, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(625, 'MANUEL JESUS', 'JORQUERA', 'NUÑEZ', 7916445, 78748930, 0, 0, 0, 0, NULL, 48, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(626, 'JORGE MARCELO ', 'LOPEZ ', 'OSORIO', 8572164, 78748930, 0, 0, 0, 0, NULL, 49, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(627, 'ALVARO', 'LOPEZ', 'OSORIO', 12, 78748930, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(628, 'JONATHAN MARDONES GARRIDO', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 51, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(629, 'JULIO ALBERTO', 'VILLANEA ', 'CABRERA', 9173533, 78748930, 0, 0, 0, 0, NULL, 52, 5, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(630, 'ORLANDO HENRIQUEZ LOBOS', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 53, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(631, 'PATRICIO DE JESUS', 'JILL', 'ZUÑIGA', 7757016, 78748930, 0, 0, 0, 0, NULL, 54, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(632, 'MANUEL FERNANDO', 'BALLADARES ', 'MORALES', 0, 78748930, 0, 0, 0, 0, NULL, 55, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(633, 'MOISES CUELLO SAA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 56, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(634, 'MANUEL ALFONSO', 'ARAOS ', 'NORAMBUENA', 8676857, 78748930, 0, 0, 0, 0, NULL, 57, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(635, 'ARTURO OMAR', 'QUIROGA', 'GUTIERREZ', 7391883, 78748930, 0, 0, 0, 0, NULL, 58, 16, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(636, 'CARLOS ', 'MALTINA ', 'DIAZ', 21, 78748930, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(637, 'SANDRO YURI DROGUETT ROJAS', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 60, 17, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(638, 'FRANCISCO PATRICIO ', 'SOTO ', 'BASTIA', 32, 78748930, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(639, 'JORGE ARANCIBIA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 62, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(640, 'JULIO CESAR', 'OSORIO ', 'CIUFFARDI', 6777495, 78748930, 0, 0, 0, 0, NULL, 63, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(641, 'RAFAEL ALEJANDRO LUCO ARACENA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 64, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(642, 'JUAN CARLOS AVILA OLGUIN', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 65, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(643, 'LAUTARO GILBERTO VALENCIA ROJA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 66, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(644, 'ROBINSON GABRIEL HERRERA NEIRA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 67, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(645, 'SANTIAGO CONTRERAS CASTILLO', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 68, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(646, 'HILDA JACQUELINE', 'ZUÑIGA ', 'MENA', 8191539, 78748930, 0, 0, 0, 0, NULL, 69, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(647, 'ARMANDO ', 'VERDUGO ', 'ACEVEDO', 14, 78748930, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(648, 'OFICINA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 71, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(649, 'JOSE MIGUEL SAN MARTIN ARANCIB', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 72, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(650, 'JAIME ALFONZO', 'NUÑEZ ', 'BOLBARAN', 4974513, 78748930, 0, 0, 0, 0, NULL, 73, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 0),
+(651, 'RUBEN SEPULVEDA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 74, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(652, 'MANUEL VERGARA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 75, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(653, 'WALTER PUEYES GONZALEZ', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 76, 26, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(654, 'LUIS SILVA HENRIQUEZ', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 77, 0, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(655, 'CARLOS ALBERTO ', 'GUAJARDO ', 'MORALE', 19, 78748930, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(656, 'FELIX ALAMIRO', 'CANELO', 'COFRE', 8262438, 78748930, 0, 0, 0, 0, 0, 0, 29, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(657, 'JUAN CARLOS SILVA ROJAS', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 80, 28, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(658, 'PEDRO GAETE GUTIERREZ', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 81, 40, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(659, 'GAMALIEL ESCUDERO MEZA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 82, 29, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(660, 'HECTOR ROLANDO ', 'ALFARO ', 'LAGOS', 8480965, 78748930, 0, 0, 0, 0, NULL, 83, 22, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(661, 'EDUARDO DEL CARMEN', 'VILLEGAS ', 'ORELLANA', 8289904, 78748930, 0, 0, 0, 0, 0, 0, 32, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(662, 'ANDRES ', 'OLIVARES ', 'TORREALBA', 13, 78748930, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(663, 'RICARDO ESTEBAN', 'CALDERON', 'MEDINA', 10591629, 78748930, 0, 0, 0, 0, NULL, 86, 13, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(664, 'MIGUEL ANDRES MADRID SALAS', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 87, 33, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(665, 'GUILLERMO P. GOMEZ CALLET', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 88, 18, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(666, 'MARIO ENRIQUE', 'GUERRERO ', 'MARTINEZ', 9067237, 78748930, 0, 0, 0, 0, NULL, 89, 31, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(667, 'RICARDO ESTEBAN ', 'GAETE ', 'GUTIERREZ', 13109445, 78748930, 0, 0, 0, 0, NULL, 90, 34, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(668, 'BODEGA CENTRAL', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 91, 34, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(669, 'CARLOS ALBERTO ', 'LEYTON ', 'GONZALEZ', 20, 78748930, 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(670, 'ORLANDO LEYTON GONZALEZ', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 93, 35, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(671, 'PATRICIO ARANCIBIA MENA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 94, 37, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(672, 'JOSE IGNACIO LOPEZ ARAYA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 95, 38, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(673, 'RODRIGO A.POBLETE CARRASCO', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 96, 23, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(674, 'GUILLERMO MENA SALAZAR', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 97, 35, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(675, 'VICTOR HENRIQUEZ BUSTOS', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 98, 37, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(676, 'SIN COBRADOR', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 99, 35, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(677, 'JULIO ALBERTO', 'VILLANEA', 'CABRERA', 9173533, 78748930, 0, 0, 0, 0, NULL, 100, 7, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(678, 'FRANCISCO NAZEL ', 'MUÑOZ ', 'GIL', 31, 78748930, 0, 0, 0, 0, 0, 0, 20, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(679, 'PATRICIO ANDRES DIAZ DIAZ', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 102, 37, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(680, 'LORENZO CORTES', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 103, 34, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(681, 'PABLO SANTANA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 104, 26, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(682, 'JUAN FRANCISCO', 'GAUBERT', 'RAMOS', 8502488, 78748930, 0, 0, 0, 0, 0, 0, 17, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(683, 'LUIS ALBERTO ', 'JARPA ', 'CORTES', 12160891, 78748930, 0, 0, 0, 0, NULL, 106, 34, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(684, 'GONZALO ANDRES', 'ASTUDILLO', ' DIAZ ', 15, 78748930, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(685, 'GABRIEL IG. ', 'ARACENA ', 'GUTIERREZ', 34, 78748930, 0, 0, 0, 0, 0, 0, 21, 9, 0, 0, 0, 1, 1, 1, 1, 2),
+(686, 'RONY', 'BRITO ', 'JELDES ', 17, 78748930, 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(687, 'DANIEL ', 'CARRASCO', ' ', 27, 78748930, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 1, 1, 1, 1, 2),
+(689, 'JOSE QUEZADA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 112, 33, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(690, 'PABLO ROJAS', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 113, 26, 0, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(691, 'JORGE CARROZA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 114, 36, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(692, 'CESAR ', 'SALGADO', ' ', 22, 78748930, 0, 0, 0, 0, 0, 0, 26, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(693, 'YAITE JAIME', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 116, 34, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(694, 'PARADA JUAN', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 117, 35, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(695, 'JAVIER', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 118, 0, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(696, 'CLAUDIO ', 'FORNES ', 'CASTILLO', 23, 78748930, 0, 0, 0, 0, 0, 0, 35, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(697, 'BERNARDO ALFONSO', 'OLIVA', 'AYALA', 6900724, 78748930, 0, 0, 0, 0, 0, 0, 36, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(698, 'JOSE DANIEL', 'GODOY ', 'GAYOSO', 11592004, 78748930, 0, 0, 0, 0, NULL, 121, 44, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(699, 'CRISTIAN', 'MUÑOZ', ' ', 24, 78748930, 0, 0, 0, 0, 0, 0, 35, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(700, 'ROBERTO ALLAN', 'SOTO ', 'MORENO', 16251013, 78748930, 0, 0, 0, 0, NULL, 123, 0, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(701, 'HERRERA MARCO', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 124, 45, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(702, 'NIVALDO RIGOBERTO', 'VERGARA', 'VILLARROEL', 6781593, 76112370, 0, 0, 0, 1, 0, 200, 0, 7, 6, 0, 7, 1, 1, 1, 1, 4),
+(703, 'SANTIAGO ALEJANDRO', 'CONTRERAS', 'CASTILLO', 9889232, 76112370, 0, 0, 0, 0, NULL, 201, 0, 7, 0, 0, NULL, 1, 1, 1, 1, 0),
+(704, 'HUGO EDUARDO', 'ABARZUA', 'FUENTEALBA', 11402127, 76112370, 0, 0, 0, 0, NULL, 202, 0, 7, 0, 0, NULL, 1, 1, 1, 1, 0),
+(705, 'MOISES ALEJANDRO', 'CUELLO', 'SAA', 10514918, 76112370, 0, 0, 0, 0, NULL, 203, 0, 7, 0, 0, NULL, 1, 1, 1, 1, 0),
+(706, 'ANANIAS VICTOR', 'BUSTAMANTE ', 'YEGES', 9061339, 76112370, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 1, 1, 1, 1, 2),
+(707, 'JONATHAN VERDEJO REYES', '', NULL, 0, 76112370, 0, NULL, NULL, NULL, NULL, 205, 8, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(708, 'RODRIGO MILLAHUEQUE MENA', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 206, 33, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(709, 'MARCELO HUGO', 'RIVEROS', 'BRAVO', 12038159, 78748930, 0, 0, 0, 0, NULL, 207, 28, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(710, 'VICTOR OLIVARES', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 208, 33, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(711, 'MAURICIO EDGARDO', 'CUELLO ', 'GUERRA ', 9142168, 76112370, 0, 0, 0, 0, 0, 0, 8, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(712, 'ROBERTO CARLOS', 'NUÑEZ ', 'FABIER', 8298387, 78748930, 0, 0, 0, 0, NULL, 210, 33, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(713, 'JAIME LUCO GONZALEZ', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 211, 35, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(714, 'HECTOR SAAVEDRA URRA', '', NULL, 0, 76112370, 0, NULL, NULL, NULL, NULL, 212, 45, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(715, 'ENRIQUE ERNESTO', 'DROGUETT', 'ROJAS', 9291914, 76112370, 0, 0, 0, 0, 0, 0, 19, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(716, 'SERGIO LEONEL', 'TRONCOSO ', 'LEVERONE', 7297052, 78748930, 0, 0, 0, 0, NULL, 214, 29, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(717, 'JOSUE AHIEZER', 'CONTRERAS ', 'MENDEZ', 18680364, 78748930, 0, 0, 0, 0, NULL, 215, 43, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(718, 'ALEJANDRO ', 'ROJAS ', 'CARVAJAL', 17643113, 76112370, 0, 0, 0, 3, 0, 0, 18, 10, 0, 0, 0, 1, 1, 1, 1, 2),
+(719, 'JOSE FUENTES MORALES', '', NULL, 0, 78748930, 0, NULL, NULL, NULL, NULL, 217, 0, 10, NULL, NULL, NULL, 1, 1, 1, 1, 0),
+(720, 'ROBERTO ALEJANDRO', 'OLGUIN ', 'VALLE', 16602227, 76112370, 0, 0, 0, 0, NULL, 218, 3, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(721, 'JOSE ADAM', 'AYERBE ', 'BELLIDO ', 22008879, 78748930, 0, 0, 0, 0, NULL, 219, 33, 10, 0, 0, NULL, 1, 1, 1, 1, 0),
+(722, 'ABIGAIL DAMARIS', 'TORDECILLA', 'GUTIERREZ', 18704654, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 4),
+(723, 'ALEJANDRA BETZABE', 'RIOS', 'GUERRERO', 16486911, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 4),
+(724, 'ALEXIS EUGENIO', 'BALLADARES', 'MORALES', 8926900, 76112370, 0, 62, 0, 1, 10, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1),
+(725, 'ANA ALEJANDRA', 'VELOZO ', 'BOZA', 15752557, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 4),
+(726, 'ARNOLDO DAVID', 'VALERO ', 'GALLARDO', 10552433, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(728, 'CAMILA FERNANDA', 'LEAL ', 'MUÑOZ', 17142907, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(729, 'CARLOS ENRIQUE', 'ROJAS ', 'VERA', 9329265, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(730, 'CARLOS HERNAN', 'CHAMORRO ', 'SILVA', 6333122, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(731, 'CAROL ANDREA ', 'LETELIER ', 'GUERRERO', 18033487, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 4),
+(732, 'CESAR ANTONIO', 'HORMAZABAL ', 'SANZANA', 11389952, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(733, 'CLAUDIO DANILO ', 'VALDEBENITO ', 'CELEDON', 13634674, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(734, 'CLAUDIO FELIPE', 'TRONCOSO', 'LEVERONE', 9302326, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(735, 'ELIZABETH ALEJANDRA', 'HANGLIN ', 'REYES', 18032941, 78748930, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 0, 1, 1, 4),
+(736, 'ELOISA ERNESTINA', 'PEREIRA ', 'VEAS', 8932672, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(737, 'ENRIQUE LUIS', 'BAÑADOS ', 'LEIRO', 9774469, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(738, 'EUGENIO CESAR ', 'BAHAMONDES ', 'TORRES', 7733426, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(739, 'EVELYN ANDREA', 'SALGADO', 'QUAAS', 13996987, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 0, 0, 1, 1, 4),
+(740, 'FABIAN ALEJANDRO', 'BALLADARES ', 'GARRIDO', 14456300, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(741, 'FELIX ANTONIO', 'MARCHANT ', 'VALLE', 8933372, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(742, 'FERMIN JESUS', 'FERNANDEZ ', 'FUENZALIDA', 9551967, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(743, 'GABRIEL LUIS', 'PONCE ', 'FERNANDEZ', 11624593, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(744, 'GALO', 'LETELIER ', 'MARGARIT', 8350922, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(745, 'GUILLERMO ANTONIO', 'LEIVA ', 'NUÑEZ', 9562622, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(746, 'HECTOR MAURICIO', 'GONZALEZ ', 'NUÑEZ', 9922506, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(747, 'HUGO CESAR', 'CERDA ', 'DIAZ', 16108196, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(748, 'IGNACIO ENRIQUE', 'ROSALES ', 'OLIVARES', 16332971, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(749, 'ISMAEL ADOLFO', 'MOLINA ', 'ROJAS', 16143537, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 4),
+(750, 'JAIME EDGARDO', 'FUENZALIDA ', 'FARIAS', 7237139, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(751, 'JAVIER EDUARDO', 'RUZ ', 'GONZALEZ', 15126287, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 4),
+(752, 'JESSICA ALEJANDRA', 'LOBOS ', 'GONZALEZ', 17160355, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 4),
+(753, 'JORGE HUMBERTO', 'ROJAS ', 'VERA', 9442995, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(754, 'JOSE LUIS', 'TORRES ', 'MILLAHUEQUE', 10981647, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(755, 'JOSE RAFAEL', 'JARPA ', 'CARTES', 11299379, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(756, 'JOSE RAMON', 'ALMONACID ', 'VALENZUELA', 15555403, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(757, 'JUAN CARLOS', 'ALVAREZ ', 'PIZARRO', 7651026, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(758, 'JUANA AMALIA', 'SALGADO ', 'DANIEL', 9309102, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(759, 'MARIA DEL PILAR', 'HERNANDEZ', 'JAMET', 9457886, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(760, 'MARIA SOLEDAD ', 'ALVAREZ', 'BRICEÑO', 7753166, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(761, 'MARIO AGUSTIN', 'GUERRA', 'MUÑOZ', 5613510, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(762, 'MARISOL SOLEDAD', 'DIAZ', 'CUEVAS', 9890149, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(763, 'MIGUEL SEGUNDO', 'CONTRERAS ', 'FERRADA', 8158456, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(764, 'ORIANA MARITZA', 'FERNANDEZ ', 'MORALES', 9806661, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(765, 'PABLA ANDREA', 'BERNAL ', 'VEGA', 16035068, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(766, 'PABLO ANDRES', 'CAROCA ', 'GARRIDO', 16487368, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(767, 'PABLO MAURICIO', 'TRONCOSO ', 'LEVERONE', 9302326, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(768, 'PATRICIA AURORA', 'DIAZ ', 'CUEVAS', 10352710, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(769, 'PATRICIA EUGENIA', 'BEROIZA ', 'SANDOVAL', 7956331, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(770, 'RAUL ANDRES', 'JAÑA ', 'ALIAGA', 17796983, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(771, 'RODOLFO ANTONIO', 'LEIVA ', 'TORREALBA', 7916445, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(772, 'ROLANDO RAUL', 'FLORES ', 'BRAVO', 7641312, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(773, 'ROSA ALVARA ELENA', 'MUÑOZ ', 'PUGA', 7336947, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(774, 'TRISTAN JOSHUA', 'MUÑOZ ', 'LEAL', 17790205, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(775, 'TRISTAN MARCIAL', 'MUÑOZ ', 'FUENTES', 7069804, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(776, 'VLADIMIR JAVIER ', 'CONTRERAS ', 'VALENZUELA', 13197605, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(777, 'YENNIFER ANDREA', 'LLANOS ', 'ALLENDE', 13992188, 76112370, 0, 0, 0, 1, NULL, 0, 0, 0, 0, 0, NULL, 1, 1, 1, 1, 1),
+(778, 'PABLO', 'ROMANO', 'FLORES ', 0, 76112370, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 1, 1, 1, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `trabajadores_tienen_cobradores`
+--
+
+CREATE TABLE IF NOT EXISTS `trabajadores_tienen_cobradores` (
+  `rut` int(11) NOT NULL,
+  `cod_cobrador` int(11) NOT NULL,
+  `sector_cobrador` int(11) NOT NULL,
+  `comision_cobrador` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `trabajadores_tienen_cobradores`
+--
+
+INSERT INTO `trabajadores_tienen_cobradores` (`rut`, `cod_cobrador`, `sector_cobrador`, `comision_cobrador`) VALUES
+(17643113, 216, 18, 10),
+(8910211, 11, 0, 10),
+(7554410, 10, 0, 10),
+(11, 24, 37, 0),
+(12, 50, 11, 0),
+(9061339, 204, 0, 4),
+(13, 85, 30, 0),
+(9434060, 1, 0, 10),
+(0, 70, 0, 0),
+(14, 70, 0, 0),
+(8064570, 10, 25, 10),
+(15, 107, 26, 0),
+(16, 5, 37, 0),
+(6900724, 120, 36, 10),
+(17, 109, 36, 0),
+(18, 5, 0, 0),
+(19, 78, 0, 0),
+(20, 92, 36, 0),
+(21, 59, 0, 0),
+(10259898, 29, 0, 10),
+(22, 115, 26, 10),
+(18, 111, 16, 0),
+(23, 119, 35, 10),
+(16109216, 24, 0, 10),
+(24, 122, 35, 10),
+(25, 13, 13, 0),
+(14416046, 23, 0, 10),
+(9142168, 209, 8, 10),
+(26, 39, 37, 0),
+(27, 110, 26, 0),
+(28, 36, 27, 0),
+(29, 19, 19, 10),
+(8289904, 84, 32, 10),
+(9291914, 213, 19, 10),
+(8262438, 79, 29, 0),
+(12954858, 9, 0, 9),
+(10435781, 6, 6, 10),
+(30, 30, 0, 9),
+(8502488, 105, 17, 10),
+(31, 101, 20, 10),
+(32, 61, 0, 0),
+(33, 9, 9, 0),
+(34, 108, 21, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `trabajadores_tienen_empresa`
+--
+
+CREATE TABLE IF NOT EXISTS `trabajadores_tienen_empresa` (
+  `rut` int(11) NOT NULL,
+  `empe_rut` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `trabajadores_tienen_empresa`
+--
+
+INSERT INTO `trabajadores_tienen_empresa` (`rut`, `empe_rut`) VALUES
+(551, 78748930),
+(551, 76112370),
+(585, 78748930),
+(585, 76112370),
+(587, 78748930),
+(588, 78748930),
+(588, 76112370),
+(589, 78748930),
+(589, 76112370),
+(591, 78748930),
+(591, 76112370),
+(595, 78748930),
+(595, 76112370),
+(596, 78748930),
+(596, 76112370),
+(597, 78748930),
+(597, 76112370),
+(598, 78748930),
+(598, 76112370),
+(599, 78748930),
+(599, 76112370),
+(600, 78748930),
+(600, 76112370),
+(601, 78748930),
+(601, 76112370),
+(603, 78748930),
+(603, 76112370),
+(605, 78748930),
+(605, 76112370),
+(607, 78748930),
+(607, 76112370),
+(608, 78748930),
+(608, 76112370),
+(609, 78748930),
+(609, 76112370),
+(610, 78748930),
+(611, 78748930),
+(615, 78748930),
+(619, 78748930),
+(620, 78748930),
+(624, 78748930),
+(628, 78748930),
+(630, 78748930),
+(633, 78748930),
+(637, 78748930),
+(639, 78748930),
+(641, 78748930),
+(642, 78748930),
+(643, 78748930),
+(644, 78748930),
+(645, 78748930),
+(648, 78748930),
+(649, 78748930),
+(651, 78748930),
+(652, 78748930),
+(653, 78748930),
+(654, 78748930),
+(657, 78748930),
+(658, 78748930),
+(659, 78748930),
+(664, 78748930),
+(665, 78748930),
+(668, 78748930),
+(670, 78748930),
+(671, 78748930),
+(672, 78748930),
+(673, 78748930),
+(674, 78748930),
+(675, 78748930),
+(676, 78748930),
+(679, 78748930),
+(680, 78748930),
+(681, 78748930),
+(688, 78748930),
+(689, 78748930),
+(690, 78748930),
+(691, 78748930),
+(693, 78748930),
+(694, 78748930),
+(695, 78748930),
+(701, 78748930),
+(707, 76112370),
+(708, 78748930),
+(710, 78748930),
+(713, 78748930),
+(714, 76112370),
+(719, 78748930),
+(722, 76112370),
+(549, 76112370),
+(549, 78748930),
+(550, 76112370),
+(550, 78748930),
+(553, 76112370),
+(553, 78748930),
+(558, 76112370),
+(558, 78748930),
+(559, 76112370),
+(559, 78748930),
+(561, 76112370),
+(561, 78748930),
+(572, 76112370),
+(572, 78748930),
+(576, 76112370),
+(576, 78748930),
+(577, 76112370),
+(577, 78748930),
+(579, 76112370),
+(579, 78748930),
+(581, 76112370),
+(581, 78748930),
+(582, 76112370),
+(582, 78748930),
+(723, 76112370),
+(725, 76112370),
+(726, 76112370),
+(635, 78748930),
+(727, 76112370),
+(728, 76112370),
+(729, 76112370),
+(730, 76112370),
+(731, 76112370),
+(704, 76112370),
+(704, 78748930),
+(732, 76112370),
+(733, 76112370),
+(734, 76112370),
+(569, 76112370),
+(569, 78748930),
+(735, 78748930),
+(736, 76112370),
+(737, 76112370),
+(738, 76112370),
+(739, 76112370),
+(740, 76112370),
+(741, 76112370),
+(742, 76112370),
+(743, 76112370),
+(744, 76112370),
+(618, 78748930),
+(745, 76112370),
+(746, 76112370),
+(660, 78748930),
+(646, 78748930),
+(747, 76112370),
+(748, 76112370),
+(749, 76112370),
+(574, 76112370),
+(574, 78748930),
+(568, 76112370),
+(568, 78748930),
+(584, 76112370),
+(584, 78748930),
+(750, 76112370),
+(751, 76112370),
+(623, 78748930),
+(752, 76112370),
+(753, 76112370),
+(626, 78748930),
+(721, 78748930),
+(650, 78748930),
+(698, 78748930),
+(578, 76112370),
+(578, 78748930),
+(754, 76112370),
+(683, 78748930),
+(755, 76112370),
+(756, 76112370),
+(717, 78748930),
+(580, 76112370),
+(580, 78748930),
+(757, 76112370),
+(594, 76112370),
+(594, 78748930),
+(758, 76112370),
+(629, 78748930),
+(677, 78748930),
+(640, 78748930),
+(614, 78748930),
+(634, 78748930),
+(632, 78748930),
+(625, 78748930),
+(709, 78748930),
+(562, 76112370),
+(562, 78748930),
+(622, 78748930),
+(759, 76112370),
+(760, 76112370),
+(761, 76112370),
+(666, 78748930),
+(552, 76112370),
+(552, 78748930),
+(762, 76112370),
+(606, 76112370),
+(606, 78748930),
+(612, 78748930),
+(617, 78748930),
+(763, 76112370),
+(705, 76112370),
+(705, 78748930),
+(548, 76112370),
+(548, 78748930),
+(764, 76112370),
+(765, 76112370),
+(766, 76112370),
+(767, 76112370),
+(768, 76112370),
+(769, 76112370),
+(631, 78748930),
+(621, 78748930),
+(770, 76112370),
+(570, 76112370),
+(570, 78748930),
+(667, 78748930),
+(663, 78748930),
+(720, 76112370),
+(700, 78748930),
+(712, 78748930),
+(771, 76112370),
+(772, 76112370),
+(773, 76112370),
+(573, 76112370),
+(573, 78748930),
+(703, 76112370),
+(703, 78748930),
+(560, 76112370),
+(560, 78748930),
+(716, 78748930),
+(575, 76112370),
+(575, 78748930),
+(774, 76112370),
+(775, 76112370),
+(776, 76112370),
+(777, 76112370),
+(586, 76112370),
+(778, 76112370),
+(702, 76112370),
+(702, 78748930),
+(554, 76112370),
+(554, 78748930),
+(718, 76112370),
+(724, 76112370),
+(724, 78748930),
+(567, 76112370),
+(566, 76112370),
+(592, 76112370),
+(592, 78748930),
+(627, 78748930),
+(706, 76112370),
+(706, 78748930),
+(662, 78748930),
+(547, 76112370),
+(547, 78748930),
+(647, 78748930),
+(565, 76112370),
+(565, 78748930),
+(684, 78748930),
+(555, 76112370),
+(555, 78748930),
+(697, 78748930),
+(686, 78748930),
+(655, 78748930),
+(669, 78748930),
+(636, 78748930),
+(602, 76112370),
+(602, 78748930),
+(692, 78748930),
+(556, 76112370),
+(556, 78748930),
+(696, 78748930),
+(593, 76112370),
+(593, 78748930),
+(699, 78748930),
+(571, 76112370),
+(571, 78748930),
+(590, 76112370),
+(590, 78748930),
+(711, 76112370),
+(616, 78748930),
+(687, 78748930),
+(613, 78748930),
+(583, 76112370),
+(583, 78748930),
+(661, 78748930),
+(715, 76112370),
+(656, 76112370),
+(656, 78748930),
+(563, 76112370),
+(563, 78748930),
+(557, 76112370),
+(557, 78748930),
+(604, 76112370),
+(604, 78748930),
+(682, 78748930),
+(678, 78748930),
+(638, 78748930),
+(564, 76112370),
+(564, 78748930),
+(685, 78748930);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `trabajadores_tienen_supervisores`
+--
+
+CREATE TABLE IF NOT EXISTS `trabajadores_tienen_supervisores` (
+  `rut` int(11) NOT NULL,
+  `cod_supervisor` int(11) NOT NULL,
+  `sector_supervisor` int(11) NOT NULL,
+  `comision_supervisor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `trabajadores_tienen_vendedores`
+--
+
+CREATE TABLE IF NOT EXISTS `trabajadores_tienen_vendedores` (
+  `rut` int(11) NOT NULL,
+  `cod_vendedor` int(11) NOT NULL,
+  `sector_vendedor` int(11) NOT NULL,
+  `zona_vendedor` int(11) NOT NULL,
+  `comision_vendedor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `trabajadores_tienen_vendedores`
+--
+
+INSERT INTO `trabajadores_tienen_vendedores` (`rut`, `cod_vendedor`, `sector_vendedor`, `zona_vendedor`, `comision_vendedor`) VALUES
+(9090, 1, 2, 3, 4),
+(8926900, 62, 0, 1, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `usuario_ncorr` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(250) NOT NULL COMMENT 'Nombre',
+  `rut` varchar(50) NOT NULL COMMENT 'Rut',
+  `empe_rut` int(11) NOT NULL COMMENT 'CBOEmpresa',
+  `activo` int(11) NOT NULL,
+  PRIMARY KEY (`usuario_ncorr`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`usuario_ncorr`, `nombre`, `rut`, `empe_rut`, `activo`) VALUES
+(1, 'Pabla Bernal', '16035068-7', 78748930, 1),
+(2, 'Samuel Silva', '15829807-4', 78748930, 1),
+(3, 'javier ruz', '15126287-2', 76112370, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_sistema`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_sistema` (
+  `usu_ncorr` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `usu_login` varchar(50) NOT NULL COMMENT 'Usuario',
+  `usu_pass` varchar(20) NOT NULL COMMENT 'passPassword',
+  `usu_nombre` varchar(100) NOT NULL COMMENT 'Nombre ',
+  `perf_ncorr` int(10) unsigned NOT NULL COMMENT 'CBOPerfil',
+  `usu_sistema` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`usu_ncorr`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Volcado de datos para la tabla `usuarios_sistema`
+--
+
+INSERT INTO `usuarios_sistema` (`usu_ncorr`, `usu_login`, `usu_pass`, `usu_nombre`, `perf_ncorr`, `usu_sistema`) VALUES
+(7, 'ssilva', 'ssilva', 'Samuel Silva', 99, 1),
+(10, 'hcerda', 'hcerda', 'Hugo Cerda', 1, 0),
+(12, 'jruz', 'jruz.,', 'Javier Ruz', 99, 0),
+(13, 'mberasategui', 'mberasategui.,', 'Macarena Berasategui', 99, 1);

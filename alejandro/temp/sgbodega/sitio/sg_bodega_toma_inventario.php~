@@ -1,0 +1,575 @@
+<?php
+session_start();
+
+require_once 'includes/xajax/xajax.inc.php'; //archivo de configuracion de ajax
+include "../includes/php/conf_smarty.php";//archivo de configuracion de smarty
+include "../includes/php/conf_bd.php"; //archivo de coneccion al servidor y base de datos
+//include "../includes/php/conf_bd_antigua.php"; //archivo de coneccion al servidor de yonley
+include "../includes/php/validaciones.php"; 
+
+$xajax = new xajax();
+
+$xajax->setRequestURI("sg_bodega_toma_inventario.php");
+$xajax->setCharEncoding("ISO-8859-1");
+$xajax->decodeUTF8InputOn();
+
+function Grabar($data){
+	global $conexion;
+	global $miSmarty;
+	
+	set_time_limit(500);
+    
+	$objResponse = new xajaxResponse('ISO-8859-1');
+	
+	//$empresa 			= 	$data["OBLI-cboEmpresa"];
+	$familia 			= 	$data["cboFamilia"];
+	$subfamilia			= 	$data["cboSubFamilia"];
+	$codigo				=	$data['txtCodProducto'];
+	
+	$objResponse->addScript("document.getElementById('divlistado').style.display='none';");
+	
+	if (($familia != '') && ($familia != 'Todas')){
+		$and = " and a.ta_familia = '".$familia."'";
+	}
+	if (($subfamilia != '') && ($subfamilia != 'Todas')){
+		$and .= " and a.ta_subfamilia = '".$subfamilia."'";
+	}
+	if (($codigo != '')){
+		$and .= " and a.ta_ncorr = '".$codigo."'";
+	}
+	
+	// busca todos los productos
+	$sql_pd = "select 
+				concat(a.ta_busqueda,' ',a.ta_descripcion) as descripcion,
+				a.ta_ncorr as codigo,
+				a.ta_codigo as codigo_antiguo,
+				a.ta_familia as familia,
+				a.ta_subfamilia as subfamilia,
+				b.fa_nombre as nombre_familia,
+				c.sf_nombre as nombre_subfamilia
+				
+				from 
+				sgbodega.tallasnew a, sgbodega.familias b, sgbodega.subfamilias c
+				
+				where
+				a.ta_empresa != '' and
+				a.ta_estado = '1' and
+				a.ta_familia != '' and a.ta_subfamilia != '' and
+				a.ta_familia = b.fa_codigo and
+				a.ta_subfamilia = c.sf_subcodigo 
+				$and 
+				
+				order by b.fa_nombre asc, c.sf_nombre asc, descripcion asc";
+	
+	$res_pd = mysql_query($sql_pd, $conexion) or die(mysql_error());
+	if (mysql_num_rows($res_pd) > 0){
+		$arrRegistros		= 	array();
+		$i 					= 	1;
+		$movim_bodega		=	$_SESSION['alycar_sgyonley_bodega'];
+		while ($line_pd = mysql_fetch_row($res_pd)) {
+			
+			$codigo_antiguo = $line_pd[2];
+			$familia 		= $line_pd[5];
+			$subfamilia 	= $line_pd[6];
+			$codigo = $line_pd[1];
+			$codigo_antiguo = $line_pd[2];
+			
+			//14/10/2010 se saca el filtro por empresa (b.empe_rut = '".$empresa."' and)		
+			//busca todos los aumentos a bodega central (movim 1)
+			$sql_saumentos 	= "select  mdet_cantidad as cantidad
+						from 
+						sgcompras.movim_detalle a, sgcompras.movim b
+					
+						where
+						a.mdet_codigo = '".$codigo."' and
+						a.movim_ncorr = b.movim_ncorr and
+						b.movim_tipo = '1' and
+						b.movim_estado = 'FINALIZADO' and
+						b.movim_bodega = '".$movim_bodega."' and
+						a.mdet_nu in ('N','U')";
+			$res_saumentos 	= 	mysql_query($sql_saumentos, $conexion) or die(mysql_error());
+			$aumentos_n 	= 	0;
+			$aumentos_u 	= 	0;
+			while ($line_saumentos = mysql_fetch_row($res_saumentos)) {
+				$cantidad	= 	$line_saumentos[0];
+				$aumentos_n 	= 	$aumentos_n + $cantidad;
+			}
+			
+			//busca todos los aumentos por devoluciones de vendedor (movim 4)
+			$sql_dev_vend 	= "select  mdet_cantidad as cantidad
+						from 
+						sgcompras.movim_detalle a, sgcompras.movim b
+						
+						where
+						a.mdet_codigo = '".$codigo."' and
+						a.movim_ncorr = b.movim_ncorr and
+						b.movim_tipo = '4' and
+						b.movim_bodega = '".$movim_bodega."' and
+						b.movim_estado = 'FINALIZADO' and
+						a.mdet_nu in ('N','U')";
+			$res_dev_vend 	= 	mysql_query($sql_dev_vend, $conexion);
+			$dev_vend_n 	= 	0;
+			$dev_vend_u 	= 	0;
+			while ($line_dev_vend = mysql_fetch_row($res_dev_vend)) {
+				$cantidad	= 	$line_dev_vend[0];
+				$dev_vend_n 	= 	$dev_vend_n + $cantidad;
+			}
+			//fin
+			
+			//busca todos los aumentos por traspasos desde (movim 8)
+			$sql_trasp 	= "select  mdet_cantidad as cantidad
+						from 
+						sgcompras.movim_detalle a, sgcompras.movim b
+						
+						where
+						a.mdet_codigo = '".$codigo."' and
+						a.movim_ncorr = b.movim_ncorr and
+						b.movim_tipo = '8' and
+						b.movim_estado = 'FINALIZADO' and
+						b.movim_bodega = '".$movim_bodega."' and
+						a.mdet_nu in ('N','U','') and 
+						mdet_conf_tras = 1
+						";
+			$res_trasp 	= 	mysql_query($sql_trasp, $conexion);
+			$trasp_n 	= 	0;
+			$trasp_u 	= 	0;
+			while ($line_trasp = mysql_fetch_row($res_trasp)) {
+				$cantidad	= 	$line_trasp[0];
+				$trasp_n 	= 	$trasp_n + $cantidad;
+				
+			}
+			//fin
+
+			//busca todos los aumentos por traspasos hacia (movim 8)
+			$sql_trasp_tras	= "select  mdet_cantidad as cantidad
+						from 
+						sgcompras.movim_detalle a, sgcompras.movim b
+						
+						where
+						a.mdet_codigo = '".$codigo."' and
+						a.movim_ncorr = b.movim_ncorr and
+						b.movim_tipo = '8' and
+						b.movim_estado = 'FINALIZADO' and
+						b.movim_bodega_tras = '".$movim_bodega."' and
+						a.mdet_nu in ('N','U','') 
+						";
+			$res_trasp_tras 	= 	mysql_query($sql_trasp_tras, $conexion);
+			$trasp_n_tras 	= 	0;
+			$trasp_u_tras 	= 	0;
+			while ($line_trasp_tras = mysql_fetch_row($res_trasp_tras)) {
+				$cantidad	= 	$line_trasp_tras[0];
+				$trasp_n_tras 	= 	$trasp_n_tras + $cantidad;
+				
+			}
+			//fin
+
+			//busqueda por codigo nuevo
+			if ($movim_bodega == '1'){			
+				$sql_dev_clienew 	= "select b.sv_nu as nu, b.sv_cantidad as cantidad
+								from 
+								sgyonley.d_guiadev a, sgyonley.sub_guiadev b
+								where
+								b.sv_codbus = '".$codigo."' and
+								b.sv_conf_bodega = 'SI' and 
+								b.sv_guiadv = a.gd_guia and
+								a.tdev_ncorr = '1'";
+			
+				$res_dev_clienew 	= 	mysql_query($sql_dev_clienew, $conexion);
+				$dev_clie_n_new 	= 	0;
+				$dev_clie_u_new 	= 	0;
+				while ($line_dev_clienew = mysql_fetch_row($res_dev_clienew)) {
+					$cantidad	= 	$line_dev_clienew[1];
+					$dev_clie_n_new 	= 	$dev_clie_n_new + $cantidad;
+				
+				}
+				//fin
+				}
+			//busca decuentos por aumento a vendedor (movim 2)
+			$sql_aum_vend 	= "select  mdet_cantidad as cantidad
+						from 
+						sgcompras.movim_detalle a, sgcompras.movim b
+						
+						where
+						a.mdet_codigo = '".$codigo."' and
+						a.movim_ncorr = b.movim_ncorr and
+						b.movim_tipo = '2' and
+						b.movim_bodega = '".$movim_bodega."' and
+						b.movim_estado = 'FINALIZADO' and
+						a.mdet_nu in ('N','U')";
+			$res_aum_vend 	= 	mysql_query($sql_aum_vend, $conexion);
+			$aum_vend_n 	= 	0;
+			$aum_vend_u 	= 	0;
+			while ($line_aum_vend = mysql_fetch_row($res_aum_vend)) {
+				$cantidad	= 	$line_aum_vend[0];
+				$aum_vend_n 	= 	$aum_vend_n + $cantidad;
+				
+			}
+			//fin
+			
+			//busca decuentos por devolucion a proveedor (movim 3)
+			$sql_dev_pro 	= "select  mdet_cantidad as cantidad
+						from 
+						sgcompras.movim_detalle a, sgcompras.movim b
+						
+						where
+						a.mdet_codigo = '".$codigo."' and
+						a.movim_ncorr = b.movim_ncorr and
+						b.movim_tipo = '3' and
+						b.movim_estado = 'FINALIZADO' and
+						b.movim_bodega = '".$movim_bodega."' and
+						a.mdet_nu in ('N','U')";
+			$res_dev_pro 	= 	mysql_query($sql_dev_pro, $conexion);
+			$dev_pro_n 	= 	0;
+			$dev_pro_u 	= 	0;
+			while ($line_dev_pro = mysql_fetch_row($res_dev_pro)) {
+				$cantidad	= 	$line_dev_pro[0];
+				$dev_pro_n 	= 	$dev_pro_n + $cantidad;
+			}
+			//fin
+			
+			//busca descuentos por cuentas personales (movim 9)
+			$sql_cp 	= "select  mdet_cantidad as cantidad
+						from 
+						sgcompras.movim_detalle a, sgcompras.movim b
+						
+						where
+						a.mdet_codigo = '".$codigo."' and
+						a.movim_ncorr = b.movim_ncorr and
+						b.movim_tipo = '9' and
+						b.movim_estado = 'FINALIZADO' and
+						b.movim_bodega = '".$movim_bodega."' and
+						a.mdet_nu in ('N','U')";
+			$res_cp 	= 	mysql_query($sql_cp, $conexion);
+			$desc_cp_n 	= 	0;
+			while ($line_cp = mysql_fetch_row($res_cp)) {
+				$cantidad	= 	$line_cp[0];
+				$desc_cp_n 	= 	$desc_cp_n + $cantidad;
+			}
+			//fin
+			
+			//ajustes aumentos
+			$sql_ajustes_aumentos 	= "select mdet_cantidad as cantidad
+							from 
+							sgcompras.movim_detalle a, sgcompras.movim b
+						
+							where
+							a.mdet_codigo = '".$codigo."' and
+							a.movim_ncorr = b.movim_ncorr and
+							b.movim_tipo = '12' and
+				 			b.movim_estado = 'FINALIZADO' and
+							b.movim_bodega = '".$movim_bodega."' and
+							a.mdet_nu in ('N','U')";
+			$res_ajustes_saumentos 	= 	mysql_query($sql_ajustes_aumentos, $conexion) or die(mysql_error());
+			$ajuste_aumentos_n 	= 	0;
+			while ($line_ajustes_saumentos = mysql_fetch_row($res_ajustes_saumentos)) {
+				$cantidad	= 	$line_ajustes_saumentos[0];
+				$ajuste_aumentos_n 	= 	$ajuste_aumentos_n + $cantidad;
+			}
+			
+			//ajustes mermas
+			$sql_merma 	= "select mdet_cantidad as cantidad
+						from 
+						sgcompras.movim_detalle a, sgcompras.movim b
+						
+						where
+						a.mdet_codigo = '".$codigo."' and
+						a.movim_ncorr = b.movim_ncorr and
+						b.movim_tipo = '13' and
+						b.movim_estado = 'FINALIZADO' and
+						b.movim_bodega = '".$movim_bodega."' and
+						a.mdet_nu in ('N','U')";
+			$res_merma 	= 	mysql_query($sql_merma, $conexion);
+			$desc_merma_n 	= 	0;
+			while ($line_merma = mysql_fetch_row($res_merma)) {
+				$cantidad	= 	$line_merma[0];
+				$desc_merma_n 	= 	$desc_merma_n + $cantidad;
+			}
+			//fin
+			
+			//ajuste castigo
+			$sql_castigo 	= "select mdet_cantidad as cantidad
+						from 
+						sgcompras.movim_detalle a, sgcompras.movim b
+						
+						where
+						a.mdet_codigo = '".$codigo."' and
+						a.movim_ncorr = b.movim_ncorr and
+						b.movim_tipo = '14' and
+						b.movim_estado = 'FINALIZADO' and
+						b.movim_bodega = '".$movim_bodega."' and
+						a.mdet_nu in ('N','U')";
+			$res_castigo 	= 	mysql_query($sql_castigo, $conexion);
+			$desc_castigo_n 	= 	0;
+			while ($line_castigo = mysql_fetch_row($res_castigo)) {
+				$cantidad	= 	$line_castigo[0];
+				$desc_castigo_n 	= 	$desc_castigo_n + $cantidad;
+			}
+			//fin
+			
+			$stock_nuevo = $aumentos_n + $trasp_n - $trasp_n_tras + $dev_vend_n + $dev_clie_n + $dev_clie_n_new - $aum_vend_n - $dev_pro_n - $desc_cp_n + $ajuste_aumentos_n  - $desc_merma_n  - $desc_castigo_n ;
+			
+			$objResponse->addAlert("$aumentos_n + $trasp_n - $trasp_n_tras + $dev_vend_n + $dev_clie_n + $dev_clie_n_new - $aum_vend_n - $dev_pro_n - $desc_cp_n + $ajuste_aumentos_n  - $desc_merma_n  - $desc_castigo_n ");
+	
+			/*$sql_saumentos 	= "select mdet_cantidad as cantidad
+						from 
+						sgcompras.movim_detalle a, sgcompras.movim b
+						
+						where
+						a.mdet_codigo = '".$codigo."' and
+						a.movim_ncorr = b.movim_ncorr and
+						b.movim_tipo = '7' and
+						b.movim_estado = 'FINALIZADO' and
+						b.movim_bodega = '".$movim_bodega."'";
+			$res_saumentos 	= 	mysql_query($sql_saumentos, $conexion);
+			$aumentos_n 	= 	0;
+			while ($line_saumentos = mysql_fetch_row($res_saumentos)) {
+				$cantidad	= 	$line_saumentos[0];
+				$aumentos_n 	= 	$aumentos_n + $cantidad;
+			}
+			
+			//busca decuentos por traspasos a bodega central (movim 8)
+			$sql_trasp 	= "select mdet_cantidad as cantidad
+							from 
+							sgcompras.movim_detalle a, sgcompras.movim b
+							
+							where
+							a.mdet_codigo = '".$codigo."' and
+							a.movim_ncorr = b.movim_ncorr and
+							b.movim_tipo = '8' and
+							b.movim_estado = 'FINALIZADO' and
+							b.movim_bodega = '".$movim_bodega."'";
+			$res_trasp 	= 	mysql_query($sql_trasp, $conexion);
+			$trasp_n 	= 	0;
+			while ($line_trasp = mysql_fetch_row($res_trasp)) {
+				$cantidad	= 	$line_trasp[0];
+				$trasp_n	= 	$trasp_n + $cantidad;
+			}
+			
+			$stock_nuevo += $aumentos_n - $trasp_n;*/
+			array_push($arrRegistros, array("item"			=>	$i,
+							"familia"		=>	$familia,
+							"subfamilia"		=>	$subfamilia,
+							"descripcion"		=> 	$line_pd[0],
+							"codigo" 		=> 	$line_pd[1],
+							"codigo_antiguo"	=> 	$line_pd[2],
+							"cantidad"		=> 	$stock_nuevo));
+			$i++;
+		}
+		       
+		// asigno las sesiones para el ordenamiento
+		$_SESSION["alycar_matriz"] 				= 	$arrRegistros;
+		$_SESSION["alycar_empresa"] 			= 	$empresa;
+		$_SESSION["alycar_nombre_empresa"]		= 	$nombre_empresa;
+		
+		
+		$miSmarty->assign('arrRegistros', $arrRegistros);
+		
+		//$objResponse->addScript("xajax_Ordenar(xajax.getFormValues('Form1'), 'familia');");
+		
+		$objResponse->addAssign("divabonos", "innerHTML", $miSmarty->fetch('sg_bodega_toma_inventario_list.tpl'));
+		//$objResponse->addAssign("divabonos", "innerHTML", $sql_saumentos);
+		
+	}else{
+		
+		$objResponse->addAssign("divabonos", "innerHTML", "No Existen Registros");
+	}
+	
+	$objResponse->addScript("document.getElementById('divlistado').style.display='block';");
+	
+	
+	return $objResponse->getXML();
+}
+function Ordenar($data, $campo){
+	global $conexion;
+	global $miSmarty;
+	
+    $objResponse = new xajaxResponse('ISO-8859-1');
+	
+	$orden_asc 	= 'ASC';
+	$orden_desc = 'DESC';
+	if ($_SESSION["alycar_orden"] == $campo.$orden_asc){
+		$campo_orden 		= 	$campo.$orden_desc;
+		$direccion_orden	=	$orden_desc;
+	}else{
+		$campo_orden 		= 	$campo.$orden_asc;
+		$direccion_orden	=	$orden_asc;
+	}		
+	
+	$arrRegistros = array();
+	$arrRegistros = ordenar_matriz_multidimensionada($_SESSION["alycar_matriz"],$campo,$direccion_orden);
+	$_SESSION["alycar_orden"] = $campo_orden;
+	
+	$miSmarty->assign('arrRegistros', $arrRegistros);
+	$objResponse->addAssign("divabonos", "innerHTML", $miSmarty->fetch('sg_bodega_toma_inventario_list.tpl'));
+	
+	
+	return $objResponse->getXML();
+}
+function MuestraRegistro($data, $campo1, $campo2, $obj1, $obj2){
+	global $conexion;
+	
+    $objResponse = new xajaxResponse('ISO-8859-1');
+	
+	$objResponse->addAssign("$obj1", "value", $campo1);
+	$objResponse->addAssign("$obj2", "value", $campo2);
+	
+	return $objResponse->getXML();
+}
+function CargaDesc($data, $tabla, $campo1, $campo2, $objeto1, $objeto2, $c_and){
+    global $conexion;
+    $objResponse = new xajaxResponse('ISO-8859-1');
+	
+	//mysql_select_db("sgyonley", $conexion);
+	
+	$ncorr 		= 	$data["$objeto1"];
+	
+	$sql = "select concat(ta_busqueda,' ',ta_descripcion) as descripcion from $tabla where $campo1 = '".$ncorr."' $and";
+	
+	$res = mysql_query($sql, $conexion);
+	
+	$objResponse->addAssign("$objeto2", "value", @mysql_result($res,0,"descripcion"));
+	
+	
+	return $objResponse->getXML();
+}
+
+function CargaSelect($data, $select, $tabla, $codigo, $descripcion, $campo1, $campo2, $opt){
+    global $conexion;
+    $objResponse = new xajaxResponse('ISO-8859-1');
+	
+	$objResponse->addAssign("$select","innerHTML",""); 		
+	$sql = "select $campo1 as codigo, $campo2 as descripcion from $tabla";
+	$res = mysql_query($sql, $conexion);
+	
+	if (mysql_num_rows($res) > 0) {
+		$objResponse->addCreate("$select","option",""); 		
+		$objResponse->addAssign("$select","options[0].value", $codigo);
+		$objResponse->addAssign("$select","options[0].text", $descripcion); 	
+		$j = 1;
+		while ($line = mysql_fetch_array($res)) {
+			$objResponse->addCreate("$select","option",""); 		
+			$objResponse->addAssign("$select","options[".$j."].value", $line[0]);
+			$objResponse->addAssign("$select","options[".$j."].text", $line[1]); 	
+			$j++;
+		}
+	
+	}
+	return $objResponse->getXML();
+}
+
+function CargaSubFamilias($data){
+    global $conexion;	
+    $objResponse = new xajaxResponse('ISO-8859-1');
+	
+	$familia	=	$data["cboFamilia"];
+	
+	$objResponse->addAssign("cboSubFamilia","innerHTML",""); 		
+	
+	//if ((trim($familia) == '') or (trim($familia) == '- - Seleccione - -')){
+	//	$objResponse->addCreate("cboSubFamilia","option",""); 		
+	//	$objResponse->addAssign("cboSubFamilia","options[0].value", '');
+	//	$objResponse->addAssign("cboSubFamilia","options[0].text", '- - Seleccione - -'); 	
+	//}else{
+		
+		//$objResponse->addScript("alert('$familia');");
+		
+	if 	($familia != 'Todas' &&  $familia != ''){
+		$sql = "select SF_SUBCODIGO as codigo, SF_NOMBRE as descripcion from sgbodega.subfamilias WHERE SF_CODIGO = '".$familia."' ORDER BY SF_NOMBRE ASC";
+	}else{
+		$sql = "select SF_SUBCODIGO as codigo, SF_NOMBRE as descripcion from sgbodega.subfamilias WHERE SF_CODIGO != '' group by SF_NOMBRE ORDER BY SF_NOMBRE ASC";
+	}	
+		$res = mysql_query($sql, $conexion);
+		if (mysql_num_rows($res) > 0) {
+			$objResponse->addCreate("cboSubFamilia","option",""); 		
+			$objResponse->addAssign("cboSubFamilia","options[0].value", '');
+			$objResponse->addAssign("cboSubFamilia","options[0].text", 'Todas'); 	
+			$j = 1;
+			while ($line = mysql_fetch_array($res)) {
+				$objResponse->addCreate("cboSubFamilia","option",""); 		
+				$objResponse->addAssign("cboSubFamilia","options[".$j."].value", $line[0]);
+				$objResponse->addAssign("cboSubFamilia","options[".$j."].text", $line[1]); 	
+				$j++;
+			}
+		}
+	//}
+	
+	return $objResponse->getXML();
+}
+
+function CargaPagina($data){
+    global $conexion;
+    $objResponse = new xajaxResponse('ISO-8859-1');
+	
+	//carga empresas
+	$objResponse->addScript("xajax_CargaSelect(xajax.getFormValues('Form1'),'OBLI-cboEmpresa','sgyonley.empresas','','- - Seleccione - -','empe_rut', 'empe_desc', '')");
+	
+	//carga familias
+	$objResponse->addScript("xajax_CargaSelect(xajax.getFormValues('Form1'),'cboFamilia','sgbodega.familias','','Todas','fa_codigo', 'fa_nombre', '')");
+	
+	$objResponse->addScript("document.getElementById('OBLI-cboEmpresa').focus();");
+
+	return $objResponse->getXML();
+}          
+function LlamaDetalle($data, $codigo, $descripcion){
+    global $conexion;
+    $objResponse = new xajaxResponse('ISO-8859-1');
+	
+	$fecha_desde		= 	$data["OBLI-txtFechaDesde"];
+	$fecha_hasta		= 	$data["OBLI-txtFechaHasta"];
+	$cobrador			= 	$data["OBLI-txtCodCobrador"];
+	$nombre_cobrador	= 	$data["OBLI-txtDescCobrador"];
+	$empresa 			= 	$data["OBLI-cboEmpresa"];
+	$ult_guia 			= 	$data["txtUltGuia"];
+	
+	list($dia1,$mes1,$anio1) = split('[/.-]', $fecha_desde);$fecha1 	= $anio1."-".$mes1."-".$dia1;
+	list($dia2,$mes2,$anio2) = split('[/.-]', $fecha_hasta);$fecha2 	= $anio2."-".$mes2."-".$dia2;
+	
+	$objResponse->addScript("showPopWin('sg_existencia_movimientos_vendedor_detalle.php?codigo=$codigo&descripcion=$descripcion&fecha1=$fecha1&fecha2=$fecha2&cobrador=$cobrador&empresa=$empresa', '$codigo $descripcion', 700, 280, null);");
+	
+	return $objResponse->getXML();
+}
+function Imprime(){
+    global $conexion;
+    $objResponse = new xajaxResponse('ISO-8859-1');
+	//if ($_SESSION["alycar_sgyonley_usuario"] == 'jruz' OR $_SESSION["alycar_sgyonley_usuario"] == 'JRUZ' OR $_SESSION["alycar_sgyonley_usuario"] == 'arojas'){ 
+//		$objResponse->addScript("showPopWin('sg_bodega_toma_inventario_cierre.php', 'Cierre para Inventario', 400, 220, null);");
+//	}
+	
+	$objResponse->addScript("ImprimeDiv('divabonos');");
+	
+	return $objResponse->getXML();
+}
+
+function CB($data,$ncorr){
+    global $conexion;
+    $objResponse = new xajaxResponse('ISO-8859-1');
+	
+	$objResponse->addScript("showPopWin('ejemplo.php?id=$ncorr', 'Codigo Barra', 700, 280, null);");
+	
+	return $objResponse->getXML();
+}
+
+$xajax->registerFunction("MuestraRegistro");
+$xajax->registerFunction("CargaDesc");
+$xajax->registerFunction("CargaPagina");
+$xajax->registerFunction("Grabar");
+$xajax->registerFunction("Ordenar");
+$xajax->registerFunction("CargaSelect");
+$xajax->registerFunction("BuscaUltGuia");
+$xajax->registerFunction("LlamaDetalle");
+$xajax->registerFunction("CargaSubFamilias");
+$xajax->registerFunction("Imprime");
+$xajax->registerFunction("CB");
+
+$xajax->processRequests();
+$miSmarty->assign('xajax_js', $xajax->getJavascript());
+
+$miSmarty->assign('COD_VENDEDOR', $_GET["cod_vendedor"]);
+$miSmarty->assign('VENDEDOR', $_GET["nombre_vendedor"]);
+$miSmarty->assign('DESDE', $_GET["desde"]);
+$miSmarty->assign('HASTA', $_GET["hasta"]);
+
+$miSmarty->display('sg_bodega_toma_inventario.tpl');
+
+?>
+
