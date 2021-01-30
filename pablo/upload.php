@@ -10,7 +10,7 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload') {
 		$fileType = $_FILES['uploadedFile']['type'];
 		$fileNameCmps = explode(".", $fileName);
 		$fileExtension = strtolower(end($fileNameCmps));
-		$newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+		$newFileName = $fileName;
 		$allowedfileExtensions = array('xls');
 		if (in_array($fileExtension, $allowedfileExtensions)) {
 			$uploadFileDir = './';
@@ -21,9 +21,9 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload') {
 			  	$message ='Archivo subido correctamente';
 			  	$_SESSION['message'] = $message;
 
-				$inputFileType = \PhpOffice\PhpSpreadsheet\IOFactory::identify($dest_path);
+				$inputFileType = \PhpOffice\PhpSpreadsheet\IOFactory::identify($newFileName);
 				$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
-				$spreadsheet = $reader->load($dest_path);
+				$spreadsheet = $reader->load($newFileName);
 				$schdeules = $spreadsheet->getActiveSheet()->toArray();
 				
 				$_SESSION['txt'] .= '<table>';
