@@ -2,10 +2,6 @@
 session_start(); 
 include "vendor/autoload.php";
 
-
-
-
-
 if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload') {
 	if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
 		$fileTmpPath = $_FILES['uploadedFile']['tmp_name'];
@@ -15,7 +11,7 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload') {
 		$fileNameCmps = explode(".", $fileName);
 		$fileExtension = strtolower(end($fileNameCmps));
 		$newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-		$allowedfileExtensions = array('pdf');
+		$allowedfileExtensions = array('xls');
 		if (in_array($fileExtension, $allowedfileExtensions)) {
 			$uploadFileDir = './';
 			$dest_path = $uploadFileDir . $newFileName;
@@ -25,20 +21,22 @@ if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload') {
 			  	$message ='Archivo subido correctamente';
 			  	$_SESSION['message'] = $message;
 
-			  	$parseador = new \Smalot\PdfParser\Parser();
-				$nombreDocumento = $dest_path;
-				$documento = $parseador->parseFile($nombreDocumento);
-
-				$paginas = $documento->getPages();
-				foreach ($paginas as $indice => $pagina) {
-				    $txt = "<h1>Página #%02d</h1>";
-				    $texto = $pagina->getText();
-				    $txt .= '<pre>';
-				    $txt .= $texto;
- 				    $txt .= '</pre>';
+				$inputFileType = \PhpOffice\PhpSpreadsheet\IOFactory::identify($dest_path);
+				$reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputFileType);
+				$spreadsheet = $reader->load($dest_path);
+				$schdeules = $spreadsheet->getActiveSheet()->toArray();
+				
+				$_SESSION['txt'] .= '<table>';
+				foreach( $schdeules as $single_schedule )
+				{               
+				    $_SESSION['txt'] .= '<tr class="row">';
+				    foreach( $single_schedule as $single_item )
+				    {
+				        $_SESSION['txt'] .=  '<td class="item">' . $single_item . '</td>';
+				    }
+				    $_SESSION['txt'] .=  '</tr>';
 				}
-				$_SESSION['txt'] = $txt;
-
+				$_SESSION['txt'] .= '/<table>';
 				header("Location: index.php");
 			}
 			else
