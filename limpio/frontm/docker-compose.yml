@@ -1,0 +1,19 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: frontend
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8000:80"
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./apache2/.htaccess:/var/www/dist/.htaccess
+      - ./apache2/sites-available:/etc/apache2/sites-available
+      - ./apache2/sites-enabled:/etc/apache2/sites-enabled
+      - /var/www/node_modules
+      - /var/www/dist
