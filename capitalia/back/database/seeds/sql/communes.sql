@@ -1,4 +1,4 @@
-INSERT INTO `communes` (`id`,`commune_name`,`province_id`)
+INSERT INTO `hab_communes` (`id`,`commune_name`,`province_id`)
 VALUES
 	(1,'Arica',1),
 	(2,'Camarones',1),

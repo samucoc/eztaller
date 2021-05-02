@@ -13,12 +13,12 @@ class CreateCommunesTable extends Migration
      */
     public function up()
     {
-        Schema::create('communes', function (Blueprint $table) {
-            $table->id();
+        Schema::create('hab_communes', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('commune_name');
             $table->unsignedBigInteger('province_id');
 
-            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('province_id')->references('id')->on('hab_provinces')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateCommunesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('communes');
+        Schema::dropIfExists('hab_communes');
     }
 }

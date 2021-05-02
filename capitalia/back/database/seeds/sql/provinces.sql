@@ -1,4 +1,4 @@
-INSERT INTO `provinces` (`id`,`province_name`,`region_id`)
+INSERT INTO `hab_provinces` (`id`,`province_name`,`region_id`)
 VALUES
 	(1,'Arica',1),
 	(2,'Parinacota',1),

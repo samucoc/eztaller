@@ -16,7 +16,7 @@
         "maatwebsite/excel": "^3.1",
         "spatie/laravel-permission": "2.*",
         "tymon/jwt-auth": "dev-develop",
-        "webpatser/laravel-uuid": "^3.0",
+        "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

@@ -13,8 +13,8 @@ class CreateRegionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('regions', function (Blueprint $table) {
-            $table->id();
+        Schema::create('hab_regions', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('region_name');
         });
     }
@@ -26,6 +26,6 @@ class CreateRegionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regions');
+        Schema::dropIfExists('hab_regions');
     }
 }

@@ -1,4 +1,4 @@
-INSERT INTO `regions` (`id`,`region_name`)
+INSERT INTO `hab_regions` (`id`,`region_name`)
 VALUES
 	(1,'Arica y Parinacota'),
 	(2,'Tarapacá'),

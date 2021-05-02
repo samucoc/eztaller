@@ -17,7 +17,7 @@ class CreateTableInversionistas extends Migration
             $table->bigIncrements('id');
 
             $table->unsignedInteger('comuna_id');
-            $table->foreign('comuna_id')->references('id')->on('hab_comunas');
+            $table->foreign('comuna_id')->references('id')->on('communes');
 
             $table->string('nombres');
             $table->string('ape_pat');

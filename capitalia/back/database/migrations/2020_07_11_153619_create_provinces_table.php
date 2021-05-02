@@ -13,12 +13,12 @@ class CreateProvincesTable extends Migration
      */
     public function up()
     {
-        Schema::create('provinces', function (Blueprint $table) {
-            $table->id();
+        Schema::create('hab_provinces', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('province_name');
             $table->unsignedBigInteger('region_id');
 
-            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('region_id')->references('id')->on('hab_regions')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateProvincesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('provinces');
+        Schema::dropIfExists('hab_provinces');
     }
 }
