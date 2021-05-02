@@ -1,0 +1,14 @@
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+.env
+/oracle/11.2.0.2/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+/storage

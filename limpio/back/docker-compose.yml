@@ -1,0 +1,48 @@
+version: '3'
+networks:
+  app-network:
+    driver: bridge
+volumes:
+  dbdata:
+    driver: local
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8080:80"
+      - "8443:443"
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./apache2/sites-available:/etc/apache2/sites-available
+      - ./apache2/sites-enabled:/etc/apache2/sites-enabled
+      - /var/www/vendor
+    networks:
+      - app-network
+  oracle:
+    build:
+      context: ./oracle/11.2.0.2
+    container_name: oracle
+    shm_size: '1gb'
+    restart: unless-stopped
+    tty: true
+    environment:
+      ORACLE_SID: orcl
+      ORACLE_PDB: pdb1
+      ORACLE_PWD: Oracle123
+      ORACLE_CHARACTERSET: AL32UTF8
+    volumes:
+      - dbdata:/opt/oracle/oradata
+    ports:
+      - 1521:1521
+    networks:
+      - app-network
