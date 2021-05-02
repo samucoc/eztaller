@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
         $this->call('EstadosCivilesTableSeeder');
         $this->call('GruposPortafoliosTableSeeder');
         $this->call('SubGruposPortafoliosTableSeeder');
+        $this->call('RegionSeeder');
+        $this->call('ProvinceSeeder');
+        $this->call('CommuneSeeder');
     }
 }
 
