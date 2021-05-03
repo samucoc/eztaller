@@ -70,7 +70,7 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'oracle',
+            'driver' => 'mysql',
             'model' => App\User::class,
         ],
 
