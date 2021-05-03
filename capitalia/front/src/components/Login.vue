@@ -18,8 +18,8 @@
                 <v-form>
                   <v-text-field
                     label="Usuario"
-                    v-model="username"
-                    name="username"
+                    v-model="name"
+                    name="name"
                     prepend-icon="mdi-account"
                     type="email"
                   />
@@ -63,7 +63,7 @@ export default {
   name: "Login",
   data() {
     return {
-      username: "",
+      name: "",
       password: "",
       isError: false,
       responseMessage: "",
@@ -71,16 +71,16 @@ export default {
   },
   methods: {
     login() {
-      let { username, password } = this;
+      let { name, password } = this;
       this.$store
-        .dispatch("login", { username, password })
+        .dispatch("login", { name, password })
         .then((res) => {
-          if (typeof res.data.type !== "undefined") {
+          if (res.data.access_token != true ) {
             this.isError = true;
             this.responseMessage = res.data.message;
             setTimeout(() => (this.isError = false), 10000);
           } else {
-            this.$router.push("/");
+            location.href = '/';
           }
         })
         .catch((err) => {

@@ -1,10 +1,6 @@
 <?php
 
 return [
-    //SSO para el proyecto
-    'AID' => env('SSO_AID', 'z74roQ11O/j+f6hqxTVOFw=='),
-    'wsdl' => 'http://ws.mds.cl/ssoapi/ssoapi-v1.0.asmx?wsdl',
-    'Id_Aplicacion' => env('SSO_ID_APLICACION', '174'),
 
     /*
     |--------------------------------------------------------------------------
@@ -18,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'api',
+        'guard' => 'web',
         'passwords' => 'users',
     ],
 
@@ -48,6 +44,7 @@ return [
         'api' => [
             'driver' => 'jwt',
             'provider' => 'users',
+            'hash' => false,
         ],
     ],
 
@@ -70,8 +67,8 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'oracle',
-            'model' => App\User::class,
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
         ],
 
         // 'users' => [
@@ -100,7 +97,21 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
+            'throttle' => 60,
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Password Confirmation Timeout
+    |--------------------------------------------------------------------------
+    |
+    | Here you may define the amount of seconds before a password confirmation
+    | times out and the user is prompted to re-enter their password via the
+    | confirmation screen. By default, the timeout lasts for three hours.
+    |
+    */
+
+    'password_timeout' => 10800,
 
 ];
