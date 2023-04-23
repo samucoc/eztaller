@@ -1,1 +1,0 @@
-ALTER TABLE `movim` ADD `observacion` TEXT NOT NULL AFTER `fecha`;

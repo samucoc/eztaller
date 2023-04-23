@@ -1,1 +1,0 @@
-ALTER TABLE `productos` CHANGE `created` `created` DATETIME NULL DEFAULT NULL, CHANGE `updated` `updated` DATETIME NULL DEFAULT NULL, CHANGE `usuario` `usuario` TEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL;

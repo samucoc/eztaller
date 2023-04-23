@@ -1,1 +1,0 @@
-ALTER TABLE `perfiles_tienen_menus_hijos` ADD `menu` INT NOT NULL AFTER `perfil`;

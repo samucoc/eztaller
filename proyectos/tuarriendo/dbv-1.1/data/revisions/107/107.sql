@@ -1,1 +1,0 @@
-ALTER TABLE `movim` ADD `vendedor` TEXT NOT NULL AFTER `movim_bodega_trans`;
