@@ -1,0 +1,113 @@
+form{
+padding:0;
+margin:0;
+}
+
+td {
+font-size:11px;
+font-family:verdana;
+color:#525252;
+}
+img {
+border:0;
+}
+input,textarea{
+font-size:11px;
+background-color:#F2F2F2;
+border:1px solid #363636;
+font-family:verdana;
+}
+
+select{
+font-size:10px;
+background-color:#F2F2F2;
+border:1px solid #363636;
+}
+.boton{
+background-color:#9FC853;
+border:1px solid #354516;
+color:#FFF;
+font-weight:bold;
+font-size:10px;
+}
+a{
+text-decoration:none;
+}
+
+input,textarea,select {
+margin-top:3px;
+}
+
+
+.texto_top{
+width:650px;
+text-align:center;
+background-color:#FFFFFF;
+border:1px solid #A7A6B4;
+}
+
+.msg{
+font-weight:bold;
+color:#FF0000;
+}
+
+.bord_img{
+border:1px solid #c0c0c0;
+font-size:10px;
+text-align:center;
+}
+
+.titulo{
+background-color:#F2F2F2;
+padding:2px;
+font-family:Myriad Pro Light;
+font-size:13px;
+font-weight:bold;
+color:#016BB7;
+}
+.titulo_fondo
+{
+background-color:#F2F2F2;
+padding:2px;
+}
+
+.lista_borrar_img{
+float:left;
+border:1px solid #c0c0c0;
+text-align:center;
+margin:2px;
+}
+.img_estilo1{
+float:left;
+border:1px solid #4B4B4B;
+margin-right:3px;
+}
+.mini_titulo{
+background-color:#F7F6F4;
+padding:1px;
+color:#000:
+width:100%;
+font-weight:bold;
+}
+
+.menu_top{
+background-color:#F6F6F6;
+color:#454545;
+font-weight:bold;
+text-align:center;
+padding:2px;
+}
+.menu_texto a{
+font-size:10px;
+color:#737373;
+font-weight:bold;
+}
+
+.thumb_titulo{
+background-color:#F2F2F2;
+padding:2px;
+font-family:Bell Gothic Std Light;
+font-size:13px;
+font-weight:bold;
+color:#016BB7;
+}

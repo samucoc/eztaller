@@ -1,0 +1,321 @@
+<?php ob_start(); 
+session_start(); 
+//conectamos a la base de datos 
+//mysql_connect("localhost","root","sebterROOT9384"); 
+//mysql_connect("localhost","root","");  
+//mysql_connect("localhost","root","");
+//mysql_select_db("vigomaq"); 
+if(isset($_SESSION['usuario']))$usuario=$_SESSION['usuario'];else $usuario=false; 
+if(isset($_SESSION['tipo_usuario']))$tipo_usuario=$_SESSION['tipo_usuario'];else $tipo_usuario=false; 
+if (!$_SESSION['usuario']) {
+    header("Location: ./login.php");
+}
+if (isset($_POST['SI'])){
+	if ($_POST['SI']=='Registrar Pago'){
+		include("classes/conex.php");
+		$link = Conectarse();
+
+		if(isset($_POST['fecha']))$fecha	= $_POST['fecha'];
+		list($dia1,$mes1,$anio1) = explode('-', $fecha);
+		$fecha 	= $anio1.'-'.$mes1.'-'.$dia1;
+		if(isset($_POST['tipo_pago']))$tipo_pago		= $_POST['tipo_pago'];
+		if(isset($_POST['monto']))$monto	= $_POST['monto'];
+
+		$arr_factura = explode(',',$_POST['facturas']);
+		for ($i=0; $i<count($arr_factura);$i++){
+			$num_factura = $arr_factura[$i];
+			
+			$sql_0 = "SELECT sum(tot_arriendo) as total ,sum(total_rep) as total_1
+				FROM factura
+					inner join det_factura
+						on factura.num_factura = det_factura.num_factura
+				where factura.num_factura = '".$num_factura."'
+				group by factura.num_factura";			
+			$res_0 = mysql_query($sql_0,$link) or die(mysql_error());
+			$row_0 = mysql_fetch_array($res_0);
+			
+			$total = $row_0['total'];
+			if ($total==0){
+				$total = $row_0['total_1'];
+				}
+			if ($monto>0){
+				$sql = "update factura
+					set 	estado = 'ABONANDO'
+					where num_factura = '".$num_factura."'";
+				$res=mysql_query($sql,$link) or die(mysql_error());
+
+				$sql = "INSERT INTO `factura_pagos`( `tipo_pago`, `monto`, `fecha`, `num_factura`, `usuario`, `fecha_dig`) VALUES ('".$tipo_pago."','".$monto."','".$fecha."','".$num_factura."','".$_SESSION['usuario']."','".date("Y-m-d H:i:s")."')";
+				$res=mysql_query($sql,$link) or die(mysql_error());
+				$id = mysql_insert_id();
+				$obs = "Accion : Evento || Nro. : ".$id." || Fecha : ".$fecha_evento;
+				$sql = "INSERT INTO `factura_logs` (`num_factura`, `fecha_log`, `observacion`, `estado_anterior`, `estado_posterior`, `usuario`) VALUES ('".$num_factura."','".date("Y-m-d H:i:s")."','".$obs."','PROCESO_PAGO','PROCESO_PAGO','".$_SESSION['usuario']."')";
+				$res=mysql_query($sql,$link) or die(mysql_error());
+
+				$monto = $monto-$total;
+				}
+			}
+		header("Location:cobranza_cuentas_corrientes.php");
+		}
+	}
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+	<title>Sistema de Arriendo y Facturación - Vigomaq</title>
+	<meta name="description"/>
+	<meta name="keywords" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="imagetoolbar" content="no" />
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="shortcut icon" href="http://vigomaq.sebter.cl/favicon.ico">
+<link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css"/>
+<style type="text/css">
+<!--
+.Estilo17 {color: #FFFFFF; font-style: italic; font-weight: bold; font-size: 12px; font-family: Arial, Helvetica, sans-serif; }
+.Estilo19 {	color: #999999;
+	font-weight: bold;
+}
+.Estilo20 {color: #000000}
+.Estilo6 {	font-size: large;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.Estilo7 {	color: #FFFFFF;
+	font-style: italic;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+.Estilo21 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #666666;
+	font-weight: bold;
+	font-style: italic;
+}
+.ui-datepicker-trigger{
+	width:32px;
+	height:32px;
+	}
+.ui-datepicker-trigger img{
+	float:left;
+	}
+#warp{
+	padding-left:10%;
+	width:80%;
+	}
+.div-busqueda{
+	background-color:#06327D;
+	color:#FF0;
+	font-weight:bold;
+	}
+.div-busqueda a{
+	padding:10px;
+	}	
+-->
+</style>
+</head>
+	<div id="div-cabecera">
+	<?php 
+		include('classes/cabecera.php'); //modulo cabecera
+	?>
+    </div>
+	<div id="div-menu">
+		<?php 
+			include('classes/menu.php'); //modulo menu
+		?>
+	</div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div id="warp">
+    	<H4>Cuentas Corrientes CLientes</H4>
+        <div class="div-busqueda">
+            <div  class="floatLeft" style="width:10%;padding:10px;">
+                Cliente
+            </div>
+            <div class="floatLeft" style="width:50%;padding:10px;">
+                <input name="cliente" type="text" id="cliente" value="" size="50" class="floatLeft" />
+                <input name="id_cliente" type="hidden" id="id_cliente" value="" size="10" maxlength="10"/>
+            </div>
+            <br class="clearFloat"/>
+	    <div  class="floatLeft" style="width:10%;padding:10px;">
+                Tipo CLiente
+            </div>
+            <div class="floatLeft" style="width:35%;padding:10px;">
+		<input type="text" name="tipo_cliente" id="tipo_cliente" />
+            </div>
+	    <div  class="floatLeft" style="width:10%;padding:10px;">
+		Contacto
+            </div>
+            <div class="floatLeft" style="width:35%;padding:10px;">
+		<input type="text" name="contacto" id="contacto" />
+            </div>
+            <br class="clearFloat"/>
+	    <div  class="floatLeft" style="width:10%;padding:10px;">
+                Email
+            </div>
+            <div class="floatLeft" style="width:35%;padding:10px;">
+		<input type="text" name="email" id="email" />
+            </div>
+	    <div  class="floatLeft" style="width:10%;padding:10px;">
+		Fono
+            </div>
+            <div class="floatLeft" style="width:35%;padding:10px;">
+		<input type="text" name="fono" id="fono" />
+            </div>
+            <br class="clearFloat"/>
+	    <div  class="floatLeft" style="width:10%;padding:10px;">
+                Movil
+            </div>
+            <div class="floatLeft" style="width:35%;padding:10px;">
+		<input type="text" name="movil" id="movil" />
+            </div>
+	    <div  class="floatLeft" style="width:10%;padding:10px;">
+		Condiciones de Envio de Factura
+            </div>
+            <div class="floatLeft" style="width:35%;padding:10px;">
+		<input type="text" name="cond_envio" id="cond_envio" />
+            </div>
+            <br class="clearFloat"/>
+	    
+        </div>
+        <div id="div-resultado">
+        
+        </div>
+	<hr />
+	<div class="div-busqueda" id="div-dialog" style="background-color:#06327D;"> 
+		<form method="post" name="frmDatos" id="frmDatos">
+		<div  class="floatLeft" style="width:10%;padding:10px;">
+			Facturas
+		</div>       
+		<div  class="floatLeft" style="width:50%;padding:10px;">
+			<input type="type" id="facturas" name="facturas" readonly/>
+		</div>       
+		<br style="clear:both"/>	
+		<div  class="floatLeft" style="width:10%;padding:10px;">
+			Tipo Pago
+		</div>       
+		<div  class="floatLeft" style="width:50%;padding:10px;">
+			<select name="tipo_pago" id="tipo_pago">
+				<?php 
+				include("classes/conex.php");
+				$link=Conectarse();
+				$sql_familias="select *
+						from tipo_pagos";
+				$res_familia = mysql_query($sql_familias,$link) or die(mysql_error());
+				while ($row_familia = mysql_fetch_array($res_familia)){
+					echo "<option value='".$row_familia['tp_ncorr']."'>".$row_familia['nombre']."</option>";
+					}
+				?>
+			</select>
+		</div>       
+		<br style="clear:both"/>	
+		<div  class="floatLeft" style="width:10%;padding:10px;">
+			Fecha 
+		</div>       
+		<div  class="floatLeft" style="width:50%;padding:10px;">
+			<input name="fecha" id="fecha" type="text" size="10" maxlength="10" /> 
+		</div>       
+		<br style="clear:both"/>	
+		<div  class="floatLeft" style="width:10%;padding:10px;">
+			Monto
+		</div>       
+		<div  class="floatLeft" style="width:50%;padding:10px;">
+			<input type="text" id="monto" name="monto" />
+		</div>       
+		<br style="clear:both"/>	
+		<input class="imprimir" type="submit" value="Registrar Pago" id="SI" name="SI"/>
+	</form>
+	</div>
+	<a href="#" id="asignar-vendedor" name="asignar-vendedor">Registrar Pago</a>
+   </div>
+	<script type="text/javascript" src="jscalendar-1.0/calendar.js"></script>
+	<script type="text/javascript" src="jscalendar-1.0/calendar-setup.js"></script>
+	<script type="text/javascript" src="jscalendar-1.0/lang/calendar-en.js"></script>
+
+	<style type="text/css"> @import url("jscalendar-1.0/calendar-win2k-cold-1.css"); </style>
+	<script src="js/jquery-1.6.2.min.js"></script>
+	<script src="js/jquery-ui-1.8.16.custom.min.js"></script>
+	<script src="js/i18n/jquery.ui.datepicker-es.js"></script>
+    <script>
+    	$(document).ready(function() {
+		$( "#fecha" ).datepicker({
+			dateFormat : "dd-mm-yy"
+			});
+		$(".buscar").click(function(){
+			var id_cliente = $("#id_cliente").attr('value');
+			$.ajax({
+				url: 'classes/cobranza_cuentas_corrientes/buscar_facturas.php?id_cliente='+id_cliente,
+				success: function(data){
+					$("#div-resultado").html(data);
+					}
+				});
+			});
+		$("#cliente").autocomplete({
+			source: "classes/cobranza_cuentas_corrientes/buscar_cliente.php",
+			select: function(event, ui){
+				var rut = ui.item.id;
+				var tipo_cliente = ui.item.tipo_cliente;
+				var resp = ui.item.resp;
+				var email_resp = ui.item.email_resp;
+				var fono_resp = ui.item.fono_resp;
+				var movil_resp = ui.item.movil_resp;
+				var cond_envio = ui.item.cond_envio;
+				document.getElementById('id_cliente').value = rut;
+				document.getElementById('tipo_cliente').value = tipo_cliente;
+				document.getElementById('contacto').value = resp;
+				document.getElementById('email').value = email_resp;
+				document.getElementById('fono').value = fono_resp;
+				document.getElementById('movil').value = movil_resp;
+				document.getElementById('cond_envio').value = cond_envio;
+				$.ajax({
+					url: 'classes/cobranza_cuentas_corrientes/buscar_facturas.php?id_cliente='+rut,
+					success: function(data){
+						$("#div-resultado").html(data);
+						}
+					});
+				}
+			});
+		$( "#div-dialog" ).dialog({
+				autoOpen: false,
+				height: 320,
+				width: 550,
+				modal: true
+			});
+		$( "#asignar-vendedor" ).button().click(function() {
+				$( "#div-dialog" ).dialog( "open" );
+			});
+		});
+	function seleccionar(factura){
+		if (document.getElementById(factura).checked == true){
+		    if (document.getElementById("facturas").value!='') 
+			document.getElementById("facturas").value = document.getElementById("facturas").value +','+factura;
+		    else
+			document.getElementById("facturas").value = factura;
+		}
+		else{
+			var arr  = document.getElementById("facturas").value.split(",");
+			var posBorrar = 0;
+			for (var i = 0; i<arr.length; i++){
+				if (arr[i]==factura){
+					posBorrar  = i;
+					i = arr.length;
+					}
+				}			
+			arr.splice(posBorrar, 1);
+			document.getElementById("facturas").value = arr.join(",");
+		}
+	}
+
+    </script>
+	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript">
+        var menu=new menu.dd("menu");
+        menu.init("menu","menuhover");
+    </script>
+</body>
+</html>

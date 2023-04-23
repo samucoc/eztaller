@@ -1,0 +1,4 @@
+[26-Aug-2021 11:00:12 America/Caracas] PHP Warning:  mysql_query(): Access denied for user 'www-data'@'localhost' (using password: NO) in /home/dominios/vigomaq.cl/web/80/intranet.vigomaq.cl/public_html/classes/cobranza_libro_compras/ver_xml.php on line 14
+[26-Aug-2021 11:00:12 America/Caracas] PHP Warning:  mysql_query(): A link to the server could not be established in /home/dominios/vigomaq.cl/web/80/intranet.vigomaq.cl/public_html/classes/cobranza_libro_compras/ver_xml.php on line 14
+[26-Aug-2021 11:00:12 America/Caracas] PHP Notice:  Undefined variable: link in /home/dominios/vigomaq.cl/web/80/intranet.vigomaq.cl/public_html/classes/cobranza_libro_compras/ver_xml.php on line 18
+[26-Aug-2021 11:00:12 America/Caracas] PHP Warning:  mysql_query() expects parameter 2 to be resource, null given in /home/dominios/vigomaq.cl/web/80/intranet.vigomaq.cl/public_html/classes/cobranza_libro_compras/ver_xml.php on line 18
