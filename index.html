@@ -32,6 +32,15 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .modal-dialog.modal-lg {
+            max-width: 95%; /* Ajusta el ancho del modal según tus necesidades */
+        }
+        .modal-dialog {
+            width: 75% !important;
+        }
+    
+    </style>
 
 </head>
 
@@ -118,8 +127,8 @@
                         <i class="fa fa-address-card" aria-hidden="true"></i> CV</a>
                     </button>
 
-                    <div class="modal fade" id="myModal_CV" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                      <div class="modal-dialog">
+                    <div class="modal fade " id="myModal_CV" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                           <div class="modal-header text-left">
                             Curriculum Vitae
