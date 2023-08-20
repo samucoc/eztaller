@@ -63,7 +63,7 @@ function QRModal({ isOpen, onClose, despachoId, action}) {
         video.srcObject.getTracks().forEach(track => track.stop());
       }
     };
-  }, [isOpen]);
+  }, [isOpen,action, despachoId, onClose]);
 
   const fetchRecogerDespacho = async (idDespacho) => {
     try {
