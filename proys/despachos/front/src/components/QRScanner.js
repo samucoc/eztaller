@@ -5,7 +5,6 @@ import jsQR from 'jsqr';
 import API_BASE_URL from './apiConstants'; // Import the API_BASE_URL constant
 
 function QRModal({ isOpen, onClose, despachoId, action}) {
-  const [Despachos, setDespachos] = useState([]);
 
   const videoRef = useRef(null);
   const [qrCodeResult, setQrCodeResult] = useState(null);
@@ -37,7 +36,6 @@ function QRModal({ isOpen, onClose, despachoId, action}) {
             setQrCodeResult(code.data);
             // Extraer acción y ID del QR
 
-            let response;
             if (action === "recoger") {
                 fetchRecogerDespacho(despachoId);
             } else if (action === "entregar") {
@@ -49,7 +47,6 @@ function QRModal({ isOpen, onClose, despachoId, action}) {
 
             onClose();  // Cerrar modal
             // Aquí asumimos que tienes una función que refresca los datos de la tabla
-            cargarDespachos();
             
           } else {
             requestAnimationFrame(scanQR);
@@ -99,15 +96,6 @@ const fetchEntregarDespacho = async (idDespacho) => {
       console.error('Error:', error);
   }
 }
-
-  const cargarDespachos = async () => {
-    try {
-      const res = await axios.get(API_BASE_URL + '/despachos');
-      setDespachos(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <div className={`modal ${isOpen ? 'show' : ''}`} tabIndex="-1" role="dialog" style={isOpen ? { display: 'block' } : { display: 'none' }}>

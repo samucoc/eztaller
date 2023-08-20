@@ -7,7 +7,6 @@ import Clientes from './components/Clientes';
 import Despachos from './components/Despachos';
 import Configuracion from './components/Configuracion';
 import Perfil from './components/Perfil';
-import QRScanner from './components/QRScanner';
 import Menu from './components/NavigationMenu';
 
 function App() {

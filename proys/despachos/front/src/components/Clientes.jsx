@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './despachos.css';
-import { Button, Modal, Form, Row, Col, Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 
 import API_BASE_URL from './apiConstants'; // Import the API_BASE_URL constant
 

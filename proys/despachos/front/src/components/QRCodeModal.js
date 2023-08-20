@@ -1,5 +1,4 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
 import  QRCode  from 'qrcode.react';
 
 function QRCodeModal({ isOpen, onClose, despachoId }) {
