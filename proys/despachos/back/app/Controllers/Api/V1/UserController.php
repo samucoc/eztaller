@@ -226,7 +226,7 @@ class UserController extends ResourceController
 
         //verify that passwords match
 
-        if ($user && password_verify($payload->userPassword, $user->userPassword)) {
+        if ($user && $payload->userPassword == $user->userPassword) {
             unset($user->userPassword);
             $response = [
                 'status' => 200,
