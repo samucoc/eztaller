@@ -5,8 +5,8 @@ import logo from '../assets/logo0.png';  // Asegúrate de ajustar la ruta según
 
 const Menu = () => {
   const navbarStyles = {
-    backgroundColor: '#242526', // Fondo negro
-    color: '#EBA51C', // Texto amarillo
+    backgroundColor: '#242526 !important', // Fondo negro
+    color: '#EBA51C !important', // Texto amarillo
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

@@ -51,8 +51,7 @@ const Login = ({ onLogin }) => {
       <h1>Iniciar Sesión</h1>
       <div className="d-flex flex-column align-items-center container">
         <div className="row">
-          <div className="col-6"></div>
-          <div className="col-6 mb-3 ml-3">
+          <div className="col-12 mb-3 ml-3">
             <input
               type="text"
               className="form-control text-center" 
@@ -63,8 +62,7 @@ const Login = ({ onLogin }) => {
           </div>
         </div>
         <div className="row">
-          <div className="col-6"></div>
-          <div className="col-6 mb-3 ml-3">
+          <div className="col-12 mb-3 ml-3">
             <input
               type="password"
               className="form-control text-center" 
