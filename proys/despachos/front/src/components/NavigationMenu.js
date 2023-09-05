@@ -13,7 +13,7 @@ const Menu = () => {
     fontSize: '20px', // Tamaño de fuente más grande
   };
   return (
-      <div className="navbar navbar-expand-lg navbar-light bg-light" style={navbarStyles}>
+      <div className="navbar navbar-expand-lg navbar-light bg-light" style="background-color: rgb(36, 37, 38) !important; color: rgb(235, 165, 28); display: flex; justify-content: center; align-items: center; font-size: 20px;">
         <a className="navbar-brand" href="/">               
           <img src={logo} alt="MiApp Logo" width="48" height="48" className="d-inline-block align-top" />
         </a>
