@@ -5,9 +5,39 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #242526 !important; /* Color de fondo claro de Bootstrap */
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.container {
+  width: 80%;
+}
+
+/* Mejora la apariencia de los enlaces cuando se pasa el ratón por encima */
+.navbar .nav-link {
+  color: #EBA51C; /* Color predeterminado de enlace activo de Bootstrap */
+  transition: color 0.2s ease-in-out;
+}
+
+/* Si necesitas un fondo diferente para la barra de navegación */
+.navbar {
+  background-color: #242526 !important; /* Color de fondo claro de Bootstrap */
+  display: 'flex';
+  text-align: center;
+}
+
+.navbar-nav {
+  list-style-type: none;
+  padding-left: 0;  /* Asegúrate de que no haya un padding innecesario */
+}
+
+.navbar-nav .nav-item {
+  margin-right: 15px;  /* Si deseas tener un espacio entre los elementos de la lista */
+}
+h1, p {
+  font-family: Lato;
 }
