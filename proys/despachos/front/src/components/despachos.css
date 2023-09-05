@@ -3,14 +3,16 @@
 }
 
 /* Mejora la apariencia de los enlaces cuando se pasa el ratón por encima */
-.navbar .nav-link:hover {
-    color: #007BFF; /* Color predeterminado de enlace activo de Bootstrap */
+.navbar .nav-link {
+    color: #EBA51C; /* Color predeterminado de enlace activo de Bootstrap */
     transition: color 0.2s ease-in-out;
 }
 
 /* Si necesitas un fondo diferente para la barra de navegación */
 .navbar {
-    background-color: #f8f9fa !important; /* Color de fondo claro de Bootstrap */
+    background-color: #242526 !important; /* Color de fondo claro de Bootstrap */
+    display: 'flex';
+    text-align: center;
 }
 
 .navbar-nav {
@@ -24,3 +26,7 @@
 h1, p {
     font-family: Lato;
   }
+body{
+    background-color: #242526 !important; /* Color de fondo claro de Bootstrap */
+
+}

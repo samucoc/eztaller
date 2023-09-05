@@ -164,6 +164,7 @@ const Despachos = () => {
           </div>
         </div>
       </div>
+      <br></br>
       <div className={`modal ${isModalOpen ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: isModalOpen ? 'block' : 'none' }}>
         <div className="modal-dialog" role="document">
           <div className="modal-content">
@@ -259,7 +260,7 @@ const Despachos = () => {
         </div>
       </div>
 
-      <Table striped bordered hover>
+      <Table bordered hover>
         <thead>
           <tr>
             <th>Nro Orden</th>

@@ -122,6 +122,7 @@ const Clientes = () => {
           </div>
         </div>
       </div>
+      <br></br>
       <div className={`modal ${isModalOpen ? 'show' : ''}`} tabIndex="-1">
           <div className="modal-dialog">
               <div className="modal-content">
@@ -209,7 +210,7 @@ const Clientes = () => {
               </div>
           </div>
       </div>
-      <Table striped bordered hover>
+      <Table bordered hover>
         <thead>
           <tr>
             <th>Nro</th>
