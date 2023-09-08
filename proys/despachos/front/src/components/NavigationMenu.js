@@ -4,8 +4,16 @@ import './despachos.css';
 import logo from '../assets/logo0.png';  // Asegúrate de ajustar la ruta según donde tengas tu imagen
 
 const Menu = () => {
+  const navbarStyles = {
+    backgroundColor: '#242526 !important', // Fondo negro
+    color: '#EBA51C !important', // Texto amarillo
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '20px', // Tamaño de fuente más grande
+  };
   return (
-      <div className="navbar navbar-expand-lg navbar-light bg-light" style="background-color: rgb(36, 37, 38) !important; color: rgb(235, 165, 28); display: flex; justify-content: center; align-items: center; font-size: 20px;">
+      <div className="navbar navbar-expand-lg navbar-dark bg-dark" style={navbarStyles}>
         <a className="navbar-brand" href="/">               
           <img src={logo} alt="MiApp Logo" width="48" height="48" className="d-inline-block align-top" />
         </a>

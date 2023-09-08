@@ -9,7 +9,6 @@ import Despachos from './components/Despachos';
 import Conductores from './components/Conductores';
 import Vehiculos from './components/Vehiculos';
 import Configuracion from './components/Configuracion';
-import Login from './components/Login';
 import Perfil from './components/Perfil';
 import Menu from './components/NavigationMenu';
 
@@ -28,7 +27,6 @@ function App() {
   return (
     <Router>
       <div className="App" style={appStyles}>
-        {isLoggedIn ? <Navigate to="/clientes" /> : <Navigate to="/login" />}
         <Menu />
         <Routes>
           <Route path="/clientes" element={<Clientes />} />
@@ -36,7 +34,6 @@ function App() {
           <Route path="/conductores" element={<Conductores />} />
           <Route path="/vehiculos" element={<Vehiculos />} />
           <Route path="/configuracion" element={<Configuracion />} />
-          <Route path="/login" element={<Login onLogin={handleLoginChange} />} />
           <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </div>
