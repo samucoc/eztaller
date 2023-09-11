@@ -283,8 +283,7 @@ const Despachos = () => {
           </div>
         </div>
       </div>
-
-      <Table bordered hover>
+      <Table bordered hover className="miTabla">
         <thead>
           <tr>
             <th>Nro Orden</th>
