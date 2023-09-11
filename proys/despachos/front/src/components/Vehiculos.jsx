@@ -119,7 +119,7 @@ const Vehiculos = () => {
         </div>
       </div>
       <br></br>
-      <div className={`modal ${isModalOpen ? 'show' : ''}`} tabIndex="-1">
+      <div className={`modal ${isModalOpen ? 'show' : ''}`} tabIndex="-1" style={{ display: isModalOpen ? 'block' : 'none' }}>
           <div className="modal-dialog">
               <div className="modal-content">
                  <div className="modal-header">
@@ -196,7 +196,7 @@ const Vehiculos = () => {
               </div>
           </div>
       </div>
-      <Table bordered hover>
+      <Table bordered hover style={{ color: '#EBA51C', backgroundColor: '#242526' }} className="miTabla">
         <thead>
           <tr>
             <th>Nro</th>

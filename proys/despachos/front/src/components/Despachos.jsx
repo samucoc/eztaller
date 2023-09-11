@@ -176,81 +176,105 @@ const Despachos = () => {
             </div>
             <div className="modal-body">
               <form onSubmit={crearOActualizarDespacho}>
-                <div className="form-group">
-                  <input
-                    type="date"
-                    className="form-control"
-                    placeholder="Fecha Despacho"
-                    name="fecha"
-                    value={nuevoDespacho.fecha}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <select 
-                    className="form-control"
-                    name="cliente_id"
-                    value={nuevoDespacho.cliente_id}
-                    onChange={handleChange}
-                  >
-                    <option>Seleccione...</option>
-                    {clientes.map(cliente => (
-                      <option key={cliente.id} value={cliente.id}>{cliente.nombreEmpresa}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Origen Despacho"
-                    name="origenDespacho"
-                    value={nuevoDespacho.origenDespacho}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Destino Despacho"
-                    name="destinoDespacho"
-                    value={nuevoDespacho.destinoDespacho}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <select 
-                    className="form-control"
-                    name="conductor_id"
-                    value={nuevoDespacho.conductor_id}
-                    onChange={handleChange}
-                  >
-                    <option>Seleccione...</option>
-                    {conductores.map(conductor => (
-                      <option key={conductor.id} value={conductor.id}>{conductor.nombres} {conductor.apellidoPaterno} </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <select 
-                    className="form-control"
-                    name="vehiculo_id"
-                    value={nuevoDespacho.vehiculo_id}
-                    onChange={handleChange}
-                  >
-                    <option>Seleccione...</option>
-                    {vehiculos.map(vehiculo => (
-                      <option key={vehiculo.id} value={vehiculo.id}>{vehiculo.patente}</option>
-                    ))}
-                  </select>
-                </div>
-
+                <div className="row">
+			<div className="col-3">
+				Fecha Despacho
+			</div>
+			<div className="form-group col-9">
+	                  <input
+        	            type="date"
+                	    className="form-control"
+	                    placeholder="Fecha Despacho"
+        	            name="fecha"
+                	    value={nuevoDespacho.fecha}
+	                    onChange={handleChange}
+        	          />
+                	</div>
+		</div>
+                <div className="row">
+                        <div className="col-3">
+                                Cliente	
+                        </div>
+	                <div className="form-group col-9">
+	                  <select 
+	                    className="form-control"
+	                    name="cliente_id"
+	                    value={nuevoDespacho.cliente_id}
+	                    onChange={handleChange}
+	                  >
+	                    <option>Seleccione...</option>
+	                    {clientes.map(cliente => (
+	                      <option key={cliente.id} value={cliente.id}>{cliente.nombreEmpresa}</option>
+	                    ))}
+	                  </select>
+	                </div>
+		</div>
+                <div className="row">
+                        <div className="col-3">
+                                Origen Despacho
+                        </div>
+    	                <div className="form-group col-9">
+	                  <input
+	                    type="text"
+	                    className="form-control"
+	                    placeholder="Origen Despacho"
+	                    name="origenDespacho"
+	                    value={nuevoDespacho.origenDespacho}
+	                    onChange={handleChange}
+	                  />
+	                </div>
+		</div>
+                <div className="row">
+                        <div className="col-3">
+                                Destino Despacho
+                        </div>
+	                <div className="form-group col-9">
+	                  <input
+	                    type="text"
+	                    className="form-control"
+	                    placeholder="Destino Despacho"
+	                    name="destinoDespacho"
+	                    value={nuevoDespacho.destinoDespacho}
+	                    onChange={handleChange}
+	                  />
+	                </div>
+		</div>
+                <div className="row">
+                        <div className="col-3">
+                                Conductor
+                        </div>
+	                <div className="form-group col-9">
+	                  <select 
+	                    className="form-control"
+	                    name="conductor_id"
+	                    value={nuevoDespacho.conductor_id}
+	                    onChange={handleChange}
+	                  >
+	                    <option>Seleccione...</option>
+	                    {conductores.map(conductor => (
+	                      <option key={conductor.id} value={conductor.id}>{conductor.nombres} {conductor.apellidoPaterno} </option>
+	                    ))}
+	                  </select>
+	                </div>
+		</div>
+                <div className="row">
+                        <div className="col-3">
+                                Vehículo
+                        </div>
+	                <div className="form-group col-9">
+	                  <select 
+	                    className="form-control"
+	                    name="vehiculo_id"
+	                    value={nuevoDespacho.vehiculo_id}
+	                    onChange={handleChange}
+	                  >
+	                    <option>Seleccione...</option>
+	                    {vehiculos.map(vehiculo => (
+	                      <option key={vehiculo.id} value={vehiculo.id}>{vehiculo.patente}</option>
+	                    ))}
+	                  </select>
+	                </div>
+		</div>
                 <button className="btn btn-primary" type="submit">
                   Crear
                 </button>

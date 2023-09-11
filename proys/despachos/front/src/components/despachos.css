@@ -1,0 +1,17 @@
+/* Estilo para la tabla */
+.miTabla {
+  background-color: #242526 !important; /* Fondo negro */
+  color: #EBA51C !important; /* Texto color miel */
+}
+
+/* Estilo para las celdas del encabezado */
+.miTabla th {
+  background-color: #242526 !important; /* Fondo negro */
+  color: #EBA51C !important; /* Texto color miel */
+}
+
+/* Estilo para las celdas del cuerpo */
+.miTabla td {
+  background-color: #242526 !important; /* Fondo negro */
+  color: #EBA51C !important; /* Texto color miel */
+}

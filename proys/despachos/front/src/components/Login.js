@@ -9,9 +9,9 @@ import logo from '../assets/logo0.png';  // Asegúrate de ajustar la ruta según
 const Login = ({ onLogin }) => {
   const [userEmail, setuserEmail] = useState('');
   const [userPassword, setuserPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
+  //const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
-  
+
   const handleLogin = async () => {
     try {
       // Realiza la solicitud POST con Axios y envía las credenciales
@@ -22,7 +22,7 @@ const Login = ({ onLogin }) => {
 
       // Verifica la respuesta y redirecciona si las credenciales son válidas
       if (response.status === 200) {
-        setLoggedIn(true);
+        //setLoggedIn(true);
         onLogin(true); // Llama a la función onLogin con true
         redireccionar();
       } else {
@@ -38,10 +38,10 @@ const Login = ({ onLogin }) => {
     navigate('/clientes');
   };
 
-  const appStyles = {
-    width: '30%',
-    textAlign: 'center' // Corregido: Usar camelCase
-  };
+  //const appStyles = {
+  //  width: '30%',
+  //  textAlign: 'center' // Corregido: Usar camelCase
+  //};
 
   return (
     <div className="d-flex flex-column align-items-center justify-content-center vh-50">

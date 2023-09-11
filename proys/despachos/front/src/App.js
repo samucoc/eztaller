@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, Redirect, Switch } from 'react-router-dom';
-import {Navigate} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Clientes from './components/Clientes';
 import Despachos from './components/Despachos';
@@ -17,13 +16,7 @@ function App() {
     backgroundColor: '#242526', // Fondo negro
     color: '#EBA51C', // Texto amarillo
   };
- 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLoginChange = (loggedInValue) => {
-    setIsLoggedIn(loggedInValue);
-  };
- 
   return (
     <Router>
       <div className="App" style={appStyles}>
