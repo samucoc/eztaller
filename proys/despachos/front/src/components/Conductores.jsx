@@ -234,7 +234,7 @@ const Conductores = () => {
               </div>
           </div>
       </div>
-      <Table bordered hover className="miTabla">
+      <Table bordered hover className="miTabla" id="miTabla">
         <thead>
           <tr>
             <th>Nro</th>

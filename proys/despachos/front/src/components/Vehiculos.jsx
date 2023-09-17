@@ -206,7 +206,7 @@ const Vehiculos = () => {
               </div>
           </div>
       </div>
-      <Table bordered hover style={{ color: '#EBA51C', backgroundColor: '#242526' }} className="miTabla">
+      <Table bordered hover style={{ color: '#EBA51C', backgroundColor: '#242526' }} className="miTabla" id="miTabla">
         <thead>
           <tr>
             <th>Nro</th>
