@@ -2,16 +2,42 @@
 .miTabla {
   background-color: #242526 !important; /* Fondo negro */
   color: #EBA51C !important; /* Texto color miel */
+  border: 2px solid #EBA51C !important; /* Cambiar el borde a #EBA51C y agregar un grosor de 2px */
 }
 
 /* Estilo para las celdas del encabezado */
 .miTabla th {
   background-color: #242526 !important; /* Fondo negro */
   color: #EBA51C !important; /* Texto color miel */
+  border: 2px solid #EBA51C !important; /* Cambiar el borde a #EBA51C y agregar un grosor de 2px */
 }
 
 /* Estilo para las celdas del cuerpo */
 .miTabla td {
   background-color: #242526 !important; /* Fondo negro */
   color: #EBA51C !important; /* Texto color miel */
+  border: 2px solid #EBA51C !important; /* Cambiar el borde a #EBA51C y agregar un grosor de 2px */
+}
+/* Estilo para el texto dentro del modal con la clase "modal-negro" */
+.modal-negro {
+  color: black; /* Cambiar el color del texto a negro */
+}
+
+/* Estilo para el título del modal con la clase "modal-title" */
+.modal-negro .modal-title {
+  color: black; /* Cambiar el color del título a negro */
+}
+
+/* Estilo para los input de formulario dentro del modal */
+.modal-negro input.form-control {
+  color: black; /* Cambiar el color del texto en los inputs a negro */
+}
+/* Cambiar el fondo del botón a #242526 */
+.btn-custom {
+  background-color: #242526 !important;
+  color: #EBA51C !important;
+  border: 2px solid #EBA51C !important; /* Cambiar el borde a #EBA51C y agregar un grosor de 2px */
+  margin: 10px;
+  padding: 10px 20px; /* Ajustar el espaciado interno del botón según sea necesario */
+  /* Otros estilos personalizados según tus necesidades */
 }

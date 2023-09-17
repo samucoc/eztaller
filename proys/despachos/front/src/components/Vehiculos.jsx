@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './despachos.css';
@@ -114,12 +115,21 @@ const Vehiculos = () => {
             <h1>Vehiculos</h1>
           </div>
           <div className="col-auto ml-auto text-right">
-            <Button onClick={openModal}>Agregar Vehiculo</Button>
+            <Button onClick={openModal} className="btn-custom">Agregar Vehiculo</Button>
+            {/* Botón para exportar la tabla a Excel */}
+            <ReactHTMLTableToExcel
+              id="botonExportar"
+              className="btn btn-custom"
+              table="miTabla"
+              filename="mi_tabla_excel"
+              sheet="Sheet"
+              buttonText="Exportar a Excel"
+            />            
           </div>
         </div>
       </div>
       <br></br>
-      <div className={`modal ${isModalOpen ? 'show' : ''}`} tabIndex="-1" style={{ display: isModalOpen ? 'block' : 'none' }}>
+      <div className={`modal ${isModalOpen ? 'show' : ''} modal-negro`} tabIndex="-1" style={{ display: isModalOpen ? 'block' : 'none' }}>
           <div className="modal-dialog">
               <div className="modal-content">
                  <div className="modal-header">
@@ -220,8 +230,8 @@ const Vehiculos = () => {
               <td>{Vehiculo.modelo}</td>
               <td>{Vehiculo.tipo}</td>
               <td>
-                <Button variant="primary" onClick={() => handleEdit(Vehiculo.id)}>Editar</Button>
-                <Button variant="danger" onClick={() => handleDelete(Vehiculo.id)}>Eliminar</Button>
+                <Button variant="primary" onClick={() => handleEdit(Vehiculo.id)} className="btn-custom">Editar</Button>
+                <Button variant="danger" onClick={() => handleDelete(Vehiculo.id)} className="btn-custom">Eliminar</Button>
               </td>
             </tr>
           ))}

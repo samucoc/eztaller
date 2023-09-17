@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './despachos.css';
@@ -119,21 +118,12 @@ const Clientes = () => {
             <h1>Clientes</h1>
           </div>
           <div className="col-auto ml-auto text-right">
-            <Button onClick={openModal} className="btn-custom">Agregar Cliente</Button>
-            {/* Botón para exportar la tabla a Excel */}
-            <ReactHTMLTableToExcel
-              id="botonExportar"
-              className="btn btn-custom"
-              table="miTabla"
-              filename="mi_tabla_excel"
-              sheet="Sheet"
-              buttonText="Exportar a Excel"
-            />
+            <Button onClick={openModal}>Agregar Cliente</Button>
           </div>
         </div>
       </div>
       <br></br>
-      <div className={`modal ${isModalOpen ? 'show' : ''} modal-negro`} tabIndex="-1" style={{ display: isModalOpen ? 'block' : 'none' }}>
+      <div className={`modal ${isModalOpen ? 'show' : ''}`} tabIndex="-1" style={{ display: isModalOpen ? 'block' : 'none' }}>
           <div className="modal-dialog">
               <div className="modal-content">
                  <div className="modal-header">
@@ -146,71 +136,71 @@ const Clientes = () => {
                       <form onSubmit={crearOActualizarCliente}>
                           <div className="row">
                             <div className="col-3">
-                              Nombre
+                              Nombre Empresa
                             </div>
                             <div className="col-9">
                                   <div className="mb-3">
-                                      <input type="text" className="form-control" placeholder="Nombre" name="nombreEmpresa" value={nuevoCliente.nombreEmpresa} onChange={handleChange} />
+                                      <input type="text" className="form-control" placeholder="Nombre Empresa" name="nombreEmpresa" value={nuevoCliente.nombreEmpresa} onChange={handleChange} />
                                   </div>
                               </div>
                           </div>
                           <div className="row">
                               <div className="col-3">
-                              Rut
+                              Rut Empresa
                               </div>
                               <div className="col-9">
                                   <div className="mb-3">
-                                      <input type="text" className="form-control" placeholder="Rut" name="rutEmpresa" value={nuevoCliente.rutEmpresa} onChange={handleChange} />
+                                      <input type="text" className="form-control" placeholder="Rut Empresa" name="rutEmpresa" value={nuevoCliente.rutEmpresa} onChange={handleChange} />
                                   </div>
                               </div>
                           </div>
                           <div className="row">
                               <div className="col-3">
-                              Dirección
+                              Dirección Empresa
                               </div>
                               <div className="col-9">
                                   <div className="mb-3">
-                                      <input type="text" className="form-control" placeholder="Dirección" name="direccionEmpresa" value={nuevoCliente.direccionEmpresa} onChange={handleChange} />
+                                      <input type="text" className="form-control" placeholder="Dirección Empresa" name="direccionEmpresa" value={nuevoCliente.direccionEmpresa} onChange={handleChange} />
                                   </div>
                               </div>
                           </div>
                           <div className="row">
                           <div className="col-3">
-                          Nombre Contacto
+                          Nombre Contacto Empresa
                               </div>
                               <div className="col-9">
                                   <div className="mb-3">
-                                      <input type="text" className="form-control" placeholder="Nombre Contacto" name="nombreContactoEmpresa" value={nuevoCliente.nombreContactoEmpresa} onChange={handleChange} />
+                                      <input type="text" className="form-control" placeholder="Nombre Contacto Empresa" name="nombreContactoEmpresa" value={nuevoCliente.nombreContactoEmpresa} onChange={handleChange} />
                                   </div>
                               </div>
                           </div>
                           <div className="row">
                           <div className="col-3">
-                          Teléfono Contacto
+                          Teléfono Contacto Empresa
                               </div>
                               <div className="col-9">
                                   <div className="mb-3">
-                                      <input type="text" className="form-control" placeholder="Teléfono Contacto" name="telefonoContactoEmpresa" value={nuevoCliente.telefonoContactoEmpresa} onChange={handleChange} />
+                                      <input type="text" className="form-control" placeholder="Teléfono Contacto Empresa" name="telefonoContactoEmpresa" value={nuevoCliente.telefonoContactoEmpresa} onChange={handleChange} />
                                   </div>
                               </div>
                           </div>
                           <div className="row">
                           <div className="col-3">
-                          Correo Contacto 
+                          Correo Contacto  Empresa
                               </div>
                               <div className="col-9">
                                   <div className="mb-3">
-                                      <input type="text" className="form-control" placeholder="Correo Contacto" name="correoContactoEmpresa" value={nuevoCliente.correoContactoEmpresa} onChange={handleChange} />
+                                      <input type="text" className="form-control" placeholder="Correo Contacto Empresa" name="correoContactoEmpresa" value={nuevoCliente.correoContactoEmpresa} onChange={handleChange} />
                                   </div>
                               </div>
                           </div>
                           <div className="row">
                           <div className="col-3">
-                          Nivel
+                          Nivel Empresa
                               </div>
                               <div className="col-9">
                                   <div className="mb-3">
-                                      <input type="text" className="form-control" placeholder="Nivel" name="nivelEmpresa" value={nuevoCliente.nivelEmpresa} onChange={handleChange} />
+                                      <input type="text" className="form-control" placeholder="Nivel Empresa" name="nivelEmpresa" value={nuevoCliente.nivelEmpresa} onChange={handleChange} />
                                   </div>
                               </div>
                           </div>
@@ -220,11 +210,11 @@ const Clientes = () => {
               </div>
           </div>
       </div>
-      <Table bordered hover className="miTabla" id="miTabla">
+      <Table bordered hover>
         <thead>
           <tr>
             <th>Nro</th>
-            <th>Nombre</th>
+            <th>Nombre Empresa</th>
             <th>RUT/DNI</th>
             <th>Dirección</th>
             <th>Nombre de Contacto</th>
@@ -246,14 +236,13 @@ const Clientes = () => {
               <td>{cliente.correoContactoEmpresa}</td>
               <td>{cliente.nivelEmpresa}</td>
               <td>
-                <Button variant="primary" onClick={() => handleEdit(cliente.id)} className="btn-custom">Editar</Button>
-                <Button variant="danger" onClick={() => handleDelete(cliente.id)} className="btn-custom">Eliminar</Button>
+                <Button variant="primary" onClick={() => handleEdit(cliente.id)}>Editar</Button>
+                <Button variant="danger" onClick={() => handleDelete(cliente.id)}>Eliminar</Button>
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
-
     </div>
   );
 };

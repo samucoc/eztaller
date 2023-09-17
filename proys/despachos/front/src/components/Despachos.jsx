@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import './despachos.css';
@@ -160,12 +161,21 @@ const Despachos = () => {
             <h1>Despachos</h1>
           </div>
           <div className="col-auto ml-auto text-right">
-            <Button onClick={openModal}>Agregar Despacho</Button>
+            <Button onClick={openModal} className="btn-custom">Agregar Despacho</Button>
+            {/* Botón para exportar la tabla a Excel */}
+            <ReactHTMLTableToExcel
+              id="botonExportar"
+              className="btn btn-custom"
+              table="miTabla"
+              filename="mi_tabla_excel"
+              sheet="Sheet"
+              buttonText="Exportar a Excel"
+            />            
           </div>
         </div>
       </div>
       <br></br>
-      <div className={`modal ${isModalOpen ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: isModalOpen ? 'block' : 'none' }}>
+      <div className={`modal ${isModalOpen ? 'show' : ''} modal-negro`} tabIndex="-1" role="dialog" style={{ display: isModalOpen ? 'block' : 'none' }}>
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -314,18 +324,18 @@ const Despachos = () => {
             <td>
               {formatDate(Despacho.recogido) != null
                 ? formatDate(Despacho.recogido)
-                : <Button variant="warning" onClick={() => handleShow(Despacho.id, "recoger")}>Camara</Button> }
+                : <Button variant="warning" onClick={() => handleShow(Despacho.id, "recoger")} className="btn-custom">Camara</Button> }
             </td>
             <td>
               {formatDate(Despacho.recogido) == null
                 ? '' : formatDate(Despacho.entregado) != null ?
                 formatDate(Despacho.entregado) 
-                : <Button variant="warning" onClick={() => handleShow(Despacho.id, "entregar")}>Camara</Button> }
+                : <Button variant="warning" onClick={() => handleShow(Despacho.id, "entregar")} className="btn-custom">Camara</Button> }
             </td>
-            <td><Button variant="info" onClick={() => handleShowQRModal(Despacho.id)}>Ver</Button></td>
+            <td><Button variant="info" onClick={() => handleShowQRModal(Despacho.id)} className="btn-custom">Ver</Button></td>
             <td>
-              <Button variant="primary" onClick={() => handleEdit(Despacho.id)}>Editar</Button>
-              <Button variant="danger" onClick={() => handleDelete(Despacho.id)}>Eliminar</Button>
+              <Button variant="primary" onClick={() => handleEdit(Despacho.id)} className="btn-custom">Editar</Button>
+              <Button variant="danger" onClick={() => handleDelete(Despacho.id)} className="btn-custom">Eliminar</Button>
             </td>
           </tr>
         );
