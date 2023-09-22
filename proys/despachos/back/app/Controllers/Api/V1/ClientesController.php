@@ -40,7 +40,7 @@ class ClientesController extends ResourceController
 
         $data = $this->model->find($id);
         if (empty($data)) {
-            return $this->failNotFound(RESOURCE_NOT_FOUND);
+            return $this->failNotFound();
         }
         return $this->respond($data);
     }
@@ -71,7 +71,7 @@ class ClientesController extends ResourceController
 
         if ($this->model->insert($data)) {
             $data->id = $this->model->insertID();
-            return $this->respondCreated($data, RESOURCE_CREATED);
+            return $this->respondCreated($data);
         } else {
             return $this->fail($this->model->errors());
         }
@@ -95,7 +95,7 @@ class ClientesController extends ResourceController
     {
         $validateEntry = $this->model->find($id);
         if (empty($validateEntry)) {
-            return $this->failNotFound(RESOURCE_NOT_FOUND);
+            return $this->failNotFound();
         }
 
         //divide in PATCH and PUT cases
@@ -113,7 +113,7 @@ class ClientesController extends ResourceController
 
         if ($this->model->update($id, $data)) {
             $data->id = $id;
-            return $this->respondUpdated($data, RESOURCE_UPDATED);
+            return $this->respondUpdated($data);
         } else {
             return $this->fail($this->model->errors());
         }
@@ -128,7 +128,7 @@ class ClientesController extends ResourceController
     {
 
         if ($this->model->delete($id)) {
-            return $this->respondDeleted($id, RESOURCE_DELETED);
+            return $this->respondDeleted($id);
         } else {
             return $this->fail($this->model->errors());
         }
