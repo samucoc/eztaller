@@ -19,9 +19,15 @@ class DespachosController extends ResourceController
         // $this->clientesModal = new \App\Models\ClientesModel();
         // $this->conductoresModal = new \App\Models\ConductoresModel();
         // $this->vehiculosModal = new \App\Models\VehiculosModel();
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-        header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding, Authorization");
+        header('Access-Control-Allow-Origin: *');
+
+        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE, PATCH");
+        header("Allow: GET, POST, OPTIONS, PUT, DELETE, PATCH");
+        $method = $_SERVER['REQUEST_METHOD'];
+        if ($method == "OPTIONS") {
+            die();
+        }
     }
 
     //request data is raw json
