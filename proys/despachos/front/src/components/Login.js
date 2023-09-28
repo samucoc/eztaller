@@ -73,7 +73,7 @@ const Login = ({ onLogin }) => {
           </div>
         </div>
         <div>
-          <button onClick={handleLogin} className="btn btn-primary">Iniciar Sesión</button>
+          <button onClick={handleLogin} className="btn-custom">Iniciar Sesión</button>
         </div>
       </div>
     </div>

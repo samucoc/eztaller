@@ -200,7 +200,7 @@ const Vehiculos = () => {
                                   </div>
                               </div>
                           </div>
-                          <button className="btn btn-primary" type="submit">Crear</button>
+                          <button className="btn-custom" type="submit">Crear</button>
                       </form>
                   </div>
               </div>
