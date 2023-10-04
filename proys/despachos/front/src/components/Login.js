@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo0.png';  // Asegúrate de ajustar la ruta según donde tengas tu imagen
 
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin , onAdm }) => {
   const [userEmail, setuserEmail] = useState('');
   const [userPassword, setuserPassword] = useState('');
   //const [loggedIn, setLoggedIn] = useState(false);
@@ -24,7 +24,17 @@ const Login = ({ onLogin }) => {
       if (response.status === 200) {
         //setLoggedIn(true);
         onLogin(true); // Llama a la función onLogin con true
-        redireccionar();
+
+        if (response.data.role_id === "1"){
+		onAdm(true);
+		redireccionar();
+
+	}
+	else{
+		onAdm(false);
+		redireccionar_2();
+
+	}
       } else {
         alert('Credenciales incorrectas');
       }
@@ -35,8 +45,12 @@ const Login = ({ onLogin }) => {
   };
 
   const redireccionar = () => {
-    navigate('/clientes');
-  };
+    	navigate('/despachos');
+  	};
+
+  const redireccionar_2 = () => {
+	navigate('/transportista');
+	};
 
   //const appStyles = {
   //  width: '30%',
@@ -44,11 +58,11 @@ const Login = ({ onLogin }) => {
   //};
 
   return (
-    <div className="d-flex flex-column align-items-center justify-content-center vh-50">
+    <div className="d-flex flex-column align-items-center justify-content-center vh-100">
       <div>
-        <img src={logo} alt="MiApp Logo" width="350" height="350" className="d-inline-block align-top" />
+        <img src={logo} alt="MiApp Logo" width="180" height="180" className="d-inline-block align-top" />
       </div>
-      <h1>Iniciar Sesión</h1>
+      <h4>Iniciar Sesión</h4>
       <div className="d-flex flex-column align-items-center container">
         <div className="row">
           <div className="col-12 mb-3 ml-3">

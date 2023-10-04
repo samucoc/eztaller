@@ -4,6 +4,9 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './despachos.css';
 import { Button, Table } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import API_BASE_URL from './apiConstants'; // Import the API_BASE_URL constant
 
@@ -20,6 +23,9 @@ const Conductores = () => {
     licenciaConducir: ''
   });
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 5; // Cambia esto al número deseado de elementos por página
+
   useEffect(() => {
     cargarConductores();
   }, []);
@@ -33,10 +39,20 @@ const Conductores = () => {
     }
   };
   
+  // Función para manejar el cambio de página
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
 
   const handleChange = e => {
     setNuevoConductor({ ...nuevoConductor, [e.target.name]: e.target.value });
   };
+
+
+  // Filtrar los clientes para mostrar solo los de la página actual
+  const offset = currentPage * itemsPerPage;
+  const displayedClientes = Conductores.slice(offset, offset + itemsPerPage);
+
 
   const crearOActualizarConductor = async (e) => {
     e.preventDefault();
@@ -250,7 +266,7 @@ const Conductores = () => {
           </tr>
         </thead>
         <tbody>
-          {Conductores.map(Conductor => (
+          {displayedClientes.map(Conductor => (
             <tr key={Conductor.id}>
               <td>{Conductor.id}</td>
               <td>{Conductor.rut}</td>
@@ -262,13 +278,30 @@ const Conductores = () => {
               <td>{Conductor.email}</td>
               <td>{Conductor.licenciaConducir}</td>
               <td>
-                <Button variant="primary" onClick={() => handleEdit(Conductor.id)} className="btn-custom">Editar</Button>
-                <Button variant="danger" onClick={() => handleDelete(Conductor.id)} className="btn-custom">Eliminar</Button>
+                <Button variant="primary" onClick={() => handleEdit(Conductor.id)} className="btn-custom">
+			<FontAwesomeIcon icon={faEdit} />
+		</Button>
+                <Button variant="danger" onClick={() => handleDelete(Conductor.id)} className="btn-custom">
+			<FontAwesomeIcon icon={faTrash} />
+		</Button>
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
+      <ReactPaginate
+        previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
+        nextLabel={<FontAwesomeIcon icon={faChevronRight} />}
+        breakLabel={'...'}
+        pageCount={Math.ceil(Conductores.length / itemsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageChange}
+        containerClassName={'pagination'}
+        activeClassName={'active'}
+        previousLinkClassName="btn-custom"
+        nextLinkClassName="btn-custom"
+      />
     </div>
   );
 };

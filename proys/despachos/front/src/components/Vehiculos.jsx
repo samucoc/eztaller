@@ -4,6 +4,9 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './despachos.css';
 import { Button, Table } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import API_BASE_URL from './apiConstants'; // Import the API_BASE_URL constant
 
@@ -18,6 +21,9 @@ const Vehiculos = () => {
     tipo: '',
   });
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 5; // Cambia esto al número deseado de elementos por página
+
   useEffect(() => {
     cargarVehiculos();
   }, []);
@@ -30,11 +36,21 @@ const Vehiculos = () => {
       console.error(error);
     }
   };
-  
 
+  // Función para manejar el cambio de página
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+ 
   const handleChange = e => {
     setNuevoVehiculo({ ...nuevoVehiculo, [e.target.name]: e.target.value });
   };
+
+
+  // Filtrar los clientes para mostrar solo los de la página actual
+  const offset = currentPage * itemsPerPage;
+  const displayedClientes = Vehiculos.slice(offset, offset + itemsPerPage);
+
 
   const crearOActualizarVehiculo = async (e) => {
     e.preventDefault();
@@ -186,7 +202,7 @@ const Vehiculos = () => {
                               </div>
                               <div className="col-9">
                                   <div className="mb-3">
-                                      <input type="date" className="form-control" placeholder="Modelo" name="modelo" value={nuevoVehiculo.modelo} onChange={handleChange} />
+                                      <input type="text" className="form-control" placeholder="Modelo" name="modelo" value={nuevoVehiculo.modelo} onChange={handleChange} />
                                   </div>
                               </div>
                           </div>
@@ -220,7 +236,7 @@ const Vehiculos = () => {
           </tr>
         </thead>
         <tbody>
-          {Vehiculos.map(Vehiculo => (
+          {displayedClientes.map(Vehiculo => (
             <tr key={Vehiculo.id}>
               <td>{Vehiculo.id}</td>
               <td>{Vehiculo.nombre}</td>
@@ -230,13 +246,31 @@ const Vehiculos = () => {
               <td>{Vehiculo.modelo}</td>
               <td>{Vehiculo.tipo}</td>
               <td>
-                <Button variant="primary" onClick={() => handleEdit(Vehiculo.id)} className="btn-custom">Editar</Button>
-                <Button variant="danger" onClick={() => handleDelete(Vehiculo.id)} className="btn-custom">Eliminar</Button>
+                <Button variant="primary" onClick={() => handleEdit(Vehiculo.id)} className="btn-custom">
+			<FontAwesomeIcon icon={faEdit} />
+		</Button>
+                <Button variant="danger" onClick={() => handleDelete(Vehiculo.id)} className="btn-custom">
+			<FontAwesomeIcon icon={faTrash} />
+		</Button>
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
+      {/* Agregar la paginación */}
+      <ReactPaginate
+        previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
+        nextLabel={<FontAwesomeIcon icon={faChevronRight} />}
+        breakLabel={'...'}
+        pageCount={Math.ceil(Vehiculos.length / itemsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageChange}
+        containerClassName={'pagination'}
+        activeClassName={'active'}
+        previousLinkClassName="btn-custom"
+        nextLinkClassName="btn-custom"
+      />
     </div>
   );
 };

@@ -20,10 +20,10 @@ const Menu = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/clientes">Clientes</Link>
+              <Link className="nav-link" to="/despachos">Despachos</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/despachos">Despachos</Link>
+              <Link className="nav-link" to="/clientes">Clientes</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/conductores">Conductores</Link>

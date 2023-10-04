@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 import Clientes from './components/Clientes';
 import Despachos from './components/Despachos';
@@ -11,6 +11,7 @@ import Configuracion from './components/Configuracion';
 import Perfil from './components/Perfil';
 import Menu from './components/NavigationMenu';
 import Login from './components/Login';
+import Transportista from './components/Transportista';
 
 function App() {
   const appStyles = {
@@ -19,36 +20,44 @@ function App() {
   };
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isUserAdm, setIsUserAdm] = useState(false);
 
-  const handleLoginChange = (loggedInValue) => {
-    setIsLoggedIn(loggedInValue);
-  };
+  // Verificar si el usuario está autenticado al cargar la página
+  useEffect(() => {
+    const userLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    setIsLoggedIn(userLoggedIn);
+    const userAdm = localStorage.getItem('isUserAdm') === 'true';
+    setIsUserAdm(userAdm);
+  }, []);
+
+
+const handleLoginChange = (loggedInValue) => {
+  setIsLoggedIn(loggedInValue);
+  // Almacenar el estado de inicio de sesión en el almacenamiento local para mantener la sesión
+  localStorage.setItem('isLoggedIn', loggedInValue);
+};
+
+const handleAdmChange = (isUserAdmValue) => {
+  setIsUserAdm(isUserAdmValue); // Usar setIsUserAdm para actualizar el estado
+  localStorage.setItem('isUserAdm', isUserAdmValue);
+};
 
   return (
     <Router>
       <div className="App" style={appStyles}>
-        <Menu isLoggedIn={isLoggedIn} /> {/* Mostrar el menú solo si está autenticado */}
+	{localStorage.getItem('isLoggedIn') === 'true' && localStorage.getItem('isUserAdm') === 'true' ? <Menu /> : '' }
         <Routes>
-          <Route path="/clientes" element={<Clientes />} />
-          <Route path="/despachos" element={<Despachos />} />
-          <Route path="/conductores" element={<Conductores />} />
-          <Route path="/vehiculos" element={<Vehiculos />} />
-          <Route path="/configuracion" element={<Configuracion />} />
-          <Route path="/login" element={<Login onLogin={handleLoginChange} />} />
-          <Route path="/perfil" element={<Perfil />} />
-          {/* Agregar más rutas aquí */}
-          <Route path="/" element={isLoggedIn ? <Despachos /> : <Login onLogin={handleLoginChange} />} />
+          <Route path="/despachos" element={localStorage.getItem('isLoggedIn') ? <Despachos /> : <Navigate to="/login" />} />
+          <Route path="/clientes" element={localStorage.getItem('isLoggedIn') ? <Clientes /> : <Navigate to="/login" />} />
+          <Route path="/conductores" element={localStorage.getItem('isLoggedIn') ? <Conductores /> : <Navigate to="/login" />} />
+          <Route path="/vehiculos" element={localStorage.getItem('isLoggedIn') ? <Vehiculos /> : <Navigate to="/login" />} />
+          <Route path="/configuracion" element={localStorage.getItem('isLoggedIn') ? <Configuracion /> : <Navigate to="/login" />} />
+          <Route path="/login" element={<Login onLogin={handleLoginChange} onAdm={handleAdmChange} />} />
+          <Route path="/perfil" element={localStorage.getItem('isLoggedIn') ? <Perfil /> : <Navigate to="/login" />} />
+  	  <Route path="/transportista" element={localStorage.getItem('isLoggedIn') ? <Transportista /> : <Navigate to="/login" />} />
+          {/* Ruta de inicio */}
+          <Route path="/" element={localStorage.getItem('isLoggedIn') ? <Despachos /> : <Navigate to="/login" />} />
         </Routes>
-        {isLoggedIn && (
-          <div>
-            {/* Agrega enlaces a otras rutas aquí */}
-            <Link to="/clientes">Clientes</Link>
-            <Link to="/conductores">Conductores</Link>
-            <Link to="/vehiculos">Vehículos</Link>
-            <Link to="/configuracion">Configuración</Link>
-            <Link to="/perfil">Perfil</Link>
-          </div>
-        )}
       </div>
     </Router>
   );

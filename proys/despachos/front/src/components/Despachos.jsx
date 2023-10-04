@@ -7,6 +7,9 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import  QRModal  from './QRScanner'; 
 import  QRCodeModal  from './QRCodeModal';
+import ReactPaginate from 'react-paginate';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight, faCamera, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import API_BASE_URL from './apiConstants'; // Import the API_BASE_URL constant
 
@@ -17,6 +20,9 @@ const Despachos = () => {
   const [conductores, setConductores] = useState([]);
   const [vehiculos, setVehiculos] = useState([]);
   const [showQRModal, setShowQRModal] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 5; // Cambia esto al número deseado de elementos por página
 
   const [nuevoDespacho, setNuevoDespacho] = useState({
     fecha: '',
@@ -63,6 +69,11 @@ const Despachos = () => {
     setClientes(res.data);
   };
 
+  // Función para manejar el cambio de página
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
   const cargarConductores = async () => {
     const res = await axios.get(API_BASE_URL + '/conductores');
     setConductores(res.data);
@@ -86,6 +97,12 @@ const Despachos = () => {
   const handleChange = e => {
     setNuevoDespacho({ ...nuevoDespacho, [e.target.name]: e.target.value });
   };
+
+
+  // Filtrar los clientes para mostrar solo los de la página actual
+  const offset = currentPage * itemsPerPage;
+  const displayedClientes = Despachos.slice(offset, offset + itemsPerPage);
+
 
   const crearOActualizarDespacho = async (e) => {
     e.preventDefault();
@@ -315,7 +332,7 @@ const Despachos = () => {
           </tr>
         </thead>
         <tbody>
-        {Despachos.map(Despacho => {
+        {displayedClientes.map(Despacho => {
         // Encuentra el cliente, el conductor y el vehículo correspondiente
         return (
           <tr key={Despacho.id}>
@@ -329,24 +346,41 @@ const Despachos = () => {
             <td>
               {formatDate(Despacho.recogido) != null
                 ? formatDate(Despacho.recogido)
-                : <Button variant="warning" onClick={() => handleShow(Despacho.id, "recoger")} className="btn-custom">Camara</Button> }
+                : <Button variant="warning" onClick={() => handleShow(Despacho.id, "recoger")} className="btn-custom"><FontAwesomeIcon icon={faCamera} /> </Button> }
             </td>
             <td>
               {formatDate(Despacho.recogido) == null
                 ? '' : formatDate(Despacho.entregado) != null ?
                 formatDate(Despacho.entregado) 
-                : <Button variant="warning" onClick={() => handleShow(Despacho.id, "entregar")} className="btn-custom">Camara</Button> }
+                : <Button variant="warning" onClick={() => handleShow(Despacho.id, "entregar")} className="btn-custom"><FontAwesomeIcon icon={faCamera} /> </Button> }
             </td>
             <td><Button variant="info" onClick={() => handleShowQRModal(Despacho.id)} className="btn-custom">Ver</Button></td>
             <td>
-              <Button variant="primary" onClick={() => handleEdit(Despacho.id)} className="btn-custom">Editar</Button>
-              <Button variant="danger" onClick={() => handleDelete(Despacho.id)} className="btn-custom">Eliminar</Button>
+              <Button variant="primary" onClick={() => handleEdit(Despacho.id)} className="btn-custom">
+		<FontAwesomeIcon icon={faEdit} />
+		</Button>
+              <Button variant="danger" onClick={() => handleDelete(Despacho.id)} className="btn-custom">
+		<FontAwesomeIcon icon={faTrash} />
+		</Button>
             </td>
           </tr>
         );
       })}
         </tbody>
       </Table>
+      <ReactPaginate
+        previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
+        nextLabel={<FontAwesomeIcon icon={faChevronRight} />}
+        breakLabel={'...'}
+        pageCount={Math.ceil(Despachos.length / itemsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageChange}
+        containerClassName={'pagination'}
+        activeClassName={'active'}
+        previousLinkClassName="btn-custom"
+        nextLinkClassName="btn-custom"
+      />
       <QRModal isOpen={showQRScanner} onClose={handleClose} despachoId={selectedDespachoId} action={action} />
       <QRCodeModal 
         isOpen={showQRModal} 

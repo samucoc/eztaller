@@ -4,6 +4,9 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './despachos.css';
 import { Button, Table } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import API_BASE_URL from './apiConstants'; // Import the API_BASE_URL constant
 
@@ -19,6 +22,9 @@ const Clientes = () => {
     nivelEmpresa: '',
   });
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 5; // Cambia esto al número deseado de elementos por página
+
   useEffect(() => {
     cargarClientes();
   }, []);
@@ -32,10 +38,19 @@ const Clientes = () => {
     }
   };
   
+  // Función para manejar el cambio de página
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
 
   const handleChange = e => {
     setNuevoCliente({ ...nuevoCliente, [e.target.name]: e.target.value });
   };
+
+  // Filtrar los clientes para mostrar solo los de la página actual
+  const offset = currentPage * itemsPerPage;
+  const displayedClientes = clientes.slice(offset, offset + itemsPerPage);
+
 
   const crearOActualizarCliente = async (e) => {
     e.preventDefault();
@@ -235,7 +250,7 @@ const Clientes = () => {
           </tr>
         </thead>
         <tbody>
-          {clientes.map(cliente => (
+          {displayedClientes.map(cliente => (
             <tr key={cliente.id}>
               <td>{cliente.id}</td>
               <td>{cliente.nombreEmpresa}</td>
@@ -246,14 +261,31 @@ const Clientes = () => {
               <td>{cliente.correoContactoEmpresa}</td>
               <td>{cliente.nivelEmpresa}</td>
               <td>
-                <Button variant="primary" onClick={() => handleEdit(cliente.id)} className="btn-custom">Editar</Button>
-                <Button variant="danger" onClick={() => handleDelete(cliente.id)} className="btn-custom">Eliminar</Button>
+                <Button variant="primary" onClick={() => handleEdit(cliente.id)} className="btn-custom">
+			<FontAwesomeIcon icon={faEdit} />
+		</Button>
+                <Button variant="danger" onClick={() => handleDelete(cliente.id)} className="btn-custom">
+			<FontAwesomeIcon icon={faTrash} />
+		</Button>
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
-
+      {/* Agregar la paginación */}
+      <ReactPaginate
+        previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
+        nextLabel={<FontAwesomeIcon icon={faChevronRight} />}
+        breakLabel={'...'}
+        pageCount={Math.ceil(clientes.length / itemsPerPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageChange}
+        containerClassName={'pagination'}
+        activeClassName={'active'}
+	previousLinkClassName="btn-custom"
+	nextLinkClassName="btn-custom"
+      />
     </div>
   );
 };
