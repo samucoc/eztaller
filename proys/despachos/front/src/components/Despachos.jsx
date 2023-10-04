@@ -217,8 +217,8 @@ const Despachos = () => {
 	                    onChange={handleChange}
         	          />
                 	</div>
-		</div>
-		<br/>
+		            </div>
+		            <br/>
                 <div className="row">
                         <div className="col-3">
                                 Cliente	
@@ -236,8 +236,8 @@ const Despachos = () => {
 	                    ))}
 	                  </select>
 	                </div>
-		</div>
-		<br/>
+		            </div>
+		            <br/>
                 <div className="row">
                         <div className="col-3">
                                 Origen Despacho
@@ -252,9 +252,9 @@ const Despachos = () => {
 	                    onChange={handleChange}
 	                  />
 	                </div>
-		</div>
+		            </div>
                 <br/>
-		<div className="row">
+		              <div className="row">
                         <div className="col-3">
                                 Destino Despacho
                         </div>
@@ -268,9 +268,9 @@ const Despachos = () => {
 	                    onChange={handleChange}
 	                  />
 	                </div>
-		</div>
+		            </div>
                 <br/>
-		<div className="row">
+		            <div className="row">
                         <div className="col-3">
                                 Conductor
                         </div>
@@ -287,9 +287,9 @@ const Despachos = () => {
 	                    ))}
 	                  </select>
 	                </div>
-		</div>
+		            </div>
                 <br/>
-		<div className="row">
+		              <div className="row">
                         <div className="col-3">
                                 Vehículo
                         </div>
@@ -306,8 +306,8 @@ const Despachos = () => {
 	                    ))}
 	                  </select>
 	                </div>
-		</div>
-		<button className="btn-custom" type="submit">
+		            </div>
+		            <button className="btn-custom" type="submit">
                   Crear
                 </button>
               </form>

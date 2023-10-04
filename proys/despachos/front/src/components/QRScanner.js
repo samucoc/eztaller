@@ -39,7 +39,9 @@ function QRModal({ isOpen, onClose, despachoId, action}) {
             if (action === "recoger") {
                 fetchRecogerDespacho(despachoId);
             } else if (action === "entregar") {
-                fetchEntregarDespacho(despachoId);
+              fetchEntregarDespacho(despachoId);
+            } else if (action === "auto") {
+              fetchRecogerAuto  (code.data);
             } else {
                 console.error("Acción no válida.");
                 return;
@@ -65,6 +67,22 @@ function QRModal({ isOpen, onClose, despachoId, action}) {
     };
   }, [isOpen,action, despachoId, onClose]);
 
+  const fetchRecogerAuto= async (idDespacho) => {
+    try {
+        const response = await axios.get(API_BASE_URL + '/despachos/auto/'+idDespacho, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        console.log(response.data);
+        // Hacer algo con la respuesta
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+  }
+
   const fetchRecogerDespacho = async (idDespacho) => {
     try {
         const response = await axios.get(API_BASE_URL + '/despachos/recoger/'+idDespacho, {
@@ -79,23 +97,23 @@ function QRModal({ isOpen, onClose, despachoId, action}) {
     } catch (error) {
         console.error('Error:', error);
     }
-}
-
-const fetchEntregarDespacho = async (idDespacho) => {
-  try {
-      const response = await axios.get(API_BASE_URL + '/despachos/entregar/'+idDespacho, {
-          headers: {
-              'Content-Type': 'application/json',
-          },
-      });
-
-      console.log(response.data);
-      // Hacer algo con la respuesta
-
-  } catch (error) {
-      console.error('Error:', error);
   }
-}
+
+  const fetchEntregarDespacho = async (idDespacho) => {
+    try {
+        const response = await axios.get(API_BASE_URL + '/despachos/entregar/'+idDespacho, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        console.log(response.data);
+        // Hacer algo con la respuesta
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+  }
 
   return (
     <div className={`modal ${isOpen ? 'show' : ''}`} tabIndex="-1" role="dialog" style={isOpen ? { display: 'block' } : { display: 'none' }}>
