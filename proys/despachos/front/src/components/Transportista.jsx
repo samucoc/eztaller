@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import  QRModal  from './QRScanner'; 
+import QRModal from './QRScanner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight, faCamera, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import './despachos.css'; // Asegúrate de importar tu archivo CSS
 
 const Transportista = () => {
   const [showQRScanner, setShowQRScanner] = useState(false);
@@ -14,9 +15,13 @@ const Transportista = () => {
   };
 
   return (
-    <div>
+    <div className="centered-container">
       <h3>Escanear Código</h3>
-      <button onClick={() => handleOpenQRScanner('auto')}><FontAwesomeIcon icon={faCamera} /></button>
+	<br />
+	<br />
+      	<button onClick={() => handleOpenQRScanner('auto')} className="btn-custom scan-button">
+        	<FontAwesomeIcon icon={faCamera} className="icon-custom" />
+      	</button>
       {showQRScanner && (
         <QRModal isOpen={showQRScanner} onClose={() => setShowQRScanner(false)} action={action} />
       )}

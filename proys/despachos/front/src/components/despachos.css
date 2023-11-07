@@ -41,3 +41,23 @@
   padding: 10px 20px; /* Ajustar el espaciado interno del botón según sea necesario */
   /* Otros estilos personalizados según tus necesidades */
 }
+
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Esto centra verticalmente en la ventana */
+}
+
+.scan-button {
+  font-size: 24px; /* Ajusta el tamaño del botón según tus preferencias */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.icon-custom {
+  font-size: 36px; /* Ajusta el tamaño del icono según tus preferencias */
+  color: #EBA51C; /* Cambia el color del icono si es necesario */
+}
