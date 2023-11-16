@@ -113,22 +113,27 @@ const Conductores = () => {
   };
   
   const handleDelete = async (id) => {
-    try {
-      await axios.delete(API_BASE_URL+`/conductores/${id}`);
-      setNuevoConductor({
-        rut: '',
-        nombres: '',
-        apellidoPaterno: '',
-        apellidoMaterno: '',
-        fechaNacimiento: '',
-        direccion: '',
-        email: '',
-        licenciaConducir: ''
-      });
-      cargarConductores(); // carga nuevamente los Conductores después de eliminar
-    } catch (error) {
-      console.error(error);
-    }
+
+	  const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este registro?");
+
+	  if (confirmDelete) {
+	    try {
+	      await axios.delete(API_BASE_URL+`/conductores/${id}`);
+	      setNuevoConductor({
+	        rut: '',
+	        nombres: '',
+	        apellidoPaterno: '',
+	        apellidoMaterno: '',
+	        fechaNacimiento: '',
+	        direccion: '',
+	        email: '',
+	        licenciaConducir: ''
+	      });
+	      cargarConductores(); // carga nuevamente los Conductores después de eliminar
+	    } catch (error) {
+	      console.error(error);
+	    }
+	  }
   };
 
   return (

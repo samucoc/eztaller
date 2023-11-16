@@ -31,6 +31,14 @@ const Despachos = () => {
     destinoDespacho: '',
     conductor_id: '',
     vehiculo_id: '',
+        estado_1:'',        
+	estado_2:'',        
+	estado_3:'',        
+	estado_4:'',
+	estado_5:'',
+	nombreEmpresa:'',
+	nombre_conductor:'',
+	patente:'',	
   });
 
   const handleShowQRModal = (despachoId) => {
@@ -118,6 +126,14 @@ const Despachos = () => {
           destinoDespacho: '',
           conductor_id: '',
           vehiculo_id: '',
+        estado_1:'',        
+        estado_2:'',
+        estado_3:'',
+        estado_4:'',
+        estado_5:'',
+        nombreEmpresa:'',
+        nombre_conductor:'',
+        patente:'',   
         });
       } else {
         // De lo contrario, crea un nuevo Despacho
@@ -129,6 +145,14 @@ const Despachos = () => {
           destinoDespacho: '',
           conductor_id: '',
           vehiculo_id: '',
+        estado_1:'',        
+        estado_2:'',
+        estado_3:'',
+        estado_4:'',
+        estado_5:'',
+        nombreEmpresa:'',
+        nombre_conductor:'',
+        patente:'',   
         });
       }
   
@@ -145,6 +169,11 @@ const Despachos = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  const [isModalEstadosOpen, setisModalEstadosOpen] = useState(false);
+
+  const openEstadosDespachos = () => setisModalEstadosOpen(true);
+  const closeEstadosDespachos = () => setisModalEstadosOpen(false);
+
   const handleEdit = async (id) => {
     const Despachoseleccionado = Despachos.find(Despacho => Despacho.id === id);
     if (Despachoseleccionado) {
@@ -152,22 +181,59 @@ const Despachos = () => {
       openModal();
     }
   };
-  
+
+	const handleEstadosDespachos = async (id) => {
+	  setNuevoDespacho({
+	    fecha: '',
+	    cliente_id: '',
+	    origenDespacho: '',
+	    destinoDespacho: '',
+	    conductor_id: '',
+	    vehiculo_id: '',
+	    estado_1: '', // Inicializar en vacío
+	    estado_2: '', // Inicializar en vacío
+	    estado_3: '', // Inicializar en vacío
+	    estado_4: '', // Inicializar en vacío
+	    estado_5: '', // Inicializar en vacío
+	    nombreEmpresa: '',
+	    nombre_conductor: '',
+	    patente: '',
+	  });
+
+	  const Despachoseleccionado = Despachos.find(Despacho => Despacho.id === id);
+	  if (Despachoseleccionado) {
+	    setNuevoDespacho({...Despachoseleccionado});
+	    openEstadosDespachos();
+	  }
+	};
+
   const handleDelete = async (id) => {
-    try {
-      await axios.delete(API_BASE_URL + `/despachos/${id}`);
-      setNuevoDespacho({
-        fecha: '',
-        cliente_id: '',
-        origenDespacho: '',
-        destinoDespacho: '',
-        conductor_id: '',
-        vehiculo_id: '',
-      });
-      cargarDespachos(); // carga nuevamente los Despachos después de eliminar
-    } catch (error) {
-      console.error(error);
-    }
+	  const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este registro?");
+
+	  if (confirmDelete) {
+		    try {
+		      await axios.delete(API_BASE_URL + `/despachos/${id}`);
+		      setNuevoDespacho({
+		        fecha: '',
+		        cliente_id: '',
+		        origenDespacho: '',
+		        destinoDespacho: '',
+		        conductor_id: '',
+		        vehiculo_id: '',
+		        estado_1:'',        
+		        estado_2:'',
+		        estado_3:'',
+		        estado_4:'',
+		        estado_5:'',
+		        nombreEmpresa:'',
+		        nombre_conductor:'',
+		        patente:'',
+		      });
+		      cargarDespachos(); // carga nuevamente los Despachos después de eliminar
+		    } catch (error) {
+		      console.error(error);
+		    }
+	  }
   };
 
   return (
@@ -192,6 +258,173 @@ const Despachos = () => {
         </div>
       </div>
       <br></br>
+      <div className={`modal ${isModalEstadosOpen ? 'show' : ''} modal-negro`} tabIndex="-1" role="dialog" style={{ display: isModalEstadosOpen ? 'block' : 'none' }}>
+        <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Ver Estados Despacho</h5>
+                <button type="button" className="close" onClick={closeEstadosDespachos}>
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-3">
+                    Fecha Despacho
+                  </div>
+                  <div className="form-group col-9">
+	                  <input
+        	            type="date"
+                	    className="form-control"
+	                    placeholder="Fecha Despacho"
+        	            name="fecha"
+                	    value={nuevoDespacho.fecha}
+	                    onChange={handleChange}
+        	          />
+                	</div>
+		            </div>
+		            <br/>
+                <div className="row">
+                  <div className="col-3">
+                          Cliente	
+                  </div>
+	                <div className="form-group col-9">
+	                  <select 
+	                    className="form-control"
+	                    name="cliente_id"
+	                    value={nuevoDespacho.cliente_id}
+	                    onChange={handleChange}
+	                  >
+	                    <option>Seleccione...</option>
+	                    {clientes.map(cliente => (
+	                      <option 
+					key={cliente.id} 
+					value={cliente.id} 
+					selected={nuevoDespacho.cliente_id === cliente.id} >
+				{cliente.nombreEmpresa}
+			      </option>
+	                    ))}
+	                  </select>
+	                </div>
+		            </div>
+		            <br/>
+                <div className="row">
+                  <div className="col-3">
+                          Estado 1	
+                  </div>
+	                <div className="form-group col-9">
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Estado 1"
+                            name="fecha"
+                            value={nuevoDespacho.estado_1}
+                          />
+	                </div>
+		            </div>
+		            <br/>
+                <div className="row">
+                  <div className="col-3">
+                          Estado 2	
+                  </div>
+	                <div className="form-group col-9">
+	                  <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Estado 2"
+                            name="fecha"
+                            value={nuevoDespacho.estado_2}
+                          />
+	                </div>
+		            </div>
+		            <br/>
+                <div className="row">
+                  <div className="col-3">
+                          Estado 3	
+                  </div>
+	                <div className="form-group col-9">
+	                  <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Estado 3"
+                            name="fecha"
+                            value={nuevoDespacho.estado_3}
+                          />
+	                </div>
+		            </div>
+		            <br/>
+                <div className="row">
+                  <div className="col-3">
+                          Estado 4	
+                  </div>
+	                <div className="form-group col-9">
+	                  <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Estado 4"
+                            name="fecha"
+                            value={nuevoDespacho.estado_4}
+                          />
+	                </div>
+		            </div>
+		            <br/>
+                <div className="row">
+                  <div className="col-3">
+                          Estado 5	
+                  </div>
+	                <div className="form-group col-9">
+                          <input
+                            type="texte"
+                            className="form-control"
+                            placeholder="Estado 5"
+                            name="fecha"
+                            value={nuevoDespacho.estado_5}
+                          />
+	                </div>
+		            </div>
+		            <br/>
+                <div className="row">
+                        <div className="col-3">
+                                Conductor
+                        </div>
+	                <div className="form-group col-9">
+	                  <select 
+	                    className="form-control"
+	                    name="conductor_id"
+	                    value={nuevoDespacho.conductor_id}
+	                    onChange={handleChange}
+	                  >
+	                    <option>Seleccione...</option>
+	                    {conductores.map(conductor => (
+	                      <option key={conductor.id} value={conductor.id}>{conductor.nombres} {conductor.apellidoPaterno} </option>
+	                    ))}
+	                  </select>
+	                </div>
+		            </div>
+                <br/>
+		            <div className="row">
+                  <div className="col-3">
+                          Vehículo
+                  </div>
+	                <div className="form-group col-9">
+	                  <select 
+	                    className="form-control"
+	                    name="vehiculo_id"
+	                    value={nuevoDespacho.vehiculo_id}
+	                    onChange={handleChange}
+	                  >
+	                    <option>Seleccione...</option>
+	                    {vehiculos.map(vehiculo => (
+	                      <option key={vehiculo.id} value={vehiculo.id}>{vehiculo.patente}</option>
+	                    ))}
+	                  </select>
+	                </div>
+		            </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
       <div className={`modal ${isModalOpen ? 'show' : ''} modal-negro`} tabIndex="-1" role="dialog" style={{ display: isModalOpen ? 'block' : 'none' }}>
         <div className="modal-dialog" role="document">
           <div className="modal-content">
@@ -325,8 +558,7 @@ const Despachos = () => {
             <th>Destino</th>
             <th>Conductor</th>
             <th>Vehiculo</th>
-            <th>Estado Recogido</th>
-            <th>Estado Entregado</th>
+            <th>Estados</th>
             <th>QR</th>
             <th>Acciones</th>
           </tr>
@@ -338,22 +570,12 @@ const Despachos = () => {
           <tr key={Despacho.id}>
             <td>{Despacho.id}</td>
             <td>{formatDateMin(Despacho.fecha)}</td>
-            <td>{Despacho.cliente_id}</td>
+            <td>{Despacho.nombreEmpresa}</td>
             <td>{Despacho.origenDespacho}</td>
             <td>{Despacho.destinoDespacho}</td>
-            <td>{Despacho.conductor_id}</td>            
-            <td>{Despacho.vehiculo_id}</td>
-            <td>
-              {formatDate(Despacho.recogido) != null
-                ? formatDate(Despacho.recogido)
-                : <Button variant="warning" onClick={() => handleShow(Despacho.id, "recoger")} className="btn-custom"><FontAwesomeIcon icon={faCamera} /> </Button> }
-            </td>
-            <td>
-              {formatDate(Despacho.recogido) == null
-                ? '' : formatDate(Despacho.entregado) != null ?
-                formatDate(Despacho.entregado) 
-                : <Button variant="warning" onClick={() => handleShow(Despacho.id, "entregar")} className="btn-custom"><FontAwesomeIcon icon={faCamera} /> </Button> }
-            </td>
+            <td>{Despacho.nombre_conductor}</td>            
+            <td>{Despacho.patente}</td>
+            <td><Button variant="info" onClick={() => handleEstadosDespachos(Despacho.id) } className="btn-custom">Ver</Button></td>
             <td><Button variant="info" onClick={() => handleShowQRModal(Despacho.id)} className="btn-custom">Ver</Button></td>
             <td>
               <Button variant="primary" onClick={() => handleEdit(Despacho.id)} className="btn-custom">

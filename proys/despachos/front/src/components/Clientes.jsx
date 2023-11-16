@@ -50,49 +50,54 @@ const Clientes = () => {
   // Filtrar los clientes para mostrar solo los de la página actual
   const offset = currentPage * itemsPerPage;
   const displayedClientes = clientes.slice(offset, offset + itemsPerPage);
+	
+	const crearOActualizarCliente = async (e) => {
+	  e.preventDefault();
 
+	  try {
+	    if (nuevoCliente.id) {
+	      // Si el cliente tiene un ID, actualiza el cliente existente
+	      await axios.put(API_BASE_URL+`/clientes/${nuevoCliente.id}`, nuevoCliente);
+	    } else {
+	      // De lo contrario, crea un nuevo cliente
+	      await axios.post(API_BASE_URL + '/clientes', nuevoCliente);
+	    }
 
-  const crearOActualizarCliente = async (e) => {
-    e.preventDefault();
-  
-    try {
-      if (nuevoCliente.id) {
-        // Si el cliente tiene un ID, actualiza el cliente existente
-        await axios.put(API_BASE_URL+`/clientes/${nuevoCliente.id}`, nuevoCliente);
-        setNuevoCliente({
-          nombreEmpresa: '',
-          rutEmpresa: '',
-          direccionEmpresa: '',
-          nombreContactoEmpresa: '',
-          telefonoContactoEmpresa: '',
-          correoContactoEmpresa: '',
-          nivelEmpresa: ''
-        });
-      } else {
-        // De lo contrario, crea un nuevo cliente
-        await axios.post(API_BASE_URL + '/clientes', nuevoCliente);
-        setNuevoCliente({
-          nombreEmpresa: '',
-          rutEmpresa: '',
-          direccionEmpresa: '',
-          nombreContactoEmpresa: '',
-          telefonoContactoEmpresa: '',
-          correoContactoEmpresa: '',
-          nivelEmpresa: ''
-        });
-      }
-  
-      // Carga nuevamente los clientes y cierra el modal después de crear o actualizar
-      cargarClientes();
-      closeModal();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+	    // Restablece el estado de nuevoCliente después de una edición exitosa
+	    setNuevoCliente({
+		    nombreEmpresa: '',
+		    rutEmpresa: '',
+		    direccionEmpresa: '',
+		    nombreContactoEmpresa: '',
+		    telefonoContactoEmpresa: '',
+		    correoContactoEmpresa: '',
+		    nivelEmpresa: '',
+	    });
+
+	    // Carga nuevamente los clientes y cierra el modal después de crear o actualizar
+	    cargarClientes();
+	    closeModal();
+	  } catch (error) {
+	    console.error(error);
+	  }
+	};
   
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
+    setIsModalOpen(true);
+  }
+
+  const openModal2 = () => {
+      setNuevoCliente({
+        nombreEmpresa: '',
+        rutEmpresa: '',
+        direccionEmpresa: '',
+        nombreContactoEmpresa: '',
+        telefonoContactoEmpresa: '',
+        correoContactoEmpresa: '',
+        nivelEmpresa: ''
+      });
     setIsModalOpen(true);
   }
   
@@ -108,23 +113,28 @@ const Clientes = () => {
     }
   };
   
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(API_BASE_URL+`/clientes/${id}`);
-      setNuevoCliente({
-        nombreEmpresa: '',
-        rutEmpresa: '',
-        direccionEmpresa: '',
-        nombreContactoEmpresa: '',
-        telefonoContactoEmpresa: '',
-        correoContactoEmpresa: '',
-        nivelEmpresa: ''
-      });
-      cargarClientes(); // carga nuevamente los clientes después de eliminar
-    } catch (error) {
-      console.error(error);
-    }
-  };
+	const handleDelete = async (id) => {
+	  const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este cliente?");
+
+	  if (confirmDelete) {
+	    try {
+	      await axios.delete(API_BASE_URL+`/clientes/${id}`);
+	      setNuevoCliente({
+	        nombreEmpresa: '',
+	        rutEmpresa: '',
+	        direccionEmpresa: '',
+	        nombreContactoEmpresa: '',
+	        telefonoContactoEmpresa: '',
+	        correoContactoEmpresa: '',
+	        nivelEmpresa: ''
+	      });
+	      cargarClientes(); // carga nuevamente los clientes después de eliminar
+	    } catch (error) {
+	      console.error(error);
+	    }
+	  }
+	};   
+
 
   return (
     <div className="container">
@@ -134,7 +144,7 @@ const Clientes = () => {
             <h1>Clientes</h1>
           </div>
           <div className="col-auto ml-auto text-right">
-            <Button onClick={openModal} className="btn-custom">Agregar Cliente</Button>
+            <Button onClick={openModal2} className="btn-custom">Agregar Cliente</Button>
             {/* Botón para exportar la tabla a Excel */}
             <ReactHTMLTableToExcel
               id="botonExportar"

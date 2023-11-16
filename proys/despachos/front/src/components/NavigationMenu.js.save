@@ -1,0 +1,71 @@
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Importa 'useHistory' directamente
+import './despachos.css';
+import logo from '../assets/logo0.png';  // Asegúrate de ajustar la ruta según donde tengas tu imagen
+
+const Menu = () => {
+  const navigate = useNavigate(); // Inicializa useNavigate
+
+  const navbarStyles = {
+    backgroundColor: '#242526 !important', // Fondo negro
+    color: '#EBA51C !important', // Texto amarillo
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '20px', // Tamaño de fuente más grande
+  };
+
+  const handleLogout = () => {
+    // Elimina los datos de localStorage o cualquier otro almacenamiento que utilices para la sesión
+    localStorage.setItem('isLoggedIn', 'false');
+    localStorage.setItem('isUserAdm', 'false');	
+    // Redirecciona al usuario a la página de inicio de sesión
+    navigate('/login');
+  };
+
+  const username = localStorage.getItem('username'); // Reemplaza 'username' con la clave real utilizada en localStorage
+
+  const usernameStyles = {
+    paddingRight: '15px', // Espacio entre el nombre de usuario y el botón de cierre de sesión
+    color: '#ffffff',
+  };
+
+  return (
+      <div className="navbar navbar-expand-lg navbar-dark bg-dark" style={navbarStyles}>
+localStorage.setItem('isLoggedIn', 'false');
+    localStorage.setItem('isUserAdm', 'false');         <a className="navbar-brand" href="/">               
+          <img src={logo} alt="MiApp Logo" width="48" height="48" className="d-inline-block align-top" />
+        </a>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/despachos">Despachos</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/clientes">Clientes</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/conductores">Conductores</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/vehiculos">Vehiculos</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/configuracion">Configuración</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/perfil">Perfil</Link>
+            </li>
+            <li className="nav-item">
+		<div className="d-flex">
+	              <span className="nav-link mr-3" style={{ color: 'white' }}>{username}</span>
+        	      <button className="btn-custom" onClick={handleLogout}>Cerrar Sesión</button>
+	        </div>
+            </li>
+	   </ul>
+        </div>
+      </div>
+  );
+};
+
+export default Menu;

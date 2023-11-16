@@ -14,6 +14,8 @@ const Transportista = () => {
     setShowQRScanner(true);
   };
 
+  const username = localStorage.getItem('username'); // Reemplaza 'username' con la clave real utilizada en localStorage
+
   return (
     <div className="centered-container">
       <h3>Escanear Código</h3>
@@ -22,6 +24,7 @@ const Transportista = () => {
       	<button onClick={() => handleOpenQRScanner('auto')} className="btn-custom scan-button">
         	<FontAwesomeIcon icon={faCamera} className="icon-custom" />
       	</button>
+      <span className="nav-link mr-3" style={{ color: 'white' }}>{username}</span>
       {showQRScanner && (
         <QRModal isOpen={showQRScanner} onClose={() => setShowQRScanner(false)} action={action} />
       )}

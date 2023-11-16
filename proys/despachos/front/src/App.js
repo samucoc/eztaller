@@ -21,6 +21,7 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUserAdm, setIsUserAdm] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(true); // Inicialmente visible
 
   // Verificar si el usuario está autenticado al cargar la página
   useEffect(() => {
@@ -40,12 +41,25 @@ const handleLoginChange = (loggedInValue) => {
 const handleAdmChange = (isUserAdmValue) => {
   setIsUserAdm(isUserAdmValue); // Usar setIsUserAdm para actualizar el estado
   localStorage.setItem('isUserAdm', isUserAdmValue);
+  if (isUserAdmValue){
+	setIsMenuOpen(isUserAdmValue);
+	}
+};
+
+
+const handleCloseChange = (isUserAdmValue) => {
+  localStorage.setItem('isLoggedIn', 'false');
+  localStorage.setItem('isUserAdm', 'false'); 
+    setIsMenuOpen(false); // Oculta el menú cuando se activa onClose
+
 };
 
   return (
     <Router>
       <div className="App" style={appStyles}>
-	{localStorage.getItem('isLoggedIn') === 'true' && localStorage.getItem('isUserAdm') === 'true' ? <Menu /> : '' }
+        <div className={` ${isMenuOpen ? 'show' : 'hide'} `}>
+		{localStorage.getItem('isLoggedIn') === 'true' && localStorage.getItem('isUserAdm') === 'true' && isMenuOpen  ? <Menu onClose={handleCloseChange} /> : '' }
+	</div>
         <Routes>
           <Route path="/despachos" element={localStorage.getItem('isLoggedIn') ? <Despachos /> : <Navigate to="/login" />} />
           <Route path="/clientes" element={localStorage.getItem('isLoggedIn') ? <Clientes /> : <Navigate to="/login" />} />

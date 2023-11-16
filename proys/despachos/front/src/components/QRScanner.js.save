@@ -67,10 +67,11 @@ function QRModal({ isOpen, onClose, despachoId, action}) {
     };
   }, [isOpen,action, despachoId, onClose]);
 
+                      <span className="nav-link mr-3" style={{ color: 'white' }}>{username}</span>
+
   const fetchRecogerAuto= async (idDespacho) => {
     try {
-	const username = localStorage.getItem('username'); // Reemplaza 'username' con la clave real utilizada en localStorage
-        const response = await axios.get(API_BASE_URL + '/despachos/auto/'+idDespacho+'/'+username, {
+        const response = await axios.get(API_BASE_URL + '/despachos/auto/'+idDespacho, {
             headers: {
                 'Content-Type': 'application/json',
             },

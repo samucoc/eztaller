@@ -24,7 +24,7 @@ const Login = ({ onLogin , onAdm }) => {
       if (response.status === 200) {
         //setLoggedIn(true);
         onLogin(true); // Llama a la función onLogin con true
-
+        localStorage.setItem('username',userEmail)	
         if (response.data.role_id === "1"){
 		onAdm(true);
 		redireccionar();

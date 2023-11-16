@@ -107,20 +107,24 @@ const Vehiculos = () => {
   };
   
   const handleDelete = async (id) => {
-    try {
-      await axios.delete(API_BASE_URL+`/vehiculos/${id}`);
-      setNuevoVehiculo({
-        nombre: '',
-        patente: '',
-        año: '',
-        marca: '',
-        modelo: '',
-        tipo: '',
-      });
-      cargarVehiculos(); // carga nuevamente los Vehiculos después de eliminar
-    } catch (error) {
-      console.error(error);
-    }
+	  const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este registro?");
+
+	  if (confirmDelete) {
+	    try {
+	      await axios.delete(API_BASE_URL+`/vehiculos/${id}`);
+	      setNuevoVehiculo({
+	        nombre: '',
+	        patente: '',
+	        año: '',
+	        marca: '',
+	        modelo: '',
+	        tipo: '',
+	      });
+	      cargarVehiculos(); // carga nuevamente los Vehiculos después de eliminar
+	    } catch (error) {
+	      console.error(error);
+	    }
+	}
   };
 
   return (
