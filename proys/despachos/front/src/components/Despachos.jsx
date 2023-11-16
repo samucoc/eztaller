@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -9,7 +9,8 @@ import  QRModal  from './QRScanner';
 import  QRCodeModal  from './QRCodeModal';
 import ReactPaginate from 'react-paginate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight, faCamera, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight, faCamera, faEdit, faTrash, faPrint } from '@fortawesome/free-solid-svg-icons';
+import QRCode from 'qrcode';
 
 import API_BASE_URL from './apiConstants'; // Import the API_BASE_URL constant
 
@@ -31,15 +32,79 @@ const Despachos = () => {
     destinoDespacho: '',
     conductor_id: '',
     vehiculo_id: '',
-        estado_1:'',        
-	estado_2:'',        
-	estado_3:'',        
-	estado_4:'',
-	estado_5:'',
-	nombreEmpresa:'',
-	nombre_conductor:'',
-	patente:'',	
-  });
+    estado_1:'',        
+    estado_2:'',        
+    estado_3:'',        
+    estado_4:'',
+    estado_5:'',
+    nombreEmpresa:'',
+    nombre_conductor:'',
+    patente:'',	
+    });
+
+    const canvasRef = useRef(null);
+
+    const imprimirCodigoQR = (despachoId) => {
+      const canvas = canvasRef.current;
+      const qrCodeData = String(despachoId);
+      QRCode.toCanvas(canvas, qrCodeData, (error) => {
+        if (error) {
+          console.error('Error al generar el código QR', error);
+        }
+      });
+
+      const qrCodeImage = canvas.toDataURL('image/png');
+  	  setNuevoDespacho({
+        fecha: '',
+        cliente_id: '',
+        origenDespacho: '',
+        destinoDespacho: '',
+        conductor_id: '',
+        vehiculo_id: '',
+        estado_1: '', // Inicializar en vacío
+        estado_2: '', // Inicializar en vacío
+        estado_3: '', // Inicializar en vacío
+        estado_4: '', // Inicializar en vacío
+        estado_5: '', // Inicializar en vacío
+        nombreEmpresa: '',
+        nombre_conductor: '',
+        patente: '',
+      });
+      const Despachoseleccionado = Despachos.find(Despacho => Despacho.id === id);
+      if (Despachoseleccionado) {
+        setNuevoDespacho({...Despachoseleccionado});
+      }
+      const ventanaImpresion = window.open('', '', 'width=600,height=600');
+      ventanaImpresion.document.open();
+      ventanaImpresion.document.write('<html><head><title>Despacho</title></head><body>');
+      ventanaImpresion.document.write('<div style="text-align: center;">');
+      ventanaImpresion.document.write('<img src="' + Despachoseleccionado.fecha + '" />');
+      ventanaImpresion.document.write('</div><br/>');
+      ventanaImpresion.document.write('<div style="text-align: center;">');
+      ventanaImpresion.document.write('<img src="' +  Despachoseleccionado.nombreEmpresa  + '" />');
+      ventanaImpresion.document.write('</div><br/>');
+      ventanaImpresion.document.write('<div style="text-align: center;">');
+      ventanaImpresion.document.write('<img src="' +  Despachoseleccionado.origenDespacho  + '" />');
+      ventanaImpresion.document.write('</div><br/>');
+      ventanaImpresion.document.write('<div style="text-align: center;">');
+      ventanaImpresion.document.write('<img src="' +  Despachoseleccionado.destinoDespacho  + '" />');
+      ventanaImpresion.document.write('</div><br/>');
+      ventanaImpresion.document.write('<div style="text-align: center;">');
+      ventanaImpresion.document.write('<img src="' +  Despachoseleccionado.nombre_conductor  + '" />');
+      ventanaImpresion.document.write('</div><br/>');
+      ventanaImpresion.document.write('<div style="text-align: center;">');
+      ventanaImpresion.document.write('<img src="' +  Despachoseleccionado.patente  + '" />');
+      ventanaImpresion.document.write('</div><br/>');
+      ventanaImpresion.document.write('<div style="text-align: center;">');
+      ventanaImpresion.document.write('<img src="' + qrCodeImage + '" />');
+      ventanaImpresion.document.write('</div><br/>');
+      ventanaImpresion.document.write('</body></html>');
+      ventanaImpresion.document.close();
+      ventanaImpresion.print();
+      ventanaImpresion.close();
+  
+    };
+
 
   const handleShowQRModal = (despachoId) => {
     setSelectedDespachoId(despachoId);
@@ -298,11 +363,11 @@ const Despachos = () => {
 	                    <option>Seleccione...</option>
 	                    {clientes.map(cliente => (
 	                      <option 
-					key={cliente.id} 
-					value={cliente.id} 
-					selected={nuevoDespacho.cliente_id === cliente.id} >
-				{cliente.nombreEmpresa}
-			      </option>
+                          key={cliente.id} 
+                          value={cliente.id} 
+                          selected={nuevoDespacho.cliente_id === cliente.id} >
+                        {cliente.nombreEmpresa}
+                            </option>
 	                    ))}
 	                  </select>
 	                </div>
@@ -437,10 +502,10 @@ const Despachos = () => {
             <div className="modal-body">
               <form onSubmit={crearOActualizarDespacho}>
                 <div className="row">
-			<div className="col-3">
-				Fecha Despacho
-			</div>
-			<div className="form-group col-9">
+                  <div className="col-3">
+                    Fecha Despacho
+                  </div>
+                  <div className="form-group col-9">
 	                  <input
         	            type="date"
                 	    className="form-control"
@@ -579,11 +644,17 @@ const Despachos = () => {
             <td><Button variant="info" onClick={() => handleShowQRModal(Despacho.id)} className="btn-custom">Ver</Button></td>
             <td>
               <Button variant="primary" onClick={() => handleEdit(Despacho.id)} className="btn-custom">
-		<FontAwesomeIcon icon={faEdit} />
-		</Button>
+                <FontAwesomeIcon icon={faEdit} />
+              </Button>
               <Button variant="danger" onClick={() => handleDelete(Despacho.id)} className="btn-custom">
-		<FontAwesomeIcon icon={faTrash} />
-		</Button>
+                <FontAwesomeIcon icon={faTrash} />
+              </Button>
+              <Button variant="info" onClick={() => imprimirCodigoQR(Despacho.id)} className="btn-custom">
+                <FontAwesomeIcon icon={faPrint} />
+              </Button>
+              <div className="modal-body text-center hide">
+                <canvas ref={canvasRef} id="qrCodeCanvas" />
+              </div>
             </td>
           </tr>
         );
