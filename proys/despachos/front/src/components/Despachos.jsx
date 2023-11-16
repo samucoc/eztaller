@@ -45,15 +45,14 @@ const Despachos = () => {
     const canvasRef = useRef(null);
 
     const imprimirCodigoQR = (despachoId) => {
-      const canvas = canvasRef.current;
       const qrCodeData = String(despachoId);
-      QRCode.toCanvas(canvas, qrCodeData, (error) => {
-        if (error) {
-          console.error('Error al generar el código QR', error);
-        }
+
+      // OBTENER LA URL DEL CÓDIGO QR
+      let qrCodeUrl;
+      QRCode.toDataURL(qrCodeData, (url) => {
+        qrCodeUrl = url;
       });
 
-      const qrCodeImage = canvas.toDataURL('image/png');
   	  setNuevoDespacho({
         fecha: '',
         cliente_id: '',
@@ -96,7 +95,7 @@ const Despachos = () => {
       ventanaImpresion.document.write('<img src="' +  Despachoseleccionado.patente  + '" />');
       ventanaImpresion.document.write('</div><br/>');
       ventanaImpresion.document.write('<div style="text-align: center;">');
-      ventanaImpresion.document.write('<img src="' + qrCodeImage + '" />');
+      ventanaImpresion.document.write('<img src="' + qrCodeUrl + '" />');
       ventanaImpresion.document.write('</div><br/>');
       ventanaImpresion.document.write('</body></html>');
       ventanaImpresion.document.close();
