@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Importa 'useHistory' directamente
 import './despachos.css';
 import logo from '../assets/logo0.png';  // Asegúrate de ajustar la ruta según donde tengas tu imagen
+import Button from 'react-bootstrap/Button';
 
 const Menu = ({ onClose }) => {
   const navigate = useNavigate(); // Inicializa useNavigate
@@ -36,7 +37,7 @@ const Menu = ({ onClose }) => {
         <a className="navbar-brand" href="/">               
           <img src={logo} alt="MiApp Logo" width="48" height="48" className="d-inline-block align-top" />
         </a>
-	<div className="d-flex justify-content-between align-items-center">
+	      <div className="d-flex justify-content-between align-items-center">
 	        <div className="collapse navbar-collapse" id="navbarNav">
 	          <ul className="navbar-nav ml-auto">
 	            <li className="nav-item">
@@ -57,13 +58,13 @@ const Menu = ({ onClose }) => {
 	            <li className="nav-item">
 	              <Link className="nav-link" to="/perfil">Perfil</Link>
 	            </li>
-	    	  </ul>
-	        </div>
-	    	<div id="loginDiv" className="d-flex">
-	 	        <span className="nav-link mr-3" style={{ color: 'white' }}>{username}</span>
-	        	<button className="btn-custom" onClick={handleLogout}>Cerrar Sesión</button>
-		</div>
-	</div>
+            </ul>
+          </div>
+          <div id="loginDiv" className="d-flex">
+              <span className="nav-link mr-3" style={{ color: 'white' }}>{username}</span>
+              <Button onClick={handleLogout} className="btn-custom">Cerrar Sesión</Button>
+          </div>
+        </div>
       </div>
   );
 };
