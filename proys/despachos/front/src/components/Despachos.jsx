@@ -46,62 +46,51 @@ const Despachos = () => {
 
     const imprimirCodigoQR = (despachoId) => {
       const qrCodeData = String(despachoId);
-
-      // OBTENER LA URL DEL CÓDIGO QR
-      let qrCodeUrl;
-      QRCode.toDataURL(qrCodeData, (url) => {
-        qrCodeUrl = url;
+    
+      // Generar la URL del código QR de manera asíncrona
+      QRCode.toDataURL(qrCodeData, (error, qrCodeUrl) => {
+        if (error) {
+          console.error('Error al generar el código QR', error);
+          return;
+        }
+    
+        // Encontrar el despacho correspondiente
+        const Despachoseleccionado = Despachos.find((Despacho) => Despacho.id === despachoId);
+    
+        // Abrir la ventana de impresión
+        const ventanaImpresion = window.open('', '', 'width=600,height=600');
+        ventanaImpresion.document.open();
+        ventanaImpresion.document.write('<html><head><title>Despacho</title></head><body>');
+        ventanaImpresion.document.write('<div style="text-align: center;">');
+        
+        // Asegurarse de que el despacho existe antes de intentar acceder a sus propiedades
+        if (Despachoseleccionado) {
+          ventanaImpresion.document.write(Despachoseleccionado.fecha);
+          ventanaImpresion.document.write('<br/>');
+          ventanaImpresion.document.write(Despachoseleccionado.nombreEmpresa);
+          ventanaImpresion.document.write('<br/>');
+          ventanaImpresion.document.write(Despachoseleccionado.origenDespacho);
+          ventanaImpresion.document.write('<br/>');
+          ventanaImpresion.document.write(Despachoseleccionado.destinoDespacho);
+          ventanaImpresion.document.write('<br/>');
+          ventanaImpresion.document.write(Despachoseleccionado.nombre_conductor);
+          ventanaImpresion.document.write('<br/>');
+          ventanaImpresion.document.write(Despachoseleccionado.patente);
+          ventanaImpresion.document.write('<br/>');
+        }
+    
+        // Mostrar la imagen QR generada
+        ventanaImpresion.document.write('<img src="' + qrCodeUrl + '" />');
+        ventanaImpresion.document.write('</div><br/>');
+        ventanaImpresion.document.write('</body></html>');
+        ventanaImpresion.document.close();
+    
+        // Esperar a que la imagen se cargue antes de imprimir
+        ventanaImpresion.onload = () => {
+          ventanaImpresion.print();
+          ventanaImpresion.close();
+        };
       });
-
-  	  setNuevoDespacho({
-        fecha: '',
-        cliente_id: '',
-        origenDespacho: '',
-        destinoDespacho: '',
-        conductor_id: '',
-        vehiculo_id: '',
-        estado_1: '', // Inicializar en vacío
-        estado_2: '', // Inicializar en vacío
-        estado_3: '', // Inicializar en vacío
-        estado_4: '', // Inicializar en vacío
-        estado_5: '', // Inicializar en vacío
-        nombreEmpresa: '',
-        nombre_conductor: '',
-        patente: '',
-      });
-      const Despachoseleccionado = Despachos.find(Despacho => Despacho.id === despachoId);
-      if (Despachoseleccionado) {
-        setNuevoDespacho({...Despachoseleccionado});
-      }
-      const ventanaImpresion = window.open('', '', 'width=600,height=600');
-      ventanaImpresion.document.open();
-      ventanaImpresion.document.write('<html><head><title>Despacho</title></head><body>');
-      ventanaImpresion.document.write('<div style="text-align: center;">');
-      ventanaImpresion.document.write('<img src="' + Despachoseleccionado.fecha + '" />');
-      ventanaImpresion.document.write('</div><br/>');
-      ventanaImpresion.document.write('<div style="text-align: center;">');
-      ventanaImpresion.document.write('<img src="' +  Despachoseleccionado.nombreEmpresa  + '" />');
-      ventanaImpresion.document.write('</div><br/>');
-      ventanaImpresion.document.write('<div style="text-align: center;">');
-      ventanaImpresion.document.write('<img src="' +  Despachoseleccionado.origenDespacho  + '" />');
-      ventanaImpresion.document.write('</div><br/>');
-      ventanaImpresion.document.write('<div style="text-align: center;">');
-      ventanaImpresion.document.write('<img src="' +  Despachoseleccionado.destinoDespacho  + '" />');
-      ventanaImpresion.document.write('</div><br/>');
-      ventanaImpresion.document.write('<div style="text-align: center;">');
-      ventanaImpresion.document.write('<img src="' +  Despachoseleccionado.nombre_conductor  + '" />');
-      ventanaImpresion.document.write('</div><br/>');
-      ventanaImpresion.document.write('<div style="text-align: center;">');
-      ventanaImpresion.document.write('<img src="' +  Despachoseleccionado.patente  + '" />');
-      ventanaImpresion.document.write('</div><br/>');
-      ventanaImpresion.document.write('<div style="text-align: center;">');
-      ventanaImpresion.document.write('<img src="' + qrCodeUrl + '" />');
-      ventanaImpresion.document.write('</div><br/>');
-      ventanaImpresion.document.write('</body></html>');
-      ventanaImpresion.document.close();
-      ventanaImpresion.print();
-      ventanaImpresion.close();
-  
     };
 
 
