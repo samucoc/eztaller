@@ -41,7 +41,7 @@ function QRModal({ isOpen, onClose, despachoId, action, nombre, rut}) {
             } else if (action === "entregar") {
                 fetchEntregarDespacho(despachoId);
             } else if (action === "auto") {
-                fetchRecogerAuto(despachoId, nombre, rut);
+                fetchRecogerAuto(code.data, nombre, rut);
             } else {
                 console.error("Acción no válida.");
                 return;
