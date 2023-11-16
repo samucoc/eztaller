@@ -4,7 +4,7 @@ import axios from 'axios';
 import jsQR from 'jsqr';
 import API_BASE_URL from './apiConstants'; // Import the API_BASE_URL constant
 
-function QRModal({ isOpen, onClose, despachoId, action}) {
+function QRModal({ isOpen, onClose, despachoId, action, nombre, rut}) {
 
   const videoRef = useRef(null);
   const [qrCodeResult, setQrCodeResult] = useState(null);
@@ -39,9 +39,9 @@ function QRModal({ isOpen, onClose, despachoId, action}) {
             if (action === "recoger") {
                 fetchRecogerDespacho(despachoId);
             } else if (action === "entregar") {
-              fetchEntregarDespacho(despachoId);
+                fetchEntregarDespacho(despachoId);
             } else if (action === "auto") {
-              fetchRecogerAuto  (code.data);
+                fetchRecogerAuto(despachoId, nombre, rut);
             } else {
                 console.error("Acción no válida.");
                 return;
@@ -67,22 +67,24 @@ function QRModal({ isOpen, onClose, despachoId, action}) {
     };
   }, [isOpen,action, despachoId, onClose]);
 
-  const fetchRecogerAuto= async (idDespacho) => {
+  const fetchRecogerAuto = async (idDespacho, nombre, rut) => {
     try {
-	const username = localStorage.getItem('username'); // Reemplaza 'username' con la clave real utilizada en localStorage
-        const response = await axios.get(API_BASE_URL + '/despachos/auto/'+idDespacho+'/'+username, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        console.log(response.data);
-        // Hacer algo con la respuesta
-
+      const response = await axios.get(
+        `${API_BASE_URL}/despachos/auto/${idDespacho}/${nombre}/${rut}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+  
+      console.log(response.data);
+      // Hacer algo con la respuesta
+  
     } catch (error) {
-        console.error('Error:', error);
+      console.error('Error:', error);
     }
-  }
+  };
 
   const fetchRecogerDespacho = async (idDespacho) => {
     try {
