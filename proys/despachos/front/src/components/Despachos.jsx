@@ -70,7 +70,7 @@ const Despachos = () => {
         nombre_conductor: '',
         patente: '',
       });
-      const Despachoseleccionado = Despachos.find(Despacho => Despacho.id === id);
+      const Despachoseleccionado = Despachos.find(Despacho => Despacho.id === despachoId);
       if (Despachoseleccionado) {
         setNuevoDespacho({...Despachoseleccionado});
       }
