@@ -63,20 +63,20 @@ const Despachos = () => {
         ventanaImpresion.document.write('<html><head><title>Despacho</title>');
         ventanaImpresion.document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">');
         ventanaImpresion.document.write('</head><body>');
-        ventanaImpresion.document.write('<div class="row" style="border: 2px solid #000000">');
-        ventanaImpresion.document.write('<div class="col-6" style="border: 2px solid #000000">');
+        ventanaImpresion.document.write('<div class="row" style="border: 2px solid #000000; width:80%; text-align: center;">');
+        ventanaImpresion.document.write('<div class="col-6 p-3" style="border: 2px solid #000000">');
         
         // Asegurarse de que el despacho existe antes de intentar acceder a sus propiedades
         if (Despachoseleccionado) {
-          ventanaImpresion.document.write('<div class="row">'+Despachoseleccionado.fecha+'</div>');
-          ventanaImpresion.document.write('<div class="row">'+Despachoseleccionado.nombreEmpresa+'</div>');
-          ventanaImpresion.document.write('<div class="row">'+Despachoseleccionado.origenDespacho+'</div>');
-          ventanaImpresion.document.write('<div class="row">'+Despachoseleccionado.destinoDespacho+'</div>');
-          ventanaImpresion.document.write('<div class="row">'+Despachoseleccionado.nombre_conductor+'</div>');
-          ventanaImpresion.document.write('<div class="row">'+Despachoseleccionado.patente+'</div>');
+          ventanaImpresion.document.write('<div class="row p-3">'+Despachoseleccionado.fecha+'</div>');
+          ventanaImpresion.document.write('<div class="row p-3">'+Despachoseleccionado.nombreEmpresa+'</div>');
+          ventanaImpresion.document.write('<div class="row p-3">'+Despachoseleccionado.origenDespacho+'</div>');
+          ventanaImpresion.document.write('<div class="row p-3">'+Despachoseleccionado.destinoDespacho+'</div>');
+          ventanaImpresion.document.write('<div class="row p-3">'+Despachoseleccionado.nombre_conductor+'</div>');
+          ventanaImpresion.document.write('<div class="row p-3">'+Despachoseleccionado.patente+'</div>');
         }
         ventanaImpresion.document.write('</div>');
-        ventanaImpresion.document.write('<div class="col-6" style="border: 2px solid #0000000; text-align: center;">');
+        ventanaImpresion.document.write('<div class="col-6 p-3" style="border: 2px solid #0000000; text-align: center;">');
         
         // Mostrar la imagen QR generada
         ventanaImpresion.document.write('<img src="' + qrCodeUrl + '" />');
