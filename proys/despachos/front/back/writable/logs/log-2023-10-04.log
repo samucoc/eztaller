@@ -1,0 +1,134 @@
+CRITICAL - 2023-10-04 11:14:52 --> The namespace delimiter is a backslash (\), not a slash (/). Route handler: "\App\Controllers\Api\V1\DespachosController:auto/$1"
+in SYSTEMPATH/Router/Router.php on line 473.
+ 1 SYSTEMPATH/Router/Router.php(473): CodeIgniter\Router\Exceptions\RouterException::forInvalidControllerName()
+ 2 SYSTEMPATH/Router/Router.php(181): CodeIgniter\Router\Router->checkRoutes()
+ 3 SYSTEMPATH/CodeIgniter.php(815): CodeIgniter\Router\Router->handle()
+ 4 SYSTEMPATH/CodeIgniter.php(449): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 5 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 11:15:15 --> The namespace delimiter is a backslash (\), not a slash (/). Route handler: "\App\Controllers\Api\V1\DespachosController:auto/$1"
+in SYSTEMPATH/Router/Router.php on line 473.
+ 1 SYSTEMPATH/Router/Router.php(473): CodeIgniter\Router\Exceptions\RouterException::forInvalidControllerName()
+ 2 SYSTEMPATH/Router/Router.php(181): CodeIgniter\Router\Router->checkRoutes()
+ 3 SYSTEMPATH/CodeIgniter.php(815): CodeIgniter\Router\Router->handle()
+ 4 SYSTEMPATH/CodeIgniter.php(449): CodeIgniter\CodeIgniter->tryToRouteIt()
+ 5 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 6 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 11:29:45 --> Undefined variable: despachos
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 244.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(244): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 11:29:46 --> Undefined variable: despachos
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 244.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(244): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 11:59:16 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 246.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(246): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 11:59:17 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 246.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(246): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 15:48:12 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 246.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(246): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 15:48:31 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 246.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(246): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 15:48:35 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 246.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(246): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 15:48:45 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 246.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(246): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 15:48:58 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 246.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(246): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 15:49:03 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 246.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(246): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 16:02:14 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 246.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(246): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 16:06:51 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 246.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(246): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 16:06:52 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 246.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(246): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 16:07:22 --> Cannot use object of type stdClass as array
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 246.
+ 1 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 2 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 3 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 4 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 16:08:42 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 248.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(248): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 16:08:43 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 248.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(248): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-10-04 16:09:08 --> Undefined property: stdClass::$recogido
+in APPPATH/Controllers/Api/V1/DespachosController.php on line 248.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(248): CodeIgniter\Debug\Exceptions->errorHandler()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->auto()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()

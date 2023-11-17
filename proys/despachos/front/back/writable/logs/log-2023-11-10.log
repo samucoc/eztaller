@@ -1,0 +1,20 @@
+ERROR - 2023-11-10 07:16:34 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'origenDespacho, destinoDespacho, 
+                                        con...' at line 4 in /var/www/html/proys/despachos/front/build/back/system/Database/MySQLi/Connection.php:295
+Stack trace:
+#0 /var/www/html/proys/despachos/front/build/back/system/Database/MySQLi/Connection.php(295): mysqli->query()
+#1 /var/www/html/proys/despachos/front/build/back/system/Database/BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute()
+#2 /var/www/html/proys/despachos/front/build/back/system/Database/BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery()
+#3 /var/www/html/proys/despachos/front/build/back/app/Controllers/Api/V1/DespachosController.php(44): CodeIgniter\Database\BaseConnection->query()
+#4 /var/www/html/proys/despachos/front/build/back/system/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 /var/www/html/proys/despachos/front/build/back/system/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+#6 /var/www/html/proys/despachos/front/build/back/system/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+#7 /var/www/html/proys/despachos/front/build/back/public/index.php(85): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-11-10 07:16:34 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'origenDespacho, destinoDespacho, 
+                                        con...' at line 4
+in SYSTEMPATH/Database/BaseConnection.php on line 645.
+ 1 APPPATH/Controllers/Api/V1/DespachosController.php(44): CodeIgniter\Database\BaseConnection->query()
+ 2 SYSTEMPATH/CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH/CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController()
+ 4 SYSTEMPATH/CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest()
+ 5 FCPATH/index.php(85): CodeIgniter\CodeIgniter->run()

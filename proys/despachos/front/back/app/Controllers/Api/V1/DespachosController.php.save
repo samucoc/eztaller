@@ -1,0 +1,333 @@
+<?php
+
+namespace App\Controllers\Api\V1;
+
+use CodeIgniter\RESTful\ResourceController;
+
+class DespachosController extends ResourceController
+{
+    protected $modelName = '\App\Models\DespachosModel';
+    protected $format = 'json';
+    private $clientesModal;
+    private $conductoresModal;
+    private $vehiculosModal;
+    private $datetimeNow;
+
+    public function __construct()
+    {
+        $this->datetimeNow = new \DateTime('NOW', new \DateTimeZone('America/Santiago'));
+        // $this->clientesModal = new \App\Models\ClientesModel();
+        // $this->conductoresModal = new \App\Models\ConductoresModel();
+        // $this->vehiculosModal = new \App\Models\VehiculosModel();
+        //header('Access-Control-Allow-Origin: *');
+
+        //header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
+        //header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE, PATCH");
+        //header("Allow: GET, POST, OPTIONS, PUT, DELETE, PATCH");
+        //$method = $_SERVER['REQUEST_METHOD'];
+        //if ($method == "OPTIONS") {
+        //    die();
+        //}
+    }
+
+    //request data is raw json
+
+    /**
+     * Return an array of resource objects, themselves in array format
+     *
+     * @return mixed
+     */
+    public function index()
+    {
+        //$data = $this->model->findAll();
+        $db = \Config\Database::connect();
+        $despachos = $db->query("SELECT despachos.id, fecha, 
+					nombreEmpresa as  nombreEmpresa, 
+					clientes.id as cliente_id,
+					origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, ' ' ,conductores.apellidoPaterno, ' ' ,conductores.apellidoMaterno) as nombre_conductor, 
+					conductores.id as conductor_id,
+                                        patente as patente,
+					vehiculos.id as vehiculo_id, 
+                                        recogido, entregado,
+					concat(                               'nombre_estado_2' => $nombre,
+                               'rut_estado_2' => $rut,                               'nombre_estado_2' => $nombre,
+                               'rut_estado_2' => $rut,nombre_estado_1,' - ', time_estado_1) as estado_1,
+                                        concat(cond_estado_2,' - ', time_estado_2) as estado_2,
+                                        concat(cond_estado_3,' - ', time_estado_3) as estado_3,
+                                        concat(cond_estado_4,' - ', time_estado_4) as estado_4,
+                                        concat(cond_estado_5,' - ', time_estado_5) as estado_5
+                                FROM despachos 
+                                    left join clientes on despachos.cliente_id = clientes.id 
+                                    left join conductores on despachos.conductor_id = conductores.id 
+                                    left join vehiculos on despachos.vehiculo_id = vehiculos.id 
+				order by despachos.id desc
+                                ")->getResult();
+        return $this->respond($despachos);  
+        // foreach ($data as $key => $value) {
+        //     $data[$key]->cliente = $this->clientesModal->find($value->cliente_id);
+        //     $data[$key]->conductor = $this->conductoresModal->find($value->conductor_id);
+        //     $data[$key]->vehiculo = $this->vehiculosModal->find($value->vehiculo_id);
+        // }
+        //return $this->respond($data);
+    }
+
+    /**
+     * Return the properties of a resource object
+     *
+     * @return mixed
+     */
+    public function show($id = null)
+    {
+        $db = \Config\Database::connect();
+        $despachos = $db->query("SELECT despachos.id, fecha, 
+                                        nombreEmpresa as  nombreEmpresa, 
+                                        clientes.id as cliente_id,
+                                        origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, ' ' ,conductores.apellidoPaterno, ' ' ,conductores.apellidoMaterno) as nombre_conductor, 
+                                        conductores.id as conductor_id,
+                                        patente as patente, 
+                                        vehiculos.id as vehiculo_id, 
+                                        recogido, entregado,
+                                        concat(cond_estado_1,' - ', time_estado_1) as estado_1,
+                                        concat(cond_estado_2,' - ', time_estado_2) as estado_2,
+                                        concat(cond_estado_3,' - ', time_estado_3) as estado_3,
+                                        concat(cond_estado_4,' - ', time_estado_4) as estado_4,
+                                        concat(cond_estado_5,' - ', time_estado_5) as estado_5
+                                FROM despachos 
+                                    left join clientes on despachos.cliente_id = clientes.id 
+                                    left join conductores on despachos.conductor_id = conductores.id 
+                                    left join vehiculos on despachos.vehiculo_id = vehiculos.id 
+                                where despachos.id= '".$id."'
+                                ")->getResult();
+        return $this->respond($despachos); 
+    }
+
+    // public function listByCliente($id = null)
+    // {
+    //     $data = $this->model->where('cliente_id', $id)->findAll();
+    //     if (empty($data)) {
+    //         return $this->failNotFound(RESOURCE_NOT_FOUND);
+    //     }
+    //     $data->cliente = $this->clientesModal->find($data->cliente_id);
+    //     $data->conductor = $this->conductoresModal->find($data->conductor_id);
+    //     $data->vehiculo = $this->vehiculosModal->find($data->vehiculo_id);
+        
+    //     return $this->respond($data);
+    // }
+
+    // public function listByConductor($id = null)
+    // {
+    //     $data = $this->model->where('conductor_id', $id)->findAll();
+    //     if (empty($data)) {
+    //         return $this->failNotFound(RESOURCE_NOT_FOUND);
+    //     }
+    //     $data->cliente = $this->clientesModal->find($data->cliente_id);
+    //     $data->conductor = $this->conductoresModal->find($data->conductor_id);
+    //     $data->vehiculo = $this->vehiculosModal->find($data->vehiculo_id);
+        
+    //     return $this->respond($data);
+    // }
+
+    // public function listByVehiculo($id = null)
+    // {
+    //     $data = $this->model->where('vehiculo_id', $id)->findAll();
+    //     if (empty($data)) {
+    //         return $this->failNotFound(RESOURCE_NOT_FOUND);
+    //     }
+    //     $data->cliente = $this->clientesModal->find($data->cliente_id);
+    //     $data->conductor = $this->conductoresModal->find($data->conductor_id);
+    //     $data->vehiculo = $this->vehiculosModal->find($data->vehiculo_id);
+        
+    //     return $this->respond($data);
+    // }
+
+    /**
+     * Return a new resource object, with default properties
+     *
+     * @return mixed
+     */
+    public function new()
+    {
+        $data = new \App\Entities\Despachos;
+        return $this->respond($data);
+    }
+
+    /**
+     * Create a new resource object, from "posted" parameters
+     *
+     * @return mixed
+     */
+    public function create()
+    {
+
+        $data = $this->request->getJSON();
+
+        $data->created_at = $this->datetimeNow->format('Y-m-d H:i:s');
+        $data->updated_at = $this->datetimeNow->format('Y-m-d H:i:s');
+
+        if ($this->model->insert($data)) {
+            $data->id = $this->model->insertID();
+            return $this->respondCreated($data);
+        } else {
+            return $this->fail($this->model->errors());
+        }
+    }
+
+    /**
+     * Return the editable properties of a resource object
+     *
+     * @return mixed
+     */
+    public function edit($id = null)
+    {
+    }
+
+    /**
+     * Add or update a model resource, from "posted" properties
+     *
+     * @return mixed
+     */
+    public function update($id = null)
+    {
+
+	$data = $this->request->getJSON();
+
+	$db = \Config\Database::connect();
+        $db->query("
+                    update despachos
+                        set fecha = '".$data->fecha."' ,
+				cliente_id = '".$data->cliente_id."',
+				origenDespacho = '".$data->origenDespacho."',
+				destinoDespacho = '".$data->destinoDespacho."',
+				conductor_id = '".$data->conductor_id."',
+				vehiculo_id = '".$data->vehiculo_id."',
+				updated_at = '".date("Y-m-d H:i:s")."'
+                    where despachos.id= '".$id."'
+                    ");
+
+        return $this->respondUpdated($id);
+
+    }
+
+    /**
+     * Delete the designated resource object from the model
+     *
+     * @return mixed
+     */
+    public function delete($id = null)
+    {
+	$db = \Config\Database::connect();
+        $db->query("
+                    delete from despachos
+                    where despachos.id= '".$id."'
+                    ");
+
+        return $this->respondDeleted($id);
+    }
+
+    public function recoger($id = null){
+        $db = \Config\Database::connect();
+        $db->query("
+                    update despachos
+                        set recogido = '".$this->datetimeNow->format('Y-m-d H:i:s')."',
+                        updated_at = '".$this->datetimeNow->format('Y-m-d H:i:s')."'
+                    where despachos.id= '".$id."'
+                    ");
+
+        return $this->respondUpdated($id);
+       
+    }
+
+    public function entregar($id = null){
+        $db = \Config\Database::connect();
+        $db->query("
+                    update despachos
+                        set entregado = '".$this->datetimeNow->format('Y-m-d H:i:s')."',
+                        updated_at = '".$this->datetimeNow->format('Y-m-d H:i:s')."'
+                    where despachos.id= '".$id."'
+                    ");
+
+        return $this->respondUpdated($id);
+       
+    }
+
+ 
+public function auto($id = null, $nombre = null, $rut=null){
+    $db = \Config\Database::connect();
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
+    $now = date('Y-m-d H:i:s'); // Obtener la fecha y hora actual
+
+    // Obtener el despacho
+    $despacho = $db->table('despachos')
+                  ->select('`time_estado_1`, `time_estado_2`, `time_estado_3`, `time_estado_4`, `time_estado_5`')
+                  ->where('id', $id)
+                  ->get()
+                  ->getRow();
+
+    // Verificar si entregado está vacío
+		if (!empty($despacho)){
+		   if (empty($despacho->time_estado_1)) {
+			$db->table('despachos')
+		           ->where('id', $id)
+		           ->update([
+		               'time_estado_1' => $now,
+			       'nombre_estado_1' => $nombre,
+		               'rut_estado_1' => $rut,
+			       'updated_at' => $now
+		           ]);
+		        return $this->respondUpdated($id);
+		    }
+		    // Verificar si recogido está vacío
+		    elseif (empty($despacho->time_estado_2)) {
+			$db->table('despachos')
+		           ->where('id', $id)
+		           ->update([
+		               'time_estado_2' => $now,
+                               'nombre_estado_2' => $nombre,
+                               'rut_estado_2' => $rut,
+		               'updated_at' => $now
+		           ]);
+		        return $this->respondUpdated($id);
+		    }
+		    // Verificar si recogido está vacío
+                    elseif (empty($despacho->time_estado_3)) {
+                        $db->table('despachos')
+                           ->where('id', $id)
+                           ->update([
+                               'time_estado_3' => $now,
+                               'nombre_estado_3' => $nombre,
+                               'rut_estado_3' => $rut,
+                               'updated_at' => $now
+                           ]);
+                        return $this->respondUpdated($id);
+                    }// Verificar si recogido está vacío
+                    elseif (empty($despacho->time_estado_4)) {
+                        $db->table('despachos')
+                           ->where('id', $id)
+                           ->update([
+                               'time_estado_4' => $now,
+                               'nombre_estado_4' => $nombre,
+                               'rut_estado_4' => $rut,
+                               'updated_at' => $now
+                           ]);
+                        return $this->respondUpdated($id);
+                    }// Verificar si recogido está vacío
+                    elseif (empty($despacho->time_estado_5)) {
+                        $db->table('despachos')
+                           ->where('id', $id)
+                           ->update([
+                               'time_estado_5' => $now,
+                               'nombre_estado_5' => $nombre,
+                               'rut_estado_5' => $rut,
+                               'updated_at' => $now
+                           ]);
+                        return $this->respondUpdated($id);
+                    }
+		    // Si ambos campos están llenos, no hacer nada
+		    else {
+			return $this->respond('No se realizó ninguna actualización.');
+		    }
+		}
+	}
+}
