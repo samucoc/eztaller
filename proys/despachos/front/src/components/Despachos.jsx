@@ -79,7 +79,7 @@ const Despachos = () => {
         ventanaImpresion.document.write('<div class="col-6 p-3" style="border: 2px solid #0000000; text-align: center;">');
         
         // Mostrar la imagen QR generada
-        ventanaImpresion.document.write('<img src="' + qrCodeUrl + '" />');
+        ventanaImpresion.document.write('<img src="' + qrCodeUrl + '" width="400"/>');
         ventanaImpresion.document.write('</div');
         ventanaImpresion.document.write('</div');
         ventanaImpresion.document.write('</body></html>');
