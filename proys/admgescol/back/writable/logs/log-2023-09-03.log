@@ -1,0 +1,877 @@
+ERROR - 2023-09-03 15:17:59 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\VehiculosController.php(28): CodeIgniter\Database\BaseConnection->query('SELECT *\n      ...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\VehiculosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\VehiculosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\VehiculosController.php(28): CodeIgniter\Database\BaseConnection->query('SELECT *\n      ...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\VehiculosController->index()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\VehiculosController))
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#7 {main}
+ERROR - 2023-09-03 15:17:59 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#9 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2023-09-03 15:17:59 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ConductoresController.php(28): CodeIgniter\Database\BaseConnection->query('SELECT *\n      ...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ConductoresController.php(28): CodeIgniter\Database\BaseConnection->query('SELECT *\n      ...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->index()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#7 {main}
+ERROR - 2023-09-03 15:17:59 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2023-09-03 15:17:59 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id 
+                                ')
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 15:17:59 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH\Controllers\Api\V1\VehiculosController.php(28): CodeIgniter\Database\BaseConnection->query('SELECT *
+                                FROM vehiculos 
+
+                                ')
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\VehiculosController->index()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\VehiculosController))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 15:17:59 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `clientes`
+WHERE `clientes`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 15:17:59 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH\Controllers\Api\V1\ConductoresController.php(28): CodeIgniter\Database\BaseConnection->query('SELECT *
+                                FROM conductores 
+
+                                ')
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->index()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-03 15:17:59 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ConductoresController.php(28): CodeIgniter\Database\BaseConnection->query('SELECT *\n      ...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ConductoresController.php(28): CodeIgniter\Database\BaseConnection->query('SELECT *\n      ...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->index()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2023-09-03 15:17:59 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH\Controllers\Api\V1\ConductoresController.php(28): CodeIgniter\Database\BaseConnection->query('SELECT *
+                                FROM conductores 
+
+                                ')
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->index()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-03 15:17:59 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\VehiculosController.php(28): CodeIgniter\Database\BaseConnection->query('SELECT *\n      ...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\VehiculosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\VehiculosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\VehiculosController.php(28): CodeIgniter\Database\BaseConnection->query('SELECT *\n      ...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\VehiculosController->index()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\VehiculosController))
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2023-09-03 15:17:59 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH\Controllers\Api\V1\VehiculosController.php(28): CodeIgniter\Database\BaseConnection->query('SELECT *
+                                FROM vehiculos 
+
+                                ')
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\VehiculosController->index()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\VehiculosController))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-03 15:17:59 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#8 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#7 {main}
+ERROR - 2023-09-03 15:17:59 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#9 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-09-03 15:17:59 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id 
+                                ')
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 15:17:59 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `clientes`
+WHERE `clientes`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-03 15:18:03 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#9 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-09-03 15:18:03 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `clientes`
+WHERE `clientes`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-03 15:18:03 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#9 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-09-03 15:18:03 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `clientes`
+WHERE `clientes`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-03 15:18:31 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#9 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-09-03 15:18:31 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `clientes`
+WHERE `clientes`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-03 15:19:52 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#9 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-09-03 15:19:52 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `clientes`
+WHERE `clientes`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-03 15:21:46 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#9 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-09-03 15:21:46 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `clientes`
+WHERE `clientes`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-03 15:21:46 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#9 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-09-03 15:21:46 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `clientes`
+WHERE `clientes`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-03 15:23:17 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'ss_admin'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'ss_admin', '2903vane', 'despachosqr', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#9 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\despachos\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+#7 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+#8 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2023-09-03 15:23:17 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `clientes`
+WHERE `clientes`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\ClientesController.php(29): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ClientesController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ClientesController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:33:15 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_CREATED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 75.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->create()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:33:48 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:37:42 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:38:29 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:39:41 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:40:00 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\DespachosController.php on line 167.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->update('3')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:40:05 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\DespachosController.php on line 167.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->update('3')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:40:06 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\DespachosController.php on line 167.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->update('3')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:40:32 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:43:24 --> Call to undefined method CodeIgniter\Router\RouteCollection::name()
+in APPPATH\Config\Routes.php on line 156.
+ 1 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 2 APPPATH\Config\Routes.php(187): CodeIgniter\Router\RouteCollection->group('V1', Object(Closure))
+ 3 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 4 APPPATH\Config\Routes.php(188): CodeIgniter\Router\RouteCollection->group('Api', Object(Closure))
+ 5 SYSTEMPATH\Router\RouteCollection.php(266): require('APPPATH\\Config\\Routes.php')
+ 6 SYSTEMPATH\CodeIgniter.php(802): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 7 SYSTEMPATH\CodeIgniter.php(449): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:43:50 --> Call to undefined method CodeIgniter\Router\RouteCollection::name()
+in APPPATH\Config\Routes.php on line 156.
+ 1 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 2 APPPATH\Config\Routes.php(187): CodeIgniter\Router\RouteCollection->group('V1', Object(Closure))
+ 3 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 4 APPPATH\Config\Routes.php(188): CodeIgniter\Router\RouteCollection->group('Api', Object(Closure))
+ 5 SYSTEMPATH\Router\RouteCollection.php(266): require('APPPATH\\Config\\Routes.php')
+ 6 SYSTEMPATH\CodeIgniter.php(802): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 7 SYSTEMPATH\CodeIgniter.php(449): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:43:50 --> Call to undefined method CodeIgniter\Router\RouteCollection::name()
+in APPPATH\Config\Routes.php on line 156.
+ 1 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 2 APPPATH\Config\Routes.php(187): CodeIgniter\Router\RouteCollection->group('V1', Object(Closure))
+ 3 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 4 APPPATH\Config\Routes.php(188): CodeIgniter\Router\RouteCollection->group('Api', Object(Closure))
+ 5 SYSTEMPATH\Router\RouteCollection.php(266): require('APPPATH\\Config\\Routes.php')
+ 6 SYSTEMPATH\CodeIgniter.php(802): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 7 SYSTEMPATH\CodeIgniter.php(449): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:43:50 --> Call to undefined method CodeIgniter\Router\RouteCollection::name()
+in APPPATH\Config\Routes.php on line 156.
+ 1 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 2 APPPATH\Config\Routes.php(187): CodeIgniter\Router\RouteCollection->group('V1', Object(Closure))
+ 3 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 4 APPPATH\Config\Routes.php(188): CodeIgniter\Router\RouteCollection->group('Api', Object(Closure))
+ 5 SYSTEMPATH\Router\RouteCollection.php(266): require('APPPATH\\Config\\Routes.php')
+ 6 SYSTEMPATH\CodeIgniter.php(802): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 7 SYSTEMPATH\CodeIgniter.php(449): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:43:50 --> Call to undefined method CodeIgniter\Router\RouteCollection::name()
+in APPPATH\Config\Routes.php on line 156.
+ 1 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 2 APPPATH\Config\Routes.php(187): CodeIgniter\Router\RouteCollection->group('V1', Object(Closure))
+ 3 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 4 APPPATH\Config\Routes.php(188): CodeIgniter\Router\RouteCollection->group('Api', Object(Closure))
+ 5 SYSTEMPATH\Router\RouteCollection.php(266): require('APPPATH\\Config\\Routes.php')
+ 6 SYSTEMPATH\CodeIgniter.php(802): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 7 SYSTEMPATH\CodeIgniter.php(449): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:43:50 --> Call to undefined method CodeIgniter\Router\RouteCollection::name()
+in APPPATH\Config\Routes.php on line 156.
+ 1 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 2 APPPATH\Config\Routes.php(187): CodeIgniter\Router\RouteCollection->group('V1', Object(Closure))
+ 3 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 4 APPPATH\Config\Routes.php(188): CodeIgniter\Router\RouteCollection->group('Api', Object(Closure))
+ 5 SYSTEMPATH\Router\RouteCollection.php(266): require('APPPATH\\Config\\Routes.php')
+ 6 SYSTEMPATH\CodeIgniter.php(802): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 7 SYSTEMPATH\CodeIgniter.php(449): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:43:50 --> Call to undefined method CodeIgniter\Router\RouteCollection::name()
+in APPPATH\Config\Routes.php on line 156.
+ 1 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 2 APPPATH\Config\Routes.php(187): CodeIgniter\Router\RouteCollection->group('V1', Object(Closure))
+ 3 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 4 APPPATH\Config\Routes.php(188): CodeIgniter\Router\RouteCollection->group('Api', Object(Closure))
+ 5 SYSTEMPATH\Router\RouteCollection.php(266): require('APPPATH\\Config\\Routes.php')
+ 6 SYSTEMPATH\CodeIgniter.php(802): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 7 SYSTEMPATH\CodeIgniter.php(449): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:43:50 --> Call to undefined method CodeIgniter\Router\RouteCollection::name()
+in APPPATH\Config\Routes.php on line 156.
+ 1 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 2 APPPATH\Config\Routes.php(187): CodeIgniter\Router\RouteCollection->group('V1', Object(Closure))
+ 3 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 4 APPPATH\Config\Routes.php(188): CodeIgniter\Router\RouteCollection->group('Api', Object(Closure))
+ 5 SYSTEMPATH\Router\RouteCollection.php(266): require('APPPATH\\Config\\Routes.php')
+ 6 SYSTEMPATH\CodeIgniter.php(802): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 7 SYSTEMPATH\CodeIgniter.php(449): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:43:50 --> Call to undefined method CodeIgniter\Router\RouteCollection::name()
+in APPPATH\Config\Routes.php on line 156.
+ 1 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 2 APPPATH\Config\Routes.php(187): CodeIgniter\Router\RouteCollection->group('V1', Object(Closure))
+ 3 SYSTEMPATH\Router\RouteCollection.php(673): CodeIgniter\Router\RouteCollection->Config\{closure}(Object(CodeIgniter\Router\RouteCollection))
+ 4 APPPATH\Config\Routes.php(188): CodeIgniter\Router\RouteCollection->group('Api', Object(Closure))
+ 5 SYSTEMPATH\Router\RouteCollection.php(266): require('APPPATH\\Config\\Routes.php')
+ 6 SYSTEMPATH\CodeIgniter.php(802): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 7 SYSTEMPATH\CodeIgniter.php(449): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:45:32 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:47:51 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:48:08 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_CREATED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 75.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->create()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:48:17 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:48:47 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_CREATED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 75.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->create()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:49:03 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_CREATED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 75.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->create()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:49:09 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:49:34 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_CREATED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 75.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->create()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:49:53 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_CREATED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 75.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->create()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:50:44 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:50:52 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('6')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:52:23 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('6')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:52:34 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_NOT_FOUND"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 100.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->update('6')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:52:49 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_CREATED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 75.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->create()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:53:06 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_DELETED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 132.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->delete('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:53:08 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_DELETED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 132.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->delete('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:53:08 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_DELETED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 132.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->delete('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:53:08 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_DELETED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 132.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->delete('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:53:08 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_DELETED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 132.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->delete('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:53:09 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_DELETED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 132.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->delete('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:53:11 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_DELETED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 132.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->delete('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-03 18:53:24 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_DELETED"
+in APPPATH\Controllers\Api\V1\ConductoresController.php on line 132.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\ConductoresController->delete('2')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\ConductoresController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()

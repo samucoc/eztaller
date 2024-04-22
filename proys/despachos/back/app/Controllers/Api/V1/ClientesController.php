@@ -72,15 +72,7 @@ class ClientesController extends ResourceController
      */
     public function create()
     {
-        header('Access-Control-Allow-Origin: *');
-
-        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE, PATCH");
-        header("Allow: GET, POST, OPTIONS, PUT, DELETE, PATCH");
-        $method = $_SERVER['REQUEST_METHOD'];
-        if ($method == "OPTIONS") {
-            die();
-        }        
+        
         $data = $this->request->getJSON();
 
         $data->created_at = $this->datetimeNow->format('Y-m-d H:i:s');
@@ -110,15 +102,6 @@ class ClientesController extends ResourceController
      */
     public function update($id = null)
     {
-        header('Access-Control-Allow-Origin: *');
-
-        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE, PATCH");
-        header("Allow: GET, POST, OPTIONS, PUT, DELETE, PATCH");
-        $method = $_SERVER['REQUEST_METHOD'];
-        if ($method == "OPTIONS") {
-            die();
-        }
         $validateEntry = $this->model->find($id);
         if (empty($validateEntry)) {
             return $this->failNotFound();
@@ -153,15 +136,6 @@ class ClientesController extends ResourceController
     public function delete($id = null)
     {
 
-        header('Access-Control-Allow-Origin: *');
-
-        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE, PATCH");
-        header("Allow: GET, POST, OPTIONS, PUT, DELETE, PATCH");
-        $method = $_SERVER['REQUEST_METHOD'];
-        if ($method == "OPTIONS") {
-            die();
-        }
         if ($this->model->delete($id)) {
             return $this->respondDeleted($id);
         } else {

@@ -15,7 +15,7 @@ class ConductoresModel extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'rut', 'nombres', 'apellidoPäterno', 'apellidoMaterno', 'fechaNacimiento', 'direccion', 'email', 'licenciaConducir'   ];
+        'rut', 'nombres', 'apellidoPaterno', 'apellidoMaterno', 'fechaNacimiento', 'direccion', 'email', 'licenciaConducir'   ];
 
     // Dates
     protected $useTimestamps = true;

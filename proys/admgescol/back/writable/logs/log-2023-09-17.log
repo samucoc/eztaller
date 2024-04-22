@@ -1,0 +1,338 @@
+ERROR - 2023-09-17 01:56:52 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 01:56:52 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, nivel, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id 
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-17 01:57:00 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 01:57:00 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, nivel, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id 
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-17 01:57:00 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 01:57:00 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, nivel, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id 
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-17 01:57:04 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 01:57:04 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, nivel, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id 
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-17 01:57:04 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 01:57:04 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, nivel, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id 
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-17 01:57:07 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 01:57:07 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, nivel, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id 
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-17 01:57:07 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 01:57:07 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, nivel, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id 
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-17 01:58:18 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 01:58:18 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, clientes.nivelEmpresa as nivel, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-17 01:58:18 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 01:58:18 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, clientes.nivelEmpresa as nivel, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-17 01:58:21 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 01:58:21 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, clientes.nivelEmpresa as nivel, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-17 01:58:21 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 01:58:21 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, clientes.nivelEmpresa as nivel, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-17 02:00:15 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 02:00:15 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id 
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+ERROR - 2023-09-17 02:00:15 --> mysqli_sql_exception: Unknown column 'despachos.cliente_id' in 'on clause' in C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\despachos\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT despacho...', 0)
+#1 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT despacho...')
+#2 C:\laragon\www\eztaller\proys\despachos\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT despacho...')
+#3 C:\laragon\www\eztaller\proys\despachos\back\app\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despacho...')
+#4 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+#5 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+#6 C:\laragon\www\eztaller\proys\despachos\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\despachos\back\public\index.php(76): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2023-09-17 02:00:15 --> Unknown column 'despachos.cliente_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DespachosController.php(38): CodeIgniter\Database\BaseConnection->query('SELECT despachos.id, fecha, nombreEmpresa as cliente_id, origenDespacho, destinoDespacho, 
+                                        concat(conductores.nombres, \'\' ,conductores.apellidoPaterno, \'\' ,conductores.apellidoMaterno) as conductor_id, 
+                                        patente as vehiculo_id, 
+                                        recogido, entregado 
+                                FROM despachos 
+                                    inner join clientes on despachos.cliente_id = clientes.id 
+                                    inner join conductores on despachos.conductor_id = conductores.id 
+                                    inner join vehiculos on despachos.vehiculo_id = vehiculos.id 
+                                ')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DespachosController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DespachosController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()

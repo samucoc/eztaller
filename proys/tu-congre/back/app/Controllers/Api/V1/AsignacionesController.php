@@ -1053,8 +1053,10 @@ class AsignacionesController extends ResourceController
         // Filtra las personas que tienen el privilegio para la asignación dada y no han sido asignadas recientemente
         $personasConPrivilegios = array_filter($personas, function ($persona) use ($privilegio, $asignacionesModel) {
             is_array($persona) ? null : $persona = (array) $persona;
-            $privilegios = explode(',', $persona['privilegios']);
-            return in_array($privilegio, $privilegios) && !$this->fueAsignadoRecientemente($persona['id'], $asignacionesModel);
+            if (array_key_exists('privilegios', $persona)) {
+                $privilegios = strlen($persona['privilegios']) < 2 ? $persona['privilegios'] : explode(',', $persona['privilegios']);
+                return ! $this->fueAsignadoRecientemente($persona['id'], $asignacionesModel);
+            }
         });
     
         // Si no hay personas con privilegios disponibles que no hayan sido asignadas recientemente, devuelve null

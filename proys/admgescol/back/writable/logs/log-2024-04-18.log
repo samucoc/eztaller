@@ -1,0 +1,21 @@
+CRITICAL - 2024-04-18 02:43:20 --> Undefined variable $numberToFind
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 169.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(169): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $numberToFind', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 169)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->create()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-18 02:43:33 --> Undefined variable $numberToFind
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 169.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(169): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $numberToFind', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 169)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->create()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-18 02:43:56 --> Undefined variable $numberToFind
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 169.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(169): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $numberToFind', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 169)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->create()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()

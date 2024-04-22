@@ -152,6 +152,7 @@ $routes->group('Api', function ($routes) {
         $routes->put('despachos/(:segment)', 'DespachosController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->delete('despachos/(:segment)', 'DespachosController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
         
+        $routes->put('conductores/(:segment)', 'ConductoresController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->resource(
             'conductores',
             [
@@ -162,7 +163,6 @@ $routes->group('Api', function ($routes) {
                     'show',
                     'new',
                     'create',
-                    'update',
                     'delete'
                 ],
             ]

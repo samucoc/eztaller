@@ -1,0 +1,486 @@
+CRITICAL - 2024-04-02 01:37:10 --> syntax error, unexpected token "class"
+in APPPATH\Config\Filters.php on line 13.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(289): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Config\\Filters.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(267): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Config\\Filters')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Config\\Filters')
+ 4 SYSTEMPATH\Config\Factories.php(155): class_exists('Config\\Filters')
+ 5 SYSTEMPATH\Config\Factories.php(125): CodeIgniter\Config\Factories::locateClass([...], 'Filters')
+ 6 SYSTEMPATH\Common.php(206): CodeIgniter\Config\Factories::__callStatic('config', [])
+ 7 SYSTEMPATH\Config\Services.php(285): config('Filters')
+ 8 SYSTEMPATH\Config\BaseService.php(252): CodeIgniter\Config\Services::filters(null, false)
+ 9 SYSTEMPATH\Config\BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic('filters', [...])
+10 SYSTEMPATH\Config\Services.php(282): CodeIgniter\Config\BaseService::getSharedInstance('filters', null)
+11 SYSTEMPATH\Config\BaseService.php(252): CodeIgniter\Config\Services::filters()
+12 SYSTEMPATH\CodeIgniter.php(455): CodeIgniter\Config\BaseService::__callStatic('filters', [])
+13 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 01:40:10 --> Class "Config\CorsFilter" not found
+in SYSTEMPATH\Filters\Filters.php on line 166.
+ 1 SYSTEMPATH\CodeIgniter.php(473): CodeIgniter\Filters\Filters->run('Api/V1/documentos', 'before')
+ 2 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 3 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:40:38 --> Class "App\Controllers\Api\V1\Services" not found
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 140.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:41:24 --> Class "App\Models\TrabajadoresModel" not found
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 157.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:44:21 --> Cannot declare class App\Models\DocumentoModel, because the name is already in use
+in APPPATH\Models\TrabajadorModel.php on line 7.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-04-02 02:45:05 --> Class "FPDF" not found
+in VENDORPATH\setasign\fpdi\src\FpdfTpl.php on line 18.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once()
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\FpdfTpl.php')
+ 3 VENDORPATH\setasign\fpdi\src\Fpdi.php(23): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\FpdfTpl')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 5 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 6 APPPATH\Controllers\Api\V1\DocumentoController.php(162): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\Fpdi')
+ 7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 9 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:46:28 --> Class "FPDF" not found
+in VENDORPATH\setasign\fpdi\src\FpdfTpl.php on line 18.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once()
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\FpdfTpl.php')
+ 3 VENDORPATH\setasign\fpdi\src\Fpdi.php(23): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\FpdfTpl')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 5 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 6 APPPATH\Controllers\Api\V1\DocumentoController.php(162): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\Fpdi')
+ 7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 9 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:48:21 --> Class "FPDF" not found
+in VENDORPATH\setasign\fpdi\src\FpdfTpl.php on line 18.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once()
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\FpdfTpl.php')
+ 3 VENDORPATH\setasign\fpdi\src\Fpdi.php(23): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\FpdfTpl')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 5 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 6 APPPATH\Controllers\Api\V1\DocumentoController.php(162): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\Fpdi')
+ 7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 9 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:50:12 --> Class "FPDF" not found
+in VENDORPATH\setasign\fpdi\src\FpdfTpl.php on line 18.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once()
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\FpdfTpl.php')
+ 3 VENDORPATH\setasign\fpdi\src\Fpdi.php(23): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\FpdfTpl')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 5 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 6 APPPATH\Controllers\Api\V1\DocumentoController.php(162): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\Fpdi')
+ 7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 9 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:53:20 --> Class "mPDF" not found
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 163.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:53:22 --> Class "mPDF" not found
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 163.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:53:26 --> Class "mPDF" not found
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 163.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:53:51 --> Call to undefined method Mpdf\Mpdf::countPages()
+in VENDORPATH\mpdf\mpdf\src\Strict.php on line 15.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(165): Mpdf\Mpdf->__call('countPages', [])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:54:52 --> Undefined variable $mpdf
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 165.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(165): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $mpdf', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 165)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:55:09 --> Call to undefined method Mpdf\Mpdf::getPageCount()
+in VENDORPATH\mpdf\mpdf\src\Strict.php on line 15.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(165): Mpdf\Mpdf->__call('getPageCount', [])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 03:05:17 --> Class "GetId3\GetId3Core" not found
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 167.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 03:06:14 --> Class "GetId3\GetId3Core" not found
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 167.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 03:06:44 --> Class "GetId3" not found
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 167.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 03:09:15 --> Uncaught ValueError: realpath(): Argument #1 ($path) must not contain any null bytes in C:\laragon\www\eztaller\proys\admgescol\back\system\Common.php:93
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Common.php(93): realpath('%PDF-1.7\n\n4 0 o...')
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Debug\Exceptions.php(524): clean_path('%PDF-1.7\n\n4 0 o...')
+#2 [internal function]: CodeIgniter\Debug\Exceptions::CodeIgniter\Debug\{closure}('%PDF-1.7\n\n4 0 o...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Debug\Exceptions.php(529): array_map(Object(Closure), Array)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Debug\Exceptions.php(123): CodeIgniter\Debug\Exceptions::renderBacktrace(Array)
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(Mpdf\MpdfException))
+#6 {main}
+  thrown
+in SYSTEMPATH\Common.php on line 93.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-04-02 03:12:32 --> Uncaught ValueError: realpath(): Argument #1 ($path) must not contain any null bytes in C:\laragon\www\eztaller\proys\admgescol\back\system\Common.php:93
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Common.php(93): realpath('%PDF-1.7\n\n4 0 o...')
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Debug\Exceptions.php(524): clean_path('%PDF-1.7\n\n4 0 o...')
+#2 [internal function]: CodeIgniter\Debug\Exceptions::CodeIgniter\Debug\{closure}('%PDF-1.7\n\n4 0 o...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Debug\Exceptions.php(529): array_map(Object(Closure), Array)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Debug\Exceptions.php(123): CodeIgniter\Debug\Exceptions::renderBacktrace(Array)
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(Mpdf\MpdfException))
+#6 {main}
+  thrown
+in SYSTEMPATH\Common.php on line 93.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-04-02 03:16:27 --> Call to undefined method CodeIgniter\HTTP\Files\UploadedFile::getStream()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 150.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 03:17:38 --> Call to undefined method CodeIgniter\HTTP\Files\UploadedFile::getStream()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 161.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 03:44:44 --> Too few arguments to function setasign\Fpdi\PdfParser\PdfParser::__construct(), 0 passed in C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php on line 166 and exactly 1 expected
+in VENDORPATH\setasign\fpdi\src\PdfParser\PdfParser.php on line 76.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(166): setasign\Fpdi\PdfParser\PdfParser->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 03:45:41 --> setasign\Fpdi\PdfParser\PdfParser::__construct(): Argument #1 ($streamReader) must be of type setasign\Fpdi\PdfParser\StreamReader, string given, called in C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php on line 166
+in VENDORPATH\setasign\fpdi\src\PdfParser\PdfParser.php on line 76.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(166): setasign\Fpdi\PdfParser\PdfParser->__construct('ROOTPATH\\writable\\temp/uploaded_file.pdf')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 03:59:36 --> syntax error, unexpected token "for"
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 167.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(289): CodeIgniter\Autoloader\Autoloader->includeFile('APPPATH\\Controllers\\Api\\V1\\DocumentoController.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(267): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Api\\V1\\DocumentoController')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Api\\V1\\DocumentoController')
+ 4 SYSTEMPATH\CodeIgniter.php(892): class_exists('\\App\\Controllers\\Api\\V1\\DocumentoController', true)
+ 5 SYSTEMPATH\CodeIgniter.php(486): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:05:43 --> Class "FPDF" not found
+in VENDORPATH\setasign\fpdi\src\FpdfTpl.php on line 18.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once()
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\FpdfTpl.php')
+ 3 VENDORPATH\setasign\fpdi\src\Fpdi.php(23): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\FpdfTpl')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 5 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 6 APPPATH\Controllers\Api\V1\DocumentoController.php(184): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\Fpdi')
+ 7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 9 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:07:58 --> Class "FPDF" not found
+in VENDORPATH\setasign\fpdi\src\FpdfTpl.php on line 18.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once()
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\FpdfTpl.php')
+ 3 VENDORPATH\setasign\fpdi\src\Fpdi.php(23): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\FpdfTpl')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 5 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 6 APPPATH\Controllers\Api\V1\DocumentoController.php(184): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\Fpdi')
+ 7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 9 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:09:52 --> Class "FPDF" not found
+in VENDORPATH\setasign\fpdi\src\FpdfTpl.php on line 18.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once()
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\FpdfTpl.php')
+ 3 VENDORPATH\setasign\fpdi\src\Fpdi.php(23): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\FpdfTpl')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 5 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 6 APPPATH\Controllers\Api\V1\DocumentoController.php(187): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\Fpdi')
+ 7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 9 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:13:14 --> Call to undefined method TCPDF::setSourceFile()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 192.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:29:48 --> Class "FPDF" not found
+in VENDORPATH\setasign\fpdi\src\FpdfTpl.php on line 18.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once()
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\FpdfTpl.php')
+ 3 VENDORPATH\setasign\fpdi\src\Fpdi.php(23): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\FpdfTpl')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 5 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 6 APPPATH\Controllers\Api\V1\DocumentoController.php(187): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\Fpdi')
+ 7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 9 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:33:09 --> Call to undefined method TCPDF::setSourceFile()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 190.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:35:55 --> Class "FPDF" not found
+in VENDORPATH\setasign\fpdi\src\FpdfTpl.php on line 18.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once()
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\FpdfTpl.php')
+ 3 VENDORPATH\setasign\fpdi\src\Fpdi.php(23): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\FpdfTpl')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 5 SYSTEMPATH\Autoloader\Autoloader.php(248): CodeIgniter\Autoloader\Autoloader->includeFile('VENDORPATH\\setasign\\fpdi\\src\\Fpdi.php')
+ 6 APPPATH\Controllers\Api\V1\DocumentoController.php(187): CodeIgniter\Autoloader\Autoloader->loadClassmap('setasign\\Fpdi\\Fpdi')
+ 7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 9 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:38:13 --> Call to undefined method setasign\Fpdi\Fpdi::getText()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 197.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:44:38 --> Call to undefined method setasign\Fpdi\Fpdi::getText()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 197.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:46:41 --> Call to undefined method Mpdf\Mpdf::getPageCount()
+in VENDORPATH\mpdf\mpdf\src\Strict.php on line 15.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(196): Mpdf\Mpdf->__call('getPageCount', [])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:46:47 --> Call to undefined method Mpdf\Mpdf::getPageCount()
+in VENDORPATH\mpdf\mpdf\src\Strict.php on line 15.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(196): Mpdf\Mpdf->__call('getPageCount', [])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:48:21 --> Undefined array key 1
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 200.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(200): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 1', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 200)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:50:49 --> Undefined array key 1
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 194.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(194): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 1', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 194)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:51:18 --> Undefined array key 1
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 194.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(194): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 1', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 194)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:53:56 --> Call to undefined method Mpdf\Mpdf::getPageCount()
+in VENDORPATH\mpdf\mpdf\src\Strict.php on line 15.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(180): Mpdf\Mpdf->__call('getPageCount', [])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 04:54:37 --> Call to undefined method Mpdf\Mpdf::getPageCount()
+in VENDORPATH\mpdf\mpdf\src\Strict.php on line 15.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(180): Mpdf\Mpdf->__call('getPageCount', [])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:00:21 --> Call to undefined function App\Controllers\Api\V1\countPages()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 179.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:06:43 --> Call to undefined method Mpdf\Mpdf::getText()
+in VENDORPATH\mpdf\mpdf\src\Strict.php on line 15.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(218): Mpdf\Mpdf->__call('getText', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:07:04 --> Call to undefined method Mpdf\Mpdf::getText()
+in VENDORPATH\mpdf\mpdf\src\Strict.php on line 15.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(217): Mpdf\Mpdf->__call('getText', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:08:35 --> Undefined array key 1
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 220.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(220): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 1', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 220)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:10:03 --> Call to undefined method Mpdf\Mpdf::getText()
+in VENDORPATH\mpdf\mpdf\src\Strict.php on line 15.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(218): Mpdf\Mpdf->__call('getText', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:12:53 --> Call to undefined method Mpdf\Mpdf::getText()
+in VENDORPATH\mpdf\mpdf\src\Strict.php on line 15.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(218): Mpdf\Mpdf->__call('getText', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:13:09 --> Call to undefined method Mpdf\Mpdf::getText()
+in VENDORPATH\mpdf\mpdf\src\Strict.php on line 15.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(218): Mpdf\Mpdf->__call('getText', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:13:18 --> Call to undefined method Mpdf\Mpdf::showImage()
+in VENDORPATH\mpdf\mpdf\src\Strict.php on line 15.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(221): Mpdf\Mpdf->__call('showImage', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:16:07 --> Undefined variable $mpdf
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 177.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(177): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $mpdf', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 177)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:17:14 --> fopen(archivo.pdf): Failed to open stream: No such file or directory
+in VENDORPATH\setasign\fpdi\src\PdfParser\StreamReader.php on line 42.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fopen(archivo.pdf): Failed to open stream: No such file or directory', 'VENDORPATH\\setasign\\fpdi\\src\\PdfParser\\StreamReader.php', 42)
+ 2 VENDORPATH\setasign\fpdi\src\PdfParser\StreamReader.php(42): fopen('archivo.pdf', 'rb')
+ 3 VENDORPATH\setasign\fpdi\src\FpdiTrait.php(177): setasign\Fpdi\PdfParser\StreamReader::createByFile('archivo.pdf')
+ 4 VENDORPATH\setasign\fpdi\src\FpdiTrait.php(233): setasign\Fpdi\Fpdi->getPdfReaderId('archivo.pdf', [])
+ 5 VENDORPATH\setasign\fpdi\src\FpdiTrait.php(216): setasign\Fpdi\Fpdi->setSourceFileWithParserParams('archivo.pdf')
+ 6 APPPATH\Controllers\Api\V1\DocumentoController.php(215): setasign\Fpdi\Fpdi->setSourceFile('archivo.pdf')
+ 7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 9 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:17:38 --> Call to undefined method setasign\Fpdi\Fpdi::getPageText()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 218.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:19:35 --> Call to undefined method setasign\Fpdi\Fpdi::setPageNumber()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 218.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:26:30 --> FPDF error: No page has been added yet
+in VENDORPATH\setasign\fpdf\fpdf.php on line 267.
+ 1 VENDORPATH\setasign\fpdf\fpdf.php(1463): FPDF->Error('No page has been added yet')
+ 2 VENDORPATH\setasign\fpdi\src\FpdfTplTrait.php(470): FPDF->_out('q 0 J 1 w 0 j 0 G 0 g 1.0000 0 0 1.0000 0.0000 49.8900 cm /TPL0 Do Q')
+ 3 VENDORPATH\setasign\fpdi\src\FpdiTrait.php(478): setasign\Fpdi\FpdfTpl->_out('q 0 J 1 w 0 j 0 G 0 g 1.0000 0 0 1.0000 0.0000 49.8900 cm /TPL0 Do Q')
+ 4 VENDORPATH\setasign\fpdi\src\FpdfTrait.php(49): setasign\Fpdi\Fpdi->useImportedPage('ROOTPATH\\writable\\temp\\uploaded_file_1712035590.pdf|1|1|0|CropBox', 0, 0, null, null, false)
+ 5 APPPATH\Controllers\Api\V1\DocumentoController.php(223): setasign\Fpdi\Fpdi->useTemplate('ROOTPATH\\writable\\temp\\uploaded_file_1712035590.pdf|1|1|0|CropBox')
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:39:27 --> Cannot modify header information - headers already sent by (output started at C:\laragon\www\eztaller\proys\admgescol\back\public\tcpdf\include\tcpdf_static.php:1139)
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 20.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify header information - headers already sent by (output started at C:\\laragon\\www\\eztaller\\proys\\admgescol\\back\\public\\tcpdf\\include\\tcpdf_static.php:1139)', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 20)
+ 2 APPPATH\Controllers\Api\V1\DocumentoController.php(20): header('Access-Control-Allow-Origin: *')
+ 3 SYSTEMPATH\CodeIgniter.php(906): App\Controllers\Api\V1\DocumentoController->__construct()
+ 4 SYSTEMPATH\CodeIgniter.php(490): CodeIgniter\CodeIgniter->createController()
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(77): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:40:01 --> Class "App\Controllers\Api\V1\TCPDF" not found
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 278.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:41:31 --> Class "App\Controllers\Api\V1\TCPDF" not found
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 276.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 05:43:29 --> Call to undefined method TCPDF::setSourceFile()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 280.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 06:02:54 --> Call to undefined method setasign\Fpdi\Fpdi::setPageNumber()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 183.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 06:04:12 --> Call to undefined method setasign\Fpdi\Fpdi::getTemplateStream()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 184.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 06:04:13 --> Call to undefined method setasign\Fpdi\Fpdi::getTemplateStream()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 184.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 11:27:15 --> Call to undefined function App\Controllers\Api\V1\findTextInPDF()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 177.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 11:33:43 --> Call to undefined function App\Controllers\Api\V1\findTextInPDF()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 177.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()

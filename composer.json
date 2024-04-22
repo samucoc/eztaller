@@ -1,5 +1,6 @@
 {
     "require": {
-        "laravel/ui": "^3.2"
+        "laravel/ui": "^3.2",
+        "setasign/fpdi": "^2.6"
     }
 }

@@ -1,0 +1,12 @@
+CRITICAL - 2023-09-05 10:22:02 --> Undefined constant "App\Controllers\Api\V1\RESOURCE_CREATED"
+in APPPATH\Controllers\Api\V1\VehiculosController.php on line 75.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\VehiculosController->create()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\VehiculosController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-09-05 11:07:11 --> Object of class App\Entities\User could not be converted to string
+in APPPATH\Controllers\Api\V1\UserController.php on line 225.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(76): CodeIgniter\CodeIgniter->run()
