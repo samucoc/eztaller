@@ -1,146 +1,140 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Assuming you're using Axios for API calls
-import '../css/LiquidacionesToPdf.css'; // Revisa este archivo para asegurarte de que los estilos se apliquen correctamente
-import API_BASE_URL from './apiConstants'; // Asegúrate de importar la URL base de tu API desde apiConstants.js
-import API_DOWNLOAD_URL from './apiConstants1'; // Asegúrate de importar la URL base de tu API desde apiConstants.js
+import axios from 'axios';
+import API_BASE_URL from './apiConstants'; // Assuming API_BASE_URL is defined here
+import TrabajadorForm from './TrabajadorForm';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@material-ui/core'; // Importa componentes de Material-UI
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
 
-function Trabajadores() {
-    const [trabajadores, setTrabajadores] = useState([]);
-    const [empresas, setEmpresas] = useState([]);
+const Trabajadores = ({empresaId}) => {
+  const [showForm, setShowForm] = useState(false); // State to control form visibility
+  const [selectedtrabajador, setSelectedtrabajador] = useState(null);
+  const [Trabajadores, setTrabajadores] = useState([]); // Use state to manage Trabajadores
 
-    const [formData, setFormData] = useState({
-        empresa_id: '',
-        user_id: '',
-        rut: '',
-        dv: '',
-        apellido_paterno: '',
-        apellido_materno: '',
-        nombres: '',
-        nombre_social: '',
-        fecha_nac: '',
-        nacionalidad: '',
-        cargo_id: '',
-        sexo_id: '',
-        foto: '',
-        direccion: '',
-        comuna_id: '',
-        telefono: '',
-        email: '',
-        contacto_emergencia: '',
-        telefono_emergencia: '',
-        estado_id: '',
-        // otros campos...
-    });
-
-    useEffect(() => {
-        fetchTrabajadores();
-        fetchEmpresas();
-
-    }, []);
-
+  // Fetch Trabajadores on component mount
+  useEffect(() => {
     const fetchTrabajadores = async () => {
-        try {
-            const response = await axios.get(`${API_BASE_URL}/trabajadores`);
-            setTrabajadores(response.data);
-        } catch (error) {
-            console.error('Error al obtener la lista de trabajadores:', error);
-        }
-    };
-
-    const fetchEmpresas = async () => {
       try {
-          const response = await axios.get('/api/empresas');
-          setEmpresas(response.data);
+        const response = empresaId == '' ? await axios.get(API_BASE_URL+'/trabajadores') : await axios.get(API_BASE_URL+'/trabajadores/showByEmpresa/'+empresaId) ; // Replace with your API endpoint
+        setTrabajadores(response.data);
       } catch (error) {
-          console.error('Error al obtener la lista de empresas:', error);
+        console.error('Error fetching Trabajadores:', error);
       }
     };
+    // Verificar si selectedtrabajador no es null antes de ejecutar setShowForm(true)
+    if (selectedtrabajador !== null) {
+      console.log(selectedtrabajador);
+      setShowForm(true);
+    }
+    
+    fetchTrabajadores();
+  }, [selectedtrabajador]);
 
-    const handleInputChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  const deletetrabajador = async (id) => {
+    try {
+      const response = await axios.delete(API_BASE_URL+`/trabajadores/${id}`); // Delete request with trabajador ID
+  
+      if (response.status === 200) { // Check for successful deletion (replace with your API's success code)
+        setTrabajadores(Trabajadores.filter(trabajador => trabajador.id !== id)); // Filter out deleted trabajador
+        console.log('trabajador eliminada exitosamente');
+      } else {
+        console.error('Error al eliminar la trabajador:', response.data); // Handle deletion errors
+      }
+    } catch (error) {
+      console.error('Error durante la eliminación:', error); // Handle general errors
+    }
+  };  
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await axios.post(`${API_BASE_URL}/trabajadores`, formData);
-            fetchTrabajadores();
-            // Limpiar formulario después de crear un trabajador
-            setFormData({
-              empresa_id: '',
-              user_id: '',
-              rut: '',
-              dv: '',
-              apellido_paterno: '',
-              apellido_materno: '',
-              nombres: '',
-              nombre_social: '',
-              fecha_nac: '',
-              nacionalidad: '',
-              cargo_id: '',
-              sexo_id: '',
-              foto: '',
-              direccion: '',
-              comuna_id: '',
-              telefono: '',
-              email: '',
-              contacto_emergencia: '',
-              telefono_emergencia: '',
-              estado_id: '',
-            });
-        } catch (error) {
-            console.error('Error al crear un trabajador:', error);
+  const addtrabajador = async (trabajadorData) => {
+    try {
+      var initialTrabajador = selectedtrabajador
+      const url = initialTrabajador ? `${API_BASE_URL}/trabajadores/${initialTrabajador.id}` : `${API_BASE_URL}/trabajadores`;
+      const method = initialTrabajador ? 'PUT' : 'POST'; // Use PUT for update, POST for create
+  
+      const response = await axios({
+        method,
+        url,
+        data: trabajadorData,
+      });
+  
+      if (response.status === 200 || response.status === 201) { // Check for successful creation/update (replace with your API's success codes)
+        const updatedtrabajador = response.data; // Assuming your API returns the updated trabajador
+        
+        if (initialTrabajador) { // Update scenario, update state with modified trabajador
+          setTrabajadores(Trabajadores.map(trabajador => trabajador.id === updatedtrabajador.id ? updatedtrabajador : trabajador));
+        } else { // Create scenario, add new trabajador to state
+          setTrabajadores([...Trabajadores, updatedtrabajador]);
         }
-    };
+        
+        setShowForm(false); // Hide the form after successful operation
+        console.log(initialTrabajador ? 'trabajador actualizada exitosamente' : 'trabajador agregada exitosamente');
+      } else {
+        console.error(initialTrabajador ? 'Error al actualizar la trabajador:' : 'Error al agregar la trabajador:', response.data); // Handle creation/update errors
+      }
+    } catch (error) {
+      console.error(initialTrabajador ? 'Error durante la actualización:' : 'Error durante la creación:', error); // Handle general errors
+    }
+  };
 
-    const handleDelete = async (id) => {
-        try {
-            await axios.delete(`${API_BASE_URL}/trabajadores/${id}`);
-            fetchTrabajadores();
-        } catch (error) {
-            console.error('Error al eliminar el trabajador:', error);
-        }
-    };
+  const edittrabajador = (trabajador) => {
+    setSelectedtrabajador(trabajador);
+  };
 
-    return (
-        <div>
-            <h3>Trabajadores</h3>
-            <form onSubmit={handleSubmit}>
-                <select name="empresa_id" value={formData.empresa_id} onChange={handleInputChange}>
-                    <option value="">Selecciona una empresa</option>
-                    {empresas.map(empresa => (
-                        <option key={empresa.id} value={empresa.id}>{empresa.nombre}</option>
-                    ))}
-                </select>
+  const handleCancel = () => {
+    setShowForm(false);
+    setSelectedtrabajador(null);
+  };
 
-                <input type="text" name="empresa_id" value={formData.empresa_id} onChange={handleInputChange} />
-                <button type="submit">Crear Trabajador</button>
-            </form>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Apellido Paterno</th>
-                        {/* Otros encabezados de columna */}
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {trabajadores.map(trabajador => (
-                        <tr key={trabajador.id}>
-                            <td>{trabajador.id}</td>
-                            <td> {trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_paterno}</td>
-                            <td> {trabajador.estado_id}</td>
-                            {/* Otras celdas de datos */}
-                            <td>
-                                <button onClick={() => handleDelete(trabajador.id)}>Eliminar</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    );
-}
+  return (
+    <div className="container Trabajadores">
+      <h3>Trabajadores</h3>
+      <div className="d-flex justify-content-between mb-3">
+        <div></div> {/* Espacio en blanco */}
+        <Button
+            variant="contained"
+            color="primary"
+            startIcon={<AddIcon />}
+            onClick={() => setShowForm(true)}
+            >
+            Agregar trabajador
+            </Button>
+      </div>
+      {showForm ? (
+        <TrabajadorForm
+          onSubmit={addtrabajador}
+          initialTrabajador={selectedtrabajador}
+          onCancel={handleCancel}
+          empresaId={empresaId}
+        />
+      ) : (
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Rut</TableCell>
+                <TableCell>Nombre Completo</TableCell>
+                <TableCell>Acciones</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {Trabajadores
+                .map((trabajador) => (
+                <TableRow key={trabajador.id}>
+                  <TableCell>{trabajador.rut}-{trabajador.dv}</TableCell>
+                  <TableCell>{trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_materno}</TableCell>
+                  <TableCell>
+                    <Button variant="contained" color="primary" onClick={() => edittrabajador(trabajador)} startIcon={<EditIcon />}>Editar</Button>
+                    <Button variant="contained" color="secondary" onClick={() => deletetrabajador(trabajador.id)} startIcon={<DeleteIcon />}>Eliminar</Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </div>
+  );
+};
 
 export default Trabajadores;

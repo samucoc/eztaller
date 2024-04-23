@@ -42,6 +42,24 @@ const Sidebar = ({ onOptionChange }) => {
                 <li onClick={() => onOptionChange('LiquidacionesToPdf')}>
                   Obtener Liquidaciones de Archivo PDF
                 </li>
+                <li onClick={() => onOptionChange('Empresas')}>
+                  Empresas
+                </li>
+                <li onClick={() => onOptionChange('Trabajadores')}>
+                  Trabajadores
+                </li>
+                <li onClick={() => onOptionChange('Comunas')}>
+                  Comunas
+                </li>
+                <li onClick={() => onOptionChange('Cargos')}>
+                  Cargos
+                </li>
+                <li onClick={() => onOptionChange('Sexo')}>
+                  Sexo
+                </li>
+                <li onClick={() => onOptionChange('Tipo_Docs')}>
+                  Tipo de Documentos
+                </li>
               </ul>
           </li>
         )}
@@ -57,12 +75,6 @@ const Sidebar = ({ onOptionChange }) => {
                 </li>
                 <li onClick={() => onOptionChange('Documentos')}>
                   Documentos
-                </li>
-                <li onClick={() => onOptionChange('Comunas')}>
-                  Comunas
-                </li>
-                <li onClick={() => onOptionChange('Cargos')}>
-                  Cargos
                 </li>
               </ul>
           </li>

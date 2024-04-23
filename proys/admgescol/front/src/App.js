@@ -73,21 +73,36 @@ const App = () => {
     }
   }, [userDNI]);
 
+  const [sidebarVisible, setSidebarVisible] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarVisible(!sidebarVisible);
+  };
+
   return (
     <div className="app">
       <div className="content">
         {loggedIn ? (
-          isEmpresas || localStorage.getItem('roleSession') === '1' || localStorage.getItem('roleSession') === '2' ? (
+          isEmpresas || localStorage.getItem('roleSession') === '1' ? (
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-12">
                   <Header onLogout={handleLogout} />
                 </div>
-                <div className="col-md-3">
+                {/* Botón para mostrar/ocultar la barra lateral en pantallas pequeñas */}
+                <button
+                  className={`btn d-block d-sm-none ${sidebarVisible ? 'active' : ''}`}
+                  onClick={toggleSidebar}
+                  style={{ backgroundColor: '#333', color: '#fff' }}
+                >
+                  Menú
+                </button>
+                {/* Oculta la barra lateral en pantallas extra pequeñas (xs) */}
+                <div className={`col-md-2 ${sidebarVisible ? 'd-block' : 'd-none'} d-sm-block`}>
                   <Sidebar onOptionChange={handleOptionChange} />
                 </div>
-                <div className="col-md-9">
-                  <Panel currentOption={currentOption} userDNI={userDNI} />
+                <div className="col-md-10">
+                  <Panel currentOption={currentOption} userDNI={userDNI} empresaId={empresaId} />
                 </div>
               </div>
             </div>
@@ -112,6 +127,7 @@ const App = () => {
       </div>
     </div>
   );
+  
   
 }
 

@@ -3,13 +3,20 @@ import axios from 'axios'; // Assuming you're using Axios for API calls
 import '../css/LiquidacionesToPdf.css'; // Revisa este archivo para asegurarte de que los estilos se apliquen correctamente
 import API_BASE_URL from './apiConstants'; // Asegúrate de importar la URL base de tu API desde apiConstants.js
 import API_DOWNLOAD_URL from './apiConstants1'; // Asegúrate de importar la URL base de tu API desde apiConstants.js
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ListadoContratos = ({userDNI}) => {
+const ListadoContratos = ({userDNI,  empresaId}) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const userSession = userDNI
-  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [contractsPerPage] = useState(10);
+  const indexOfLastContract = currentPage * contractsPerPage;
+  const indexOfFirstContract = indexOfLastContract - contractsPerPage;
+
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -42,31 +49,39 @@ const ListadoContratos = ({userDNI}) => {
     return <p>No documents found for RUT 16968853.</p>;
   }
 
+  const currentContracts = data.slice(indexOfFirstContract, indexOfLastContract);
+  const paginateForward = () => setCurrentPage(currentPage + 1);
+  const paginateBackward = () => setCurrentPage(currentPage - 1);
+
   return (
     <div>
-    <h3>Contratos de Trabajo y Anexos</h3>
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Mes</th>
-          <th>Año</th>
-          <th>Nombre</th>
-          <th>Trabajador</th>
-          <th>Ruta</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map(d => (
+      <h3>Contratos de Trabajo y Anexos</h3>
+      <table className="table">
+        <thead>
           <tr>
-            <td>{d.mes}</td>
-            <td>{d.agno}</td>
-            <td>{d.nombre}</td>
-            <td>{d.trabajador}</td>
-            <td><a href={`${API_DOWNLOAD_URL}/${d.ruta}`} download target="_blank">Descargar</a></td>
+            <th>Mes</th>
+            <th>Año</th>
+            <th>Nombre</th>
+            <th>Ruta</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {currentContracts
+            .filter((d) => d.empresa_id === empresaId)
+            .map(d => (
+            <tr>
+              <td>{d.mes}</td>
+              <td>{d.agno}</td>
+              <td>{d.nombre}</td>
+              <td><a href={`${API_DOWNLOAD_URL}/${d.ruta}`} download target="_blank"><FontAwesomeIcon icon={faDownload} /></a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div>
+        <button onClick={paginateBackward} disabled={currentPage === 1}>Anterior</button>
+        <button onClick={paginateForward} disabled={indexOfLastContract >= data.length}>Siguiente</button>
+      </div>
     </div>
   );
 };

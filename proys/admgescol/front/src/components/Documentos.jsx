@@ -6,12 +6,14 @@ import API_BASE_URL from './apiConstants';
 import Swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
 
-const Documentos = () => {
+const Documentos = ({empresaId}) => {
+
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
   const [tipo_doc_id, settipo_doc_id] = useState('');
   const [nombre, setnombre] = useState('');
   const [trabajador, settrabajador] = useState('');
+  const [tipoDocumentos, setTipoDocumentos] = useState([]);
   
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -68,6 +70,18 @@ const Documentos = () => {
         };
 
         fetchWorkers();
+
+        const fetchTipoDocumentos = async () => {
+          try {
+            const response = await axios.get(`${API_BASE_URL}/tipo_doc`);
+            setTipoDocumentos(response.data);
+          } catch (error) {
+            console.error('Error fetching tipo_doc:', error);
+          }
+        };
+    
+        fetchTipoDocumentos();
+
         }, []);
 
   const handleSubmit = async (event) => {
@@ -85,6 +99,7 @@ const Documentos = () => {
     formData.append('tipo_doc_id', tipo_doc_id);
     formData.append('trabajador', trabajador);
     formData.append('nombre', nombre);
+    formData.append('empresa_id', empresaId);
     formData.append('file', file); // Agrega el archivo al FormData
 
     try {
@@ -121,9 +136,11 @@ const Documentos = () => {
           <label htmlFor="tipo_doc_id" className="form-label">Tipo Documento:</label>
           <select id="tipo_doc_id" className="form-select" value={tipo_doc_id} onChange={handletipo_doc_idChange}>
             <option value="">Seleccionar tipo documento...</option>
-            <option value="1">Liquidación</option>
-            <option value="2">Reglamento</option>
-            <option value="3">Contratos y Anexos</option>
+            {tipoDocumentos.map((tipo) => (
+              <option key={tipo.id} value={tipo.id}>
+                {tipo.nombre}
+              </option>
+            ))}
           </select>
         </div>
         <div className="mb-3 row">
