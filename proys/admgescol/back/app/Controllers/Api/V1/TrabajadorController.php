@@ -45,6 +45,21 @@ class TrabajadorController extends ResourceController
         return $this->respond($data);
     }
 
+    public function showByEmpresa($id = null)
+    {
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "SELECT * FROM trabajadores WHERE empresa_id = ? ";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$id])->getResult();
+        // Verificar si se encontraron resultados
+        // if (empty($data)) {
+        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
+        // }
+        // Responder con los datos encontrados
+        return $this->respond($data);
+    }
+
     /**
      * Return a new resource object, with default properties
      *

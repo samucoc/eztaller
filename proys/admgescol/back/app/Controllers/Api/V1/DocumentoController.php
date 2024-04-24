@@ -136,6 +136,7 @@ class DocumentoController extends ResourceController
         $tipo_doc_id = $this->request->getPost('tipo_doc_id');
         $trabajador = $this->request->getPost('trabajador');
         $nombre = $this->request->getPost('nombre');
+        $empresa_id = $this->request->getPost('empresa_id');
 
         // Obtiene el archivo subido
         $file = $this->request->getFile('file');
@@ -167,6 +168,7 @@ class DocumentoController extends ResourceController
         $docu->agno         = $year;
         $docu->nombre       = $nombre;
         $docu->trabajador   = $trabajador;
+        $docu->empresa_id   = $empresa_id;
         $docu->ruta         = 'pdfs/'.$tempFileName;
 
         if ($this->model->insert($docu)) {

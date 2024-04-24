@@ -15,7 +15,26 @@ class TrabajadorModel extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'user_id',        'rut',        'dv',        'nombres',        'apellido_paterno',        'apellido_materno', 'email'
+        'empresa_id' ,
+        'user_id' ,
+        'rut' ,
+        'dv' ,
+        'apellido_paterno' ,
+        'apellido_materno' ,
+        'nombres' ,
+        'nombre_social',
+        'fecha_nac' ,
+        'nacionalidad' ,
+        'cargo_id',
+        'sexo_id' ,
+        'foto' ,
+        'direccion' ,
+        'comuna_id' ,
+        'telefono' ,
+        'email' ,
+        'contacto_emergencia' ,
+        'telefono_emergencia' ,
+        'estado_id'
     ];
 
     // Dates
