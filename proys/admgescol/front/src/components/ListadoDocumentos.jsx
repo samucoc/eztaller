@@ -3,8 +3,10 @@ import axios from 'axios'; // Assuming you're using Axios for API calls
 import '../css/LiquidacionesToPdf.css'; // Revisa este archivo para asegurarte de que los estilos se apliquen correctamente
 import API_BASE_URL from './apiConstants'; // Asegúrate de importar la URL base de tu API desde apiConstants.js
 import API_DOWNLOAD_URL from './apiConstants1'; // Asegúrate de importar la URL base de tu API desde apiConstants.js
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 const ListadoDocumentos = ({userDNI,  empresaId}) => {
   const [data, setData] = useState(null);
@@ -15,7 +17,8 @@ const ListadoDocumentos = ({userDNI,  empresaId}) => {
   const [contractsPerPage] = useState(10);
   const indexOfLastContract = currentPage * contractsPerPage;
   const indexOfFirstContract = indexOfLastContract - contractsPerPage;
-  
+  const [previewPdf, setPreviewPdf] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -68,15 +71,37 @@ const ListadoDocumentos = ({userDNI,  empresaId}) => {
           {currentContracts
             .filter((d) => d.empresa_id === empresaId)
             .map(d => (
-            <tr>
-              <td>{d.mes}</td>
-              <td>{d.agno}</td>
-              <td>{d.nombre}</td>
-              <td><a href={`${API_DOWNLOAD_URL}/${d.ruta}`} download target="_blank"><FontAwesomeIcon icon={faDownload} /></a></td>
-            </tr>
-          ))}
+              <tr key={d.ruta}>
+                <td>{d.mes}</td>
+                <td>{d.agno}</td>
+                <td>{d.nombre}</td>
+                <td>
+                  <a href="#"
+                    className="btn btn-primary"
+                    onClick={() => setPreviewPdf(`${API_DOWNLOAD_URL}/${d.ruta}`)}
+                    data-bs-toggle="modal"
+                    data-bs-target="#pdfModal"
+                  >
+                    <FontAwesomeIcon icon={faEye} /> Ver Archivo
+                  </a>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
+
+      <div className="modal fade" id="pdfModal" tabIndex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="pdfModalLabel">Vista previa</h5>
+            </div>
+            <div className="modal-body">
+              {previewPdf && <iframe src={previewPdf} width="100%" height="500px" title="PDF Viewer"></iframe>}
+            </div>
+          </div>
+        </div>
+      </div>
       <div>
         <button onClick={paginateBackward} disabled={currentPage === 1}>Anterior</button>
         <button onClick={paginateForward} disabled={indexOfLastContract >= data.length}>Siguiente</button>

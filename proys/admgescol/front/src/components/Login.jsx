@@ -7,10 +7,12 @@ const Login = ({ username, password, loading, error, setUsername, setPassword, h
         <div className="col-md-6">
           <div className="card">
             <div className="card-body">
-              <h2 className="card-title text-center mb-4">
-                <img src="Logo.png" width="600"></img>
-                Iniciar Sesión
-              </h2>
+              <div className="card-title text-center mb-4">
+                <img src="logo.png" className="img-fluid" alt="Logo" style={{ maxWidth: "100%", height: "auto" }} />
+                <br />
+                <br />
+                <h3>RRHH-GESCOL</h3>
+              </div>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="userEmail" className="form-label">Nombre de Usuario</label>

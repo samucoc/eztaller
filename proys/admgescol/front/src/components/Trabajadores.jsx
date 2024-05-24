@@ -114,6 +114,7 @@ const Trabajadores = ({empresaId}) => {
               <TableRow>
                 <TableCell>Rut</TableCell>
                 <TableCell>Nombre Completo</TableCell>
+                <TableCell>Email</TableCell>
                 <TableCell>Acciones</TableCell>
               </TableRow>
             </TableHead>
@@ -123,6 +124,7 @@ const Trabajadores = ({empresaId}) => {
                 <TableRow key={trabajador.id}>
                   <TableCell>{trabajador.rut}-{trabajador.dv}</TableCell>
                   <TableCell>{trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_materno}</TableCell>
+                  <TableCell>{trabajador.email}</TableCell>
                   <TableCell>
                     <Button variant="contained" color="primary" onClick={() => edittrabajador(trabajador)} startIcon={<EditIcon />}>Editar</Button>
                     <Button variant="contained" color="secondary" onClick={() => deletetrabajador(trabajador.id)} startIcon={<DeleteIcon />}>Eliminar</Button>
