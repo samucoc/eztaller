@@ -159,6 +159,7 @@ $routes->group('Api', function ($routes) {
         $routes->get('trabajadores', 'TrabajadorController::index', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('trabajadores/new', 'TrabajadorController::new', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('trabajadores/show/(:segment)', 'TrabajadorController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('trabajadores/showByRut/(:segment)', 'TrabajadorController::showByRut/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('trabajadores/showByEmpresa/(:segment)', 'TrabajadorController::showByEmpresa/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->post('trabajadores', 'TrabajadorController::create', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->put('trabajadores/(:segment)', 'TrabajadorController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
