@@ -392,14 +392,17 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
         <Grid item xs={12} sm={6}>
           <TextField
             variant="outlined"
-            
             fullWidth
             id="estado_id"
             label="Estado"
             name="estado_id"
+            select
             value={formData.estado_id}
             onChange={handleChange}
-          />
+          >
+            <MenuItem value="1">Activo</MenuItem>
+            <MenuItem value="0">Inactivo</MenuItem>
+          </TextField>
         </Grid>
         <Grid item xs={6}>
           <Button

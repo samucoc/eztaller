@@ -6,6 +6,7 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
+import swal from 'sweetalert2';
 
 const Trabajadores = ({empresaId}) => {
   const [showForm, setShowForm] = useState(false); // State to control form visibility
@@ -46,32 +47,61 @@ const Trabajadores = ({empresaId}) => {
     }
   };  
 
+  const validateRUT = (rut) => {
+    if (!/^[0-9]+-[0-9kK]{1}$/.test(rut)) {
+      return false;
+    }
+  
+    const [rutBody, dv] = rut.split('-');
+    const formattedDV = dv.toLowerCase() === 'k' ? 'k' : dv;
+  
+    let sum = 0;
+    let multiplier = 2;
+  
+    for (let i = rutBody.length - 1; i >= 0; i--) {
+      sum += parseInt(rutBody[i], 10) * multiplier;
+      multiplier = (multiplier === 7) ? 2 : multiplier + 1;
+    }
+  
+    const calculatedDV = 11 - (sum % 11);
+    const validDV = calculatedDV === 11 ? '0' : calculatedDV === 10 ? 'k' : calculatedDV.toString();
+  
+    return validDV === formattedDV;
+  };
+  
+
   const addtrabajador = async (trabajadorData) => {
     try {
       var initialTrabajador = selectedtrabajador
-      const url = initialTrabajador ? `${API_BASE_URL}/trabajadores/${initialTrabajador.id}` : `${API_BASE_URL}/trabajadores`;
-      const method = initialTrabajador ? 'PUT' : 'POST'; // Use PUT for update, POST for create
-  
-      const response = await axios({
-        method,
-        url,
-        data: trabajadorData,
-      });
-  
-      if (response.status === 200 || response.status === 201) { // Check for successful creation/update (replace with your API's success codes)
+
+      const rutCompleto = `${trabajadorData.rut}-${trabajadorData.dv}`;
+      if (validateRUT(rutCompleto)) {
+        const url = initialTrabajador ? `${API_BASE_URL}/trabajadores/${initialTrabajador.id}` : `${API_BASE_URL}/trabajadores`;
+        const method = initialTrabajador ? 'PUT' : 'POST'; // Use PUT for update, POST for create
+    
+        const response = await axios({
+          method,
+          url,
+          data: trabajadorData,
+        });
         const updatedtrabajador = response.data; // Assuming your API returns the updated trabajador
-        
-        if (initialTrabajador) { // Update scenario, update state with modified trabajador
-          setTrabajadores(Trabajadores.map(trabajador => trabajador.id === updatedtrabajador.id ? updatedtrabajador : trabajador));
-        } else { // Create scenario, add new trabajador to state
-          setTrabajadores([...Trabajadores, updatedtrabajador]);
+      
+        if (response.status === 200 || response.status === 201) { // Check for successful creation/update (replace with your API's success codes)
+          if (initialTrabajador) { // Update scenario, update state with modified trabajador
+            setTrabajadores(Trabajadores.map(trabajador => trabajador.id === updatedtrabajador.id ? updatedtrabajador : trabajador));
+          } else { // Create scenario, add new trabajador to state
+            setTrabajadores([...Trabajadores, updatedtrabajador]);
+          }
+          
+          setShowForm(false); // Hide the form after successful operation
+          console.log(initialTrabajador ? 'trabajador actualizada exitosamente' : 'trabajador agregada exitosamente');
+        } else {
+          console.error(initialTrabajador ? 'Error al actualizar la trabajador:' : 'Error al agregar la trabajador:', response.data); // Handle creation/update errors
         }
-        
-        setShowForm(false); // Hide the form after successful operation
-        console.log(initialTrabajador ? 'trabajador actualizada exitosamente' : 'trabajador agregada exitosamente');
       } else {
-        console.error(initialTrabajador ? 'Error al actualizar la trabajador:' : 'Error al agregar la trabajador:', response.data); // Handle creation/update errors
+        swal.fire("Error", "El dígito verificador no corresponde al RUT ingresado.", "error");
       }
+
     } catch (error) {
       console.error(initialTrabajador ? 'Error durante la actualización:' : 'Error durante la creación:', error); // Handle general errors
     }
@@ -115,6 +145,7 @@ const Trabajadores = ({empresaId}) => {
                 <TableCell>Rut</TableCell>
                 <TableCell>Nombre Completo</TableCell>
                 <TableCell>Email</TableCell>
+                <TableCell>Estado</TableCell>
                 <TableCell>Acciones</TableCell>
               </TableRow>
             </TableHead>
@@ -125,6 +156,7 @@ const Trabajadores = ({empresaId}) => {
                   <TableCell>{trabajador.rut}-{trabajador.dv}</TableCell>
                   <TableCell>{trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_materno}</TableCell>
                   <TableCell>{trabajador.email}</TableCell>
+                  <TableCell>{trabajador.estado_id == "1" ? "Activo" : "Inactivo" }</TableCell>
                   <TableCell>
                     <Button variant="contained" color="primary" onClick={() => edittrabajador(trabajador)} startIcon={<EditIcon />}>Editar</Button>
                     <Button variant="contained" color="secondary" onClick={() => deletetrabajador(trabajador.id)} startIcon={<DeleteIcon />}>Eliminar</Button>
