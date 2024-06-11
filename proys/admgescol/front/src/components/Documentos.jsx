@@ -85,49 +85,67 @@ const Documentos = ({empresaId}) => {
         }, []);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    showLoadingAlert();
-    
-    if (!month || !year || !file || !trabajador || !nombre) {
-      alert('Por favor, complete todos los campos.');
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('month', month);
-    formData.append('year', year);
-    formData.append('tipo_doc_id', tipo_doc_id);
-    formData.append('trabajador', trabajador);
-    formData.append('nombre', nombre);
-    formData.append('empresa_id', empresaId);
-    formData.append('file', file); // Agrega el archivo al FormData
-
-    try {
-      setLoading(true);
-      const response = await axios.post(`${API_BASE_URL}/documentos`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      console.log('Respuesta del servidor:', response.data);
-      hideLoadingAlert();
-      Swal.fire({
-        icon: 'success',
-        title: 'Respuesta Exitosa',
-        text: 'Ha ingresado un documento de forma existosa' // Suponiendo que la respuesta contiene un campo 'message'
-        });
-      setLoading(false);
-    } catch (error) {
-      console.error('Error al enviar los datos:', error);
-      setLoading(false);
-      hideLoadingAlert();
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Ocurrió un error al procesar la solicitud.'
-        });
-    }
+      event.preventDefault();
+      showLoadingAlert();
+  
+      if (!month || !year || !file || !trabajador || !nombre) {
+          alert('Por favor, complete todos los campos.');
+          return;
+      }
+  
+      const formData = new FormData();
+      formData.append('month', month);
+      formData.append('year', year);
+      formData.append('tipo_doc_id', tipo_doc_id);
+      formData.append('trabajador', trabajador);
+      formData.append('nombre', nombre);
+      formData.append('empresa_id', empresaId);
+      formData.append('file', file); // Agrega el archivo al FormData
+  
+      try {
+          setLoading(true);
+          const response = await axios.post(`${API_BASE_URL}/documentos`, formData, {
+              headers: {
+                  'Content-Type': 'multipart/form-data'
+              }
+          });
+  
+          console.log('Respuesta del servidor:', response.data);
+          hideLoadingAlert();
+  
+          Swal.fire({
+              icon: 'success',
+              title: 'Respuesta Exitosa',
+              text: response.data.message || 'Ha ingresado un documento de forma exitosa'
+          });
+  
+          setLoading(false);
+      } catch (error) {
+          console.error('Error al enviar los datos:', error);
+  
+          setLoading(false);
+          hideLoadingAlert();
+  
+          let errorMessage = 'Ocurrió un error al procesar la solicitud.';
+          if (error.response && error.response.request && error.response.request.response) {
+              try {
+                  const errorData = JSON.parse(error.response.request.response);
+                  if (errorData.messages && errorData.messages.error) {
+                      errorMessage = errorData.messages.error;
+                  }
+              } catch (parseError) {
+                  console.error('Error al parsear el JSON de la respuesta de error:', parseError);
+              }
+          }
+  
+          Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: errorMessage
+          });
+      }
   };
+
   return (
     <div className="liquidaciones-to-pdf container">
       <h2>Cargar Documentación</h2>

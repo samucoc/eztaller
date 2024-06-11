@@ -6,6 +6,14 @@ use App\Models\TrabajadorModel;
 use CodeIgniter\RESTful\ResourceController;
 use setasign\Fpdi\Fpdi;
 use setasign\Fpdf\Parser\StreamReader;
+use setasign\Fpdi\PdfReader;
+use PDFParser\PDFParser;
+use PDFParser\L1Parser;
+use PDFParser\L2Parser;
+use PDFParser\L3Parser;
+use PDFParser\TextExtractor;
+use Smalot\PdfParser\Parser;
+
 class DocumentoController extends ResourceController
 {
     protected $modelName = 'App\Models\DocumentoModel';
@@ -154,31 +162,59 @@ class DocumentoController extends ResourceController
         if (empty($month) || empty($year)) {
             throw new \Exception('Error: Por favor, complete todos los campos.');
         }
-
+        
+        $tempFileName = $file->getName();
         // Mueve el archivo a una carpeta temporal
         $tempFolder = FCPATH . 'pdfs/';
-        $tempFileName = $file->getName();
         if (!$file->move($tempFolder, $tempFileName)) {
             throw new \Exception('Error: No se pudo mover el archivo a la carpeta temporal.');
         }
 
-        $docu = new \App\Entities\Documento;
-        $docu->tipo_doc_id  = $tipo_doc_id;
-        $docu->mes          = $month;
-        $docu->agno         = $year;
-        $docu->nombre       = $nombre;
-        $docu->trabajador   = $trabajador;
-        $docu->empresa_id   = $empresa_id;
-        $docu->ruta         = 'pdfs/'.$tempFileName;
+        $pdfFilePath = FCPATH . 'pdfs/' . $tempFileName;
+        $pageNumber = $this->findTextInPDF($pdfFilePath, $trabajador);
 
-        if ($this->model->insert($docu)) {
-            $docu->id = $this->model->insertID();
-            return $this->respondCreated($docu, RESOURCE_CREATED);
-        } else {
-            return $this->fail($this->model->errors());
+        if ($pageNumber === -1) {
+            $pageNumber = $this->findTextInPDF($pdfFilePath, $this->formatRut($trabajador));
+            if ($pageNumber !== -1) {
+                $docu = new \App\Entities\Documento;
+                $docu->tipo_doc_id  = $tipo_doc_id;
+                $docu->mes          = $month;
+                $docu->agno         = $year;
+                $docu->nombre       = $nombre;
+                $docu->trabajador   = $trabajador;
+                $docu->empresa_id   = $empresa_id;
+                $docu->ruta         = 'pdfs/'.$tempFileName;
+    
+                if ($this->model->insert($docu)) {
+                    $docu->id = $this->model->insertID();
+                    return $this->respondCreated($docu, RESOURCE_CREATED);
+                } else {
+                    return $this->fail($this->model->errors());
+                }
+            }
+            else{
+                return $this->fail("Búsqueda rut en documento no encontrada");
+            }
         }
-    }
+        else{
+            $docu = new \App\Entities\Documento;
+            $docu->tipo_doc_id  = $tipo_doc_id;
+            $docu->mes          = $month;
+            $docu->agno         = $year;
+            $docu->nombre       = $nombre;
+            $docu->trabajador   = $trabajador;
+            $docu->empresa_id   = $empresa_id;
+            $docu->ruta         = 'pdfs/'.$tempFileName;
 
+            if ($this->model->insert($docu)) {
+                $docu->id = $this->model->insertID();
+                return $this->respondCreated($docu, RESOURCE_CREATED);
+            } else {
+                return $this->fail($this->model->errors());
+            }
+        }
+
+    }
     /**
      * Return the editable properties of a resource object
      *
@@ -324,48 +360,43 @@ class DocumentoController extends ResourceController
         ]);
     }
 
-    public function findTextInPDF($pdfFilePath, $textToFind) {
-        // Abrir el archivo PDF en modo lectura binaria
+    function findTextInPDF($pdfFilePath, $searchText) {
+        // Open the PDF file in binary mode
         $file = fopen($pdfFilePath, 'rb');
-    
-        // Verificar si se pudo abrir el archivo correctamente
         if (!$file) {
-            die("Error: No se pudo abrir el archivo PDF.");
+          die("Error: Unable to open PDF file.");
         }
-    
-        // Contador de páginas
+      
+        // Initialize variables
+        $text = '';
         $pageNumber = 0;
-    
-        // Contador de bytes leídos
-        $totalBytesRead = 0;
-    
-        // Tamaño del bloque de lectura
-        $bufferSize = 8192;
-    
-        // Leer el contenido del archivo por bloques
-        while (!feof($file)) {
-            // Leer un bloque del archivo
-            $buffer = fread($file, $bufferSize);
-    
-            // Incrementar el contador de bytes leídos
-            $totalBytesRead += strlen($buffer);
-    
-            // Buscar el texto en el bloque actual
-            $pos = strpos($buffer, $textToFind);
-    
-            // Si se encuentra el texto en el bloque actual, calcular la página
-            if ($pos !== false) {
-                // Calcular el número de página
-                $pageNumber = substr_count(substr($buffer, 0, $pos), '/Type /Page') + 1;
+        $found = false;
+        $foundPage = -1;
+        $currentObject = null;
+      
+        // Read and Parse PDF
+        $parser = new Parser();
+        $pdf = $parser->parseFile($pdfFilePath);
+
+        // Extract Text
+        $text = $pdf->getText();
+
+        // Perform String Search
+        $found = false;
+        $foundPage = -1;
+        $pageNumber = 1;
+        foreach ($pdf->getPages() as $page) {
+            if (strpos($page->getText(), $searchText) !== false) {
+                $found = true;
+                $foundPage = $pageNumber;
                 break;
             }
+            $pageNumber++;
         }
-    
-        // Cerrar el archivo
-        fclose($file);
-    
-        return $pageNumber+1;
-    }
+      
+        // Return the page number or -1 if not found
+        return $found ? $foundPage : -1;
+      }
 
     public function extract_page_from_pdf($pdfPath, $pageNumber, $rut) {
         $pdf = new Fpdi();
@@ -387,4 +418,19 @@ class DocumentoController extends ResourceController
     
         return $outputPdf;
     }
+
+    public function formatRut($rut) {
+        // Eliminar cualquier carácter no numérico, excepto la 'k' en caso de RUTs con dígito verificador 'k'
+        $rut = preg_replace('/[^0-9]/', '', $rut);
+        
+        // Obtener el número sin el dígito verificador
+        $number = $rut;
+        
+        // Formatear el número con puntos como separadores de miles
+        $numberFormatted = number_format($number, 0, '', '.');
+        
+        // Combinar el número formateado con el dígito verificador
+        return $numberFormatted;
+    }
+
 }
