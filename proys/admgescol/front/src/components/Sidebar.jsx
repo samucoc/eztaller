@@ -84,8 +84,8 @@ const Sidebar = ({ onOptionChange }) => {
             Ficha Trabajador
               <ul>
                 <li onClick={() => onOptionChange('Resumen')}>Datos Personales</li>
-                <li onClick={() => onOptionChange('ListadoReglamento')}>Reglamento Interno</li>
-                <li onClick={() => onOptionChange('ListadoContratos')}>Contratos de Trabajo y Anexo</li>
+                <li onClick={() => onOptionChange('ListadoReglamento')}>Contratos de Trabajo y Anexo</li>
+                <li onClick={() => onOptionChange('ListadoContratos')}>Reglamento Interno</li>
                 <li onClick={() => onOptionChange('ListadoDocumentos')}>Liquidaciones</li>
               </ul>
           </li>

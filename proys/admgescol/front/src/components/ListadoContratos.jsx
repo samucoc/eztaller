@@ -54,7 +54,7 @@ const ListadoContratos = ({ userDNI, empresaId }) => {
 
   return (
     <div>
-      <h3>Contratos de Trabajo y Anexos</h3>
+      <h3>Reglamento Interno</h3>
       <table className="table">
         <thead>
           <tr>

@@ -58,7 +58,7 @@ const ListadoReglamento = ({userDNI,  empresaId}) => {
 
   return (
     <div>
-    <h3>Reglamento Interno</h3>
+    <h3>Contratos de Trabajo y Anexo</h3>
     <table className="table">
         <thead>
           <tr>
