@@ -68,13 +68,10 @@ const Sidebar = ({ onOptionChange }) => {
             Administración
               <ul>
                 <li onClick={() => onOptionChange('Dashboard')}>
-                  Dashboard
+                  Documentos
                 </li>
                 <li onClick={() => onOptionChange('Trabajadores')}>
                   Trabajadores
-                </li>
-                <li onClick={() => onOptionChange('Documentos')}>
-                  Documentos
                 </li>
               </ul>
           </li>
