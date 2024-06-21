@@ -78,12 +78,51 @@ const Trabajadores = ({empresaId}) => {
       if (validateRUT(rutCompleto)) {
         const url = initialTrabajador ? `${API_BASE_URL}/trabajadores/${initialTrabajador.id}` : `${API_BASE_URL}/trabajadores`;
         const method = initialTrabajador ? 'PUT' : 'POST'; // Use PUT for update, POST for create
-    
+
+        const formData = new FormData();
+
+        formData.append('empresa_id', trabajadorData.empresa_id)
+        formData.append('user_id', trabajadorData.user_id)
+        formData.append('rut', trabajadorData.rut)
+        formData.append('dv', trabajadorData.dv)
+        formData.append('apellido_paterno', trabajadorData.apellido_paterno)
+        formData.append('apellido_materno', trabajadorData.apellido_materno)
+        formData.append('nombres', trabajadorData.nombres)
+        formData.append('nombre_social', trabajadorData.nombre_social)
+        formData.append('fecha_nac', trabajadorData.fecha_nac) 
+        formData.append('nacionalidad', trabajadorData.nacionalidad)
+        formData.append('cargo_id', trabajadorData.cargo_id)
+        formData.append('sexo_id', trabajadorData.sexo_id)
+        formData.append('direccion', trabajadorData.direccion)
+        formData.append('comuna_id', trabajadorData.comuna_id)
+        formData.append('telefono', trabajadorData.telefono)
+        formData.append('email', trabajadorData.email)
+        formData.append('contacto_emergencia', trabajadorData.contacto_emergencia)
+        formData.append('telefono_emergencia', trabajadorData.telefono_emergencia)
+        formData.append('estado_id', trabajadorData.estado_id)
+        const data = Object.fromEntries(formData); // Convert formData to object
+
+        // Handle file upload (before or in parallel with resource update)
+        if (trabajadorData.foto) {
+          const formData1 = new FormData();
+          formData1.append('foto', trabajadorData.foto)
+
+          const fileUploadResponse = await axios({
+            method: 'POST',
+            url: `${API_BASE_URL}/trabajadores/uploadFoto/${initialTrabajador.id}`,
+            data: formData1,
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+        }
+
         const response = await axios({
           method,
           url,
-          data: trabajadorData,
+          data: JSON.stringify(data)
         });
+
         const updatedtrabajador = response.data; // Assuming your API returns the updated trabajador
       
         if (response.status === 200 || response.status === 201) { // Check for successful creation/update (replace with your API's success codes)
@@ -92,7 +131,6 @@ const Trabajadores = ({empresaId}) => {
           } else { // Create scenario, add new trabajador to state
             setTrabajadores([...Trabajadores, updatedtrabajador]);
           }
-          
           setShowForm(false); // Hide the form after successful operation
           console.log(initialTrabajador ? 'trabajador actualizada exitosamente' : 'trabajador agregada exitosamente');
         } else {

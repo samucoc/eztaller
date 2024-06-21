@@ -5,6 +5,9 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import API_BASE_URL from './apiConstants'; 
+import IconButton from '@mui/material/IconButton';
+import PhotoLibraryOutlinedIcon from '@mui/icons-material/PhotoLibraryOutlined';
+import { useTheme } from '@mui/material/styles';
 
 const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) => {
   const [formData, setFormData] = useState({
@@ -20,7 +23,7 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
     nacionalidad: initialTrabajador ? initialTrabajador.nacionalidad : '',
     cargo_id: initialTrabajador ? initialTrabajador.cargo_id :'',
     sexo_id: initialTrabajador ? initialTrabajador.sexo_id :'',
-    foto: null,
+    foto: initialTrabajador ? initialTrabajador.foto : '',
     direccion: initialTrabajador ? initialTrabajador.direccion : '',
     comuna_id: initialTrabajador ? initialTrabajador.comuna_id :'',
     telefono: initialTrabajador ? initialTrabajador.telefono : '',
@@ -30,11 +33,16 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
     estado_id: initialTrabajador ? initialTrabajador.estado_id : '',
   });
 
+  const [previewUrl, setPreviewUrl] = useState(formData.foto || '');
+  const theme = useTheme();
+
+
   const [empresas, setEmpresas] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
   const [cargos, setCargos] = useState([]);
   const [sexos, setSexos] = useState([]);
   const [comunas, setComunas] = useState([]);
+  const [selectedFile, setSelectedFile] = useState([]);
 
   useEffect(() => {
     fetchEmpresas();
@@ -42,7 +50,39 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
     fetchCargos();
     fetchSexos();
     fetchComunas();
-  }, []);
+    if (selectedFile) {
+      setFormData({ ...formData, foto: selectedFile });
+    }
+  }, [selectedFile]);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    if (!isValidImage(file)) {
+      alert('Please select a valid image file (JPEG, PNG, or GIF)');
+      return;
+    }
+
+    const selectedFile = file;
+    setFormData({ ...formData, foto: file });
+    setSelectedFile(file);
+
+    const reader = new FileReader();
+    reader.onload = (e) => setPreviewUrl(e.target.result);
+    reader.readAsDataURL(file);
+
+  };
+
+  const isValidImage = (file) => {
+    const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    const maxSizeInBytes = 5 * 1024 * 1024; // 5MB
+  
+    if (!file) return false;
+    if (!validTypes.includes(file.type)) return false;
+    if (file.size > maxSizeInBytes) return false;
+  
+    return true;
+  };
 
   const fetchEmpresas = async () => {
     try {
@@ -90,21 +130,46 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
   };
 
   const handleChange = (e) => {
-    if (e.target.type === 'file') {
-      setFormData({ ...formData, [e.target.name]: e.target.files[0] });
-    } else {
       setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
+
   };
   
   return (
     <form onSubmit={handleSubmit}>
       <Grid container spacing={2} alignItems="center">
+        <Grid item xs={12} sm={12}>
+          <TextField
+            variant="outlined"
+            fullWidth
+            type="file"
+            id="foto"
+            label="Foto"
+            name="foto"
+            onChange={handleFileChange}
+            InputProps={{
+              endAdornment: (
+                <IconButton color="primary">
+                  <PhotoLibraryOutlinedIcon />
+                </IconButton>
+              ),
+            }}
+            helperText={previewUrl ? 'Imagen seleccionada' : 'Selecciona una imagen'}
+            sx={{
+              '& .MuiInputBase-root': {
+                display: 'flex',
+                alignItems: 'center',
+              },
+            }}
+          />
+          {previewUrl && (
+            <img src={previewUrl} alt="Selected Image Preview" style={{ width: '100%', maxWidth: 300, marginTop: theme.spacing(1) }} />
+          )}
+        </Grid>
         <Grid item xs={12} sm={6}>
         <TextField
             variant="outlined"
@@ -297,19 +362,7 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
             ))}
           </TextField>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            variant="outlined"
-            
-            fullWidth
-            type="file"
-            id="foto"
-            label="foto"
-            name="foto"
-            value={formData.foto}
-            onChange={handleChange}
-          />
-        </Grid>
+
         <Grid item xs={12} sm={6}>
           <TextField
             variant="outlined"
@@ -389,7 +442,7 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
             onChange={handleChange}
           />
         </Grid>        
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           <TextField
             variant="outlined"
             fullWidth

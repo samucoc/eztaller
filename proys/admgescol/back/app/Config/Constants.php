@@ -104,3 +104,4 @@ define('INVALID_TOKEN', 'Token  Inválido');
 define('EXPIRED_EMAIL', 'Token expirado');
 define('USER_EXISTS', 'Usuario ya existente');
 define('PASSWORD_DONT_MATCH', 'Password no concuerdan');
+define('URL_BACK', 'http://localhost/eztaller/proys/admgescol/back/public');

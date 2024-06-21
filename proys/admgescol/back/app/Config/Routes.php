@@ -162,6 +162,7 @@ $routes->group('Api', function ($routes) {
         $routes->get('trabajadores/showByRut/(:segment)', 'TrabajadorController::showByRut/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('trabajadores/showByEmpresa/(:segment)', 'TrabajadorController::showByEmpresa/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->post('trabajadores', 'TrabajadorController::create', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->post('trabajadores/uploadFoto/(:segment)', 'TrabajadorController::uploadFoto/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->put('trabajadores/(:segment)', 'TrabajadorController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->delete('trabajadores/(:segment)', 'TrabajadorController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
         

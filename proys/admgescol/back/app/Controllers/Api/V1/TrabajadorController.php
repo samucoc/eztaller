@@ -3,7 +3,15 @@
 namespace App\Controllers\Api\V1;
 
 use CodeIgniter\RESTful\ResourceController;
-
+use setasign\Fpdi\Fpdi;
+use setasign\Fpdf\Parser\StreamReader;
+use setasign\Fpdi\PdfReader;
+use PDFParser\PDFParser;
+use PDFParser\L1Parser;
+use PDFParser\L2Parser;
+use PDFParser\L3Parser;
+use PDFParser\TextExtractor;
+use Smalot\PdfParser\Parser;
 class TrabajadorController extends ResourceController
 {
     protected $modelName = 'App\Models\TrabajadorModel';
@@ -121,13 +129,47 @@ class TrabajadorController extends ResourceController
      *
      * @return mixed
      */
+    public function uploadFoto($id = null)
+    {
+
+        // Obtiene el archivo subido
+        $file = $this->request->getFile('foto');
+        $tempFileName = $file?->getName();
+        
+        if ($file?->isValid() && !$file?->getError()) {
+            // Mueve el archivo a una carpeta temporal
+            $tempFolder = FCPATH . 'fotos_trabajadores/';
+            if (!$file->move($tempFolder, $tempFileName)) {
+                throw new \Exception('Error: No se pudo mover el archivo a la carpeta temporal.');
+            }
+
+            $pdfFilePath =  URL_BACK . '/fotos_trabajadores/' . $tempFileName;
+        
+            $db = \Config\Database::connect();
+            // Preparar la consulta SQL
+            $query = "UPDATE trabajadores 
+                            SET foto = '".$pdfFilePath."'
+                        WHERE id = ? ";
+            // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+            $data = $db->query($query, [$id]);
+        
+            return $this->respondUpdated($data, RESOURCE_UPDATED);
+        }
+        return $this->failNotFound(RESOURCE_NOT_FOUND);
+    }
+
+    /**
+     * Add or update a model resource, from "posted" properties
+     *
+     * @return mixed
+     */
     public function update($id = null)
     {
 
-        $validateEntry = $this->model->find($id);
-        if (empty($validateEntry)) {
-            return $this->failNotFound(RESOURCE_NOT_FOUND);
-        }
+        // $validateEntry = $this->model->find($id);
+        // if (empty($validateEntry)) {
+        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
+        // }
 
         //divide in PATCH and PUT cases
 
@@ -149,6 +191,8 @@ class TrabajadorController extends ResourceController
             return $this->fail($this->model->errors());
         }
     }
+
+
 
     /**
      * Delete the designated resource object from the model
