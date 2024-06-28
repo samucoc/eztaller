@@ -81,6 +81,7 @@ const Trabajadores = ({empresaId}) => {
 
         const formData = new FormData();
 
+        formData.append('id', trabajadorData.id)
         formData.append('empresa_id', trabajadorData.empresa_id)
         formData.append('user_id', trabajadorData.user_id)
         formData.append('rut', trabajadorData.rut)
@@ -103,7 +104,7 @@ const Trabajadores = ({empresaId}) => {
         const data = Object.fromEntries(formData); // Convert formData to object
 
         // Handle file upload (before or in parallel with resource update)
-        if (trabajadorData.foto) {
+        if (trabajadorData.foto && trabajadorData.id) {
           const formData1 = new FormData();
           formData1.append('foto', trabajadorData.foto)
 
