@@ -103,21 +103,6 @@ const Trabajadores = ({empresaId}) => {
         formData.append('estado_id', trabajadorData.estado_id)
         const data = Object.fromEntries(formData); // Convert formData to object
 
-        // Handle file upload (before or in parallel with resource update)
-        if (trabajadorData.foto && trabajadorData.id) {
-          const formData1 = new FormData();
-          formData1.append('foto', trabajadorData.foto)
-
-          const fileUploadResponse = await axios({
-            method: 'POST',
-            url: `${API_BASE_URL}/trabajadores/uploadFoto/${initialTrabajador.id}`,
-            data: formData1,
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          });
-        }
-
         const response = await axios({
           method,
           url,
@@ -126,6 +111,21 @@ const Trabajadores = ({empresaId}) => {
 
         const updatedtrabajador = response.data; // Assuming your API returns the updated trabajador
       
+        // Handle file upload (before or in parallel with resource update)
+        if (trabajadorData.foto && updatedtrabajador.id) {
+          const formData1 = new FormData();
+          formData1.append('foto', trabajadorData.foto)
+
+          const fileUploadResponse = await axios({
+            method: 'POST',
+            url: `${API_BASE_URL}/trabajadores/uploadFoto/${updatedtrabajador.id}`,
+            data: formData1,
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+        }
+
         if (response.status === 200 || response.status === 201) { // Check for successful creation/update (replace with your API's success codes)
           if (initialTrabajador) { // Update scenario, update state with modified trabajador
             setTrabajadores(Trabajadores.map(trabajador => trabajador.id === updatedtrabajador.id ? updatedtrabajador : trabajador));
