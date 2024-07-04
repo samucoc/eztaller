@@ -3,6 +3,7 @@
 namespace App\Controllers\Api\V1;
 
 use CodeIgniter\RESTful\ResourceController;
+use App\Models\TrabajadorModel;
 
 class UserController extends ResourceController
 {
@@ -10,12 +11,14 @@ class UserController extends ResourceController
     protected $format = 'json';
     private $datetimeNow;
     private $roleModel;
+    private $TrabajadorModel;
     private $validation;
 
     public function __construct()
     {
         $this->datetimeNow = new \DateTime('NOW', new \DateTimeZone('America/Santiago'));
         $this->roleModel = new \App\Models\RoleModel;
+        $this->TrabajadorModel = new \App\Models\TrabajadorModel;
         $this->validation = \Config\Services::validation();
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
@@ -35,6 +38,7 @@ class UserController extends ResourceController
 
         foreach ($data as $key => $value) {
             $data[$key]->role = $this->roleModel->find($value->role_id);
+            $data[$key]->trabajador = $this->TrabajadorModel->find($value->user_id);
         }
 
         return $this->respond($data);
@@ -53,6 +57,7 @@ class UserController extends ResourceController
         }
 
         $data->role = $this->roleModel->find($data->role_id);
+        $data->trabajador = $this->TrabajadorModel->find($data->user_id);
 
         return $this->respond($data);
     }
@@ -66,6 +71,8 @@ class UserController extends ResourceController
 
         foreach ($data as $key => $value) {
             $data[$key]->role = $this->roleModel->find($value->role_id);
+            $data[$key]->trabajador = $this->TrabajadorModel->find($value->user_id);
+
         }
 
         return $this->respond($data);
@@ -227,14 +234,31 @@ class UserController extends ResourceController
 
         if ($user && $payload->userPassword == $user->userPassword) {
             unset($user->userPassword);
-            $response = [
-                'status' => 200,
-                'error' => null,
-                'messages' => 'Login successful',
-                'userDNI' => $user->userDNI,
-                'role_id' => $user->role_id
-            ];
-            return $this->respond($response);
+            $db = \Config\Database::connect();
+            $query = "SELECT t.* , c.nombre as nombre_cargo
+                        FROM trabajadores t
+                            inner join cargos c
+                                on t.cargo_id = c.id
+                        WHERE rut = ? ";
+            // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+            $trabajador = $db->query($query, [$user->userDNI])->getResult();
+
+            if (!empty($trabajador)) {
+                $trabajador = $trabajador[0]; // Obtener el primer resultado como objeto
+
+                $response = [
+                    'status' => 200,
+                    'error' => null,
+                    'messages' => 'Login successful',
+                    'userDNI' => $user->userDNI,
+                    'role_id' => $user->role_id,
+                    'foto' => $trabajador->foto,
+                    'cargo' => $trabajador->nombre_cargo,
+                    'nombre' => $trabajador->nombres . ' ' . $trabajador->apellido_paterno . ' ' . $trabajador->apellido_materno
+                ];
+                return $this->respond($response);
+
+            }
         } else {
             return $this->fail('Invalid email or password');
         }

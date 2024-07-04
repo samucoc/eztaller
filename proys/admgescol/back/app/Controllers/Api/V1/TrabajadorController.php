@@ -16,16 +16,32 @@ class TrabajadorController extends ResourceController
 {
     protected $modelName = 'App\Models\TrabajadorModel';
     protected $format = 'json';
+    private $CargoModel;
     private $datetimeNow;
 
     public function __construct()
     {
         $this->datetimeNow = new \DateTime('NOW', new \DateTimeZone('America/Santiago'));
+        $this->CargoModel = new \App\Models\CargoModel;
+
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding, Authorization");
     }
 
+    public function findByRut($rut)
+    {
+        $db = \Config\Database::connect();
+        $query = "SELECT t.* , c.nombre as nombre_cargo
+                    FROM trabajadores t
+                        inner join cargos c
+                            on t.cargo_id = c.id
+                    WHERE rut = ? ";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$rut])->getResult();
+
+        return $this->respond($data);
+    }
     //request data is raw json
 
     /**
@@ -36,6 +52,9 @@ class TrabajadorController extends ResourceController
     public function index()
     {
         $data = $this->model->findAll();
+        foreach ($data as $key => $value) {
+            $data[$key]->cargo = $this->CargoModel->find($value->role_id);
+        }
         return $this->respond($data);
     }
 
@@ -50,6 +69,8 @@ class TrabajadorController extends ResourceController
         if (empty($data)) {
             return $this->failNotFound(RESOURCE_NOT_FOUND);
         }
+        $data->cargo = $this->CargoModel->find($data->role_id);
+
         return $this->respond($data);
     }
 

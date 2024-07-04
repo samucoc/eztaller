@@ -1,16 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Sidebar.css';
 
-const Sidebar = ({ onOptionChange }) => {
+const Sidebar = ({ onOptionChange, handleLogout }) => {
   const [adminMenuOpen, setAdminMenuOpen] = useState(false);
   const [adminGescolMenuOpen, setAdminGescolMenuOpen] = useState(false);
   const [workerMenuOpen, setWorkerMenuOpen] = useState(false);
   const [role, setRole] = useState(null); // Estado para almacenar el role_id
+  const [photoWorker, setphotoWorker] = useState(null); // Estado para almacenar el role_id
+  const [nombre, setnombre] = useState(null); // Estado para almacenar el role_id
+  const [cargo, setcargo] = useState(null); // Estado para almacenar el role_id
 
   useEffect(() => {
     const roleSession = localStorage.getItem('roleSession');
+    const photoWorker = localStorage.getItem('photoWorker');
+    const nombre = localStorage.getItem('nombre');
+    const cargo = localStorage.getItem('cargo');
     if (roleSession) {
       setRole(JSON.parse(roleSession));
+    }
+    if (photoWorker) {
+      setphotoWorker(photoWorker); // No JSON.parse for strings
+    }
+    if (nombre) {
+      setnombre(nombre); // No JSON.parse for strings
+    }
+    if (cargo) {
+      setcargo(cargo); // No JSON.parse for strings
     }
   }, []);
 
@@ -20,11 +35,11 @@ const Sidebar = ({ onOptionChange }) => {
     setAdminGescolMenuOpen(false);
   };
 
-  const toggleWorkerMenu = () => {
-    setWorkerMenuOpen(!workerMenuOpen);
-    setAdminMenuOpen(false);
-    setAdminGescolMenuOpen(false);
-  };
+  // const toggleWorkerMenu = () => {
+  //   setWorkerMenuOpen(!workerMenuOpen);
+  //   setAdminMenuOpen(false);
+  //   setAdminGescolMenuOpen(false);
+  // };
 
   const toggleAdminGescolMenu = () => {
     setAdminGescolMenuOpen(!adminGescolMenuOpen);
@@ -77,15 +92,16 @@ const Sidebar = ({ onOptionChange }) => {
           </li>
         )}
         {role === 3 && (
-          <li onClick={toggleWorkerMenu}>
-            Ficha Trabajador
-              <ul>
-                <li onClick={() => onOptionChange('Resumen')}>Datos Personales</li>
-                <li onClick={() => onOptionChange('ListadoReglamento')}>Contratos de Trabajo y Anexo</li>
-                <li onClick={() => onOptionChange('ListadoContratos')}>Reglamento Interno</li>
-                <li onClick={() => onOptionChange('ListadoDocumentos')}>Liquidaciones</li>
-              </ul>
-          </li>
+          <div>
+            <div className="worker-info">
+              <img src={photoWorker} alt="Foto del Trabajador" className="worker-photo" />
+              <div className="worker-details">
+                <h2>{nombre}</h2>
+                <p>{cargo}</p>
+              </div>
+              <button onClick={handleLogout} className="logout-button">Cerrar Sesión</button>
+            </div>
+          </div>
         )}
       </ul>
     </div>

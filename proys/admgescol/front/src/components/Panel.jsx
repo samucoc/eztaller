@@ -12,9 +12,13 @@ import Tipo_Docs from './Tipo_Docs'; // Asegúrate de importar correctamente el 
 import Empresas from './Empresas'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
 import Resumen from './Resumen'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
 import Dashboard from './Dashboard'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
+import DashTrab from './DashTrab'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
 import '../css/Panel.css';
 
-const Panel = ({ currentOption, userDNI, empresaId}) => {
+const Panel = ({ currentOption, userDNI, empresaId, setCurrentOption}) => {
+  const handleOptionChange = (option) => {
+    setCurrentOption(option);
+  };
   const renderContent = () => {
     switch (currentOption) {
       case 'LiquidacionesToPdf':
@@ -43,7 +47,8 @@ const Panel = ({ currentOption, userDNI, empresaId}) => {
         return <Resumen userDNI={userDNI}  empresaId={empresaId}/>;    
       case 'Dashboard':
         return <Dashboard userDNI={userDNI}  empresaId={empresaId}/>;    
-                        
+      case 'DashTrab' : 
+        return <DashTrab onOptionChange={handleOptionChange} />;                      
       default:
         return <h1>{currentOption}</h1>;
     }
