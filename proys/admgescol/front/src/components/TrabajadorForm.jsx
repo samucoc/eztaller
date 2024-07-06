@@ -130,7 +130,14 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
   };
 
   const handleChange = (e) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleChangeUser = (e) => {
+    const selectedUserId = e.target.value;
+    const selectedUser = usuarios.find(user => user.id === selectedUserId);
+    setFormData({ ...formData, user_id: selectedUserId });
+    setFormData({ ...formData, rut: selectedUser.userDNI });
   };
 
   const handleSubmit = (e) => {

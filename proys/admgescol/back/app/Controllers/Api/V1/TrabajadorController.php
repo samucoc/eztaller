@@ -145,6 +145,25 @@ class TrabajadorController extends ResourceController
     {
     }
 
+    public function bulkUpload()
+    {
+        $input = json_decode(trim(file_get_contents('php://input')), true);
+
+        if (!$input) {
+            return $this->fail($this->model->errors());
+        }
+
+        foreach ($input as $index => $trabajador) {
+            // Validation for each trabajador entry
+            $this->model->insert($trabajador);
+        }
+        if (!empty($errors)) {
+            return $this->fail($this->model->errors());
+
+        } 
+        return $this->respondCreated($input, RESOURCE_CREATED);
+    }
+
     /**
      * Add or update a model resource, from "posted" properties
      *

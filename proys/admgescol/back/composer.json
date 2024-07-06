@@ -13,9 +13,11 @@
         "james-heinrich/getid3": "^1.9",
         "laminas/laminas-escaper": "^2.9",
         "mpdf/mpdf": "^8.2",
+        "phpoffice/phpexcel": "^1.8",
         "psr/log": "^1.1",
-        "setasign/fpdi": "^2.6",
         "setasign/fpdf": "1.8.*",
+        "setasign/fpdi": "^2.6",
+        "smalot/pdfparser": "^2.10",
         "tecnickcom/tcpdf": "^6.7"
     },
     "require-dev": {
@@ -80,8 +82,7 @@
     },
     "scripts": {
         "post-update-cmd": [
-            "CodeIgniter\\ComposerScripts::postUpdate",
-            "bash -c \"if [ -f admin/setup.sh ]; then bash admin/setup.sh; fi\""
+            "CodeIgniter\\ComposerScripts::postUpdate"
         ],
         "analyze": [
             "bash -c \"XDEBUG_MODE=off phpstan analyse\"",

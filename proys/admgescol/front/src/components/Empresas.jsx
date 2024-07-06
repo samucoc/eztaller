@@ -122,6 +122,7 @@ const Empresas = () => {
           <Table>
             <TableHead>
               <TableRow>
+                <TableCell>ID</TableCell>
                 <TableCell>Nombre</TableCell>
                 <TableCell>Acciones</TableCell>
               </TableRow>
@@ -129,6 +130,7 @@ const Empresas = () => {
             <TableBody>
               {Empresas.map((Empresa) => (
                 <TableRow key={Empresa.id}>
+                  <TableCell>{Empresa.id}</TableCell>
                   <TableCell>{Empresa.RazonSocial}</TableCell>
                   <TableCell>
                     <Button variant="contained" color="primary" onClick={() => editEmpresa(Empresa)} startIcon={<EditIcon />}>Editar</Button>

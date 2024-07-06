@@ -13,6 +13,8 @@ import Empresas from './Empresas'; // Asegúrate de importar correctamente el co
 import Resumen from './Resumen'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
 import Dashboard from './Dashboard'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
 import DashTrab from './DashTrab'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
+import Users from './Users'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
+import Roles from './Roles'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
 import '../css/Panel.css';
 
 const Panel = ({ currentOption, userDNI, empresaId, setCurrentOption}) => {
@@ -49,6 +51,10 @@ const Panel = ({ currentOption, userDNI, empresaId, setCurrentOption}) => {
         return <Dashboard userDNI={userDNI}  empresaId={empresaId}/>;    
       case 'DashTrab' : 
         return <DashTrab onOptionChange={handleOptionChange} />;                      
+      case 'Users' : 
+        return <Users />;
+      case 'Roles' : 
+        return <Roles />;
       default:
         return <h1>{currentOption}</h1>;
     }

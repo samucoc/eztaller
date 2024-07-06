@@ -1,0 +1,389 @@
+CRITICAL - 2024-06-21 03:45:03 --> Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 335.
+ 1 SYSTEMPATH\Database\Query.php(335): strtr('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(310): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(605): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\Api\V1\TrabajadorController.php(145): CodeIgniter\Model->update('1', Object(stdClass))
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 03:46:44 --> Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 335.
+ 1 SYSTEMPATH\Database\Query.php(335): strtr('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(310): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(605): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\Api\V1\TrabajadorController.php(146): CodeIgniter\Model->update('1', Object(stdClass))
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 03:46:44 --> Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 335.
+ 1 SYSTEMPATH\Database\Query.php(335): strtr('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(310): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(605): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\Api\V1\TrabajadorController.php(146): CodeIgniter\Model->update('1', Object(stdClass))
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 03:47:43 --> Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 335.
+ 1 SYSTEMPATH\Database\Query.php(335): strtr('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(310): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(605): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\Api\V1\TrabajadorController.php(148): CodeIgniter\Model->update('1', Object(stdClass))
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 03:51:02 --> Call to a member function isValid() on null
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 149.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 03:51:53 --> Call to a member function getName() on null
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 148.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 03:54:40 --> Call to a member function isValid() on null
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 148.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 03:58:11 --> Call to a member function isValid() on null
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 148.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 04:01:29 --> Call to a member function isValid() on null
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 148.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 04:46:15 --> Call to a member function isValid() on null
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 148.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 04:48:57 --> Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 335.
+ 1 SYSTEMPATH\Database\Query.php(335): strtr('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(310): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(605): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\Api\V1\TrabajadorController.php(172): CodeIgniter\Model->update('1', Object(stdClass))
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 04:50:24 --> Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 335.
+ 1 SYSTEMPATH\Database\Query.php(335): strtr('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(310): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(605): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\Api\V1\TrabajadorController.php(173): CodeIgniter\Model->update('1', Object(stdClass))
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 04:52:04 --> Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 335.
+ 1 SYSTEMPATH\Database\Query.php(335): strtr('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(310): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(605): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\Api\V1\TrabajadorController.php(173): CodeIgniter\Model->update('1', Object(stdClass))
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 04:52:27 --> Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 335.
+ 1 SYSTEMPATH\Database\Query.php(335): strtr('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(310): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(605): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\Api\V1\TrabajadorController.php(173): CodeIgniter\Model->update('1', Object(stdClass))
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 04:56:57 --> Attempt to assign property "updated_at" on null
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 151.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 05:00:58 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\BaseModel.php(910): CodeIgniter\BaseModel->transformDataToArray(null, 'update')
+ 3 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], null)
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(169): CodeIgniter\Model->update('1', null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 05:03:22 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\BaseModel.php(910): CodeIgniter\BaseModel->transformDataToArray(null, 'update')
+ 3 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], null)
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(170): CodeIgniter\Model->update('1', null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 05:04:42 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\BaseModel.php(910): CodeIgniter\BaseModel->transformDataToArray(null, 'update')
+ 3 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], null)
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(170): CodeIgniter\Model->update('1', null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 05:05:14 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\BaseModel.php(910): CodeIgniter\BaseModel->transformDataToArray(null, 'update')
+ 3 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], null)
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(170): CodeIgniter\Model->update('1', null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 05:06:13 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\BaseModel.php(910): CodeIgniter\BaseModel->transformDataToArray(null, 'update')
+ 3 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], null)
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(171): CodeIgniter\Model->update('1', null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 12:44:58 --> Attempt to read property "errno" on bool
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 567.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(567): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "errno" on bool', 'SYSTEMPATH\\Database\\MySQLi\\Connection.php', 567)
+ 2 SYSTEMPATH\Model.php(507): CodeIgniter\Database\MySQLi\Connection->error()
+ 3 SYSTEMPATH\BaseModel.php(1162): CodeIgniter\Model->doErrors()
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(152): CodeIgniter\BaseModel->errors()
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 12:45:09 --> Attempt to read property "errno" on bool
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 567.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(567): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "errno" on bool', 'SYSTEMPATH\\Database\\MySQLi\\Connection.php', 567)
+ 2 SYSTEMPATH\Model.php(507): CodeIgniter\Database\MySQLi\Connection->error()
+ 3 SYSTEMPATH\BaseModel.php(1162): CodeIgniter\Model->doErrors()
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(152): CodeIgniter\BaseModel->errors()
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 12:46:20 --> Attempt to read property "errno" on bool
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 567.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(567): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "errno" on bool', 'SYSTEMPATH\\Database\\MySQLi\\Connection.php', 567)
+ 2 SYSTEMPATH\Model.php(507): CodeIgniter\Database\MySQLi\Connection->error()
+ 3 SYSTEMPATH\BaseModel.php(1162): CodeIgniter\Model->doErrors()
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(152): CodeIgniter\BaseModel->errors()
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 12:46:52 --> Attempt to read property "errno" on bool
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 567.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(567): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "errno" on bool', 'SYSTEMPATH\\Database\\MySQLi\\Connection.php', 567)
+ 2 SYSTEMPATH\Model.php(507): CodeIgniter\Database\MySQLi\Connection->error()
+ 3 SYSTEMPATH\BaseModel.php(1162): CodeIgniter\Model->doErrors()
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(152): CodeIgniter\BaseModel->errors()
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 12:47:02 --> Attempt to read property "errno" on bool
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 567.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(567): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "errno" on bool', 'SYSTEMPATH\\Database\\MySQLi\\Connection.php', 567)
+ 2 SYSTEMPATH\Model.php(507): CodeIgniter\Database\MySQLi\Connection->error()
+ 3 SYSTEMPATH\BaseModel.php(1162): CodeIgniter\Model->doErrors()
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(152): CodeIgniter\BaseModel->errors()
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 12:49:19 --> Attempt to read property "errno" on bool
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 567.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(567): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "errno" on bool', 'SYSTEMPATH\\Database\\MySQLi\\Connection.php', 567)
+ 2 SYSTEMPATH\Model.php(507): CodeIgniter\Database\MySQLi\Connection->error()
+ 3 SYSTEMPATH\BaseModel.php(1162): CodeIgniter\Model->doErrors()
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(152): CodeIgniter\BaseModel->errors()
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 13:20:32 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\BaseModel.php(910): CodeIgniter\BaseModel->transformDataToArray(null, 'update')
+ 3 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], null)
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(171): CodeIgniter\Model->update('1', null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 13:26:48 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\BaseModel.php(910): CodeIgniter\BaseModel->transformDataToArray(null, 'update')
+ 3 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], null)
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(171): CodeIgniter\Model->update('1', null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 13:27:27 --> Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 335.
+ 1 SYSTEMPATH\Database\Query.php(335): strtr('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(310): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(605): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\Api\V1\TrabajadorController.php(171): CodeIgniter\Model->update('1', Object(stdClass))
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 13:44:44 --> Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 335.
+ 1 SYSTEMPATH\Database\Query.php(335): strtr('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(310): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(605): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `nombre_social` = :nombre_social:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `sexo_id` = :sexo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\Api\V1\TrabajadorController.php(188): CodeIgniter\Model->update('1', Object(stdClass))
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('1')
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 13:54:16 --> Undefined variable $data
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 158.
+ 1 APPPATH\Controllers\Api\V1\TrabajadorController.php(158): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'APPPATH\\Controllers\\Api\\V1\\TrabajadorController.php', 158)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->uploadFoto('1')
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 14:17:02 --> Call to a member function getResult() on bool
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 154.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->uploadFoto('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 14:17:31 --> Call to a member function getResult() on bool
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 154.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->uploadFoto('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 14:17:53 --> Call to a member function getResult() on bool
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 154.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->uploadFoto('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 14:19:05 --> Call to a member function getResult() on bool
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 154.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->uploadFoto('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-21 14:19:18 --> Call to a member function getResult() on bool
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 154.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->uploadFoto('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()

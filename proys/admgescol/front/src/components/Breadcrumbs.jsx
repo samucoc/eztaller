@@ -3,10 +3,11 @@ import React from 'react';
 const Breadcrumbs = ({ currentOption, onHomeClick }) => {
   const breadcrumbMap = {
     'Resumen': 'Datos Personales',
+    'Dashboard': 'Documentos',
     'ListadoReglamento': 'Documentos Laborales',
     'ListadoContratos': 'Liquidaciones',
     'Documentos': 'Solicitudes',
-    'Trabajadores': 'Comunicación Empleador',
+    'ComunicaEmplea': 'Comunicación Empleador',
     // Agrega más mappings según sea necesario
   };
 

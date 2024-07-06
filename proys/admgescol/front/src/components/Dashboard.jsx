@@ -27,7 +27,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
   const [loading, setLoading] = useState(false);
 
   // Fetch documents on component mount
-  useEffect(() => {
+  useEffect( () => {
     const fetchDocuments = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/documentos`); // Replace with your API endpoint
@@ -241,13 +241,18 @@ const addDocument = async (docData) => {
     <div className="container Documentos">
       <h3>Documentos</h3>
       <div className="d-flex justify-content-between mb-3">
-        <TextField
-          label="Buscar"
-          variant="outlined"
-          value={searchTerm}
-          onChange={handleSearch}
-          style={{ marginBottom: '1rem' }}
-        />
+        { !showForm && (
+            <TextField
+            label="Buscar"
+            variant="outlined"
+            value={searchTerm}
+            onChange={handleSearch}
+            style={{ marginBottom: '1rem' }}
+          />
+        )}
+      </div>
+      <div className="d-flex justify-content-between mb-3">
+        <div></div> {/* Espacio en blanco */}
         <Button
           variant="contained"
           color="primary"
@@ -278,7 +283,10 @@ const addDocument = async (docData) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {filteredDocuments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((doc) => (
+                {filteredDocuments
+                  .filter((doc) => doc.empresa_id === empresaId)
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((doc) => (
                   <TableRow key={doc.id}>
                     <TableCell>{doc.mes}</TableCell>
                     <TableCell>{doc.agno}</TableCell>

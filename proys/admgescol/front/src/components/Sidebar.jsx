@@ -51,14 +51,26 @@ const Sidebar = ({ onOptionChange, handleLogout }) => {
     <div className="sidebar" style={{ height: '100% !important' }}>
       <ul>
         {role === 1 && (
-          <li onClick={toggleAdminGescolMenu}>
+          <>
+            <li onClick={toggleAdminGescolMenu}>
             Administración GESCOL
               <ul>
                 <li onClick={() => onOptionChange('LiquidacionesToPdf')}>
                   Obtener Liquidaciones de Archivo PDF
                 </li>
+              </ul>
+          </li>
+          <li onClick={toggleAdminGescolMenu}>
+            Mantenedores GESCOL
+              <ul>
                 <li onClick={() => onOptionChange('Empresas')}>
                   Empresas
+                </li>
+                <li onClick={() => onOptionChange('Users')}>
+                  Usuarios
+                </li>
+                <li onClick={() => onOptionChange('Roles')}>
+                  Roles
                 </li>
                 <li onClick={() => onOptionChange('Trabajadores')}>
                   Trabajadores
@@ -77,6 +89,7 @@ const Sidebar = ({ onOptionChange, handleLogout }) => {
                 </li>
               </ul>
           </li>
+        </>
         )}
         {role === 2 && (
           <li onClick={toggleAdminMenu}>

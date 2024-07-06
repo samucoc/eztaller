@@ -3,7 +3,7 @@
         'name' => 'codeigniter4/codeigniter4',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '50bf29aeae7b22374ff7edd9284ba080b59c4802',
+        'reference' => '5fb5b4eb0866ebbceb02941731f6bcb52dfaa742',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -40,7 +40,7 @@
         'codeigniter4/codeigniter4' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '50bf29aeae7b22374ff7edd9284ba080b59c4802',
+            'reference' => '5fb5b4eb0866ebbceb02941731f6bcb52dfaa742',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -369,6 +369,15 @@
             'install_path' => __DIR__ . '/../phpdocumentor/type-resolver',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'phpoffice/phpexcel' => array(
+            'pretty_version' => '1.8.1',
+            'version' => '1.8.1.0',
+            'reference' => '372c7cbb695a6f6f1e62649381aeaa37e7e70b32',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpoffice/phpexcel',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'phpstan/phpdoc-parser' => array(
             'pretty_version' => '1.27.0',
@@ -739,6 +748,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'smalot/pdfparser' => array(
+            'pretty_version' => 'v2.10.0',
+            'version' => '2.10.0.0',
+            'reference' => '14adf318f8620a6195c0b00d51c6a507837b9ff4',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../smalot/pdfparser',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'spatie/array-to-xml' => array(
             'pretty_version' => '3.2.3',
             'version' => '3.2.3.0',
@@ -860,7 +878,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/polyfill-php80' => array(
             'pretty_version' => 'v1.29.0',

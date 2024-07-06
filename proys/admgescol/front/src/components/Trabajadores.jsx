@@ -2,33 +2,74 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import API_BASE_URL from './apiConstants'; // Assuming API_BASE_URL is defined here
 import TrabajadorForm from './TrabajadorForm';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@material-ui/core'; // Importa componentes de Material-UI
+import { Table, 
+        TableBody, 
+        TableCell, 
+        TableContainer, 
+        TableHead, 
+        TableRow, 
+        Paper, 
+        Button, 
+        TextField, 
+        TablePagination, 
+        Dialog, 
+        DialogTitle, 
+        DialogContent, 
+        MenuItem,
+        Select,
+        FormControl,
+        InputLabel,
+        Typography  } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import AddIcon from '@material-ui/icons/Add';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import swal from 'sweetalert2';
+import Loader from 'react-loader-spinner';
+import * as XLSX from 'xlsx';
 
 const Trabajadores = ({empresaId}) => {
   const [showForm, setShowForm] = useState(false); // State to control form visibility
   const [selectedtrabajador, setSelectedtrabajador] = useState(null);
   const [Trabajadores, setTrabajadores] = useState([]); // Use state to manage Trabajadores
+  const [searchTerm, setSearchTerm] = useState(''); // State to manage search term
+  const [page, setPage] = useState(0); // State to manage pagination page
+  const [rowsPerPage, setRowsPerPage] = useState(5); // State to manage rows per page
+  const [previewPdf, setPreviewPdf] = useState('');
+  const [open, setOpen] = useState(false);
+  const [tipoDocumentos, setTipoDocumentos] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedEmpresa, setSelectedEmpresa] = useState('');
+  const [empresas, setEmpresas] = useState([]);
+
+  const fetchTrabajadores = async () => {
+    try {
+      const response = empresaId == '' ? await axios.get(API_BASE_URL+'/trabajadores') : await axios.get(API_BASE_URL+'/trabajadores/showByEmpresa/'+empresaId) ; // Replace with your API endpoint
+      setTrabajadores(response.data);
+    } catch (error) {
+      console.error('Error fetching Trabajadores:', error);
+    }
+  };
 
   // Fetch Trabajadores on component mount
   useEffect(() => {
-    const fetchTrabajadores = async () => {
-      try {
-        const response = empresaId == '' ? await axios.get(API_BASE_URL+'/trabajadores') : await axios.get(API_BASE_URL+'/trabajadores/showByEmpresa/'+empresaId) ; // Replace with your API endpoint
-        setTrabajadores(response.data);
-      } catch (error) {
-        console.error('Error fetching Trabajadores:', error);
-      }
-    };
+
     // Verificar si selectedtrabajador no es null antes de ejecutar setShowForm(true)
     if (selectedtrabajador !== null) {
-      console.log(selectedtrabajador);
       setShowForm(true);
     }
-    
+    const fetchEmpresas = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/empresas`);
+        setEmpresas(response.data);
+      } catch (error) {
+        console.error('Error fetching trabajadores:', error);
+      }
+    };
+    fetchEmpresas();
     fetchTrabajadores();
   }, [selectedtrabajador]);
 
@@ -146,6 +187,40 @@ const Trabajadores = ({empresaId}) => {
     }
   };
 
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[sheetName];
+        const json = XLSX.utils.sheet_to_json(worksheet);
+        handleBulkUpload(json);
+      };
+      reader.readAsArrayBuffer(file);
+    }
+  };
+
+  const handleBulkUpload = async (data) => {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/trabajadores/bulk-upload`, data);
+      if (response.status === 200 || response.status === 201 ) {
+        fetchTrabajadores();
+        swal.fire("Correcto", "Carga masiva exitosa.", "success");
+        console.log('Carga masiva exitosa');
+      } else {
+        swal.fire("Error", "Error durante la carga masiva.", "error");
+
+        console.error('Error en la carga masiva:', response.data);
+      }
+    } catch (error) {
+      swal.fire("Error", "Error durante la carga masiva.", "error");
+      console.error('Error durante la carga masiva:', error);
+    }
+  };
+
   const edittrabajador = (trabajador) => {
     setSelectedtrabajador(trabajador);
   };
@@ -154,20 +229,50 @@ const Trabajadores = ({empresaId}) => {
     setShowForm(false);
     setSelectedtrabajador(null);
   };
+  
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleEmpresaChange = (event) => {
+    setSelectedEmpresa(event.target.value);
+    setPage(0); // Reset page to 0 when changing filter
+  };
+
+  let filteredTrabajadores = Trabajadores.filter(doc =>
+    (doc.rut?.toString() || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (doc.nombres?.toString() || '').includes(searchTerm) ||
+    (doc.apellido_paterno?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
+    (doc.apellido_materno?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
+    (doc.email?.toLowerCase() || '').includes(searchTerm.toLowerCase())
+  );
+
+  filteredTrabajadores = selectedEmpresa
+  ? filteredTrabajadores.filter(trabajador => trabajador.empresa_id === selectedEmpresa)
+  : filteredTrabajadores;
 
   return (
     <div className="container Trabajadores">
       <h3>Trabajadores</h3>
       <div className="d-flex justify-content-between mb-3">
-        <div></div> {/* Espacio en blanco */}
-        <Button
-            variant="contained"
-            color="primary"
-            startIcon={<AddIcon />}
-            onClick={() => setShowForm(true)}
-            >
-            Agregar trabajador
-            </Button>
+        { !showForm && (
+            <TextField
+            label="Buscar"
+            variant="outlined"
+            value={searchTerm}
+            onChange={handleSearch}
+            style={{ marginBottom: '1rem' }}
+          />
+        )}
       </div>
       {showForm ? (
         <TrabajadorForm
@@ -177,34 +282,96 @@ const Trabajadores = ({empresaId}) => {
           empresaId={empresaId}
         />
       ) : (
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Rut</TableCell>
-                <TableCell>Nombre Completo</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Estado</TableCell>
-                <TableCell>Acciones</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {Trabajadores
-                .map((trabajador) => (
-                <TableRow key={trabajador.id}>
-                  <TableCell>{trabajador.rut}-{trabajador.dv}</TableCell>
-                  <TableCell>{trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_materno}</TableCell>
-                  <TableCell>{trabajador.email}</TableCell>
-                  <TableCell>{trabajador.estado_id == "1" ? "Activo" : "Inactivo" }</TableCell>
-                  <TableCell>
-                    <Button variant="contained" color="primary" onClick={() => edittrabajador(trabajador)} startIcon={<EditIcon />}>Editar</Button>
-                    <Button variant="contained" color="secondary" onClick={() => deletetrabajador(trabajador.id)} startIcon={<DeleteIcon />}>Eliminar</Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <div>
+            { !empresaId && (
+              <Grid container spacing={3} alignItems="center">
+                <Grid item xs={12} sm={4}>                
+                  <FormControl variant="outlined" fullWidth margin="normal">
+                  <InputLabel id="empresa-select-label">Empresa</InputLabel>
+                  <Select
+                    labelId="empresa-select-label"
+                    id="empresa-select"
+                    value={selectedEmpresa}
+                    onChange={handleEmpresaChange}
+                    label="Empresa"
+                  >
+                    <MenuItem value="">
+                      <em>Elija Empresa</em>
+                    </MenuItem>
+                    {empresas.map((empresa) => (
+                      <MenuItem key={empresa.id} value={empresa.id}>
+                        {empresa.RazonSocial}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={4}>                
+                  <input
+                    accept=".xls,.xlsx"
+                    style={{ display: 'none' }}
+                    id="contained-button-file"
+                    type="file"
+                    onChange={handleFileUpload}
+                  />
+                  <label htmlFor="contained-button-file">
+                    <Button variant="contained" color="primary" component="span">
+                      Subir Archivo Carga Masiva
+                    </Button>
+                  </label>
+                </Grid>
+                <Grid item xs={12} sm={4}>              
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<AddIcon />}
+                    onClick={() => setShowForm(true)}
+                    >
+                    Agregar trabajador
+                    </Button>
+                </Grid>
+              </Grid>    
+            )}
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>ID</TableCell>
+                    <TableCell>Rut</TableCell>
+                    <TableCell>Nombre Completo</TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell>Estado</TableCell>
+                    <TableCell>Acciones</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filteredTrabajadores
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((trabajador) => (
+                    <TableRow key={trabajador.id}>
+                      <TableCell>{trabajador.id}</TableCell>
+                      <TableCell>{trabajador.rut}-{trabajador.dv}</TableCell>
+                      <TableCell>{trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_materno}</TableCell>
+                      <TableCell>{trabajador.email}</TableCell>
+                      <TableCell>{trabajador.estado_id == "1" ? "Activo" : "Inactivo" }</TableCell>
+                      <TableCell>
+                        <Button variant="contained" color="primary" onClick={() => edittrabajador(trabajador)} startIcon={<EditIcon />}>Editar</Button>
+                        <Button variant="contained" color="secondary" onClick={() => deletetrabajador(trabajador.id)} startIcon={<DeleteIcon />}>Eliminar</Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              component="div"
+              count={filteredTrabajadores.length}
+              page={page}
+              onPageChange={handleChangePage}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+        </div>
       )}
     </div>
   );

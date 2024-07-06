@@ -156,11 +156,11 @@ class UserController extends ResourceController
 
         $data->updated_at = $this->datetimeNow->format('Y-m-d H:i:s');
 
-        $this->validation->setRules(config('Validation')->usersRules);
+        // $this->validation->setRules(config('Validation')->usersRules);
 
-        if (!$this->validation->run((array) $data)) {
-            return $this->fail($this->validation->getErrors());
-        }
+        // if (!$this->validation->run((array) $data)) {
+        //     return $this->fail($this->validation->getErrors());
+        // }
 
         if ($this->model->update($id, $data)) {
             $data->id = $id;
@@ -232,7 +232,7 @@ class UserController extends ResourceController
 
         //verify that passwords match
 
-        if ($user && $payload->userPassword == $user->userPassword) {
+        if ($user && password_verify($payload->userPassword, $user->userPassword)) {
             unset($user->userPassword);
             $db = \Config\Database::connect();
             $query = "SELECT t.* , c.nombre as nombre_cargo

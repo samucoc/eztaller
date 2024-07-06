@@ -286,9 +286,10 @@ class DocumentoController extends ResourceController
         // Obtiene los datos del formulario
         $month = $this->request->getPost('month');
         $year = $this->request->getPost('year');
+        $empresa_id = $this->request->getPost('empresa_id');
 
         // Valida los campos del formulario
-        if (empty($month) || empty($year)) {
+        if (empty($month) || empty($year) || empty($empresa_id)) {
             throw new \Exception('Error: Por favor, complete todos los campos.');
         }
 
@@ -304,15 +305,46 @@ class DocumentoController extends ResourceController
 
         $trabsModel  = new TrabajadorModel();
         $trabs = $trabsModel->findAll();
-
         foreach($trabs as $t){
             // Número que deseas buscar
             $numberToFind = $t->rut;
-
             try {
                 $pageNumber = $this->findTextInPDF($pdfFilePath, $numberToFind);
-                if ($pageNumber !== null) {
-                
+
+                if ($pageNumber === -1) {
+                    $pageNumber = $this->findTextInPDF($pdfFilePath, $this->formatRut($numberToFind));
+                    if ($pageNumber !== -1) {
+                        $pdf = new Fpdi();
+
+                        // Path to your existing PDF file
+                        $inputPdf = $pdfFilePath;
+                        
+                        // Open existing PDF
+                        $pageCount = $pdf->setSourceFile($inputPdf);
+                        
+                        // Loop through each page and create a new PDF for each page
+                        $pdf->AddPage();
+                        $templateId = $pdf->importPage($pageNumber);
+                        $pdf->useTemplate($templateId);
+                        
+                        // Save the page as a separate PDF
+                        $outputPdf = 'pdfs/Liquidacion_'.$month.'_' .$year.'_' . $numberToFind . '.pdf';
+                        $pdf->Output($outputPdf, 'F');
+
+                        $docu = new \App\Entities\Documento;
+                        $docu->tipo_doc_id  = 1;
+                        $docu->empresa_id          = $empresa_id;
+                        $docu->mes          = $month;
+                        $docu->agno         = $year;
+                        $docu->nombre       = 'Liquidacion_'.$month.'_' .$year.'_' . $numberToFind;
+                        $docu->trabajador   = $numberToFind;
+                        $docu->ruta         = $outputPdf;
+                        $this->model->insert($docu);
+                    }
+                    else{
+                    }
+                }
+                else{
                     $pdf = new Fpdi();
 
                     // Path to your existing PDF file
@@ -332,15 +364,13 @@ class DocumentoController extends ResourceController
 
                     $docu = new \App\Entities\Documento;
                     $docu->tipo_doc_id  = 1;
+                    $docu->empresa_id   = $empresa_id;
                     $docu->mes          = $month;
                     $docu->agno         = $year;
                     $docu->nombre       = 'Liquidacion_'.$month.'_' .$year.'_' . $numberToFind;
                     $docu->trabajador   = $numberToFind;
                     $docu->ruta         = $outputPdf;
                     $this->model->insert($docu);
-
-                } else {
-                echo "El texto no fue encontrado en el PDF.";
                 }
 
             } catch (Exception $e) {

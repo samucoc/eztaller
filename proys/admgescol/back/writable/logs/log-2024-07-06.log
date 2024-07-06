@@ -1,0 +1,7 @@
+CRITICAL - 2024-07-06 01:49:19 --> Undefined property: Config\Validation::$usersRules
+in APPPATH\Controllers\Api\V1\UserController.php on line 159.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(159): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: Config\\Validation::$usersRules', 'APPPATH\\Controllers\\Api\\V1\\UserController.php', 159)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->update('2')
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()

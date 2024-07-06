@@ -1,0 +1,261 @@
+CRITICAL - 2024-07-04 02:14:09 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(40): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:14:09 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(40): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:14:18 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(40): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:14:25 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(40): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:14:26 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(40): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:14:29 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(40): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:14:30 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(40): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:23:40 --> Attempt to read property "foto" on null
+in APPPATH\Controllers\Api\V1\UserController.php on line 242.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(242): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "foto" on null', 'APPPATH\\Controllers\\Api\\V1\\UserController.php', 242)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:23:43 --> Attempt to read property "foto" on null
+in APPPATH\Controllers\Api\V1\UserController.php on line 242.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(242): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "foto" on null', 'APPPATH\\Controllers\\Api\\V1\\UserController.php', 242)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:25:30 --> Undefined property: stdClass::$userEmail
+in APPPATH\Controllers\Api\V1\UserController.php on line 230.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(230): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$userEmail', 'APPPATH\\Controllers\\Api\\V1\\UserController.php', 230)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:26:52 --> Attempt to read property "foto" on null
+in APPPATH\Controllers\Api\V1\UserController.php on line 243.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(243): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "foto" on null', 'APPPATH\\Controllers\\Api\\V1\\UserController.php', 243)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:27:12 --> Attempt to read property "foto" on null
+in APPPATH\Controllers\Api\V1\UserController.php on line 242.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(242): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "foto" on null', 'APPPATH\\Controllers\\Api\\V1\\UserController.php', 242)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:29:20 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(236): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:29:51 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(237): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:31:58 --> Undefined array key "foto"
+in APPPATH\Controllers\Api\V1\UserController.php on line 252.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(252): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "foto"', 'APPPATH\\Controllers\\Api\\V1\\UserController.php', 252)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 02:32:54 --> Cannot use object of type stdClass as array
+in APPPATH\Controllers\Api\V1\UserController.php on line 252.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 13:13:34 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(41): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 13:13:35 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(41): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 13:18:38 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(41): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 13:18:39 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(41): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 13:19:09 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(41): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 13:19:10 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(41): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 13:21:03 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(41): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 13:21:04 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(41): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-07-04 13:37:41 --> mysqli_sql_exception: Table 'gescolcl_adminrrhh.trabajadores' doesn't exist in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT t.* , c....', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT t.* , c....')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT t.* , c....')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\UserController.php(244): CodeIgniter\Database\BaseConnection->query('SELECT t.* , c....', Array)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2024-07-04 13:37:41 --> Table 'gescolcl_adminrrhh.trabajadores' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(244): CodeIgniter\Database\BaseConnection->query('SELECT t.* , c.nombre as nombre_cargo
+                        FROM trabajadores t
+                            inner join cargos c
+                                on t.cargo_id = c.id
+                        WHERE rut = ? ', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-07-04 13:37:43 --> mysqli_sql_exception: Table 'gescolcl_adminrrhh.trabajadores' doesn't exist in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT t.* , c....', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT t.* , c....')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT t.* , c....')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\UserController.php(244): CodeIgniter\Database\BaseConnection->query('SELECT t.* , c....', Array)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2024-07-04 13:37:43 --> Table 'gescolcl_adminrrhh.trabajadores' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(244): CodeIgniter\Database\BaseConnection->query('SELECT t.* , c.nombre as nombre_cargo
+                        FROM trabajadores t
+                            inner join cargos c
+                                on t.cargo_id = c.id
+                        WHERE rut = ? ', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-07-04 13:37:50 --> mysqli_sql_exception: Table 'gescolcl_adminrrhh.trabajadores' doesn't exist in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT t.* , c....', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT t.* , c....')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT t.* , c....')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\UserController.php(244): CodeIgniter\Database\BaseConnection->query('SELECT t.* , c....', Array)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2024-07-04 13:37:50 --> Table 'gescolcl_adminrrhh.trabajadores' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(244): CodeIgniter\Database\BaseConnection->query('SELECT t.* , c.nombre as nombre_cargo
+                        FROM trabajadores t
+                            inner join cargos c
+                                on t.cargo_id = c.id
+                        WHERE rut = ? ', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 13:55:08 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(41): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 13:55:09 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(41): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 13:55:44 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(41): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 13:55:44 --> Call to undefined method App\Models\TrabajadorModel::findByRut
+in SYSTEMPATH\Model.php on line 841.
+ 1 APPPATH\Controllers\Api\V1\UserController.php(41): CodeIgniter\Model->__call('findByRut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
