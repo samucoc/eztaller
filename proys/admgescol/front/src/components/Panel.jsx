@@ -50,7 +50,7 @@ const Panel = ({ currentOption, userDNI, empresaId, setCurrentOption}) => {
       case 'Dashboard':
         return <Dashboard userDNI={userDNI}  empresaId={empresaId}/>;    
       case 'DashTrab' : 
-        return <DashTrab onOptionChange={handleOptionChange} />;                      
+        return <DashTrab userDNI={userDNI} onOptionChange={handleOptionChange} />;                      
       case 'Users' : 
         return <Users />;
       case 'Roles' : 

@@ -15,6 +15,9 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
+import IconButton from '@mui/material/IconButton';
+import PhotoLibraryOutlinedIcon from '@mui/icons-material/PhotoLibraryOutlined';
+import { useTheme } from '@mui/material/styles';
 
 const Resumen = ({ userDNI, empresaId }) => {
   const [worker, setWorker] = useState(null);
@@ -28,25 +31,30 @@ const Resumen = ({ userDNI, empresaId }) => {
   const [cargos, setCargos] = useState([]);
   const [sexos, setSexos] = useState([]);
   const [comunas, setComunas] = useState([]);
+  const [previewUrl, setPreviewUrl] = useState('');
+  const theme = useTheme();
+
+
+  const fetchData = async () => {
+    try {
+      const workerResponse = await axios.get(API_BASE_URL+`/trabajadores/showByRut/${userDNI}`);
+      setWorker(workerResponse.data);
+      
+      const liquidationsResponse = await axios.get(`${API_BASE_URL}/documentos/showLiquidaciones/${userDNI}`);
+      setLiquidations(liquidationsResponse.data);
+
+      const contractsResponse =  await axios.get(`${API_BASE_URL}/documentos/showContratos/${userDNI}`);
+      setContracts(contractsResponse.data);
+
+      const othersResponse = await axios.get(`${API_BASE_URL}/documentos/showReglamento/${userDNI}`);
+      setOthers(othersResponse.data);
+    } catch (error) {
+      console.error('Error fetching data', error);
+    }
+  };
+
   
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const workerResponse = await axios.get(API_BASE_URL+`/trabajadores/showByRut/${userDNI}`);
-        setWorker(workerResponse.data);
-
-        const liquidationsResponse = await axios.get(`${API_BASE_URL}/documentos/showLiquidaciones/${userDNI}`);
-        setLiquidations(liquidationsResponse.data);
-
-        const contractsResponse =  await axios.get(`${API_BASE_URL}/documentos/showContratos/${userDNI}`);
-        setContracts(contractsResponse.data);
-
-        const othersResponse = await axios.get(`${API_BASE_URL}/documentos/showReglamento/${userDNI}`);
-        setOthers(othersResponse.data);
-      } catch (error) {
-        console.error('Error fetching data', error);
-      }
-    };
     const fetchEmpresas = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/empresas`);
@@ -101,6 +109,7 @@ const Resumen = ({ userDNI, empresaId }) => {
 
   }, [userDNI, empresaId]);
 
+
   if (!worker) {
     return <div>Loading...</div>;
   }
@@ -126,6 +135,9 @@ const Resumen = ({ userDNI, empresaId }) => {
               .map(d => (
                 <div key={d.id}>
                   <Grid container spacing={2} alignItems="center">
+                    <Grid item xs={12} sm={12}>
+                      <img src={d.foto} alt="Selected Image Preview" style={{ width: '100%', maxWidth: 300, marginTop: theme.spacing(1) }} />
+                    </Grid>
                     <Grid item xs={12} sm={6}>
                     <TextField
                         variant="outlined"
@@ -341,21 +353,6 @@ const Resumen = ({ userDNI, empresaId }) => {
                           </MenuItem>
                         ))}
                       </TextField>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        variant="outlined"
-                        InputProps={{
-                          readOnly: true,
-                        }}
-                        fullWidth
-                        type="file"
-                        id="foto"
-                        label="foto"
-                        name="foto"
-                        value={d.foto}
-                        onChange={handleChange}
-                      />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField

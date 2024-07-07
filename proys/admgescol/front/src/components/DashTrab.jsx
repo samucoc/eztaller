@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/DashTrab.css'; // Si tienes estilos adicionales para DashTrab
 
-const DashTrab = ({ onOptionChange }) => {
+const DashTrab = ({ userDNI, onOptionChange }) => {
   return (
     <div className="menu-container d-flex justify-content-center align-items-center">
       <div className="row w-100">
@@ -22,7 +22,7 @@ const DashTrab = ({ onOptionChange }) => {
           </a>
         </div>
         <div className="col-12 col-sm-6 col-md-4 d-flex justify-content-center">
-          <a onClick={() => onOptionChange('ListadoContratos')} className="btn btn-link text-center">
+          <a onClick={() => onOptionChange('ListadoDocumentos')} className="btn btn-link text-center">
             <div className="icon-text">
               <img src="images_gescol/fin_comp/pagos.png" className="img-fluid mb-2" alt="Liquidaciones"/>
               <span>Liquidaciones</span>
