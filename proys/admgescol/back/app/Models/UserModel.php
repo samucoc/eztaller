@@ -25,6 +25,12 @@ class UserModel extends Model
         'userPasswordRecoveryTokenExpirationDatetime'
     ];
 
+    public function insertUser($data)
+    {
+        $this->insert($data);
+        return $this->getInsertID();
+    }
+    
     // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';

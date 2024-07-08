@@ -259,6 +259,11 @@ const Trabajadores = ({empresaId}) => {
   filteredTrabajadores = selectedEmpresa
   ? filteredTrabajadores.filter(trabajador => trabajador.empresa_id === selectedEmpresa)
   : filteredTrabajadores;
+  
+  const getEmpresaRazonSocial = (empresa_id) => {
+    const empresa = empresas.find((e) => e.id === empresa_id);
+    return empresa ? empresa.RazonSocial : "Desconocida";
+  };
 
   return (
     <div className="container Trabajadores">
@@ -337,6 +342,7 @@ const Trabajadores = ({empresaId}) => {
                 <TableHead>
                   <TableRow>
                     <TableCell>ID</TableCell>
+                    <TableCell>Empresa</TableCell>
                     <TableCell>Rut</TableCell>
                     <TableCell>Nombre Completo</TableCell>
                     <TableCell>Email</TableCell>
@@ -346,10 +352,12 @@ const Trabajadores = ({empresaId}) => {
                 </TableHead>
                 <TableBody>
                   {filteredTrabajadores
+                    .filter(trabajador => trabajador.estado_id === "1") // Filtra los trabajadores por estado_id = 1
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((trabajador) => (
                     <TableRow key={trabajador.id}>
                       <TableCell>{trabajador.id}</TableCell>
+                      <TableCell>{getEmpresaRazonSocial(trabajador.empresa_id)}</TableCell>
                       <TableCell>{trabajador.rut}-{trabajador.dv}</TableCell>
                       <TableCell>{trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_materno}</TableCell>
                       <TableCell>{trabajador.email}</TableCell>

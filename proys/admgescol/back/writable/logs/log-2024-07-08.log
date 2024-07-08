@@ -1,0 +1,48 @@
+CRITICAL - 2024-07-08 16:51:19 --> Attempt to read property "empresa_id" on array
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 161.
+ 1 APPPATH\Controllers\Api\V1\TrabajadorController.php(161): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "empresa_id" on array', 'APPPATH\\Controllers\\Api\\V1\\TrabajadorController.php', 161)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->bulkUpload()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-08 16:52:48 --> Attempt to read property "empresa_id" on array
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 162.
+ 1 APPPATH\Controllers\Api\V1\TrabajadorController.php(162): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "empresa_id" on array', 'APPPATH\\Controllers\\Api\\V1\\TrabajadorController.php', 162)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->bulkUpload()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-08 16:55:31 --> Call to a member function insert() on null
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 179.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->bulkUpload()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-07-08 16:59:58 --> mysqli_sql_exception: Unknown column 'userPhone' in 'field list' in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(2295): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(329): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(782): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(729): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\app\Models\UserModel.php(30): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\TrabajadorController.php(181): App\Models\UserModel->insertUser(Array)
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->bulkUpload()
+#10 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+#11 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2024-07-08 16:59:58 --> Unknown column 'userPhone' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2295): CodeIgniter\Database\BaseConnection->query('INSERT INTO `users` (`role_id`, `userDNI`, `userFullName`, `userPhone`, `userEmail`, `userPassword`, `created_at`, `updated_at`) VALUES (:role_id:, :userDNI:, :userFullName:, :userPhone:, :userEmail:, :userPassword:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(329): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(782): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(729): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Models\UserModel.php(30): CodeIgniter\Model->insert([...])
+ 6 APPPATH\Controllers\Api\V1\TrabajadorController.php(181): App\Models\UserModel->insertUser([...])
+ 7 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->bulkUpload()
+ 8 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 9 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()

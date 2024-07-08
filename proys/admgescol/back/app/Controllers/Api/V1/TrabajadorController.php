@@ -2,6 +2,8 @@
 
 namespace App\Controllers\Api\V1;
 
+use App\Entities\Trabajador;
+use App\Models\UserModel;
 use CodeIgniter\RESTful\ResourceController;
 use setasign\Fpdi\Fpdi;
 use setasign\Fpdf\Parser\StreamReader;
@@ -155,7 +157,29 @@ class TrabajadorController extends ResourceController
 
         foreach ($input as $index => $trabajador) {
             // Validation for each trabajador entry
-            $this->model->insert($trabajador);
+            var_dump($trabajador);
+            $t = new Trabajador();
+            $t->empresa_id = $trabajador['empresa_id'];
+            $t->rut = $trabajador['rut'];
+            $t->dv = $trabajador['dv'];
+            $t->apellido_paterno = $trabajador['apellido_paterno'];
+            $t->apellido_materno = $trabajador['apellido_materno'];
+            $t->nombres = $trabajador['nombres'];
+            $t->cargo_id = $trabajador['cargo_id'];
+            $t->email = $trabajador['email'];
+            $t->estado_id = $trabajador['estado_id'];
+
+            $u = new UserModel();
+            $userData = [
+                'role_id' => $trabajador['role_id'],
+                'userDNI' => $trabajador['rut'],
+                'userFullName' => $trabajador['userFullName'],
+                'userEmail' => $trabajador['email'],
+                'userPassword' => password_hash($trabajador['userPassword'], PASSWORD_DEFAULT),
+            ];
+            $t->user_id = $u->insertUser($userData);
+
+            $this->model->insert($t);
         }
         if (!empty($errors)) {
             return $this->fail($this->model->errors());
