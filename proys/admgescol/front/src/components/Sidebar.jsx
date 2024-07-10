@@ -112,7 +112,11 @@ const Sidebar = ({ onOptionChange, handleLogout }) => {
                 <h2>{nombre}</h2>
                 <p>{cargo}</p>
               </div>
-              <button onClick={handleLogout} className="logout-button">Cerrar Sesión</button>
+              <a onClick={() => onOptionChange('Resumen')} className="btn btn-outline-light text-center">
+                <div className="icon-text">
+                  <span>Ficha</span>
+                </div>
+              </a>
             </div>
           </div>
         )}

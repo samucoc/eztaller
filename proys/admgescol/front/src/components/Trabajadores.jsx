@@ -211,8 +211,7 @@ const Trabajadores = ({empresaId}) => {
         swal.fire("Correcto", "Carga masiva exitosa.", "success");
         console.log('Carga masiva exitosa');
       } else {
-        swal.fire("Error", "Error durante la carga masiva.", "error");
-
+        swal.fire("Error", "Error durante la carga masiva: " + response.data, "error");
         console.error('Error en la carga masiva:', response.data);
       }
     } catch (error) {
