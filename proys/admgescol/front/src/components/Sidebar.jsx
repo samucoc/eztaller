@@ -47,6 +47,8 @@ const Sidebar = ({ onOptionChange, handleLogout }) => {
     setWorkerMenuOpen(false);
   };
 
+  const defaultPhoto = 'https://www.gravatar.com/avatar/?d=mp';
+  
   return (
     <div className="sidebar" style={{ height: '100% !important' }}>
       <ul>
@@ -107,7 +109,9 @@ const Sidebar = ({ onOptionChange, handleLogout }) => {
         {role === 3 && (
           <div>
             <div className="worker-info">
-              <img src={photoWorker} alt="Foto del Trabajador" className="worker-photo" />
+              <img  src={photoWorker !== "null" ? photoWorker : defaultPhoto} 
+                    alt="Foto del Trabajador" 
+                    className="worker-photo" />
               <div className="worker-details">
                 <h2>{nombre}</h2>
                 <p>{cargo}</p>

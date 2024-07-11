@@ -6,7 +6,6 @@ html, body, #root {
 }
 
 .sidebar {
-    width: 200px;
     height: 100%;
     background-color: #333;
     color: #fff;
@@ -77,3 +76,9 @@ html, body, #root {
   .logout-button:hover {
     background-color: #c9302c;
   }
+
+  .btn-custom {
+    background-color: #f8f9fa !important; /* Fondo claro */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+

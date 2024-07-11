@@ -1,57 +1,69 @@
-import React from 'react';
-import LiquidacionesToPdf from './LiquidacionesToPdf'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import ListadoDocumentos from './ListadoDocumentos'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import ListadoContratos from './ListadoContratos'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import ListadoReglamento from './ListadoReglamento'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import Documentos from './Documentos'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import Trabajadores from './Trabajadores'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import Comunas from './Comunas'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import Cargos from './Cargos'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import Sexo from './Sexo'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import Tipo_Docs from './Tipo_Docs'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import Empresas from './Empresas'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import Resumen from './Resumen'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import Dashboard from './Dashboard'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import DashTrab from './DashTrab'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import Users from './Users'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import Roles from './Roles'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import LiqAnioActual from './LiqAnioActual'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import LiqAnioAnterior from './LiqAnioAnterior'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import SolAntSue from './SolAntSue'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import SolOtros from './SolOtros'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import SolBene from './SolBene'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import SolPer from './SolPer'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import SolAntCuo from './SolAntCuo'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import ComAmon from './ComAmon.jsx'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import ComCumple from './ComCumple'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import ComOtras from './ComOtras'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import DashTrabDocLabRegla from './DashTrabDocLabRegla'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import DashTrabDocLabContr from './DashTrabDocLabContr'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import DashTrabDocLabReglaCarga from './DashTrabDocLabReglaCarga'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import DashTrabDocLabReglaFunGen from './DashTrabDocLabReglaFunGen'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import DashTrabDocLabReglaRIOHS from './DashTrabDocLabReglaRIOHS'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import DashTrabDocLabContrCopia from './DashTrabDocLabContrCopia'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
-import DashTrabDocLabContrFirmar from './DashTrabDocLabContrFirmar'; // Asegúrate de importar correctamente el componente LiquidacionesToPdf
+import React, { useState } from 'react';
+import LiquidacionesToPdf from './LiquidacionesToPdf'; 
+import ListadoDocumentos from './ListadoDocumentos'; 
+import ListadoContratos from './ListadoContratos'; 
+import ListadoReglamento from './ListadoReglamento'; 
+import Documentos from './Documentos'; 
+import Trabajadores from './Trabajadores'; 
+import Comunas from './Comunas'; 
+import Cargos from './Cargos'; 
+import Sexo from './Sexo'; 
+import Tipo_Docs from './Tipo_Docs'; 
+import Empresas from './Empresas'; 
+import Resumen from './Resumen'; 
+import Dashboard from './Dashboard'; 
+import DashTrab from './DashTrab'; 
+import Users from './Users'; 
+import Roles from './Roles'; 
+import LiqAnioActual from './LiqAnioActual'; 
+import LiqAnioAnterior from './LiqAnioAnterior'; 
+import SolAntSue from './SolAntSue'; 
+import SolOtros from './SolOtros'; 
+import SolBene from './SolBene'; 
+import SolPer from './SolPer'; 
+import SolAntCuo from './SolAntCuo'; 
+import ComAmon from './ComAmon'; 
+import ComCumple from './ComCumple'; 
+import ComOtras from './ComOtras'; 
+import DashTrabDocLabRegla from './DashTrabDocLabRegla'; 
+import DashTrabDocLabContr from './DashTrabDocLabContr'; 
+import DashTrabDocLabReglaCarga from './DashTrabDocLabReglaCarga'; 
+import DashTrabDocLabReglaFunGen from './DashTrabDocLabReglaFunGen'; 
+import DashTrabDocLabReglaRIOHS from './DashTrabDocLabReglaRIOHS'; 
+import DashTrabDocLabContrCopia from './DashTrabDocLabContrCopia'; 
+import DashTrabDocLabContrFirmar from './DashTrabDocLabContrFirmar'; 
+import Button from '@mui/material/Button';
 import '../css/Panel.css';
 
-const Panel = ({ currentOption, userDNI, empresaId, setCurrentOption}) => {
+const Panel = ({ currentOption, userDNI, empresaId, setCurrentOption }) => {
+  const [previousOption, setPreviousOption] = useState(null);
+
   const handleOptionChange = (option) => {
+    setPreviousOption(currentOption); // Almacena la opción actual como la anterior
     setCurrentOption(option);
   };
+
+  const handleBack = () => {
+    if (previousOption) {
+      setCurrentOption(previousOption);
+      setPreviousOption(null);
+    }
+  };
+
   const renderContent = () => {
     switch (currentOption) {
       case 'LiquidacionesToPdf':
         return <LiquidacionesToPdf />;
       case 'ListadoDocumentos':
-        return <ListadoDocumentos userDNI={userDNI}  empresaId={empresaId}/>;
+        return <ListadoDocumentos userDNI={userDNI} empresaId={empresaId} />;
       case 'ListadoContratos':
-        return <ListadoContratos userDNI={userDNI}  empresaId={empresaId}/>;
+        return <ListadoContratos userDNI={userDNI} empresaId={empresaId} />;
       case 'ListadoReglamento':
-          return <ListadoReglamento userDNI={userDNI}  empresaId={empresaId}/>;
+        return <ListadoReglamento userDNI={userDNI} empresaId={empresaId} />;
       case 'Documentos':
-        return <Documentos  empresaId={empresaId} />;
+        return <Documentos empresaId={empresaId} />;
       case 'Trabajadores':
-        return <Trabajadores  empresaId={empresaId}/>;
+        return <Trabajadores empresaId={empresaId} />;
       case 'Comunas':
         return <Comunas />;
       case 'Cargos':
@@ -59,52 +71,52 @@ const Panel = ({ currentOption, userDNI, empresaId, setCurrentOption}) => {
       case 'Sexo':
         return <Sexo />;
       case 'Tipo_Docs':
-        return <Tipo_Docs />;         
+        return <Tipo_Docs />;
       case 'Empresas':
-        return <Empresas />;    
+        return <Empresas />;
       case 'Resumen':
-        return <Resumen userDNI={userDNI}  empresaId={empresaId}/>;    
+        return <Resumen userDNI={userDNI} empresaId={empresaId} />;
       case 'Dashboard':
-        return <Dashboard userDNI={userDNI}  empresaId={empresaId}/>;    
-      case 'DashTrab' : 
-        return <DashTrab userDNI={userDNI} onOptionChange={handleOptionChange} />;                      
-      case 'Users' : 
+        return <Dashboard userDNI={userDNI} empresaId={empresaId} />;
+      case 'DashTrab':
+        return <DashTrab userDNI={userDNI} onOptionChange={handleOptionChange} />;
+      case 'Users':
         return <Users />;
-      case 'Roles' : 
+      case 'Roles':
         return <Roles />;
-      case 'LiqAnioActual' : 
+      case 'LiqAnioActual':
         return <LiqAnioActual />;
-      case 'LiqAnioAnterior' : 
+      case 'LiqAnioAnterior':
         return <LiqAnioAnterior />;
-      case 'SolAntSue' : 
+      case 'SolAntSue':
         return <SolAntSue />;
-      case 'SolAntCuo' : 
+      case 'SolAntCuo':
         return <SolAntCuo />;
-        case 'SolPer' : 
+      case 'SolPer':
         return <SolPer />;
-      case 'SolBene' : 
+      case 'SolBene':
         return <SolBene />;
-      case 'SolOtros' : 
+      case 'SolOtros':
         return <SolOtros />;
-      case 'ComAmon' : 
+      case 'ComAmon':
         return <ComAmon />;
-      case 'ComCumple' : 
+      case 'ComCumple':
         return <ComCumple />;
-      case 'ComOtras' : 
+      case 'ComOtras':
         return <ComOtras />;
-      case 'DashTrabDocLabRegla' : 
+      case 'DashTrabDocLabRegla':
         return <DashTrabDocLabRegla />;
-      case 'DashTrabDocLabContr' : 
+      case 'DashTrabDocLabContr':
         return <DashTrabDocLabContr />;
-      case 'DashTrabDocLabReglaCarga' : 
+      case 'DashTrabDocLabReglaCarga':
         return <DashTrabDocLabReglaCarga />;
-      case 'DashTrabDocLabReglaFunGen' : 
+      case 'DashTrabDocLabReglaFunGen':
         return <DashTrabDocLabReglaFunGen />;
-      case 'DashTrabDocLabReglaRIOHS' : 
+      case 'DashTrabDocLabReglaRIOHS':
         return <DashTrabDocLabReglaRIOHS />;
-      case 'DashTrabDocLabContrCopia' : 
+      case 'DashTrabDocLabContrCopia':
         return <DashTrabDocLabContrCopia />;
-      case 'DashTrabDocLabContrFirmar' : 
+      case 'DashTrabDocLabContrFirmar':
         return <DashTrabDocLabContrFirmar />;
       default:
         return <h1>{currentOption}</h1>;
@@ -116,6 +128,6 @@ const Panel = ({ currentOption, userDNI, empresaId, setCurrentOption}) => {
       {renderContent()}
     </div>
   );
-}
+};
 
 export default Panel;
