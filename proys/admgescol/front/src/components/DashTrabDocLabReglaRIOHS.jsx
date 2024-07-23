@@ -68,7 +68,7 @@ const DashTrabDocLabReglaCarga = () => {
   return (
     <div>
       <Typography variant="h3" gutterBottom>
-        Carga Horaria
+        RIOHS
       </Typography>
       <TableContainer component={Paper}>
         <Table>

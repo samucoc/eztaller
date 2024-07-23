@@ -156,6 +156,10 @@ $routes->group('Api', function ($routes) {
         $routes->get('documentos/showFunGenByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showFunGenByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('documentos/showRIOHSByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showRIOHSByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('documentos/showContratosByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showContratosByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('documentos/showLiqActByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showLiqActByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('documentos/showLiqAntByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showLiqAntByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
+        
+        
         $routes->post('documentos/upload', 'DocumentoController::uploadDocumento', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->post('documentos/upload-contratos', 'DocumentoController::uploadContratosDocumento', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->post('documentos/upload-varios', 'DocumentoController::uploadVariosDocumento', ['namespace' => 'App\Controllers\Api\V1']);
