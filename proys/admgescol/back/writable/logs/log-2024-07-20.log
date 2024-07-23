@@ -1,0 +1,8 @@
+CRITICAL - 2024-07-20 01:15:03 --> Page number "0" out of available page range (1 - 57)
+in VENDORPATH\setasign\fpdi\src\PdfReader\PdfReader.php on line 128.
+ 1 VENDORPATH\setasign\fpdi\src\FpdiTrait.php(287): setasign\Fpdi\PdfReader\PdfReader->getPage(0)
+ 2 APPPATH\Controllers\Api\V1\DocumentoController.php(461): setasign\Fpdi\Fpdi->importPage(0)
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadContratosDocumento()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()

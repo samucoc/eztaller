@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import LiquidacionesToPdf from './LiquidacionesToPdf'; 
+import ContratosToPdf from './ContratosToPdf'; 
+import DocumentosToPdf from './DocumentosToPdf'; 
 import ListadoDocumentos from './ListadoDocumentos'; 
 import ListadoContratos from './ListadoContratos'; 
 import ListadoReglamento from './ListadoReglamento'; 
@@ -32,6 +34,8 @@ import DashTrabDocLabReglaFunGen from './DashTrabDocLabReglaFunGen';
 import DashTrabDocLabReglaRIOHS from './DashTrabDocLabReglaRIOHS'; 
 import DashTrabDocLabContrCopia from './DashTrabDocLabContrCopia'; 
 import DashTrabDocLabContrFirmar from './DashTrabDocLabContrFirmar'; 
+import ListDocs from './ListDocs'; 
+
 import Button from '@mui/material/Button';
 import '../css/Panel.css';
 
@@ -54,6 +58,10 @@ const Panel = ({ currentOption, userDNI, empresaId, setCurrentOption }) => {
     switch (currentOption) {
       case 'LiquidacionesToPdf':
         return <LiquidacionesToPdf />;
+      case 'ContratosToPdf':
+        return <ContratosToPdf />;
+      case 'DocumentosToPdf':
+        return <DocumentosToPdf />;
       case 'ListadoDocumentos':
         return <ListadoDocumentos userDNI={userDNI} empresaId={empresaId} />;
       case 'ListadoContratos':
@@ -118,6 +126,8 @@ const Panel = ({ currentOption, userDNI, empresaId, setCurrentOption }) => {
         return <DashTrabDocLabContrCopia />;
       case 'DashTrabDocLabContrFirmar':
         return <DashTrabDocLabContrFirmar />;
+      case 'ListDocs':
+        return <ListDocs />;
       default:
         return <h1>{currentOption}</h1>;
     }

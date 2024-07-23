@@ -4,7 +4,9 @@ namespace App\Controllers\Api\V1;
 
 use App\Entities\Trabajador;
 use App\Models\UserModel;
+use App\Models\TrabajadorModel;
 use CodeIgniter\RESTful\ResourceController;
+
 use setasign\Fpdi\Fpdi;
 use setasign\Fpdf\Parser\StreamReader;
 use setasign\Fpdi\PdfReader;
@@ -155,39 +157,62 @@ class TrabajadorController extends ResourceController
             return $this->fail($this->model->errors());
         }
 
+        $trabajadorModel = new TrabajadorModel();
+        $userModel = new UserModel();
+        $errors = [];
+    
         foreach ($input as $index => $trabajador) {
-            // Validation for each trabajador entry
-            var_dump($trabajador);
-            $t = new Trabajador();
-            $t->empresa_id = $trabajador['empresa_id'];
-            $t->rut = $trabajador['rut'];
-            $t->dv = $trabajador['dv'];
-            $t->apellido_paterno = $trabajador['apellido_paterno'];
-            $t->apellido_materno = $trabajador['apellido_materno'];
-            $t->nombres = $trabajador['nombres'];
-            $t->cargo_id = $trabajador['cargo_id'];
-            $t->email = $trabajador['email'];
-            $t->estado_id = $trabajador['estado_id'];
+            // Verificar si el trabajador ya existe
+            $existingTrabajador = $trabajadorModel->where('empresa_id', $trabajador['empresa_id'])
+                                                 ->where('rut', $trabajador['rut'])
+                                                 ->first();
+    
+            // Verificar si el usuario ya existe
+            $existingUser = $userModel->where('userEmail', $trabajador['email'])
+                                      ->first();
+    
+            if ($existingTrabajador) {
+                $errors[] = "El trabajador con RUT {$trabajador['rut']} ya existe en la empresa {$trabajador['empresa_id']}.";
+            } elseif ($existingUser) {
+                $errors[] = "El usuario con email {$trabajador['email']} ya existe.";
+            } else {
+                // Crear nuevo Trabajador
+                $t = new Trabajador();
+                $t->empresa_id = $trabajador['empresa_id'];
+                $t->rut = $trabajador['rut'];
+                $t->dv = $trabajador['dv'];
+                $t->apellido_paterno = $trabajador['apellido_paterno'];
+                $t->apellido_materno = $trabajador['apellido_materno'];
+                $t->nombres = $trabajador['nombres'];
+                $t->cargo_id = $trabajador['cargo_id'];
+                $t->email = $trabajador['email'];
+                $t->estado_id = $trabajador['estado_id'];
 
-            $u = new UserModel();
-            $userData = [
-                'role_id' => $trabajador['role_id'],
-                'userDNI' => $trabajador['rut'],
-                'userFullName' => $trabajador['userFullName'],
-                'userEmail' => $trabajador['email'],
-                'userPassword' => password_hash($trabajador['userPassword'], PASSWORD_DEFAULT),
-            ];
-            $t->user_id = $u->insertUser($userData);
+                // Crear nuevo Usuario
+                $userData = [
+                    'role_id' => $trabajador['role_id'],
+                    'userDNI' => $trabajador['rut'],
+                    'userFullName' => $trabajador['userFullName'],
+                    'userEmail' => $trabajador['email'],
+                    'userPassword' => password_hash($trabajador['userPassword'], PASSWORD_DEFAULT),
+                ];
 
-            $this->model->insert($t);
+                $userId = $userModel->insert($userData);
+
+                if ($userId) {
+                    $t->user_id = $userId;
+                    $trabajadorModel->insert($t);
+                } else {
+                    $errors[] = "Error al crear el usuario para el trabajador con RUT {$trabajador['rut']}.";
+                }
+            }
         }
         if (!empty($errors)) {
-            return $this->fail($this->model->errors());
-
-        } 
+            return $this->fail($errors);
+        }
+    
         return $this->respondCreated($input, RESOURCE_CREATED);
     }
-
     /**
      * Add or update a model resource, from "posted" properties
      *

@@ -1,0 +1,31 @@
+CRITICAL - 2024-07-19 03:57:25 --> FPDF error: The document is closed
+in VENDORPATH\setasign\fpdf\fpdf.php on line 267.
+ 1 VENDORPATH\setasign\fpdf\fpdf.php(291): FPDF->Error('The document is closed')
+ 2 VENDORPATH\setasign\fpdi\src\FpdfTplTrait.php(335): FPDF->AddPage('ROOTPATH\\public', 'ROOTPATH\\public', 0)
+ 3 APPPATH\Controllers\Api\V1\DocumentoController.php(459): setasign\Fpdi\FpdfTpl->AddPage()
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadContratosDocumento()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-19 17:58:06 --> Page number "0" out of available page range (1 - 57)
+in VENDORPATH\setasign\fpdi\src\PdfReader\PdfReader.php on line 128.
+ 1 VENDORPATH\setasign\fpdi\src\FpdiTrait.php(287): setasign\Fpdi\PdfReader\PdfReader->getPage(0)
+ 2 APPPATH\Controllers\Api\V1\DocumentoController.php(456): setasign\Fpdi\Fpdi->importPage(0)
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadContratosDocumento()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-19 22:37:39 --> sort(): Argument #1 ($array) must be of type array, int given
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 442.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(442): sort(20)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadContratosDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-19 23:45:01 --> sort(): Argument #1 ($array) must be of type array, int given
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 442.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(442): sort(20)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadContratosDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()

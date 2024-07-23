@@ -3,6 +3,7 @@
 namespace App\Controllers\Api\V1;
 
 use App\Models\TrabajadorModel;
+use App\Models\Tipo_DocModel;
 use CodeIgniter\RESTful\ResourceController;
 use setasign\Fpdi\Fpdi;
 use setasign\Fpdf\Parser\StreamReader;
@@ -112,7 +113,67 @@ class DocumentoController extends ResourceController
         return $this->respond($data);
     }
 
+    public function showCargaByUserByEmp($rut, $empresa)
+    {
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '7' and trabajador = ? and empresa_id = ?";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$rut, $empresa])->getResult();
+        // Verificar si se encontraron resultados
+        // if (empty($data)) {
+        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
+        // }
+        // Responder con los datos encontrados
+        return $this->respond($data);
+    }
 
+    public function showFunGenByUserByEmp($rut, $empresa)
+    {
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '6' and trabajador = ? and empresa_id = ?";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$rut, $empresa])->getResult();
+        // Verificar si se encontraron resultados
+        // if (empty($data)) {
+        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
+        // }
+        // Responder con los datos encontrados
+        return $this->respond($data);
+    }
+
+    public function showRIOHSByUserByEmp($rut, $empresa)
+    {
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '5' and trabajador = ? and empresa_id = ?";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$rut, $empresa])->getResult();
+        // Verificar si se encontraron resultados
+        // if (empty($data)) {
+        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
+        // }
+        // Responder con los datos encontrados
+        return $this->respond($data);
+    }
+
+    public function showContratosByUserByEmp($rut, $empresa)
+    {
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '2' and trabajador = ? and empresa_id = ?";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$rut, $empresa])->getResult();
+        // Verificar si se encontraron resultados
+        // if (empty($data)) {
+        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
+        // }
+        // Responder con los datos encontrados
+        return $this->respond($data);
+    }
+
+    
 
     /**
      * Return a new resource object, with default properties
@@ -272,6 +333,218 @@ class DocumentoController extends ResourceController
         }
     }
 
+    public function uploadVariosDocumento()
+    {
+         // Obtiene el archivo subido
+         $file = $this->request->getFile('file');
+
+         // Verifica que se haya cargado un archivo válido
+         if (!$file->isValid() || $file->hasMoved()) {
+             throw new \Exception('Error: Archivo no válido.');
+         }
+ 
+         // Obtiene los datos del formulario
+         $month = $this->request->getPost('month');
+         $year = $this->request->getPost('year');
+         $tipo_doc = $this->request->getPost('tipo_doc_id');
+         $empresa_id = $this->request->getPost('empresa_id');
+ 
+         // Valida los campos del formulario
+         if (empty($month) || empty($year) || empty($empresa_id)) {
+             throw new \Exception('Error: Por favor, complete todos los campos.');
+         }
+ 
+         // Mueve el archivo a una carpeta temporal
+         $tempFolder = WRITEPATH . 'temp\\';
+         $tempFileName = 'uploaded_file_' . time() . '.pdf';
+         if (!$file->move($tempFolder, $tempFileName)) {
+             throw new \Exception('Error: No se pudo mover el archivo a la carpeta temporal.');
+         }
+     
+         $pdfFilePath = $tempFolder.$tempFileName;
+ 
+ 
+         $trabsModel  = new TrabajadorModel();
+         $trabs = $trabsModel->findAll();
+
+         $tp = new Tipo_DocModel();
+         $tp_u = $tp->find($tipo_doc)->nombre;
+
+         foreach($trabs as $t){
+             // Número que deseas buscar
+             $numberToFind = $t->rut;
+             try {
+                 $pageNumber = $this->findTextInPDF($pdfFilePath, $numberToFind);
+ 
+                 if ($pageNumber === -1) {
+                    $pageNumber = $this->findTextInPDF($pdfFilePath, str_replace('.','',$numberToFind));
+                    if ($pageNumber !== -1) {
+                         $pdf = new Fpdi();
+ 
+                         // Path to your existing PDF file
+                         $inputPdf = $pdfFilePath;
+                         
+                         // Open existing PDF
+                         $pageCount = $pdf->setSourceFile($inputPdf);
+                         
+                         // Loop through each page and create a new PDF for each page
+                         $pdf->AddPage();
+                         $templateId = $pdf->importPage($pageNumber);
+                         $pdf->useTemplate($templateId);
+                         
+                         // Save the page as a separate PDF
+                         
+                         $outputPdf = 'pdfs/'.$tp_u.'_'.$month.'_' .$year.'_' . $numberToFind . '.pdf';
+                         $pdf->Output($outputPdf, 'F');
+ 
+                         $docu = new \App\Entities\Documento;
+                         $docu->tipo_doc_id  = $tipo_doc;
+                         $docu->empresa_id          = $empresa_id;
+                         $docu->mes          = $month;
+                         $docu->agno         = $year;
+                         $docu->nombre       = $tp_u.'_'.$month.'_' .$year.'_' . $numberToFind;
+                         $docu->trabajador   = $numberToFind;
+                         $docu->ruta         = $outputPdf;
+                         $this->model->insert($docu);
+                     }
+                     else{
+                     }
+                 }
+                 else{
+                     $pdf = new Fpdi();
+ 
+                     // Path to your existing PDF file
+                     $inputPdf = $pdfFilePath;
+                     
+                     // Open existing PDF
+                     $pageCount = $pdf->setSourceFile($inputPdf);
+                     
+                     // Loop through each page and create a new PDF for each page
+                     $pdf->AddPage();
+                     $templateId = $pdf->importPage($pageNumber);
+                     $pdf->useTemplate($templateId);
+                     
+                     // Save the page as a separate PDF
+                     $outputPdf = 'pdfs/'.$tp_u.'_'.$month.'_' .$year.'_' . $numberToFind . '.pdf';
+                     $pdf->Output($outputPdf, 'F');
+ 
+                     $docu = new \App\Entities\Documento;
+                     $docu->tipo_doc_id  = $tipo_doc;
+                     $docu->empresa_id   = $empresa_id;
+                     $docu->mes          = $month;
+                     $docu->agno         = $year;
+                     $docu->nombre       = $tp_u.'_'.$month.'_' .$year.'_' . $numberToFind;
+                     $docu->trabajador   = $numberToFind;
+                     $docu->ruta         = $outputPdf;
+                     $this->model->insert($docu);
+                 }
+ 
+             } catch (Exception $e) {
+                 echo "Error al procesar el PDF: " . $e->getMessage();
+             }
+ 
+         }
+ 
+         return $this->respondCreated([
+             'status' => 'success',
+             'message' => 'Documento cargado exitosamente'
+         ]);
+    }
+
+    public function uploadContratosDocumento()
+    {
+        // Obtiene el archivo subido
+        $file = $this->request->getFile('file');
+
+        // Verifica que se haya cargado un archivo válido
+        if (!$file->isValid() || $file->hasMoved()) {
+            throw new \Exception('Error: Archivo no válido.');
+        }
+
+        // Obtiene los datos del formulario
+        $month = $this->request->getPost('month');
+        $year = $this->request->getPost('year');
+        $empresa_id = $this->request->getPost('empresa_id');
+
+        // Valida los campos del formulario
+        if (empty($month) || empty($year) || empty($empresa_id)) {
+            throw new \Exception('Error: Por favor, complete todos los campos.');
+        }
+
+        // Mueve el archivo a una carpeta temporal
+        $tempFolder = WRITEPATH . 'temp\\';
+        $tempFileName = 'uploaded_file_' . time() . '.pdf';
+        if (!$file->move($tempFolder, $tempFileName)) {
+            throw new \Exception('Error: No se pudo mover el archivo a la carpeta temporal.');
+        }
+
+        $pdfFilePath = $tempFolder . $tempFileName;
+
+        $trabsModel = new TrabajadorModel();
+        $trabs = $trabsModel->findAll();
+        $pageNumbers = [];
+
+        // Encuentra las páginas donde están los RUTs
+        foreach ($trabs as $t) {
+            $numberToFind = $t->rut;
+            try {
+                $pageNumber = $this->findTextInPDF($pdfFilePath, $numberToFind);
+                if ($pageNumber !== -1) {
+                    if (!isset($pageNumbers[$numberToFind])) {
+                        $pageNumbers[$numberToFind] = [];
+                    }
+                    $pageNumbers[$numberToFind][] = $pageNumber;
+                }
+    
+            } catch (Exception $e) {
+                echo "Error al procesar el PDF: " . $e->getMessage();
+            }
+        }
+
+        // Ordena las páginas por número de página
+        foreach ($pageNumbers as $rut => $pages) {
+            sort($pages);
+        }
+        $keys = array_keys($pageNumbers);
+        $totalTrabs = count($keys);
+
+        for ($i = 0; $i < $totalTrabs; $i++) {
+            $pdf = new Fpdi();
+            $inputPdf = $pdfFilePath;
+            $pageCount = $pdf->setSourceFile($inputPdf);
+
+            $currentRut = $keys[$i];
+            $pages = $pageNumbers[$currentRut];
+    
+            // Combine all consecutive pages for the same RUT
+            foreach ($pages as $page) {
+                $templateId = $pdf->importPage($page);
+                $pdf->AddPage();
+                $pdf->useTemplate($templateId);
+            }
+
+            // Save the page range as a separate PDF
+            $outputPdf = 'pdfs/Contrato_' . $month . '_' . $year . '_' . $currentRut . '.pdf';
+            $pdf->Output($outputPdf, 'F');
+
+            $docu = new \App\Entities\Documento;
+            $docu->tipo_doc_id = 2;
+            $docu->empresa_id = $empresa_id;
+            $docu->mes = $month;
+            $docu->agno = $year;
+            $docu->nombre = 'Contrato_' . $month . '_' . $year . '_' . $currentRut;
+            $docu->trabajador = $currentRut;
+            $docu->ruta = $outputPdf;
+            $this->model->insert($docu);
+        }
+
+        return $this->respondCreated([
+            'status' => 'success',
+            'message' => 'Documento cargado exitosamente'
+        ]);
+    }
+
+
     public function uploadDocumento()
     {
     
@@ -312,7 +585,7 @@ class DocumentoController extends ResourceController
                 $pageNumber = $this->findTextInPDF($pdfFilePath, $numberToFind);
 
                 if ($pageNumber === -1) {
-                    $pageNumber = $this->findTextInPDF($pdfFilePath, $this->formatRut($numberToFind));
+                    $pageNumber = $this->findTextInPDF($pdfFilePath, str_replace('.','',$numberToFind));
                     if ($pageNumber !== -1) {
                         $pdf = new Fpdi();
 
@@ -379,11 +652,6 @@ class DocumentoController extends ResourceController
 
         }
 
-        
-
-
-        // $this->model->insert($data); // Guardar datos en la base de datos
-
         return $this->respondCreated([
             'status' => 'success',
             'message' => 'Documento cargado exitosamente'
@@ -397,33 +665,26 @@ class DocumentoController extends ResourceController
           die("Error: Unable to open PDF file.");
         }
       
-        // Initialize variables
-        $text = '';
-        $pageNumber = 0;
-        $found = false;
-        $foundPage = -1;
-        $currentObject = null;
-      
         // Read and Parse PDF
         $parser = new Parser();
         $pdf = $parser->parseFile($pdfFilePath);
 
-        // Extract Text
-        $text = $pdf->getText();
-
         // Perform String Search
         $found = false;
         $foundPage = -1;
-        $pageNumber = 1;
-        foreach ($pdf->getPages() as $page) {
-            if (strpos($page->getText(), $searchText) !== false) {
+        $pageNumber = 0;
+        $searchTextFormatted = $this->formatRut($searchText);
+
+        foreach ($pdf->getPages() as $pageNumber => $page) {
+            $pageText = $page->getText();
+            $pageNumber++;
+            if (strpos($pageText, $searchText) !== false || strpos($pageText, $searchTextFormatted) !== false) {
                 $found = true;
                 $foundPage = $pageNumber;
                 break;
             }
-            $pageNumber++;
+
         }
-      
         // Return the page number or -1 if not found
         return $found ? $foundPage : -1;
       }

@@ -57,10 +57,25 @@ const Sidebar = ({ onOptionChange, handleLogout }) => {
             <li onClick={toggleAdminGescolMenu}>
             Administración GESCOL
               <ul>
-                <li onClick={() => onOptionChange('LiquidacionesToPdf')}>
-                  Obtener Liquidaciones de Archivo PDF
+                <li onClick={() => onOptionChange('DocumentosToPdf')}>
+                  Guardar Documentos PDF 
                 </li>
               </ul>
+              <ul>
+                <li onClick={() => onOptionChange('LiquidacionesToPdf')}>
+                  Guardar Liquidaciones PDF
+                </li>
+              </ul>
+              <ul>
+                <li onClick={() => onOptionChange('ListDocs')}>
+                  Listado de Documentos
+                </li>
+              </ul>
+              {/* <ul>
+                <li onClick={() => onOptionChange('ContratosToPdf')}>
+                  Obtener Contratos de Archivo PDF
+                </li>
+              </ul> */}
           </li>
           <li onClick={toggleAdminGescolMenu}>
             Mantenedores GESCOL

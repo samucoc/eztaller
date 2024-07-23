@@ -16,7 +16,7 @@ const Tipo_Docs = () => {
   useEffect(() => {
     const fetchTipo_Docs = async () => {
       try {
-        const response = await axios.get(API_BASE_URL+'/tipo_doc'); // Replace with your API endpoint
+        const response = await axios.get(`${API_BASE_URL}/tipo_doc`);
         setTipo_Docs(response.data);
       } catch (error) {
         console.error('Error fetching Tipo_Docs:', error);

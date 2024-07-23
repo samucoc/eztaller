@@ -1,21 +1,142 @@
 import React, { useState, useEffect } from 'react';
-import '../css/DashTrab.css'; // Si tienes estilos adicionales para DashTrab
+import axios from 'axios';
+import API_BASE_URL from './apiConstants'; // Asegúrate de importar la URL base de tu API
+import API_DOWNLOAD_URL from './apiConstants1'; // Asegúrate de importar la URL de descarga de tu API
+import { useSelector } from 'react-redux'; // Importar useSelector
+import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Dialog, DialogTitle, DialogContent, Paper, Typography, Box } from '@mui/material';
+import { Visibility } from '@mui/icons-material';
 
-const DashTrabDocLabContrCopia = ({ userDNI, onOptionChange }) => {
-  const [showDashTrabRegla, setshowDashTrabRegla] = useState(true);
-  const [showDashTrabContr, setshowDashTrabContr] = useState(true);
+const DashTrabDocLabContrCopia = () => {
+  const userDNI = useSelector((state) => state.userDNI); // Obtener userDNI de Redux
+  const empresaId = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
 
-  const currentYear = new Date().getFullYear();
-  const previousYear = currentYear - 1;
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [previewPdf, setPreviewPdf] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  const contractsPerPage = 10;
+  const indexOfLastContract = currentPage * contractsPerPage;
+  const indexOfFirstContract = indexOfLastContract - contractsPerPage;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const response = await axios.get(`${API_BASE_URL}/documentos/showContratosByUserByEmp/${userDNI}/${empresaId}`); // Replace with your API endpoint
+        setData(response.data);
+      } catch (error) {
+        const errorMessage = error.response?.data?.message || 'An error occurred while fetching data';
+        setError(errorMessage);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [userDNI]);
+
+  if (isLoading) {
+    return <p>Loading data...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  if (!data.length) {
+    return <p>No documents found for RUT {userDNI}.</p>;
+  }
+
+  const currentContracts = data.slice(indexOfFirstContract, indexOfLastContract);
+  const paginateForward = () => setCurrentPage(currentPage + 1);
+  const paginateBackward = () => setCurrentPage(currentPage - 1);
+
+  const handleClickOpen = (pdfUrl) => {
+    setPreviewPdf(pdfUrl);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setPreviewPdf(null);
+    setOpen(false);
+  };
 
   return (
-    <div className="menu-container d-flex justify-content-center align-items-center">
-      <div className="row w-100">
-      DashTrabDocLabContrCopia
-        {/* Añadir los otros enlaces si es necesario */}
-      </div>
+    <div>
+      <Typography variant="h3" gutterBottom>
+        Contratos y anexos
+      </Typography>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Mes</TableCell>
+              <TableCell>Año</TableCell>
+              <TableCell>Nombre</TableCell>
+              <TableCell>Acciones</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {currentContracts
+              .map((d) => (
+                <TableRow key={d.ruta}>
+                  <TableCell>{d.mes}</TableCell>
+                  <TableCell>{d.agno}</TableCell>
+                  <TableCell>{d.nombre}</TableCell>
+                  <TableCell>
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${d.ruta}`)}
+                    >
+                      <Visibility />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth>
+        <DialogTitle>Vista previa</DialogTitle>
+        <DialogContent>
+          {previewPdf && (
+            <iframe
+              src={previewPdf}
+              width="100%"
+              height="500px"
+              title="PDF Viewer"
+              style={{ border: 'none' }}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+
+      <Box mt={2}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={paginateBackward}
+          disabled={currentPage === 1}
+          style={{ marginRight: '10px' }}
+        >
+          Anterior
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={paginateForward}
+          disabled={indexOfLastContract >= data.length}
+        >
+          Siguiente
+        </Button>
+      </Box>
     </div>
   );
-}
+};
 
 export default DashTrabDocLabContrCopia;
