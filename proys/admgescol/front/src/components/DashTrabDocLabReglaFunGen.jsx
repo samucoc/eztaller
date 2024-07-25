@@ -9,6 +9,7 @@ import { Visibility } from '@mui/icons-material';
 const DashTrabDocLabReglaCarga = () => {
   const userDNI = useSelector((state) => state.userDNI); // Obtener userDNI de Redux
   const empresaId = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
+  const roleSession = useSelector((state) => state.roleSession); // Obtener empresaId de Redux
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,6 +17,7 @@ const DashTrabDocLabReglaCarga = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [previewPdf, setPreviewPdf] = useState(null);
   const [open, setOpen] = useState(false);
+  const [trabajadores, setTrabajadores] = useState([]);
 
   const contractsPerPage = 10;
   const indexOfLastContract = currentPage * contractsPerPage;
@@ -26,7 +28,7 @@ const DashTrabDocLabReglaCarga = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await axios.get(`${API_BASE_URL}/documentos/showFunGenByUserByEmp/${userDNI}/${empresaId}`); // Replace with your API endpoint
+        const response = roleSession == 2 ? await axios.get(`${API_BASE_URL}/documentos/showFunGenByEmp/${empresaId}`) : await axios.get(`${API_BASE_URL}/documentos/showFunGenByUserByEmp/${userDNI}/${empresaId}`); // Replace with your API endpoint
         setData(response.data);
       } catch (error) {
         const errorMessage = error.response?.data?.message || 'An error occurred while fetching data';
@@ -35,7 +37,16 @@ const DashTrabDocLabReglaCarga = () => {
         setIsLoading(false);
       }
     };
+    const fetchTrabajadores = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+        setTrabajadores(response.data);
+      } catch (error) {
+        console.error('Error fetching trabajadores:', error);
+      }
+    };
 
+    fetchTrabajadores();
     fetchData();
   }, [userDNI]);
 
@@ -65,6 +76,16 @@ const DashTrabDocLabReglaCarga = () => {
     setOpen(false);
   };
 
+  const getTrabajadorNombre = (trab) => {
+    for (let i = 0; i < trabajadores.length; i++) {
+      if (trabajadores[i].rut === trab) {
+        return `${trabajadores[i].nombres} ${trabajadores[i].apellido_paterno} ${trabajadores[i].apellido_materno}`;
+      }
+    }
+    console.warn(`Trabajador con RUT ${trab} no encontrado.`);
+    return 'Desconocido';
+  };
+
   return (
     <div>
       <Typography variant="h3" gutterBottom>
@@ -74,6 +95,7 @@ const DashTrabDocLabReglaCarga = () => {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell>Trabajador</TableCell>
               <TableCell>Mes</TableCell>
               <TableCell>Año</TableCell>
               <TableCell>Nombre</TableCell>
@@ -84,6 +106,7 @@ const DashTrabDocLabReglaCarga = () => {
             {currentContracts
               .map((d) => (
                 <TableRow key={d.ruta}>
+                  <TableCell>{getTrabajadorNombre(d.trabajador)}</TableCell>
                   <TableCell>{d.mes}</TableCell>
                   <TableCell>{d.agno}</TableCell>
                   <TableCell>{d.nombre}</TableCell>

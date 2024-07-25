@@ -140,7 +140,7 @@ const App = () => {
                 <Sidebar onOptionChange={handleOptionChange} handleLogout={handleLogout} />
               </div>
               <div className="col-md-10">
-                {roleSession === '3' && showDashTrab && (
+                {roleSession !== '1' && showDashTrab && (
                   <DashTrab
                     userDNI={userDNI}
                     onOptionChange={handleOptionChange}

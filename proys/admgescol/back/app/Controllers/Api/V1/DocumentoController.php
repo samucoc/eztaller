@@ -206,6 +206,99 @@ class DocumentoController extends ResourceController
 
     
 
+    public function showCargaByEmp($empresa)
+    {
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '7' and empresa_id = ?";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$empresa])->getResult();
+        // Verificar si se encontraron resultados
+        // if (empty($data)) {
+        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
+        // }
+        // Responder con los datos encontrados
+        return $this->respond($data);
+    }
+
+    public function showFunGenByEmp($empresa)
+    {
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '6' and empresa_id = ?";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$empresa])->getResult();
+        // Verificar si se encontraron resultados
+        // if (empty($data)) {
+        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
+        // }
+        // Responder con los datos encontrados
+        return $this->respond($data);
+    }
+
+    public function showRIOHSByEmp($empresa)
+    {
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '5' and empresa_id = ?";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$empresa])->getResult();
+        // Verificar si se encontraron resultados
+        // if (empty($data)) {
+        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
+        // }
+        // Responder con los datos encontrados
+        return $this->respond($data);
+    }
+
+    public function showContratosByEmp($empresa)
+    {
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '2' and empresa_id = ?";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$empresa])->getResult();
+        // Verificar si se encontraron resultados
+        // if (empty($data)) {
+        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
+        // }
+        // Responder con los datos encontrados
+        return $this->respond($data);
+    }
+
+    public function showLiqActByEmp($empresa)
+    {
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '1' and empresa_id = ? and agno = '".date("Y")."'";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$empresa])->getResult();
+        // Verificar si se encontraron resultados
+        // if (empty($data)) {
+        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
+        // }
+        // Responder con los datos encontrados
+        return $this->respond($data);
+    }
+
+    public function showLiqAntByEmp($empresa)
+    {
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $agno_ant = date("Y") -1;
+        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '1' and empresa_id = ? and agno = '".$agno_ant."'";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$empresa])->getResult();
+        // Verificar si se encontraron resultados
+        // if (empty($data)) {
+        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
+        // }
+        // Responder con los datos encontrados
+        return $this->respond($data);
+    }
+
+    
+
     /**
      * Return a new resource object, with default properties
      *

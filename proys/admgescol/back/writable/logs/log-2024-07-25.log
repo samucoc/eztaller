@@ -1,0 +1,12 @@
+CRITICAL - 2024-07-25 02:25:32 --> Too few arguments to function App\Controllers\Api\V1\DocumentoController::showRIOHSByEmp(), 1 passed in C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php on line 934 and exactly 2 expected
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 239.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showRIOHSByEmp('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-25 02:25:38 --> Too few arguments to function App\Controllers\Api\V1\DocumentoController::showRIOHSByEmp(), 1 passed in C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php on line 934 and exactly 2 expected
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 239.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showRIOHSByEmp('1')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()

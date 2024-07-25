@@ -109,17 +109,22 @@ const Sidebar = ({ onOptionChange, handleLogout }) => {
         </>
         )}
         {role === 2 && (
-          <li onClick={toggleAdminMenu}>
-            Administración
-              <ul>
-                <li onClick={() => onOptionChange('Dashboard')}>
-                  Documentos
-                </li>
-                <li onClick={() => onOptionChange('Trabajadores')}>
-                  Trabajadores
-                </li>
-              </ul>
-          </li>
+          <div>
+            <div className="worker-info">
+              <img  src={photoWorker !== "null" ? photoWorker : defaultPhoto} 
+                    alt="Foto del Trabajador" 
+                    className="worker-photo" />
+              <div className="worker-details">
+                <h2>{nombre}</h2>
+                <p>{cargo}</p>
+              </div>
+              <a onClick={() => onOptionChange('Resumen')} className="btn btn-outline-light text-center">
+                <div className="icon-text">
+                  <span>Ficha</span>
+                </div>
+              </a>
+            </div>
+          </div>
         )}
         {role === 3 && (
           <div>

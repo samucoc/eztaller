@@ -152,12 +152,20 @@ $routes->group('Api', function ($routes) {
         $routes->get('documentos/showLiquidaciones/(:segment)', 'DocumentoController::showLiquidaciones/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('documentos/showReglamento/(:segment)', 'DocumentoController::showReglamento/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('documentos/showContratos/(:segment)', 'DocumentoController::showContratos/$1', ['namespace' => 'App\Controllers\Api\V1']);
+ 
         $routes->get('documentos/showCargaByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showCargaByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('documentos/showFunGenByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showFunGenByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('documentos/showRIOHSByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showRIOHSByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('documentos/showContratosByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showContratosByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('documentos/showLiqActByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showLiqActByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('documentos/showLiqAntByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showLiqAntByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
+ 
+        $routes->get('documentos/showCargaByEmp/(:segment)', 'DocumentoController::showCargaByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('documentos/showFunGenByEmp/(:segment)', 'DocumentoController::showFunGenByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('documentos/showRIOHSByEmp/(:segment)', 'DocumentoController::showRIOHSByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('documentos/showContratosByEmp/(:segment)', 'DocumentoController::showContratosByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('documentos/showLiqActByEmp/(:segment)', 'DocumentoController::showLiqActByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('documentos/showLiqAntByEmp/(:segment)', 'DocumentoController::showLiqAntByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
         
         
         $routes->post('documentos/upload', 'DocumentoController::uploadDocumento', ['namespace' => 'App\Controllers\Api\V1']);

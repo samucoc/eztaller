@@ -5,9 +5,11 @@ import DashTrabDocLab from './DashTrabDocLab';
 import DashTrabLiq from './DashTrabLiq';
 import DashTrabSol from './DashTrabSol';
 import DashTrabCom from './DashTrabCom';
+import { useSelector } from 'react-redux'; // Importar useSelector
 
 const DashTrab = ({ userDNI, onOptionChange, currentOption, onHomeClick }) => {
   const [currentSection, setCurrentSection] = useState('menu'); // default section is menu
+  const roleSession = useSelector((state) => state.roleSession); // Obtener empresaId de Redux
 
   const handleOptionChange = (section) => {
     setCurrentSection(section); // Update the current section
@@ -50,6 +52,26 @@ const DashTrab = ({ userDNI, onOptionChange, currentOption, onHomeClick }) => {
                 </div>
               </a>
             </div>
+            { roleSession === '2' && (
+                <>
+                  <div className="col-6 col-sm-6 col-md-6 d-flex justify-content-center">
+                  <a onClick={() => onOptionChange('Trabajadores')} className="btn btn-link text-center">
+                    <div className="icon-text">
+                      <img src="images_gescol/fin_comp/pagos.png" className="img-fluid mb-2" alt="Trabajdores" />
+                      <span>Trabajadores</span>
+                    </div>
+                  </a>
+                  </div>
+                  <div className="col-6 col-sm-6 col-md-6 d-flex justify-content-center">
+                  <a onClick={() => onOptionChange('Dashboard')} className="btn btn-link text-center">
+                    <div className="icon-text">
+                      <img src="images_gescol/fin_comp/pagos.png" className="img-fluid mb-2" alt="Documentos" />
+                      <span>Documentos</span>
+                    </div>
+                  </a>
+                  </div>
+                </>
+            )}
           </>
         )}
 
