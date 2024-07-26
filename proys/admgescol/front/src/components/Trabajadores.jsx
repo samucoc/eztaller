@@ -287,55 +287,53 @@ const Trabajadores = ({empresaId}) => {
         />
       ) : (
         <div>
-            { !empresaId && (
-              <Grid container spacing={3} alignItems="center">
-                <Grid item xs={12} sm={4}>                
-                  <FormControl variant="outlined" fullWidth margin="normal">
-                  <InputLabel id="empresa-select-label">Empresa</InputLabel>
-                  <Select
-                    labelId="empresa-select-label"
-                    id="empresa-select"
-                    value={selectedEmpresa}
-                    onChange={handleEmpresaChange}
-                    label="Empresa"
-                  >
-                    <MenuItem value="">
-                      <em>Elija Empresa</em>
+            <Grid container spacing={3} alignItems="center">
+              <Grid item xs={12} sm={4}>                
+                <FormControl variant="outlined" fullWidth margin="normal">
+                <InputLabel id="empresa-select-label">Empresa</InputLabel>
+                <Select
+                  labelId="empresa-select-label"
+                  id="empresa-select"
+                  value={selectedEmpresa}
+                  onChange={handleEmpresaChange}
+                  label="Empresa"
+                >
+                  <MenuItem value="">
+                    <em>Elija Empresa</em>
+                  </MenuItem>
+                  {empresas.map((empresa) => (
+                    <MenuItem key={empresa.id} value={empresa.id}>
+                      {empresa.RazonSocial}
                     </MenuItem>
-                    {empresas.map((empresa) => (
-                      <MenuItem key={empresa.id} value={empresa.id}>
-                        {empresa.RazonSocial}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={4}>                
-                  <input
-                    accept=".xls,.xlsx"
-                    style={{ display: 'none' }}
-                    id="contained-button-file"
-                    type="file"
-                    onChange={handleFileUpload}
-                  />
-                  <label htmlFor="contained-button-file">
-                    <Button variant="contained" color="primary" component="span">
-                      Subir Archivo Carga Masiva
-                    </Button>
-                  </label>
-                </Grid>
-                <Grid item xs={12} sm={4}>              
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<AddIcon />}
-                    onClick={() => setShowForm(true)}
-                    >
-                    Agregar trabajador
-                    </Button>
-                </Grid>
-              </Grid>    
-            )}
+                  ))}
+                </Select>
+              </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={4}>                
+                <input
+                  accept=".xls,.xlsx"
+                  style={{ display: 'none' }}
+                  id="contained-button-file"
+                  type="file"
+                  onChange={handleFileUpload}
+                />
+                <label htmlFor="contained-button-file">
+                  <Button variant="contained" color="primary" component="span">
+                    Subir Archivo Carga Masiva
+                  </Button>
+                </label>
+              </Grid>
+              <Grid item xs={12} sm={4}>              
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<AddIcon />}
+                  onClick={() => setShowForm(true)}
+                  >
+                  Agregar trabajador
+                  </Button>
+              </Grid>
+            </Grid>    
             <TableContainer component={Paper}>
               <Table>
                 <TableHead>

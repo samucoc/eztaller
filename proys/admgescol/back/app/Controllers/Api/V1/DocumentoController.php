@@ -147,7 +147,7 @@ class DocumentoController extends ResourceController
     {
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
-        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '5' and trabajador = ? and empresa_id = ?";
+        $query = "SELECT * FROM documentos WHERE (tipo_doc_id = '5' and trabajador = ? and empresa_id = ?) or (tipo_doc_id = '5' and trabajador = 0)";
         // Ejecutar la consulta utilizando Query Builder de CodeIgniter
         $data = $db->query($query, [$rut, $empresa])->getResult();
         // Verificar si se encontraron resultados
@@ -487,87 +487,100 @@ class DocumentoController extends ResourceController
      
          $pdfFilePath = $tempFolder.$tempFileName;
  
- 
-         $trabsModel  = new TrabajadorModel();
-         $trabs = $trabsModel->findAll();
+         if ($this->request->getPost('trabajador') === 0 || $this->request->getPost('trabajador') === '' || $this->request->getPost('trabajador') === null) {
 
-         $tp = new Tipo_DocModel();
-         $tp_u = $tp->find($tipo_doc)->nombre;
+            $pdf = new Fpdi();
+            $tp = new Tipo_DocModel();
+            $tp_u = $tp->find($tipo_doc)->nombre;
+    
+            // Path to your existing PDF file
+            $inputPdf = $pdfFilePath;
+            
+            // Open existing PDF
+            $pageCount = $pdf->setSourceFile($inputPdf);
 
-         foreach($trabs as $t){
-             // Número que deseas buscar
-             $numberToFind = $t->rut;
-             try {
-                 $pageNumber = $this->findTextInPDF($pdfFilePath, $numberToFind);
+            // Loop through each page and add it to the new PDF
+            for ($pageNumber = 1; $pageNumber <= $pageCount; $pageNumber++) {
+                $pdf->AddPage();
+                $templateId = $pdf->importPage($pageNumber);
+                $pdf->useTemplate($templateId);
+            }
+            
+            // Save the page as a separate PDF
+            
+            $outputPdf = 'pdfs/'.$tp_u.'_'.$month.'_' .$year.'_all.pdf';
+            $pdf->Output($outputPdf, 'F');
+
+            $docu = new \App\Entities\Documento;
+            $docu->tipo_doc_id  = $tipo_doc;
+            $docu->empresa_id   = $empresa_id;
+            $docu->mes          = $month;
+            $docu->agno         = $year;
+            $docu->nombre       = $tp_u.'_'.$month.'_' .$year;
+            $docu->trabajador   = 0;
+            $docu->ruta         = $outputPdf;
+            $this->model->insert($docu);
+
+        }else{
+            $trabsModel  = new TrabajadorModel();
+            $trabs = $trabsModel->findAll();
+   
+            $tp = new Tipo_DocModel();
+            $tp_u = $tp->find($tipo_doc)->nombre;
+   
+            foreach($trabs as $t){
+                // Número que deseas buscar
+                $numberToFind = $t->rut;
+                try {
+                    $pageNumber = $this->findTextInPDF($pdfFilePath, $numberToFind);
+    
+                    if ($pageNumber === -1) {
+                       $pageNumber = $this->findTextInPDF($pdfFilePath, str_replace('.','',$numberToFind));
+                       if ($pageNumber !== -1) {
+                            $pdf = new Fpdi();
+    
+                            // Path to your existing PDF file
+                            $inputPdf = $pdfFilePath;
+                            
+                            // Open existing PDF
+                            $pageCount = $pdf->setSourceFile($inputPdf);
+                            
+                            // Loop through each page and create a new PDF for each page
+                            $pdf->AddPage();
+                            $templateId = $pdf->importPage($pageNumber);
+                            $pdf->useTemplate($templateId);
+                            
+                            // Save the page as a separate PDF
+                            
+                            $outputPdf = 'pdfs/'.$tp_u.'_'.$month.'_' .$year.'_' . $numberToFind . '.pdf';
+                            $pdf->Output($outputPdf, 'F');
+    
+                            $docu = new \App\Entities\Documento;
+                            $docu->tipo_doc_id  = $tipo_doc;
+                            $docu->empresa_id          = $empresa_id;
+                            $docu->mes          = $month;
+                            $docu->agno         = $year;
+                            $docu->nombre       = $tp_u.'_'.$month.'_' .$year.'_' . $numberToFind;
+                            $docu->trabajador   = $numberToFind;
+                            $docu->ruta         = $outputPdf;
+                            $this->model->insert($docu);
+                        }
+                        else{
+
+                        }
+                    }
+                    else{
+   
+                    }
+    
+                } catch (Exception $e) {
+                    echo "Error al procesar el PDF: " . $e->getMessage();
+                }
+    
+            }
+        }
  
-                 if ($pageNumber === -1) {
-                    $pageNumber = $this->findTextInPDF($pdfFilePath, str_replace('.','',$numberToFind));
-                    if ($pageNumber !== -1) {
-                         $pdf = new Fpdi();
- 
-                         // Path to your existing PDF file
-                         $inputPdf = $pdfFilePath;
-                         
-                         // Open existing PDF
-                         $pageCount = $pdf->setSourceFile($inputPdf);
-                         
-                         // Loop through each page and create a new PDF for each page
-                         $pdf->AddPage();
-                         $templateId = $pdf->importPage($pageNumber);
-                         $pdf->useTemplate($templateId);
-                         
-                         // Save the page as a separate PDF
-                         
-                         $outputPdf = 'pdfs/'.$tp_u.'_'.$month.'_' .$year.'_' . $numberToFind . '.pdf';
-                         $pdf->Output($outputPdf, 'F');
- 
-                         $docu = new \App\Entities\Documento;
-                         $docu->tipo_doc_id  = $tipo_doc;
-                         $docu->empresa_id          = $empresa_id;
-                         $docu->mes          = $month;
-                         $docu->agno         = $year;
-                         $docu->nombre       = $tp_u.'_'.$month.'_' .$year.'_' . $numberToFind;
-                         $docu->trabajador   = $numberToFind;
-                         $docu->ruta         = $outputPdf;
-                         $this->model->insert($docu);
-                     }
-                     else{
-                     }
-                 }
-                 else{
-                     $pdf = new Fpdi();
- 
-                     // Path to your existing PDF file
-                     $inputPdf = $pdfFilePath;
-                     
-                     // Open existing PDF
-                     $pageCount = $pdf->setSourceFile($inputPdf);
-                     
-                     // Loop through each page and create a new PDF for each page
-                     $pdf->AddPage();
-                     $templateId = $pdf->importPage($pageNumber);
-                     $pdf->useTemplate($templateId);
-                     
-                     // Save the page as a separate PDF
-                     $outputPdf = 'pdfs/'.$tp_u.'_'.$month.'_' .$year.'_' . $numberToFind . '.pdf';
-                     $pdf->Output($outputPdf, 'F');
- 
-                     $docu = new \App\Entities\Documento;
-                     $docu->tipo_doc_id  = $tipo_doc;
-                     $docu->empresa_id   = $empresa_id;
-                     $docu->mes          = $month;
-                     $docu->agno         = $year;
-                     $docu->nombre       = $tp_u.'_'.$month.'_' .$year.'_' . $numberToFind;
-                     $docu->trabajador   = $numberToFind;
-                     $docu->ruta         = $outputPdf;
-                     $this->model->insert($docu);
-                 }
- 
-             } catch (Exception $e) {
-                 echo "Error al procesar el PDF: " . $e->getMessage();
-             }
- 
-         }
+         
  
          return $this->respondCreated([
              'status' => 'success',

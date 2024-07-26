@@ -27,6 +27,7 @@ const DocumentosToPdf = () => {
   const [empresas, setEmpresas] = useState([]);
   const [tipoDocumentos, setTipoDocumentos] = useState([]);
   const [tipo_doc_id, settipo_doc_id] = useState('');
+  const [trabajadores, setTrabajador] = useState([]);
 
   const fetchEmpresas = async () => {
     try {
@@ -46,9 +47,19 @@ const DocumentosToPdf = () => {
     }
   };
 
+  const fetchTrabajadores = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+      setTrabajador(response.data);
+    } catch (error) {
+      console.error('Error fetching trabajadores:', error);
+    }
+  };
+
   useEffect(() => {
     fetchEmpresas();
     fetchTipoDocumentos();
+    fetchTrabajadores();
   }, []);
 
   const handleMonthChange = (event) => {
@@ -71,6 +82,11 @@ const DocumentosToPdf = () => {
     settipo_doc_id(event.target.value);
   };
 
+  const handleTrabajadorChange = (event) => {
+    setTrabajador(event.target.value);
+  };
+
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -198,6 +214,30 @@ const DocumentosToPdf = () => {
                 <MenuItem value="2022">2022</MenuItem>
                 <MenuItem value="2023">2023</MenuItem>
                 <MenuItem value="2024">2024</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Box mb={3}>
+            <FormControl fullWidth variant="outlined" margin="normal">
+              <InputLabel id="trabajador-label">Trabajador</InputLabel>
+              <Select
+                labelId="trabajador-label"
+                id="trabajador"
+                value={year}
+                onChange={handleTrabajadorChange}
+                label="Trabajador"
+              >
+                <MenuItem value="0">
+                  <em>Seleccionar trabajador...</em>
+                </MenuItem>
+                {trabajadores.map((trabajador) => (
+                  <MenuItem
+                    key={trabajador.id}
+                    value={trabajador.id}
+                  >
+                    {trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_materno} 
+                  </MenuItem>
+             ))}
               </Select>
             </FormControl>
           </Box>
