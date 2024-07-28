@@ -30,6 +30,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
 import * as XLSX from 'xlsx';
+import { useSelector } from 'react-redux'; // Importar useSelector
 
 const Trabajadores = ({empresaId}) => {
   const [showForm, setShowForm] = useState(false); // State to control form visibility
@@ -44,10 +45,13 @@ const Trabajadores = ({empresaId}) => {
   const [loading, setLoading] = useState(false);
   const [selectedEmpresa, setSelectedEmpresa] = useState('');
   const [empresas, setEmpresas] = useState([]);
+  const roleSession = useSelector((state) => state.roleSession); // Obtener empresaId de Redux
+
+
 
   const fetchTrabajadores = async () => {
     try {
-      const response = empresaId == '' ? await axios.get(API_BASE_URL+'/trabajadores') : await axios.get(API_BASE_URL+'/trabajadores/showByEmpresa/'+empresaId) ; // Replace with your API endpoint
+      const response = roleSession == 1 ? await axios.get(API_BASE_URL+'/trabajadores') : await axios.get(API_BASE_URL+'/trabajadores/showByEmpresa/'+empresaId) ; // Replace with your API endpoint
       setTrabajadores(response.data);
     } catch (error) {
       console.error('Error fetching Trabajadores:', error);
