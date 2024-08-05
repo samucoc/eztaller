@@ -113,9 +113,6 @@ const App = () => {
     }
   }, [loggedIn, userDNI, empresas.length, dispatch, handleSelectChange]);
 
-  console.log(showDashTrab)
-  console.log(roleSession)
-
   return (
     <div>
       {loggedIn ? (

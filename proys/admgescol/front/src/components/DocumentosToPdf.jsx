@@ -27,7 +27,8 @@ const DocumentosToPdf = () => {
   const [empresas, setEmpresas] = useState([]);
   const [tipoDocumentos, setTipoDocumentos] = useState([]);
   const [tipo_doc_id, settipo_doc_id] = useState('');
-  const [trabajadores, setTrabajador] = useState([]);
+  const [trabajadores, setTrabajadores] = useState([]);
+  const [trabajador, setTrabajador] = useState('');
 
   const fetchEmpresas = async () => {
     try {
@@ -50,7 +51,7 @@ const DocumentosToPdf = () => {
   const fetchTrabajadores = async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/trabajadores`);
-      setTrabajador(response.data);
+      setTrabajadores(response.data);
     } catch (error) {
       console.error('Error fetching trabajadores:', error);
     }
@@ -218,28 +219,27 @@ const DocumentosToPdf = () => {
             </FormControl>
           </Box>
           <Box mb={3}>
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel id="trabajador-label">Trabajador</InputLabel>
-              <Select
-                labelId="trabajador-label"
-                id="trabajador"
-                value={year}
-                onChange={handleTrabajadorChange}
-                label="Trabajador"
-              >
-                <MenuItem value="0">
-                  <em>Seleccionar trabajador...</em>
-                </MenuItem>
-                {trabajadores.map((trabajador) => (
-                  <MenuItem
-                    key={trabajador.id}
-                    value={trabajador.id}
-                  >
-                    {trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_materno} 
+          <FormControl fullWidth variant="outlined" margin="normal">
+            <InputLabel id="trabajador-label">Trabajador</InputLabel>
+            <Select
+              labelId="trabajador-label"
+              id="trabajador"
+              value={trabajador}
+              onChange={handleTrabajadorChange}
+              label="Trabajador"
+            >
+              <MenuItem value="0">
+                <em>Seleccionar trabajador...</em>
+              </MenuItem>
+              {trabajadores
+                .filter((trabajador) => trabajador.empresaId === empresa_id)
+                .map((trabajador) => (
+                  <MenuItem key={trabajador.id} value={trabajador.id}>
+                    {trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_materno}
                   </MenuItem>
-             ))}
-              </Select>
-            </FormControl>
+                ))}
+            </Select>
+          </FormControl>
           </Box>
           <Box mb={3}>
             <TextField

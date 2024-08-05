@@ -293,7 +293,7 @@ const Trabajadores = ({empresaId}) => {
         <div>
             <Grid container spacing={3} alignItems="center">
               <Grid item xs={12} sm={4}>                
-                <FormControl variant="outlined" fullWidth margin="normal">
+              <FormControl variant="outlined" fullWidth margin="normal">
                 <InputLabel id="empresa-select-label">Empresa</InputLabel>
                 <Select
                   labelId="empresa-select-label"
@@ -305,11 +305,19 @@ const Trabajadores = ({empresaId}) => {
                   <MenuItem value="">
                     <em>Elija Empresa</em>
                   </MenuItem>
-                  {empresas.map((empresa) => (
-                    <MenuItem key={empresa.id} value={empresa.id}>
-                      {empresa.RazonSocial}
-                    </MenuItem>
-                  ))}
+                  {empresaId
+                    ? empresas
+                        .filter((empresa) => empresa.id === empresaId)
+                        .map((empresa) => (
+                          <MenuItem key={empresa.id} value={empresa.id}>
+                            {empresa.RazonSocial}
+                          </MenuItem>
+                        ))
+                    : empresas.map((empresa) => (
+                        <MenuItem key={empresa.id} value={empresa.id}>
+                          {empresa.RazonSocial}
+                        </MenuItem>
+                      ))}
                 </Select>
               </FormControl>
               </Grid>
@@ -354,6 +362,7 @@ const Trabajadores = ({empresaId}) => {
                 <TableBody>
                   {filteredTrabajadores
                     .filter(trabajador => trabajador.estado_id === "1") // Filtra los trabajadores por estado_id = 1
+                    .filter((trabajador) => trabajador.empresa_id === empresaId)
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((trabajador) => (
                     <TableRow key={trabajador.id}>
