@@ -173,6 +173,12 @@ const Trabajadores = ({ empresaId }) => {
     ? filteredTrabajadores.filter(trabajador => trabajador.empresa_id === selectedEmpresa)
     : filteredTrabajadores;
 
+  if (empresaIdS){
+    filteredTrabajadores = selectedEmpresa
+    ? filteredTrabajadores.filter(trabajador => trabajador.empresa_id === empresaIdS)
+    : filteredTrabajadores ;
+  }
+    
   const getEmpresaRazonSocial = (empresa_id) => {
     const empresa = empresas.find((e) => e.id === empresa_id);
     return empresa ? empresa.RazonSocial : "Desconocida";
@@ -280,7 +286,7 @@ const Trabajadores = ({ empresaId }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-              {!selectedEmpresa
+              {!empresaIdS
                     ? 
                       filteredTrabajadores
                       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -329,7 +335,7 @@ const Trabajadores = ({ empresaId }) => {
                     ))
                     : 
                       filteredTrabajadores
-                      .filter( (trabajador) => trabajador.empresa_id === selectedEmpresa)
+                      .filter( (trabajador) => trabajador.empresa_id === empresaIdS)
                       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       .map((trabajador) => (
                       <TableRow key={trabajador.id}>

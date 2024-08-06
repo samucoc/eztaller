@@ -160,8 +160,17 @@ const DashboardForm = ({ onSubmit, onCancel, initialDoc, empresaId }) => {
             onChange={(e) => setTrabajador(e.target.value)}
           >
             <MenuItem value="">Seleccionar trabajador...</MenuItem>
-            {workers
-              .filter((worker) => worker.empresa_id === empresaId)
+            {empresaId
+              ? 
+                workers
+                  .filter((worker) => worker.empresa_id === empresaId)
+                  .map((worker) => (
+                  <MenuItem key={worker.rut} value={worker.rut}>
+                    {`${worker.rut} - ${worker.nombres} ${worker.apellido_paterno} ${worker.apellido_materno}`}
+                  </MenuItem>
+              ))
+              :
+              workers
               .map((worker) => (
               <MenuItem key={worker.rut} value={worker.rut}>
                 {`${worker.rut} - ${worker.nombres} ${worker.apellido_paterno} ${worker.apellido_materno}`}
