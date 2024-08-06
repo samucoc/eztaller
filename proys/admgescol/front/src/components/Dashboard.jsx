@@ -145,7 +145,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
 
       // Validar que todos los campos requeridos están completos
       const { mes, agno, tipo, trabajador, nombre, file  } = docData;
-      if (!mes || !agno || !tipo || !trabajador || !nombre) {
+      if (!mes || !agno || !tipo || !trabajador || !nombre || !selectedEmpresa) {
         alert('');
         Swal.fire({
             icon: 'error',
@@ -162,7 +162,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
       formData.append('tipo_doc_id', docData.tipo);
       formData.append('trabajador', docData.trabajador);
       formData.append('nombre', docData.nombre);
-      formData.append('empresa_id', empresaId);
+      formData.append('empresa_id', selectedEmpresa);
       formData.append('file', docData.file);
       
       const response = await axios({
