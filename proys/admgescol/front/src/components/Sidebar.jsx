@@ -56,19 +56,19 @@ const Sidebar = ({ onOptionChange, handleLogout }) => {
           <>
             <li onClick={toggleAdminGescolMenu}>
             Administración GESCOL
-              <ul>
+              {/* <ul>
                 <li onClick={() => onOptionChange('DocumentosToPdf')}>
                   Guardar Documentos PDF 
                 </li>
-              </ul>
+              </ul> */}
               <ul>
                 <li onClick={() => onOptionChange('LiquidacionesToPdf')}>
                   Guardar Liquidaciones PDF
                 </li>
               </ul>
               <ul>
-                <li onClick={() => onOptionChange('ListDocs')}>
-                  Listado de Documentos
+                <li onClick={() => onOptionChange('Dashboard')}>
+                  Documentos
                 </li>
               </ul>
               {/* <ul>

@@ -232,7 +232,7 @@ const DocumentosToPdf = () => {
                 <em>Seleccionar trabajador...</em>
               </MenuItem>
               {trabajadores
-                .filter((trabajador) => trabajador.empresaId === empresa_id)
+                .filter((trabajador) => trabajador.empresa_id === empresa_id)
                 .map((trabajador) => (
                   <MenuItem key={trabajador.id} value={trabajador.id}>
                     {trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_materno}

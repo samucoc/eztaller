@@ -15,6 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
+import { useSelector } from 'react-redux'; // Importar useSelector
 
 const Dashboard = ({ userDNI, empresaId }) => {
   const [showForm, setShowForm] = useState(false); // State to control form visibility
@@ -34,6 +35,9 @@ const Dashboard = ({ userDNI, empresaId }) => {
   const [month, setMonth] = useState('');
   const [docType, setDocType] = useState('');
   const [empresas, setEmpresas] = useState([]);
+
+  const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
+
 
   // Fetch documents on component mount
   useEffect( () => {
@@ -275,6 +279,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
           onSubmit={addDocumentPrev}
           initialDoc={selectedDoc}
           onCancel={handleCancel}
+          empresaId={empresaId}
         />
       ) : (
         <>
@@ -290,9 +295,9 @@ const Dashboard = ({ userDNI, empresaId }) => {
               <MenuItem value="">
                 <em>Elija Empresa</em>
               </MenuItem>
-              {empresaId
+              {empresaIdS
                 ? empresas
-                    .filter((empresa) => empresa.id === empresaId)
+                    .filter((empresa) => empresa.id === empresaIdS)
                     .map((empresa) => (
                       <MenuItem key={empresa.id} value={empresa.id}>
                         {empresa.RazonSocial}

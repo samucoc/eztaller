@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextField, Grid } from '@material-ui/core';
+import {Select, MenuItem, Button, TextField, Grid } from '@material-ui/core';
 import axios from 'axios';
 import API_BASE_URL from './apiConstants'; // Assuming API_BASE_URL is defined here
 import API_DOWNLOAD_URL from './apiConstants1'; // Asegúrate de importar la URL de descarga de tu API
 
-const DashboardForm = ({ onSubmit, onCancel, initialDoc }) => {
+const DashboardForm = ({ onSubmit, onCancel, initialDoc, empresaId }) => {
     const [meses, setMeses] = useState([]);
     const [agnios, setAgnios] = useState([]);
     const [tipoDocumentos, setTipoDocumentos] = useState([]);
@@ -87,8 +87,8 @@ const DashboardForm = ({ onSubmit, onCancel, initialDoc }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Grid container spacing={2} alignItems="center">
-      <Grid item xs={12} sm={6}>
-          <TextField
+        <Grid item xs={12} sm={6}>
+          <Select
             variant="outlined"
             
             fullWidth
@@ -99,16 +99,16 @@ const DashboardForm = ({ onSubmit, onCancel, initialDoc }) => {
             value={mes}
             onChange={(e) => setMes(e.target.value)}
           >
-            <option value="">Seleccionar mes...</option>
+            <MenuItem value="">Seleccionar mes...</MenuItem>
             {meses.map((option) => (
-              <option key={option.value} value={option.value}>
+              <MenuItem key={option.value} value={option.value}>
                 {option.label}
-              </option>
+              </MenuItem>
             ))}
-          </TextField>
+          </Select>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField
+          <Select
             variant="outlined"
             
             fullWidth
@@ -119,16 +119,16 @@ const DashboardForm = ({ onSubmit, onCancel, initialDoc }) => {
             value={agno}
             onChange={(e) => setAgnio(e.target.value)}
           >
-            <option value="">Seleccionar año...</option>
+            <MenuItem value="">Seleccionar año...</MenuItem>
             {agnios.map((option) => (
-              <option key={option.value} value={option.value}>
+              <MenuItem key={option.value} value={option.value}>
                 {option.label}
-              </option>
+              </MenuItem>
             ))}
-          </TextField>
+          </Select>
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <Select
             variant="outlined"
             
             fullWidth
@@ -139,16 +139,16 @@ const DashboardForm = ({ onSubmit, onCancel, initialDoc }) => {
             value={tipo}
             onChange={(e) => setTipo(e.target.value)}
           >
-            <option value="">Seleccionar tipo...</option>
+            <MenuItem value="">Seleccionar tipo...</MenuItem>
             {tipoDocumentos.map((tipo) => (
-              <option key={tipo.id} value={tipo.id}>
+              <MenuItem key={tipo.id} value={tipo.id}>
                 {tipo.nombre}
-              </option>
+              </MenuItem>
             ))}
-          </TextField>
+          </Select>
         </Grid>
         <Grid item xs={12}>
-          <TextField
+          <Select
             variant="outlined"
             
             fullWidth
@@ -159,13 +159,15 @@ const DashboardForm = ({ onSubmit, onCancel, initialDoc }) => {
             value={trabajador}
             onChange={(e) => setTrabajador(e.target.value)}
           >
-            <option value="">Seleccionar trabajador...</option>
-            {workers.map((worker) => (
-              <option key={worker.rut} value={worker.rut}>
+            <MenuItem value="">Seleccionar trabajador...</MenuItem>
+            {workers
+              .filter((worker) => worker.empresa_id === empresaId)
+              .map((worker) => (
+              <MenuItem key={worker.rut} value={worker.rut}>
                 {`${worker.rut} - ${worker.nombres} ${worker.apellido_paterno} ${worker.apellido_materno}`}
-              </option>
+              </MenuItem>
             ))}
-          </TextField>
+          </Select>
         </Grid>
         <Grid item xs={12}>
           <TextField
@@ -185,7 +187,6 @@ const DashboardForm = ({ onSubmit, onCancel, initialDoc }) => {
             id="file"
             className="form-control"
             accept=".pdf"
-            value={file}
             onChange={handleFileChange}
           />
         </Grid>
