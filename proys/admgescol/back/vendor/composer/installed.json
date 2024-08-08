@@ -1702,6 +1702,56 @@
             "install-path": "../laminas/laminas-escaper"
         },
         {
+            "name": "mikehaertl/pdfable",
+            "version": "1.0.4",
+            "version_normalized": "1.0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mikehaertl/pdfable.git",
+                "reference": "a2e2e6b09ed58352b731c5a4709d64a8afb5e575"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mikehaertl/pdfable/zipball/a2e2e6b09ed58352b731c5a4709d64a8afb5e575",
+                "reference": "a2e2e6b09ed58352b731c5a4709d64a8afb5e575",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "time": "2017-03-21T12:01:10+00:00",
+            "type": "yii-extension",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "Pdfable.php",
+                    "PdfFile.php",
+                    "WkHtmlToPdf.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Haertl",
+                    "email": "haertl.mike@gmail.com"
+                }
+            ],
+            "description": "PDFable is a Yii extension to create PDFs from web pages with PHPWkHtmlToPdf(included)",
+            "homepage": "https://github.com/mikehaertl/pdfable",
+            "keywords": [
+                "pdf",
+                "yii"
+            ],
+            "support": {
+                "issues": "https://github.com/mikehaertl/pdfable/issues",
+                "source": "https://github.com/mikehaertl/pdfable/tree/master"
+            },
+            "install-path": "../mikehaertl/pdfable"
+        },
+        {
             "name": "mikey179/vfsstream",
             "version": "v1.6.11",
             "version_normalized": "1.6.11.0",

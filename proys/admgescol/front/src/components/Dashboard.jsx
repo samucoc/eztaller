@@ -433,7 +433,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
                       >
                         Ver
                       </Button>
-                      <Button
+                      {/* <Button
                         variant="contained"
                         color="primary"
                         onClick={() => editDocument(doc)}
@@ -441,7 +441,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
                         style={{ marginRight: '0.5rem' }}
                       >
                         Editar
-                      </Button>
+                      </Button> */}
                       <Button
                         variant="contained"
                         color="secondary"

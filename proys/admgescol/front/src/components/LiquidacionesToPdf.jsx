@@ -63,30 +63,66 @@ const LiquidacionesToPdf = () => {
       return;
     }
 
-    const formData = new FormData();
-    formData.append('empresa_id', empresa_id);
-    formData.append('month', month);
-    formData.append('year', year);
-    formData.append('file', file); // Agrega el archivo al FormData
+    setLoading(true);
 
     try {
-      setLoading(true);
-      const response = await axios.post(`${API_BASE_URL}/documentos/upload`, formData, {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('output_type', 'PDF/A-1b');
+      formData.append('rasterize_if_errors_encountered', 'on');
+
+      const config = {
+        method: 'post',
+        url: 'https://api.pdfrest.com/pdfa',
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+          'Api-Key': 'b026d6e6-529b-4f34-9e04-71d4303186d4',
+          'Content-Type': 'multipart/form-data',
+        },
+        data: formData,
+      };
+
+      const pdfRestResponse = await axios(config);
+
+      const convertedPdfUrl = pdfRestResponse.data.outputUrl;
+
+      // Obtener el archivo convertido desde la URL
+      const convertedFileResponse = await axios.get(convertedPdfUrl, {
+        responseType: 'blob',
       });
-      console.log('Respuesta del servidor:', response.data);
-      swal.fire("Correcto", response.message, "success");
 
-      setLoading(false);
+      const convertedFile = new File([convertedFileResponse.data], 'converted.pdf', {
+        type: 'application/pdf',
+      });
+
+      // Preparar el FormData con el archivo convertido
+      const uploadFormData = new FormData();
+      uploadFormData.append('empresa_id', empresa_id);
+      uploadFormData.append('month', month);
+      uploadFormData.append('year', year);
+      uploadFormData.append('file', convertedFile);
+
+      // Enviar el formulario al servidor usando axios
+      try {
+        const response = await axios.post(`${API_BASE_URL}/documentos/upload`, uploadFormData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        console.log('Respuesta del servidor:', response.data);
+        swal.fire('Correcto', response.data.message, 'success');
+      } catch (error) {
+        console.error('Error al enviar los datos:', error);
+        swal.fire('Error', 'Error al enviar los datos.', 'error');
+      } finally {
+        setLoading(false);
+      }
     } catch (error) {
-      console.error('Error al enviar los datos:', error);
-      swal.fire("Error", "Error al enviar los datos.", "error");
-
+      console.error('Error al convertir el archivo a PDF/A:', error);
+      swal.fire('Error', 'Error al convertir el archivo a PDF/A.', 'error');
       setLoading(false);
     }
   };
+  
   return (
       <Container className="liquidaciones-to-pdf" maxWidth="sm">
         <Typography variant="h4" component="h2" gutterBottom>

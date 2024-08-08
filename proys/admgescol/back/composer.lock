@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "754e4a66ad1399d2a0eae1bbd505ce3d",
+    "content-hash": "fa8f1656c1c134947fac52be7f31336d",
     "packages": [
         {
             "name": "fpdf/fpdf",
@@ -187,6 +187,53 @@
                 }
             ],
             "time": "2023-10-10T08:35:13+00:00"
+        },
+        {
+            "name": "mikehaertl/pdfable",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mikehaertl/pdfable.git",
+                "reference": "a2e2e6b09ed58352b731c5a4709d64a8afb5e575"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mikehaertl/pdfable/zipball/a2e2e6b09ed58352b731c5a4709d64a8afb5e575",
+                "reference": "a2e2e6b09ed58352b731c5a4709d64a8afb5e575",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "type": "yii-extension",
+            "autoload": {
+                "classmap": [
+                    "Pdfable.php",
+                    "PdfFile.php",
+                    "WkHtmlToPdf.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Haertl",
+                    "email": "haertl.mike@gmail.com"
+                }
+            ],
+            "description": "PDFable is a Yii extension to create PDFs from web pages with PHPWkHtmlToPdf(included)",
+            "homepage": "https://github.com/mikehaertl/pdfable",
+            "keywords": [
+                "pdf",
+                "yii"
+            ],
+            "support": {
+                "issues": "https://github.com/mikehaertl/pdfable/issues",
+                "source": "https://github.com/mikehaertl/pdfable/tree/master"
+            },
+            "time": "2017-03-21T12:01:10+00:00"
         },
         {
             "name": "mpdf/mpdf",

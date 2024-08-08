@@ -12,6 +12,7 @@
         "fpdf/fpdf": "^1.86",
         "james-heinrich/getid3": "^1.9",
         "laminas/laminas-escaper": "^2.9",
+        "mikehaertl/pdfable": "^1.0",
         "mpdf/mpdf": "^8.2",
         "phpoffice/phpexcel": "^1.8",
         "psr/log": "^1.1",

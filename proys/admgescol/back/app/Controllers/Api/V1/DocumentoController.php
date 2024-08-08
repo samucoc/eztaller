@@ -356,48 +356,48 @@ class DocumentoController extends ResourceController
         }
 
         $pdfFilePath = FCPATH . 'pdfs/' . $tempFileName;
-        $pageNumber = $this->findTextInPDF($pdfFilePath, $trabajador);
+        //$pageNumber = $this->findTextInPDF($pdfFilePath, $trabajador);
 
-        if ($pageNumber === -1) {
-            $pageNumber = $this->findTextInPDF($pdfFilePath, $this->formatRut($trabajador));
-            if ($pageNumber !== -1) {
-                $docu = new \App\Entities\Documento;
-                $docu->tipo_doc_id  = $tipo_doc_id;
-                $docu->mes          = $month;
-                $docu->agno         = $year;
-                $docu->nombre       = $nombre;
-                $docu->trabajador   = $trabajador;
-                $docu->empresa_id   = $empresa_id;
-                $docu->ruta         = 'pdfs/'.$tempFileName;
+        // if ($pageNumber === -1) {
+        //     $pageNumber = $this->findTextInPDF($pdfFilePath, $this->formatRut($trabajador));
+        //     if ($pageNumber !== -1) {
+        //         $docu = new \App\Entities\Documento;
+        //         $docu->tipo_doc_id  = $tipo_doc_id;
+        //         $docu->mes          = $month;
+        //         $docu->agno         = $year;
+        //         $docu->nombre       = $nombre;
+        //         $docu->trabajador   = $trabajador;
+        //         $docu->empresa_id   = $empresa_id;
+        //         $docu->ruta         = 'pdfs/'.$tempFileName;
     
-                if ($this->model->insert($docu)) {
-                    $docu->id = $this->model->insertID();
-                    return $this->respondCreated($docu, RESOURCE_CREATED);
-                } else {
-                    return $this->fail($this->model->errors());
-                }
-            }
-            else{
-                return $this->fail("Búsqueda rut en documento no encontrada");
-            }
-        }
-        else{
-            $docu = new \App\Entities\Documento;
-            $docu->tipo_doc_id  = $tipo_doc_id;
-            $docu->mes          = $month;
-            $docu->agno         = $year;
-            $docu->nombre       = $nombre;
-            $docu->trabajador   = $trabajador;
-            $docu->empresa_id   = $empresa_id;
-            $docu->ruta         = 'pdfs/'.$tempFileName;
+        //         if ($this->model->insert($docu)) {
+        //             $docu->id = $this->model->insertID();
+        //             return $this->respondCreated($docu, RESOURCE_CREATED);
+        //         } else {
+        //             return $this->fail($this->model->errors());
+        //         }
+        //     }
+        //     else{
+        //         return $this->fail("Búsqueda rut en documento no encontrada");
+        //     }
+        // }
+        // else{
+        $docu = new \App\Entities\Documento;
+        $docu->tipo_doc_id  = $tipo_doc_id;
+        $docu->mes          = $month;
+        $docu->agno         = $year;
+        $docu->nombre       = $nombre;
+        $docu->trabajador   = $trabajador;
+        $docu->empresa_id   = $empresa_id;
+        $docu->ruta         = 'pdfs/'.$tempFileName;
 
-            if ($this->model->insert($docu)) {
-                $docu->id = $this->model->insertID();
-                return $this->respondCreated($docu, RESOURCE_CREATED);
-            } else {
-                return $this->fail($this->model->errors());
-            }
+        if ($this->model->insert($docu)) {
+            $docu->id = $this->model->insertID();
+            return $this->respondCreated($docu, RESOURCE_CREATED);
+        } else {
+            return $this->fail($this->model->errors());
         }
+        //}
 
     }
     /**
@@ -680,7 +680,6 @@ class DocumentoController extends ResourceController
             'message' => 'Documento cargado exitosamente'
         ]);
     }
-
 
     public function uploadDocumento()
     {
