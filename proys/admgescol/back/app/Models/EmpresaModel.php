@@ -18,6 +18,7 @@ class EmpresaModel extends Model
         'rut' ,
         'dv' ,
         'RazonSocial' ,
+        'NombreFantasia',
         'direccion' ,
         'comuna_id' ,
         'contactoRRHH' ,

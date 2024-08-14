@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import Panel from './components/Panel';
-import EmpresaList from './components/EmpresaList';
-import Login from './components/Login';
+import Header from './components/config/Header';
+import Sidebar from './components/config/Sidebar';
+import Panel from './components/config/Panel';
+import EmpresaList from './components/config/EmpresaList';
+import Login from './components/config/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import API_BASE_URL from './components/apiConstants';
-import DashTrab from './components/DashTrab';
-import Breadcrumbs from './components/Breadcrumbs';
+import API_BASE_URL from './components/config/apiConstants';
+import Breadcrumbs from './components/config/Breadcrumbs';
+
 import {
   setLoggedIn,
   setUserDNI,
@@ -35,15 +35,15 @@ const App = () => {
     showDashTrab,
     username,
     password,
-    loading, // Assuming loading is from Redux state
-    error, // Assuming error is from Redux state
+    loading,
+    error,
   } = useSelector((state) => state);
 
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
-  // Función para manejar el cambio en el tamaño de la pantalla
+
   const handleResize = () => {
-    setIsMobileView(window.innerWidth <= 768); // Establece 768px como el límite para determinar si es móvil
+    setIsMobileView(window.innerWidth <= 768);
   };
 
   const handleOptionChange = (option) => {
@@ -87,12 +87,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    // Agregar event listener para el cambio en el tamaño de la pantalla
     window.addEventListener('resize', handleResize);
-    // Inicializa el estado al cargar la aplicación
     handleResize();
     return () => {
-      // Remueve el event listener al desmontar el componente
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -111,18 +108,17 @@ const App = () => {
           console.error('Error al obtener la lista de empresas:', error);
         });
     }
-  }, [loggedIn, userDNI, empresas.length, dispatch, handleSelectChange]);
+  }, [loggedIn, userDNI, empresas.length, dispatch]);
 
   return (
     <div>
       {loggedIn ? (
-        empresaId || roleSession === '1' ? (
+        empresaId || roleSession === 1 ? (
           <div className="container-fluid">
             <div className="row">
               <div className="col-md-12">
                 <Header onLogout={handleLogout} />
               </div>
-              {/* Botón de menú para dispositivos móviles */}
               {isMobileView && (
                 <button
                   className={`btn d-block d-sm-none ${sidebarVisible ? 'active' : ''}`}
@@ -132,30 +128,19 @@ const App = () => {
                   Menú
                 </button>
               )}
-              {/* Sidebar */}
               <div className={`${isMobileView ? (sidebarVisible ? 'd-block col-12' : 'd-none col-12') : 'col-md-2'} d-sm-block`}>
-                <Sidebar onOptionChange={handleOptionChange} handleLogout={handleLogout} />
+                <Sidebar handleLogout={handleLogout} />
               </div>
               <div className="col-md-10">
-                {roleSession !== '1' && showDashTrab && (
-                  <DashTrab
-                    userDNI={userDNI}
-                    onOptionChange={handleOptionChange}
+                <>
+                  <Breadcrumbs currentOption={currentOption} onHomeClick={handleHomeClick} selectedEmpresa={empresaId} />
+                  <Panel
                     currentOption={currentOption}
-                    onHomeClick={handleHomeClick}
+                    userDNI={userDNI}
+                    empresaId={empresaId}
+                    setCurrentOption={handleOptionChange}
                   />
-                )}
-                {!showDashTrab && (
-                  <>
-                    <Breadcrumbs currentOption={currentOption} onHomeClick={handleHomeClick} />
-                    <Panel
-                      currentOption={currentOption}
-                      userDNI={userDNI}
-                      empresaId={empresaId}
-                      onOptionChange={handleOptionChange}
-                    />
-                  </>
-                )}
+                </>
               </div>
             </div>
           </div>
