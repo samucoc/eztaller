@@ -13,6 +13,19 @@ const Breadcrumbs = () => {
   const dispatch = useDispatch();
   let id;
 
+  const {
+    loggedIn,
+    userDNI,
+    empresaId,
+    empresas,
+    roleSession,
+    showDashTrab,
+    username,
+    password,
+    loading,
+    error,
+  } = useSelector((state) => state);
+
   const breadcrumbMap = {
     '/Empresas': 'Lista de Empresas',
     '/Documentos': 'Documentos',
@@ -36,12 +49,18 @@ const Breadcrumbs = () => {
   const parts = currentPath.split('/'); // Split the path by '/'
   id = parts[parts.length - 1]; // Get the last part which is the ID
 
+  if(id==='Empresas') {
+    id = empresaId;
+  }
+  
   useEffect(() => {
-    if (id) {
+    if (id !== 'Empresas') {
       axios
         .get(`${API_BASE_URL}/empresas/show/${id}`)
         .then((response) => {
           setRazonSocial(response.data.RazonSocial);
+          navigate(`/Empresas/${id}`);
+          dispatch(setEmpresaId(id));
         })
         .catch((error) => {
           console.error('Error fetching razonSocial:', error);

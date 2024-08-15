@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Empresas from '../admin/Empresas';
+import Empresas from '../superadmin/Empresas';
 import Documentos from '../mantenedores/Dashboard';
 import Usuarios from '../mantenedores/Users';
 import Trabajadores from '../mantenedores/Trabajadores';
@@ -12,12 +12,12 @@ import TipoDocs from '../mantenedores/Tipo_Docs';
 import LiquidacionesToPdf from '../mantenedores/LiquidacionesToPdf';
 import DocumentosToPdf from '../mantenedores/DocumentosToPdf';
 import DocumentosGenToPdf from '../mantenedores/DocumentosGenToPdf';
-import ManageEmpresa from '../admin/ManageEmpresa';
+import ManageEmpresa from '../superadmin/ManageEmpresa';
 import Breadcrumbs from '../config/Breadcrumbs'; // Adjust the path as necessary
 import { useDispatch } from 'react-redux';
 import { setCurrentOption } from '../../actions';
 
-const Panel = ({ currentOption }) => {
+const Panel = ({ currentOption, empresaId }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Panel = ({ currentOption }) => {
     <div className="panel">
       <Routes>
         <Route path="/" element={<Navigate replace to={`/${currentOption}`} />} />
-        <Route path="/Empresas" element={<Empresas />} />
+        <Route path="/Empresas" element={<Empresas empresaId={empresaId}/>} />
         <Route path="/Documentos" element={<Documentos />} />
         <Route path="/Usuarios" element={<Usuarios />} />
         <Route path="/Trabajadores" element={<Trabajadores />} />

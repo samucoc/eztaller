@@ -10,6 +10,10 @@ const initialState = {
   showDashTrab: true,
   username: '',
   password: '',
+  userSession: '',
+  photoWorker: '',
+  cargo: '',
+  nombre: '',
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -32,6 +36,14 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, username: action.payload };
     case 'SET_PASSWORD':
       return { ...state, password: action.payload };
+    case 'SET_USER_SESSION':
+      return { ...state, userSession: action.payload };
+    case 'SET_PHOTO_WORKER':
+      return { ...state, photoWorker: action.payload };
+    case 'SET_CARGO':
+      return { ...state, cargo: action.payload };
+    case 'SET_NOMBRE':
+      return { ...state, nombre: action.payload };
     default:
       return state;
   }

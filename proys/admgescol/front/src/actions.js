@@ -45,3 +45,23 @@ export const setLoggedIn = (loggedIn) => ({
     payload: password,
   });
   
+  export const setUserSession = (userSession) => ({
+    type: 'SET_USER_SESSION',
+    payload: userSession,
+  });
+  
+  export const setPhotoWorker = (photoWorker) => ({
+    type: 'SET_PHOTO_WORKER',
+    payload: photoWorker,
+  });
+  
+  export const setCargo = (cargo) => ({
+    type: 'SET_CARGO',
+    payload: cargo,
+  });
+  
+  export const setNombre = (nombre) => ({
+    type: 'SET_NOMBRE',
+    payload: nombre,
+  });
+  

@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 
 const EmpresaList = ({ empresas, empresaId, handleSelectChange }) => {
-  
-
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">

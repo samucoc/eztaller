@@ -21,6 +21,10 @@ import {
   setShowDashTrab,
   setUsername,
   setPassword,
+  setUserSession,
+  setPhotoWorker,
+  setCargo,
+  setNombre,
 } from './actions';
 
 const App = () => {
@@ -38,21 +42,34 @@ const App = () => {
     loading,
     error,
   } = useSelector((state) => state);
+  const { userSession, photoWorker, cargo, nombre } = useSelector((state) => state);
 
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
 
-  const handleResize = () => {
-    setIsMobileView(window.innerWidth <= 768);
-  };
+  useEffect(() => {
+    const handleResize = () => setIsMobileView(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initialize on mount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (loggedIn && userDNI && empresas.length === 0) {
+      axios.get(`${API_BASE_URL}/empresas/trabajadores/${userDNI}`)
+        .then((response) => {
+          dispatch(setEmpresas(response.data));
+          if (response.data.length === 1) {
+            dispatch(setEmpresaId(response.data[0].id));
+          }
+        })
+        .catch((error) => console.error('Error al obtener la lista de empresas:', error));
+    }
+  }, [loggedIn, userDNI, empresas.length, dispatch]);
 
   const handleOptionChange = (option) => {
     dispatch(setCurrentOption(option));
     dispatch(setShowDashTrab(false));
-  };
-
-  const handleHomeClick = () => {
-    dispatch(setShowDashTrab(true));
   };
 
   const handleLogout = () => {
@@ -68,134 +85,76 @@ const App = () => {
         userEmail: username,
         userPassword: password,
       });
-      dispatch(setUserDNI(response.data.userDNI));
+      const { userDNI, role_id, foto, cargo, nombre } = response.data;
+  
+      // Dispatch to Redux store instead of setting in localStorage
+      dispatch(setUserSession(userDNI));
+      dispatch(setRoleSession(role_id));
+      dispatch(setUserDNI(userDNI));
+      dispatch(setPhotoWorker(foto));
+      dispatch(setCargo(cargo));
+      dispatch(setNombre(nombre));
+  
+      // Set logged in state
       dispatch(setLoggedIn(true));
-      dispatch(setRoleSession(response.data.role_id));
-      localStorage.setItem('userSession', response.data.userDNI);
-      localStorage.setItem('roleSession', response.data.role_id);
-      localStorage.setItem('userDNI', response.data.userDNI);
-      localStorage.setItem('photoWorker', response.data.foto);
-      localStorage.setItem('cargo', response.data.cargo);
-      localStorage.setItem('nombre', response.data.nombre);
     } catch (error) {
       console.error('Usuario o contraseña incorrectos');
     }
   };
 
-  const handleSelectChange = (empresaId) => {
-    dispatch(setEmpresaId(empresaId));
-  };
+  if (!loggedIn) {
+    return (
+      <Login
+        username={username}
+        password={password}
+        loading={loading}
+        error={error}
+        setUsername={(value) => dispatch(setUsername(value))}
+        setPassword={(value) => dispatch(setPassword(value))}
+        handleSubmit={handleSubmit}
+      />
+    );
+  }
 
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (loggedIn && localStorage.getItem('userDNI') && empresas.length === 0) {
-      axios
-        .get(`${API_BASE_URL}/empresas/trabajadores/${userDNI}`)
-        .then((response) => {
-          dispatch(setEmpresas(response.data));
-          if (response.data.length === 1) {
-            handleSelectChange(response.data[0].id);
-          }
-        })
-        .catch((error) => {
-          console.error('Error al obtener la lista de empresas:', error);
-        });
-    }
-  }, [loggedIn, userDNI, empresas.length, dispatch]);
-
-  return (
-    <div>
-      {roleSession === "1" ? (
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-md-12">
-              <Header onLogout={handleLogout} />
-            </div>
-            {isMobileView && (
-              <button
-                className={`btn d-block d-sm-none ${sidebarVisible ? 'active' : ''}`}
-                onClick={() => setSidebarVisible(!sidebarVisible)}
-                style={{ backgroundColor: '#333', color: '#fff' }}
-              >
-                Menú
-              </button>
-            )}
-            <div className={`${isMobileView ? (sidebarVisible ? 'd-block col-12' : 'd-none col-12') : 'col-md-2'} d-sm-block`}>
-              <Sidebar handleLogout={handleLogout} />
-            </div>
-            <div className="col-md-10">
-              <>
-                <Breadcrumbs currentOption={currentOption} selectedEmpresa={empresaId} />
-                <Panel
-                  currentOption={currentOption}
-                  userDNI={userDNI}
-                  empresaId={empresaId}
-                  setCurrentOption={handleOptionChange}
-                />
-              </>
-            </div>
+  if (roleSession === "1" || empresaId) {
+    return (
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-12">
+            <Header onLogout={handleLogout} />
+          </div>
+          {isMobileView && (
+            <button
+              className={`btn d-block d-sm-none ${sidebarVisible ? 'active' : ''}`}
+              onClick={() => setSidebarVisible(!sidebarVisible)}
+              style={{ backgroundColor: '#333', color: '#fff' }}
+            >
+              Menú
+            </button>
+          )}
+          <div className={`${isMobileView ? (sidebarVisible ? 'd-block col-12' : 'd-none col-12') : 'col-md-2'} d-sm-block`}>
+            <Sidebar handleLogout={handleLogout} selectedEmpresa={empresaId} />
+          </div>
+          <div className="col-md-10">
+            <Breadcrumbs currentOption={currentOption} selectedEmpresa={empresaId} />
+            <Panel
+              currentOption={currentOption}
+              userDNI={userDNI}
+              empresaId={empresaId}
+              setCurrentOption={handleOptionChange}
+            />
           </div>
         </div>
-        ) : (
-        loggedIn ? (
-          roleSession === "1" || empresaId ? (
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-md-12">
-                  <Header onLogout={handleLogout} />
-                </div>
-                {isMobileView && (
-                  <button
-                    className={`btn d-block d-sm-none ${sidebarVisible ? 'active' : ''}`}
-                    onClick={() => setSidebarVisible(!sidebarVisible)}
-                    style={{ backgroundColor: '#333', color: '#fff' }}
-                  >
-                    Menú
-                  </button>
-                )}
-                <div className={`${isMobileView ? (sidebarVisible ? 'd-block col-12' : 'd-none col-12') : 'col-md-2'} d-sm-block`}>
-                  <Sidebar handleLogout={handleLogout} />
-                </div>
-                <div className="col-md-10">
-                  <>
-                    <Breadcrumbs currentOption={currentOption} selectedEmpresa={empresaId} />
-                    <Panel
-                      currentOption={currentOption}
-                      userDNI={userDNI}
-                      empresaId={empresaId}
-                      setCurrentOption={handleOptionChange}
-                    />
-                  </>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <EmpresaList
-              empresas={empresas}
-              empresaId={empresaId}
-              handleSelectChange={handleSelectChange}
-            />
-          )
-        ) : (
-          <Login
-            username={username}
-            password={password}
-            loading={loading}
-            error={error}
-            setUsername={(value) => dispatch(setUsername(value))}
-            setPassword={(value) => dispatch(setPassword(value))}
-            handleSubmit={handleSubmit}
-          />
-        )
-      ) }
-    </div>
+      </div>
+    );
+  }
+
+  return (
+    <EmpresaList
+      empresas={empresas}
+      empresaId={empresaId}
+      handleSelectChange={(id) => dispatch(setEmpresaId(id))}
+    />
   );
 };
 
