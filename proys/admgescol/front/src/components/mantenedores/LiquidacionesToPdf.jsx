@@ -1,7 +1,7 @@
 // components/LiquidacionesToPdf.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../css/LiquidacionesToPdf.css';
+import '../../css/LiquidacionesToPdf.css';
 import API_BASE_URL from '../config/apiConstants';
 import {
   Container,
@@ -126,7 +126,7 @@ const LiquidacionesToPdf = () => {
   return (
       <Container className="liquidaciones-to-pdf" maxWidth="sm">
         <Typography variant="h4" component="h2" gutterBottom>
-          Generar Liquidaciones a PDF
+          Ingresar Liquidaciones
         </Typography>
         <form onSubmit={handleSubmit}>
           <Box mb={3}>

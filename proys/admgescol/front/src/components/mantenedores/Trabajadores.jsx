@@ -169,15 +169,13 @@ const Trabajadores = ({ empresaId }) => {
     )
   );
 
+  filteredTrabajadores = trabajadores
+    .filter((trabajadores) => empresaIdS ? trabajadores.empresa_id === empresaIdS : true);
+
   filteredTrabajadores = selectedEmpresa
     ? filteredTrabajadores.filter(trabajador => trabajador.empresa_id === selectedEmpresa)
     : filteredTrabajadores;
 
-  if (empresaIdS){
-    filteredTrabajadores = selectedEmpresa
-    ? filteredTrabajadores.filter(trabajador => trabajador.empresa_id === empresaIdS)
-    : filteredTrabajadores ;
-  }
     
   const getEmpresaRazonSocial = (empresa_id) => {
     const empresa = empresas.find((e) => e.id === empresa_id);

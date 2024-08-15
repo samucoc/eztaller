@@ -1,7 +1,7 @@
 // components/ContratosToPdf.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../css/LiquidacionesToPdf.css';
+import '../../css/LiquidacionesToPdf.css';
 import API_BASE_URL from '../config/apiConstants';
 import {
   Container,

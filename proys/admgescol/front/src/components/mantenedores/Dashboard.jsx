@@ -251,7 +251,8 @@ const Dashboard = ({ userDNI, empresaId }) => {
   .filter((doc) => trabajador ? doc.trabajador === trabajador : true)
   .filter((doc) => year ? doc.agno == year : true)
   .filter((doc) => month ? doc.mes == month : true)
-  .filter((doc) => docType ? doc.tipo_doc_id === docType : true);
+  .filter((doc) => docType ? doc.tipo_doc_id === docType : true)
+  .filter((doc) => empresaIdS ? doc.empresa_id === empresaIdS : true);
 
   const addDocumentPrev = async ({mes, agno, tipo, trabajador, nombre, file}) => {
     setLoading(true);

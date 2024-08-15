@@ -1,7 +1,7 @@
 // components/DocumentosToPdf.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../css/LiquidacionesToPdf.css';
+import '../../css/LiquidacionesToPdf.css';
 import API_BASE_URL from '../config/apiConstants';
 import {
   Container,
@@ -101,11 +101,12 @@ const DocumentosToPdf = () => {
     formData.append('tipo_doc_id', tipo_doc_id);
     formData.append('month', month);
     formData.append('year', year);
+    formData.append('trabajador', trabajador);
     formData.append('file', file); // Agrega el archivo al FormData
 
     try {
       setLoading(true);
-      const response = await axios.post(`${API_BASE_URL}/documentos/upload-varios`, formData, {
+      const response = await axios.post(`${API_BASE_URL}/documentos`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -124,7 +125,7 @@ const DocumentosToPdf = () => {
   return (
       <Container className="liquidaciones-to-pdf" maxWidth="sm">
         <Typography variant="h4" component="h2" gutterBottom>
-          Generar Documentos a PDF
+          Ingresar Documentos Individuales
         </Typography>
         <form onSubmit={handleSubmit}>
           <Box mb={3}>

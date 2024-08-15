@@ -7,12 +7,21 @@ import { Button } from '@material-ui/core'; // No es necesario importar Table, T
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { setEmpresaId } from '../../actions';
+import { useNavigate } from 'react-router-dom';
 
 const Empresas = () => {
   const [showForm, setShowForm] = useState(false);
   const [selectedEmpresa, setSelectedEmpresa] = useState(null);
   const [empresas, setEmpresas] = useState([]);
   const [comunas, setComunas] = useState([]);
+  const dispatch = useDispatch();
+  const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
+
+  const { id } = useParams(); // Extract the ID from the URL
+
 
   // Fetch Empresas and Comunas on component mount
   useEffect(() => {
@@ -96,10 +105,15 @@ const Empresas = () => {
     setSelectedEmpresa(null);
   };
 
+  const navigate = useNavigate();
+
   const manageEmpresa = (empresaId) => {
     const empresa = empresas.find(emp => emp.id === empresaId);
-    setSelectedEmpresa(empresa);
+    dispatch(setEmpresaId(empresa.id));  // Actualizar empresaId en Redux
+    navigate(`/Empresas/${empresaId}`);  // Navegar a ManageEmpresa
   };
+
+  id && manageEmpresa(id);
 
   return (
     <div className="container empresas">
@@ -143,8 +157,18 @@ const Empresas = () => {
                           color="primary"
                           startIcon={<EditIcon />}
                           onClick={() => manageEmpresa(empresa.id)}
+                          style={{ marginLeft: '10px' }}
                         >
                           Gestionar
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          startIcon={<EditIcon />}
+                          onClick={() => editEmpresa(empresa)}
+                          style={{ marginLeft: '10px' }}
+                        >
+                          Editar
                         </Button>
                         <Button
                           variant="contained"

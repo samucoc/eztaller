@@ -112,56 +112,89 @@ const App = () => {
 
   return (
     <div>
-      {loggedIn ? (
-        empresaId || roleSession === 1 ? (
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-12">
-                <Header onLogout={handleLogout} />
-              </div>
-              {isMobileView && (
-                <button
-                  className={`btn d-block d-sm-none ${sidebarVisible ? 'active' : ''}`}
-                  onClick={() => setSidebarVisible(!sidebarVisible)}
-                  style={{ backgroundColor: '#333', color: '#fff' }}
-                >
-                  Menú
-                </button>
-              )}
-              <div className={`${isMobileView ? (sidebarVisible ? 'd-block col-12' : 'd-none col-12') : 'col-md-2'} d-sm-block`}>
-                <Sidebar handleLogout={handleLogout} />
-              </div>
-              <div className="col-md-10">
-                <>
-                  <Breadcrumbs currentOption={currentOption} onHomeClick={handleHomeClick} selectedEmpresa={empresaId} />
-                  <Panel
-                    currentOption={currentOption}
-                    userDNI={userDNI}
-                    empresaId={empresaId}
-                    setCurrentOption={handleOptionChange}
-                  />
-                </>
-              </div>
+      {roleSession === "1" ? (
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-12">
+              <Header onLogout={handleLogout} />
+            </div>
+            {isMobileView && (
+              <button
+                className={`btn d-block d-sm-none ${sidebarVisible ? 'active' : ''}`}
+                onClick={() => setSidebarVisible(!sidebarVisible)}
+                style={{ backgroundColor: '#333', color: '#fff' }}
+              >
+                Menú
+              </button>
+            )}
+            <div className={`${isMobileView ? (sidebarVisible ? 'd-block col-12' : 'd-none col-12') : 'col-md-2'} d-sm-block`}>
+              <Sidebar handleLogout={handleLogout} />
+            </div>
+            <div className="col-md-10">
+              <>
+                <Breadcrumbs currentOption={currentOption} selectedEmpresa={empresaId} />
+                <Panel
+                  currentOption={currentOption}
+                  userDNI={userDNI}
+                  empresaId={empresaId}
+                  setCurrentOption={handleOptionChange}
+                />
+              </>
             </div>
           </div>
+        </div>
         ) : (
-          <EmpresaList
-            empresas={empresas}
-            empresaId={empresaId}
-            handleSelectChange={handleSelectChange}
+        loggedIn ? (
+          roleSession === "1" || empresaId ? (
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-md-12">
+                  <Header onLogout={handleLogout} />
+                </div>
+                {isMobileView && (
+                  <button
+                    className={`btn d-block d-sm-none ${sidebarVisible ? 'active' : ''}`}
+                    onClick={() => setSidebarVisible(!sidebarVisible)}
+                    style={{ backgroundColor: '#333', color: '#fff' }}
+                  >
+                    Menú
+                  </button>
+                )}
+                <div className={`${isMobileView ? (sidebarVisible ? 'd-block col-12' : 'd-none col-12') : 'col-md-2'} d-sm-block`}>
+                  <Sidebar handleLogout={handleLogout} />
+                </div>
+                <div className="col-md-10">
+                  <>
+                    <Breadcrumbs currentOption={currentOption} selectedEmpresa={empresaId} />
+                    <Panel
+                      currentOption={currentOption}
+                      userDNI={userDNI}
+                      empresaId={empresaId}
+                      setCurrentOption={handleOptionChange}
+                    />
+                  </>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <EmpresaList
+              empresas={empresas}
+              empresaId={empresaId}
+              handleSelectChange={handleSelectChange}
+            />
+          )
+        ) : (
+          <Login
+            username={username}
+            password={password}
+            loading={loading}
+            error={error}
+            setUsername={(value) => dispatch(setUsername(value))}
+            setPassword={(value) => dispatch(setPassword(value))}
+            handleSubmit={handleSubmit}
           />
         )
-      ) : (
-        <Login
-          username={username}
-          password={password}
-          loading={loading}
-          error={error}
-          setUsername={(value) => dispatch(setUsername(value))}
-          setPassword={(value) => dispatch(setPassword(value))}
-          handleSubmit={handleSubmit}
-        />
-      )}
+      ) }
     </div>
   );
 };

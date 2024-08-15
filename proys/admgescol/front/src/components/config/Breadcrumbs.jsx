@@ -1,63 +1,87 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config/apiConstants';
+import { useSelector, useDispatch } from 'react-redux';
+import { setEmpresaId } from '../../actions';
 
-const Breadcrumbs = ({ currentOption, onHomeClick, selectedEmpresa }) => {
-  
+const Breadcrumbs = () => {
   const [razonSocial, setRazonSocial] = useState('');
+  const currentOption = useSelector((state) => state.currentOption);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  let id;
 
   const breadcrumbMap = {
-    'Resumen': 'Datos Personales',
-    'Dashboard': 'Documentos',
-    'ListadoReglamento': 'Documentos Laborales',
-    'ListadoContratos': 'Liquidaciones',
-    'Documentos': 'Solicitudes',
-    'ComunicaEmplea': 'Comunicación Empleador',
-    'Empresas': 'Lista de Empresas',
-    'Trabajadores': 'Trabajadores',
-    'Roles': 'Roles',
-    'Comunas': 'Comunas',
-    'Cargos': 'Cargos',
-    'Sexo': 'Sexo',
-    'Tipo_Docs': 'Tipo de Documentos',
-    'Users': 'Usuarios',
+    '/Empresas': 'Lista de Empresas',
+    '/Documentos': 'Documentos',
+    '/Usuarios': 'Usuarios',
+    '/Trabajadores': 'Trabajadores',
+    '/Roles': 'Roles',
+    '/Comunas': 'Comunas',
+    '/Cargos': 'Cargos',
+    '/Sexo': 'Sexo',
+    '/TipoDocs': 'Tipo de Documentos',
+    '/LiquidacionesToPdf': 'Liquidaciones',
+    '/DocumentosToPdf': 'Documentos Individuales',
+    '/DocumentosGenToPdf': 'Documentos Generales',
+    '/Empresas/:id': 'Detalles de la Empresa',
   };
 
+  const currentPath = location.pathname;
+  const breadcrumbLabel =
+    breadcrumbMap[currentPath] || currentOption || 'Home';
+
+  const parts = currentPath.split('/'); // Split the path by '/'
+  id = parts[parts.length - 1]; // Get the last part which is the ID
+
   useEffect(() => {
-    if (selectedEmpresa) {
-      // Asumiendo que el endpoint es algo como `/api/empresas/{id}`
-      axios.get(`/api/empresas/${selectedEmpresa}`)
-        .then(response => {
-          const { razonSocial } = response.data;
-          setRazonSocial(razonSocial);
+    if (id) {
+      axios
+        .get(`${API_BASE_URL}/empresas/show/${id}`)
+        .then((response) => {
+          setRazonSocial(response.data.RazonSocial);
         })
-        .catch(error => {
-          console.error("Error fetching razonSocial:", error);
-          setRazonSocial(''); // Reinicia el estado si hay un error
+        .catch((error) => {
+          console.error('Error fetching razonSocial:', error);
+          setRazonSocial('');
         });
     }
-  }, [selectedEmpresa]);
+  }, [id]);
+
+  const handleHomeClick = () => {
+    dispatch(setEmpresaId(null)); // Clear empresaId in Redux
+    navigate('/Empresas');
+  };
+
+  const handleEmpresaClick = () => {
+    navigate(`/Empresas/${id}`);
+    dispatch(setEmpresaId(id));
+  };
+
+
+
+  console.log(currentPath)
 
   return (
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">
         <li className="breadcrumb-item">
-          <a href="#" onClick={onHomeClick}>Home</a>
+          <span role="button" onClick={handleHomeClick}>
+            Home
+          </span>
         </li>
-        {selectedEmpresa && (
-          <li className="breadcrumb-item active" aria-current="page">
-            {breadcrumbMap[currentOption] || currentOption}
+        {id && razonSocial && (
+          <li className="breadcrumb-item">
+            <span role="button" onClick={handleEmpresaClick}>
+              {razonSocial}
+            </span>
           </li>
         )}
-        {selectedEmpresa && (
-          <li className="breadcrumb-item active" aria-current="page">
-            {razonSocial}
-          </li>
-        )}
-        {!selectedEmpresa && currentOption && (
-          <li className="breadcrumb-item active" aria-current="page">
-            {breadcrumbMap[currentOption] || currentOption}
-          </li>
-        )}
+        <li className="breadcrumb-item active" aria-current="page">
+          {breadcrumbLabel}
+        </li>
       </ol>
     </nav>
   );
