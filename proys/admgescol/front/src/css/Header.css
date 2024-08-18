@@ -1,24 +1,26 @@
+.app-bar {
+  background-color: #2e7d32 !important; /* Equivalente a green[800] */
+  color: white !important;
+  box-shadow: none; /* Sin sombra de caja */
+}
 
-/* css/Header.css */
-.header {
-    display: flex;
-    justify-content: space-between; /* Para justificar los elementos al principio y al final */
-    align-items: center; /* Para alinear verticalmente al centro */
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    flex: 0 0 auto; /* Para que no se estire y mantenga su tamaño original */
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-  }
-  
-  .profile-button {
-    background-color: #555;
-    color: #fff;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+.logo-container {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.title {
+  margin-left: 8px; /* Equivalente a ml: 1 en Material-UI */
+}
+
+.logout-button {
+  border-color: white !important; /* Borde blanco para el botón */
+  color: white !important; /* Texto blanco en el botón */
+}
+
+.logout-button:hover {
+  background-color: #388e3c !important;/* Equivalente a green[700] */
+  border-color: white !important;
+}

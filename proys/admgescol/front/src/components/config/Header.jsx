@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import { green } from '@mui/material/colors';
 import Box from '@mui/material/Box';
+import '../../css/Header.css';
 
 const Header = ({ onLogout }) => {
   const handleLogout = () => {
@@ -15,49 +16,22 @@ const Header = ({ onLogout }) => {
   };
 
   return (
-    <AppBar
-      position="static"
-      sx={{
-        backgroundColor: 'white', // Tono verde para la barra de aplicación
-        color: 'black', // Texto blanco en toda la aplicación
-        boxShadow: 'none', // Sin sombra de caja
-      }}
-    >
+    <AppBar position="static" className="app-bar">
       <Toolbar>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon />
-        </IconButton>
         <Box
           component="a"
           href="#"
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            color: 'inherit',
-            textDecoration: 'none',
-          }}
+          className="logo-container"
         >
           <img src="logo.png" alt="Logo" width="60" />
-          <Typography variant="h6" sx={{ ml: 1 }}>
+          <Typography variant="h6" className="title">
             GRHIN
           </Typography>
         </Box>
         <Box sx={{ flexGrow: 1 }} />
         <Button
           variant="outlined"
-          sx={{
-            borderColor: 'white', // Borde blanco para el botón
-            color: 'white', // Texto blanco en el botón
-            '&:hover': {
-              backgroundColor: green[700], // Cambia ligeramente el tono de verde al hacer hover
-              borderColor: 'white',
-            },
-          }}
+          className="logout-button"
           onClick={handleLogout}
         >
           Cerrar sesión

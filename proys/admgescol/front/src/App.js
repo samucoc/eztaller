@@ -15,6 +15,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { green } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import './App.css'; // Import the new CSS file
 
 import {
   setLoggedIn,
@@ -140,52 +141,48 @@ const App = () => {
   if (roleSession === "1" || empresaId) {
     return (
       <ThemeProvider theme={theme}>
-        <Container
-          disableGutters
-          maxWidth={false}
-          sx={{
-            height: '100vh',
-            bgcolor: green[50],
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          <Header onLogout={handleLogout} />
-          {isMobileView ? (
-            <>
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                onClick={() => setSidebarVisible(true)}
-                sx={{ mt: 2, color: green[900] }}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Drawer
-                anchor="left"
-                open={sidebarVisible}
-                onClose={() => setSidebarVisible(false)}
-              >
-                <Sidebar handleLogout={handleLogout} selectedEmpresa={empresaId} />
-              </Drawer>
-            </>
-          ) : (
-            <Box sx={{ display: 'flex', flexDirection: 'row', flexGrow: 1 }}>
+      <Container
+        disableGutters
+        maxWidth={false}
+        className="container-root"
+      >
+        <Header onLogout={handleLogout} className="header-root" />
+        {isMobileView ? (
+          <>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={() => setSidebarVisible(true)}
+              className="icon-button"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Drawer
+              anchor="left"
+              open={sidebarVisible}
+              onClose={() => setSidebarVisible(false)}
+              className="drawer-root"
+            >
               <Sidebar handleLogout={handleLogout} selectedEmpresa={empresaId} />
-              <Box sx={{ flexGrow: 1, p: 2 }}>
-                <Breadcrumbs currentOption={currentOption} selectedEmpresa={empresaId} />
-                <Panel
-                  currentOption={currentOption}
-                  userDNI={userDNI}
-                  empresaId={empresaId}
-                  setCurrentOption={handleOptionChange}
-                />
-              </Box>
+            </Drawer>
+          </>
+        ) : (
+          <Box className="sidebar-container">
+            <Sidebar handleLogout={handleLogout} selectedEmpresa={empresaId} />
+            <Box className="panel-container">
+              <Breadcrumbs currentOption={currentOption} selectedEmpresa={empresaId} />
+              <Panel
+                currentOption={currentOption}
+                userDNI={userDNI}
+                empresaId={empresaId}
+                setCurrentOption={handleOptionChange}
+              />
             </Box>
-          )}
-        </Container>
-      </ThemeProvider>
+          </Box>
+        )}
+      </Container>
+    </ThemeProvider>
     );
   }
 

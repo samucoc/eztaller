@@ -47,3 +47,39 @@
   display: flex;
   flex: 1; /* Para que ocupe todo el espacio restante */
 }
+
+/* App.css */
+
+.container-root {
+  height: 100vh;
+  background-color: #f1f8e9; /* equivalent to green[50] */
+  display: flex;
+  flex-direction: column;
+}
+
+.header-root {
+  background-color: #2e7d32; /* equivalent to green[800] */
+  color: white; /* White text */
+  box-shadow: none; /* No box shadow */
+}
+
+.icon-button {
+  margin-top: 16px; /* Equivalent to mt: 2 */
+  color: #1b5e20; /* equivalent to green[900] */
+}
+
+.drawer-root {
+  /* Any additional styles for Drawer if needed */
+}
+
+.sidebar-container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.panel-container {
+  flex-grow: 1;
+  padding: 16px; /* Equivalent to p: 2 */
+}
+

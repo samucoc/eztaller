@@ -11,8 +11,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import AddIcon from '@material-ui/icons/Add';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
 import { useSelector } from 'react-redux'; // Importar useSelector
@@ -20,7 +18,7 @@ import { useSelector } from 'react-redux'; // Importar useSelector
 const Dashboard = ({ userDNI, empresaId }) => {
   const [showForm, setShowForm] = useState(false); // State to control form visibility
   const [selectedDoc, setSelectedDoc] = useState(null); // State for selected document
-  const [documents, setDocuments] = useState([]); // Use state to manage documents
+  const [documents, setDocuments] = useState([]); // Use  state to manage documents
   const [searchTerm, setSearchTerm] = useState(''); // State to manage search term
   const [page, setPage] = useState(0); // State to manage pagination page
   const [rowsPerPage, setRowsPerPage] = useState(5); // State to manage rows per page
