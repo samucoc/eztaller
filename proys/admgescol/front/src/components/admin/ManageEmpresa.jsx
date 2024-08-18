@@ -68,7 +68,7 @@ const ManageEmpresa = () => {
         >
           <CardActionArea >
             <CardContent>
-              <Typography variant="h6" >Solicitudes</Typography>
+              <Typography variant="h6" sx={{ color: 'black' }}>Solicitudes</Typography>
               <Button 
                 variant="contained" 
                 color="primary" 
@@ -90,7 +90,7 @@ const ManageEmpresa = () => {
         >
           <CardActionArea >
             <CardContent>
-              <Typography variant="h6">Comunicaciones</Typography>
+              <Typography variant="h6" sx={{ color: 'black' }}>Comunicaciones</Typography>
               <Button 
                 variant="contained" 
                 color="primary" 
@@ -112,7 +112,7 @@ const ManageEmpresa = () => {
         >
           <CardActionArea>
             <CardContent>
-              <Typography variant="h6">Documentos</Typography>
+              <Typography variant="h6" sx={{ color: 'black' }}>Documentos</Typography>
               <DocumentosCard empresaId={empresa?.id}/>
             </CardContent>
           </CardActionArea>
@@ -127,7 +127,7 @@ const ManageEmpresa = () => {
         >
           <CardActionArea>
             <CardContent>
-              <Typography variant="h6">
+              <Typography variant="h6" sx={{ color: 'black' }}>
                 Consultar Documentos y Gestión de Trabajos
               </Typography>
               <ConsultarGestionCard empresaId={empresa?.id}/>
