@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
+import { useSelector } from 'react-redux'; // Importar useSelector
 
 const DocumentosToPdf = () => {
   const [empresa_id, setEmpresa_Id] = useState('');
@@ -29,6 +30,8 @@ const DocumentosToPdf = () => {
   const [tipo_doc_id, settipo_doc_id] = useState('');
   const [trabajadores, setTrabajadores] = useState([]);
   const [trabajador, setTrabajador] = useState('');
+  const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
+  const [nombre, setNombre] = useState('');
 
   const fetchEmpresas = async () => {
     try {
@@ -87,41 +90,62 @@ const DocumentosToPdf = () => {
     setTrabajador(event.target.value);
   };
 
-  
+  const handleNombreChange = (event) => {
+    setNombre(event.target.value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (!month || !year || !file) {
       alert('Por favor, complete todos los campos.');
       return;
     }
-
+  
     const formData = new FormData();
     formData.append('empresa_id', empresa_id);
     formData.append('tipo_doc_id', tipo_doc_id);
     formData.append('month', month);
     formData.append('year', year);
     formData.append('trabajador', 0);
-    formData.append('file', file); // Agrega el archivo al FormData
+    formData.append('nombre', nombre);
 
+    formData.append('file', file);
+  
     try {
+      // Mostrar mensaje de "Cargando"
+      swal.fire({
+        title: 'Cargando',
+        text: 'Por favor, espere mientras se suben los datos...',
+        allowOutsideClick: false,
+        didOpen: () => {
+          swal.showLoading();
+        }
+      });
+  
       setLoading(true);
       const response = await axios.post(`${API_BASE_URL}/documentos`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
+      
       console.log('Respuesta del servidor:', response.data);
+      
+      // Cerrar el mensaje de carga y mostrar el de éxito
       swal.fire("Correcto", response.message, "success");
-
+  
       setLoading(false);
     } catch (error) {
       console.error('Error al enviar los datos:', error);
+      
+      // Cerrar el mensaje de carga y mostrar el de error
       swal.fire("Error", "Error al enviar los datos.", "error");
-
+  
       setLoading(false);
     }
   };
+  
   return (
       <Container className="liquidaciones-to-pdf" maxWidth="sm">
         <Typography variant="h4" component="h2" gutterBottom>
@@ -141,14 +165,19 @@ const DocumentosToPdf = () => {
               onChange={handleEmpresaChange}
 
             >
-            {empresas.map((empresa) => (
-                  <MenuItem
-                    key={empresa.id}
-                    value={empresa.id}
-                  >
-                    {empresa.RazonSocial}
-                  </MenuItem>
-             ))}
+              {empresaIdS
+                ? empresas
+                    .filter((empresa) => empresa.id === empresaIdS)
+                    .map((empresa) => (
+                      <MenuItem key={empresa.id} value={empresa.id}>
+                        {empresa.RazonSocial}
+                      </MenuItem>
+                    ))
+                : empresas.map((empresa) => (
+                    <MenuItem key={empresa.id} value={empresa.id}>
+                      {empresa.RazonSocial}
+                    </MenuItem>
+                  ))}
             </TextField>
           </Box>
           <Box mb={3}>
@@ -231,6 +260,21 @@ const DocumentosToPdf = () => {
               inputProps={{ accept: '.pdf' }}
               onChange={handleFileChange}
             />
+          </Box>
+          <Box mb={3}>
+            <FormControl fullWidth variant="outlined" margin="normal">
+              <InputLabel id="nombre-label">Nombre del Documento</InputLabel>
+              <TextField
+                labelId="nombre-label"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                id="document_name"
+                value={nombre}
+                onChange={handleNombreChange}
+              />
+            </FormControl>
+
           </Box>
           <Box mb={3}>
             <Button

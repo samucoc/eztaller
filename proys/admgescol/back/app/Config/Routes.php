@@ -236,6 +236,24 @@ $routes->group('Api', function ($routes) {
         
 
 
+        $routes->get('tipoSol', 'TipoSolController::index', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('tipoSol/new', 'TipoSolController::new', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('tipoSol/show/(:segment)', 'TipoSolController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->post('tipoSol', 'TipoSolController::create', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->put('tipoSol/(:segment)', 'TipoSolController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->delete('tipoSol/(:segment)', 'TipoSolController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        
+
+
+        $routes->get('estadoSol', 'EstadoSolController::index', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('estadoSol/new', 'EstadoSolController::new', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('estadoSol/show/(:segment)', 'EstadoSolController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->post('estadoSol', 'EstadoSolController::create', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->put('estadoSol/(:segment)', 'EstadoSolController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->delete('estadoSol/(:segment)', 'EstadoSolController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        
+
+
   
         
 

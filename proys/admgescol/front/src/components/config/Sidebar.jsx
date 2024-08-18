@@ -1,36 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../css/Sidebar.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {     setLoggedIn,
-  setUserDNI,
-  setEmpresaId,
-  setEmpresas,
-  setCurrentOption,
-  setRoleSession,
-  setShowDashTrab,
-  setUsername,
-  setPassword,
-  setUserSession,
-  setPhotoWorker,
-  setCargo,
-  setNombre,} from '../../actions';
+import {
+  List, ListItem, ListItemText, ListItemIcon, Divider, Typography, Avatar, Button, Box
+} from '@mui/material';
+import {
+  Business, Description, Group, AccountCircle, Settings, Home, ExitToApp, 
+  Folder, People, Person, AdminPanelSettings, LocationCity, Work, Wc, FolderOpen, Assignment, Verified
+} from '@mui/icons-material';
+import { green } from '@mui/material/colors';
+import {
+  setEmpresaId
+} from '../../actions';
 
 const Sidebar = ({ handleLogout, selectedEmpresa }) => {
   const [role, setRole] = useState(null);
   const navigate = useNavigate();
   const {
-    loggedIn,
-    userDNI,
-    empresaId,
-    empresas,
-    currentOption,
     roleSession,
-    showDashTrab,
-    username,
-    password,
-    loading,
-    error,
     photoWorker,
     nombre,
     cargo,
@@ -39,12 +26,8 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
 
   useEffect(() => {
     if (roleSession) setRole(JSON.parse(roleSession));
-    if (photoWorker) setPhotoWorker(photoWorker);
-    if (nombre) setNombre(nombre);
-    if (cargo) setCargo(cargo);
-    
     dispatch(setEmpresaId(selectedEmpresa));
-  }, [selectedEmpresa, dispatch]);
+  }, [selectedEmpresa, dispatch, roleSession]);
 
   const defaultPhoto = 'https://www.gravatar.com/avatar/?d=mp';
 
@@ -53,53 +36,245 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
   };
 
   return (
-    <div className="sidebar" style={{ height: '100% !important' }}>
-      <ul>
-        {role === 1 && (
-          <>
-            <h3>Funcionalidades</h3>
-            <ul>
-              <li onClick={() => handleOptionChange('Empresas')}>Lista de Empresas</li>
-              <li onClick={() => handleOptionChange('Documentos')}>Documentos</li>
-              <li onClick={() => handleOptionChange('Trabajadores')}>Trabajadores</li>
-              <li onClick={() => handleOptionChange('Usuarios')}>Usuarios</li>
-            </ul>
-            <h3>Mantenedores</h3>
-            <ul>
-              <li onClick={() => handleOptionChange('Roles')}>Roles</li>
-              <li onClick={() => handleOptionChange('Comunas')}>Comunas</li>
-              <li onClick={() => handleOptionChange('Cargos')}>Cargos</li>
-              <li onClick={() => handleOptionChange('Sexo')}>Sexo</li>
-              <li onClick={() => handleOptionChange('TipoDocs')}>Tipo de Documentos</li>
-            </ul>
-          </>
-        )}
-        {role === 2 && (
-          <>
-            <h3>Funcionalidades</h3>
-            <ul>
-              <li onClick={() => handleOptionChange('Empresas/'+selectedEmpresa)}>Empresa</li>
-              <li onClick={() => handleOptionChange('Documentos')}>Documentos</li>
-              <li onClick={() => handleOptionChange('Trabajadores')}>Trabajadores</li>
-            </ul>
-          </>
-        )}
-        {(role === 3) && (
-          <div className="worker-info">
-            <img src={photoWorker !== "null" ? photoWorker : defaultPhoto} alt="Foto del Trabajador" className="worker-photo" />
-            <div className="worker-details">
-              <h2>{nombre}</h2>
-              <p>{cargo}</p>
-            </div>
-            <a onClick={() => handleOptionChange('Resumen')} className="btn btn-outline-light text-center">
-              <div className="icon-text">
-                <span>Ficha</span>
-              </div>
-            </a>
-          </div>
-        )}
-      </ul>
-    </div>
+    <Box
+      sx={{
+        width: 250,
+        bgcolor: green[100],
+        height: '100vh',
+        padding: 2,
+        boxShadow: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
+      <div>
+        <Typography variant="h6" sx={{ color: green[900], mb: 2 }}>Menú</Typography>
+        <List>
+          {role === 1 && (
+            <>
+              <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Funcionalidades</Typography>
+              <ListItem button onClick={() => handleOptionChange('Empresas')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Business sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Lista de Empresas" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('Documentos')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Description sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Documentos" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('Trabajadores')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <People sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Trabajadores" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('Usuarios')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Person sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Usuarios" />
+              </ListItem>
+              <Divider sx={{ my: 2 }} />
+              <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Mantenedores</Typography>
+              <ListItem button onClick={() => handleOptionChange('Roles')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <AdminPanelSettings sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Roles" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('Comunas')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <LocationCity sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Comunas" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('Cargos')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Work sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Cargos" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('Sexo')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Wc sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Sexo" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('TipoDocs')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <FolderOpen sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Tipo Documentos" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('TipoSol')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Assignment sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Tipo Solicitudes" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('EstadoSol')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Verified sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Estados Solicitudes" />
+              </ListItem>
+            </>
+            
+          )}
+          {role === 2 && (
+            <>
+              <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Funcionalidades</Typography>
+              <ListItem button onClick={() => handleOptionChange('Empresas/' + selectedEmpresa)}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Business sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Empresa" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('Documentos')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Description sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Documentos" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('Trabajadores')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Group sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Trabajadores" />
+              </ListItem>
+            </>
+          )}
+          {(role === 3) && (
+            <Box sx={{ textAlign: 'center', mt: 2 }}>
+              <Avatar
+                src={photoWorker !== "null" ? photoWorker : defaultPhoto}
+                sx={{ width: 80, height: 80, mb: 1, mx: 'auto' }}
+              />
+              <Typography variant="h6">{nombre}</Typography>
+              <Typography variant="body2" color="textSecondary">{cargo}</Typography>
+              <Button
+                onClick={() => handleOptionChange('Resumen')}
+                variant="outlined"
+                sx={{ mt: 2, color: green[900], borderColor: green[900] }}
+              >
+                Ficha
+              </Button>
+            </Box>
+          )}
+        </List>
+      </div>
+      {/* <Button
+        variant="contained"
+        color="secondary"
+        onClick={handleLogout}
+        sx={{ bgcolor: green[700], '&:hover': { bgcolor: green[900] } }}
+        startIcon={<ExitToApp />}
+      >
+        Cerrar Sesión
+      </Button> */}
+    </Box>
   );
 };
 

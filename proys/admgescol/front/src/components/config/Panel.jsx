@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Empresas from '../superadmin/Empresas';
+import Empresas from '../admin/Empresas';
 import Documentos from '../mantenedores/Dashboard';
 import Usuarios from '../mantenedores/Users';
 import Trabajadores from '../mantenedores/Trabajadores';
@@ -9,11 +9,12 @@ import Comunas from '../mantenedores/Comunas';
 import Cargos from '../mantenedores/Cargos';
 import Sexo from '../mantenedores/Sexo';
 import TipoDocs from '../mantenedores/Tipo_Docs';
+import TipoSol from '../mantenedores/TipoSol';
+import EstadoSol from '../mantenedores/EstadoSol';
 import LiquidacionesToPdf from '../mantenedores/LiquidacionesToPdf';
 import DocumentosToPdf from '../mantenedores/DocumentosToPdf';
 import DocumentosGenToPdf from '../mantenedores/DocumentosGenToPdf';
-import ManageEmpresa from '../superadmin/ManageEmpresa';
-import Breadcrumbs from '../config/Breadcrumbs'; // Adjust the path as necessary
+import ManageEmpresa from '../admin/ManageEmpresa';
 import { useDispatch } from 'react-redux';
 import { setCurrentOption } from '../../actions';
 
@@ -37,6 +38,8 @@ const Panel = ({ currentOption, empresaId }) => {
         <Route path="/Cargos" element={<Cargos />} />
         <Route path="/Sexo" element={<Sexo />} />
         <Route path="/TipoDocs" element={<TipoDocs />} />
+        <Route path="/TipoSol" element={<TipoSol />} />
+        <Route path="/EstadoSol" element={<EstadoSol />} />
         <Route path="/LiquidacionesToPdf" element={<LiquidacionesToPdf />} />
         <Route path="/DocumentosToPdf" element={<DocumentosToPdf />} />
         <Route path="/DocumentosGenToPdf" element={<DocumentosGenToPdf />} />

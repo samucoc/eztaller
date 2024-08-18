@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
+import { useSelector } from 'react-redux'; // Importar useSelector
 
 const LiquidacionesToPdf = () => {
   const [empresa_id, setEmpresa_Id] = useState('');
@@ -25,6 +26,7 @@ const LiquidacionesToPdf = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [empresas, setEmpresas] = useState([]);
+  const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
 
   const fetchEmpresas = async () => {
     try {
@@ -62,6 +64,16 @@ const LiquidacionesToPdf = () => {
       alert('Por favor, complete todos los campos.');
       return;
     }
+
+    // Mostrar mensaje de "Cargando"
+    swal.fire({
+      title: 'Cargando',
+      text: 'Por favor, espere mientras se suben los datos...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        swal.showLoading();
+      }
+    });
 
     setLoading(true);
 
@@ -142,14 +154,19 @@ const LiquidacionesToPdf = () => {
               onChange={handleEmpresaChange}
 
             >
-            {empresas.map((empresa) => (
-                  <MenuItem
-                    key={empresa.id}
-                    value={empresa.id}
-                  >
-                    {empresa.RazonSocial}
-                  </MenuItem>
-             ))}
+              {empresaIdS
+                ? empresas
+                    .filter((empresa) => empresa.id === empresaIdS)
+                    .map((empresa) => (
+                      <MenuItem key={empresa.id} value={empresa.id}>
+                        {empresa.RazonSocial}
+                      </MenuItem>
+                    ))
+                : empresas.map((empresa) => (
+                    <MenuItem key={empresa.id} value={empresa.id}>
+                      {empresa.RazonSocial}
+                    </MenuItem>
+                  ))}
             </TextField>
           </Box>
           <Box mb={3}>

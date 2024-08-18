@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
+import { useSelector } from 'react-redux'; // Importar useSelector
 
 const DocumentosToPdf = () => {
   const [empresa_id, setEmpresa_Id] = useState('');
@@ -29,6 +30,8 @@ const DocumentosToPdf = () => {
   const [tipo_doc_id, settipo_doc_id] = useState('');
   const [trabajadores, setTrabajadores] = useState([]);
   const [trabajador, setTrabajador] = useState('');
+  const [nombre, setNombre] = useState('');
+  const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
 
   const fetchEmpresas = async () => {
     try {
@@ -87,7 +90,10 @@ const DocumentosToPdf = () => {
     setTrabajador(event.target.value);
   };
 
-  
+  const handleNombreChange = (event) => {
+    setNombre(event.target.value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -102,9 +108,20 @@ const DocumentosToPdf = () => {
     formData.append('month', month);
     formData.append('year', year);
     formData.append('trabajador', trabajador);
+    formData.append('nombre', nombre);
     formData.append('file', file); // Agrega el archivo al FormData
 
     try {
+      // Mostrar mensaje de "Cargando"
+      swal.fire({
+        title: 'Cargando',
+        text: 'Por favor, espere mientras se suben los datos...',
+        allowOutsideClick: false,
+        didOpen: () => {
+          swal.showLoading();
+        }
+      });
+
       setLoading(true);
       const response = await axios.post(`${API_BASE_URL}/documentos`, formData, {
         headers: {
@@ -141,14 +158,19 @@ const DocumentosToPdf = () => {
               onChange={handleEmpresaChange}
 
             >
-            {empresas.map((empresa) => (
-                  <MenuItem
-                    key={empresa.id}
-                    value={empresa.id}
-                  >
-                    {empresa.RazonSocial}
-                  </MenuItem>
-             ))}
+              {empresaIdS
+                ? empresas
+                    .filter((empresa) => empresa.id === empresaIdS)
+                    .map((empresa) => (
+                      <MenuItem key={empresa.id} value={empresa.id}>
+                        {empresa.RazonSocial}
+                      </MenuItem>
+                    ))
+                : empresas.map((empresa) => (
+                    <MenuItem key={empresa.id} value={empresa.id}>
+                      {empresa.RazonSocial}
+                    </MenuItem>
+                  ))}
             </TextField>
           </Box>
           <Box mb={3}>
@@ -235,7 +257,7 @@ const DocumentosToPdf = () => {
               {trabajadores
                 .filter((trabajador) => trabajador.empresa_id === empresa_id)
                 .map((trabajador) => (
-                  <MenuItem key={trabajador.id} value={trabajador.id}>
+                  <MenuItem key={trabajador.rut} value={trabajador.rut}>
                     {trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_materno}
                   </MenuItem>
                 ))}
@@ -253,6 +275,17 @@ const DocumentosToPdf = () => {
               InputLabelProps={{ shrink: true }}
               inputProps={{ accept: '.pdf' }}
               onChange={handleFileChange}
+            />
+          </Box>
+          <Box mb={3}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              id="document_name"
+              label="Nombre del Documento"
+              value={nombre}
+              onChange={handleNombreChange}
             />
           </Box>
           <Box mb={3}>

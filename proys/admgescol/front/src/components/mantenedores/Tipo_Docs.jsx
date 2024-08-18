@@ -93,7 +93,7 @@ const Tipo_Docs = () => {
             startIcon={<AddIcon />}
             onClick={() => setShowForm(true)}
             >
-            Agregar Tipo_Doc
+            Agregar Tipo Documento
             </Button>
       </div>
       {showForm ? (

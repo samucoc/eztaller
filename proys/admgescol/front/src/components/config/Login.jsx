@@ -1,50 +1,66 @@
 import React from 'react';
+import {
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  TextField,
+  Button,
+  Alert,
+  CircularProgress,
+} from '@mui/material';
 
 const Login = ({ username, password, loading, error, setUsername, setPassword, handleSubmit }) => {
   return (
-    <div className="container">
-      <div className="row justify-content-center mt-5">
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-body">
-              <div className="card-title text-center mb-4">
-                <img src="logo.png" className="img-fluid" alt="Logo" style={{ maxWidth: "100%", height: "auto" }} />
+    <Container maxWidth="sm">
+      <Grid container justifyContent="center" style={{ marginTop: '5rem' }}>
+        <Grid item xs={12}>
+          <Card>
+            <CardContent>
+              <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                <img src="logo.png" alt="Logo" style={{ maxWidth: '100%', height: 'auto' }} />
                 <br />
                 <br />
-                <h3>RRHH-GESCOL</h3>
+                <Typography variant="h4">RRHH-GESCOL</Typography>
               </div>
               <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="userEmail" className="form-label">Nombre de Usuario</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="userEmail"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="userPassword" className="form-label">Contraseña</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="userPassword"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary" disabled={loading}>
+                <TextField
+                  label="Nombre de Usuario"
+                  variant="outlined"
+                  fullWidth
+                  margin="normal"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <TextField
+                  label="Contraseña"
+                  type="password"
+                  variant="outlined"
+                  fullWidth
+                  margin="normal"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  disabled={loading}
+                  startIcon={loading && <CircularProgress size={20} />}
+                  style={{ marginTop: '1rem' }}
+                >
                   {loading ? 'Cargando...' : 'Iniciar Sesión'}
-                </button>
-                {error && <div className="alert alert-danger mt-3">{error}</div>}
+                </Button>
+                {error && <Alert severity="error" style={{ marginTop: '1rem' }}>{error}</Alert>}
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+    </Container>
   );
-}
+};
 
 export default Login;

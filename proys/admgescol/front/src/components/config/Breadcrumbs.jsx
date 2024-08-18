@@ -7,11 +7,11 @@ import { setEmpresaId } from '../../actions';
 
 const Breadcrumbs = () => {
   const [razonSocial, setRazonSocial] = useState('');
-  const currentOption = useSelector((state) => state.currentOption);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   let id;
+  const currentOption = useSelector((state) => state.currentOption);
 
   const {
     loggedIn,
@@ -36,6 +36,8 @@ const Breadcrumbs = () => {
     '/Cargos': 'Cargos',
     '/Sexo': 'Sexo',
     '/TipoDocs': 'Tipo de Documentos',
+    '/TipoSol': 'Tipo de Solicitudes',
+    '/EstadoSol': 'Estados de Solicitudes',
     '/LiquidacionesToPdf': 'Liquidaciones',
     '/DocumentosToPdf': 'Documentos Individuales',
     '/DocumentosGenToPdf': 'Documentos Generales',
@@ -44,7 +46,7 @@ const Breadcrumbs = () => {
 
   const currentPath = location.pathname;
   const breadcrumbLabel =
-    breadcrumbMap[currentPath] || currentOption || 'Home';
+    breadcrumbMap[currentPath] || currentOption ;
 
   const parts = currentPath.split('/'); // Split the path by '/'
   id = parts[parts.length - 1]; // Get the last part which is the ID
@@ -79,31 +81,66 @@ const Breadcrumbs = () => {
     dispatch(setEmpresaId(id));
   };
 
+  const handleEmpresaClick2 = () => {
+    navigate(`/Empresas/${empresaId}`);
+    dispatch(setEmpresaId(empresaId));
+  };
 
+  if (empresaId){
+    axios
+        .get(`${API_BASE_URL}/empresas/show/${empresaId}`)
+        .then((response) => {
+          setRazonSocial(response.data.RazonSocial);
+        })
+        .catch((error) => {
+          console.error('Error fetching razonSocial:', error);
+          setRazonSocial('');
+        });
 
-  console.log(currentPath)
-
-  return (
-    <nav aria-label="breadcrumb">
-      <ol className="breadcrumb">
-        <li className="breadcrumb-item">
-          <span role="button" onClick={handleHomeClick}>
-            Home
-          </span>
-        </li>
-        {id && razonSocial && (
+    return (
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
           <li className="breadcrumb-item">
-            <span role="button" onClick={handleEmpresaClick}>
+            <span role="button" onClick={handleHomeClick}>
+              Home
+            </span>
+          </li>
+          <li className="breadcrumb-item">
+            <span role="button" onClick={handleEmpresaClick2}>
               {razonSocial}
             </span>
           </li>
-        )}
-        <li className="breadcrumb-item active" aria-current="page">
-          {breadcrumbLabel}
-        </li>
-      </ol>
-    </nav>
-  );
+          <li className="breadcrumb-item active" aria-current="page">
+            {breadcrumbLabel}
+          </li>
+        </ol>
+      </nav>
+    );
+  }
+  else{
+    return (
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <span role="button" onClick={handleHomeClick}>
+              Home
+            </span>
+          </li>
+          {id && razonSocial && (
+            <li className="breadcrumb-item">
+              <span role="button" onClick={handleEmpresaClick}>
+                {razonSocial}
+              </span>
+            </li>
+          )}
+          <li className="breadcrumb-item active" aria-current="page">
+            {breadcrumbLabel}
+          </li>
+        </ol>
+      </nav>
+    );
+  }
+
 };
 
 export default Breadcrumbs;
