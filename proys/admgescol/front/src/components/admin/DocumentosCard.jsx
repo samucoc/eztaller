@@ -30,7 +30,7 @@ const DocumentosCard = ({ empresaId }) => {
                 Liquidaciones
               </Typography>
               <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-                Sube archivos PDF con liquidaciones de sueldo. El sistema identifuca el RUT en cada hoja y lo asigna automáticamente al trabajador correspondiente
+                Sube archivos PDF con liquidaciones de sueldo. El sistema identifica el RUT en cada hoja y lo asigna automáticamente al trabajador correspondiente
               </Typography>
               <Button 
                 variant="contained" 

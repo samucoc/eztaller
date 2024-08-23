@@ -136,15 +136,26 @@ const LiquidacionesToPdf = () => {
   };
   
   return (
-      <Container className="liquidaciones-to-pdf" maxWidth="sm">
-        <Typography variant="h4" component="h2" gutterBottom>
-          Ingresar Liquidaciones
-        </Typography>
-        <form onSubmit={handleSubmit}>
-          <Box mb={3}>
+<Container className="liquidaciones-to-pdf" maxWidth="sm">
+      <Typography variant="h4" component="h2" gutterBottom>
+        Ingresar Liquidaciones
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        {empresaIdS ? (
           <TextField
+            variant="outlined"
+            fullWidth
+            id="empresa_id"
+            name="empresa_id"
+            type="hidden"
+            value={empresa_id}
+            InputLabelProps={{ shrink: true }}
+            sx={{ display: 'none' }}  
+          />
+        ) : (
+          <Box mb={3}>
+            <TextField
               variant="outlined"
-              
               fullWidth
               id="empresa_id"
               label="Empresa"
@@ -152,97 +163,104 @@ const LiquidacionesToPdf = () => {
               select
               value={empresa_id}
               onChange={handleEmpresaChange}
-
+              sx={{ color: 'black' }}  
             >
-              {empresaIdS
-                ? empresas
-                    .filter((empresa) => empresa.id === empresaIdS)
-                    .map((empresa) => (
-                      <MenuItem key={empresa.id} value={empresa.id}>
-                        {empresa.RazonSocial}
-                      </MenuItem>
-                    ))
-                : empresas.map((empresa) => (
-                    <MenuItem key={empresa.id} value={empresa.id}>
-                      {empresa.RazonSocial}
-                    </MenuItem>
-                  ))}
+              {empresas.map((empresa) => (
+                <MenuItem key={empresa.id} value={empresa.id}>
+                  {empresa.RazonSocial}
+                </MenuItem>
+              ))}
             </TextField>
           </Box>
-          <Box mb={3}>
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel id="month-label">Mes</InputLabel>
-              <Select
-                labelId="month-label"
-                id="month"
-                value={month}
-                onChange={handleMonthChange}
-                label="Mes"
-              >
-                <MenuItem value="">
-                  <em>Seleccionar mes...</em>
-                </MenuItem>
-                <MenuItem value="1">Enero</MenuItem>
-                <MenuItem value="2">Febrero</MenuItem>
-                <MenuItem value="3">Marzo</MenuItem>
-                <MenuItem value="4">Abril</MenuItem>
-                <MenuItem value="5">Mayo</MenuItem>
-                <MenuItem value="6">Junio</MenuItem>
-                <MenuItem value="7">Julio</MenuItem>
-                <MenuItem value="8">Agosto</MenuItem>
-                <MenuItem value="9">Septiembre</MenuItem>
-                <MenuItem value="10">Octubre</MenuItem>
-                <MenuItem value="11">Noviembre</MenuItem>
-                <MenuItem value="12">Diciembre</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <Box mb={3}>
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel id="year-label">Año</InputLabel>
-              <Select
-                labelId="year-label"
-                id="year"
-                value={year}
-                onChange={handleYearChange}
-                label="Año"
-              >
-                <MenuItem value="">
-                  <em>Seleccionar año...</em>
-                </MenuItem>
-                <MenuItem value="2022">2022</MenuItem>
-                <MenuItem value="2023">2023</MenuItem>
-                <MenuItem value="2024">2024</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <Box mb={3}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              id="file"
-              label="Cargar archivo"
-              type="file"
-              InputLabelProps={{ shrink: true }}
-              inputProps={{ accept: '.pdf' }}
-              onChange={handleFileChange}
-            />
-          </Box>
-          <Box mb={3}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              fullWidth
-              disabled={loading}
-              startIcon={loading && <CircularProgress size={20} />}
+        )}
+        <Box mb={3}>
+          <FormControl fullWidth variant="outlined" margin="normal">
+            <InputLabel id="month-label">Mes</InputLabel>
+            <Select
+              labelId="month-label"
+              id="month"
+              value={month}
+              onChange={handleMonthChange}
+              label="Mes"
+              sx={{
+                color: 'black', // Explicitly set text color to black
+                '& .MuiSelect-select': {
+                  color: 'black', // Set selected text color to black
+                },
+              }}
             >
-              {loading ? 'Enviando...' : 'Generar PDF'}
-            </Button>
-          </Box>
-        </form>
-      </Container>
+              <MenuItem value="">
+                <em>Seleccionar mes...</em>
+              </MenuItem>
+              <MenuItem value="1">Enero</MenuItem>
+              <MenuItem value="2">Febrero</MenuItem>
+              <MenuItem value="3">Marzo</MenuItem>
+              <MenuItem value="4">Abril</MenuItem>
+              <MenuItem value="5">Mayo</MenuItem>
+              <MenuItem value="6">Junio</MenuItem>
+              <MenuItem value="7">Julio</MenuItem>
+              <MenuItem value="8">Agosto</MenuItem>
+              <MenuItem value="9">Septiembre</MenuItem>
+              <MenuItem value="10">Octubre</MenuItem>
+              <MenuItem value="11">Noviembre</MenuItem>
+              <MenuItem value="12">Diciembre</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Box mb={3}>
+          <FormControl fullWidth variant="outlined" margin="normal">
+            <InputLabel id="year-label">Año</InputLabel>
+            <Select
+              labelId="year-label"
+              id="year"
+              value={year}
+              onChange={handleYearChange}
+              label="Año"
+              sx={{
+                color: 'black', // Explicitly set text color to black
+                '& .MuiSelect-select': {
+                  color: 'black', // Set selected text color to black
+                },
+              }}
+
+            >
+              <MenuItem value="">
+                <em>Seleccionar año...</em>
+              </MenuItem>
+              <MenuItem value="2022">2022</MenuItem>
+              <MenuItem value="2023">2023</MenuItem>
+              <MenuItem value="2024">2024</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Box mb={3}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            id="file"
+            label="Cargar archivo"
+            type="file"
+            InputLabelProps={{ shrink: true }}
+            inputProps={{ accept: '.pdf' }}
+            onChange={handleFileChange}
+          />
+        </Box>
+        <Box mb={3}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            disabled={loading}
+            startIcon={loading && <CircularProgress size={20} />}
+          >
+            {loading ? 'Enviando...' : 'Generar PDF'}
+          </Button>
+        </Box>
+      </form>
+    </Container>
+  
   );
 }
 

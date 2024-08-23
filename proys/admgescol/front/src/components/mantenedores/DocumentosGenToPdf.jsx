@@ -152,34 +152,38 @@ const DocumentosToPdf = () => {
           Ingresar Documentos Generales
         </Typography>
         <form onSubmit={handleSubmit}>
-          <Box mb={3}>
-          <TextField
+          {empresaIdS ? (
+            <TextField
               variant="outlined"
-              
               fullWidth
               id="empresa_id"
-              label="Empresa"
               name="empresa_id"
-              select
+              type="hidden"
               value={empresa_id}
-              onChange={handleEmpresaChange}
-
-            >
-              {empresaIdS
-                ? empresas
-                    .filter((empresa) => empresa.id === empresaIdS)
-                    .map((empresa) => (
-                      <MenuItem key={empresa.id} value={empresa.id}>
-                        {empresa.RazonSocial}
-                      </MenuItem>
-                    ))
-                : empresas.map((empresa) => (
-                    <MenuItem key={empresa.id} value={empresa.id}>
-                      {empresa.RazonSocial}
-                    </MenuItem>
-                  ))}
-            </TextField>
-          </Box>
+              InputLabelProps={{ shrink: true }}
+              sx={{ display: 'none' }}  
+            />
+          ) : (
+            <Box mb={3}>
+              <TextField
+                variant="outlined"
+                fullWidth
+                id="empresa_id"
+                label="Empresa"
+                name="empresa_id"
+                select
+                value={empresa_id}
+                onChange={handleEmpresaChange}
+                sx={{ color: 'black' }}  
+              >
+                {empresas.map((empresa) => (
+                  <MenuItem key={empresa.id} value={empresa.id}>
+                    {empresa.RazonSocial}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Box>
+          )}
           <Box mb={3}>
             <FormControl fullWidth variant="outlined" margin="normal">
               <InputLabel id="tipo_doc-label">Tipo Documento</InputLabel>

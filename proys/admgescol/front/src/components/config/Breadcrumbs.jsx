@@ -60,7 +60,7 @@ const Breadcrumbs = () => {
       axios
         .get(`${API_BASE_URL}/empresas/show/${id}`)
         .then((response) => {
-          setRazonSocial(response.data.RazonSocial);
+          setRazonSocial(response.data.NombreFantasia);
           navigate(`/Empresas/${id}`);
           dispatch(setEmpresaId(id));
         })
@@ -90,7 +90,7 @@ const Breadcrumbs = () => {
     axios
         .get(`${API_BASE_URL}/empresas/show/${empresaId}`)
         .then((response) => {
-          setRazonSocial(response.data.RazonSocial);
+          setRazonSocial(response.data.NombreFantasia);
         })
         .catch((error) => {
           console.error('Error fetching razonSocial:', error);

@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../config/apiConstants';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button'; // Import Button
+import { Box, Typography, Card, CardActionArea, CardContent, Button, Grid } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
 import SolicitudesCard from './SolicitudesCard';
@@ -44,98 +39,113 @@ const ManageEmpresa = () => {
   return (
     <Box sx={{ width: '100%' }}>
       {/* Display the company title */}
-      <Box >
+      <Box>
         <Typography variant="h4" component="h1" gutterBottom>
           {empresa?.NombreFantasia}
         </Typography>
         <Typography variant="h6" component="h2">
           {empresa?.RazonSocial}
         </Typography>
-        <br></br>
-        <Typography variant="h8" component="h3">
+        <br />
+        <Typography variant="h6" component="h3">
           ¿Qué deseas realizar?
         </Typography>
       </Box>
 
-      {/* Cards as Buttons */}
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-        <Card
-          sx={{
-            minWidth: 200,
-            border: value === 0 ? '2px solid #3f51b5' : '1px solid #ccc',
-            backgroundColor: value === 0 ? '#e8eaf6' : '#fff',
-          }}
-        >
-          <CardActionArea >
-            <CardContent>
-              <Typography variant="h6" sx={{ color: 'black' }}>Solicitudes</Typography>
-              <Button 
-                variant="contained" 
-                color="primary" 
-                sx={{ mt: 2 }} 
-                onClick={() => handleChangeSolicitudes(empresa?.id)}
-              >
-                Gestionar
-              </Button>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+      {/* Cards as Buttons using Grid */}
+      <Grid container spacing={2} sx={{ mt: 2 }}>
+        {/* Documentos Card */}
+        <Grid item xs={12} md={12}>
+          <Card
+            sx={{
+              minWidth: 200,
+              border: value === 2 ? '2px solid #3f51b5' : '1px solid #ccc',
+              backgroundColor: value === 2 ? '#e8eaf6' : '#fff',
+            }}
+          >
+            <CardActionArea>
+              <CardContent>
+                <Typography variant="h6" sx={{ color: 'black' }}>Documentos</Typography>
+                <DocumentosCard empresaId={empresa?.id} />
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
 
-        <Card
-          sx={{
-            minWidth: 200,
-            border: value === 1 ? '2px solid #3f51b5' : '1px solid #ccc',
-            backgroundColor: value === 1 ? '#e8eaf6' : '#fff',
-          }}
-        >
-          <CardActionArea >
-            <CardContent>
-              <Typography variant="h6" sx={{ color: 'black' }}>Comunicaciones</Typography>
-              <Button 
-                variant="contained" 
-                color="primary" 
-                sx={{ mt: 2 }} 
-                onClick={() => handleChangeComunicaciones(empresa?.id)}
-              >
-                Gestionar
-              </Button>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+        {/* Consultar Documentos y Gestión de Trabajos Card */}
+        <Grid item xs={12} md={12}>
+          <Card
+            sx={{
+              minWidth: 200,
+              border: value === 3 ? '2px solid #3f51b5' : '1px solid #ccc',
+              backgroundColor: value === 3 ? '#e8eaf6' : '#fff',
+            }}
+          >
+            <CardActionArea>
+              <CardContent>
+                <Typography variant="h6" sx={{ color: 'black' }}>
+                  Consultar Documentos y Gestión de Trabajos
+                </Typography>
+                <ConsultarGestionCard empresaId={empresa?.id} />
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
 
-        <Card
-          sx={{
-            minWidth: 200,
-            border: value === 2 ? '2px solid #3f51b5' : '1px solid #ccc',
-            backgroundColor: value === 2 ? '#e8eaf6' : '#fff',
-          }}
-        >
-          <CardActionArea>
-            <CardContent>
-              <Typography variant="h6" sx={{ color: 'black' }}>Documentos</Typography>
-              <DocumentosCard empresaId={empresa?.id}/>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+        {/* Solicitudes Card */}
+        <Grid item xs={12} md={6}>
+          <Card
+            sx={{
+              minWidth: 200,
+              border: value === 0 ? '2px solid #3f51b5' : '1px solid #ccc',
+              backgroundColor: value === 0 ? '#e8eaf6' : '#fff',
+            }}
+          >
+            <CardActionArea>
+              <CardContent>
+                <Typography variant="h6" sx={{ color: 'black' }}>Solicitudes</Typography>
+                <Typography variant="h8" color="textSecondary" sx={{ mt: 1 }}>Tienes XXX solicitud(es) por revisar</Typography>
+                <br/>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ mt: 2 }}
+                  onClick={() => handleChangeSolicitudes(empresa?.id)}
+                >
+                  Gestionar
+                </Button>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
 
-        <Card
-          sx={{
-            minWidth: 200,
-            border: value === 3 ? '2px solid #3f51b5' : '1px solid #ccc',
-            backgroundColor: value === 3 ? '#e8eaf6' : '#fff',
-          }}
-        >
-          <CardActionArea>
-            <CardContent>
-              <Typography variant="h6" sx={{ color: 'black' }}>
-                Consultar Documentos y Gestión de Trabajos
-              </Typography>
-              <ConsultarGestionCard empresaId={empresa?.id}/>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      </Box>
-
+        {/* Comunicaciones Card */}
+        <Grid item xs={12} md={6}>
+          <Card
+            sx={{
+              minWidth: 200,
+              border: value === 1 ? '2px solid #3f51b5' : '1px solid #ccc',
+              backgroundColor: value === 1 ? '#e8eaf6' : '#fff',
+            }}
+          >
+            <CardActionArea>
+              <CardContent>
+                <Typography variant="h6" sx={{ color: 'black' }}>Comunicaciones</Typography>
+                <Typography variant="h8" color="textSecondary" sx={{ mt: 1 }}>Publica las últimas noticias sobre tu establecimiento</Typography>
+                <br/>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ mt: 2 }}
+                  onClick={() => handleChangeComunicaciones(empresa?.id)}
+                >
+                  Gestionar
+                </Button>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

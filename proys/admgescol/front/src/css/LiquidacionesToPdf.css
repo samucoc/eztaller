@@ -1,0 +1,45 @@
+.liquidaciones-to-pdf {
+    max-width: 600px;
+    margin: auto;
+  }
+  .css-tn3v0l-MuiButtonBase-root-MuiMenuItem-root{
+    color: black !important;
+  }
+
+  .liquidaciones-to-pdf .MuiFormControl-root {
+    width: 100% !important;
+    margin: 16px 0 !important;
+  }
+  
+  .liquidaciones-to-pdf .MuiInputLabel-root {
+    color: black !important;
+  }
+  
+  .liquidaciones-to-pdf .MuiOutlinedInput-root {
+    color: black !important;
+  }
+  
+  .liquidaciones-to-pdf .MuiSelect-root {
+    color: black !important;
+  }
+  
+  .liquidaciones-to-pdf .MuiInputBase-input {
+    color: black !important;
+  }
+  
+  .liquidaciones-to-pdf .MuiInputLabel-formControl {
+    color: black !important;
+  }
+  
+  .liquidaciones-to-pdf .MuiButton-containedPrimary {
+    background-color: #3f51b5 !important;
+    color: white !important;
+  }
+  
+  .liquidaciones-to-pdf .MuiButton-containedPrimary:hover {
+    background-color: #303f9f !important;
+  }
+  
+  .liquidaciones-to-pdf .MuiTypography-root {
+    color: black !important;
+  }
