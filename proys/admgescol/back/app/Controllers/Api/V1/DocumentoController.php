@@ -683,25 +683,24 @@ class DocumentoController extends ResourceController
 
     public function uploadDocumento()
     {
-    
         // Obtiene el archivo subido
         $file = $this->request->getFile('file');
-
+    
         // Verifica que se haya cargado un archivo válido
         if (!$file->isValid() || $file->hasMoved()) {
             throw new \Exception('Error: Archivo no válido.');
         }
-
+    
         // Obtiene los datos del formulario
         $month = $this->request->getPost('month');
         $year = $this->request->getPost('year');
         $empresa_id = $this->request->getPost('empresa_id');
-
+    
         // Valida los campos del formulario
         if (empty($month) || empty($year) || empty($empresa_id)) {
             throw new \Exception('Error: Por favor, complete todos los campos.');
         }
-
+    
         // Mueve el archivo a una carpeta temporal
         $tempFolder = WRITEPATH . 'temp\\';
         $tempFileName = 'uploaded_file_' . time() . '.pdf';
@@ -709,90 +708,89 @@ class DocumentoController extends ResourceController
             throw new \Exception('Error: No se pudo mover el archivo a la carpeta temporal.');
         }
     
-        $pdfFilePath = $tempFolder.$tempFileName;
-
-
-        $trabsModel  = new TrabajadorModel();
+        $pdfFilePath = $tempFolder . $tempFileName;
+    
+        $trabsModel = new TrabajadorModel();
         $trabs = $trabsModel->findAll();
-        foreach($trabs as $t){
-            // Número que deseas buscar
+    
+        // Array para almacenar los resultados
+        $resultados = [];
+    
+        foreach ($trabs as $t) {
             $numberToFind = $t->rut;
+            $nombreArchivo = 'No se genero archivo';
+            $nombreTrabajador = '';
+            $nombreArchivo = '';
+            
             try {
                 $pageNumber = $this->findTextInPDF($pdfFilePath, $numberToFind);
-
+    
                 if ($pageNumber === -1) {
-                    $pageNumber = $this->findTextInPDF($pdfFilePath, str_replace('.','',$numberToFind));
-                    if ($pageNumber !== -1) {
-                        $pdf = new Fpdi();
-
-                        // Path to your existing PDF file
-                        $inputPdf = $pdfFilePath;
-                        
-                        // Open existing PDF
-                        $pageCount = $pdf->setSourceFile($inputPdf);
-                        
-                        // Loop through each page and create a new PDF for each page
-                        $pdf->AddPage();
-                        $templateId = $pdf->importPage($pageNumber);
-                        $pdf->useTemplate($templateId);
-                        
-                        // Save the page as a separate PDF
-                        $outputPdf = 'pdfs/Liquidacion_'.$month.'_' .$year.'_' . $numberToFind . '.pdf';
-                        $pdf->Output($outputPdf, 'F');
-
-                        $docu = new \App\Entities\Documento;
-                        $docu->tipo_doc_id  = 1;
-                        $docu->empresa_id          = $empresa_id;
-                        $docu->mes          = $month;
-                        $docu->agno         = $year;
-                        $docu->nombre       = 'Liquidacion_'.$month.'_' .$year.'_' . $numberToFind;
-                        $docu->trabajador   = $numberToFind;
-                        $docu->ruta         = $outputPdf;
-                        $this->model->insert($docu);
-                    }
-                    else{
-                    }
+                    $pageNumber = $this->findTextInPDF($pdfFilePath, str_replace('.', '', $numberToFind));
                 }
-                else{
+    
+                if ($pageNumber !== -1) {
                     $pdf = new Fpdi();
-
-                    // Path to your existing PDF file
-                    $inputPdf = $pdfFilePath;
-                    
+    
                     // Open existing PDF
-                    $pageCount = $pdf->setSourceFile($inputPdf);
-                    
-                    // Loop through each page and create a new PDF for each page
+                    $pdf->setSourceFile($pdfFilePath);
                     $pdf->AddPage();
                     $templateId = $pdf->importPage($pageNumber);
                     $pdf->useTemplate($templateId);
-                    
+    
                     // Save the page as a separate PDF
-                    $outputPdf = 'pdfs/Liquidacion_'.$month.'_' .$year.'_' . $numberToFind . '.pdf';
+                    $outputPdf = 'pdfs/Liquidacion_' . $month . '_' . $year . '_' . $numberToFind . '.pdf';
                     $pdf->Output($outputPdf, 'F');
+    
+                    // Buscar al trabajador por rut en el modelo
+                    // Crear una instancia de la base de datos
+                    $db = \Config\Database::connect();
+                    // Preparar la consulta SQL
+                    $sql = "SELECT * FROM trabajadores WHERE rut = ?";
+                    // Ejecutar la consulta
+                    $trabajador = $db->query($sql, [$numberToFind])->getResult();
 
+                    if ($trabajador) {
+                        foreach($trabajador as $t){
+                            $nombreTrabajador = $t->nombres.' '.$t->apellido_paterno.' '.$t->apellido_materno;
+                        }
+                    } else {
+                        $nombreTrabajador = 'Nombre no disponible';
+                    }
+    
+                    // Almacenar el nombre del archivo generado
+                    $nombreArchivo = $outputPdf;
+    
+                    // Guardar en la base de datos
                     $docu = new \App\Entities\Documento;
-                    $docu->tipo_doc_id  = 1;
-                    $docu->empresa_id   = $empresa_id;
-                    $docu->mes          = $month;
-                    $docu->agno         = $year;
-                    $docu->nombre       = 'Liquidacion_'.$month.'_' .$year.'_' . $numberToFind;
-                    $docu->trabajador   = $numberToFind;
-                    $docu->ruta         = $outputPdf;
+                    $docu->tipo_doc_id = 1;
+                    $docu->empresa_id = $empresa_id;
+                    $docu->mes = $month;
+                    $docu->agno = $year;
+                    $docu->nombre = 'Liquidacion_' . $month . '_' . $year . '_' . $numberToFind;
+                    $docu->trabajador = $numberToFind;
+                    $docu->ruta = $outputPdf;
                     $this->model->insert($docu);
-                }
-
-            } catch (Exception $e) {
-                echo "Error al procesar el PDF: " . $e->getMessage();
+                } 
+    
+            } catch (\Exception $e) {
+                $nombreTrabajador = 'Error al procesar el PDF';
             }
-
+    
+            // Agregar resultado al array
+            $resultados[] = [
+                'nombre_trabajador' => $nombreTrabajador,
+                'nombre_archivo' => $nombreArchivo
+            ];
         }
-
+    
         return $this->respondCreated([
             'status' => 'success',
-            'message' => 'Documento cargado exitosamente'
+            'message' => $resultados // Devuelve el array con los resultados
         ]);
     }
+    
+    
 
     function findTextInPDF($pdfFilePath, $searchText) {
         // Open the PDF file in binary mode

@@ -13,10 +13,18 @@ import {
   Button,
   CircularProgress,
   TextField,
-  Box
+  Box,
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+
 } from '@mui/material';
 import swal from 'sweetalert2';
-import Loader from 'react-loader-spinner';
 import { useSelector } from 'react-redux'; // Importar useSelector
 
 const LiquidacionesToPdf = () => {
@@ -27,6 +35,7 @@ const LiquidacionesToPdf = () => {
   const [loading, setLoading] = useState(false);
   const [empresas, setEmpresas] = useState([]);
   const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
+  const [result, setResult] = useState([]);
 
   const fetchEmpresas = async () => {
     try {
@@ -61,7 +70,7 @@ const LiquidacionesToPdf = () => {
     event.preventDefault();
 
     if (!month || !year || !file) {
-      alert('Por favor, complete todos los campos.');
+      swal.fire('Error', 'Por favor, complete todos los campos.', 'error');
       return;
     }
 
@@ -108,160 +117,221 @@ const LiquidacionesToPdf = () => {
 
       // Preparar el FormData con el archivo convertido
       const uploadFormData = new FormData();
-      uploadFormData.append('empresa_id', empresa_id);
+      uploadFormData.append('empresa_id', empresaIdS ? empresaIdS : empresa_id);
       uploadFormData.append('month', month);
       uploadFormData.append('year', year);
       uploadFormData.append('file', convertedFile);
 
       // Enviar el formulario al servidor usando axios
-      try {
-        const response = await axios.post(`${API_BASE_URL}/documentos/upload`, uploadFormData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+      const response = await axios.post(`${API_BASE_URL}/documentos/upload`, uploadFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log('Respuesta del servidor:', response.data);
+
+      // Construir mensaje para swal basado en la respuesta del servidor
+      let messageContent = '';
+
+      if (Array.isArray(response.data.message)) {
+        response.data.message.forEach((worker) => {
+          const nombreTrabajador = worker.nombre_trabajador || 'Nombre no disponible';
+          const nombreArchivo = worker.nombre_archivo || 'Archivo no generado';
+          messageContent += `<li><strong>${nombreTrabajador}</strong>: ${nombreArchivo}</li>`;
         });
-        console.log('Respuesta del servidor:', response.data);
-        swal.fire('Correcto', response.data.message, 'success');
-      } catch (error) {
-        console.error('Error al enviar los datos:', error);
-        swal.fire('Error', 'Error al enviar los datos.', 'error');
-      } finally {
-        setLoading(false);
+      } else {
+        messageContent = 'No se encontraron trabajadores ni archivos generados.';
       }
+
+      setResult(response.data.message);
     } catch (error) {
-      console.error('Error al convertir el archivo a PDF/A:', error);
-      swal.fire('Error', 'Error al convertir el archivo a PDF/A.', 'error');
+      console.error('Error al enviar los datos:', error);
+      swal.fire('Error', 'Error al enviar los datos.', 'error');
+    } finally {
       setLoading(false);
     }
   };
-  
-  return (
-<Container className="liquidaciones-to-pdf" maxWidth="sm">
-      <Typography variant="h4" component="h2" gutterBottom>
-        Ingresar Liquidaciones
-      </Typography>
-      <form onSubmit={handleSubmit}>
-        {empresaIdS ? (
-          <TextField
-            variant="outlined"
-            fullWidth
-            id="empresa_id"
-            name="empresa_id"
-            type="hidden"
-            value={empresa_id}
-            InputLabelProps={{ shrink: true }}
-            sx={{ display: 'none' }}  
-          />
-        ) : (
-          <Box mb={3}>
-            <TextField
-              variant="outlined"
-              fullWidth
-              id="empresa_id"
-              label="Empresa"
-              name="empresa_id"
-              select
-              value={empresa_id}
-              onChange={handleEmpresaChange}
-              sx={{ color: 'black' }}  
-            >
-              {empresas.map((empresa) => (
-                <MenuItem key={empresa.id} value={empresa.id}>
-                  {empresa.RazonSocial}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Box>
-        )}
-        <Box mb={3}>
-          <FormControl fullWidth variant="outlined" margin="normal">
-            <InputLabel id="month-label">Mes</InputLabel>
-            <Select
-              labelId="month-label"
-              id="month"
-              value={month}
-              onChange={handleMonthChange}
-              label="Mes"
-              sx={{
-                color: 'black', // Explicitly set text color to black
-                '& .MuiSelect-select': {
-                  color: 'black', // Set selected text color to black
-                },
-              }}
-            >
-              <MenuItem value="">
-                <em>Seleccionar mes...</em>
-              </MenuItem>
-              <MenuItem value="1">Enero</MenuItem>
-              <MenuItem value="2">Febrero</MenuItem>
-              <MenuItem value="3">Marzo</MenuItem>
-              <MenuItem value="4">Abril</MenuItem>
-              <MenuItem value="5">Mayo</MenuItem>
-              <MenuItem value="6">Junio</MenuItem>
-              <MenuItem value="7">Julio</MenuItem>
-              <MenuItem value="8">Agosto</MenuItem>
-              <MenuItem value="9">Septiembre</MenuItem>
-              <MenuItem value="10">Octubre</MenuItem>
-              <MenuItem value="11">Noviembre</MenuItem>
-              <MenuItem value="12">Diciembre</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-        <Box mb={3}>
-          <FormControl fullWidth variant="outlined" margin="normal">
-            <InputLabel id="year-label">Año</InputLabel>
-            <Select
-              labelId="year-label"
-              id="year"
-              value={year}
-              onChange={handleYearChange}
-              label="Año"
-              sx={{
-                color: 'black', // Explicitly set text color to black
-                '& .MuiSelect-select': {
-                  color: 'black', // Set selected text color to black
-                },
-              }}
 
-            >
-              <MenuItem value="">
-                <em>Seleccionar año...</em>
-              </MenuItem>
-              <MenuItem value="2022">2022</MenuItem>
-              <MenuItem value="2023">2023</MenuItem>
-              <MenuItem value="2024">2024</MenuItem>
-            </Select>
-          </FormControl>
+  return (
+    <Container className="liquidaciones-to-pdf" maxWidth="sm">
+      {result.length > 0 ? (
+          <Box mb={3}>
+          <Typography variant="h5" component="h3" gutterBottom>
+          Resultados de Liquidaciones Cargadas 
+          </Typography>
+          <Typography variant="h7" component="h5" gutterBottom>
+          ({result.filter((r) => r.nombre_trabajador !== '').length} Liquidaciones)
+          </Typography>
+          <TableContainer component={Paper} sx={{ color: 'black' }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ color: 'black' , fontWeight: 'bold' }}>Nombre del Trabajador</TableCell>
+                  <TableCell sx={{ color: 'black' , fontWeight: 'bold' }}>Nombre del Archivo</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {result
+                  .filter((r) => r.nombre_trabajador !== '')
+                  .map((r, index) => (
+                    <TableRow key={index}>
+                      <TableCell sx={{ color: 'black' }}>{r.nombre_trabajador}</TableCell>
+                      <TableCell sx={{ color: 'black' }}>{r.nombre_archivo}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Box>
-        <Box mb={3}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            margin="normal"
-            id="file"
-            label="Cargar archivo"
-            type="file"
-            InputLabelProps={{ shrink: true }}
-            inputProps={{ accept: '.pdf' }}
-            onChange={handleFileChange}
-          />
-        </Box>
-        <Box mb={3}>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            disabled={loading}
-            startIcon={loading && <CircularProgress size={20} />}
-          >
-            {loading ? 'Enviando...' : 'Generar PDF'}
-          </Button>
-        </Box>
-      </form>
+      ) : (
+        <>
+          <Typography variant="h4" component="h2" gutterBottom>
+            Ingresar Liquidaciones
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            {empresaIdS ? (
+              <TextField
+                variant="outlined"
+                fullWidth
+                id="empresa_id"
+                name="empresa_id"
+                type="hidden"
+                value={empresaIdS}
+                InputLabelProps={{ shrink: true }}
+                sx={{ display: 'none' }}
+              />
+            ) : (
+              <Box mb={3}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="empresa_id"
+                  label="Empresa"
+                  name="empresa_id"
+                  select
+                  value={empresa_id}
+                  onChange={handleEmpresaChange}
+                  sx={{ color: 'black' }}
+                >
+                  {empresas.map((empresa) => (
+                    <MenuItem key={empresa.id} value={empresa.id}>
+                      {empresa.RazonSocial}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Box>
+            )}
+
+            <Grid container spacing={2} mb={3}>
+              <Grid item xs={6}>
+                <FormControl fullWidth variant="outlined" margin="normal">
+                  <InputLabel id="month-label">Mes</InputLabel>
+                  <Select
+                    labelId="month-label"
+                    id="month"
+                    value={month}
+                    onChange={handleMonthChange}
+                    label="Mes"
+                    sx={{
+                      color: 'black',
+                      '& .MuiSelect-select': {
+                        color: 'black',
+                      },
+                    }}
+                  >
+                    <MenuItem value="">
+                      <em>Seleccionar mes...</em>
+                    </MenuItem>
+                    <MenuItem value="1">Enero</MenuItem>
+                    <MenuItem value="2">Febrero</MenuItem>
+                    <MenuItem value="3">Marzo</MenuItem>
+                    <MenuItem value="4">Abril</MenuItem>
+                    <MenuItem value="5">Mayo</MenuItem>
+                    <MenuItem value="6">Junio</MenuItem>
+                    <MenuItem value="7">Julio</MenuItem>
+                    <MenuItem value="8">Agosto</MenuItem>
+                    <MenuItem value="9">Septiembre</MenuItem>
+                    <MenuItem value="10">Octubre</MenuItem>
+                    <MenuItem value="11">Noviembre</MenuItem>
+                    <MenuItem value="12">Diciembre</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={6}>
+                <FormControl fullWidth variant="outlined" margin="normal">
+                  <InputLabel id="year-label">Año</InputLabel>
+                  <Select
+                    labelId="year-label"
+                    id="year"
+                    value={year}
+                    onChange={handleYearChange}
+                    label="Año"
+                    sx={{
+                      color: 'black',
+                      '& .MuiSelect-select': {
+                        color: 'black',
+                      },
+                    }}
+                  >
+                    <MenuItem value="">
+                      <em>Seleccionar año...</em>
+                    </MenuItem>
+                    <MenuItem value="2022">2022</MenuItem>
+                    <MenuItem value="2023">2023</MenuItem>
+                    <MenuItem value="2024">2024</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
+
+            <Box mb={3}>
+              <TextField
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                id="file"
+                label="Cargar archivo"
+                type="file"
+                InputLabelProps={{ shrink: true }}
+                inputProps={{ accept: '.pdf' }}
+                onChange={handleFileChange}
+              />
+            </Box>
+            <Box mb={3}>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                disabled={loading}
+                startIcon={loading && <CircularProgress size={20} />}
+              >
+                {loading ? 'Enviando...' : 'Cargar Documento'}
+              </Button>
+            </Box>
+          </form>
+
+          <Box mb={3}>
+            <Typography variant="h5" component="h3" gutterBottom>
+              Paso a paso: Cargar Liquidaciones en PDF
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              <strong>1.- Seleccionar el mes y año:</strong> En la vista de cargar liquidaciones, seleccione el mes y el año correspondiente a las liquidaciones que vas a subir.
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              <strong>2.- Subir el archivo PDF:</strong> Sube el PDF que contiene las liquidaciones. Asegúrate de que cada página del documento corresponde a un trabajador diferente.
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              <strong>3.- Procesamiento del documento:</strong> La plataforma separará automáticamente el PDF en varias páginas, asignando cada una al trabajador correspondiente según el RUT identificado en cada página. Este proceso puede tomar algunos minutos.
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              <strong>4.- Revisión de resultados:</strong> Una vez completado el procesamiento, la plataforma te mostrará una lista con las liquidaciones subidas. Esta lista incluirá los nombres de los trabajadores y el nombre del documento en el formato: Liquidacion_mes_año_RUT.pdf.
+            </Typography>
+          </Box>
+        </>
+      )}
     </Container>
-  
   );
-}
+};
 
 export default LiquidacionesToPdf;

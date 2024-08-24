@@ -1,0 +1,32 @@
+CRITICAL - 2024-08-24 00:55:20 --> Error: Por favor, complete todos los campos.
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 702.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-24 00:57:18 --> Error: Por favor, complete todos los campos.
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 702.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-24 00:58:24 --> Error: Por favor, complete todos los campos.
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 702.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-24 01:33:42 --> Undefined variable $nombreTrabajador
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 780.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(780): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $nombreTrabajador', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 780)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-24 01:40:49 --> Undefined variable $nombreTrabajador
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 780.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(780): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $nombreTrabajador', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 780)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->uploadDocumento()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
