@@ -33,6 +33,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
   const [month, setMonth] = useState('');
   const [docType, setDocType] = useState('');
   const [empresas, setEmpresas] = useState([]);
+  const [cargos, setCargos] = useState([]);
 
   const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
 
@@ -71,6 +72,15 @@ const Dashboard = ({ userDNI, empresaId }) => {
         console.error('Error fetching trabajadores:', error);
       }
     };
+    const fetchCargos = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/cargos`);
+        setCargos(response.data);
+      } catch (error) {
+        console.error('Error fetching cargos:', error);
+      }
+    };
+    fetchCargos();
     fetchEmpresas();
     fetchDocuments();
     fetchTrabajadores();
@@ -226,6 +236,12 @@ const Dashboard = ({ userDNI, empresaId }) => {
     return 'Desconocido';
   };
 
+  const getCargoTrabajadorNombre = (cargo_id) => {
+    console.log(cargos)
+    console.log(cargo_id)
+    const cargo = cargos.find((c) => c.id === cargo_id);
+    return cargo ? cargo.nombre : 'Desconocido';
+  };
   const getTipoDocumentoNombre = (tipoDocId) => {
     const tipoDoc = tipoDocumentos.find((tipo) => tipo.id === tipoDocId);
     return tipoDoc ? tipoDoc.nombre : 'Desconocido';
@@ -406,7 +422,8 @@ const Dashboard = ({ userDNI, empresaId }) => {
                 <TableRow>
                   <TableCell>Mes</TableCell>
                   <TableCell>Año</TableCell>
-                  <TableCell>Tipo</TableCell>
+                  <TableCell>Tipo Documento</TableCell>
+                  <TableCell>Cargo Trabajador</TableCell>
                   <TableCell>Trabajador</TableCell>
                   <TableCell>Nombre</TableCell>
                   <TableCell>Acciones</TableCell>
@@ -420,6 +437,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
                     <TableCell>{getMonthName(parseInt(doc.mes))}</TableCell>
                     <TableCell>{doc.agno}</TableCell>
                     <TableCell>{getTipoDocumentoNombre(doc.tipo_doc_id)}</TableCell>
+                    <TableCell>{getCargoTrabajadorNombre(doc.cargo_id)}</TableCell>
                     <TableCell>{getTrabajadorNombre(doc.trabajador)}</TableCell>
                     <TableCell>{doc.nombre}</TableCell>
                     <TableCell>

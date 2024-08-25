@@ -15,7 +15,7 @@ class DocumentoModel extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'tipo_doc_id',        'mes',        'agno',        'nombre',        'trabajador',   'empresa_id',        'tipo_archivo',        'peso', 'ruta'
+        'tipo_doc_id',   'cargo_id',        'mes',        'agno',        'nombre',        'trabajador',   'empresa_id',        'tipo_archivo',        'peso', 'ruta'
     ];
 
     // Dates

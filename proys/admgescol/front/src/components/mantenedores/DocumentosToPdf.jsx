@@ -297,6 +297,18 @@ const DocumentosToPdf = () => {
               fullWidth
               variant="outlined"
               margin="normal"
+              id="document_name"
+              label="Nombre del Documento"
+              value={nombre}
+              onChange={handleNombreChange}
+            />
+          </Box>
+          
+          <Box mb={3}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              margin="normal"
               id="file"
               label="Cargar archivo"
               type="file"
@@ -305,17 +317,7 @@ const DocumentosToPdf = () => {
               onChange={handleFileChange}
             />
           </Box>
-          <Box mb={3}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              id="document_name"
-              label="Nombre del Documento"
-              value={nombre}
-              onChange={handleNombreChange}
-            />
-          </Box>
+
           <Box mb={3}>
             <Button
               type="submit"

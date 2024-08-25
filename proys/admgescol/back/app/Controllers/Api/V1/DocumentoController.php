@@ -329,6 +329,7 @@ class DocumentoController extends ResourceController
         $tipo_doc_id = $this->request->getPost('tipo_doc_id');
         $trabajador = $this->request->getPost('trabajador');
         $nombre = $this->request->getPost('nombre');
+        $cargo_id = $this->request->getPost('cargo_id');
         $empresa_id = $this->request->getPost('empresa_id');
 
         // Obtiene el archivo subido
@@ -384,6 +385,7 @@ class DocumentoController extends ResourceController
         // else{
         $docu = new \App\Entities\Documento;
         $docu->tipo_doc_id  = $tipo_doc_id;
+        $docu->cargo_id     = $cargo_id;
         $docu->mes          = $month;
         $docu->agno         = $year;
         $docu->nombre       = $nombre;

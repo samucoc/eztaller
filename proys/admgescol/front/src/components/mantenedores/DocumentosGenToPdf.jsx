@@ -41,6 +41,8 @@ const DocumentosToPdf = () => {
   const [trabajador, setTrabajador] = useState('');
   const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
   const [nombre, setNombre] = useState('');
+  const [cargos, setCargos] = useState([]);
+  const [cargo, setCargo] = useState([]);
 
   const fetchEmpresas = async () => {
     try {
@@ -69,10 +71,20 @@ const DocumentosToPdf = () => {
     }
   };
 
+  const fetchCargos = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/cargos`);
+      setCargos(response.data);
+    } catch (error) {
+      console.error('Error fetching cargos:', error);
+    }
+  };
+
   useEffect(() => {
     fetchEmpresas();
     fetchTipoDocumentos();
     fetchTrabajadores();
+    fetchCargos();
   }, []);
 
   const handleMonthChange = (event) => {
@@ -103,10 +115,14 @@ const DocumentosToPdf = () => {
     setNombre(event.target.value);
   };
 
+  const handleCargoChange = (event) => {
+    setCargo(event.target.value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    if (!month || !year || !file) {
+    if (!month || !year || !file|| !cargo) {
       alert('Por favor, complete todos los campos.');
       return;
     }
@@ -116,7 +132,7 @@ const DocumentosToPdf = () => {
     formData.append('tipo_doc_id', tipo_doc_id);
     formData.append('month', month);
     formData.append('year', year);
-    formData.append('trabajador', 0);
+    formData.append('cargo_id', cargo);
     formData.append('nombre', nombre);
 
     formData.append('file', file);
@@ -275,20 +291,26 @@ const DocumentosToPdf = () => {
                 </FormControl>
               </Grid>
             </Grid>
-
-          <Box mb={3}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              margin="normal"
-              id="file"
-              label="Cargar archivo"
-              type="file"
-              InputLabelProps={{ shrink: true }}
-              inputProps={{ accept: '.pdf' }}
-              onChange={handleFileChange}
-            />
-          </Box>
+           
+            <Box mb={3}>
+              <TextField
+                variant="outlined"
+                fullWidth
+                id="cargo_id"
+                label="Cargo"
+                name="cargo_id"
+                select
+                value={cargo}
+                onChange={handleCargoChange}
+                sx={{ color: 'black' }}  
+              >
+                {cargos.map((c) => (
+                  <MenuItem key={c.id} value={c.id}>
+                    {c.nombre}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Box>
           <Box mb={3}>
             <FormControl fullWidth variant="outlined" margin="normal">
               <InputLabel id="nombre-label">Nombre del Documento</InputLabel>
@@ -303,6 +325,19 @@ const DocumentosToPdf = () => {
               />
             </FormControl>
 
+          </Box>
+          <Box mb={3}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              id="file"
+              label="Cargar archivo"
+              type="file"
+              InputLabelProps={{ shrink: true }}
+              inputProps={{ accept: '.pdf' }}
+              onChange={handleFileChange}
+            />
           </Box>
           <Box mb={3}>
             <Button
