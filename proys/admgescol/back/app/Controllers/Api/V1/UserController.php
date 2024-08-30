@@ -38,7 +38,7 @@ class UserController extends ResourceController
 
         foreach ($data as $key => $value) {
             $data[$key]->role = $this->roleModel->find($value->role_id);
-            $data[$key]->trabajador = $this->TrabajadorModel->find($value->user_id);
+            $data[$key]->trabajador = $this->TrabajadorModel->find($value->id);
         }
 
         return $this->respond($data);
@@ -57,8 +57,26 @@ class UserController extends ResourceController
         }
 
         $data->role = $this->roleModel->find($data->role_id);
-        $data->trabajador = $this->TrabajadorModel->find($data->user_id);
+        $data->trabajador = $this->TrabajadorModel->find($data->id);
 
+        return $this->respond($data);
+    }
+
+    public function showByRut($rut = null)
+    {
+        // Buscar al usuario por su RUT en lugar de por ID
+        $data = $this->model->where('userDNI', $rut)->first();
+    
+        if (empty($data)) {
+            return $this->failNotFound(RESOURCE_NOT_FOUND);
+        }
+    
+        // Obtener el rol asociado usando el modelo de roles
+        $data->role = $this->roleModel->find($data->role_id);
+    
+        // Obtener el trabajador asociado usando un método estándar para la búsqueda por RUT
+        $data->trabajador = $this->TrabajadorModel->findByRut($data->userDNI);
+    
         return $this->respond($data);
     }
 
@@ -71,7 +89,7 @@ class UserController extends ResourceController
 
         foreach ($data as $key => $value) {
             $data[$key]->role = $this->roleModel->find($value->role_id);
-            $data[$key]->trabajador = $this->TrabajadorModel->find($value->user_id);
+            $data[$key]->trabajador = $this->TrabajadorModel->find($value->id);
 
         }
 
@@ -233,6 +251,48 @@ class UserController extends ResourceController
         //verify that passwords match
 
         if ($user && password_verify($payload->userPassword, $user->userPassword)) {
+            unset($user->userPassword);
+            $db = \Config\Database::connect();
+            $query = "SELECT t.* , c.nombre as nombre_cargo
+                        FROM trabajadores t
+                            inner join cargos c
+                                on t.cargo_id = c.id
+                        WHERE rut = ? ";
+            // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+            $trabajador = $db->query($query, [$user->userDNI])->getResult();
+
+            if (!empty($trabajador)) {
+                $trabajador = $trabajador[0]; // Obtener el primer resultado como objeto
+
+                $response = [
+                    'status' => 200,
+                    'error' => null,
+                    'messages' => 'Login successful',
+                    'userDNI' => $user->userDNI,
+                    'role_id' => $user->role_id,
+                    'foto' => $trabajador->foto,
+                    'cargo' => $trabajador->nombre_cargo,
+                    'nombre' => $trabajador->nombres . ' ' . $trabajador->apellido_paterno . ' ' . $trabajador->apellido_materno
+                ];
+                return $this->respond($response);
+
+            }
+        } else {
+            return $this->fail('Invalid email or password');
+        }
+    }
+
+    public function signInRut()
+    {
+
+        $payload = $this->request->getJSON();
+
+        //load from database user based on userEmail
+        $user = $this->model->where('userDNI', $payload->userDNI)->first();
+
+        //verify that passwords match
+
+        if ($user && password_verify($payload->password, $user->userPassword)) {
             unset($user->userPassword);
             $db = \Config\Database::connect();
             $query = "SELECT t.* , c.nombre as nombre_cargo

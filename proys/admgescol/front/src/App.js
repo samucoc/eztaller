@@ -71,8 +71,13 @@ const App = () => {
           dispatch(setEmpresas(response.data));
           if (response.data.length === 1) {
             dispatch(setEmpresaId(response.data[0].id));
-            if (roleSession !== "1") {
-              navigate('/Empresas');
+            if (roleSession === "3") {
+              navigate('/UserDashboard');
+            }
+            else{
+              if (roleSession !== "1") {
+                navigate('/Empresas');
+              }
             }
           } else if (roleSession === "1") {
             navigate('/Empresas');

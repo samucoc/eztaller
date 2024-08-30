@@ -1,0 +1,90 @@
+CRITICAL - 2024-08-29 04:23:13 --> Undefined property: stdClass::$tipo
+in APPPATH\Controllers\Api\V1\SolicitudController.php on line 78.
+ 1 APPPATH\Controllers\Api\V1\SolicitudController.php(78): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$tipo', 'APPPATH\\Controllers\\Api\\V1\\SolicitudController.php', 78)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-29 04:24:08 --> Call to a member function insert() on null
+in APPPATH\Controllers\Api\V1\NotificacionController.php on line 148.
+ 1 APPPATH\Controllers\Api\V1\SolicitudController.php(83): App\Controllers\Api\V1\NotificacionController->logNotification('6117483', 'insert', 'solicitud - Anticipos', 'Solicituid del tipo Anticipos con trabajador rut 6117483 ha sido insertado.')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-29 04:25:07 --> Call to a member function insert() on null
+in APPPATH\Controllers\Api\V1\NotificacionController.php on line 148.
+ 1 APPPATH\Controllers\Api\V1\SolicitudController.php(83): App\Controllers\Api\V1\NotificacionController->logNotification('6117483', 'insert', 'solicitud - Anticipos', 'Solicituid del tipo Anticipos con trabajador rut 6117483 ha sido insertado.')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-29 04:26:35 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 SYSTEMPATH\API\ResponseTrait.php(152): CodeIgniter\RESTful\ResourceController->respond([...], 201, 'Notificación creada con éxito.')
+ 3 APPPATH\Controllers\Api\V1\NotificacionController.php(159): CodeIgniter\RESTful\ResourceController->respondCreated([...], 'Notificación creada con éxito.')
+ 4 APPPATH\Controllers\Api\V1\SolicitudController.php(83): App\Controllers\Api\V1\NotificacionController->logNotification('6117483', 'insert', 'solicitud - Anticipos', 'Solicituid del tipo Anticipos con trabajador rut 6117483 ha sido insertado.')
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-29 04:27:40 --> Call to a member function setJSON() on null
+in APPPATH\Controllers\Api\V1\NotificacionController.php on line 155.
+ 1 APPPATH\Controllers\Api\V1\SolicitudController.php(83): App\Controllers\Api\V1\NotificacionController->logNotification('6117483', 'insert', 'solicitud - Anticipos', 'Solicituid del tipo Anticipos con trabajador rut 6117483 ha sido insertado.')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-29 04:28:03 --> Call to a member function setStatusCode() on null
+in APPPATH\Controllers\Api\V1\NotificacionController.php on line 155.
+ 1 APPPATH\Controllers\Api\V1\SolicitudController.php(83): App\Controllers\Api\V1\NotificacionController->logNotification('6117483', 'insert', 'solicitud - Anticipos', 'Solicituid del tipo Anticipos con trabajador rut 6117483 ha sido insertado.')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-29 04:29:06 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 SYSTEMPATH\API\ResponseTrait.php(152): CodeIgniter\RESTful\ResourceController->respond([...], 201, 'Recurso creado')
+ 3 APPPATH\Controllers\Api\V1\NotificacionController.php(154): CodeIgniter\RESTful\ResourceController->respondCreated([...], 'Recurso creado')
+ 4 APPPATH\Controllers\Api\V1\SolicitudController.php(83): App\Controllers\Api\V1\NotificacionController->logNotification('6117483', 'insert', 'solicitud - Anticipos', 'Solicituid del tipo Anticipos con trabajador rut 6117483 ha sido insertado.')
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-29 04:30:21 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 APPPATH\Controllers\Api\V1\NotificacionController.php(154): CodeIgniter\RESTful\ResourceController->respond([...])
+ 3 APPPATH\Controllers\Api\V1\SolicitudController.php(83): App\Controllers\Api\V1\NotificacionController->logNotification('6117483', 'insert', 'solicitud - Anticipos', 'Solicituid del tipo Anticipos con trabajador rut 6117483 ha sido insertado.')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-29 04:33:05 --> Call to a member function getResult() on bool
+in APPPATH\Controllers\Api\V1\NotificacionController.php on line 146.
+ 1 APPPATH\Controllers\Api\V1\SolicitudController.php(83): App\Controllers\Api\V1\NotificacionController->logNotification('6117483', 'insert', 'solicitud - Anticipos', 'Solicituid del tipo Anticipos con trabajador rut 6117483 ha sido insertado.')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-29 04:33:21 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format(true)
+ 2 APPPATH\Controllers\Api\V1\NotificacionController.php(148): CodeIgniter\RESTful\ResourceController->respond(true)
+ 3 APPPATH\Controllers\Api\V1\SolicitudController.php(83): App\Controllers\Api\V1\NotificacionController->logNotification('6117483', 'insert', 'solicitud - Anticipos', 'Solicituid del tipo Anticipos con trabajador rut 6117483 ha sido insertado.')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-29 04:35:01 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format(true)
+ 2 SYSTEMPATH\API\ResponseTrait.php(152): CodeIgniter\RESTful\ResourceController->respond(true, 201, 'Recurso creado')
+ 3 APPPATH\Controllers\Api\V1\NotificacionController.php(148): CodeIgniter\RESTful\ResourceController->respondCreated(true, 'Recurso creado')
+ 4 APPPATH\Controllers\Api\V1\SolicitudController.php(83): App\Controllers\Api\V1\NotificacionController->logNotification('6117483', 'insert', 'solicitud - Anticipos', 'Solicituid del tipo Anticipos con trabajador rut 6117483 ha sido insertado.')
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()

@@ -60,4 +60,20 @@ class TrabajadorModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+        // Método para encontrar un trabajador por su RUT
+        public function findByRut($rut)
+        {
+            $db = \Config\Database::connect();
+            $query = "SELECT t.*, c.nombre as nombre_cargo
+                      FROM trabajadores t
+                      INNER JOIN cargos c ON t.cargo_id = c.id
+                      WHERE t.rut = ?";
+    
+            // Ejecutar la consulta y obtener el resultado
+            $result = $db->query($query, [$rut])->getRow();
+    
+            return $result ? $result : null;
+        }
+        
 }

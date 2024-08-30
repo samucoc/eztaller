@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Api\V1;
 
+use App\Models\DocumentoModel;
 use App\Models\TrabajadorModel;
 use App\Models\Tipo_DocModel;
 use CodeIgniter\RESTful\ResourceController;
@@ -117,9 +118,9 @@ class DocumentoController extends ResourceController
     {
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
-        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '7' and trabajador = ? and empresa_id = ?";
+        $query = "SELECT * FROM documentos WHERE (tipo_doc_id not in  ('1','2','5') and trabajador = ? and empresa_id = ?) or (tipo_doc_id not in  ('1','2','5') and cargo_id in (select cargo_id from trabajadores where trabajador = ?) )";
         // Ejecutar la consulta utilizando Query Builder de CodeIgniter
-        $data = $db->query($query, [$rut, $empresa])->getResult();
+        $data = $db->query($query, [$rut, $empresa, $rut])->getResult();
         // Verificar si se encontraron resultados
         // if (empty($data)) {
         //     return $this->failNotFound(RESOURCE_NOT_FOUND);
@@ -147,9 +148,9 @@ class DocumentoController extends ResourceController
     {
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
-        $query = "SELECT * FROM documentos WHERE (tipo_doc_id = '5' and trabajador = ? and empresa_id = ?) or (tipo_doc_id = '5' and trabajador = 0)";
+        $query = "SELECT * FROM documentos WHERE (tipo_doc_id = '5' and trabajador = ? and empresa_id = ?) or (tipo_doc_id = '5' and cargo_id in (select cargo_id from trabajadores where trabajador = ?) )";
         // Ejecutar la consulta utilizando Query Builder de CodeIgniter
-        $data = $db->query($query, [$rut, $empresa])->getResult();
+        $data = $db->query($query, [$rut, $empresa, $rut])->getResult();
         // Verificar si se encontraron resultados
         // if (empty($data)) {
         //     return $this->failNotFound(RESOURCE_NOT_FOUND);
@@ -177,7 +178,8 @@ class DocumentoController extends ResourceController
     {
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
-        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '1' and trabajador = ? and empresa_id = ? and agno = '".date("Y")."'";
+        //$query = "SELECT * FROM documentos WHERE tipo_doc_id = '1' and trabajador = ? and empresa_id = ? and agno = '".date("Y")."'";
+        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '1' and trabajador = ? and empresa_id = ? ";
         // Ejecutar la consulta utilizando Query Builder de CodeIgniter
         $data = $db->query($query, [$rut, $empresa])->getResult();
         // Verificar si se encontraron resultados
@@ -317,91 +319,70 @@ class DocumentoController extends ResourceController
      */
     public function create()
     {
+        try {
+            // Obtiene los datos del formulario
+            $month = $this->request->getPost('month');
+            $year = $this->request->getPost('year');
+            $tipo_doc_id = $this->request->getPost('tipo_doc_id');
+            $trabajador = $this->request->getPost('trabajador');
+            $nombre = $this->request->getPost('nombre');
+            $cargo_id = $this->request->getPost('cargo_id');
+            $empresa_id = $this->request->getPost('empresa_id');
 
-        // $data = $this->request->getJSON();
+            // Obtiene el archivo subido
+            $file = $this->request->getFile('file');
 
-        // $data->created_at = $this->datetimeNow->format('Y-m-d H:i:s');
-        // $data->updated_at = $this->datetimeNow->format('Y-m-d H:i:s');
+            // Verifica que se haya cargado un archivo válido
+            if (!$file->isValid() || $file->hasMoved()) {
+                return $this->fail('Error: Archivo no válido o ya ha sido movido.');
+            }
 
-        // Obtiene los datos del formulario
-        $month = $this->request->getPost('month');
-        $year = $this->request->getPost('year');
-        $tipo_doc_id = $this->request->getPost('tipo_doc_id');
-        $trabajador = $this->request->getPost('trabajador');
-        $nombre = $this->request->getPost('nombre');
-        $cargo_id = $this->request->getPost('cargo_id');
-        $empresa_id = $this->request->getPost('empresa_id');
+            // Valida los campos del formulario
+            if (empty($month) || empty($year) || empty($tipo_doc_id) || empty($trabajador) || empty($nombre) || empty($cargo_id) || empty($empresa_id)) {
+                return $this->fail('Error: Por favor, complete todos los campos.');
+            }
 
-        // Obtiene el archivo subido
-        $file = $this->request->getFile('file');
+            $tempFileName = $file->getName();
+            $tempFolder = FCPATH . 'pdfs/';
 
-        // Verifica que se haya cargado un archivo válido
-        if (!$file->isValid() || $file->hasMoved()) {
-            throw new \Exception('Error: Archivo no válido.');
+            // Mueve el archivo a la carpeta temporal
+            if (!$file->move($tempFolder, $tempFileName)) {
+                return $this->fail('Error: No se pudo mover el archivo a la carpeta temporal.');
+            }
+
+            // Crear una nueva entidad Documento
+            $docu = new \App\Entities\Documento;
+            $docu->tipo_doc_id  = $tipo_doc_id;
+            $docu->cargo_id     = $cargo_id;
+            $docu->mes          = $month;
+            $docu->agno         = $year;
+            $docu->nombre       = $nombre;
+            $docu->trabajador   = $trabajador;
+            $docu->empresa_id   = $empresa_id;
+            $docu->ruta         = 'pdfs/' . $tempFileName;
+
+            // Inserta el documento en la base de datos
+            if ($this->model->insert($docu)) {
+                $docu->id = $this->model->insertID();
+
+                $tp = new Tipo_DocModel();
+                $tp_u = $tp->find($tipo_doc_id)->nombre;
+
+                // Registrar notificación
+                $notificacionController = new \App\Controllers\Api\V1\NotificacionController();
+                $mensaje = "Documento del tipo {$tp_u} con nombre {$nombre} ha sido insertado.";
+                $notificacionController->logNotification($trabajador, 'insert', "documento - {$tp_u}", $mensaje);
+
+                return $this->respondCreated($docu, RESOURCE_CREATED);
+            } else {
+                return $this->fail($this->model->errors());
+            }
+
+        } catch (\Exception $e) {
+            return $this->failServerError($e->getMessage());
         }
-
-        // Obtiene los datos del formulario
-        $month = $this->request->getPost('month');
-        $year = $this->request->getPost('year');
-
-        // Valida los campos del formulario
-        if (empty($month) || empty($year)) {
-            throw new \Exception('Error: Por favor, complete todos los campos.');
-        }
-        
-        $tempFileName = $file->getName();
-        // Mueve el archivo a una carpeta temporal
-        $tempFolder = FCPATH . 'pdfs/';
-        if (!$file->move($tempFolder, $tempFileName)) {
-            throw new \Exception('Error: No se pudo mover el archivo a la carpeta temporal.');
-        }
-
-        $pdfFilePath = FCPATH . 'pdfs/' . $tempFileName;
-        //$pageNumber = $this->findTextInPDF($pdfFilePath, $trabajador);
-
-        // if ($pageNumber === -1) {
-        //     $pageNumber = $this->findTextInPDF($pdfFilePath, $this->formatRut($trabajador));
-        //     if ($pageNumber !== -1) {
-        //         $docu = new \App\Entities\Documento;
-        //         $docu->tipo_doc_id  = $tipo_doc_id;
-        //         $docu->mes          = $month;
-        //         $docu->agno         = $year;
-        //         $docu->nombre       = $nombre;
-        //         $docu->trabajador   = $trabajador;
-        //         $docu->empresa_id   = $empresa_id;
-        //         $docu->ruta         = 'pdfs/'.$tempFileName;
-    
-        //         if ($this->model->insert($docu)) {
-        //             $docu->id = $this->model->insertID();
-        //             return $this->respondCreated($docu, RESOURCE_CREATED);
-        //         } else {
-        //             return $this->fail($this->model->errors());
-        //         }
-        //     }
-        //     else{
-        //         return $this->fail("Búsqueda rut en documento no encontrada");
-        //     }
-        // }
-        // else{
-        $docu = new \App\Entities\Documento;
-        $docu->tipo_doc_id  = $tipo_doc_id;
-        $docu->cargo_id     = $cargo_id;
-        $docu->mes          = $month;
-        $docu->agno         = $year;
-        $docu->nombre       = $nombre;
-        $docu->trabajador   = $trabajador;
-        $docu->empresa_id   = $empresa_id;
-        $docu->ruta         = 'pdfs/'.$tempFileName;
-
-        if ($this->model->insert($docu)) {
-            $docu->id = $this->model->insertID();
-            return $this->respondCreated($docu, RESOURCE_CREATED);
-        } else {
-            return $this->fail($this->model->errors());
-        }
-        //}
-
     }
+
     /**
      * Return the editable properties of a resource object
      *
@@ -773,6 +754,14 @@ class DocumentoController extends ResourceController
                     $docu->trabajador = $numberToFind;
                     $docu->ruta = $outputPdf;
                     $this->model->insert($docu);
+
+                    $docu->id = $this->model->insertID();
+
+                    // Registrar notificación
+                    $notificacionController = new \App\Controllers\Api\V1\NotificacionController();
+                    $mensaje = "Liquidacion por carga masiva con nombre {$nombre} ha sido insertado.";
+                    $notificacionController->logNotification($trabajador, 'insert', 'documento - liquidacion', $mensaje);
+
                 } 
     
             } catch (\Exception $e) {
@@ -859,5 +848,28 @@ class DocumentoController extends ResourceController
         // Combinar el número formateado con el dígito verificador
         return $numberFormatted;
     }
+
+    public function firmarDoc(){
+        $payload = $this->request->getJSON();
+
+        $tp = new DocumentoModel();
+        $tp = $tp->find($payload->documentId);
+
+        $tp->firma = 1;
+
+        if ($this->model->update($payload->documentId, $tp)) {
+            $tp->id = $payload->documentId;
+            // Registrar notificación
+            $notificacionController = new \App\Controllers\Api\V1\NotificacionController();
+            $mensaje = "Documento con rut {$tp->trabajador} ha sido firmado correctamente.";
+            $notificacionController->logNotification($tp->trabajador, 'insert', 'documento - firma', $mensaje);
+
+            return $this->respondUpdated($tp, RESOURCE_UPDATED);
+        } else {
+            return $this->fail($this->model->errors());
+        }
+
+    }
+
 
 }

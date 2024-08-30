@@ -7,6 +7,8 @@ import { setEmpresaId } from '../../actions';
 
 const Breadcrumbs = () => {
   const [razonSocial, setRazonSocial] = useState('');
+  const [usuario, setUsuario] = useState([]);
+
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -42,6 +44,14 @@ const Breadcrumbs = () => {
     '/DocumentosToPdf': 'Documentos Individuales',
     '/DocumentosGenToPdf': 'Documentos Generales',
     '/Empresas/:id': 'Detalles de la Empresa',
+    '/ContratosUser': 'Contratos y Anexos',
+    '/LiquidacionesUser': 'Liquidaciones',
+    '/ReglamentosUser': 'Reglamentos',
+    '/OtrosUser': 'Otros',
+    '/SolicitarAnticipo': 'Solicitud de Anticipo',
+    '/SolicitarPrestamo': 'Solicitud de Préstamo',
+    '/SolicitarPermiso': 'Solicitud de Permiso',
+    '/SolicitarVacaciones': 'Solicitud de Vacaciones',
   };
 
   const currentPath = location.pathname;
@@ -56,7 +66,7 @@ const Breadcrumbs = () => {
   }
   
   useEffect(() => {
-    if (id !== 'Empresas') {
+    if (id !== 'Empresas' && roleSession !== "3") {
       axios
         .get(`${API_BASE_URL}/empresas/show/${id}`)
         .then((response) => {
@@ -72,8 +82,13 @@ const Breadcrumbs = () => {
   }, [id]);
 
   const handleHomeClick = () => {
-    dispatch(setEmpresaId(null)); // Clear empresaId in Redux
-    navigate('/Empresas');
+    if (roleSession !== "3"){
+      dispatch(setEmpresaId(null)); // Clear empresaId in Redux
+      navigate('/Empresas');
+    }
+    else{
+      navigate('/UserDashboard');
+    }
   };
 
   const handleEmpresaClick = () => {
@@ -86,7 +101,7 @@ const Breadcrumbs = () => {
     dispatch(setEmpresaId(empresaId));
   };
 
-  if (empresaId){
+  if (empresaId && roleSession !== "3"){
     axios
         .get(`${API_BASE_URL}/empresas/show/${empresaId}`)
         .then((response) => {
@@ -117,7 +132,18 @@ const Breadcrumbs = () => {
       </nav>
     );
   }
-  else{
+  else if (roleSession === "3"){
+    if (!usuario){
+      axios
+      .get(`${API_BASE_URL}/users/showByRut/${userDNI}`)
+      .then((response) => {
+        setUsuario(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching user data:', error);
+        setUsuario('');
+      });
+    }
     return (
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
@@ -126,13 +152,11 @@ const Breadcrumbs = () => {
               Home
             </span>
           </li>
-          {id && razonSocial && (
-            <li className="breadcrumb-item">
-              <span role="button" onClick={handleEmpresaClick}>
-                {razonSocial}
+          <li className="breadcrumb-item">
+              <span role="button" onClick={handleHomeClick}>
+                {usuario?.trabajador?.nombres}
               </span>
-            </li>
-          )}
+          </li>
           <li className="breadcrumb-item active" aria-current="page">
             {breadcrumbLabel}
           </li>

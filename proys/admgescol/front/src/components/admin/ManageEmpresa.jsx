@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../config/apiConstants';
 import { Box, Typography, Card, CardActionArea, CardContent, Button, Grid } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import SolicitudesCard from './SolicitudesCard';
 import ComunicacionesCard from './ComunicacionesCard';
@@ -11,18 +11,18 @@ import ConsultarGestionCard from './ConsultarGestionCard';
 
 const ManageEmpresa = () => {
   const [value, setValue] = useState(0);
-  const [empresa, setEmpresa] = useState([])
+  const [empresa, setEmpresa] = useState([]);
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [pendingCount, setPendingCount] = useState(0);
 
-  const handleChangeSolicitudes = (newValue) => {
-    setValue(newValue);
-  };
-
-  const handleChangeComunicaciones = (newValue) => {
-    setValue(newValue);
+  // Function to handle button clicks for navigation
+  const handleItemClick = (path) => {
+    navigate(path); // Use navigate to change route
   };
 
   useEffect(() => {
+    
     if (id) {
       axios
         .get(`${API_BASE_URL}/empresas/show/${id}`)
@@ -34,6 +34,18 @@ const ManageEmpresa = () => {
           setEmpresa('');
         });
     }
+    const fetchPendingCount = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/solicitudes`);
+        const resultSol = response.data.filter((s) => s.empresa_id === id && s.status === "1");
+        setPendingCount(resultSol.length);
+      } catch (error) {
+        console.error('Error fetching pending solicitudes count:', error);
+      }
+    };
+
+    fetchPendingCount();
+
   }, [id]);
 
   return (
@@ -104,13 +116,15 @@ const ManageEmpresa = () => {
             <CardActionArea>
               <CardContent>
                 <Typography variant="h6" sx={{ color: 'black' }}>Solicitudes</Typography>
-                <Typography variant="h8" color="textSecondary" sx={{ mt: 1 }}>Tienes XXX solicitud(es) por revisar</Typography>
+                <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>              
+                  Tienes {pendingCount} solicitud(es) por revisar
+                </Typography>
                 <br/>
                 <Button
                   variant="contained"
                   color="primary"
                   sx={{ mt: 2 }}
-                  onClick={() => handleChangeSolicitudes(empresa?.id)}
+                  onClick={() => handleItemClick(`/SolicitudesCard`)} // Adjust path as per routing
                 >
                   Gestionar
                 </Button>
@@ -131,13 +145,13 @@ const ManageEmpresa = () => {
             <CardActionArea>
               <CardContent>
                 <Typography variant="h6" sx={{ color: 'black' }}>Comunicaciones</Typography>
-                <Typography variant="h8" color="textSecondary" sx={{ mt: 1 }}>Publica las últimas noticias sobre tu establecimiento</Typography>
+                <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>Publica las últimas noticias sobre tu establecimiento</Typography>
                 <br/>
                 <Button
                   variant="contained"
                   color="primary"
                   sx={{ mt: 2 }}
-                  onClick={() => handleChangeComunicaciones(empresa?.id)}
+                  onClick={() => handleItemClick(`/ComunicacionesCard`)} // Adjust path as per routing
                 >
                   Gestionar
                 </Button>
