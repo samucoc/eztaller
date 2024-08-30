@@ -337,10 +337,10 @@ class DocumentoController extends ResourceController
                 return $this->fail('Error: Archivo no válido o ya ha sido movido.');
             }
 
-            // Valida los campos del formulario
-            if (empty($month) || empty($year) || empty($tipo_doc_id) || empty($trabajador) || empty($nombre) || empty($cargo_id) || empty($empresa_id)) {
-                return $this->fail('Error: Por favor, complete todos los campos.');
-            }
+            // // Valida los campos del formulario
+            // if (empty($month) || empty($year) || empty($tipo_doc_id) || empty($trabajador) || empty($nombre) || empty($cargo_id) || empty($empresa_id)) {
+            //     return $this->fail('Error: Por favor, complete todos los campos.');
+            // }
 
             $tempFileName = $file->getName();
             $tempFolder = FCPATH . 'pdfs/';
