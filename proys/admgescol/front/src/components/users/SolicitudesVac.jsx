@@ -87,6 +87,14 @@ const SolicitudesVac = ({ onSubmit, onCancel }) => {
               InputLabelProps={{ shrink: true }}
               value={fechaInicio}
               onChange={(e) => setFechaInicio(e.target.value)}
+              sx={{ color: 'black' }}
+              InputLabelProps={{ 
+                shrink: true,
+                style: { color: 'black' }  // Set label color
+              }}
+              InputProps={{ 
+                style: { color: 'black' }  // Set input text color
+              }}
             />
           </Grid>
           <Grid item xs={6}>
@@ -101,6 +109,14 @@ const SolicitudesVac = ({ onSubmit, onCancel }) => {
               InputLabelProps={{ shrink: true }}
               value={fechaFin}
               onChange={(e) => setFechaFin(e.target.value)}
+              sx={{ color: 'black' }}
+              InputLabelProps={{ 
+                shrink: true,
+                style: { color: 'black' }  // Set label color
+              }}
+              InputProps={{ 
+                style: { color: 'black' }  // Set input text color
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -115,6 +131,13 @@ const SolicitudesVac = ({ onSubmit, onCancel }) => {
               rows={4}
               value={comentario}
               onChange={(e) => setComentario(e.target.value)}
+              sx={{ color: 'black' }}
+              InputLabelProps={{ 
+                style: { color: 'black' }  // Set label color
+              }}
+              InputProps={{ 
+                style: { color: 'black' }  // Set input text color
+              }}
             />
           </Grid>
           <Grid item xs={6}>

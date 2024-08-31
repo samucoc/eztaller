@@ -85,7 +85,13 @@ const SolicitudesAnti = ({ onSubmit, onCancel }) => {
                 value={monto}
                 onChange={(e) => setMonto(e.target.value)}
                 inputProps={{ min: 0 }} // Puedes establecer valores mínimos si es necesario
-
+                sx={{ color: 'black' }}
+                InputLabelProps={{ 
+                  style: { color: 'black' }  // Set label color
+                }}
+                InputProps={{ 
+                  style: { color: 'black' }  // Set input text color
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -100,6 +106,13 @@ const SolicitudesAnti = ({ onSubmit, onCancel }) => {
                 rows={4}
                 value={comentario}
                 onChange={(e) => setComentario(e.target.value)}
+                sx={{ color: 'black' }}
+                InputLabelProps={{ 
+                  style: { color: 'black' }  // Set label color
+                }}
+                InputProps={{ 
+                  style: { color: 'black' }  // Set input text color
+                }}
               />
             </Grid>
             <Grid item xs={6}>
