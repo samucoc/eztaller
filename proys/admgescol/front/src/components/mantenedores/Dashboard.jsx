@@ -14,8 +14,18 @@ import AddIcon from '@material-ui/icons/Add';
 import Swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
 import { useSelector } from 'react-redux'; // Importar useSelector
+import DashboardTipoDoc from '../mantenedores/DashboardTipoDoc';
+import { makeStyles } from '@material-ui/core/styles';
 
 const Dashboard = ({ userDNI, empresaId }) => {
+  const useStyles = makeStyles({
+    root: {
+      width: '100%',
+    },
+    container: {
+      maxHeight: 440,
+    },
+  });
   const [showForm, setShowForm] = useState(false); // State to control form visibility
   const [selectedDoc, setSelectedDoc] = useState(null); // State for selected document
   const [documents, setDocuments] = useState([]); // Use  state to manage documents
@@ -34,59 +44,90 @@ const Dashboard = ({ userDNI, empresaId }) => {
   const [docType, setDocType] = useState('');
   const [empresas, setEmpresas] = useState([]);
   const [cargos, setCargos] = useState([]);
+  const classes = useStyles();
 
   const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
 
+  const fetchDocuments = async (newType) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/documentos`); // Replace with your API endpoint
+      !newType ? setDocuments(response.data) : setDocuments(response.data.filter((doc) => doc.tipo_doc_id === newType ));
+    } catch (error) {
+      console.error('Error fetching documents:', error);
+    }
+  };
+  const fetchTipoDocumentos = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/tipo_doc`);
+      setTipoDocumentos(response.data);
+    } catch (error) {
+      console.error('Error fetching tipo_doc:', error);
+    }
+  };
+  const fetchTrabajadores = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+      
+      // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
+      const sortedTrabajadores = response.data.sort((a, b) => {
+        if (a.apellido_paterno < b.apellido_paterno) return -1;
+        if (a.apellido_paterno > b.apellido_paterno) return 1;
+        
+        // Si los apellidos paternos son iguales, ordenar por apellido_materno
+        if (a.apellido_materno < b.apellido_materno) return -1;
+        if (a.apellido_materno > b.apellido_materno) return 1;
+        
+        // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
+        if (a.nombre < b.nombre) return -1;
+        if (a.nombre > b.nombre) return 1;
+
+        return 0;
+      });
+
+      setTrabajadores(sortedTrabajadores);
+    } catch (error) {
+      console.error('Error fetching trabajadores:', error);
+    }
+  };
+  const fetchEmpresas = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/empresas`);
+      setEmpresas(response.data);
+    } catch (error) {
+      console.error('Error fetching trabajadores:', error);
+    }
+  };
+  const fetchCargos = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/cargos`);
+      setCargos(response.data);
+    } catch (error) {
+      console.error('Error fetching cargos:', error);
+    }
+  };
+
+  const handleDocTypeChangeTable = (newType) => {
+    setDocType(newType);
+    // Filtra y actualiza los documentos según el tipo seleccionado
+    fetchDocuments(newType);
+  };
 
   // Fetch documents on component mount
   useEffect( () => {
-    const fetchDocuments = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/documentos`); // Replace with your API endpoint
-        setDocuments(response.data);
-      } catch (error) {
-        console.error('Error fetching documents:', error);
-      }
-    };
-    const fetchTipoDocumentos = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/tipo_doc`);
-        setTipoDocumentos(response.data);
-      } catch (error) {
-        console.error('Error fetching tipo_doc:', error);
-      }
-    };
-    const fetchTrabajadores = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/trabajadores`);
-        setTrabajadores(response.data);
-      } catch (error) {
-        console.error('Error fetching trabajadores:', error);
-      }
-    };
-    const fetchEmpresas = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/empresas`);
-        setEmpresas(response.data);
-      } catch (error) {
-        console.error('Error fetching trabajadores:', error);
-      }
-    };
-    const fetchCargos = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/cargos`);
-        setCargos(response.data);
-      } catch (error) {
-        console.error('Error fetching cargos:', error);
-      }
-    };
+    // Si hay solo un valor para empresaIdS, actualizar el estado de selectedEmpresa
+    if (empresaIdS && empresas.filter((empresa) => empresa.id === empresaIdS).length === 1) {
+      setSelectedEmpresa(empresaIdS);
+    }
+
     fetchCargos();
     fetchEmpresas();
-    fetchDocuments();
+    fetchDocuments(null);
     fetchTrabajadores();
     fetchTipoDocumentos();
 
-  }, []);
+  }, [empresaIdS, empresas]);
+
+
 
   const handleEmpresaChange = (e) => setSelectedEmpresa(e.target.value);
   const handleTrabajadorChange = (e) => setTrabajador(e.target.value);
@@ -229,7 +270,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
   const getTrabajadorNombre = (trab) => {
     for (let i = 0; i < trabajadores.length; i++) {
       if (trabajadores[i].rut === trab) {
-        return `${trabajadores[i].apellido_paterno} ${trabajadores[i].apellido_materno} ${trabajadores[i].nombres}`;
+        return `${trabajadores[i].apellido_paterno} ${trabajadores[i].apellido_materno}, ${trabajadores[i].nombres}`;
       }
     }
     console.warn(`Trabajador con RUT ${trab} no encontrado.`);
@@ -237,8 +278,6 @@ const Dashboard = ({ userDNI, empresaId }) => {
   };
 
   const getCargoTrabajadorNombre = (cargo_id) => {
-    console.log(cargos)
-    console.log(cargo_id)
     const cargo = cargos.find((c) => c.id === cargo_id);
     return cargo ? cargo.nombre : 'Desconocido';
   };
@@ -298,34 +337,33 @@ const Dashboard = ({ userDNI, empresaId }) => {
         />
       ) : (
         <>
-          <FormControl variant="outlined" style={{ marginRight: '1rem', minWidth: '120px' }}>
-            <InputLabel id="empresa-select-label">Empresa</InputLabel>
-            <Select
-              labelId="empresa-select-label"
-              id="empresa-select"
-              value={selectedEmpresa}
-              onChange={handleEmpresaChange}
-              label="Empresa"
-            >
-              <MenuItem value="">
-                <em>Elija Empresa</em>
-              </MenuItem>
-              {empresaIdS
-                ? empresas
-                    .filter((empresa) => empresa.id === empresaIdS)
-                    .map((empresa) => (
-                      <MenuItem key={empresa.id} value={empresa.id}>
-                        {empresa.RazonSocial}
-                      </MenuItem>
-                    ))
-                : empresas.map((empresa) => (
+          <DashboardTipoDoc tipoDocumentos={tipoDocumentos} onDocTypeChange={handleDocTypeChangeTable} />
+            {empresaIdS && empresas.filter((empresa) => empresa.id === empresaIdS).length === 1 ? (
+              // Mostrar un campo oculto y no el Select
+              <input type="hidden" value={selectedEmpresa} />
+            ) : (
+              <FormControl variant="outlined" style={{ marginRight: '1rem', minWidth: '120px' }}>
+              <>
+                <InputLabel id="empresa-select-label">Empresa</InputLabel>
+                <Select
+                  labelId="empresa-select-label"
+                  id="empresa-select"
+                  value={selectedEmpresa}
+                  onChange={handleEmpresaChange}
+                  label="Empresa"
+                >
+                  <MenuItem value="">
+                    <em>Elija Empresa</em>
+                  </MenuItem>
+                  {empresas.map((empresa) => (
                     <MenuItem key={empresa.id} value={empresa.id}>
                       {empresa.RazonSocial}
                     </MenuItem>
                   ))}
-            </Select>
-          </FormControl>
-
+                </Select>
+              </>
+              </FormControl>
+            )}
           <FormControl variant="outlined" style={{ marginRight: '1rem', minWidth: '120px' }}>
             <InputLabel id="trabajador-select-label">Trabajador</InputLabel>
             <Select
@@ -342,7 +380,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
                 .filter((trab) => trab.empresa_id === selectedEmpresa)
                 .map((trab) => (
                   <MenuItem key={trab.rut} value={trab.rut}>
-                    {trab.nombres} {trab.apellido_paterno} {trab.apellido_materno}
+                    {trab.apellido_paterno} {trab.apellido_materno}, {trab.nombres} 
                   </MenuItem>
                 ))}
             </Select>
@@ -395,92 +433,66 @@ const Dashboard = ({ userDNI, empresaId }) => {
               <MenuItem value="12">Diciembre</MenuItem>
             </Select>
           </FormControl>
-
-          <FormControl variant="outlined" style={{ marginRight: '1rem', minWidth: '120px' }}>
-            <InputLabel id="doc-type-select-label">Tipo</InputLabel>
-            <Select
-              labelId="doc-type-select-label"
-              id="doc-type-select"
-              value={docType}
-              onChange={handleDocTypeChange}
-              label="Tipo"
-            >
-              <MenuItem value="">
-                <em>Seleccionar tipo...</em>
-              </MenuItem>
-              {tipoDocumentos.map((tipo) => (
-                <MenuItem key={tipo.id} value={tipo.id}>
-                  {tipo.nombre}
-                </MenuItem>
-              ))}
-              {/* Añadir más tipos según sea necesario */}
-            </Select>
-          </FormControl>  
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Mes</TableCell>
-                  <TableCell>Año</TableCell>
-                  <TableCell>Tipo Documento</TableCell>
-                  <TableCell>Cargo Trabajador</TableCell>
-                  <TableCell>Trabajador</TableCell>
-                  <TableCell>Nombre</TableCell>
-                  <TableCell>Acciones</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {filteredDocuments
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((doc) => (
-                  <TableRow key={doc.id}>
-                    <TableCell>{getMonthName(parseInt(doc.mes))}</TableCell>
-                    <TableCell>{doc.agno}</TableCell>
-                    <TableCell>{getTipoDocumentoNombre(doc.tipo_doc_id)}</TableCell>
-                    <TableCell>{getCargoTrabajadorNombre(doc.cargo_id)}</TableCell>
-                    <TableCell>{getTrabajadorNombre(doc.trabajador)}</TableCell>
-                    <TableCell>{doc.nombre}</TableCell>
-                    <TableCell>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${doc.ruta}`)}
-                        startIcon={<VisibilityIcon />}
-                        style={{ marginRight: '0.5rem' }}
-                      >
-                        Ver
-                      </Button>
-                      {/* <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => editDocument(doc)}
-                        startIcon={<EditIcon />}
-                        style={{ marginRight: '0.5rem' }}
-                      >
-                        Editar
-                      </Button> */}
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={() => deleteDocument(doc.id)}
-                        startIcon={<DeleteIcon />}
-                      >
-                        Eliminar
-                      </Button>
-                    </TableCell>
+          <Paper className={classes.root}>
+            <TableContainer 
+              className={classes.container}
+              >
+              <Table stickyHeader>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Mes</TableCell>
+                    <TableCell>Año</TableCell>
+                    <TableCell>Tipo Documento</TableCell>
+                    <TableCell>Trabajador</TableCell>
+                    <TableCell>Nombre</TableCell>
+                    <TableCell>Estado</TableCell>
+                    <TableCell>Acciones</TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            component="div"
-            count={filteredDocuments.length}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+                </TableHead>
+                <TableBody>
+                  {filteredDocuments
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((doc) => (
+                    <TableRow key={doc.id} hover >
+                      <TableCell>{getMonthName(parseInt(doc.mes))}</TableCell>
+                      <TableCell>{doc.agno}</TableCell>
+                      <TableCell>{getTipoDocumentoNombre(doc.tipo_doc_id)}</TableCell>
+                      <TableCell>{getTrabajadorNombre(doc.trabajador)}</TableCell>
+                      <TableCell>{doc.nombre}</TableCell>
+                      <TableCell>{doc.firma === "1"? "Firmado" : "Sin Firmar"}</TableCell>
+                      <TableCell>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${doc.ruta}`)}
+                          startIcon={<VisibilityIcon />}
+                          style={{ marginRight: '0.5rem' }}
+                        >
+                          Ver
+                        </Button>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={() => deleteDocument(doc.id)}
+                          startIcon={<DeleteIcon />}
+                        >
+                          Eliminar
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              component="div"
+              count={filteredDocuments.length}
+              page={page}
+              onPageChange={handleChangePage}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
         </>
       )}
 

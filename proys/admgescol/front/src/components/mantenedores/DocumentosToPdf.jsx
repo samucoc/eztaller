@@ -199,7 +199,9 @@ const DocumentosToPdf = () => {
                 <MenuItem value="">
                   <em>Seleccionar Tipo Documento...</em>
                 </MenuItem>
-                {tipoDocumentos.map((tipo) => (
+                {tipoDocumentos
+                  .filter( (tipo) => tipo.id !== "1" && tipo.id !== "5"  && tipo.id !== "6" )
+                  .map((tipo) => (
                   <MenuItem value={tipo.id} key={tipo.id}>
                     {tipo.nombre}
                   </MenuItem>

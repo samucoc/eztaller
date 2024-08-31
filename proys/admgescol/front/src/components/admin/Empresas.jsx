@@ -2,27 +2,31 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../config/apiConstants';
 import EmpresaForm from './EmpresaForm';
-import ManageEmpresa from './ManageEmpresa'; // Asegúrate de importar este componente si ya está definido
-import { Button } from '@material-ui/core'; // No es necesario importar Table, TableBody, etc., si no se utilizan
+import ManageEmpresa from './ManageEmpresa';
+import { Button, TextField, MenuItem, Select, FormControl, InputLabel } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { setEmpresaId } from '../../actions';
-import { useNavigate } from 'react-router-dom';
 
-const Empresas = ({empresaId}) => {
+const Empresas = ({ empresaId }) => {
   const [showForm, setShowForm] = useState(false);
   const [selectedEmpresa, setSelectedEmpresa] = useState(null);
   const [empresas, setEmpresas] = useState([]);
   const [comunas, setComunas] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const dispatch = useDispatch();
-  const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
+  const empresaIdS = useSelector((state) => state.empresaId);
 
-  const { id } = useParams(); // Extract the ID from the URL
+  const { id } = useParams();
 
-  // Fetch Empresas and Comunas on component mount
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchEmpresas = async () => {
       try {
@@ -49,7 +53,6 @@ const Empresas = ({empresaId}) => {
   const deleteEmpresa = async (id) => {
     try {
       const response = await axios.delete(`${API_BASE_URL}/empresas/${id}`);
-
       if (response.status === 200) {
         setEmpresas(empresas.filter(empresa => empresa.id !== id));
         console.log('Empresa eliminada exitosamente');
@@ -99,20 +102,32 @@ const Empresas = ({empresaId}) => {
     setShowForm(true);
   };
 
-  const handleCancel = () => {
-    setShowForm(false);
-    setSelectedEmpresa(null);
-  };
-
-  const navigate = useNavigate();
-
   const manageEmpresa = (empresaId) => {
     const empresa = empresas.find(emp => emp.id === empresaId);
-    dispatch(setEmpresaId(empresa?.id));  // Actualizar empresaId en Redux
-    navigate(`/Empresas/${empresaId}`);  // Navegar a ManageEmpresa
+    dispatch(setEmpresaId(empresa?.id));
+    navigate(`/Empresas/${empresaId}`);
   };
 
-  const xxx = empresaId ? manageEmpresa(empresaId) : id ? manageEmpresa(id) :  empresaIdS ?manageEmpresa(empresaIdS) : 1;
+  const filteredEmpresas = empresas.filter(empresa => 
+    empresa.NombreFantasia.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    empresa.RazonSocial.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
+  const handleItemsPerPageChange = (event) => {
+    setItemsPerPage(Number(event.target.value));
+    setCurrentPage(1); // Reset to first page when changing items per page
+  };
+
+  const currentEmpresas = filteredEmpresas.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const totalPages = Math.ceil(filteredEmpresas.length / itemsPerPage);
 
   return (
     <div className="container empresas">
@@ -122,7 +137,7 @@ const Empresas = ({empresaId}) => {
         <>
           <h3>Empresas</h3>
           <div className="d-flex justify-content-between mb-3">
-            <div></div> {/* Espacio en blanco */}
+            <div></div>
             <Button
               variant="contained"
               color="primary"
@@ -135,55 +150,102 @@ const Empresas = ({empresaId}) => {
               Agregar Empresa
             </Button>
           </div>
+          <TextField
+            label="Buscar Empresa"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Buscar por Razón Social o Nombre Fantasía"
+          />
           {showForm ? (
             <EmpresaForm
               onSubmit={addOrUpdateEmpresa}
               initialEmpresa={selectedEmpresa}
-              onCancel={handleCancel}
+              onCancel={() => setShowForm(false)}
               comunas={comunas}
             />
           ) : (
-            <div className="row">
-              {empresas.map(empresa => (
-                <div key={empresa.id} className="col-12">
-                  <div className="card mb-3">
-                    <div className="card-body">
-                      <h5 className="card-title">{empresa.NombreFantasia}</h5>
-                      <p className="card-text">{empresa.RazonSocial}</p>
-                      <div className="d-flex justify-content-end">
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          startIcon={<EditIcon />}
-                          onClick={() => manageEmpresa(empresa.id)}
-                          style={{ marginLeft: '10px' }}
-                        >
-                          Gestionar
-                        </Button>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          startIcon={<EditIcon />}
-                          onClick={() => editEmpresa(empresa)}
-                          style={{ marginLeft: '10px' }}
-                        >
-                          Editar
-                        </Button>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          startIcon={<DeleteIcon />}
-                          onClick={() => deleteEmpresa(empresa.id)}
-                          style={{ marginLeft: '10px' }}
-                        >
-                          Eliminar
-                        </Button>
+            <>
+              <div className="row" style={{ overflowY: 'auto', maxHeight: '500px' }}>
+                {currentEmpresas.map(empresa => (
+                  <div key={empresa.id} className="col-12">
+                    <div className="card mb-3">
+                      <div className="card-body">
+                        <h5 className="card-title">{empresa.NombreFantasia}</h5>
+                        <p className="card-text">{empresa.RazonSocial}</p>
+                        <div className="d-flex justify-content-end">
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            startIcon={<EditIcon />}
+                            onClick={() => manageEmpresa(empresa.id)}
+                            style={{ marginLeft: '10px' }}
+                          >
+                            Gestionar
+                          </Button>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            startIcon={<EditIcon />}
+                            onClick={() => editEmpresa(empresa)}
+                            style={{ marginLeft: '10px' }}
+                          >
+                            Editar
+                          </Button>
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            startIcon={<DeleteIcon />}
+                            onClick={() => deleteEmpresa(empresa.id)}
+                            style={{ marginLeft: '10px' }}
+                          >
+                            Eliminar
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   </div>
+                ))}
+              </div>
+              <div className="d-flex justify-content-between align-items-center mt-3">
+                <div className="pagination">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    style={{ marginRight: '10px' }}
+                  >
+                    Anterior
+                  </Button>
+                  <span>Página {currentPage} de {totalPages}</span>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    style={{ marginLeft: '10px' }}
+                  >
+                    Siguiente
+                  </Button>
                 </div>
-              ))}
-            </div>
+                <FormControl variant="outlined" className="ml-auto">
+                  <InputLabel id="items-per-page-label">Items por página</InputLabel>
+                  <Select
+                    labelId="items-per-page-label"
+                    value={itemsPerPage}
+                    onChange={handleItemsPerPageChange}
+                    label="Items por página"
+                  >
+                    <MenuItem value={5}>5</MenuItem>
+                    <MenuItem value={10}>10</MenuItem>
+                    <MenuItem value={25}>25</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+            </>
           )}
         </>
       )}

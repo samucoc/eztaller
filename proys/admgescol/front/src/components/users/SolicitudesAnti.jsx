@@ -4,9 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Importa axios
 import API_BASE_URL from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
+import { Card, CardContent, Typography, RadioGroup, FormControlLabel, Radio, TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Swal from 'sweetalert2';
 
 const SolicitudesAnti = ({ onSubmit, onCancel }) => {
@@ -68,58 +66,64 @@ const SolicitudesAnti = ({ onSubmit, onCancel }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item xs={12}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="monto"
-            label="Monto"
-            type="number" // Asegura que el campo acepte solo números
-            name="monto"
-            value={monto}
-            onChange={(e) => setMonto(e.target.value)}
-            inputProps={{ min: 0 }} // Puedes establecer valores mínimos si es necesario
+    <Card sx={{ maxWidth: 600, margin: 'auto', padding: 2 }}>
+      <CardContent>
+        <Typography variant="h5" gutterBottom>
+          Solicitud de Anticipo
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="monto"
+                label="Monto"
+                type="number" // Asegura que el campo acepte solo números
+                name="monto"
+                value={monto}
+                onChange={(e) => setMonto(e.target.value)}
+                inputProps={{ min: 0 }} // Puedes establecer valores mínimos si es necesario
 
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="comentario"
-            label="Comentario"
-            name="comentario"
-            multiline
-            rows={4}
-            value={comentario}
-            onChange={(e) => setComentario(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-          >
-            Guardar
-          </Button>
-        </Grid>
-        <Grid item xs={6}>
-          <Button
-            fullWidth
-            variant="contained"
-            onClick={handleCancel}
-          >
-            Cancelar
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="comentario"
+                label="Comentario"
+                name="comentario"
+                multiline
+                rows={4}
+                value={comentario}
+                onChange={(e) => setComentario(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                Guardar
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                variant="outlined"                 onClick={handleCancel}
+              >
+                Cancelar
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </CardContent>
+    </Card>
   );
 };
 

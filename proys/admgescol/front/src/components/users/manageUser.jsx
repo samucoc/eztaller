@@ -17,8 +17,10 @@ import SolicitudesCard from './SolicitudesCard';
 const ManageUser = () => {
   const [value, setValue] = useState(0);
   const [usuario, setUsuario] = useState(null); // Initialize as null
-  const [openModal, setOpenModal] = useState(false);
-  const [modalContent, setModalContent] = useState('');
+  const [openModalCom, setOpenModalCom] = useState(false);
+  const [modalContentCom, setModalContentCom] = useState('');
+  const [openModalNot, setOpenModalNot] = useState(false);
+  const [modalContentNot, setModalContentNot] = useState('');
   const [notificaciones, setNotificaciones] = useState([]);
   const [solicitudes, setSolicitudes] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -82,14 +84,31 @@ const ManageUser = () => {
         });
     }
 
-    const fetchTrabajadores = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/trabajadores`);
-        setTrabajadores(response.data);
-      } catch (error) {
-        console.error('Error fetching trabajadores:', error);
-      }
-    };
+const fetchTrabajadores = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+    
+    // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
+    const sortedTrabajadores = response.data.sort((a, b) => {
+      if (a.apellido_paterno < b.apellido_paterno) return -1;
+      if (a.apellido_paterno > b.apellido_paterno) return 1;
+      
+      // Si los apellidos paternos son iguales, ordenar por apellido_materno
+      if (a.apellido_materno < b.apellido_materno) return -1;
+      if (a.apellido_materno > b.apellido_materno) return 1;
+      
+      // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
+      if (a.nombre < b.nombre) return -1;
+      if (a.nombre > b.nombre) return 1;
+
+      return 0;
+    });
+
+    setTrabajadores(sortedTrabajadores);
+  } catch (error) {
+    console.error('Error fetching trabajadores:', error);
+  }
+};
 
     fetchTrabajadores();
     fetchComunicaciones();
@@ -97,13 +116,22 @@ const ManageUser = () => {
     fetchNotificaciones();
   }, [userDNI, empresaId]); // Dependencies: userDNI and empresaId
 
-  const handleOpenModal = (content) => {
-    setModalContent(content);
-    setOpenModal(true);
+  const handleOpenModalCom = (content) => {
+    setModalContentCom(content);
+    setOpenModalCom(true);
   };
 
-  const handleCloseModal = () => {
-    setOpenModal(false);
+  const handleCloseModalCom = () => {
+    setOpenModalCom(false);
+  };
+
+  const handleOpenModalNot = (content) => {
+    setModalContentNot(content);
+    setOpenModalNot(true);
+  };
+
+  const handleCloseModalNot = () => {
+    setOpenModalNot(false);
   };
 
   const handleClick = (event) => {
@@ -121,7 +149,7 @@ const ManageUser = () => {
 
   const getTrabajadorNombre = (trab) => {
     const trabajador = trabajadores.find(t => t.rut === trab);
-    return trabajador ? `${trabajador.nombres} ${trabajador.apellido_paterno} ${trabajador.apellido_materno}` : 'Desconocido';
+    return trabajador ? `${trabajador.apellido_paterno} ${trabajador.apellido_materno},  ${trabajador.nombres}` : 'Desconocido';
   };
 
   const getTipoSolicitud = (tipo_sol_id) => {
@@ -172,14 +200,12 @@ const ManageUser = () => {
               backgroundColor: value === 2 ? '#e8eaf6' : '#fff',
             }}
           >
-            <CardActionArea>
-              <CardContent>
-                <Typography variant="h6" sx={{ color: 'black' }}>
-                  Consultar Documentos
-                </Typography>
-                <DocumentosCard usuario={usuario} />
-              </CardContent>
-            </CardActionArea>
+            <CardContent>
+              <Typography variant="h6" sx={{ color: 'black' }}>
+                Consultar Documentos
+              </Typography>
+              <DocumentosCard usuario={usuario} />
+            </CardContent>
           </Card>
         </Grid>
 
@@ -204,50 +230,46 @@ const ManageUser = () => {
         {/* Notificaciones del Sistema y Comunicaciones */}
         <Grid item xs={12} md={6}>
           <Card>
-            <CardActionArea onClick={() => handleOpenModal('Notificaciones del Sistema')}>
-              <CardContent>
-                <Typography variant="h6" sx={{ color: 'black' }}>
-                  Notificaciones del Sistema
-                </Typography>
-                <List>
-                  {notificaciones.map((notificacion) => {
-                    const [, tipoSolicitud] = notificacion.controlador.split('-');
-                    return (
-                      <ListItem key={notificacion.id}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                          <Button variant="contained" color="primary" sx={{ marginRight: 2 }}>
-                            {tipoSolicitud}
-                          </Button>
-                          <ListItemText primary={notificacion.mensaje} />
-                        </Box>
-                      </ListItem>
-                    );
-                  })}
-                </List>
-              </CardContent>
-            </CardActionArea>
+            <CardContent>
+              <Typography variant="h6" sx={{ color: 'black' }}>
+                Notificaciones del Sistema
+              </Typography>
+              <List>
+                {notificaciones.map((notificacion) => {
+                  const [, tipoSolicitud] = notificacion.controlador.split('-');
+                  return (
+                    <ListItem key={notificacion.id} onClick={() => handleOpenModalNot(notificacion)}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                        <Button variant="contained" color="primary" sx={{ marginRight: 2 }}>
+                          {tipoSolicitud}
+                        </Button>
+                        <ListItemText primary={notificacion.mensaje} />
+                      </Box>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </CardContent>
           </Card>
         </Grid>
 
         <Grid item xs={12} md={6}>
           <Card>
-            <CardActionArea onClick={() => handleOpenModal('Comunicaciones')}>
-              <CardContent>
-                <Typography variant="h6" sx={{ color: 'black' }}>
-                  Comunicaciones
-                </Typography>
-                <List>
-                  {comunicaciones.map((comunicacion) => (
-                    <ListItem key={comunicacion.id}>
-                      <ListItemText
-                        primary={comunicacion.titulo}
-                        secondary={`Enviado por: ${getTrabajadorNombre(comunicacion.user_id)}`} // Display both title and user_id
-                      />
-                    </ListItem>
-                  ))}
-                </List>
-              </CardContent>
-            </CardActionArea>
+            <CardContent>
+              <Typography variant="h6" sx={{ color: 'black' }}>
+                Comunicaciones
+              </Typography>
+              <List>
+                {comunicaciones.map((comunicacion) => (
+                  <ListItem key={comunicacion.id} onClick={() => handleOpenModalCom(comunicacion)}>
+                    <ListItemText
+                      primary={comunicacion.titulo}
+                      secondary={`Enviado por: ${getTrabajadorNombre(comunicacion.user_id)}`} // Display both title and user_id
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </CardContent>
           </Card>
         </Grid>
         {/* Estados de Solicitudes */}
@@ -308,24 +330,68 @@ const ManageUser = () => {
         </Grid>
       </Grid>
       
-      {/* Modal for displaying additional information */}
-      <Modal open={openModal} onClose={handleCloseModal}>
+      <Modal open={openModalCom} onClose={handleCloseModalCom}>
         <Box
           sx={{
             position: 'absolute',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
+            width: 600,
             bgcolor: 'background.paper',
             border: '2px solid #000',
             boxShadow: 24,
             p: 4,
+            overflowY: 'auto', // Make sure the content is scrollable if needed
           }}
         >
-          <Typography variant="h6" component="h2">
-            {modalContent}
-          </Typography>
+          {modalContentCom ? (
+            <>
+              <Typography variant="h6" component="h2">
+                {modalContentCom.titulo} {/* Adjust this based on the actual structure */}
+              </Typography>
+              <Typography variant="h8" component="h4">
+                {modalContentCom.descripcion} {/* Adjust this based on the actual structure */}
+              </Typography>
+              <Typography variant="body1" component="p">
+                Enviado por: {getTrabajadorNombre(modalContentCom.user_id)} {/* Adjust this based on the actual structure */}
+              </Typography>
+              {/* Add more fields as needed */}
+            </>
+          ) : (
+            <Typography variant="body1">No hay contenido disponible.</Typography>
+          )}
+        </Box>
+      </Modal>
+
+      <Modal open={openModalNot} onClose={handleCloseModalNot}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 600,
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
+            overflowY: 'auto', // Make sure the content is scrollable if needed
+          }}
+        >
+          {modalContentNot ? (
+            <>
+              <Typography variant="h6" component="h2">
+                {modalContentNot.tipoSolicitud} {/* Adjust this based on the actual structure */}
+              </Typography>
+              <Typography variant="body1" component="p">
+                Mensaje: {modalContentNot.mensaje} {/* Adjust this based on the actual structure */}
+              </Typography>
+              {/* Add more fields as needed */}
+            </>
+          ) : (
+            <Typography variant="body1">No hay contenido disponible.</Typography>
+          )}
         </Box>
       </Modal>
     </Box>

@@ -37,14 +37,31 @@ const DashTrabDocLabReglaCarga = () => {
         setIsLoading(false);
       }
     };
-    const fetchTrabajadores = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/trabajadores`);
-        setTrabajadores(response.data);
-      } catch (error) {
-        console.error('Error fetching trabajadores:', error);
-      }
-    };
+const fetchTrabajadores = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+    
+    // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
+    const sortedTrabajadores = response.data.sort((a, b) => {
+      if (a.apellido_paterno < b.apellido_paterno) return -1;
+      if (a.apellido_paterno > b.apellido_paterno) return 1;
+      
+      // Si los apellidos paternos son iguales, ordenar por apellido_materno
+      if (a.apellido_materno < b.apellido_materno) return -1;
+      if (a.apellido_materno > b.apellido_materno) return 1;
+      
+      // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
+      if (a.nombre < b.nombre) return -1;
+      if (a.nombre > b.nombre) return 1;
+
+      return 0;
+    });
+
+    setTrabajadores(sortedTrabajadores);
+  } catch (error) {
+    console.error('Error fetching trabajadores:', error);
+  }
+};
 
     fetchTrabajadores();
     fetchData();

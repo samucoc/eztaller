@@ -22,7 +22,7 @@ const Login = ({ username, password, loading, error, setUsername, setPassword, h
                 <img src="logo.png" alt="Logo" style={{ maxWidth: '100%', height: 'auto' }} />
                 <br />
                 <br />
-                <Typography variant="h4">RRHH-GESCOL</Typography>
+                <Typography variant="h4">GRHIN-GESCOL</Typography>
               </div>
               <form onSubmit={handleSubmit}>
                 <TextField
@@ -32,6 +32,12 @@ const Login = ({ username, password, loading, error, setUsername, setPassword, h
                   margin="normal"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
+                  InputProps={{
+                    style: { color: 'black' }  // Text color inside the input
+                  }}
+                  InputLabelProps={{
+                    style: { color: 'black' }  // Label color
+                  }}
                 />
                 <TextField
                   label="Contraseña"
@@ -41,6 +47,12 @@ const Login = ({ username, password, loading, error, setUsername, setPassword, h
                   margin="normal"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  InputProps={{
+                    style: { color: 'black' }  // Text color inside the input
+                  }}
+                  InputLabelProps={{
+                    style: { color: 'black' }  // Label color
+                  }}
                 />
                 <Button
                   type="submit"

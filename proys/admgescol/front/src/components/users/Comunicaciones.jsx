@@ -63,7 +63,7 @@ const Comunicaciones = () => {
 
   const getTrabajadorNombre = (trab) => {
     const trabajador = trabajadores.find(t => t.rut === trab);
-    return trabajador ? `${trabajador.nombres} ${trabajador.apellido_paterno} ${trabajador.apellido_materno}` : 'Desconocido';
+    return trabajador ? `${trabajador.apellido_paterno} ${trabajador.apellido_materno},  ${trabajador.nombres}` : 'Desconocido';
   };
 
   return (

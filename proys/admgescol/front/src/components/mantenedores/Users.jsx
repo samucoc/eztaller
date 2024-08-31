@@ -6,11 +6,21 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
+import { makeStyles } from '@material-ui/core/styles';
 
 const Users = () => {
+  const useStyles = makeStyles({
+    root: {
+      width: '100%',
+    },
+    container: {
+      maxHeight: 440,
+    },
+  });
   const [showForm, setShowForm] = useState(false); // State to control form visibility
   const [selectedUser, setSelectedUser] = useState(null); // State for selected User
   const [Users, setUsers] = useState([]); // Use state to manage Users
+  const classes = useStyles();
 
   const fetchUsers = async () => {
     try {
@@ -104,8 +114,11 @@ const Users = () => {
           onCancel={handleCancel}
         />
       ) : (
-        <TableContainer component={Paper}>
-          <Table>
+        <Paper className={classes.root}>
+        <TableContainer 
+          className={classes.container}
+          >
+          <Table stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>
@@ -133,6 +146,7 @@ const Users = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        </Paper>
       )}
     </div>
   );

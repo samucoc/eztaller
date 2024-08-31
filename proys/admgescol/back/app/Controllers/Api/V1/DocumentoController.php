@@ -735,7 +735,7 @@ class DocumentoController extends ResourceController
 
                     if ($trabajador) {
                         foreach($trabajador as $t){
-                            $nombreTrabajador = $t->nombres.' '.$t->apellido_paterno.' '.$t->apellido_materno;
+                            $nombreTrabajador = $t->apellido_paterno.' '.$t->apellido_materno.', '.$t->nombres;
                         }
                     } else {
                         $nombreTrabajador = 'Nombre no disponible';
@@ -759,8 +759,8 @@ class DocumentoController extends ResourceController
 
                     // Registrar notificación
                     $notificacionController = new \App\Controllers\Api\V1\NotificacionController();
-                    $mensaje = "Liquidacion por carga masiva con nombre {$nombre} ha sido insertado.";
-                    $notificacionController->logNotification($trabajador, 'insert', 'documento - liquidacion', $mensaje);
+                    $mensaje = "Liquidacion por carga masiva con nombre {$docu->nombre} ha sido insertado.";
+                    $notificacionController->logNotification($numberToFind, 'insert', 'documento - liquidacion', $mensaje);
 
                 } 
     

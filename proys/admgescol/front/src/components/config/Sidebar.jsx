@@ -248,9 +248,9 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
           )}
           {(role === 3) && (
             <>
-              {/* Sección de Comunicaciones */}
-              <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Comunicaciones</Typography>
-              <ListItem button onClick={() => handleOptionChange('ComunicacionesUsers')}
+            {/* Sección de Consultar Documentos */}
+            <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Consultar Documentos</Typography>
+              <ListItem button onClick={() => handleOptionChange('ContratosUser')}
                   sx={{
                     padding: 0,
                     margin: 0,
@@ -259,9 +259,48 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Mail sx={{ color: green[700] }} />
+                  <Description sx={{ color: green[700] }} />
                 </ListItemIcon>
-                <ListItemText primary="Comunicaciones" />
+                <ListItemText primary="Contratos y Anexos" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('LiquidacionesUser')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Receipt sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Liquidaciones" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('ReglamentosUser')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Gavel sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Reglamentos" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('OtrosUser')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <FolderOpen sx={{ color: green[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Otros" />
               </ListItem>
             
               <Divider sx={{ my: 2 }} />
@@ -323,9 +362,9 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
             
               <Divider sx={{ my: 2 }} />
             
-              {/* Sección de Consultar Documentos */}
-              <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Consultar Documentos</Typography>
-              <ListItem button onClick={() => handleOptionChange('ContratosUser')}
+              {/* Sección de Comunicaciones */}
+              <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Comunicaciones</Typography>
+              <ListItem button onClick={() => handleOptionChange('ComunicacionesUsers')}
                   sx={{
                     padding: 0,
                     margin: 0,
@@ -334,48 +373,9 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Description sx={{ color: green[700] }} />
+                  <Mail sx={{ color: green[700] }} />
                 </ListItemIcon>
-                <ListItemText primary="Contratos y Anexos" />
-              </ListItem>
-              <ListItem button onClick={() => handleOptionChange('LiquidacionesUser')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <Receipt sx={{ color: green[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Liquidaciones" />
-              </ListItem>
-              <ListItem button onClick={() => handleOptionChange('ReglamentosUser')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <Gavel sx={{ color: green[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Reglamentos" />
-              </ListItem>
-              <ListItem button onClick={() => handleOptionChange('OtrosUser')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <FolderOpen sx={{ color: green[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Otros" />
+                <ListItemText primary="Comunicaciones" />
               </ListItem>
             </>
             

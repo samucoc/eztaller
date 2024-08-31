@@ -25,8 +25,18 @@ import * as XLSX from 'xlsx';
 import { useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { makeStyles } from '@material-ui/core/styles';
 
 const Trabajadores = ({ empresaId }) => {
+  const useStyles = makeStyles({
+    root: {
+      width: '100%',
+    },
+    container: {
+      maxHeight: 440,
+    },
+  });
+
   const [showForm, setShowForm] = useState(false);
   const [selectedTrabajador, setSelectedTrabajador] = useState(null);
   const [trabajadores, setTrabajadores] = useState([]);
@@ -37,6 +47,7 @@ const Trabajadores = ({ empresaId }) => {
   const [empresas, setEmpresas] = useState([]);
   const roleSession = useSelector((state) => state.roleSession);
   const empresaIdS = useSelector((state) => state.empresaId);
+  const classes = useStyles();
 
   const fetchTrabajadores = async () => {
     try {
@@ -59,9 +70,16 @@ const Trabajadores = ({ empresaId }) => {
         console.error('Error fetching empresas:', error);
       }
     };
+
+    // Si hay solo un valor para empresaIdS, actualizar el estado de selectedEmpresa
+    if (empresaIdS && empresas.filter((empresa) => empresa.id === empresaIdS).length === 1) {
+      setSelectedEmpresa(empresaIdS);
+    }
+
+    
     fetchEmpresas();
     fetchTrabajadores();
-  }, [selectedTrabajador]);
+  }, [selectedTrabajador, empresaIdS, empresas]);
 
   const deleteTrabajador = async (id) => {
     try {
@@ -208,36 +226,35 @@ const Trabajadores = ({ empresaId }) => {
       ) : (
         <div>
           <Grid container spacing={3} alignItems="center">
-            <Grid item xs={12} sm={4}>
-              <FormControl variant="outlined" fullWidth margin="normal">
-                <InputLabel id="empresa-select-label">Empresa</InputLabel>
-                <Select
-                  labelId="empresa-select-label"
-                  id="empresa-select"
-                  value={selectedEmpresa}
-                  onChange={handleEmpresaChange}
-                  label="Empresa"
-                >
-                  <MenuItem value="">
-                    <em>Elija Empresa</em>
-                  </MenuItem>
-                  {empresaIdS
-                    ? empresas
-                        .filter((empresa) => empresa.id === empresaIdS)
-                        .map((empresa) => (
-                          <MenuItem key={empresa.id} value={empresa.id}>
-                            {empresa.RazonSocial}
-                          </MenuItem>
-                        ))
-                    : empresas.map((empresa) => (
+              {empresaIdS && empresas.filter((empresa) => empresa.id === empresaIdS).length === 1 ? (
+                // Mostrar un campo oculto y no el Select
+                <input type="hidden" value={selectedEmpresa} />
+              ) : (
+                <Grid item xs={12} sm={4}>
+                  <FormControl variant="outlined" style={{ marginRight: '1rem', minWidth: '120px' }}>
+                  <>
+                    <InputLabel id="empresa-select-label">Empresa</InputLabel>
+                    <Select
+                      labelId="empresa-select-label"
+                      id="empresa-select"
+                      value={selectedEmpresa}
+                      onChange={handleEmpresaChange}
+                      label="Empresa"
+                    >
+                      <MenuItem value="">
+                        <em>Elija Empresa</em>
+                      </MenuItem>
+                      {empresas.map((empresa) => (
                         <MenuItem key={empresa.id} value={empresa.id}>
                           {empresa.RazonSocial}
                         </MenuItem>
                       ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={8} className="text-end">
+                    </Select>
+                  </>
+                  </FormControl>
+                </Grid>
+              )}
+            <Grid item xs={12} sm={12} className="text-end">
               <Button
                 onClick={() => {
                   setSelectedTrabajador(null);
@@ -268,127 +285,131 @@ const Trabajadores = ({ empresaId }) => {
               </label>
             </Grid>
           </Grid>
-          <TableContainer component={Paper} className="mt-3">
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Foto</TableCell>
-                  <TableCell>RUT</TableCell>
-                  <TableCell>Nombres</TableCell>
-                  <TableCell>Apellido Paterno</TableCell>
-                  <TableCell>Apellido Materno</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Teléfono</TableCell>
-                  <TableCell>Empresa</TableCell>
-                  <TableCell>Acciones</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-              {!empresaIdS
-                    ? 
-                      filteredTrabajadores
-                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                      .map((trabajador) => (
-                      <TableRow key={trabajador.id}>
-                        <TableCell>
-                          <img
-                            src={trabajador.foto ? `${API_BASE_URL}/trabajadores/getFoto/${trabajador.foto}` : defaultPhoto}
-                            alt="Foto Trabajador"
-                            className="img-thumbnail"
-                            width="50"
-                            height="50"
-                          />
-                        </TableCell>
-                        <TableCell>{trabajador.rut}-{trabajador.dv}</TableCell>
-                        <TableCell>{trabajador.nombres}</TableCell>
-                        <TableCell>{trabajador.apellido_paterno}</TableCell>
-                        <TableCell>{trabajador.apellido_materno}</TableCell>
-                        <TableCell>{trabajador.email}</TableCell>
-                        <TableCell>{trabajador.telefono}</TableCell>
-                        <TableCell>{getEmpresaRazonSocial(trabajador.empresa_id)}</TableCell>
-                        <TableCell>
-                          <Button
-                            onClick={() => setSelectedTrabajador(trabajador)}
-                            variant="contained"
-                            color="primary"
-                            startIcon={<EditIcon />}
-                          >
-                            Editar
-                          </Button>
-                          <Button
-                            onClick={() => {
-                              if (window.confirm('¿Estás seguro de eliminar este trabajador?')) {
-                                deleteTrabajador(trabajador.id);
-                              }
-                            }}
-                            variant="contained"
-                            color="secondary"
-                            startIcon={<DeleteIcon />}
-                            style={{ marginLeft: '0.5rem' }}
-                          >
-                            Eliminar
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))
-                    : 
-                      filteredTrabajadores
-                      .filter( (trabajador) => trabajador.empresa_id === empresaIdS)
-                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                      .map((trabajador) => (
-                      <TableRow key={trabajador.id}>
-                        <TableCell>
-                          <img
-                            src={trabajador.foto ? `${API_BASE_URL}/trabajadores/getFoto/${trabajador.foto}` : defaultPhoto}
-                            alt="Foto Trabajador"
-                            className="img-thumbnail"
-                            width="50"
-                            height="50"
-                          />
-                        </TableCell>
-                        <TableCell>{trabajador.rut}-{trabajador.dv}</TableCell>
-                        <TableCell>{trabajador.nombres}</TableCell>
-                        <TableCell>{trabajador.apellido_paterno}</TableCell>
-                        <TableCell>{trabajador.apellido_materno}</TableCell>
-                        <TableCell>{trabajador.email}</TableCell>
-                        <TableCell>{trabajador.telefono}</TableCell>
-                        <TableCell>{getEmpresaRazonSocial(trabajador.empresa_id)}</TableCell>
-                        <TableCell>
-                          <Button
-                            onClick={() => setSelectedTrabajador(trabajador)}
-                            variant="contained"
-                            color="primary"
-                            startIcon={<EditIcon />}
-                          >
-                            Editar
-                          </Button>
-                          <Button
-                            onClick={() => {
-                              if (window.confirm('¿Estás seguro de eliminar este trabajador?')) {
-                                deleteTrabajador(trabajador.id);
-                              }
-                            }}
-                            variant="contained"
-                            color="secondary"
-                            startIcon={<DeleteIcon />}
-                            style={{ marginLeft: '0.5rem' }}
-                          >
-                            Eliminar
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            component="div"
-            count={filteredTrabajadores.length}
-            page={page}
-            onPageChange={handleChangePage}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+          <Paper className={classes.root}>
+            <TableContainer 
+              className={classes.container}
+              >
+              <Table stickyHeader>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Foto</TableCell>
+                    <TableCell>RUT</TableCell>
+                    <TableCell>Nombres</TableCell>
+                    <TableCell>Apellido Paterno</TableCell>
+                    <TableCell>Apellido Materno</TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell>Teléfono</TableCell>
+                    <TableCell>Empresa</TableCell>
+                    <TableCell>Acciones</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                {!empresaIdS
+                      ? 
+                        filteredTrabajadores
+                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        .map((trabajador) => (
+                        <TableRow key={trabajador.id} hover >
+                          <TableCell>
+                            <img
+                              src={trabajador.foto ? `${API_BASE_URL}/trabajadores/getFoto/${trabajador.foto}` : defaultPhoto}
+                              alt="Foto Trabajador"
+                              className="img-thumbnail"
+                              width="50"
+                              height="50"
+                            />
+                          </TableCell>
+                          <TableCell>{trabajador.rut}-{trabajador.dv}</TableCell>
+                          <TableCell>{trabajador.nombres}</TableCell>
+                          <TableCell>{trabajador.apellido_paterno}</TableCell>
+                          <TableCell>{trabajador.apellido_materno}</TableCell>
+                          <TableCell>{trabajador.email}</TableCell>
+                          <TableCell>{trabajador.telefono}</TableCell>
+                          <TableCell>{getEmpresaRazonSocial(trabajador.empresa_id)}</TableCell>
+                          <TableCell>
+                            <Button
+                              onClick={() => setSelectedTrabajador(trabajador)}
+                              variant="contained"
+                              color="primary"
+                              startIcon={<EditIcon />}
+                            >
+                              Editar
+                            </Button>
+                            <Button
+                              onClick={() => {
+                                if (window.confirm('¿Estás seguro de eliminar este trabajador?')) {
+                                  deleteTrabajador(trabajador.id);
+                                }
+                              }}
+                              variant="contained"
+                              color="secondary"
+                              startIcon={<DeleteIcon />}
+                              style={{ marginLeft: '0.5rem' }}
+                            >
+                              Eliminar
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                      : 
+                        filteredTrabajadores
+                        .filter( (trabajador) => trabajador.empresa_id === empresaIdS)
+                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        .map((trabajador) => (
+                        <TableRow key={trabajador.id}>
+                          <TableCell>
+                            <img
+                              src={trabajador.foto ? `${API_BASE_URL}/trabajadores/getFoto/${trabajador.foto}` : defaultPhoto}
+                              alt="Foto Trabajador"
+                              className="img-thumbnail"
+                              width="50"
+                              height="50"
+                            />
+                          </TableCell>
+                          <TableCell>{trabajador.rut}-{trabajador.dv}</TableCell>
+                          <TableCell>{trabajador.nombres}</TableCell>
+                          <TableCell>{trabajador.apellido_paterno}</TableCell>
+                          <TableCell>{trabajador.apellido_materno}</TableCell>
+                          <TableCell>{trabajador.email}</TableCell>
+                          <TableCell>{trabajador.telefono}</TableCell>
+                          <TableCell>{getEmpresaRazonSocial(trabajador.empresa_id)}</TableCell>
+                          <TableCell>
+                            <Button
+                              onClick={() => setSelectedTrabajador(trabajador)}
+                              variant="contained"
+                              color="primary"
+                              startIcon={<EditIcon />}
+                            >
+                              Editar
+                            </Button>
+                            <Button
+                              onClick={() => {
+                                if (window.confirm('¿Estás seguro de eliminar este trabajador?')) {
+                                  deleteTrabajador(trabajador.id);
+                                }
+                              }}
+                              variant="contained"
+                              color="secondary"
+                              startIcon={<DeleteIcon />}
+                              style={{ marginLeft: '0.5rem' }}
+                            >
+                              Eliminar
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              component="div"
+              count={filteredTrabajadores.length}
+              page={page}
+              onPageChange={handleChangePage}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
         </div>
       )}
     </div>

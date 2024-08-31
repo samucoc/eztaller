@@ -49,14 +49,31 @@ import React, { useState, useEffect } from 'react';
       }
     };
 
-    const fetchTrabajadores = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/trabajadores`);
-        setTrabajadores(response.data);
-      } catch (error) {
-        console.error('Error fetching trabajadores:', error);
-      }
-    };
+const fetchTrabajadores = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+    
+    // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
+    const sortedTrabajadores = response.data.sort((a, b) => {
+      if (a.apellido_paterno < b.apellido_paterno) return -1;
+      if (a.apellido_paterno > b.apellido_paterno) return 1;
+      
+      // Si los apellidos paternos son iguales, ordenar por apellido_materno
+      if (a.apellido_materno < b.apellido_materno) return -1;
+      if (a.apellido_materno > b.apellido_materno) return 1;
+      
+      // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
+      if (a.nombre < b.nombre) return -1;
+      if (a.nombre > b.nombre) return 1;
+
+      return 0;
+    });
+
+    setTrabajadores(sortedTrabajadores);
+  } catch (error) {
+    console.error('Error fetching trabajadores:', error);
+  }
+};
 
     fetchTrabajadores();
     fetchData();
@@ -100,7 +117,7 @@ import React, { useState, useEffect } from 'react';
 
   const getTrabajadorNombre = (trab) => {
     const trabajador = trabajadores.find(t => t.rut === trab);
-    return trabajador ? `${trabajador.nombres} ${trabajador.apellido_paterno} ${trabajador.apellido_materno}` : 'Desconocido';
+    return trabajador ? `${trabajador.apellido_paterno} ${trabajador.apellido_materno},  ${trabajador.nombres}` : 'Desconocido';
   };
 
 

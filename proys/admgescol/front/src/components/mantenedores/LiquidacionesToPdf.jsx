@@ -68,14 +68,14 @@ const LiquidacionesToPdf = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (!month || !year || !file) {
       swal.fire('Error', 'Por favor, complete todos los campos.', 'error');
       return;
     }
-
-    // Mostrar mensaje de "Cargando"
-    swal.fire({
+  
+    // Mostrar mensaje de "Cargando" y guardar la instancia
+    const loadingSwal = swal.fire({
       title: 'Cargando',
       text: 'Por favor, espere mientras se suben los datos...',
       allowOutsideClick: false,
@@ -83,15 +83,15 @@ const LiquidacionesToPdf = () => {
         swal.showLoading();
       }
     });
-
+  
     setLoading(true);
-
+  
     try {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('output_type', 'PDF/A-1b');
       formData.append('rasterize_if_errors_encountered', 'on');
-
+  
       const config = {
         method: 'post',
         url: 'https://api.pdfrest.com/pdfa',
@@ -101,39 +101,39 @@ const LiquidacionesToPdf = () => {
         },
         data: formData,
       };
-
+  
       const pdfRestResponse = await axios(config);
-
+  
       const convertedPdfUrl = pdfRestResponse.data.outputUrl;
-
+  
       // Obtener el archivo convertido desde la URL
       const convertedFileResponse = await axios.get(convertedPdfUrl, {
         responseType: 'blob',
       });
-
+  
       const convertedFile = new File([convertedFileResponse.data], 'converted.pdf', {
         type: 'application/pdf',
       });
-
+  
       // Preparar el FormData con el archivo convertido
       const uploadFormData = new FormData();
       uploadFormData.append('empresa_id', empresaIdS ? empresaIdS : empresa_id);
       uploadFormData.append('month', month);
       uploadFormData.append('year', year);
       uploadFormData.append('file', convertedFile);
-
+  
       // Enviar el formulario al servidor usando axios
       const response = await axios.post(`${API_BASE_URL}/documentos/upload`, uploadFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-
+  
       console.log('Respuesta del servidor:', response.data);
-
+  
       // Construir mensaje para swal basado en la respuesta del servidor
       let messageContent = '';
-
+  
       if (Array.isArray(response.data.message)) {
         response.data.message.forEach((worker) => {
           const nombreTrabajador = worker.nombre_trabajador || 'Nombre no disponible';
@@ -143,15 +143,21 @@ const LiquidacionesToPdf = () => {
       } else {
         messageContent = 'No se encontraron trabajadores ni archivos generados.';
       }
-
+  
       setResult(response.data.message);
+      
+      // Mostrar mensaje de éxito
+      swal.fire('Éxito', 'Los datos se han subido correctamente.', 'success');
     } catch (error) {
       console.error('Error al enviar los datos:', error);
       swal.fire('Error', 'Error al enviar los datos.', 'error');
     } finally {
       setLoading(false);
+      // Cerrar el mensaje de "Cargando"
+      loadingSwal.close();
     }
   };
+  
 
   return (
     <Container className="liquidaciones-to-pdf" maxWidth="sm">

@@ -148,15 +148,58 @@ const SolicitudesCard = ({ empresaId }) => {
                 <TableCell>
                   {solicitud.status === '1' && (
                     <>
-                      <Button variant="contained" color="success" onClick={() => handleAccept(2, solicitud.id)}>Aceptar</Button>
-                      <Button variant="contained" color="error" onClick={() => handleReject(3, solicitud.id)} sx={{ ml: 1 }}>Rechazar</Button>
+                      <Button 
+                        variant="contained" 
+                        onClick={() => handleReject(3, solicitud.id)} 
+                        sx={{ 
+                          ml: 1, 
+                          backgroundColor: 'white', 
+                          color: 'red', 
+                          border: 'none',
+                          '&:hover': { backgroundColor: 'gray' } // Maintain same style on hover
+                        }}
+                      >
+                        Rechazar
+                      </Button>
+                      <Button 
+                        variant="contained" 
+                        onClick={() => handleAccept(2, solicitud.id)}
+                        sx={{ 
+                          backgroundColor: 'white', 
+                          color: 'green', 
+                          border: '1px solid green',
+                          '&:hover': { backgroundColor: 'white' } // Maintain same style on hover
+                        }}
+                      >
+                        Aceptar
+                      </Button>
                     </>
                   )}
                   {solicitud.status === '2' && (
-                    <Button variant="contained" color="success" disabled>Aceptado</Button>
+                    <Button 
+                      variant="contained" 
+                      disabled
+                      sx={{ 
+                        backgroundColor: 'gray', 
+                        color: 'green', 
+                        border: '1px solid green' 
+                      }}
+                    >
+                      Aceptado
+                    </Button>
                   )}
                   {solicitud.status === '3' && (
-                    <Button variant="contained" color="error" disabled>Rechazado</Button>
+                    <Button 
+                      variant="contained" 
+                      disabled
+                      sx={{ 
+                        backgroundColor: 'gray', 
+                        color: 'red', 
+                        border: '1px solid red' 
+                      }}
+                    >
+                      Rechazado
+                    </Button>
                   )}
                 </TableCell>
               </TableRow>

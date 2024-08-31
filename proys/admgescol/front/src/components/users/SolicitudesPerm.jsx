@@ -27,6 +27,10 @@ const SolicitudesPerm = () => {
     setFormData({ ...formData, fecha: '', horas: '', time: '', goce: '', motivo: '', fecha_fin: '' }); // Reset form data on option change
   };
 
+  const handleCancel = () =>{
+    navigate('/UserDashboard')
+  }
+  
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -395,7 +399,8 @@ const SolicitudesPerm = () => {
           </Button>
         </Grid>
         <Grid item xs={6}>
-          <Button fullWidth variant="outlined" onClick={() => setSelectedOption('')}>
+          <Button fullWidth variant="outlined"  onClick={handleCancel}
+          >
             Cancelar
           </Button>
         </Grid>
