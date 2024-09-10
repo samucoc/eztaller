@@ -14,10 +14,27 @@ const initialState = {
   photoWorker: '',
   cargo: '',
   nombre: '',
+  notificaciones: [],
+  notificacionesNoVistas: 0, // Contador de no vistas
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'SET_NOTIFICACIONES':
+      return {
+        ...state,
+        notificaciones: action.payload,
+        notificacionesNoVistas: action.payload.filter(notif => notif.vista === 'false' ||  notif.vista === null).length,
+      };
+    case 'SET_NOTIFICACIONES_VISTAS':
+      return {
+        ...state,
+        notificaciones: state.notificaciones.map(notif => ({
+          ...notif,
+          vista: 'true',
+        })),
+        notificacionesNoVistas: 0,
+      };
     case 'SET_LOGGED_IN':
       return { ...state, loggedIn: action.payload };
     case 'SET_USER_DNI':

@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
-import API_BASE_URL from '../config/apiConstants'; 
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here 
 import IconButton from '@mui/material/IconButton';
 import PhotoLibraryOutlinedIcon from '@mui/icons-material/PhotoLibraryOutlined';
 import { useTheme } from '@mui/material/styles';
@@ -18,11 +18,9 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
     apellido_paterno: initialTrabajador ? initialTrabajador.apellido_paterno : '',
     apellido_materno: initialTrabajador ? initialTrabajador.apellido_materno : '',
     nombres: initialTrabajador ? initialTrabajador.nombres : '',
-    nombre_social: initialTrabajador ? initialTrabajador.nombre_social : '',
     fecha_nac: initialTrabajador ? initialTrabajador.fecha_nac : new Date(), 
     nacionalidad: initialTrabajador ? initialTrabajador.nacionalidad : '',
     cargo_id: initialTrabajador ? initialTrabajador.cargo_id :'',
-    sexo_id: initialTrabajador ? initialTrabajador.sexo_id :'',
     foto: initialTrabajador ? initialTrabajador.foto : '',
     direccion: initialTrabajador ? initialTrabajador.direccion : '',
     comuna_id: initialTrabajador ? initialTrabajador.comuna_id :'',
@@ -31,6 +29,8 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
     contacto_emergencia: initialTrabajador ? initialTrabajador.contacto_emergencia : '',
     telefono_emergencia: initialTrabajador ? initialTrabajador.telefono_emergencia : '',
     estado_id: initialTrabajador ? initialTrabajador.estado_id : '',
+    fecha_ingreso: initialTrabajador ? initialTrabajador.fecha_ingreso : '',
+    tipo_contrato: initialTrabajador ? initialTrabajador.tipo_contrato : '',
   });
 
   const [previewUrl, setPreviewUrl] = useState(formData.foto || '');
@@ -54,6 +54,19 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
       setFormData({ ...formData, foto: selectedFile });
     }
   }, [selectedFile]);
+
+  const contractTypes = [
+    { value: 'plazo_fijo', label: 'Contrato a Plazo Fijo' },
+    { value: 'indefinido', label: 'Contrato Indefinido' },
+    { value: 'obra_faena', label: 'Contrato de Trabajo por Obra o Faena' },
+    { value: 'tiempo_parcial', label: 'Contrato de Trabajo a Tiempo Parcial' },
+    { value: 'tiempo_completo', label: 'Contrato de Trabajo a Tiempo Completo' },
+    { value: 'necesidades_empresa', label: 'Contrato de Trabajo por Necesidades de la Empresa' },
+    { value: 'trabajo_hogar', label: 'Contrato de Trabajo para el Hogar' },
+    { value: 'menores_edad', label: 'Contrato de Trabajo para Menores de Edad' },
+    { value: 'discapacidad', label: 'Contrato de Trabajo para Personas con Discapacidad' },
+    { value: 'aprendizaje', label: 'Contrato de Aprendizaje' },
+  ];
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -324,6 +337,22 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
             variant="outlined"
             
             fullWidth
+            id="fecha_ingreso"
+            label="Fecha de Ingreso"
+            name="fecha_ingreso"
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={formData.fecha_ingreso}
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            variant="outlined"
+            
+            fullWidth
             id="nacionalidad"
             label="Nacionalidad"
             name="nacionalidad"
@@ -355,16 +384,16 @@ const TrabajadorForm = ({ onSubmit, onCancel, initialTrabajador, empresaId }) =>
             variant="outlined"
             
             fullWidth
-            id="sexo_id"
-            label="Sexo"
-            name="sexo_id"
+            id="tipo_contrato"
+            label="Tipo de Contrato"
+            name="tipo_contrato"
             select
-            value={formData.sexo_id}
+            value={formData.tipo_contrato}
             onChange={handleChange}
           >
-            {sexos.map((sexo) => (
-              <MenuItem key={sexo.id} value={sexo.id} selected={initialTrabajador && sexo.id === initialTrabajador.sexo_id}>
-                {sexo.nombre}
+            {contractTypes.map((type) => (
+              <MenuItem key={type.value} value={type.value}>
+                {type.label}
               </MenuItem>
             ))}
           </TextField>

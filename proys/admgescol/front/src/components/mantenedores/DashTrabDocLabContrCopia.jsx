@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import API_BASE_URL from '../config/apiConstants';
-import API_DOWNLOAD_URL from '../config/apiConstants1';
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
+
 import { useSelector } from 'react-redux';
 import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Dialog, DialogTitle, DialogContent, Paper, Typography, Box } from '@mui/material';
 import { Modal, TextField } from '@mui/material';
@@ -77,7 +77,7 @@ const fetchTrabajadores = async () => {
 
     fetchTrabajadores();
     fetchData();
-  }, [userDNI, empresaId, roleSession]);
+  }, []);
 
   if (isLoading) {
     return <Typography variant="h6" color="black">Loading data...</Typography>;
@@ -120,6 +120,14 @@ const fetchTrabajadores = async () => {
     return trabajador ? `${trabajador.apellido_paterno} ${trabajador.apellido_materno},  ${trabajador.nombres}` : 'Desconocido';
   };
 
+  const getMonthName = (monthNumber) => {
+    const monthNames = [
+      'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ];
+    return monthNames[monthNumber - 1]; // Restar 1 ya que el índice del array comienza en 0
+  };
+
 
   const handleSignDocument = async () => {
     try {
@@ -151,8 +159,7 @@ const fetchTrabajadores = async () => {
           <TableHead>
             <TableRow>
               <TableCell sx={{ color: 'black' }}>Trabajador</TableCell>
-              <TableCell sx={{ color: 'black' }}>Mes</TableCell>
-              <TableCell sx={{ color: 'black' }}>Año</TableCell>
+              <TableCell sx={{ color: 'black' }}>Mes - Año</TableCell>
               <TableCell sx={{ color: 'black' }}>Nombre</TableCell>
               <TableCell sx={{ color: 'black' }}>Acciones</TableCell>
             </TableRow>
@@ -161,7 +168,7 @@ const fetchTrabajadores = async () => {
             {currentContracts.map((d) => (
               <TableRow key={d.ruta}>
                 <TableCell sx={{ color: 'black' }}>{getTrabajadorNombre(d.trabajador)}</TableCell>
-                <TableCell sx={{ color: 'black' }}>{d.mes}</TableCell>
+                <TableCell sx={{ color: 'black' }}>{getMonthName(d.mes)} - {d.agno}</TableCell>
                 <TableCell sx={{ color: 'black' }}>{d.agno}</TableCell>
                 <TableCell sx={{ color: 'black' }}>{d.nombre}</TableCell>
                 <TableCell>

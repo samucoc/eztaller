@@ -1,0 +1,446 @@
+CRITICAL - 2024-09-10 02:16:49 --> Object of class stdClass could not be converted to string
+in APPPATH\Controllers\Api\V1\NotificacionController.php on line 153.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\NotificacionController->marcarComoVistas()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\NotificacionController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-10 02:33:39 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?,?,?,?,?)' at line 1 in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('insert into not...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('insert into not...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('insert into not...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\NotificacionController.php(146): CodeIgniter\Database\BaseConnection->query('insert into not...', Array)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\SolicitudController.php(83): App\Controllers\Api\V1\NotificacionController->logNotification('6117483', 'insert', 'solicitud - Ant...', 'Solicituid del ...')
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-09-10 02:33:39 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?,?,?,?,?)' at line 1
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\NotificacionController.php(146): CodeIgniter\Database\BaseConnection->query('insert into notificaciones(fecha, trabajador, tipo, controlador, mensaje, vista) values(?,?,?,?,?)', [...])
+ 2 APPPATH\Controllers\Api\V1\SolicitudController.php(83): App\Controllers\Api\V1\NotificacionController->logNotification('6117483', 'insert', 'solicitud - Anticipos', 'Solicituid del tipo Anticipos con trabajador rut 6117483 ha sido insertado.')
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\SolicitudController->create()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\SolicitudController))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-10 03:15:37 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'root', '', 'gescolcl_adminr...', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\CargoController.php(30): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index()
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\CargoController.php(30): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-10 03:15:37 --> Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `cargos`
+WHERE `cargos`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\CargoController.php(30): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-10 03:15:37 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'root', '', 'gescolcl_adminr...', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\EmpresaController.php(30): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\EmpresaController->index()
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\EmpresaController))
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\EmpresaController.php(30): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\EmpresaController->index()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\EmpresaController))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-10 03:15:37 --> Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `empresas`
+WHERE `empresas`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\EmpresaController.php(30): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\EmpresaController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\EmpresaController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-10 03:15:38 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'root', '', 'gescolcl_adminr...', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\TrabajadorController.php(58): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->index()
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\TrabajadorController.php(58): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->index()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-10 03:15:38 --> Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `trabajadores`
+WHERE `trabajadores`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\TrabajadorController.php(58): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-10 03:15:38 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'root', '', 'gescolcl_adminr...', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(42): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->index()
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(42): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->index()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-10 03:15:38 --> Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `documentos`
+WHERE `documentos`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\DocumentoController.php(42): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-10 03:15:38 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'root', '', 'gescolcl_adminr...', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\Tipo_DocController.php(30): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\Tipo_DocController->index()
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\Tipo_DocController))
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\Tipo_DocController.php(30): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\Tipo_DocController->index()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\Tipo_DocController))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-10 03:15:38 --> Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `tipo_doc`
+WHERE `tipo_doc`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\Tipo_DocController.php(30): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\Tipo_DocController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\Tipo_DocController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-10 03:21:32 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'root', '', 'gescolcl_adminr...', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\EmpresaController.php(30): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\EmpresaController->index()
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\EmpresaController))
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\EmpresaController.php(30): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\EmpresaController->index()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\EmpresaController))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2024-09-10 03:21:32 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'root', '', 'gescolcl_adminr...', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(42): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->index()
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(42): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->index()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-10 03:21:32 --> Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `empresas`
+WHERE `empresas`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\EmpresaController.php(30): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\EmpresaController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\EmpresaController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-10 03:21:32 --> Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `documentos`
+WHERE `documentos`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\DocumentoController.php(42): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-10 03:21:32 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'root', '', 'gescolcl_adminr...', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\CargoController.php(30): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index()
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\CargoController.php(30): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-10 03:21:32 --> Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `cargos`
+WHERE `cargos`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\CargoController.php(30): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-10 03:21:32 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'root', '', 'gescolcl_adminr...', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\TrabajadorController.php(58): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->index()
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\TrabajadorController.php(58): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->index()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-10 03:21:32 --> Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `trabajadores`
+WHERE `trabajadores`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\TrabajadorController.php(58): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-10 03:21:32 --> Error connecting to the database: mysqli_sql_exception: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:174
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(174): mysqli->real_connect('localhost', 'root', '', 'gescolcl_adminr...', 3306, '', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\Tipo_DocController.php(30): CodeIgniter\BaseModel->findAll()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\Tipo_DocController->index()
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\Tipo_DocController))
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#11 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:218
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\Tipo_DocController.php(30): CodeIgniter\BaseModel->findAll()
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\Tipo_DocController->index()
+#7 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\Tipo_DocController))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-09-10 03:21:32 --> Unable to connect to the database.
+Main connection [MySQLi]: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión
+in SYSTEMPATH\Database\BaseConnection.php on line 427.
+ 1 SYSTEMPATH\Database\BaseConnection.php(573): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1602): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `tipo_doc`
+WHERE `tipo_doc`.`deleted_at` IS NULL', [], false)
+ 3 SYSTEMPATH\Model.php(240): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(618): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\Api\V1\Tipo_DocController.php(30): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\Tipo_DocController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\Tipo_DocController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()

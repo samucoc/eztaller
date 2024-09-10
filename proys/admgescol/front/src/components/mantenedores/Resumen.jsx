@@ -5,8 +5,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import API_BASE_URL from '../config/apiConstants'; // Asegúrate de importar la URL base de tu API
-import API_DOWNLOAD_URL from '../config/apiConstants1'; // Asegúrate de importar la URL de descarga de tu API
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here // Asegúrate de importar la URL base de tu API
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';

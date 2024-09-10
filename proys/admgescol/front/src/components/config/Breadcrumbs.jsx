@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import API_BASE_URL from '../config/apiConstants';
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import { useSelector, useDispatch } from 'react-redux';
 import { setEmpresaId } from '../../actions';
+import { Box, Button } from '@mui/material';
 
 const Breadcrumbs = () => {
   const [razonSocial, setRazonSocial] = useState('');
@@ -101,6 +102,10 @@ const Breadcrumbs = () => {
     dispatch(setEmpresaId(empresaId));
   };
 
+  const handleBackClick = () => {
+    navigate(-1); // Navigate to the previous page
+  };
+
   if (empresaId && roleSession !== "3"){
     axios
         .get(`${API_BASE_URL}/empresas/show/${empresaId}`)
@@ -113,23 +118,29 @@ const Breadcrumbs = () => {
         });
 
     return (
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <span role="button" onClick={handleHomeClick}>
-              Home
-            </span>
-          </li>
-          <li className="breadcrumb-item">
-            <span role="button" onClick={handleEmpresaClick2}>
-              {razonSocial}
-            </span>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            {breadcrumbLabel}
-          </li>
-        </ol>
-      </nav>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <span role="button" onClick={handleHomeClick}>
+                Menú
+              </span>
+            </li>
+            <li className="breadcrumb-item">
+              <span role="button" onClick={handleEmpresaClick2}>
+                {razonSocial}
+              </span>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              {breadcrumbLabel}
+            </li>
+          </ol>
+        </nav>
+        {/* Back Button */}
+        <Button variant="outlined" color="primary" onClick={handleBackClick}>
+          Volver
+        </Button>
+      </Box>
     );
   }
   else if (roleSession === "3"){
@@ -145,26 +156,33 @@ const Breadcrumbs = () => {
       });
     }
     return (
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <span role="button" onClick={handleHomeClick}>
-              Home
-            </span>
-          </li>
-          <li className="breadcrumb-item">
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
               <span role="button" onClick={handleHomeClick}>
-                {usuario?.trabajador?.nombres}
+                Menú
               </span>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            {breadcrumbLabel}
-          </li>
-        </ol>
-      </nav>
+            </li>
+            <li className="breadcrumb-item">
+                <span role="button" onClick={handleHomeClick}>
+                  {usuario?.trabajador?.nombres}
+                </span>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              {breadcrumbLabel}
+            </li>
+          </ol>
+        </nav>
+        {/* Back Button */}
+        <Button variant="outlined" color="primary" onClick={handleBackClick}>
+          Volver
+        </Button>
+      </Box>
     );
   }
 
+  return null;
 };
 
 export default Breadcrumbs;

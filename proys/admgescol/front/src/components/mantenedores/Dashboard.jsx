@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import API_BASE_URL from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
-import API_DOWNLOAD_URL from '../config/apiConstants1'; // Asegúrate de importar la URL de descarga de tu API
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import DocumentForm from './DashboardForm'; // Assuming you have a DocumentForm component
 import {
   TextField, Button, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody,
@@ -16,6 +15,7 @@ import Loader from 'react-loader-spinner';
 import { useSelector } from 'react-redux'; // Importar useSelector
 import DashboardTipoDoc from '../mantenedores/DashboardTipoDoc';
 import { makeStyles } from '@material-ui/core/styles';
+import moment from 'moment';
 
 const Dashboard = ({ userDNI, empresaId }) => {
   const useStyles = makeStyles({
@@ -121,11 +121,11 @@ const Dashboard = ({ userDNI, empresaId }) => {
 
     fetchCargos();
     fetchEmpresas();
-    fetchDocuments(null);
+    fetchDocuments(null); 
     fetchTrabajadores();
     fetchTipoDocumentos();
 
-  }, [empresaIdS, empresas]);
+  }, []);
 
 
 
@@ -314,6 +314,21 @@ const Dashboard = ({ userDNI, empresaId }) => {
     setLoading(false);
   };
 
+  const getLastTenYears = () => {
+    const currentYear = new Date().getFullYear();
+    const years = [];
+    
+    for (let i = 0; i < 10; i++) {
+      years.push(currentYear - i);
+    }
+    
+    return years;
+  };
+
+  const formatDate = (dateString) => {
+    return moment(dateString.date, 'YYYY-MM-DD HH:mm:ss.SSSSSS').format('DD-MM-YYYY HH:mm:ss');
+  };
+
   return (
     <div className="container Documentos">
       <h3>Documentos</h3>
@@ -390,7 +405,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
             <InputLabel id="year-select-label">Año</InputLabel>
             <Select
               labelId="year-select-label"
-              id="year-select"
+              id="year"
               value={year}
               onChange={handleYearChange}
               label="Año"
@@ -398,8 +413,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
               <MenuItem value="">
                 <em>Seleccionar año...</em>
               </MenuItem>
-              {/* Añadir más años según sea necesario */}
-              {[2023, 2024, 2025].map((year) => (
+              {getLastTenYears().map((year) => (
                 <MenuItem key={year} value={year}>
                   {year}
                 </MenuItem>
@@ -440,12 +454,11 @@ const Dashboard = ({ userDNI, empresaId }) => {
               <Table stickyHeader>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Mes</TableCell>
-                    <TableCell>Año</TableCell>
-                    <TableCell>Tipo Documento</TableCell>
+                    <TableCell>Mes - Año</TableCell>
                     <TableCell>Trabajador</TableCell>
+                    <TableCell>Fecha</TableCell>
                     <TableCell>Nombre</TableCell>
-                    <TableCell>Estado</TableCell>
+                    <TableCell>Firmado</TableCell>
                     <TableCell>Acciones</TableCell>
                   </TableRow>
                 </TableHead>
@@ -454,10 +467,9 @@ const Dashboard = ({ userDNI, empresaId }) => {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((doc) => (
                     <TableRow key={doc.id} hover >
-                      <TableCell>{getMonthName(parseInt(doc.mes))}</TableCell>
-                      <TableCell>{doc.agno}</TableCell>
-                      <TableCell>{getTipoDocumentoNombre(doc.tipo_doc_id)}</TableCell>
                       <TableCell>{getTrabajadorNombre(doc.trabajador)}</TableCell>
+                      <TableCell>{getMonthName(parseInt(doc.mes))} - {doc.agno}</TableCell>
+                      <TableCell>{formatDate(doc.created_at)}</TableCell>
                       <TableCell>{doc.nombre}</TableCell>
                       <TableCell>{doc.firma === "1"? "Firmado" : "Sin Firmar"}</TableCell>
                       <TableCell>

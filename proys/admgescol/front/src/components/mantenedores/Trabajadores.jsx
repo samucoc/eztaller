@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import API_BASE_URL from '../config/apiConstants';
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import TrabajadorForm from './TrabajadorForm';
 import {
   Table,
@@ -79,7 +79,7 @@ const Trabajadores = ({ empresaId }) => {
     
     fetchEmpresas();
     fetchTrabajadores();
-  }, [selectedTrabajador, empresaIdS, empresas]);
+  }, []);
 
   const deleteTrabajador = async (id) => {
     try {
@@ -294,9 +294,9 @@ const Trabajadores = ({ empresaId }) => {
                   <TableRow>
                     <TableCell>Foto</TableCell>
                     <TableCell>RUT</TableCell>
-                    <TableCell>Nombres</TableCell>
                     <TableCell>Apellido Paterno</TableCell>
                     <TableCell>Apellido Materno</TableCell>
+                    <TableCell>Nombres</TableCell>
                     <TableCell>Email</TableCell>
                     <TableCell>Teléfono</TableCell>
                     <TableCell>Empresa</TableCell>
@@ -320,9 +320,9 @@ const Trabajadores = ({ empresaId }) => {
                             />
                           </TableCell>
                           <TableCell>{trabajador.rut}-{trabajador.dv}</TableCell>
-                          <TableCell>{trabajador.nombres}</TableCell>
                           <TableCell>{trabajador.apellido_paterno}</TableCell>
                           <TableCell>{trabajador.apellido_materno}</TableCell>
+                          <TableCell>{trabajador.nombres}</TableCell>
                           <TableCell>{trabajador.email}</TableCell>
                           <TableCell>{trabajador.telefono}</TableCell>
                           <TableCell>{getEmpresaRazonSocial(trabajador.empresa_id)}</TableCell>
@@ -367,9 +367,9 @@ const Trabajadores = ({ empresaId }) => {
                             />
                           </TableCell>
                           <TableCell>{trabajador.rut}-{trabajador.dv}</TableCell>
-                          <TableCell>{trabajador.nombres}</TableCell>
                           <TableCell>{trabajador.apellido_paterno}</TableCell>
                           <TableCell>{trabajador.apellido_materno}</TableCell>
+                          <TableCell>{trabajador.nombres}</TableCell>
                           <TableCell>{trabajador.email}</TableCell>
                           <TableCell>{trabajador.telefono}</TableCell>
                           <TableCell>{getEmpresaRazonSocial(trabajador.empresa_id)}</TableCell>

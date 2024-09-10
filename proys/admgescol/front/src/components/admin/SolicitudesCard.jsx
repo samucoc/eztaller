@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Tabs, Tab, Button, Box, Typography, Paper, Table, TableHead, TableBody, TableRow, TableCell, TablePagination } from '@mui/material';
-import API_BASE_URL from '../config/apiConstants';
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -22,12 +22,13 @@ const SolicitudesCard = ({ empresaId }) => {
   // Pagination state
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const empresaIdS = useSelector((state) => state.empresaId);
 
   useEffect(() => {
     const fetchSolicitudes = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/solicitudes`);
-        const solicitudesData = response.data;
+        const solicitudesData = response.data.filter((soli) => soli.empresa_id == empresaIdS);
 
         // Filter and categorize the data
         const categorizedSolicitudes = {
@@ -89,7 +90,7 @@ const SolicitudesCard = ({ empresaId }) => {
 
   const getTrabajadorNombre = (rut) => {
     const trabajador = trabajadores.find(t => t.rut === rut);
-    return trabajador ? `${trabajador.nombres} ${trabajador.apellido_paterno} ${trabajador.apellido_materno}` : 'Desconocido';
+    return trabajador ? `${trabajador.apellido_paterno} ${trabajador.apellido_materno}, ${trabajador.nombres} ` : 'Desconocido';
   };
 
   const getStatusNombre = (id) => {
@@ -101,7 +102,7 @@ const SolicitudesCard = ({ empresaId }) => {
     const fields = {
       anticipos: ['trabajador', 'fecha', 'monto', 'cuotas', 'comentario', 'status'],
       prestamos: ['trabajador', 'fecha', 'monto', 'cuotas', 'comentario', 'status'],
-      permisos: ['trabajador', 'fecha', 'goce', 'horas', 'time', 'comentario', 'status'],
+      permisos: ['trabajador', 'fecha', 'goce', 'horas', 'time', 'timeEnd', 'comentario', 'status'],
       vacaciones: ['trabajador', 'fecha', 'fecha_fin', 'comentario', 'status']
     };
 

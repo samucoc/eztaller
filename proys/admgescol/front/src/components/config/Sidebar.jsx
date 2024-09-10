@@ -9,6 +9,8 @@ import {
   Folder, People, Person, AdminPanelSettings, LocationCity, Work, Wc, FolderOpen, Assignment, Verified, Mail, MonetizationOn, AttachMoney, 
 } from '@mui/icons-material';
 import { green } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
+
 import {
   setEmpresaId
 } from '../../actions';
@@ -39,7 +41,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
     <Box
       sx={{
         width: 250,
-        bgcolor: green[100],
+        bgcolor: '#E0F2F1',
         height: '100vh',
         padding: 2,
         boxShadow: 2,
@@ -49,11 +51,11 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
       }}
     >
       <div>
-        <Typography variant="h6" sx={{ color: green[900], mb: 2 }}>Menú</Typography>
+        <Typography variant="h6" sx={{ color: grey[900], mb: 2 }}>Menú</Typography>
         <List>
           {role === 1 && (
             <>
-              <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Funcionalidades</Typography>
+              <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Funcionalidades</Typography>
               <ListItem button onClick={() => handleOptionChange('Empresas')}
                   sx={{
                     padding: 0,
@@ -63,7 +65,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Business sx={{ color: green[700] }} />
+                  <Business sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Lista de Empresas" />
               </ListItem>
@@ -76,7 +78,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Description sx={{ color: green[700] }} />
+                  <Description sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Documentos" />
               </ListItem>
@@ -89,7 +91,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <People sx={{ color: green[700] }} />
+                  <People sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Trabajadores" />
               </ListItem>
@@ -102,12 +104,12 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Person sx={{ color: green[700] }} />
+                  <Person sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Usuarios" />
               </ListItem>
               <Divider sx={{ my: 2 }} />
-              <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Mantenedores</Typography>
+              <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Mantenedores</Typography>
               <ListItem button onClick={() => handleOptionChange('Roles')}
                   sx={{
                     padding: 0,
@@ -117,7 +119,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <AdminPanelSettings sx={{ color: green[700] }} />
+                  <AdminPanelSettings sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Roles" />
               </ListItem>
@@ -130,7 +132,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <LocationCity sx={{ color: green[700] }} />
+                  <LocationCity sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Comunas" />
               </ListItem>
@@ -143,7 +145,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Work sx={{ color: green[700] }} />
+                  <Work sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Cargos" />
               </ListItem>
@@ -156,7 +158,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Wc sx={{ color: green[700] }} />
+                  <Wc sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Sexo" />
               </ListItem>
@@ -169,7 +171,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <FolderOpen sx={{ color: green[700] }} />
+                  <FolderOpen sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Tipo Documentos" />
               </ListItem>
@@ -182,7 +184,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Assignment sx={{ color: green[700] }} />
+                  <Assignment sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Tipo Solicitudes" />
               </ListItem>
@@ -195,7 +197,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Verified sx={{ color: green[700] }} />
+                  <Verified sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Estados Solicitudes" />
               </ListItem>
@@ -204,7 +206,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
           )}
           {role === 2 && (
             <>
-              <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Funcionalidades</Typography>
+              <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Funcionalidades</Typography>
               <ListItem button onClick={() => handleOptionChange('Empresas/' + selectedEmpresa)}
                   sx={{
                     padding: 0,
@@ -214,7 +216,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Business sx={{ color: green[700] }} />
+                  <Business sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Empresa" />
               </ListItem>
@@ -227,7 +229,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Description sx={{ color: green[700] }} />
+                  <Description sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Documentos" />
               </ListItem>
@@ -240,7 +242,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Group sx={{ color: green[700] }} />
+                  <Group sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Trabajadores" />
               </ListItem>
@@ -249,7 +251,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
           {(role === 3) && (
             <>
             {/* Sección de Consultar Documentos */}
-            <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Consultar Documentos</Typography>
+            <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Consultar Documentos</Typography>
               <ListItem button onClick={() => handleOptionChange('ContratosUser')}
                   sx={{
                     padding: 0,
@@ -259,7 +261,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Description sx={{ color: green[700] }} />
+                  <Description sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Contratos y Anexos" />
               </ListItem>
@@ -272,7 +274,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Receipt sx={{ color: green[700] }} />
+                  <Receipt sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Liquidaciones" />
               </ListItem>
@@ -285,7 +287,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Gavel sx={{ color: green[700] }} />
+                  <Gavel sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Reglamentos" />
               </ListItem>
@@ -298,7 +300,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <FolderOpen sx={{ color: green[700] }} />
+                  <FolderOpen sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Otros" />
               </ListItem>
@@ -306,7 +308,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
               <Divider sx={{ my: 2 }} />
             
               {/* Sección de Realizar Solicitudes */}
-              <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Realizar Solicitudes</Typography>
+              <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Realizar Solicitudes</Typography>
               <ListItem button onClick={() => handleOptionChange('SolicitarAnticipo')}
                   sx={{
                     padding: 0,
@@ -316,7 +318,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <MonetizationOn sx={{ color: green[700] }} />
+                  <MonetizationOn sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Solicitar Anticipo" />
               </ListItem>
@@ -329,7 +331,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <AttachMoney sx={{ color: green[700] }} />
+                  <AttachMoney sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Solicitar Préstamo" />
               </ListItem>
@@ -342,7 +344,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <EventNote sx={{ color: green[700] }} />
+                  <EventNote sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Solicitar Permiso" />
               </ListItem>
@@ -355,15 +357,15 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <BeachAccess sx={{ color: green[700] }} />
+                  <BeachAccess sx={{ color: grey[700] }} />
                 </ListItemIcon>
-                <ListItemText primary="Solicitar Vacaciones" />
+                <ListItemText primary="Solicitar Beneficios" />
               </ListItem>
             
               <Divider sx={{ my: 2 }} />
             
               {/* Sección de Comunicaciones */}
-              <Typography variant="subtitle1" sx={{ color: green[800], mb: 1 }}>Comunicaciones</Typography>
+              <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Comunicaciones</Typography>
               <ListItem button onClick={() => handleOptionChange('ComunicacionesUsers')}
                   sx={{
                     padding: 0,
@@ -373,7 +375,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Mail sx={{ color: green[700] }} />
+                  <Mail sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Comunicaciones" />
               </ListItem>
@@ -386,7 +388,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
         variant="contained"
         color="secondary"
         onClick={handleLogout}
-        sx={{ bgcolor: green[700], '&:hover': { bgcolor: green[900] } }}
+        sx={{ bgcolor: grey[700], '&:hover': { bgcolor: grey[900] } }}
         startIcon={<ExitToApp />}
       >
         Cerrar Sesión

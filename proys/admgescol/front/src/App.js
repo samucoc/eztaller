@@ -8,7 +8,7 @@ import Panel from './components/config/Panel';
 import EmpresaList from './components/config/EmpresaList';
 import Login from './components/config/Login';
 import Breadcrumbs from './components/config/Breadcrumbs';
-import API_BASE_URL from './components/config/apiConstants';
+import { API_BASE_URL, API_DOWNLOAD_URL } from './components/config/apiConstants';
 import {
   Box, Container, CssBaseline, IconButton, Drawer, useMediaQuery, Button
 } from '@mui/material';

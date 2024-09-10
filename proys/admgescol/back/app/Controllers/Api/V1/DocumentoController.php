@@ -148,9 +148,15 @@ class DocumentoController extends ResourceController
     {
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
-        $query = "SELECT * FROM documentos WHERE (tipo_doc_id = '5' and trabajador = ? and empresa_id = ?) or (tipo_doc_id = '5' and cargo_id in (select cargo_id from trabajadores where trabajador = ?) )";
+        $query = "SELECT * 
+                    FROM documentos 
+                    WHERE (tipo_doc_id in ('5','6') and trabajador = '".$rut."' and empresa_id = '".$empresa."') 
+                        or (tipo_doc_id in ('5','6') and empresa_id = '".$empresa."') 
+                        or (tipo_doc_id in ('5','6') and cargo_id in (select cargo_id 
+                                                                        from trabajadores 
+                                                                        where trabajador = '".$rut."') )";
         // Ejecutar la consulta utilizando Query Builder de CodeIgniter
-        $data = $db->query($query, [$rut, $empresa, $rut])->getResult();
+        $data = $db->query($query)->getResult();
         // Verificar si se encontraron resultados
         // if (empty($data)) {
         //     return $this->failNotFound(RESOURCE_NOT_FOUND);

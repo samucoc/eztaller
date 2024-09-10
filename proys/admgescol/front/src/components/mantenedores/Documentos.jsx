@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/LiquidacionesToPdf.css';
-import API_BASE_URL from '../config/apiConstants';
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import Swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
 

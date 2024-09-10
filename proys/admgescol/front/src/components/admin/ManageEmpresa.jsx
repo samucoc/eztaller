@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import API_BASE_URL from '../config/apiConstants';
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import { Box, Typography, Card, CardActionArea , CardContent, Button, Grid } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -49,84 +49,84 @@ const ManageEmpresa = () => {
   }, [id]);
 
   return (
-    <Box sx={{ width: '100%' }}>
-      {/* Display the company title */}
-      <Box>
-        <Typography variant="h4" component="h1" gutterBottom>
-          {empresa?.NombreFantasia}
-        </Typography>
-        <Typography variant="h6" component="h2">
-          {empresa?.RazonSocial}
-        </Typography>
-        <br />
-        <Typography variant="h6" component="h3">
-          ¿Qué deseas realizar?
-        </Typography>
-      </Box>
-
-      {/* Cards as Buttons using Grid */}
-      <Grid container spacing={2} sx={{ mt: 2 }}>
-        {/* Documentos Card */}
-        <Grid item xs={12} md={12}>
-          <Typography variant="h6" sx={{ color: 'black' }}>Documentos</Typography>
-          <DocumentosCard empresaId={empresa?.id} />
-        </Grid>
-
-        {/* Consultar Documentos y Gestión de Trabajos Card */}
-        <Grid item xs={12} md={12}>
-          <Typography variant="h6" sx={{ color: 'black' }}>
-            Consultar Documentos y Gestión de Trabajos
+    <div className="container empresas">
+        {/* Display the company title */}
+        <Box>
+          <Typography variant="h4" component="h1">
+            {empresa?.NombreFantasia}
           </Typography>
-          <ConsultarGestionCard empresaId={empresa?.id} />
-        </Grid>
+          <Typography variant="h6" component="h2">
+            {empresa?.RazonSocial}
+          </Typography>
+          <br />
+          <Typography variant="h6" component="h3">
+            ¿Qué deseas realizar?
+          </Typography>
+        </Box>
 
-        {/* Solicitudes Card */}
-        <Grid item xs={12} md={6}>
-          <Card
-          >
-            <>
-              <CardContent>
-                <Typography variant="h6" sx={{ color: 'black' }}>Solicitudes</Typography>
-                <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>              
-                  Tienes {pendingCount} solicitud(es) por revisar
-                </Typography>
-                <br/>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{ mt: 2 }}
-                  onClick={() => handleItemClick(`/SolicitudesCard`)} // Adjust path as per routing
-                >
-                  Gestionar
-                </Button>
-              </CardContent>
-            </>
-          </Card>
-        </Grid>
+        {/* Cards as Buttons using Grid */}
+        <Grid container >
+          {/* Documentos Card */}
+          <Grid item xs={12} md={12}>
+            <Typography variant="h6" sx={{ color: 'black' }}>Documentos</Typography>
+            <DocumentosCard empresaId={empresa?.id} />
+          </Grid>
 
-        {/* Comunicaciones Card */}
-        <Grid item xs={12} md={6}>
-          <Card
-          >
-            <>
-              <CardContent>
-                <Typography variant="h6" sx={{ color: 'black' }}>Comunicaciones</Typography>
-                <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>Publica las últimas noticias sobre tu establecimiento</Typography>
-                <br/>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{ mt: 2 }}
-                  onClick={() => handleItemClick(`/ComunicacionesCard`)} // Adjust path as per routing
-                >
-                  Gestionar
-                </Button>
-              </CardContent>
-            </>
-          </Card>
+          {/* Consultar Documentos y Gestión de Trabajos Card */}
+          <Grid item xs={12} md={12}>
+            <Typography variant="h6" sx={{ color: 'black' }}>
+              Consultar Documentos y Gestión de Trabajos
+            </Typography>
+            <ConsultarGestionCard empresaId={empresa?.id} />
+          </Grid>
+
+          {/* Solicitudes Card */}
+          <Grid item xs={12} md={6}>
+            <Card
+            >
+              <>
+                <CardContent>
+                  <Typography variant="h6" sx={{ color: 'black' }}>Solicitudes</Typography>
+                  <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>              
+                    Tienes {pendingCount} solicitud(es) por revisar
+                  </Typography>
+                  <br/>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ mt: 2 }}
+                    onClick={() => handleItemClick(`/SolicitudesCard`)} // Adjust path as per routing
+                  >
+                    Gestionar
+                  </Button>
+                </CardContent>
+              </>
+            </Card>
+          </Grid>
+
+          {/* Comunicaciones Card */}
+          <Grid item xs={12} md={6}>
+            <Card
+            >
+              <>
+                <CardContent>
+                  <Typography variant="h6" sx={{ color: 'black' }}>Comunicaciones</Typography>
+                  <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>Publica las últimas noticias sobre tu establecimiento</Typography>
+                  <br/>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ mt: 2 }}
+                    onClick={() => handleItemClick(`/ComunicacionesCard`)} // Adjust path as per routing
+                  >
+                    Gestionar
+                  </Button>
+                </CardContent>
+              </>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
+    </div>
   );
 };
 

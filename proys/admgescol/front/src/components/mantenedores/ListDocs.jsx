@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import API_BASE_URL from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import API_DOWNLOAD_URL from '../config/apiConstants1'; // Asegúrate de importar la URL base de tu API desde apiConstants.js
 import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,

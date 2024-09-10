@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import API_BASE_URL from '../config/apiConstants';
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import {
   Box, Typography, Card, CardActionArea, CardContent, Button, Grid, Modal, List, ListItem, ListItemText, Menu, MenuItem
 } from '@mui/material';
@@ -33,27 +33,35 @@ const ManageUser = () => {
   const userDNI = useSelector((state) => state.userDNI); // Assuming userDNI is stored in Redux
 
   useEffect(() => {
-    const fetchNotificaciones = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/notificaciones`);
-        const sortedNotificaciones = response.data
-          .filter((noti) => noti.trabajador === userDNI)
-          .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
-          .slice(0, 3);
-        setNotificaciones(sortedNotificaciones);
-      } catch (error) {
-        console.error('Error al obtener las notificaciones:', error);
-      }
-    };
+    // const fetchNotificaciones = async () => {
+    //   try {
+    //     const response = await axios.get(`${API_BASE_URL}/notificaciones`);
+    //     const sortedNotificaciones = response.data
+    //       .filter((noti) => noti.trabajador === userDNI)
+    //       .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+    //       .slice(0, 3);
+    //     setNotificaciones(sortedNotificaciones);
+    //   } catch (error) {
+    //     console.error('Error al obtener las notificaciones:', error);
+    //   }
+    // };
 
     const fetchSolicitudes = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/solicitudes`);
         const recentSolicitudes = response.data
-          .filter((soli) => soli.status === '1' && soli.trabajador === userDNI)
-          .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
-          .slice(0, 3);
+          .filter((soli) => soli.trabajador === userDNI) // Filtra por el trabajador actual
+          .sort((a, b) => {
+            // Ordenar por fecha (más reciente primero)
+            const dateComparison = new Date(b.fecha) - new Date(a.fecha);
+            // Si las fechas son iguales, ordenar por status de menor a mayor
+            if (dateComparison === 0) {
+              return a.status - b.status;
+            }
+            return dateComparison;
+          });
         setSolicitudes(recentSolicitudes);
+        
       } catch (error) {
         console.error('Error al obtener solicitudes:', error);
       }
@@ -113,7 +121,7 @@ const fetchTrabajadores = async () => {
     fetchTrabajadores();
     fetchComunicaciones();
     fetchSolicitudes();
-    fetchNotificaciones();
+    //fetchNotificaciones();
   }, [userDNI, empresaId]); // Dependencies: userDNI and empresaId
 
   const handleOpenModalCom = (content) => {
@@ -228,7 +236,7 @@ const fetchTrabajadores = async () => {
         </Grid>
 
         {/* Notificaciones del Sistema y Comunicaciones */}
-        <Grid item xs={12} md={6}>
+        {/* <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
               <Typography variant="h6" sx={{ color: 'black' }}>
@@ -251,9 +259,9 @@ const fetchTrabajadores = async () => {
               </List>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid> */}
 
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <Card>
             <CardContent>
               <Typography variant="h6" sx={{ color: 'black' }}>
@@ -279,7 +287,7 @@ const fetchTrabajadores = async () => {
               <Typography variant="h6" sx={{ color: 'black' }}>
                 Estados de Solicitudes
               </Typography>
-              <List>
+              <List sx={{ maxHeight: 300, overflowY: 'auto' }}>
                 {solicitudes.map((soli) => {
                   const tipoSolicitud = getTipoSolicitud(soli.tipo_sol_id); // Obtén el tipo de solicitud
 

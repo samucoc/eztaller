@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Assuming you're using Axios for API calls
 import '../../css/LiquidacionesToPdf.css'; // Revisa este archivo para asegurarte de que los estilos se apliquen correctamente
-import API_BASE_URL from '../config/apiConstants'; // Asegúrate de importar la URL base de tu API desde apiConstants.js
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here // Asegúrate de importar la URL base de tu API desde apiConstants.js
 import API_DOWNLOAD_URL from '../config/apiConstants1'; // Asegúrate de importar la URL base de tu API desde apiConstants.js
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import API_BASE_URL from '../config/apiConstants';
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import EmpresaForm from './EmpresaForm';
 import ManageEmpresa from './ManageEmpresa';
 import { Button, TextField, MenuItem, Select, FormControl, InputLabel } from '@material-ui/core';
@@ -172,10 +172,14 @@ const Empresas = ({ empresaId }) => {
                 {currentEmpresas.map(empresa => (
                   <div key={empresa.id} className="col-12">
                     <div className="card mb-3">
-                      <div className="card-body">
-                        <h5 className="card-title">{empresa.NombreFantasia}</h5>
-                        <p className="card-text">{empresa.RazonSocial}</p>
-                        <div className="d-flex justify-content-end">
+                      <div className="card-body d-flex justify-content-between align-items-center">
+                        {/* Flex container for title and text */}
+                        <div className="d-flex flex-column">
+                          <h5 className="mb-0">{empresa.NombreFantasia}</h5>
+                          <p className="mb-0 small">{empresa.RazonSocial}</p>
+                        </div>
+                        {/* Button group */}
+                        <div className="d-flex">
                           <Button
                             variant="contained"
                             color="primary"

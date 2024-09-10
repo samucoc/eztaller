@@ -141,10 +141,29 @@ class NotificacionController extends ResourceController
     {
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
-        $query = "insert into notificaciones(fecha, trabajador, tipo, controlador, mensaje) values(?,?,?,?,?)";
+        $query = "insert into notificaciones(fecha, trabajador, tipo, controlador, mensaje, vista) values(?,?,?,?,?,?)";
         // Ejecutar la consulta utilizando Query Builder de CodeIgniter
-        $data = $db->query($query, [date('Y-m-d H:i:s'), $trabajador_rut, $tipo, $controlador, $mensaje]);
+        $data = $db->query($query, [date('Y-m-d H:i:s'), $trabajador_rut, $tipo, $controlador, $mensaje, 'false']);
         // Responder con los datos encontrados
         //return $this->respondCreated($data, RESOURCE_CREATED);
     }
+
+
+    public function marcarComoVistas($userDNI = null) {
+        if ($userDNI) {
+            // Cargar el modelo
+            $notificacionesModel = new \App\Models\NotificacionModel();
+            
+            // Actualizar las notificaciones para el usuario
+            $notificacionesModel->where('trabajador', $userDNI)
+                                ->whereIn('vista', ['false', null, '']) // Incluye tanto false como null
+                                ->set('vista', 'true') // Cambia el campo 'vista' a true
+                                ->update();
+
+            return $this->response->setJSON(['status' => 'success']);
+        }
+
+        return $this->response->setStatusCode(400)->setJSON(['status' => 'error', 'message' => 'User DNI is required']);
+    }
+
 }

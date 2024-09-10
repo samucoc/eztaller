@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Select, MenuItem, Button, TextField, Grid } from '@material-ui/core';
 import axios from 'axios';
-import API_BASE_URL from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
-import API_DOWNLOAD_URL from '../config/apiConstants1'; // Asegúrate de importar la URL de descarga de tu API
-
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 const DashboardForm = ({ onSubmit, onCancel, initialDoc, empresaId }) => {
     const [meses, setMeses] = useState([]);
     const [agnios, setAgnios] = useState([]);

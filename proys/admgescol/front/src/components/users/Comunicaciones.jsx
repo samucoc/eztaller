@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import API_BASE_URL from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
+import { API_BASE_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import { useSelector } from 'react-redux';
-import { Grid, Card, CardContent, Typography, Button, Box, Modal, IconButton } from '@mui/material'; // Updated imports
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import AddIcon from '@mui/icons-material/Add';
+import { Grid, Card, CardContent, Typography, Button, Box, Modal, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'; // For the close button in the modal
+import moment from 'moment'; // For date formatting
 
 const Comunicaciones = () => {
   const [showForm, setShowForm] = useState(false);
@@ -28,18 +26,19 @@ const Comunicaciones = () => {
         console.error('Error fetching comunicaciones:', error);
       }
     };
+
     const fetchTrabajadores = async () => {
-        try {
-          const response = await axios.get(`${API_BASE_URL}/trabajadores`);
-          setTrabajadores(response.data);
-        } catch (error) {
-          console.error('Error fetching trabajadores:', error);
-        }
-      };
-  
-      fetchTrabajadores();
+      try {
+        const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+        setTrabajadores(response.data);
+      } catch (error) {
+        console.error('Error fetching trabajadores:', error);
+      }
+    };
+
+    fetchTrabajadores();
     fetchComunicaciones();
-  }, [empresaId]);
+  }, []);
 
   const handleEdit = (comunicacion) => {
     setSelectedComunicacion(comunicacion);
@@ -63,24 +62,28 @@ const Comunicaciones = () => {
 
   const getTrabajadorNombre = (trab) => {
     const trabajador = trabajadores.find(t => t.rut === trab);
-    return trabajador ? `${trabajador.apellido_paterno} ${trabajador.apellido_materno},  ${trabajador.nombres}` : 'Desconocido';
+    return trabajador ? `${trabajador.apellido_paterno} ${trabajador.apellido_materno}, ${trabajador.nombres}` : 'Desconocido';
+  };
+
+  const formatDate = (dateString) => {
+    return moment(dateString).format('DD-MM-YYYY HH:mm:ss');
   };
 
   return (
     <div className="container Comunicaciones">
       <h3>Comunicaciones</h3>
-        <Grid container spacing={2}>
-          {comunicaciones.map((comunicacion) => (
-            <Grid item xs={12} sm={6} key={comunicacion.id}>
-              <Card onClick={() => handleCardClick(comunicacion)} sx={{ cursor: 'pointer' }}>
-                <CardContent>
-                  <Typography variant="h6">{comunicacion.titulo}</Typography>
-                  <Typography variant="body2">{comunicacion.descripcion}</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+      <Grid container spacing={2}>
+        {comunicaciones.map((comunicacion) => (
+          <Grid item xs={12} sm={6} key={comunicacion.id}>
+            <Card onClick={() => handleCardClick(comunicacion)} sx={{ cursor: 'pointer' }}>
+              <CardContent>
+                <Typography variant="h6">{comunicacion.titulo}</Typography>
+                <Typography variant="body2">{comunicacion.descripcion}</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
 
       {/* Modal */}
       <Modal
@@ -115,7 +118,7 @@ const Comunicaciones = () => {
             <strong>Usuario:</strong> {getTrabajadorNombre(modalData?.user_id)}
           </Typography>
           <Typography sx={{ mt: 2 }}>
-            <strong>Fecha y Hora:</strong> {modalData?.fechahora}
+            <strong>Fecha y Hora:</strong> {modalData?.fechahora ? formatDate(modalData?.fechahora) : 'Fecha no disponible'}
           </Typography>
         </Box>
       </Modal>

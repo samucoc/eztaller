@@ -65,3 +65,11 @@ export const setLoggedIn = (loggedIn) => ({
     payload: nombre,
   });
   
+  export const setNotificaciones = (notificaciones) => ({
+    type: 'SET_NOTIFICACIONES',
+    payload: notificaciones,
+  });
+  
+  export const setNotificacionesVistas = () => ({
+    type: 'SET_NOTIFICACIONES_VISTAS',
+  });

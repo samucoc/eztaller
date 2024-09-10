@@ -171,6 +171,7 @@ $routes->group('Api', function ($routes) {
         $routes->post('notificaciones', 'NotificacionController::create', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->put('notificaciones/(:segment)', 'NotificacionController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->delete('notificaciones/(:segment)', 'NotificacionController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('notificaciones/notificaciones-marcadas/(:segment)', 'NotificacionController::marcarComoVistas/$1', ['namespace' => 'App\Controllers\Api\V1']);
         
         $routes->get('solicitudes', 'SolicitudController::index', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('solicitudes/new', 'SolicitudController::new', ['namespace' => 'App\Controllers\Api\V1']);

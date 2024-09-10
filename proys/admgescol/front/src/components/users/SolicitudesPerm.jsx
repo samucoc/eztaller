@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Importa axios
-import API_BASE_URL from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
+import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
+
 import { Card, CardContent, Typography, RadioGroup, FormControlLabel, Radio, TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import Swal from 'sweetalert2';
 
@@ -12,6 +13,7 @@ const SolicitudesPerm = () => {
     fecha: '',
     horas: '',
     time: '',
+    timeEnd: '',
     goce: '',
     motivo: '',
     fecha_fin: ''
@@ -24,7 +26,7 @@ const SolicitudesPerm = () => {
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    setFormData({ ...formData, fecha: '', horas: '', time: '', goce: '', motivo: '', fecha_fin: '' }); // Reset form data on option change
+    setFormData({ ...formData, fecha: '', horas: '', time: '', timeEnd: '', goce: '', motivo: '', fecha_fin: '' }); // Reset form data on option change
   };
 
   const handleCancel = () =>{
@@ -47,6 +49,7 @@ const SolicitudesPerm = () => {
       comentario: formData.motivo,
       horas: formData.horas,
       time: formData.time,
+      timeEnd: formData.timeEnd,
       goce: formData.goce,
       status: 1, // Valor fijo para status
     };
@@ -134,6 +137,26 @@ const SolicitudesPerm = () => {
                 type="time"
                 InputLabelProps={{ shrink: true }}
                 value={formData.time}
+                onChange={handleChange}
+                sx={{ color: 'black' }}
+                InputLabelProps={{ 
+                  style: { color: 'black' }  // Set label color
+                }}
+                InputProps={{ 
+                  style: { color: 'black' }  // Set input text color
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="time"
+                label="Hora de Término"
+                type="time"
+                InputLabelProps={{ shrink: true }}
+                value={formData.timeEnd}
                 onChange={handleChange}
                 sx={{ color: 'black' }}
                 InputLabelProps={{ 
@@ -276,7 +299,7 @@ const SolicitudesPerm = () => {
                 required
                 fullWidth
                 name="fecha_fin"
-                label="fecha_fin"
+                label="Hasta"
                 type="date"
                 InputLabelProps={{ shrink: true }}
                 value={formData.fecha_fin}
@@ -331,6 +354,26 @@ const SolicitudesPerm = () => {
                 }}
               />
             </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="time"
+                label="Hora de Término"
+                type="time"
+                InputLabelProps={{ shrink: true }}
+                value={formData.timeEnd}
+                onChange={handleChange}
+                sx={{ color: 'black' }}
+                InputLabelProps={{ 
+                  style: { color: 'black' }  // Set label color
+                }}
+                InputProps={{ 
+                  style: { color: 'black' }  // Set input text color
+                }}
+              />
+            </Grid>            
             <Grid item xs={12}>
               <FormControl fullWidth>
                 <InputLabel>Con o sin goce de sueldo</InputLabel>

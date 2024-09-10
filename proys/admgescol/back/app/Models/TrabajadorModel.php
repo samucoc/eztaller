@@ -34,7 +34,9 @@ class TrabajadorModel extends Model
         'email' ,
         'contacto_emergencia' ,
         'telefono_emergencia' ,
-        'estado_id'
+        'estado_id' ,
+        'fecha_ingreso' ,
+        'tipo_contrato'
     ];
 
     // Dates

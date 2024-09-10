@@ -3,7 +3,7 @@ import { Grid, Typography, List, ListItem, ListItemIcon, ListItemText } from '@m
 import MoneyIcon from '@mui/icons-material/Money';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import BeachAccess from '@mui/icons-material/BeachAccess';
 import { useNavigate } from 'react-router-dom';
 
 const DocumentosCard = ({ usuario }) => {
@@ -111,9 +111,9 @@ const DocumentosCard = ({ usuario }) => {
                 onClick={handleSolicitarVacaciones}
             >   
                         <ListItemIcon>
-                        <FlightTakeoffIcon sx={{ color: '#3f51b5' }} />
+                        <BeachAccess sx={{ color: '#3f51b5' }} />
                         </ListItemIcon>
-                        <ListItemText primary="Solicitud de Vacaciones" />
+                        <ListItemText primary="Solicitud de Beneficios" />
           </ListItem>
         </Grid>
       </Grid>
