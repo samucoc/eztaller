@@ -49,31 +49,31 @@ const DashTrabDocLabContrCopia = () => {
       }
     };
 
-const fetchTrabajadores = async () => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/trabajadores`);
-    
-    // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
-    const sortedTrabajadores = response.data.sort((a, b) => {
-      if (a.apellido_paterno < b.apellido_paterno) return -1;
-      if (a.apellido_paterno > b.apellido_paterno) return 1;
-      
-      // Si los apellidos paternos son iguales, ordenar por apellido_materno
-      if (a.apellido_materno < b.apellido_materno) return -1;
-      if (a.apellido_materno > b.apellido_materno) return 1;
-      
-      // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
-      if (a.nombre < b.nombre) return -1;
-      if (a.nombre > b.nombre) return 1;
+    const fetchTrabajadores = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+        
+        // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
+        const sortedTrabajadores = response.data.sort((a, b) => {
+          if (a.apellido_paterno < b.apellido_paterno) return -1;
+          if (a.apellido_paterno > b.apellido_paterno) return 1;
+          
+          // Si los apellidos paternos son iguales, ordenar por apellido_materno
+          if (a.apellido_materno < b.apellido_materno) return -1;
+          if (a.apellido_materno > b.apellido_materno) return 1;
+          
+          // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
+          if (a.nombre < b.nombre) return -1;
+          if (a.nombre > b.nombre) return 1;
 
-      return 0;
-    });
+          return 0;
+        });
 
-    setTrabajadores(sortedTrabajadores);
-  } catch (error) {
-    console.error('Error fetching trabajadores:', error);
-  }
-};
+        setTrabajadores(sortedTrabajadores);
+      } catch (error) {
+        console.error('Error fetching trabajadores:', error);
+      }
+    };
 
     fetchTrabajadores();
     fetchData();
@@ -129,12 +129,35 @@ const fetchTrabajadores = async () => {
   };
 
 
+  const getClientIp = async () => {
+      try {
+          const response = await axios.get('https://api.ipify.org?format=json');
+          return response.data.ip;
+      } catch (error) {
+          console.error('Error obteniendo IP del cliente:', error);
+          return null;
+      }
+  };
+
   const handleSignDocument = async () => {
     try {
+      const clientIp = await getClientIp(); // Obtener IP del cliente
+      if (!clientIp) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al obtener IP',
+            text: 'No se pudo obtener la IP del cliente.',
+            confirmButtonText: 'OK',
+        });
+        return;
+      }
       const response = await axios.post(`${API_BASE_URL}/users/sign-in-rut`, { userDNI, password,  documentId: selectedDocument.id  });
       if (response.status === 200) {
-        await axios.post(`${API_BASE_URL}/documentos/firmar-doc`, { documentId: selectedDocument.id  });
-        Swal.fire({
+          await axios.post(`${API_BASE_URL}/documentos/firmar-doc`, {
+              userDNI, 
+              documentId: selectedDocument.id,
+              ip: clientIp // Incluir IP en el payload
+          });        Swal.fire({
           icon: 'success',
           title: 'Documento firmado',
           text: 'Tu documento ha sido firmado con éxito.',
@@ -180,7 +203,7 @@ const fetchTrabajadores = async () => {
                   >
                     Ver Documento
                   </Button>
-                  {d.firma !== "1" ? (
+                  {d.firmado === "0" ? (
                     <Button
                       variant="contained"
                       color="secondary"

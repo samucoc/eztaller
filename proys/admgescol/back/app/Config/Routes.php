@@ -91,6 +91,7 @@ $routes->group('Api', function ($routes) {
         $routes->get('documentos/showLiqActByEmp/(:segment)', 'DocumentoController::showLiqActByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->get('documentos/showLiqAntByEmp/(:segment)', 'DocumentoController::showLiqAntByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
                 
+        $routes->post('documentos/get-token', 'DocumentoController::getToken', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->post('documentos/upload', 'DocumentoController::uploadDocumento', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->post('documentos/upload-contratos', 'DocumentoController::uploadContratosDocumento', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->post('documentos/upload-varios', 'DocumentoController::uploadVariosDocumento', ['namespace' => 'App\Controllers\Api\V1']);
@@ -187,6 +188,13 @@ $routes->group('Api', function ($routes) {
         $routes->post('comunicaciones', 'ComunicacionController::create', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->put('comunicaciones/(:segment)', 'ComunicacionController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
         $routes->delete('comunicaciones/(:segment)', 'ComunicacionController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        
+        $routes->get('denuncias-karin', 'DenunciaController::index', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('denuncias-karin/new', 'DenunciaController::new', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->get('denuncias-karin/show/(:segment)', 'DenunciaController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->post('denuncias-karin', 'DenunciaController::create', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->put('denuncias-karin/(:segment)', 'DenunciaController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        $routes->delete('denuncias-karin/(:segment)', 'DenunciaController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
         
     });
 });

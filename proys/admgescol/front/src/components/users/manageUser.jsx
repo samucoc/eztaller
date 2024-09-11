@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import {
-  Box, Typography, Card, CardActionArea, CardContent, Button, Grid, Modal, List, ListItem, ListItemText, Menu, MenuItem
+  Box, Typography, Card, CardActionArea, CardContent, Button, Modal, List, ListItem, ListItemText, Menu, MenuItem,
+  Grid, TextField, FormControlLabel, Checkbox
+
 } from '@mui/material';
 import MoneyIcon from '@mui/icons-material/Money';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
@@ -13,6 +15,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import DocumentosCard from './DocumentosCard';
 import SolicitudesCard from './SolicitudesCard';
+import Swal from 'sweetalert2';
+import '../../css/manageUser.css'; // Si tienes estilos adicionales para DashTrab
 
 const ManageUser = () => {
   const [value, setValue] = useState(0);
@@ -32,19 +36,237 @@ const ManageUser = () => {
   const empresaId = useSelector((state) => state.empresaId); // Assuming empresaId is stored in Redux
   const userDNI = useSelector((state) => state.userDNI); // Assuming userDNI is stored in Redux
 
+  const [openKarin, setOpenKarin] = useState(false);
+  const handleOpenKarin = () => setOpenKarin(true);
+  const handleCloseKarin = () => { setOpenKarin(false); navigate('/UserDashboard')  } 
+  const [selectedFilesKarin, setSelectedFilesKarin] = useState([]);
+
+  const [denunciante, setDenunciante] = useState({
+    nombre: '',
+    apellidos: '',
+    rut: '',
+    celular: '',
+    email: '',
+    confirmarEmail: '',
+    relacionTrabajo: '',
+    lugarDenuncia: '',
+    anonimato: false,
+  });
+  const [implicados, setImplicados] = useState([
+    {
+      nombre: '',
+      apellidos: '',
+      lugar: '',
+      cargo: '',
+      denuncia: '',
+      archivo: []
+    }
+  ]);
+
+  const handleChangeDenuncianteKarin= (e) => {
+    const { name, value } = e.target;
+    setDenunciante({ ...denunciante, [name]: value });
+  };
+
+  const addImplicado = () => {
+    setImplicados([
+      ...implicados,
+      { nombre: '', apellidos: '', lugar: '', cargo: '', denuncia: '', archivo: [] }
+    ]);
+  };
+  
+  const removeImplicado = (index) => {
+    const updatedImplicados = [...implicados];
+    updatedImplicados.splice(index, 1);
+    setImplicados(updatedImplicados);
+  };
+
+  const handleChangeImplicadoKarin = (index, e) => {
+    const { name, value } = e.target;
+    const updatedImplicados = [...implicados];
+    updatedImplicados[index] = { ...updatedImplicados[index], [name]: value };
+    setImplicados(updatedImplicados);
+  };
+
+  const handleFileChangeKarin = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    setSelectedFilesKarin(selectedFiles); // Assume you have a state for files
+  };
+
+  const validateRut = (rut) => {
+    // Eliminar puntos y guiones
+    rut = rut.replace(/[.-]/g, "");
+    if (rut.length < 8 || rut.length > 9) return false;
+  
+    const body = rut.slice(0, -1);
+    let dv = rut.slice(-1).toUpperCase();
+  
+    let suma = 0;
+    let multiplicador = 2;
+  
+    for (let i = body.length - 1; i >= 0; i--) {
+      suma += multiplicador * body[i];
+      multiplicador = multiplicador === 7 ? 2 : multiplicador + 1;
+    }
+  
+    let expectedDv = 11 - (suma % 11);
+    expectedDv = expectedDv === 11 ? "0" : expectedDv === 10 ? "K" : expectedDv.toString();
+  
+    return dv === expectedDv;
+  };
+  
+  const handleSubmitKarin = async (e) => {
+    e.preventDefault();
+  
+    // Validación de campos obligatorios
+    if (
+      !denunciante.nombre ||
+      !denunciante.apellidos ||
+      !denunciante.rut ||
+      !denunciante.celular ||
+      !denunciante.email ||
+      !denunciante.confirmarEmail ||
+      !denunciante.lugarDenuncia
+    ) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos incompletos',
+        text: 'Todos los campos del denunciante son obligatorios.',
+        confirmButtonText: 'OK',
+        customClass: {
+          container: 'swal-container',
+        },
+      });
+      return;
+    }
+  
+    // Validación de al menos un implicado
+    if (implicados.length === 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Debe ingresar al menos un implicado.',
+        confirmButtonText: 'OK',
+        customClass: {
+          container: 'swal-container',
+        },
+      });
+      return;
+    }
+  
+    // Validación de coincidencia de emails
+    if (denunciante.email !== denunciante.confirmarEmail) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en el email',
+        text: 'Los correos electrónicos no coinciden.',
+        confirmButtonText: 'OK',
+        customClass: {
+          container: 'swal-container',
+        },
+      });
+      return;
+    }
+  
+    // Validación de RUT chileno
+    if (!validateRut(denunciante.rut)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'RUT inválido',
+        text: 'El RUT ingresado no es válido. Por favor, verifica el formato.',
+        confirmButtonText: 'OK',
+        customClass: {
+          container: 'swal-container',
+        },
+      });
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append('denuncianteNombre', denunciante.nombre);
+    formData.append('denuncianteApellidos', denunciante.apellidos);
+    formData.append('denuncianteRut', denunciante.rut);
+    formData.append('denuncianteCelular', denunciante.celular);
+    formData.append('denuncianteEmail', denunciante.email);
+    formData.append('denuncianteConfirmarEmail', denunciante.confirmarEmail);
+    formData.append('denuncianteRelacionTrabajo', denunciante.relacionTrabajo);
+    formData.append('denuncianteLugarDenuncia', denunciante.lugarDenuncia);
+    formData.append('denuncianteAnonimato', denunciante.anonimato);
+  
+
+    implicados.forEach((implicado, index) => {
+      formData.append(`implicados[${index}][nombre]`, implicado.nombre);
+      formData.append(`implicados[${index}][apellidos]`, implicado.apellidos);
+      formData.append(`implicados[${index}][lugar]`, implicado.lugar);
+      formData.append(`implicados[${index}][cargo]`, implicado.cargo);
+      formData.append(`implicados[${index}][denuncia]`, implicado.denuncia);
+    });
+  
+    // Añadir archivos como una sola colección
+    selectedFilesKarin.forEach((file, index) => {
+      formData.append(`archivos[${index}]`, file);
+    });
+  
+    try {
+      const response = await axios.post(`${API_BASE_URL}/denuncias-karin`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      Swal.fire({
+        icon: 'success',
+        title: 'Denuncia enviada',
+        text: 'Tu denuncia ha sido enviada con éxito.',
+        confirmButtonText: 'OK',
+        customClass: {
+          container: 'swal-container',
+        },
+      });
+      setOpenKarin(false);
+      navigate('/UserDashboard');
+    } catch (error) {
+      console.error('Error al enviar la denuncia:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al enviar denuncia',
+        text: 'Hubo un problema al enviar tu denuncia. Por favor, intenta nuevamente.',
+        confirmButtonText: 'OK',
+        customClass: {
+          container: 'swal-container',
+        },
+      });
+      setOpenKarin(false);
+      navigate('/UserDashboard');
+    }
+  };
+ 
+  
+
+  const handleCancelKarin = () => {
+    // Lógica para limpiar o cancelar el formulario
+    setDenunciante({
+      nombre: '',
+      apellidos: '',
+      rut: '',
+      celular: '',
+      email: '',
+      confirmarEmail: '',
+      relacionTrabajo: '',
+      lugarDenuncia: '',
+      anonimato: false,
+    });
+    setImplicados({
+      nombre: '',
+      apellidos: '',
+      lugar: '',
+      cargo: '',
+      denuncia: '',
+      archivo: [],
+    });
+  };
+
   useEffect(() => {
-    // const fetchNotificaciones = async () => {
-    //   try {
-    //     const response = await axios.get(`${API_BASE_URL}/notificaciones`);
-    //     const sortedNotificaciones = response.data
-    //       .filter((noti) => noti.trabajador === userDNI)
-    //       .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
-    //       .slice(0, 3);
-    //     setNotificaciones(sortedNotificaciones);
-    //   } catch (error) {
-    //     console.error('Error al obtener las notificaciones:', error);
-    //   }
-    // };
 
     const fetchSolicitudes = async () => {
       try {
@@ -92,37 +314,36 @@ const ManageUser = () => {
         });
     }
 
-const fetchTrabajadores = async () => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/trabajadores`);
-    
-    // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
-    const sortedTrabajadores = response.data.sort((a, b) => {
-      if (a.apellido_paterno < b.apellido_paterno) return -1;
-      if (a.apellido_paterno > b.apellido_paterno) return 1;
-      
-      // Si los apellidos paternos son iguales, ordenar por apellido_materno
-      if (a.apellido_materno < b.apellido_materno) return -1;
-      if (a.apellido_materno > b.apellido_materno) return 1;
-      
-      // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
-      if (a.nombre < b.nombre) return -1;
-      if (a.nombre > b.nombre) return 1;
+    const fetchTrabajadores = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+        
+        // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
+        const sortedTrabajadores = response.data.sort((a, b) => {
+          if (a.apellido_paterno < b.apellido_paterno) return -1;
+          if (a.apellido_paterno > b.apellido_paterno) return 1;
+          
+          // Si los apellidos paternos son iguales, ordenar por apellido_materno
+          if (a.apellido_materno < b.apellido_materno) return -1;
+          if (a.apellido_materno > b.apellido_materno) return 1;
+          
+          // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
+          if (a.nombre < b.nombre) return -1;
+          if (a.nombre > b.nombre) return 1;
 
-      return 0;
-    });
+          return 0;
+        });
 
-    setTrabajadores(sortedTrabajadores);
-  } catch (error) {
-    console.error('Error fetching trabajadores:', error);
-  }
-};
+        setTrabajadores(sortedTrabajadores);
+      } catch (error) {
+        console.error('Error fetching trabajadores:', error);
+      }
+    };
 
     fetchTrabajadores();
     fetchComunicaciones();
     fetchSolicitudes();
-    //fetchNotificaciones();
-  }, [userDNI, empresaId]); // Dependencies: userDNI and empresaId
+  }, []); // Dependencies: userDNI and empresaId
 
   const handleOpenModalCom = (content) => {
     setModalContentCom(content);
@@ -169,7 +390,7 @@ const fetchTrabajadores = async () => {
       case '3':
         return 'Permiso';
       case '4':
-        return 'Vacaciones';
+        return 'BEneficios';
       default:
         return 'Desconocido';
     }
@@ -235,39 +456,13 @@ const fetchTrabajadores = async () => {
           </Typography>
         </Grid>
 
-        {/* Notificaciones del Sistema y Comunicaciones */}
-        {/* <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
           <Card>
-            <CardContent>
-              <Typography variant="h6" sx={{ color: 'black' }}>
-                Notificaciones del Sistema
-              </Typography>
-              <List>
-                {notificaciones.map((notificacion) => {
-                  const [, tipoSolicitud] = notificacion.controlador.split('-');
-                  return (
-                    <ListItem key={notificacion.id} onClick={() => handleOpenModalNot(notificacion)}>
-                      <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                        <Button variant="contained" color="primary" sx={{ marginRight: 2 }}>
-                          {tipoSolicitud}
-                        </Button>
-                        <ListItemText primary={notificacion.mensaje} />
-                      </Box>
-                    </ListItem>
-                  );
-                })}
-              </List>
-            </CardContent>
-          </Card>
-        </Grid> */}
-
-        <Grid item xs={12} md={12}>
-          <Card>
-            <CardContent>
+            <CardContent >
               <Typography variant="h6" sx={{ color: 'black' }}>
                 Comunicaciones
               </Typography>
-              <List>
+              <List sx={{ height: 350, overflowY: 'auto' }}>
                 {comunicaciones.map((comunicacion) => (
                   <ListItem key={comunicacion.id} onClick={() => handleOpenModalCom(comunicacion)}>
                     <ListItemText
@@ -281,7 +476,7 @@ const fetchTrabajadores = async () => {
           </Card>
         </Grid>
         {/* Estados de Solicitudes */}
-        <Grid item xs={12}>
+        <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
               <Typography variant="h6" sx={{ color: 'black' }}>
@@ -336,8 +531,364 @@ const fetchTrabajadores = async () => {
             </CardContent>
           </Card>
         </Grid>
+        <Grid item xs={12} md={4}>
+          <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <CardContent sx={{ overflowY: 'auto' }}>
+              <Typography variant="h6" sx={{ color: 'black' }}>
+                Ley Karin – N° 21.643
+              </Typography>
+              <Typography variant="body1" sx={{ color: 'black', mb: 2, lineHeight: 1.6 }}>
+                La Ley Karin busca garantizar espacios laborales seguros y libres de acoso, estableciendo la obligación de prevenir 
+                los actos que vayan en contra de este objetivo, protegiendo los derechos de los trabajadores y promoviendo un entorno laboral saludable.
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'gray', fontStyle: 'italic', mb: 3 }}>
+                "Es responsabilidad de todos los empleadores velar por el respeto y la dignidad en el lugar de trabajo."
+              </Typography>
+              <Button variant="contained" color="primary" onClick={handleOpenKarin} sx={{ width: '100%', padding: '10px 0', mt: 3 }}>
+                Ingresar Denuncia
+              </Button>
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
       
+      <Modal
+        open={openKarin}
+        onClose={handleCloseKarin}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        sx={{ zIndex : 1040}}
+      >
+      <Card sx={{ maxWidth: 800, maxHeight: 850, overflowY: 'auto', margin: 'auto', padding: 2 }}>
+        <CardContent>
+          <Typography variant="h5" gutterBottom>
+            Formulario de Denuncia
+          </Typography>
+          <form onSubmit={handleSubmitKarin}>
+            <Typography variant="h6" gutterBottom>
+              Identificación del Denunciante
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="nombre"
+                  label="Nombre"
+                  name="nombre"
+                  value={denunciante.nombre}
+                  onChange={handleChangeDenuncianteKarin}
+                  sx={{ color: 'black' }}
+                  InputLabelProps={{ 
+                    style: { color: 'black' }  // Set label color
+                  }}
+                  InputProps={{ 
+                    style: { color: 'black' }  // Set input text color
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="apellidos"
+                  label="Apellidos"
+                  name="apellidos"
+                  value={denunciante.apellidos}
+                  onChange={handleChangeDenuncianteKarin}
+                  sx={{ color: 'black' }}
+                  InputLabelProps={{ 
+                    style: { color: 'black' }  // Set label color
+                  }}
+                  InputProps={{ 
+                    style: { color: 'black' }  // Set input text color
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="rut"
+                  label="RUT"
+                  name="rut"
+                  value={denunciante.rut}
+                  onChange={handleChangeDenuncianteKarin}
+                  helperText="Formato: 12345678-9"
+                  sx={{ color: 'black' }}
+                  InputLabelProps={{ 
+                    style: { color: 'black' }  // Set label color
+                  }}
+                  InputProps={{ 
+                    style: { color: 'black' }  // Set input text color
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="celular"
+                  label="Celular"
+                  name="celular"
+                  value={denunciante.celular}
+                  onChange={handleChangeDenuncianteKarin}
+                  inputProps={{ maxLength: 9 }}
+                  sx={{ color: 'black' }}
+                  InputLabelProps={{ 
+                    style: { color: 'black' }  // Set label color
+                  }}
+                  InputProps={{ 
+                    style: { color: 'black' }  // Set input text color
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email"
+                  name="email"
+                  value={denunciante.email}
+                  onChange={handleChangeDenuncianteKarin}
+                  sx={{ color: 'black' }}
+                  InputLabelProps={{ 
+                    style: { color: 'black' }  // Set label color
+                  }}
+                  InputProps={{ 
+                    style: { color: 'black' }  // Set input text color
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="confirmarEmail"
+                  label="Confirmar Email"
+                  name="confirmarEmail"
+                  value={denunciante.confirmarEmail}
+                  onChange={handleChangeDenuncianteKarin}
+                  sx={{ color: 'black' }}
+                  InputLabelProps={{ 
+                    style: { color: 'black' }  // Set label color
+                  }}
+                  InputProps={{ 
+                    style: { color: 'black' }  // Set input text color
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="relacionTrabajo"
+                  label="Relación con el trabajo"
+                  name="relacionTrabajo"
+                  value={denunciante.relacionTrabajo}
+                  onChange={handleChangeDenuncianteKarin}
+                  sx={{ color: 'black' }}
+                  InputLabelProps={{ 
+                    style: { color: 'black' }  // Set label color
+                  }}
+                  InputProps={{ 
+                    style: { color: 'black' }  // Set input text color
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="lugarDenuncia"
+                  label="Lugar de la denuncia"
+                  name="lugarDenuncia"
+                  value={denunciante.lugarDenuncia}
+                  onChange={handleChangeDenuncianteKarin}
+                  sx={{ color: 'black' }}
+                  InputLabelProps={{ 
+                    style: { color: 'black' }  // Set label color
+                  }}
+                  InputProps={{ 
+                    style: { color: 'black' }  // Set input text color
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={denunciante.anonimato}
+                      onChange={(e) =>
+                        setDenunciante({ ...denunciante, anonimato: e.target.checked })
+                      }
+                      name="anonimato"
+                      color="primary"
+                    />
+                  }
+                  label="¿Desea denunciar manteniendo reserva de su identidad o de forma anónima?"
+                />
+              </Grid>
+            </Grid>
+
+            <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
+              Datos de las Personas Implicadas en la Denuncia
+            </Typography>
+            <Grid container spacing={2}>
+              {Array.isArray(implicados) && implicados.map((implicado, index) => (
+                <React.Fragment key={index}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      id={`nombreImplicado-${index}`}
+                      label="Nombre del Implicado"
+                      name="nombre"
+                      value={implicado.nombre}
+                      onChange={(e) => handleChangeImplicadoKarin(index, e)}
+                      sx={{ color: 'black' }}
+                      InputLabelProps={{ 
+                        style: { color: 'black' }  // Set label color
+                      }}
+                      InputProps={{ 
+                        style: { color: 'black' }  // Set input text color
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      id={`apellidosImplicado-${index}`}
+                      label="Apellidos del Implicado"
+                      name="apellidos"
+                      value={implicado.apellidos}
+                      onChange={(e) => handleChangeImplicadoKarin(index, e)}
+                      sx={{ color: 'black' }}
+                      InputLabelProps={{ 
+                        style: { color: 'black' }  // Set label color
+                      }}
+                      InputProps={{ 
+                        style: { color: 'black' }  // Set input text color
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      id={`lugarImplicado-${index}`}
+                      label="Lugar de la Denuncia"
+                      name="lugar"
+                      value={implicado.lugar}
+                      onChange={(e) => handleChangeImplicadoKarin(index, e)}
+                      sx={{ color: 'black' }}
+                      InputLabelProps={{ 
+                        style: { color: 'black' }  // Set label color
+                      }}
+                      InputProps={{ 
+                        style: { color: 'black' }  // Set input text color
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      id={`cargoImplicado-${index}`}
+                      label="Cargo del Implicado"
+                      name="cargo"
+                      value={implicado.cargo}
+                      onChange={(e) => handleChangeImplicadoKarin(index, e)}
+                      sx={{ color: 'black' }}
+                      InputLabelProps={{ 
+                        style: { color: 'black' }  // Set label color
+                      }}
+                      InputProps={{ 
+                        style: { color: 'black' }  // Set input text color
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      id={`denuncia-${index}`}
+                      label="Denuncia"
+                      name="denuncia"
+                      multiline
+                      rows={4}
+                      value={implicado.denuncia}
+                      onChange={(e) => handleChangeImplicadoKarin(index, e)}
+                      sx={{ color: 'black' }}
+                      InputLabelProps={{ 
+                        style: { color: 'black' }  // Set label color
+                      }}
+                      InputProps={{ 
+                        style: { color: 'black' }  // Set input text color
+                      }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      onClick={() => removeImplicado(index)}
+                      fullWidth
+                    >
+                      Eliminar Implicado
+                    </Button>
+                  </Grid>
+                </React.Fragment>
+              ))}
+              <Grid item xs={12}>
+                <Button variant="contained" component="label" fullWidth>
+                  Adjuntar Archivos
+                  <input
+                    type="file"
+                    hidden
+                    onChange={(e) => handleFileChangeKarin(e)}
+                    multiple
+                  />
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={addImplicado}
+                  fullWidth
+                >
+                  Agregar Implicado
+                </Button>
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={2} sx={{ mt: 2 }}>
+              <Grid item xs={6}>
+                <Button type="submit" fullWidth variant="contained" color="primary">
+                  Enviar
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button fullWidth variant="outlined" onClick={handleCloseKarin}>
+                  Cancelar
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </CardContent>
+      </Card>
+      </Modal>
+
       <Modal open={openModalCom} onClose={handleCloseModalCom}>
         <Box
           sx={{

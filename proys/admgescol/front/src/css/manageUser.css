@@ -1,0 +1,10 @@
+
+/* Estilo del modal */
+.modal {
+    z-index: 1040; /* Ajusta este valor para que sea menor que el de Swal */
+  }
+
+  /* Asegúrate de que SweetAlert2 tenga un z-index alto */
+.swal2-container {
+    z-index: 1050 !important; /* Ajusta el valor según sea necesario */
+  }

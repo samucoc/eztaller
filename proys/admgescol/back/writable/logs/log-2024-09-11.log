@@ -1,0 +1,326 @@
+CRITICAL - 2024-09-11 00:09:55 --> Attempt to assign property "created_at" on null
+in APPPATH\Controllers\Api\V1\DenunciaController.php on line 70.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DenunciaController->create()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DenunciaController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-11 00:11:47 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\BaseModel.php(742): CodeIgniter\BaseModel->transformDataToArray(null, 'insert')
+ 3 SYSTEMPATH\Model.php(729): CodeIgniter\BaseModel->insert(null, true)
+ 4 APPPATH\Controllers\Api\V1\DenunciaController.php(73): CodeIgniter\Model->insert(null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DenunciaController->create()
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DenunciaController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-11 00:12:14 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\BaseModel.php(742): CodeIgniter\BaseModel->transformDataToArray(null, 'insert')
+ 3 SYSTEMPATH\Model.php(729): CodeIgniter\BaseModel->insert(null, true)
+ 4 APPPATH\Controllers\Api\V1\DenunciaController.php(73): CodeIgniter\Model->insert(null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DenunciaController->create()
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DenunciaController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-11 00:17:16 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\BaseModel.php(742): CodeIgniter\BaseModel->transformDataToArray(null, 'insert')
+ 3 SYSTEMPATH\Model.php(729): CodeIgniter\BaseModel->insert(null, true)
+ 4 APPPATH\Controllers\Api\V1\DenunciaController.php(73): CodeIgniter\Model->insert(null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DenunciaController->create()
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DenunciaController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-11 00:18:37 --> There is no data to insert.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('insert')
+ 2 SYSTEMPATH\BaseModel.php(742): CodeIgniter\BaseModel->transformDataToArray(null, 'insert')
+ 3 SYSTEMPATH\Model.php(729): CodeIgniter\BaseModel->insert(null, true)
+ 4 APPPATH\Controllers\Api\V1\DenunciaController.php(73): CodeIgniter\Model->insert(null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DenunciaController->create()
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DenunciaController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-11 00:37:54 --> Undefined array key "archivos"
+in APPPATH\Controllers\Api\V1\DenunciaController.php on line 119.
+ 1 APPPATH\Controllers\Api\V1\DenunciaController.php(119): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "archivos"', 'APPPATH\\Controllers\\Api\\V1\\DenunciaController.php', 119)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DenunciaController->create()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DenunciaController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-11 01:19:25 --> Undefined property: stdClass::$userDNI
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 879.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(879): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$userDNI', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 879)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->firmarDoc()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-11 01:48:34 --> Call to undefined function App\Controllers\Api\V1\generateSecurityToken()
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 874.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->firmarDoc()
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-11 01:55:36 --> Undefined property: stdClass::$timestamp
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 868.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(868): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$timestamp', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 868)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->firmarDoc()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-11 02:00:29 --> Undefined property: stdClass::$timestamp
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 962.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(962): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$timestamp', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 962)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->getToken()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-11 02:01:06 --> Undefined property: stdClass::$timestamp
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 868.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(868): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$timestamp', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 868)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->firmarDoc()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-11 02:02:51 --> Undefined property: stdClass::$token
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 865.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(865): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$token', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 865)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->firmarDoc()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-11 02:03:12 --> Undefined property: stdClass::$token
+in APPPATH\Controllers\Api\V1\DocumentoController.php on line 865.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(865): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$token', 'APPPATH\\Controllers\\Api\\V1\\DocumentoController.php', 865)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->firmarDoc()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-11 02:18:19 --> mysqli_sql_exception: Column 'trabajador' in where clause is ambiguous in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT document...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT document...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT document...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(168): CodeIgniter\Database\BaseConnection->query('SELECT document...')
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showRIOHSByUserByEmp('6117483', '4')
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2024-09-11 02:18:19 --> Column 'trabajador' in where clause is ambiguous
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(168): CodeIgniter\Database\BaseConnection->query('SELECT documentos.* 
+                    FROM documentos
+                        inner join documentos_firmados on documentos_firmados.documento_id = documentos.id
+                    WHERE (tipo_doc_id in (\'5\',\'6\') and trabajador = \'6117483\' and empresa_id = \'4\') 
+                        or (tipo_doc_id in (\'5\',\'6\') and empresa_id = \'4\') 
+                        or (tipo_doc_id in (\'5\',\'6\') and cargo_id in (select cargo_id 
+                                                                        from trabajadores 
+                                                                        where trabajador = \'6117483\') )')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showRIOHSByUserByEmp('6117483', '4')
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-11 02:19:29 --> mysqli_sql_exception: Unknown column 'trabajadores.trabajador' in 'where clause' in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT document...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT document...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT document...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(168): CodeIgniter\Database\BaseConnection->query('SELECT document...')
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showRIOHSByUserByEmp('6117483', '4')
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2024-09-11 02:19:29 --> Unknown column 'trabajadores.trabajador' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(168): CodeIgniter\Database\BaseConnection->query('SELECT documentos.* 
+                    FROM documentos
+                        inner join documentos_firmados on documentos_firmados.documento_id = documentos.id
+                    WHERE (tipo_doc_id in (\'5\',\'6\') and  documentos.trabajador = \'6117483\' and empresa_id = \'4\') 
+                        or (tipo_doc_id in (\'5\',\'6\') and empresa_id = \'4\') 
+                        or (tipo_doc_id in (\'5\',\'6\') and cargo_id in (select cargo_id 
+                                                                        from trabajadores 
+                                                                        where trabajadores.trabajador = \'6117483\') )')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showRIOHSByUserByEmp('6117483', '4')
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-11 02:20:12 --> mysqli_sql_exception: Unknown column 'trabajadores.trabajador' in 'where clause' in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT document...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT document...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT document...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(168): CodeIgniter\Database\BaseConnection->query('SELECT document...')
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showRIOHSByUserByEmp('6117483', '4')
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2024-09-11 02:20:12 --> Unknown column 'trabajadores.trabajador' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(168): CodeIgniter\Database\BaseConnection->query('SELECT documentos.* 
+                    FROM documentos
+                        inner join documentos_firmados on documentos_firmados.documento_id = documentos.id
+                    WHERE (documentos.tipo_doc_id in (\'5\',\'6\') and  documentos.trabajador = \'6117483\' and documentos.empresa_id = \'4\') 
+                        or (documentos.tipo_doc_id in (\'5\',\'6\') and documentos.empresa_id = \'4\') 
+                        or (documentos.tipo_doc_id in (\'5\',\'6\') and documentos.cargo_id in (select trabajadores.cargo_id 
+                                                                        from trabajadores 
+                                                                        where trabajadores.trabajador = \'6117483\') )')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showRIOHSByUserByEmp('6117483', '4')
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-11 02:22:22 --> mysqli_sql_exception: FUNCTION gescolcl_adminrrhh.coalsce does not exist in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT document...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT document...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT document...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(168): CodeIgniter\Database\BaseConnection->query('SELECT document...')
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showRIOHSByUserByEmp('6117483', '4')
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2024-09-11 02:22:22 --> FUNCTION gescolcl_adminrrhh.coalsce does not exist
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(168): CodeIgniter\Database\BaseConnection->query('SELECT documentos.* , coalsce(documentos_firmados.documento_id,0) as firmado
+                    FROM documentos
+                        left join documentos_firmados on documentos_firmados.documento_id = documentos.id and documentos.trabajador = \'6117483\'
+                    WHERE (documentos.tipo_doc_id in (\'5\',\'6\') and  documentos.trabajador = \'6117483\' and documentos.empresa_id = \'4\') 
+                        or (documentos.tipo_doc_id in (\'5\',\'6\') and documentos.empresa_id = \'4\') 
+                        or (documentos.tipo_doc_id in (\'5\',\'6\') and documentos.cargo_id in (select trabajadores.cargo_id 
+                                                                        from trabajadores 
+                                                                        where trabajadores.rut = \'6117483\') )')
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showRIOHSByUserByEmp('6117483', '4')
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-11 02:28:39 --> mysqli_sql_exception: Column 'trabajador' in where clause is ambiguous in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT document...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT document...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT document...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(229): CodeIgniter\Database\BaseConnection->query('SELECT document...', Array)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showLiqActByUserByEmp('6117483', '4')
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2024-09-11 02:28:39 --> Column 'trabajador' in where clause is ambiguous
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(229): CodeIgniter\Database\BaseConnection->query('SELECT documentos.*, 
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                    FROM documentos
+                    LEFT JOIN documentos_firmados 
+                        ON documentos_firmados.documento_id = documentos.id 
+                        AND documentos_firmados.trabajador = \'6117483\'
+                    WHERE tipo_doc_id = \'1\' and trabajador = ? and empresa_id = ? ', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showLiqActByUserByEmp('6117483', '4')
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-11 02:28:41 --> mysqli_sql_exception: Column 'trabajador' in where clause is ambiguous in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT document...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT document...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT document...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(207): CodeIgniter\Database\BaseConnection->query('SELECT document...', Array)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showContratosByUserByEmp('6117483', '4')
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2024-09-11 02:28:41 --> Column 'trabajador' in where clause is ambiguous
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(207): CodeIgniter\Database\BaseConnection->query('SELECT documentos.*, 
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                    FROM documentos
+                    LEFT JOIN documentos_firmados 
+                        ON documentos_firmados.documento_id = documentos.id 
+                        AND documentos_firmados.trabajador = \'6117483\'
+                    WHERE tipo_doc_id = \'2\' and trabajador = ? and empresa_id = ?', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showContratosByUserByEmp('6117483', '4')
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-11 02:28:43 --> mysqli_sql_exception: Column 'trabajador' in where clause is ambiguous in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT document...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT document...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT document...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(229): CodeIgniter\Database\BaseConnection->query('SELECT document...', Array)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showLiqActByUserByEmp('6117483', '4')
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2024-09-11 02:28:43 --> Column 'trabajador' in where clause is ambiguous
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(229): CodeIgniter\Database\BaseConnection->query('SELECT documentos.*, 
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                    FROM documentos
+                    LEFT JOIN documentos_firmados 
+                        ON documentos_firmados.documento_id = documentos.id 
+                        AND documentos_firmados.trabajador = \'6117483\'
+                    WHERE tipo_doc_id = \'1\' and trabajador = ? and empresa_id = ? ', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showLiqActByUserByEmp('6117483', '4')
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-11 02:28:46 --> mysqli_sql_exception: Column 'trabajador' in where clause is ambiguous in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT document...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT document...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT document...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(137): CodeIgniter\Database\BaseConnection->query('SELECT document...', Array)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showCargaByUserByEmp('6117483', '4')
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2024-09-11 02:28:46 --> Column 'trabajador' in where clause is ambiguous
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(137): CodeIgniter\Database\BaseConnection->query('SELECT documentos.*, 
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                    FROM documentos
+                    LEFT JOIN documentos_firmados 
+                        ON documentos_firmados.documento_id = documentos.id 
+                        AND documentos_firmados.trabajador = \'6117483\'
+                    WHERE (tipo_doc_id not in  (\'1\',\'2\',\'5\') and trabajador = ? and empresa_id = ?) or (tipo_doc_id not in  (\'1\',\'2\',\'5\') and cargo_id in (select cargo_id from trabajadores where trabajador = ?) )', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showCargaByUserByEmp('6117483', '4')
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-11 02:30:52 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? and documentos.empresa_id = ?) 
+                            or (documentos.ti' at line 7 in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT document...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('SELECT document...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT document...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\DocumentoController.php(140): CodeIgniter\Database\BaseConnection->query('SELECT document...', Array)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showCargaByUserByEmp('6117483', '4')
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2024-09-11 02:30:52 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? and documentos.empresa_id = ?) 
+                            or (documentos.ti' at line 7
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 APPPATH\Controllers\Api\V1\DocumentoController.php(140): CodeIgniter\Database\BaseConnection->query('SELECT documentos.*, 
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                    FROM documentos
+                    LEFT JOIN documentos_firmados 
+                        ON documentos_firmados.documento_id = documentos.id 
+                        AND documentos_firmados.trabajador = \'6117483\'
+                    WHERE (documentos.tipo_doc_id not in  (\'1\',\'2\',\'5\') and documentos.trabajador = ? and documentos.empresa_id = ?) 
+                            or (documentos.tipo_doc_id not in  (\'1\',\'2\',\'5\') and documentos.cargo_id in (select cargo_id 
+                                                                                                            from trabajadores 
+                                                                                                            where rut = \'6117483\') )', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\DocumentoController->showCargaByUserByEmp('6117483', '4')
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\DocumentoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()

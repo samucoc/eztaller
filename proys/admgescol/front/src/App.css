@@ -47,7 +47,11 @@
   display: flex;
   flex: 1; /* Para que ocupe todo el espacio restante */
 }
-
+.panel-white-background {
+  background-color: white !important;
+  padding: 16px; /* Ajusta según sea necesario */
+  border-radius: 8px; /* Ajusta según sea necesario */
+}
 /* App.css */
 
 .container-root {
@@ -79,6 +83,8 @@
 }
 
 .panel-container {
+  background-color: white !important;
+
   flex-grow: 1;
   padding: 16px; /* Equivalent to p: 2 */
 }

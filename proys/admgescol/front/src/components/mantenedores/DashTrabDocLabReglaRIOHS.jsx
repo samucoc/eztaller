@@ -50,31 +50,31 @@
       }
     };
 
-const fetchTrabajadores = async () => {
-  try {
-    const response = await axios.get(`${API_BASE_URL}/trabajadores`);
-    
-    // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
-    const sortedTrabajadores = response.data.sort((a, b) => {
-      if (a.apellido_paterno < b.apellido_paterno) return -1;
-      if (a.apellido_paterno > b.apellido_paterno) return 1;
-      
-      // Si los apellidos paternos son iguales, ordenar por apellido_materno
-      if (a.apellido_materno < b.apellido_materno) return -1;
-      if (a.apellido_materno > b.apellido_materno) return 1;
-      
-      // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
-      if (a.nombre < b.nombre) return -1;
-      if (a.nombre > b.nombre) return 1;
+    const fetchTrabajadores = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+        
+        // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
+        const sortedTrabajadores = response.data.sort((a, b) => {
+          if (a.apellido_paterno < b.apellido_paterno) return -1;
+          if (a.apellido_paterno > b.apellido_paterno) return 1;
+          
+          // Si los apellidos paternos son iguales, ordenar por apellido_materno
+          if (a.apellido_materno < b.apellido_materno) return -1;
+          if (a.apellido_materno > b.apellido_materno) return 1;
+          
+          // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
+          if (a.nombre < b.nombre) return -1;
+          if (a.nombre > b.nombre) return 1;
 
-      return 0;
-    });
+          return 0;
+        });
 
-    setTrabajadores(sortedTrabajadores);
-  } catch (error) {
-    console.error('Error fetching trabajadores:', error);
-  }
-};
+        setTrabajadores(sortedTrabajadores);
+      } catch (error) {
+        console.error('Error fetching trabajadores:', error);
+      }
+    };
 
     fetchTrabajadores();
     fetchData();
@@ -129,12 +129,59 @@ const fetchTrabajadores = async () => {
     return monthNames[monthNumber - 1]; // Restar 1 ya que el índice del array comienza en 0
   };
 
+  const getClientIp = async () => {
+      try {
+          const response = await axios.get('https://api.ipify.org?format=json');
+          return response.data.ip;
+      } catch (error) {
+          console.error('Error obteniendo IP del cliente:', error);
+          return null;
+      }
+  };
+
+  const generateSecurityToken = async (documentId, userDNI) => {
+      const timestamp = new Date().toISOString(); // Hora actual en formato ISO
+      const date = new Date(timestamp);
+
+      // Extraer los componentes de la fecha y hora
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses de 0 a 11
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      const seconds = String(date.getSeconds()).padStart(2, '0');
+
+      // Formatear la fecha y hora
+      const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+      // Enviar los datos al backend para obtener el token (secreto guardado en el backend)
+      const response = await axios.post(`${API_BASE_URL}/documentos/get-token`, { documentId, userDNI, formattedDateTime });
+      return response.data.token;
+  };
 
   const handleSignDocument = async () => {
     try {
+      const clientIp = await getClientIp(); // Obtener IP del cliente
+      if (!clientIp) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al obtener IP',
+            text: 'No se pudo obtener la IP del cliente.',
+            confirmButtonText: 'OK',
+        });
+        return;
+      }
       const response = await axios.post(`${API_BASE_URL}/users/sign-in-rut`, { userDNI, password,  documentId: selectedDocument.id  });
       if (response.status === 200) {
-        await axios.post(`${API_BASE_URL}/documentos/firmar-doc`, { documentId: selectedDocument.id  });
+          const token = await generateSecurityToken(selectedDocument.id, userDNI);
+
+          await axios.post(`${API_BASE_URL}/documentos/firmar-doc`, {
+              userDNI, 
+              documentId: selectedDocument.id,
+              ip: clientIp, // Incluir IP en el payload
+              token
+          });        
+        
         Swal.fire({
           icon: 'success',
           title: 'Documento firmado',
@@ -182,7 +229,7 @@ const fetchTrabajadores = async () => {
                   >
                     Ver Documento
                   </Button>
-                  {d.firma !== "1" ? (
+                  {d.firmado === "0" ? (
                     <Button
                       variant="contained"
                       color="secondary"

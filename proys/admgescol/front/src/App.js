@@ -182,6 +182,8 @@ const App = () => {
                 userDNI={userDNI}
                 empresaId={empresaId}
                 setCurrentOption={handleOptionChange}
+                className="panel-white-background"
+
               />
             </Box>
           </Box>

@@ -21,10 +21,13 @@ class DocumentoController extends ResourceController
     protected $modelName = 'App\Models\DocumentoModel';
     protected $format = 'json';
     private $datetimeNow;
+    private $documentoFirmadoModel;
 
     public function __construct()
     {
         $this->datetimeNow = new \DateTime('NOW', new \DateTimeZone('America/Santiago'));
+        $this->documentoFirmadoModel = new \App\Models\DocumentoFirmadoModel;
+
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding, Authorization");
@@ -40,6 +43,9 @@ class DocumentoController extends ResourceController
     public function index()
     {
         $data = $this->model->findAll();
+        foreach ($data as $key => $value) {
+            $data[$key]->firmado = $this->documentoFirmadoModel->find($value->id);
+        }
         return $this->respond($data);
     }
 
@@ -54,6 +60,8 @@ class DocumentoController extends ResourceController
         if (empty($data)) {
             return $this->failNotFound(RESOURCE_NOT_FOUND);
         }
+        $data->firmado = $this->documentoFirmadoModel->find($data->id);
+
         return $this->respond($data);
     }
     public function showByRut($rut = null)
@@ -118,9 +126,18 @@ class DocumentoController extends ResourceController
     {
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
-        $query = "SELECT * FROM documentos WHERE (tipo_doc_id not in  ('1','2','5') and trabajador = ? and empresa_id = ?) or (tipo_doc_id not in  ('1','2','5') and cargo_id in (select cargo_id from trabajadores where trabajador = ?) )";
+        $query = "SELECT documentos.*, 
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                    FROM documentos
+                    LEFT JOIN documentos_firmados 
+                        ON documentos_firmados.documento_id = documentos.id 
+                        AND documentos_firmados.trabajador = '".$rut."'
+                    WHERE (documentos.tipo_doc_id not in  ('1','2','5') and documentos.trabajador = ? and documentos.empresa_id = ?) 
+                            or (documentos.tipo_doc_id not in  ('1','2','5') and documentos.cargo_id in (select cargo_id 
+                                                                                                            from trabajadores 
+                                                                                                            where rut = '".$rut."') )";
         // Ejecutar la consulta utilizando Query Builder de CodeIgniter
-        $data = $db->query($query, [$rut, $empresa, $rut])->getResult();
+        $data = $db->query($query, [$rut, $empresa])->getResult();
         // Verificar si se encontraron resultados
         // if (empty($data)) {
         //     return $this->failNotFound(RESOURCE_NOT_FOUND);
@@ -133,7 +150,13 @@ class DocumentoController extends ResourceController
     {
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
-        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '6' and trabajador = ? and empresa_id = ?";
+        $query = "SELECT documentos.*, 
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                    FROM documentos
+                    LEFT JOIN documentos_firmados 
+                        ON documentos_firmados.documento_id = documentos.id 
+                        AND documentos_firmados.trabajador = '".$rut."'
+                    WHERE documentos.tipo_doc_id = '6' and documentos.trabajador = ? and documentos.empresa_id = ?";
         // Ejecutar la consulta utilizando Query Builder de CodeIgniter
         $data = $db->query($query, [$rut, $empresa])->getResult();
         // Verificar si se encontraron resultados
@@ -148,13 +171,20 @@ class DocumentoController extends ResourceController
     {
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
-        $query = "SELECT * 
-                    FROM documentos 
-                    WHERE (tipo_doc_id in ('5','6') and trabajador = '".$rut."' and empresa_id = '".$empresa."') 
-                        or (tipo_doc_id in ('5','6') and empresa_id = '".$empresa."') 
-                        or (tipo_doc_id in ('5','6') and cargo_id in (select cargo_id 
-                                                                        from trabajadores 
-                                                                        where trabajador = '".$rut."') )";
+        $query = "SELECT documentos.*, 
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                    FROM documentos
+                    LEFT JOIN documentos_firmados 
+                        ON documentos_firmados.documento_id = documentos.id 
+                        AND documentos_firmados.trabajador = '".$rut."'
+                    WHERE documentos.tipo_doc_id IN ('5', '6')
+                    AND (documentos.trabajador = '".$rut."' 
+                        OR documentos.empresa_id = '".$empresa."' 
+                        OR documentos.cargo_id IN (
+                            SELECT trabajadores.cargo_id 
+                            FROM trabajadores 
+                            WHERE trabajadores.rut = '".$rut."'
+                        ));";
         // Ejecutar la consulta utilizando Query Builder de CodeIgniter
         $data = $db->query($query)->getResult();
         // Verificar si se encontraron resultados
@@ -169,7 +199,13 @@ class DocumentoController extends ResourceController
     {
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
-        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '2' and trabajador = ? and empresa_id = ?";
+        $query = "SELECT documentos.*, 
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                    FROM documentos
+                    LEFT JOIN documentos_firmados 
+                        ON documentos_firmados.documento_id = documentos.id 
+                        AND documentos_firmados.trabajador = '".$rut."'
+                    WHERE documentos.tipo_doc_id = '2' and documentos.trabajador = ? and documentos.empresa_id = ?";
         // Ejecutar la consulta utilizando Query Builder de CodeIgniter
         $data = $db->query($query, [$rut, $empresa])->getResult();
         // Verificar si se encontraron resultados
@@ -185,7 +221,13 @@ class DocumentoController extends ResourceController
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
         //$query = "SELECT * FROM documentos WHERE tipo_doc_id = '1' and trabajador = ? and empresa_id = ? and agno = '".date("Y")."'";
-        $query = "SELECT * FROM documentos WHERE tipo_doc_id = '1' and trabajador = ? and empresa_id = ? ";
+        $query = "SELECT documentos.*, 
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                    FROM documentos
+                    LEFT JOIN documentos_firmados 
+                        ON documentos_firmados.documento_id = documentos.id 
+                        AND documentos_firmados.trabajador = '".$rut."'
+                    WHERE documentos.tipo_doc_id = '1' and documentos.trabajador = ? and documentos.empresa_id = ? ";
         // Ejecutar la consulta utilizando Query Builder de CodeIgniter
         $data = $db->query($query, [$rut, $empresa])->getResult();
         // Verificar si se encontraron resultados
@@ -855,27 +897,108 @@ class DocumentoController extends ResourceController
         return $numberFormatted;
     }
 
-    public function firmarDoc(){
+    public function firmarDoc() {
         $payload = $this->request->getJSON();
-
+    
+        // Obtener datos del payload
+        $documentId = $payload->documentId;
+        $userDNI = $payload->userDNI;
+        $clientIp = $payload->ip;
+        $receivedToken = $payload->token;
+    
+        // Obtener la hora actual del servidor
+        $timestamp = date('Y-m-d H:i:s');
+    
         $tp = new DocumentoModel();
-        $tp = $tp->find($payload->documentId);
+        $tp = $tp->find($documentId);
 
-        $tp->firma = 1;
+        if ($tp) {
 
-        if ($this->model->update($payload->documentId, $tp)) {
-            $tp->id = $payload->documentId;
-            // Registrar notificación
-            $notificacionController = new \App\Controllers\Api\V1\NotificacionController();
-            $mensaje = "Documento con rut {$tp->trabajador} ha sido firmado correctamente.";
-            $notificacionController->logNotification($tp->trabajador, 'insert', 'documento - firma', $mensaje);
-
-            return $this->respondUpdated($tp, RESOURCE_UPDATED);
+            $db = \Config\Database::connect();
+            // Preparar la consulta SQL
+            $query = "insert into documentos_firmados(documento_id, trabajador, token) values(?,?,?)";
+            // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+            $data = $db->query($query, [$documentId, $userDNI, $receivedToken]);
+       
+            if ($data) {
+                $tp->id = $documentId;
+    
+                // Registrar notificación
+                $notificacionController = new \App\Controllers\Api\V1\NotificacionController();
+                $mensaje = "Documento con rut {$tp->trabajador} ha sido firmado correctamente.";
+                $notificacionController->logNotification($tp->trabajador, 'insert', 'documento - firma', $mensaje);
+    
+                // Anexar la hoja al PDF con los datos necesarios
+                $this->anexarHojaAlPDF($tp->ruta, $userDNI, $timestamp, $clientIp, $receivedToken);
+    
+                return $this->respondUpdated($tp, RESOURCE_UPDATED);
+            } else {
+                return $this->fail($this->model->errors());
+            }
         } else {
-            return $this->fail($this->model->errors());
+            return $this->failNotFound('Documento no encontrado.');
         }
-
     }
 
+    private function anexarHojaAlPDF($pdfRuta, $usuario, $fechaHora, $ip, $expectedToken)
+    {
+        $pdf = new Fpdi();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 10);
 
+        // Título de la hoja
+        $pdf->Cell(0, 5, 'Datos de Firma', 0, 1, 'C');
+        $pdf->Ln(10);
+
+        // Agregar los datos
+        $pdf->SetFont('Arial', '', 7);
+        $pdf->Cell(0, 5, "Usuario: $usuario", 0, 1);
+        $pdf->Cell(0, 5, "Fecha y Hora de Firma: $fechaHora", 0, 1);
+        $pdf->Cell(0, 5, "IP: $ip", 0, 1);
+        $pdf->Cell(0, 5, "Token: $expectedToken", 0, 1);
+
+        // Guardar la nueva hoja en un archivo temporal
+        $tempPdf = tempnam(sys_get_temp_dir(), 'pdf');
+        $pdf->Output('F', $tempPdf);
+
+        // Combinar el archivo temporal con el PDF original
+        $pdf = new Fpdi();
+        $pdf->AddPage();
+        $pdf->setSourceFile($pdfRuta);
+        $tplIdx = $pdf->importPage(1);
+        $pdf->useTemplate($tplIdx);
+        $pdf->AddPage();
+        $pdf->setSourceFile($tempPdf);
+        $tplIdx = $pdf->importPage(1);
+        $pdf->useTemplate($tplIdx);
+
+        // Guardar el PDF combinado
+        file_put_contents($pdfRuta, $pdf->Output('S'));
+
+        // Eliminar el archivo temporal
+        unlink($tempPdf);
+    }
+    
+    public function generateSecurityToken($documentId, $userDNI, $timestamp, $secretKey) {
+        // Crear un string único basado en los datos proporcionados
+        $data = $documentId . $userDNI . $timestamp . $secretKey;
+    
+        // Generar un hash seguro usando SHA-256
+        return hash('sha256', $data);
+    }
+
+    public function getToken() {
+        $payload = $this->request->getJSON();
+        $documentId = $payload->documentId;
+        $userDNI = $payload->userDNI;
+        $timestamp = $payload->formattedDateTime;
+        
+        // Definir la clave secreta
+        $secretKey = 'your_secret_key_here';
+    
+        // Generar el token
+        $token = $this->generateSecurityToken($documentId, $userDNI, $timestamp, $secretKey);
+    
+        return $this->respond(['token' => $token]);
+    }
 }
