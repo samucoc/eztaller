@@ -65,7 +65,6 @@ const App = () => {
   });
 
   useEffect(() => {
-    if (loggedIn && userDNI && empresas.length === 0) {
       axios.get(`${API_BASE_URL}/empresas/trabajadores/${userDNI}`)
         .then((response) => {
           dispatch(setEmpresas(response.data));
@@ -84,7 +83,6 @@ const App = () => {
           }
         })
         .catch((error) => console.error('Error al obtener la lista de empresas:', error));
-    }
   }, [loggedIn, userDNI, empresas.length, dispatch]);
 
   const handleOptionChange = (option) => {
@@ -96,6 +94,7 @@ const App = () => {
     localStorage.clear();
     dispatch(setLoggedIn(false));
     dispatch(setUserDNI(''));
+    dispatch(setEmpresaId(''))
   };
 
   const handleSubmit = async (e) => {

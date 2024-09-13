@@ -20,7 +20,24 @@ const DashboardForm = ({ onSubmit, onCancel, initialDoc, empresaId }) => {
           const fetchWorkers = async () => {
               try {
               const response = await axios.get(`${API_BASE_URL}/trabajadores`); // Assuming your worker endpoint is at /trabajadores
-              setWorkers(response.data);
+              // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
+              const sortedTrabajadores = response.data.sort((a, b) => {
+                if (a.apellido_paterno < b.apellido_paterno) return -1;
+                if (a.apellido_paterno > b.apellido_paterno) return 1;
+                
+                // Si los apellidos paternos son iguales, ordenar por apellido_materno
+                if (a.apellido_materno < b.apellido_materno) return -1;
+                if (a.apellido_materno > b.apellido_materno) return 1;
+                
+                // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
+                if (a.nombre < b.nombre) return -1;
+                if (a.nombre > b.nombre) return 1;
+
+                return 0;
+              });
+
+              setWorkers(sortedTrabajadores);
+
               } catch (error) {
               console.error('Error fetching workers:', error);
               }
@@ -31,7 +48,8 @@ const DashboardForm = ({ onSubmit, onCancel, initialDoc, empresaId }) => {
           const fetchTipoDocumentos = async () => {
             try {
               const response = await axios.get(`${API_BASE_URL}/tipo_doc`);
-              setTipoDocumentos(response.data);
+              const sortedData = response.data.sort((a, b) => a.nombre.localeCompare(b.nombre));
+              setTipoDocumentos(sortedData);
             } catch (error) {
               console.error('Error fetching tipo_doc:', error);
             }

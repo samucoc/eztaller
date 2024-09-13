@@ -101,7 +101,7 @@ class DenunciaController extends ResourceController
             if (isset($archivoFiles['archivos'])) {
                 foreach ($archivoFiles['archivos'] as $archivo) {
                     // Procesar la subida del archivo
-                    $rutaArchivo = $this->procesarSubidaArchivo($archivo, $denuncianteNombre);
+                    $rutaArchivo = $this->procesarSubidaArchivo($archivo, $denunciaId);
 
                     // Si el archivo fue subido exitosamente, guardar la información en la base de datos
                     if ($rutaArchivo) {

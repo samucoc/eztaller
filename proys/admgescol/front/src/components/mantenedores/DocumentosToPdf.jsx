@@ -54,7 +54,8 @@ const DocumentosToPdf = () => {
   const fetchTipoDocumentos = async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/tipo_doc`);
-      setTipoDocumentos(response.data);
+      const sortedData = response.data.sort((a, b) => a.nombre.localeCompare(b.nombre));
+      setTipoDocumentos(sortedData);
     } catch (error) {
       console.error('Error fetching tipo_doc:', error);
     }

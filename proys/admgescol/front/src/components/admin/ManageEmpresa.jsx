@@ -81,7 +81,7 @@ const ManageEmpresa = () => {
           </Grid>
 
           {/* Solicitudes Card */}
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={4}>
             <Card
             >
               <>
@@ -105,7 +105,7 @@ const ManageEmpresa = () => {
           </Grid>
 
           {/* Comunicaciones Card */}
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={4}>
             <Card
             >
               <>
@@ -118,6 +118,26 @@ const ManageEmpresa = () => {
                     color="primary"
                     sx={{ mt: 2 }}
                     onClick={() => handleItemClick(`/ComunicacionesCard`)} // Adjust path as per routing
+                  >
+                    Gestionar
+                  </Button>
+                </CardContent>
+              </>
+            </Card>
+          </Grid>
+          {/* Ley Karin Card */}
+          <Grid item xs={12} md={4}>
+            <Card
+            >
+              <>
+                <CardContent>
+                  <Typography variant="h6" sx={{ color: 'black' }}>Denuncias Ley Karin</Typography>
+                  <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>Gestiona las denuncias.</Typography>
+                  <br/>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ mt: 2 }}
                   >
                     Gestionar
                   </Button>

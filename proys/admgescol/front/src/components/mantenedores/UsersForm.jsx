@@ -28,7 +28,9 @@ const UserForm = ({ onSubmit, onCancel, initialUser }) => {
   const fetchRoles = async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/roles`);
-      setRoles(response.data);
+      const sortedData = response.data.sort((a, b) => a.roleName.localeCompare(b.roleName));
+      setRoles(sortedData);
+
     } catch (error) {
       console.error('Error al obtener la lista de usuarios:', error);
     }
