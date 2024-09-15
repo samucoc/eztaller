@@ -139,6 +139,25 @@ const LiqAnioActual = () => {
           return null;
       }
   };
+  const generateSecurityToken = async (documentId, userDNI) => {
+    const timestamp = new Date().toISOString(); // Hora actual en formato ISO
+    const date = new Date(timestamp);
+
+    // Extraer los componentes de la fecha y hora
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Meses de 0 a 11
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    // Formatear la fecha y hora
+    const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+    // Enviar los datos al backend para obtener el token (secreto guardado en el backend)
+    const response = await axios.post(`${API_BASE_URL}/documentos/get-token`, { documentId, userDNI, formattedDateTime });
+    return response.data.token;
+};
 
   const handleSignDocument = async () => {
     try {
@@ -154,11 +173,16 @@ const LiqAnioActual = () => {
       }
       const response = await axios.post(`${API_BASE_URL}/users/sign-in-rut`, { userDNI, password,  documentId: selectedDocument.id  });
       if (response.status === 200) {
-          await axios.post(`${API_BASE_URL}/documentos/firmar-doc`, {
-              userDNI, 
-              documentId: selectedDocument.id,
-              ip: clientIp // Incluir IP en el payload
-          });        Swal.fire({
+        const token = await generateSecurityToken(selectedDocument.id, userDNI);
+
+        await axios.post(`${API_BASE_URL}/documentos/firmar-doc`, {
+            userDNI, 
+            documentId: selectedDocument.id,
+            ip: clientIp, // Incluir IP en el payload
+            token
+        });        
+           
+          Swal.fire({
           icon: 'success',
           title: 'Documento firmado',
           text: 'Tu documento ha sido firmado con éxito.',
