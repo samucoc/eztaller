@@ -16,6 +16,7 @@ import { setNotificaciones } from '../../actions';
 import axios from 'axios';
 import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import '../../css/Header.css';
+import { useParams, useNavigate, Link  } from 'react-router-dom';
 
 const Header = ({ onLogout }) => {
   const dispatch = useDispatch();
@@ -23,12 +24,16 @@ const Header = ({ onLogout }) => {
   const userDNI = useSelector((state) => state.userDNI); // Assuming userDNI is stored in Redux
   const notificacionesNoVistas = useSelector((state) => state.notificacionesNoVistas);
   const notificaciones = useSelector((state) => state.notificaciones); // Todas las notificaciones
+  const roleSession = useSelector((state) => state.roleSession); // Obteniendo roleSession desde Redux
+  const href = roleSession === "3" ? '/UserDashboard' : '/Empresas'; // Verificando si es 3 o no
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.token);
 
   // Fetch notificaciones in Header
   useEffect(() => {
     const fetchNotificaciones = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/notificaciones`);
+        const response = await axios.get(`${API_BASE_URL}/notificaciones/all/${token}`); // Replace with your API endpoint
         const sortedNotificaciones = response.data
           .filter((noti) => noti.trabajador === userDNI && (noti.vista === 'false' || noti.vista === null))
           .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
@@ -71,6 +76,10 @@ const Header = ({ onLogout }) => {
     }
   };
   
+  // Function to handle button clicks for navigation
+  const handleItemClick = (path) => {
+    navigate(path); // Use navigate to change route
+  };
 
   const open = Boolean(anchorEl);
   const id = open ? 'notifications-popover' : undefined;
@@ -78,10 +87,11 @@ const Header = ({ onLogout }) => {
   return (
     <AppBar position="static" className="app-bar">
       <Toolbar>
-        <Box
-          component="a"
-          href="#"
+      <Box
+          component={Link}
+          to={href} // Navegación dinámica basada en roleSession
           className="logo-container"
+          sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} // Estilos adicionales opcionales
         >
           <img src="logo.png" alt="Logo" width="60" />
           <Typography variant="h6" className="title">
@@ -89,7 +99,6 @@ const Header = ({ onLogout }) => {
           </Typography>
         </Box>
         <Box sx={{ flexGrow: 1 }} />
-
         {/* Campanita de notificaciones */}
         <IconButton color="inherit" onClick={handleBellClick}>
           <Badge badgeContent={notificacionesNoVistas} color="secondary">

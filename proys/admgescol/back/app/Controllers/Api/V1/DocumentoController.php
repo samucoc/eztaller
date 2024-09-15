@@ -15,7 +15,8 @@ use PDFParser\L2Parser;
 use PDFParser\L3Parser;
 use PDFParser\TextExtractor;
 use Smalot\PdfParser\Parser;
-
+use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
 class DocumentoController extends ResourceController
 {
     protected $modelName = 'App\Models\DocumentoModel';
@@ -40,8 +41,15 @@ class DocumentoController extends ResourceController
      *
      * @return mixed
      */
-    public function index()
+    public function index($token=null)
     {
+        $authHeader = new \App\Controllers\Api\V1\TokenController();
+        $tokenValidation = $this->validateToken( $token);
+
+
+        if ($tokenValidation->getStatusCode() !== 200) {
+            return $tokenValidation; // Return error response if token is invalid
+        }
         $data = $this->model->findAll();
         foreach ($data as $key => $value) {
             $data[$key]->firmado = $this->documentoFirmadoModel->find($value->id);
@@ -122,8 +130,13 @@ class DocumentoController extends ResourceController
         return $this->respond($data);
     }
 
-    public function showCargaByUserByEmp($rut, $empresa)
+    public function showCargaByUserByEmp($rut, $empresa, $token)
     {
+        $tokenValidation = $this->validateToken( $token);
+        if ($tokenValidation->getStatusCode() !== 200) {
+            return $tokenValidation; // Return error response if token is invalid
+        }
+        
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
         $query = "SELECT documentos.*, 
@@ -146,8 +159,13 @@ class DocumentoController extends ResourceController
         return $this->respond($data);
     }
 
-    public function showFunGenByUserByEmp($rut, $empresa)
+    public function showFunGenByUserByEmp($rut, $empresa, $token)
     {
+        $tokenValidation = $this->validateToken( $token);
+        if ($tokenValidation->getStatusCode() !== 200) {
+            return $tokenValidation; // Return error response if token is invalid
+        }
+        
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
         $query = "SELECT documentos.*, 
@@ -195,8 +213,13 @@ class DocumentoController extends ResourceController
         return $this->respond($data);
     }
 
-    public function showContratosByUserByEmp($rut, $empresa)
+    public function showContratosByUserByEmp($rut, $empresa, $token)
     {
+        $tokenValidation = $this->validateToken( $token);
+        if ($tokenValidation->getStatusCode() !== 200) {
+            return $tokenValidation; // Return error response if token is invalid
+        }
+        
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
         $query = "SELECT documentos.*, 
@@ -216,8 +239,13 @@ class DocumentoController extends ResourceController
         return $this->respond($data);
     }
 
-    public function showLiqActByUserByEmp($rut, $empresa)
+    public function showLiqActByUserByEmp($rut, $empresa, $token)
     {
+        $tokenValidation = $this->validateToken( $token);
+        if ($tokenValidation->getStatusCode() !== 200) {
+            return $tokenValidation; // Return error response if token is invalid
+        }
+
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
         //$query = "SELECT * FROM documentos WHERE tipo_doc_id = '1' and trabajador = ? and empresa_id = ? and agno = '".date("Y")."'";
@@ -1001,4 +1029,38 @@ class DocumentoController extends ResourceController
     
         return $this->respond(['token' => $token]);
     }
+
+    public function validateToken($authHeader)
+    {
+        
+        if (!$authHeader) {
+            return $this->failUnauthorized('Authorization header missing');
+        }
+
+        $token = $authHeader;
+
+        try {
+            // Get the secret key from config or environment
+            $secretKey = "s54adf769sd48sd468sadf46";
+            
+            // Decode and validate the token
+            $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
+            
+            // Now you can access the decoded token data
+            $userDNI = $decoded->userDNI;
+            $role_id = $decoded->role_id;
+            
+            // You could also perform additional checks here (e.g., expiration)
+            
+            return $this->respond([
+                'status' => 200,
+                'userDNI' => $userDNI,
+                'role_id' => $role_id
+            ]);
+        } catch (\Exception $e) {
+            return $this->failUnauthorized('Invalid token: ' . $e->getMessage());
+        }
+    }
+
+    
 }

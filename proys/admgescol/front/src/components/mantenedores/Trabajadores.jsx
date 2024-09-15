@@ -48,10 +48,11 @@ const Trabajadores = ({ empresaId }) => {
   const roleSession = useSelector((state) => state.roleSession);
   const empresaIdS = useSelector((state) => state.empresaId);
   const classes = useStyles();
+  const token = useSelector((state) => state.token);
 
   const fetchTrabajadores = async () => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+        const response = await axios.get(`${API_BASE_URL}/trabajadores/all/${token}`); // Replace with your API endpoint
         setTrabajadores(response.data);
     } catch (error) {
       console.error('Error fetching Trabajadores:', error);
@@ -64,7 +65,7 @@ const Trabajadores = ({ empresaId }) => {
     }
     const fetchEmpresas = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/empresas`);
+        const response = await axios.get(`${API_BASE_URL}/empresas/all/${token}`); // Replace with your API endpoint
         setEmpresas(response.data);
       } catch (error) {
         console.error('Error fetching empresas:', error);
@@ -83,14 +84,48 @@ const Trabajadores = ({ empresaId }) => {
 
   const deleteTrabajador = async (id) => {
     try {
-      const response = await axios.delete(`${API_BASE_URL}/trabajadores/${id}`);
-      if (response.status === 200) {
-        setTrabajadores(trabajadores.filter(trabajador => trabajador.id !== id));
-        console.log('Trabajador eliminado exitosamente');
-      } else {
-        console.error('Error al eliminar el trabajador:', response.data);
+      // Mostrar confirmación con SweetAlert2
+      const result = await swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'Cancelar',
+      });
+  
+      // Si el usuario confirma la eliminación
+      if (result.isConfirmed) {
+        const response = await axios.delete(`${API_BASE_URL}/trabajadores/${id}`);
+  
+        if (response.status === 200) {
+          setTrabajadores(trabajadores.filter(comunicacion => comunicacion.id !== id));
+  
+          // Mostrar éxito con SweetAlert2
+          swal.fire(
+            '¡Eliminado!',
+            'El trabajador ha sido eliminado exitosamente.',
+            'success'
+          );
+        } else {
+          // Mostrar error si la eliminación no fue exitosa
+          swal.fire(
+            'Error',
+            'Hubo un problema al eliminar el trabajador.',
+            'error'
+          );
+          console.error('Error al eliminar el trabajador:', response.data);
+        }
       }
     } catch (error) {
+      // Mostrar error si ocurrió durante la solicitud
+      swal.fire(
+        'Error',
+        'Ocurrió un error durante la eliminación.',
+        'error'
+      );
       console.error('Error durante la eliminación:', error);
     }
   };
@@ -194,7 +229,24 @@ const Trabajadores = ({ empresaId }) => {
     ? filteredTrabajadores.filter(trabajador => trabajador.empresa_id === selectedEmpresa)
     : filteredTrabajadores;
 
+  filteredTrabajadores = filteredTrabajadores.filter((trabajador) => trabajador.usuario.role_id === "3" )
+
+  // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
+  filteredTrabajadores = filteredTrabajadores.sort((a, b) => {
+    if (a.apellido_paterno < b.apellido_paterno) return -1;
+    if (a.apellido_paterno > b.apellido_paterno) return 1;
     
+    // Si los apellidos paternos son iguales, ordenar por apellido_materno
+    if (a.apellido_materno < b.apellido_materno) return -1;
+    if (a.apellido_materno > b.apellido_materno) return 1;
+    
+    // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
+    if (a.nombre < b.nombre) return -1;
+    if (a.nombre > b.nombre) return 1;
+
+    return 0;
+  });
+  
   const getEmpresaRazonSocial = (empresa_id) => {
     const empresa = empresas.find((e) => e.id === empresa_id);
     return empresa ? empresa.RazonSocial : "Desconocida";
@@ -337,9 +389,7 @@ const Trabajadores = ({ empresaId }) => {
                             </Button>
                             <Button
                               onClick={() => {
-                                if (window.confirm('¿Estás seguro de eliminar este trabajador?')) {
                                   deleteTrabajador(trabajador.id);
-                                }
                               }}
                               variant="contained"
                               color="secondary"

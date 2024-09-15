@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextField, Grid } from '@material-ui/core';
 import { useSelector } from 'react-redux';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Importa los estilos de Quill
 
 const ComunicacionesForm = ({ onSubmit, onCancel, initialComunicacion }) => {
   const [titulo, setTitulo] = useState(initialComunicacion ? initialComunicacion.titulo : '');
@@ -37,18 +39,12 @@ const ComunicacionesForm = ({ onSubmit, onCancel, initialComunicacion }) => {
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="descripcion"
-            label="Descripción"
-            name="descripcion"
-            multiline
-            rows={4}
-            value={descripcion}
-            onChange={(e) => setDescripcion(e.target.value)}
-          />
+          <ReactQuill 
+              theme="snow" 
+              value={descripcion} 
+              onChange={setDescripcion} 
+              placeholder="Escribe la descripción aquí..." 
+            />
         </Grid>
         <Grid item xs={6}>
           <Button

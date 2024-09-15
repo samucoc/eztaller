@@ -108,6 +108,19 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                 </ListItemIcon>
                 <ListItemText primary="Usuarios" />
               </ListItem>
+              <ListItem button 
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Gavel sx={{ color: grey[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Ley Karin" />
+              </ListItem>
               <Divider sx={{ my: 2 }} />
               <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Mantenedores</Typography>
               <ListItem button onClick={() => handleOptionChange('Roles')}
@@ -245,6 +258,19 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                   <Group sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Trabajadores" />
+              </ListItem>
+              <ListItem button 
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Gavel sx={{ color: grey[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Ley Karin" />
               </ListItem>
             </>
           )}

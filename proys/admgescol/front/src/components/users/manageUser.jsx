@@ -6,6 +6,11 @@ import {
   Grid, TextField, FormControlLabel, Checkbox
 
 } from '@mui/material';
+import {
+  Business, Description, Group, AccountCircle, Settings, Home, ExitToApp, EventNote, BeachAccess, Receipt, Gavel,
+  Folder, People, Person, AdminPanelSettings, LocationCity, Work, Wc, FolderOpen, Assignment, Verified, Mail, MonetizationOn, AttachMoney, 
+} from '@mui/icons-material';
+
 import MoneyIcon from '@mui/icons-material/Money';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -16,7 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DocumentosCard from './DocumentosCard';
 import SolicitudesCard from './SolicitudesCard';
 import Swal from 'sweetalert2';
-import '../../css/manageUser.css'; // Si tienes estilos adicionales para DashTrab
+//import '../../css/manageUser.css'; // Si tienes estilos adicionales para DashTrab
 
 const ManageUser = () => {
   const [value, setValue] = useState(0);
@@ -35,6 +40,7 @@ const ManageUser = () => {
   const dispatch = useDispatch();
   const empresaId = useSelector((state) => state.empresaId); // Assuming empresaId is stored in Redux
   const userDNI = useSelector((state) => state.userDNI); // Assuming userDNI is stored in Redux
+  const token = useSelector((state) => state.token);
 
   const [openKarin, setOpenKarin] = useState(false);
   const handleOpenKarin = () => setOpenKarin(true);
@@ -270,7 +276,7 @@ const ManageUser = () => {
 
     const fetchSolicitudes = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/solicitudes`);
+        const response = await axios.get(`${API_BASE_URL}/solicitudes/all/${token}`); // Replace with your API endpoint
         const recentSolicitudes = response.data
           .filter((soli) => soli.trabajador === userDNI) // Filtra por el trabajador actual
           .sort((a, b) => {
@@ -291,7 +297,7 @@ const ManageUser = () => {
 
     const fetchComunicaciones = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/comunicaciones`);
+        const response = await axios.get(`${API_BASE_URL}/comunicaciones/all/${token}`); // Replace with your API endpoint
         const recentComunicaciones = response.data
           .filter((com) => com.empresa_id === empresaId)
           .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
@@ -304,7 +310,7 @@ const ManageUser = () => {
 
     if (userDNI && usuario === null) { // Correct condition check
       axios
-        .get(`${API_BASE_URL}/users/showByRut/${userDNI}`)
+        .get(`${API_BASE_URL}/users/showByRut/${userDNI}/${token}`) // Replace with your API endpoint
         .then((response) => {
           setUsuario(response.data);
         })
@@ -316,7 +322,7 @@ const ManageUser = () => {
 
     const fetchTrabajadores = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+        const response = await axios.get(`${API_BASE_URL}/trabajadores/all/${token}`); // Replace with your API endpoint
         
         // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
         const sortedTrabajadores = response.data.sort((a, b) => {
@@ -401,9 +407,9 @@ const ManageUser = () => {
   };
 
   return (
-    <Box sx={{ width: '100%', p: 3 }}>
+    <div className="container empresas">
       {/* Display the user name and role */}
-      <Box sx={{ mb: 3 }}>
+      <Box >
         <Typography variant="h4" component="h1" gutterBottom>
           Hola, {usuario?.trabajador?.nombres}
         </Typography>
@@ -413,7 +419,7 @@ const ManageUser = () => {
       </Box>
 
       {/* Cards as Buttons using Grid */}
-      <Grid container spacing={2}>
+      <Grid container >
         <Grid item xs={12}>
           <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
             ¿Qué deseas realizar?
@@ -462,16 +468,26 @@ const ManageUser = () => {
               <Typography variant="h6" sx={{ color: 'black' }}>
                 Comunicaciones
               </Typography>
-              <List sx={{ height: 350, overflowY: 'auto' }}>
+              <List sx={{ height: 200, overflowY: 'auto' }}>
                 {comunicaciones.map((comunicacion) => (
                   <ListItem key={comunicacion.id} onClick={() => handleOpenModalCom(comunicacion)}>
                     <ListItemText
                       primary={comunicacion.titulo}
-                      secondary={`Enviado por: ${getTrabajadorNombre(comunicacion.user_id)}`} // Display both title and user_id
+                      secondary={`Publicado por: ${getTrabajadorNombre(comunicacion.user_id)}`} // Display both title and user_id
                     />
                   </ListItem>
                 ))}
               </List>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<Mail />}
+                  onClick={() => handleMenuItemClick('/ComunicacionesUsers')}
+                >
+                  Ver Comunicaciones
+                </Button>
+              </Box>
             </CardContent>
           </Card>
         </Grid>
@@ -482,13 +498,11 @@ const ManageUser = () => {
               <Typography variant="h6" sx={{ color: 'black' }}>
                 Estados de Solicitudes
               </Typography>
-              <List sx={{ maxHeight: 300, overflowY: 'auto' }}>
+              <List sx={{ height: 200,  overflowY: 'auto' }}>
                 {solicitudes.map((soli) => {
                   const tipoSolicitud = getTipoSolicitud(soli.tipo_sol_id); // Obtén el tipo de solicitud
-
                   return (
                     <ListItem key={soli.id}>
-                      <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                         <Button 
                           variant="contained" 
                           color="primary" 
@@ -503,7 +517,6 @@ const ManageUser = () => {
                               : `Monto: ${soli.monto} | Cuotas: ${soli.cuotas} | Comentario: ${soli.comentario}` // Show all details otherwise
                           }
                         />
-                      </Box>
                     </ListItem>
                   );
                 })}
@@ -532,21 +545,27 @@ const ManageUser = () => {
           </Card>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <CardContent sx={{ overflowY: 'auto' }}>
+          <Card>
+            <CardContent >
               <Typography variant="h6" sx={{ color: 'black' }}>
                 Ley Karin – N° 21.643
               </Typography>
-              <Typography variant="body1" sx={{ color: 'black', mb: 2, lineHeight: 1.6 }}>
-                La Ley Karin busca garantizar espacios laborales seguros y libres de acoso, estableciendo la obligación de prevenir 
-                los actos que vayan en contra de este objetivo, protegiendo los derechos de los trabajadores y promoviendo un entorno laboral saludable.
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'gray', fontStyle: 'italic', mb: 3 }}>
-                "Es responsabilidad de todos los empleadores velar por el respeto y la dignidad en el lugar de trabajo."
-              </Typography>
-              <Button variant="contained" color="primary" onClick={handleOpenKarin} sx={{ width: '100%', padding: '10px 0', mt: 3 }}>
-                Ingresar Denuncia
-              </Button>
+              <List sx={{ height: 200, overflowY: 'auto' }}>
+                  <ListItem >
+                    <ListItemText
+                      primary="La Ley Karin busca garantizar espacios laborales seguros y libres de acoso, estableciendo la obligación de prevenir los actos que vayan en contra de este objetivo, protegiendo los derechos de los trabajadores y promoviendo un entorno laboral saludable."
+                    />
+                  </ListItem>
+              </List>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleOpenKarin}
+                  >
+                  Ingresar Denuncia
+                </Button>
+              </Box>
             </CardContent>
           </Card>
         </Grid>
@@ -953,7 +972,7 @@ const ManageUser = () => {
           )}
         </Box>
       </Modal>
-    </Box>
+    </div>
   );
 };
 

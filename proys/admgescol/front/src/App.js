@@ -8,7 +8,7 @@ import Panel from './components/config/Panel';
 import EmpresaList from './components/config/EmpresaList';
 import Login from './components/config/Login';
 import Breadcrumbs from './components/config/Breadcrumbs';
-import { API_BASE_URL, API_DOWNLOAD_URL } from './components/config/apiConstants';
+import { API_BASE_URL } from './components/config/apiConstants';
 import {
   Box, Container, CssBaseline, IconButton, Drawer, useMediaQuery, Button
 } from '@mui/material';
@@ -31,6 +31,7 @@ import {
   setPhotoWorker,
   setCargo,
   setNombre,
+  setToken,
 } from './actions';
 
 const App = () => {
@@ -47,11 +48,34 @@ const App = () => {
     password,
     loading,
     error,
+    token,
   } = useSelector((state) => state);
   const { userSession, photoWorker, cargo, nombre } = useSelector((state) => state);
 
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const isMobileView = useMediaQuery('(max-width:768px)');
+
+  const checkTokenValidity = async (dispatch, navigate) => {
+    try {
+      await axios.post(`${API_BASE_URL}/token/check-token`, {token});
+    } catch (error) {
+      // Token is invalid or request failed
+      console.error('Token invalid or check-token request failed:', error);
+      // Handle logout if token is invalid
+      localStorage.clear();
+      dispatch(setLoggedIn(false));
+      dispatch(setUserDNI(''));
+      dispatch(setEmpresaId(''));
+      dispatch(setUserSession(''));
+      dispatch(setRoleSession(''));
+      dispatch(setPhotoWorker(''));
+      dispatch(setCargo(''));
+      dispatch(setNombre(''));
+      dispatch(setToken(''));
+
+      navigate('/login'); // Redirect to login page or wherever appropriate
+    }
+  };
 
   const theme = createTheme({
     palette: {
@@ -65,24 +89,34 @@ const App = () => {
   });
 
   useEffect(() => {
-      axios.get(`${API_BASE_URL}/empresas/trabajadores/${userDNI}`)
-        .then((response) => {
-          dispatch(setEmpresas(response.data));
-          if (response.data.length === 1) {
-            dispatch(setEmpresaId(response.data[0].id));
-            if (roleSession === "3") {
-              navigate('/UserDashboard');
-            }
-            else{
-              if (roleSession !== "1") {
-                navigate('/Empresas');
-              }
-            }
-          } else if (roleSession === "1") {
-            navigate('/Empresas');
+    const interval = setInterval(() => {
+      if (loggedIn) {
+        checkTokenValidity(dispatch, navigate);
+      }
+    }, 10 * 1000); 
+
+    return () => clearInterval(interval); // Clean up the interval on component unmount
+  }, [loggedIn, dispatch, navigate]);
+
+  useEffect(() => {
+    axios.get(`${API_BASE_URL}/empresas/trabajadores/${userDNI}`)
+      .then((response) => {
+        dispatch(setEmpresas(response.data));
+        if (response.data.length === 1) {
+          dispatch(setEmpresaId(response.data[0].id));
+          if (roleSession === "3") {
+            navigate('/UserDashboard');
           }
-        })
-        .catch((error) => console.error('Error al obtener la lista de empresas:', error));
+          else {
+            if (roleSession !== "1") {
+              navigate('/Empresas');
+            }
+          }
+        } else if (roleSession === "1") {
+          navigate('/Empresas');
+        }
+      })
+      .catch((error) => console.error('Error al obtener la lista de empresas:', error));
   }, [loggedIn, userDNI, empresas.length, dispatch]);
 
   const handleOptionChange = (option) => {
@@ -94,7 +128,7 @@ const App = () => {
     localStorage.clear();
     dispatch(setLoggedIn(false));
     dispatch(setUserDNI(''));
-    dispatch(setEmpresaId(''))
+    dispatch(setEmpresaId(''));
   };
 
   const handleSubmit = async (e) => {
@@ -104,7 +138,7 @@ const App = () => {
         userEmail: username,
         userPassword: password,
       });
-      const { userDNI, role_id, foto, cargo, nombre } = response.data;
+      const { userDNI, role_id, foto, cargo, nombre, token } = response.data;
 
       dispatch(setUserSession(userDNI));
       dispatch(setRoleSession(role_id));
@@ -112,6 +146,7 @@ const App = () => {
       dispatch(setPhotoWorker(foto));
       dispatch(setCargo(cargo));
       dispatch(setNombre(nombre));
+      dispatch(setToken(token));
 
       dispatch(setLoggedIn(true));
     } catch (error) {
@@ -145,50 +180,49 @@ const App = () => {
   if (roleSession === "1" || empresaId) {
     return (
       <ThemeProvider theme={theme}>
-      <Container
-        disableGutters
-        maxWidth={false}
-        className="container-root"
-      >
-        <Header onLogout={handleLogout} className="header-root" />
-        {isMobileView ? (
-          <>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={() => setSidebarVisible(true)}
-              className="icon-button"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Drawer
-              anchor="left"
-              open={sidebarVisible}
-              onClose={() => setSidebarVisible(false)}
-              className="drawer-root"
-            >
+        <Container
+          disableGutters
+          maxWidth={false}
+          className="container-root"
+        >
+          <Header onLogout={handleLogout} className="header-root" />
+          {isMobileView ? (
+            <>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={() => setSidebarVisible(true)}
+                className="icon-button"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Drawer
+                anchor="left"
+                open={sidebarVisible}
+                onClose={() => setSidebarVisible(false)}
+                className="drawer-root"
+              >
+                <Sidebar handleLogout={handleLogout} selectedEmpresa={empresaId} />
+              </Drawer>
+            </>
+          ) : (
+            <Box className="sidebar-container">
               <Sidebar handleLogout={handleLogout} selectedEmpresa={empresaId} />
-            </Drawer>
-          </>
-        ) : (
-          <Box className="sidebar-container">
-            <Sidebar handleLogout={handleLogout} selectedEmpresa={empresaId} />
-            <Box className="panel-container">
-              <Breadcrumbs currentOption={currentOption} selectedEmpresa={empresaId} />
-              <Panel
-                currentOption={currentOption}
-                userDNI={userDNI}
-                empresaId={empresaId}
-                setCurrentOption={handleOptionChange}
-                className="panel-white-background"
-
-              />
+              <Box className="panel-container">
+                <Breadcrumbs currentOption={currentOption} selectedEmpresa={empresaId} />
+                <Panel
+                  currentOption={currentOption}
+                  userDNI={userDNI}
+                  empresaId={empresaId}
+                  setCurrentOption={handleOptionChange}
+                  className="panel-white-background"
+                />
+              </Box>
             </Box>
-          </Box>
-        )}
-      </Container>
-    </ThemeProvider>
+          )}
+        </Container>
+      </ThemeProvider>
     );
   }
 

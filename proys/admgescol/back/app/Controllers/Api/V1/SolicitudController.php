@@ -5,7 +5,8 @@ namespace App\Controllers\Api\V1;
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\TipoSolModel;
 use App\Models\EstadoSolModel;
-
+use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
 class SolicitudController extends ResourceController
 {
     protected $modelName = 'App\Models\SolicitudModel';
@@ -146,6 +147,9 @@ class SolicitudController extends ResourceController
     }
     public function changeStatus($id = null, $newStatus = null)
     {
+        $patchData = $this->request->getJSON();
+        $comentario = $patchData->comentario;
+
         // Validar entrada
         if (is_null($id) || is_null($newStatus)) {
             return $this->fail('ID de solicitud o nuevo estado no proporcionado', 400);
@@ -160,6 +164,7 @@ class SolicitudController extends ResourceController
         // Actualizar el estado de la solicitud
         $updateData = [
             'status' => $newStatus,
+            'comentario_status' => $comentario,
             'updated_at' => date('Y-m-d H:i:s')
         ];
 
@@ -182,4 +187,38 @@ class SolicitudController extends ResourceController
             return $this->fail('No se pudo actualizar el estado de la solicitud', 500);
         }
     }
+
+    public function validateToken($authHeader)
+    {
+        
+        if (!$authHeader) {
+            return $this->failUnauthorized('Authorization header missing');
+        }
+
+        $token = $authHeader;
+
+        try {
+            // Get the secret key from config or environment
+            $secretKey = "s54adf769sd48sd468sadf46";
+            
+            // Decode and validate the token
+            $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
+            
+            // Now you can access the decoded token data
+            $userDNI = $decoded->userDNI;
+            $role_id = $decoded->role_id;
+            
+            // You could also perform additional checks here (e.g., expiration)
+            
+            return $this->respond([
+                'status' => 200,
+                'userDNI' => $userDNI,
+                'role_id' => $role_id
+            ]);
+        } catch (\Exception $e) {
+            return $this->failUnauthorized('Invalid token: ' . $e->getMessage());
+        }
+    }
+
+    
 }

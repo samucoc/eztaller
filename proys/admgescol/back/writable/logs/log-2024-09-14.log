@@ -1,0 +1,16 @@
+CRITICAL - 2024-09-14 23:50:35 --> key must be a string when using hmac
+in VENDORPATH\firebase\php-jwt\src\JWT.php on line 249.
+ 1 VENDORPATH\firebase\php-jwt\src\JWT.php(219): Firebase\JWT\JWT::sign('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTc4MzUsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MTQzNSwidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ', false, 'HS256')
+ 2 APPPATH\Controllers\Api\V1\UserController.php(281): Firebase\JWT\JWT::encode([...], false, 'HS256')
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-14 23:52:02 --> key must be a string when using hmac
+in VENDORPATH\firebase\php-jwt\src\JWT.php on line 249.
+ 1 VENDORPATH\firebase\php-jwt\src\JWT.php(219): Firebase\JWT\JWT::sign('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTc5MjEsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MTUyMSwidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ', false, 'HS256')
+ 2 APPPATH\Controllers\Api\V1\UserController.php(281): Firebase\JWT\JWT::encode([...], false, 'HS256')
+ 3 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\UserController->signIn()
+ 4 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\UserController))
+ 5 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()

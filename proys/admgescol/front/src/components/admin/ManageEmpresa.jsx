@@ -8,6 +8,7 @@ import SolicitudesCard from './SolicitudesCard';
 import ComunicacionesCard from './ComunicacionesCard';
 import DocumentosCard from './DocumentosCard';
 import ConsultarGestionCard from './ConsultarGestionCard';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ManageEmpresa = () => {
   const [value, setValue] = useState(0);
@@ -15,6 +16,7 @@ const ManageEmpresa = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [pendingCount, setPendingCount] = useState(0);
+  const token = useSelector((state) => state.token);
 
   // Function to handle button clicks for navigation
   const handleItemClick = (path) => {
@@ -36,7 +38,7 @@ const ManageEmpresa = () => {
     }
     const fetchPendingCount = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/solicitudes`);
+        const response = await axios.get(`${API_BASE_URL}/solicitudes/all/${token}`); // Replace with your API endpoint
         const resultSol = response.data.filter((s) => s.empresa_id === id && s.status === "1");
         setPendingCount(resultSol.length);
       } catch (error) {

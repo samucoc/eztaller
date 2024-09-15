@@ -43,10 +43,11 @@ const DocumentosToPdf = () => {
   const [nombre, setNombre] = useState('');
   const [cargos, setCargos] = useState([]);
   const [cargo, setCargo] = useState([]);
+  const token = useSelector((state) => state.token);
 
   const fetchEmpresas = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/empresas`);
+      const response = await axios.get(`${API_BASE_URL}/empresas/all/${token}`); // Replace with your API endpoint
       setEmpresas(response.data);
     } catch (error) {
       console.error('Error al obtener la lista de empresas:', error);
@@ -55,7 +56,7 @@ const DocumentosToPdf = () => {
 
   const fetchTipoDocumentos = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/tipo_doc`);
+      const response = await axios.get(`${API_BASE_URL}/tipo_doc/all/${token}`); // Replace with your API endpoint
       const sortedData = response.data.sort((a, b) => a.nombre.localeCompare(b.nombre));
       setTipoDocumentos(sortedData);
     } catch (error) {
@@ -65,7 +66,7 @@ const DocumentosToPdf = () => {
 
   const fetchTrabajadores = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+      const response = await axios.get(`${API_BASE_URL}/trabajadores/all/${token}`); // Replace with your API endpoint
       setTrabajadores(response.data);
     } catch (error) {
       console.error('Error fetching trabajadores:', error);
@@ -74,7 +75,7 @@ const DocumentosToPdf = () => {
 
   const fetchCargos = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/cargos`);
+      const response = await axios.get(`${API_BASE_URL}/cargos/all/${token}`); // Replace with your API endpoint
       const sortedData = response.data.sort((a, b) => a.nombre.localeCompare(b.nombre));
       setCargos(sortedData);
     } catch (error) {

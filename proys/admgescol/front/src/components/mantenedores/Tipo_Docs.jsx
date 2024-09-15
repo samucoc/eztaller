@@ -7,18 +7,22 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
+import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 const Tipo_Docs = () => {
   const [showForm, setShowForm] = useState(false); // State to control form visibility
   const [selectedTipo_Doc, setSelectedTipo_Doc] = useState(null); // State for selected Tipo_Doc
   const [Tipo_Docs, setTipo_Docs] = useState([]); // Use state to manage Tipo_Docs
+  const token = useSelector((state) => state.token);
 
   // Fetch Tipo_Docs on component mount
   useEffect(() => {
     const fetchTipo_Docs = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/tipo_doc`);
-        setTipo_Docs(response.data);
+        const response = await axios.get(`${API_BASE_URL}/tipo_doc/all/${token}`); // Replace with your API endpoint
+        const sortedData = response.data.sort((a, b) => a.nombre.localeCompare(b.nombre));
+        setTipo_Docs(sortedData);
       } catch (error) {
         console.error('Error fetching Tipo_Docs:', error);
       }
@@ -29,16 +33,49 @@ const Tipo_Docs = () => {
 
   const deleteTipo_Doc = async (id) => {
     try {
-      const response = await axios.delete(API_BASE_URL+`/tipo_doc/${id}`); // Delete request with Tipo_Doc ID
+      // Mostrar confirmación con SweetAlert2
+      const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'Cancelar',
+      });
   
-      if (response.status === 200) { // Check for successful deletion (replace with your API's success code)
-        setTipo_Docs(Tipo_Docs.filter(Tipo_Doc => Tipo_Doc.id !== id)); // Filter out deleted Tipo_Doc
-        console.log('Tipo_Doc eliminada exitosamente');
-      } else {
-        console.error('Error al eliminar la Tipo_Doc:', response.data); // Handle deletion errors
+      // Si el usuario confirma la eliminación
+      if (result.isConfirmed) {
+        const response = await axios.delete(`${API_BASE_URL}/tipo_doc/${id}`);
+  
+        if (response.status === 200) {
+          setTipo_Docs(Tipo_Docs.filter(comunicacion => comunicacion.id !== id));
+  
+          // Mostrar éxito con SweetAlert2
+          Swal.fire(
+            '¡Eliminado!',
+            'El registro ha sido eliminado exitosamente.',
+            'success'
+          );
+        } else {
+          // Mostrar error si la eliminación no fue exitosa
+          Swal.fire(
+            'Error',
+            'Hubo un problema al eliminar el registro.',
+            'error'
+          );
+          console.error('Error al eliminar el registro:', response.data);
+        }
       }
     } catch (error) {
-      console.error('Error durante la eliminación:', error); // Handle general errors
+      // Mostrar error si ocurrió durante la solicitud
+      Swal.fire(
+        'Error',
+        'Ocurrió un error durante la eliminación.',
+        'error'
+      );
+      console.error('Error durante la eliminación:', error);
     }
   };
 

@@ -152,7 +152,7 @@ const SolicitudesPerm = () => {
                 variant="outlined"
                 required
                 fullWidth
-                name="time"
+                name="timeEnd"
                 label="Hora de Término"
                 type="time"
                 InputLabelProps={{ shrink: true }}
@@ -359,7 +359,7 @@ const SolicitudesPerm = () => {
                 variant="outlined"
                 required
                 fullWidth
-                name="time"
+                name="timeEnd"
                 label="Hora de Término"
                 type="time"
                 InputLabelProps={{ shrink: true }}

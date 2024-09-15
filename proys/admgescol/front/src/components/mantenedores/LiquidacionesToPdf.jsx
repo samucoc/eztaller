@@ -36,10 +36,11 @@ const LiquidacionesToPdf = () => {
   const [empresas, setEmpresas] = useState([]);
   const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
   const [result, setResult] = useState([]);
+  const token = useSelector((state) => state.token);
 
   const fetchEmpresas = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/empresas`);
+      const response = await axios.get(`${API_BASE_URL}/empresas/all/${token}`); // Replace with your API endpoint
       setEmpresas(response.data);
     } catch (error) {
       console.error('Error al obtener la lista de empresas:', error);

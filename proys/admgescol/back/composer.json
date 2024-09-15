@@ -9,6 +9,7 @@
         "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
+        "firebase/php-jwt": "^6.10",
         "fpdf/fpdf": "^1.86",
         "james-heinrich/getid3": "^1.9",
         "laminas/laminas-escaper": "^2.9",

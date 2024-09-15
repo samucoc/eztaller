@@ -31,23 +31,26 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+
+// API Routes (Versioned)
 $routes->group('Api', function ($routes) {
     $routes->group('V1', function ($routes) {
-        $routes->resource(
-            'roles',
-            [
-                'controller' => 'RoleController',
-                'namespace' => 'App\Controllers\Api\V1',
-                'only' => [
-                    'index',
-                    'show',
-                    'new',
-                    'create',
-                    'update',
-                    'delete'
-                ],
-            ]
-        );
+        
+        $routes->group('token', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->post('check-token', 'TokenController::checkToken');
+        });
+
+        // Routes for Roles
+        $routes->group('roles', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'RoleController::index/$1');
+            $routes->get('show/(:num)', 'RoleController::show/$1');
+            $routes->get('new', 'RoleController::new');
+            $routes->post('', 'RoleController::create');
+            $routes->put('(:num)', 'RoleController::update/$1');
+            $routes->delete('(:num)', 'RoleController::delete/$1');
+        });
+
+        // Routes for Users
         $routes->group('users', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
             $routes->post('register', 'UserController::register');
             $routes->post('sign-in', 'UserController::signIn');
@@ -55,150 +58,178 @@ $routes->group('Api', function ($routes) {
             $routes->post('signout', 'UserController::signout');
             $routes->post('request-password-recovery', 'UserController::requestPasswordRecovery');
             $routes->post('set-new-password', 'UserController::setNewPassword');
-            $routes->get('role/(:num)', 'UserController::listByRole/$1');
-            $routes->get('showByRut/(:segment)', 'UserController::showByRut/$1');
+            $routes->get('showByRut/(:segment)/(:segment)', 'UserController::showByRut/$1/$2');
+            $routes->get('all/(:segment)', 'UserController::index/$1');
+            $routes->get('show/(:num)', 'UserController::show/$1');
+            $routes->get('new', 'UserController::new');
+            $routes->post('', 'UserController::create');
+            $routes->put('(:num)', 'UserController::update/$1');
+            $routes->delete('(:num)', 'UserController::delete/$1');
         });
-        
-        // Resource route for users, using the same namespace
-        $routes->resource('users', [
-            'controller' => 'UserController',
-            'namespace' => 'App\Controllers\Api\V1',
-            'only' => ['index', 'show', 'new', 'create', 'update', 'delete']
-        ]);
-        
 
-        $routes->get('documentos', 'DocumentoController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/new', 'DocumentoController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/show/(:segment)', 'DocumentoController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('documentos', 'DocumentoController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('documentos/firmar-doc', 'DocumentoController::firmarDoc', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showByRut/(:segment)', 'DocumentoController::showByRut/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showLiquidaciones/(:segment)', 'DocumentoController::showLiquidaciones/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showReglamento/(:segment)', 'DocumentoController::showReglamento/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showContratos/(:segment)', 'DocumentoController::showContratos/$1', ['namespace' => 'App\Controllers\Api\V1']);
- 
-        $routes->get('documentos/showCargaByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showCargaByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showFunGenByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showFunGenByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showRIOHSByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showRIOHSByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showContratosByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showContratosByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showLiqActByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showLiqActByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showLiqAntByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showLiqAntByUserByEmp/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
- 
-        $routes->get('documentos/showCargaByEmp/(:segment)', 'DocumentoController::showCargaByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showFunGenByEmp/(:segment)', 'DocumentoController::showFunGenByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showRIOHSByEmp/(:segment)', 'DocumentoController::showRIOHSByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showContratosByEmp/(:segment)', 'DocumentoController::showContratosByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showLiqActByEmp/(:segment)', 'DocumentoController::showLiqActByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('documentos/showLiqAntByEmp/(:segment)', 'DocumentoController::showLiqAntByEmp/$1', ['namespace' => 'App\Controllers\Api\V1']);
-                
-        $routes->post('documentos/get-token', 'DocumentoController::getToken', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('documentos/upload', 'DocumentoController::uploadDocumento', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('documentos/upload-contratos', 'DocumentoController::uploadContratosDocumento', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('documentos/upload-varios', 'DocumentoController::uploadVariosDocumento', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('documentos/(:segment)', 'DocumentoController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('documentos/(:segment)', 'DocumentoController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        
-        $routes->get('trabajadores', 'TrabajadorController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('trabajadores/new', 'TrabajadorController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('trabajadores/show/(:segment)', 'TrabajadorController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('trabajadores/showByRut/(:segment)', 'TrabajadorController::showByRut/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('trabajadores/showByEmpresa/(:segment)', 'TrabajadorController::showByEmpresa/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('trabajadores', 'TrabajadorController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('trabajadores/bulk-upload', 'TrabajadorController::bulkUpload', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('trabajadores/uploadFoto/(:segment)', 'TrabajadorController::uploadFoto/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('trabajadores/(:segment)', 'TrabajadorController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('trabajadores/(:segment)', 'TrabajadorController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        
-        $routes->get('TrabajadoresTienenDocumentos', 'TrabajadoresTienenDocumentosController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('TrabajadoresTienenDocumentos/new', 'TrabajadoresTienenDocumentosController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('TrabajadoresTienenDocumentos/show/(:segment)', 'TrabajadoresTienenDocumentosController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('TrabajadoresTienenDocumentos', 'TrabajadoresTienenDocumentosController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('TrabajadoresTienenDocumentos/(:segment)', 'TrabajadoresTienenDocumentosController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('TrabajadoresTienenDocumentos/(:segment)', 'TrabajadoresTienenDocumentosController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
-                
-        $routes->get('cargos', 'CargoController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('cargos/new', 'CargoController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('cargos/show/(:segment)', 'CargoController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('cargos', 'CargoController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('cargos/(:segment)', 'CargoController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('cargos/(:segment)', 'CargoController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        
-        $routes->get('comunas', 'ComunaController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('comunas/new', 'ComunaController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('comunas/show/(:segment)', 'ComunaController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('comunas', 'ComunaController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('comunas/(:segment)', 'ComunaController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('comunas/(:segment)', 'ComunaController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
-                
-        $routes->get('empresas', 'EmpresaController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('empresas/new', 'EmpresaController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('empresas/show/(:segment)', 'EmpresaController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('empresas', 'EmpresaController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('empresas/(:segment)', 'EmpresaController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('empresas/(:segment)', 'EmpresaController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('empresas/trabajadores/(:segment)', 'EmpresaController::showByRut/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        
-        $routes->get('sexo', 'SexoController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('sexo/new', 'SexoController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('sexo/show/(:segment)', 'SexoController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('sexo', 'SexoController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('sexo/(:segment)', 'SexoController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('sexo/(:segment)', 'SexoController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        
-        $routes->get('tipo_doc', 'Tipo_DocController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('tipo_doc/new', 'Tipo_DocController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('tipo_doc/show/(:segment)', 'Tipo_DocController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('tipo_doc', 'Tipo_DocController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('tipo_doc/(:segment)', 'Tipo_DocController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('tipo_doc/(:segment)', 'Tipo_DocController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        // Routes for Documentos
+        $routes->group('documentos', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'DocumentoController::index/$1');
+            $routes->get('new', 'DocumentoController::new');
+            $routes->get('show/(:segment)', 'DocumentoController::show/$1');
+            $routes->post('', 'DocumentoController::create');
+            $routes->post('firmar-doc', 'DocumentoController::firmarDoc');
+            $routes->get('showByRut/(:segment)', 'DocumentoController::showByRut/$1');
+            $routes->get('showLiquidaciones/(:segment)', 'DocumentoController::showLiquidaciones/$1');
+            $routes->get('showReglamento/(:segment)', 'DocumentoController::showReglamento/$1');
+            $routes->get('showContratos/(:segment)', 'DocumentoController::showContratos/$1');
+            $routes->get('showCargaByUserByEmp/(:segment)/(:segment)/(:segment)', 'DocumentoController::showCargaByUserByEmp/$1/$2/$3');
+            $routes->get('showFunGenByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showFunGenByUserByEmp/$1/$2');
+            $routes->get('showRIOHSByUserByEmp/(:segment)/(:segment)/(:segment)', 'DocumentoController::showRIOHSByUserByEmp/$1/$2/$3');
+            $routes->get('showContratosByUserByEmp/(:segment)/(:segment)/(:segment)', 'DocumentoController::showContratosByUserByEmp/$1/$2/$3');
+            $routes->get('showLiqActByUserByEmp/(:segment)/(:segment)/(:segment)', 'DocumentoController::showLiqActByUserByEmp/$1/$2/$3');
+            $routes->get('showLiqAntByUserByEmp/(:segment)/(:segment)', 'DocumentoController::showLiqAntByUserByEmp/$1/$2');
+            $routes->post('get-token', 'DocumentoController::getToken');
+            $routes->post('upload', 'DocumentoController::uploadDocumento');
+            $routes->post('upload-contratos', 'DocumentoController::uploadContratosDocumento');
+            $routes->post('upload-varios', 'DocumentoController::uploadVariosDocumento');
+            $routes->put('(:segment)', 'DocumentoController::update/$1');
+            $routes->delete('(:segment)', 'DocumentoController::delete/$1');
+        });
 
-        $routes->get('tipoSol', 'TipoSolController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('tipoSol/new', 'TipoSolController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('tipoSol/show/(:segment)', 'TipoSolController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('tipoSol', 'TipoSolController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('tipoSol/(:segment)', 'TipoSolController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('tipoSol/(:segment)', 'TipoSolController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        // Routes for Trabajadores
+        $routes->group('trabajadores', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'TrabajadorController::index/$1');
+            $routes->get('new', 'TrabajadorController::new');
+            $routes->get('show/(:segment)', 'TrabajadorController::show/$1');
+            $routes->get('showByRut/(:segment)', 'TrabajadorController::showByRut/$1');
+            $routes->get('showByEmpresa/(:segment)', 'TrabajadorController::showByEmpresa/$1');
+            $routes->post('', 'TrabajadorController::create');
+            $routes->post('bulk-upload', 'TrabajadorController::bulkUpload');
+            $routes->post('uploadFoto/(:segment)', 'TrabajadorController::uploadFoto/$1');
+            $routes->put('(:segment)', 'TrabajadorController::update/$1');
+            $routes->delete('(:segment)', 'TrabajadorController::delete/$1');
+        });
 
-        $routes->get('estadoSol', 'EstadoSolController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('estadoSol/new', 'EstadoSolController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('estadoSol/show/(:segment)', 'EstadoSolController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('estadoSol', 'EstadoSolController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('estadoSol/(:segment)', 'EstadoSolController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('estadoSol/(:segment)', 'EstadoSolController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
+        // Routes for TrabajadoresTienenDocumentos
+        $routes->group('trabajadores-tienen-documentos', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('', 'TrabajadoresTienenDocumentosController::index');
+            $routes->get('new', 'TrabajadoresTienenDocumentosController::new');
+            $routes->get('show/(:segment)', 'TrabajadoresTienenDocumentosController::show/$1');
+            $routes->post('', 'TrabajadoresTienenDocumentosController::create');
+            $routes->put('(:segment)', 'TrabajadoresTienenDocumentosController::update/$1');
+            $routes->delete('(:segment)', 'TrabajadoresTienenDocumentosController::delete/$1');
+        });
 
-        $routes->get('notificaciones', 'NotificacionController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('notificaciones/new', 'NotificacionController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('notificaciones/show/(:segment)', 'NotificacionController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('notificaciones', 'NotificacionController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('notificaciones/(:segment)', 'NotificacionController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('notificaciones/(:segment)', 'NotificacionController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('notificaciones/notificaciones-marcadas/(:segment)', 'NotificacionController::marcarComoVistas/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        
-        $routes->get('solicitudes', 'SolicitudController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('solicitudes/new', 'SolicitudController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('solicitudes/show/(:segment)', 'SolicitudController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('solicitudes', 'SolicitudController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('solicitudes/(:segment)', 'SolicitudController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('solicitudes/(:segment)', 'SolicitudController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('solicitudes/change-status/(:num)/(:num)', 'SolicitudController::changeStatus/$1/$2', ['namespace' => 'App\Controllers\Api\V1']);
+        // Routes for Cargos
+        $routes->group('cargos', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'CargoController::index/$1');
+            $routes->get('new', 'CargoController::new');
+            $routes->get('show/(:segment)', 'CargoController::show/$1');
+            $routes->post('', 'CargoController::create');
+            $routes->put('(:segment)', 'CargoController::update/$1');
+            $routes->delete('(:segment)', 'CargoController::delete/$1');
+        });
 
-        $routes->get('comunicaciones', 'ComunicacionController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('comunicaciones/new', 'ComunicacionController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('comunicaciones/show/(:segment)', 'ComunicacionController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('comunicaciones', 'ComunicacionController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('comunicaciones/(:segment)', 'ComunicacionController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('comunicaciones/(:segment)', 'ComunicacionController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        
-        $routes->get('denuncias-karin', 'DenunciaController::index', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('denuncias-karin/new', 'DenunciaController::new', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->get('denuncias-karin/show/(:segment)', 'DenunciaController::show/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->post('denuncias-karin', 'DenunciaController::create', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->put('denuncias-karin/(:segment)', 'DenunciaController::update/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        $routes->delete('denuncias-karin/(:segment)', 'DenunciaController::delete/$1', ['namespace' => 'App\Controllers\Api\V1']);
-        
+        // Routes for Comunas
+        $routes->group('comunas', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'ComunaController::index/$1');
+            $routes->get('new', 'ComunaController::new');
+            $routes->get('show/(:segment)', 'ComunaController::show/$1');
+            $routes->post('', 'ComunaController::create');
+            $routes->put('(:segment)', 'ComunaController::update/$1');
+            $routes->delete('(:segment)', 'ComunaController::delete/$1');
+        });
+
+        // Routes for Empresas
+        $routes->group('empresas', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'EmpresaController::index/$1');
+            $routes->get('new', 'EmpresaController::new');
+            $routes->get('show/(:segment)', 'EmpresaController::show/$1');
+            $routes->post('', 'EmpresaController::create');
+            $routes->put('(:segment)', 'EmpresaController::update/$1');
+            $routes->delete('(:segment)', 'EmpresaController::delete/$1');
+            $routes->get('trabajadores/(:segment)', 'EmpresaController::showByRut/$1');
+        });
+
+        // Routes for Sexo
+        $routes->group('sexo', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'SexoController::index/$1');
+            $routes->get('new', 'SexoController::new');
+            $routes->get('show/(:segment)', 'SexoController::show/$1');
+            $routes->post('', 'SexoController::create');
+            $routes->put('(:segment)', 'SexoController::update/$1');
+            $routes->delete('(:segment)', 'SexoController::delete/$1');
+        });
+
+        // Routes for TipoDoc
+        $routes->group('tipo_doc', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'Tipo_DocController::index/$1');
+            $routes->get('new', 'Tipo_DocController::new');
+            $routes->get('show/(:segment)', 'Tipo_DocController::show/$1');
+            $routes->post('', 'Tipo_DocController::create');
+            $routes->put('(:segment)', 'Tipo_DocController::update/$1');
+            $routes->delete('(:segment)', 'Tipo_DocController::delete/$1');
+        });
+
+        // Routes for TipoSol
+        $routes->group('tipoSol', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'TipoSolController::index/$1');
+            $routes->get('new', 'TipoSolController::new');
+            $routes->get('show/(:segment)', 'TipoSolController::show/$1');
+            $routes->post('', 'TipoSolController::create');
+            $routes->put('(:segment)', 'TipoSolController::update/$1');
+            $routes->delete('(:segment)', 'TipoSolController::delete/$1');
+        });
+
+        // Routes for EstadoSol
+        $routes->group('estadoSol', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'EstadoSolController::index/$1');
+            $routes->get('new', 'EstadoSolController::new');
+            $routes->get('show/(:segment)', 'EstadoSolController::show/$1');
+            $routes->post('', 'EstadoSolController::create');
+            $routes->put('(:segment)', 'EstadoSolController::update/$1');
+            $routes->delete('(:segment)', 'EstadoSolController::delete/$1');
+        });
+
+        // Routes for Notificaciones
+        $routes->group('notificaciones', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'NotificacionController::index/$1');
+            $routes->get('new', 'NotificacionController::new');
+            $routes->get('show/(:segment)', 'NotificacionController::show/$1');
+            $routes->post('', 'NotificacionController::create');
+            $routes->put('(:segment)', 'NotificacionController::update/$1');
+            $routes->delete('(:segment)', 'NotificacionController::delete/$1');
+            $routes->get('notificaciones-marcadas/(:segment)', 'NotificacionController::marcarComoVistas/$1');
+        });
+
+        // Routes for Solicitudes
+        $routes->group('solicitudes', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'SolicitudController::index/$1');
+            $routes->get('new', 'SolicitudController::new');
+            $routes->get('show/(:segment)', 'SolicitudController::show/$1');
+            $routes->post('', 'SolicitudController::create');
+            $routes->put('(:segment)', 'SolicitudController::update/$1');
+            $routes->delete('(:segment)', 'SolicitudController::delete/$1');
+            $routes->post('change-status/(:num)/(:num)', 'SolicitudController::changeStatus/$1/$2');
+        });
+
+        // Routes for Comunicaciones
+        $routes->group('comunicaciones', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'ComunicacionController::index/$1');
+            $routes->get('new', 'ComunicacionController::new');
+            $routes->get('show/(:segment)', 'ComunicacionController::show/$1');
+            $routes->post('', 'ComunicacionController::create');
+            $routes->put('(:segment)', 'ComunicacionController::update/$1');
+            $routes->delete('(:segment)', 'ComunicacionController::delete/$1');
+        });
+
+        // Routes for Denuncias
+        $routes->group('denuncias-karin', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
+            $routes->get('all/(:segment)', 'DenunciaController::index/$1');
+            $routes->get('new', 'DenunciaController::new');
+            $routes->get('show/(:segment)', 'DenunciaController::show/$1');
+            $routes->post('', 'DenunciaController::create');
+            $routes->put('(:segment)', 'DenunciaController::update/$1');
+            $routes->delete('(:segment)', 'DenunciaController::delete/$1');
+        });
     });
 });
-
 /*
  * --------------------------------------------------------------------
  * Additional Routing

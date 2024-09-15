@@ -7,18 +7,23 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
+import Swal from 'sweetalert2';
+
+import { useSelector } from 'react-redux';
 
 const Sexo = () => {
   const [showForm, setShowForm] = useState(false); // State to control form visibility
   const [selectedsex, setSelectedsex] = useState(null); // State for selected sex
   const [Sexo, setSexo] = useState([]); // Use state to manage Sexo
+  const token = useSelector((state) => state.token);
 
   // Fetch Sexo on component mount
   useEffect(() => {
     const fetchSexo = async () => {
       try {
-        const response = await axios.get(API_BASE_URL+'/sexo'); // Replace with your API endpoint
-        setSexo(response.data);
+        const response = await axios.get(API_BASE_URL+'/sexo/all/'+token); // Replace with your API endpoint
+        const sortedData = response.data.sort((a, b) => a.nombre.localeCompare(b.nombre));
+        setSexo(sortedData);
       } catch (error) {
         console.error('Error fetching Sexo:', error);
       }
@@ -29,16 +34,49 @@ const Sexo = () => {
 
   const deletesex = async (id) => {
     try {
-      const response = await axios.delete(API_BASE_URL+`/sexo/${id}`); // Delete request with sex ID
+      // Mostrar confirmación con SweetAlert2
+      const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'Cancelar',
+      });
   
-      if (response.status === 200) { // Check for successful deletion (replace with your API's success code)
-        setSexo(Sexo.filter(sex => sex.id !== id)); // Filter out deleted sex
-        console.log('sex eliminada exitosamente');
-      } else {
-        console.error('Error al eliminar la sex:', response.data); // Handle deletion errors
+      // Si el usuario confirma la eliminación
+      if (result.isConfirmed) {
+        const response = await axios.delete(`${API_BASE_URL}/sexo/${id}`);
+  
+        if (response.status === 200) {
+          setSexo(Sexo.filter(comunicacion => comunicacion.id !== id));
+  
+          // Mostrar éxito con SweetAlert2
+          Swal.fire(
+            '¡Eliminado!',
+            'El registro ha sido eliminado exitosamente.',
+            'success'
+          );
+        } else {
+          // Mostrar error si la eliminación no fue exitosa
+          Swal.fire(
+            'Error',
+            'Hubo un problema al eliminar el registro.',
+            'error'
+          );
+          console.error('Error al eliminar el registro:', response.data);
+        }
       }
     } catch (error) {
-      console.error('Error durante la eliminación:', error); // Handle general errors
+      // Mostrar error si ocurrió durante la solicitud
+      Swal.fire(
+        'Error',
+        'Ocurrió un error durante la eliminación.',
+        'error'
+      );
+      console.error('Error durante la eliminación:', error);
     }
   };
 

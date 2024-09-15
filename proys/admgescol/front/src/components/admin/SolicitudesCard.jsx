@@ -5,19 +5,25 @@ import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assu
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { ExportToXlsx } from './ExportToXlsx'; // Import your new component
 
 const SolicitudesCard = ({ empresaId }) => {
   const [solicitudes, setSolicitudes] = useState({
     anticipos: [],
-    prestamos: [],
+    beneficios: [],
     permisos: [],
-    vacaciones: []
+    prestamos: [],
   });
 
   const [value, setValue] = useState('anticipos');
   const [trabajadores, setTrabajadores] = useState([]);
   const [statuses, setStatuses] = useState([]);
   const navigate = useNavigate();
+  const [exportType, setExportType] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [status, setStatus] = useState('');
+  const token = useSelector((state) => state.token);
 
   // Pagination state
   const [page, setPage] = useState(0);
@@ -27,15 +33,15 @@ const SolicitudesCard = ({ empresaId }) => {
   useEffect(() => {
     const fetchSolicitudes = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/solicitudes`);
+        const response = await axios.get(`${API_BASE_URL}/solicitudes/all/${token}`); // Replace with your API endpoint
         const solicitudesData = response.data.filter((soli) => soli.empresa_id == empresaIdS);
 
         // Filter and categorize the data
         const categorizedSolicitudes = {
           anticipos: [],
-          prestamos: [],
+          beneficios: [],
           permisos: [],
-          vacaciones: []
+          prestamos: [],          
         };
 
         solicitudesData.forEach(solicitud => {
@@ -47,9 +53,9 @@ const SolicitudesCard = ({ empresaId }) => {
 
         // Fetch trabajadores data
         try {
-          const trabajadoresResponse = await axios.get(`${API_BASE_URL}/trabajadores`);
+          const trabajadoresResponse = await axios.get(`${API_BASE_URL}/trabajadores/all/${token}`); // Replace with your API endpoint
           setTrabajadores(trabajadoresResponse.data);
-          const statusResponse = await axios.get(`${API_BASE_URL}/estadoSol`);
+          const statusResponse = await axios.get(`${API_BASE_URL}/estadoSol/all/${token}`); // Replace with your API endpoint
           setStatuses(statusResponse.data);
         } catch (error) {
           console.error('Error fetching trabajadores:', error);
@@ -68,12 +74,12 @@ const SolicitudesCard = ({ empresaId }) => {
     switch (tipo_sol_id) {
       case '1':
         return 'anticipos';
-      case '2':
-        return 'prestamos';
+      case '4':
+        return 'beneficios';
       case '3':
         return 'permisos';
-      case '4':
-        return 'vacaciones';
+      case '2':
+        return 'prestamos';
       default:
         return 'desconocido';
     }
@@ -101,9 +107,9 @@ const SolicitudesCard = ({ empresaId }) => {
   const renderTable = (type) => {
     const fields = {
       anticipos: ['trabajador', 'fecha', 'monto', 'cuotas', 'comentario', 'status'],
-      prestamos: ['trabajador', 'fecha', 'monto', 'cuotas', 'comentario', 'status'],
+      beneficios: ['trabajador', 'fecha', 'fecha_fin', 'comentario', 'status'],
       permisos: ['trabajador', 'fecha', 'goce', 'horas', 'time', 'timeEnd', 'comentario', 'status'],
-      vacaciones: ['trabajador', 'fecha', 'fecha_fin', 'comentario', 'status']
+      prestamos: ['trabajador', 'fecha', 'monto', 'cuotas', 'comentario', 'status'],
     };
 
     const solicitudesData = solicitudes[type];
@@ -248,15 +254,38 @@ const SolicitudesCard = ({ empresaId }) => {
 
   const handleReject = async (type, id) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/solicitudes/change-status/${id}/3`);
-      if (response.status === 200) {
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Solicitud rechazada correctamente.',
-          icon: 'success'
-        }).then(() => {
-          navigate(`/Empresas/${empresaId}`); // Redirect to empresa page
-        });
+      // Mostrar un cuadro de entrada para el comentario
+      const { value: comentario } = await Swal.fire({
+        title: 'Rechazar Solicitud',
+        input: 'textarea',
+        inputLabel: 'Comentario',
+        inputPlaceholder: 'Escribe tu comentario aquí...',
+        inputAttributes: {
+          'aria-label': 'Escribe tu comentario aquí'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Rechazar',
+        cancelButtonText: 'Cancelar',
+        inputValidator: (value) => {
+          if (!value) {
+            return 'El comentario es obligatorio';
+          }
+        }
+      });
+
+      // Si el usuario proporciona un comentario y confirma
+      if (comentario) {
+        const response = await axios.post(`${API_BASE_URL}/solicitudes/change-status/${id}/3`, { comentario: comentario });
+
+        if (response.status === 200) {
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Solicitud rechazada correctamente.',
+            icon: 'success'
+          }).then(() => {
+            navigate(`/Empresas/${empresaId}`); // Redirigir a la página de empresa
+          });
+        }
       }
     } catch (error) {
       Swal.fire({
@@ -268,22 +297,27 @@ const SolicitudesCard = ({ empresaId }) => {
   };
 
   return (
-    <Paper sx={{ p: 2 }}>
+<Paper sx={{ p: 2 }}>
       <Typography variant="h5" component="div" gutterBottom>
         Solicitudes Pendientes
       </Typography>
       <Tabs value={value} onChange={handleChange} aria-label="solicitudes tabs">
         <Tab label={`Anticipos (${solicitudes.anticipos.length})`} value="anticipos" />
-        <Tab label={`Préstamos (${solicitudes.prestamos.length})`} value="prestamos" />
+        <Tab label={`Beneficios (${solicitudes.beneficios.length})`} value="beneficios" />
         <Tab label={`Permisos (${solicitudes.permisos.length})`} value="permisos" />
-        <Tab label={`Vacaciones (${solicitudes.vacaciones.length})`} value="vacaciones" />
+        <Tab label={`Préstamos (${solicitudes.prestamos.length})`} value="prestamos" />
+        <Tab label="Exportar XLSX" value="export" />
       </Tabs>
       <Box sx={{ p: 2 }}>
-        {renderTable(value)}
+        {value === 'export' ? (
+          <ExportToXlsx
+            exportData={solicitudes}
+
+          />
+        ) : (
+          renderTable(value)
+        )}
       </Box>
-      <Button variant="contained" color="info" sx={{ mt: 2 }}>
-        Exportar a XLSX
-      </Button>
     </Paper>
   );
 };

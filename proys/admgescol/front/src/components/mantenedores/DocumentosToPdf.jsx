@@ -41,10 +41,11 @@ const DocumentosToPdf = () => {
   const [trabajador, setTrabajador] = useState('');
   const [nombre, setNombre] = useState('');
   const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
+  const token = useSelector((state) => state.token);
 
   const fetchEmpresas = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/empresas`);
+      const response = await axios.get(`${API_BASE_URL}/empresas/all/${token}`); // Replace with your API endpoint
       setEmpresas(response.data);
     } catch (error) {
       console.error('Error al obtener la lista de empresas:', error);
@@ -53,7 +54,7 @@ const DocumentosToPdf = () => {
 
   const fetchTipoDocumentos = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/tipo_doc`);
+      const response = await axios.get(`${API_BASE_URL}/tipo_doc/all/${token}`); // Replace with your API endpoint
       const sortedData = response.data.sort((a, b) => a.nombre.localeCompare(b.nombre));
       setTipoDocumentos(sortedData);
     } catch (error) {
@@ -63,8 +64,24 @@ const DocumentosToPdf = () => {
 
   const fetchTrabajadores = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/trabajadores`);
-      setTrabajadores(response.data);
+      const response = await axios.get(`${API_BASE_URL}/trabajadores/all/${token}`); // Replace with your API endpoint
+        // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
+        const sortedTrabajadores = response.data.sort((a, b) => {
+          if (a.apellido_paterno < b.apellido_paterno) return -1;
+          if (a.apellido_paterno > b.apellido_paterno) return 1;
+          
+          // Si los apellidos paternos son iguales, ordenar por apellido_materno
+          if (a.apellido_materno < b.apellido_materno) return -1;
+          if (a.apellido_materno > b.apellido_materno) return 1;
+          
+          // Si ambos apellidos paternos y maternos son iguales, ordenar por nombre
+          if (a.nombre < b.nombre) return -1;
+          if (a.nombre > b.nombre) return 1;
+
+          return 0;
+        });
+
+        setTrabajadores(sortedTrabajadores);
     } catch (error) {
       console.error('Error fetching trabajadores:', error);
     }
@@ -299,7 +316,7 @@ const DocumentosToPdf = () => {
                   .filter((trabajador) => trabajador.empresa_id === empresaIdS?empresaIdS:empresa_id)
                   .map((trabajador) => (
                     <MenuItem key={trabajador.rut} value={trabajador.rut}>
-                      {trabajador.nombres} {trabajador.apellido_paterno} {trabajador.apellido_materno}
+                      {trabajador.apellido_paterno} {trabajador.apellido_materno}, {trabajador.nombres} 
                     </MenuItem>
                   ))}
               </Select>

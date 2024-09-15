@@ -31,7 +31,8 @@ import React, { useState, useEffect } from 'react';
     const contractsPerPage = 10;
     const indexOfLastContract = currentPage * contractsPerPage;
     const indexOfFirstContract = indexOfLastContract - contractsPerPage;
-  
+    const token = useSelector((state) => state.token);
+
     useEffect(() => {
       const fetchData = async () => {
         setIsLoading(true);
@@ -39,7 +40,7 @@ import React, { useState, useEffect } from 'react';
         try {
           const response = roleSession === 2
           ? await axios.get(`${API_BASE_URL}/documentos/showCargaByEmp/${empresaId}`)
-          : await axios.get(`${API_BASE_URL}/documentos/showCargaByUserByEmp/${userDNI}/${empresaId}`);
+          : await axios.get(`${API_BASE_URL}/documentos/showCargaByUserByEmp/${userDNI}/${empresaId}/${token}`);
         setData(response.data);
       } catch (error) {
         const errorMessage = error.response?.data?.message || 'An error occurred while fetching data';
@@ -252,6 +253,13 @@ import React, { useState, useEffect } from 'react';
             margin="normal"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            sx={{ color: 'black' }}
+            InputLabelProps={{ 
+              style: { color: 'black' }  // Set label color
+            }}
+            InputProps={{ 
+              style: { color: 'black' }  // Set input text color
+            }}
           />
           <Box sx={{ mt: 2, textAlign: 'right' }}>
             <Button onClick={handleCloseModal} sx={{ mr: 1 }}>Cancelar</Button>

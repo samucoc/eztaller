@@ -7,18 +7,23 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
+import Swal from 'sweetalert2';
+
+import { useSelector } from 'react-redux';
 
 const Roles = () => {
   const [showForm, setShowForm] = useState(false); // State to control form visibility
   const [selectedRol, setSelectedRol] = useState(null); // State for selected Rol
   const [Roles, setRoles] = useState([]); // Use state to manage Roles
+  const token = useSelector((state) => state.token);
 
   // Fetch Roles on component mount
   useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const response = await axios.get(API_BASE_URL+'/roles'); // Replace with your API endpoint
-        setRoles(response.data);
+        const response = await axios.get(API_BASE_URL+'/roles/all/'+token); // Replace with your API endpoint
+        const sortedData = response.data.sort((a, b) => a.roleName.localeCompare(b.roleName));
+        setRoles(sortedData);
       } catch (error) {
         console.error('Error fetching Roles:', error);
       }
@@ -29,16 +34,49 @@ const Roles = () => {
 
   const deleteRol = async (id) => {
     try {
-      const response = await axios.delete(API_BASE_URL+`/roles/${id}`); // Delete request with Rol ID
+      // Mostrar confirmación con SweetAlert2
+      const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'Cancelar',
+      });
   
-      if (response.status === 200) { // Check for successful deletion (replace with your API's success code)
-        setRoles(Roles.filter(Rol => Rol.id !== id)); // Filter out deleted Rol
-        console.log('Rol eliminada exitosamente');
-      } else {
-        console.error('Error al eliminar la Rol:', response.data); // Handle deletion errors
+      // Si el usuario confirma la eliminación
+      if (result.isConfirmed) {
+        const response = await axios.delete(`${API_BASE_URL}/roles/${id}`);
+  
+        if (response.status === 200) {
+          setRoles(Roles.filter(comunicacion => comunicacion.id !== id));
+  
+          // Mostrar éxito con SweetAlert2
+          Swal.fire(
+            '¡Eliminado!',
+            'El registro ha sido eliminado exitosamente.',
+            'success'
+          );
+        } else {
+          // Mostrar error si la eliminación no fue exitosa
+          Swal.fire(
+            'Error',
+            'Hubo un problema al eliminar el registro.',
+            'error'
+          );
+          console.error('Error al eliminar el registro:', response.data);
+        }
       }
     } catch (error) {
-      console.error('Error durante la eliminación:', error); // Handle general errors
+      // Mostrar error si ocurrió durante la solicitud
+      Swal.fire(
+        'Error',
+        'Ocurrió un error durante la eliminación.',
+        'error'
+      );
+      console.error('Error durante la eliminación:', error);
     }
   };
 

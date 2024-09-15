@@ -16,17 +16,21 @@ use PDFParser\L2Parser;
 use PDFParser\L3Parser;
 use PDFParser\TextExtractor;
 use Smalot\PdfParser\Parser;
+use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
 class TrabajadorController extends ResourceController
 {
     protected $modelName = 'App\Models\TrabajadorModel';
     protected $format = 'json';
     private $CargoModel;
+    private $UserModel;
     private $datetimeNow;
 
     public function __construct()
     {
         $this->datetimeNow = new \DateTime('NOW', new \DateTimeZone('America/Santiago'));
         $this->CargoModel = new \App\Models\CargoModel;
+        $this->UserModel = new \App\Models\UserModel;
 
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
@@ -53,11 +57,19 @@ class TrabajadorController extends ResourceController
      *
      * @return mixed
      */
-    public function index()
+    public function index($token=null)
     {
+        $authHeader = new \App\Controllers\Api\V1\TokenController();
+        $tokenValidation = $this->validateToken( $token);
+
+
+        if ($tokenValidation->getStatusCode() !== 200) {
+            return $tokenValidation; // Return error response if token is invalid
+        }
         $data = $this->model->findAll();
         foreach ($data as $key => $value) {
-            $data[$key]->cargo = $this->CargoModel->find($value->role_id);
+            $data[$key]->cargo = $this->CargoModel->find($value->cargo_id);
+            $data[$key]->usuario = $this->UserModel->find($value->user_id);
         }
         return $this->respond($data);
     }
@@ -73,7 +85,8 @@ class TrabajadorController extends ResourceController
         if (empty($data)) {
             return $this->failNotFound(RESOURCE_NOT_FOUND);
         }
-        $data->cargo = $this->CargoModel->find($data->role_id);
+        $data->cargo = $this->CargoModel->find($data->cargo_id);
+        $data->usuario = $this->UserModel->find($data->user_id);
 
         return $this->respond($data);
     }
@@ -297,4 +310,39 @@ class TrabajadorController extends ResourceController
         }
     }
 
+
+    public function validateToken($authHeader)
+    {
+        
+        if (!$authHeader) {
+            return $this->failUnauthorized('Authorization header missing');
+        }
+
+        $token = $authHeader;
+
+        try {
+            // Get the secret key from config or environment
+            $secretKey = "s54adf769sd48sd468sadf46";
+            
+            // Decode and validate the token
+            $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
+            
+            // Now you can access the decoded token data
+            $userDNI = $decoded->userDNI;
+            $role_id = $decoded->role_id;
+            
+            // You could also perform additional checks here (e.g., expiration)
+            
+            return $this->respond([
+                'status' => 200,
+                'userDNI' => $userDNI,
+                'role_id' => $role_id
+            ]);
+        } catch (\Exception $e) {
+            return $this->failUnauthorized('Invalid token: ' . $e->getMessage());
+        }
+    }
+
+
+    
 }

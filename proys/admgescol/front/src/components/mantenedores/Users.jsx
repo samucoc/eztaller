@@ -8,6 +8,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
+import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 const Users = () => {
   const useStyles = makeStyles({
@@ -22,10 +24,11 @@ const Users = () => {
   const [selectedUser, setSelectedUser] = useState(null); // State for selected User
   const [Users, setUsers] = useState([]); // Use state to manage Users
   const classes = useStyles();
+  const token = useSelector((state) => state.token);
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(API_BASE_URL+'/users'); // Replace with your API endpoint
+      const response = await axios.get(API_BASE_URL+`/users/all/${token}`); // Replace with your API endpoint
       setUsers(response.data);
     } catch (error) {
       console.error('Error fetching Users:', error);
@@ -39,16 +42,49 @@ const Users = () => {
 
   const deleteUser = async (id) => {
     try {
-      const response = await axios.delete(API_BASE_URL+`/users/${id}`); // Delete request with User ID
+      // Mostrar confirmación con SweetAlert2
+      const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'Cancelar',
+      });
   
-      if (response.status === 200) { // Check for successful deletion (replace with your API's success code)
-        setUsers(Users.filter(User => User.id !== id)); // Filter out deleted User
-        console.log('User eliminada exitosamente');
-      } else {
-        console.error('Error al eliminar la User:', response.data); // Handle deletion errors
+      // Si el usuario confirma la eliminación
+      if (result.isConfirmed) {
+        const response = await axios.delete(`${API_BASE_URL}/users/${id}`);
+  
+        if (response.status === 200) {
+          setUsers(Users.filter(comunicacion => comunicacion.id !== id));
+  
+          // Mostrar éxito con SweetAlert2
+          Swal.fire(
+            '¡Eliminado!',
+            'El usuario ha sido eliminado exitosamente.',
+            'success'
+          );
+        } else {
+          // Mostrar error si la eliminación no fue exitosa
+          Swal.fire(
+            'Error',
+            'Hubo un problema al eliminar el usuario.',
+            'error'
+          );
+          console.error('Error al eliminar el usuario:', response.data);
+        }
       }
     } catch (error) {
-      console.error('Error durante la eliminación:', error); // Handle general errors
+      // Mostrar error si ocurrió durante la solicitud
+      Swal.fire(
+        'Error',
+        'Ocurrió un error durante la eliminación.',
+        'error'
+      );
+      console.error('Error durante la eliminación:', error);
     }
   };
 

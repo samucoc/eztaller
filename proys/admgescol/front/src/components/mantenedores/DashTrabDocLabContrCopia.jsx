@@ -31,6 +31,7 @@ const DashTrabDocLabContrCopia = () => {
   const contractsPerPage = 10;
   const indexOfLastContract = currentPage * contractsPerPage;
   const indexOfFirstContract = indexOfLastContract - contractsPerPage;
+  const token = useSelector((state) => state.token);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +40,7 @@ const DashTrabDocLabContrCopia = () => {
       try {
         const response = roleSession === 2
         ? await axios.get(`${API_BASE_URL}/documentos/showContratosByEmp/${empresaId}`)
-        : await axios.get(`${API_BASE_URL}/documentos/showContratosByUserByEmp/${userDNI}/${empresaId}`);
+        : await axios.get(`${API_BASE_URL}/documentos/showContratosByUserByEmp/${userDNI}/${empresaId}/${token}`);
         setData(response.data);
       } catch (error) {
         const errorMessage = error.response?.data?.message || 'An error occurred while fetching data';
@@ -254,6 +255,13 @@ const DashTrabDocLabContrCopia = () => {
             margin="normal"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            sx={{ color: 'black' }}
+            InputLabelProps={{ 
+              style: { color: 'black' }  // Set label color
+            }}
+            InputProps={{ 
+              style: { color: 'black' }  // Set input text color
+            }}
           />
           <Box sx={{ mt: 2, textAlign: 'right' }}>
             <Button onClick={handleCloseModal} sx={{ mr: 1 }}>Cancelar</Button>

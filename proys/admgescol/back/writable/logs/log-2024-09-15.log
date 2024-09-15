@@ -1,0 +1,135 @@
+CRITICAL - 2024-09-15 00:16:02 --> Attempt to read property "token" on null
+in APPPATH\Controllers\Api\V1\CargoController.php on line 32.
+ 1 APPPATH\Controllers\Api\V1\CargoController.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "token" on null', 'APPPATH\\Controllers\\Api\\V1\\CargoController.php', 32)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 00:16:03 --> Attempt to read property "token" on null
+in APPPATH\Controllers\Api\V1\CargoController.php on line 32.
+ 1 APPPATH\Controllers\Api\V1\CargoController.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "token" on null', 'APPPATH\\Controllers\\Api\\V1\\CargoController.php', 32)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 00:22:41 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 SYSTEMPATH\API\ResponseTrait.php(136): CodeIgniter\RESTful\ResourceController->respond([...], 401, 'ROOTPATH\\public')
+ 3 SYSTEMPATH\API\ResponseTrait.php(199): CodeIgniter\RESTful\ResourceController->fail([...], 401, null, 'ROOTPATH\\public')
+ 4 APPPATH\Controllers\Api\V1\TokenController.php(26): CodeIgniter\RESTful\ResourceController->failUnauthorized('Token not provided')
+ 5 APPPATH\Controllers\Api\V1\CargoController.php(34): App\Controllers\Api\V1\TokenController->validateToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index(Object(App\Controllers\Api\V1\TokenController))
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 00:23:29 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 SYSTEMPATH\API\ResponseTrait.php(136): CodeIgniter\RESTful\ResourceController->respond([...], 401, 'ROOTPATH\\public')
+ 3 SYSTEMPATH\API\ResponseTrait.php(199): CodeIgniter\RESTful\ResourceController->fail([...], 401, null, 'ROOTPATH\\public')
+ 4 APPPATH\Controllers\Api\V1\TokenController.php(26): CodeIgniter\RESTful\ResourceController->failUnauthorized('Token not provided')
+ 5 APPPATH\Controllers\Api\V1\CargoController.php(34): App\Controllers\Api\V1\TokenController->validateToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index(Object(App\Controllers\Api\V1\TokenController))
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 00:24:18 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 SYSTEMPATH\API\ResponseTrait.php(136): CodeIgniter\RESTful\ResourceController->respond([...], 401, 'ROOTPATH\\public')
+ 3 SYSTEMPATH\API\ResponseTrait.php(199): CodeIgniter\RESTful\ResourceController->fail([...], 401, null, 'ROOTPATH\\public')
+ 4 APPPATH\Controllers\Api\V1\TokenController.php(26): CodeIgniter\RESTful\ResourceController->failUnauthorized('Token not provided')
+ 5 APPPATH\Controllers\Api\V1\CargoController.php(34): App\Controllers\Api\V1\TokenController->validateToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index(Object(App\Controllers\Api\V1\TokenController))
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 00:46:39 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 APPPATH\Controllers\Api\V1\TokenController.php(38): CodeIgniter\RESTful\ResourceController->respond([...])
+ 3 APPPATH\Controllers\Api\V1\CargoController.php(34): App\Controllers\Api\V1\TokenController->validateToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 00:47:52 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 APPPATH\Controllers\Api\V1\TokenController.php(38): CodeIgniter\RESTful\ResourceController->respond([...])
+ 3 APPPATH\Controllers\Api\V1\CargoController.php(34): App\Controllers\Api\V1\TokenController->validateToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\CargoController->index('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\CargoController))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 00:57:57 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 APPPATH\Controllers\Api\V1\TokenController.php(38): CodeIgniter\RESTful\ResourceController->respond([...])
+ 3 APPPATH\Controllers\Api\V1\RoleController.php(31): App\Controllers\Api\V1\TokenController->validateToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\RoleController->index('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\RoleController))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 01:00:50 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 APPPATH\Controllers\Api\V1\TokenController.php(38): CodeIgniter\RESTful\ResourceController->respond([...])
+ 3 APPPATH\Controllers\Api\V1\RoleController.php(31): App\Controllers\Api\V1\TokenController->validateToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\RoleController->index('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\RoleController))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 01:02:16 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 APPPATH\Controllers\Api\V1\TokenController.php(38): CodeIgniter\RESTful\ResourceController->respond([...])
+ 3 APPPATH\Controllers\Api\V1\RoleController.php(31): App\Controllers\Api\V1\TokenController->validateToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\RoleController->index('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\RoleController))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 01:02:45 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 APPPATH\Controllers\Api\V1\TokenController.php(35): CodeIgniter\RESTful\ResourceController->respond([...])
+ 3 APPPATH\Controllers\Api\V1\RoleController.php(31): App\Controllers\Api\V1\TokenController->validateToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\RoleController->index('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\RoleController))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 01:03:38 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 APPPATH\Controllers\Api\V1\TokenController.php(35): CodeIgniter\RESTful\ResourceController->respond([...])
+ 3 APPPATH\Controllers\Api\V1\RoleController.php(31): App\Controllers\Api\V1\TokenController->validateToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\RoleController->index('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\RoleController))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 01:03:48 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 APPPATH\Controllers\Api\V1\TokenController.php(38): CodeIgniter\RESTful\ResourceController->respond([...])
+ 3 APPPATH\Controllers\Api\V1\RoleController.php(31): App\Controllers\Api\V1\TokenController->validateToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\RoleController->index('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\RoleController))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 01:03:56 --> Call to a member function setContentType() on null
+in SYSTEMPATH\API\ResponseTrait.php on line 332.
+ 1 SYSTEMPATH\API\ResponseTrait.php(99): CodeIgniter\RESTful\ResourceController->format([...])
+ 2 APPPATH\Controllers\Api\V1\TokenController.php(37): CodeIgniter\RESTful\ResourceController->respond([...])
+ 3 APPPATH\Controllers\Api\V1\RoleController.php(31): App\Controllers\Api\V1\TokenController->validateToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 4 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\RoleController->index('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MjYzNTk2ODMsImlzcyI6ZmFsc2UsImV4cCI6MTcyNjM2MzI4MywidXNlckROSSI6IjE1ODI5ODA3Iiwicm9sZV9pZCI6IjEifQ._b7m4pxXjNOFcuMIHufjHpaIP_YZWRlg3i0XjAuWFgk')
+ 5 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\RoleController))
+ 6 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-15 02:13:53 --> Undefined property: stdClass::$token
+in APPPATH\Controllers\Api\V1\TokenController.php on line 46.
+ 1 APPPATH\Controllers\Api\V1\TokenController.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$token', 'APPPATH\\Controllers\\Api\\V1\\TokenController.php', 46)
+ 2 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TokenController->checkToken()
+ 3 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TokenController))
+ 4 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()

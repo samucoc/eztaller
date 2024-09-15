@@ -7,18 +7,22 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
+import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux';
 
 const EstadoSols = () => {
   const [showForm, setShowForm] = useState(false); // State to control form visibility
   const [selectedEstadoSol, setSelectedEstadoSol] = useState(null); // State for selected EstadoSol
   const [EstadoSols, setEstadoSols] = useState([]); // Use state to manage EstadoSols
+  const token = useSelector((state) => state.token);
 
   // Fetch EstadoSols on component mount
   useEffect(() => {
     const fetchEstadoSols = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/estadoSol`);
-        setEstadoSols(response.data);
+        const response = await axios.get(`${API_BASE_URL}/estadoSol/all/${token}`); // Replace with your API endpoint
+        const sortedData = response.data.sort((a, b) => a.nombre.localeCompare(b.nombre));
+        setEstadoSols(sortedData);
       } catch (error) {
         console.error('Error fetching EstadoSols:', error);
       }
@@ -29,16 +33,49 @@ const EstadoSols = () => {
 
   const deleteEstadoSol = async (id) => {
     try {
-      const response = await axios.delete(API_BASE_URL+`/estadoSol/${id}`); // Delete request with EstadoSol ID
+      // Mostrar confirmación con SweetAlert2
+      const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'Cancelar',
+      });
   
-      if (response.status === 200) { // Check for successful deletion (replace with your API's success code)
-        setEstadoSols(EstadoSols.filter(EstadoSol => EstadoSol.id !== id)); // Filter out deleted EstadoSol
-        console.log('EstadoSol eliminada exitosamente');
-      } else {
-        console.error('Error al eliminar la EstadoSol:', response.data); // Handle deletion errors
+      // Si el usuario confirma la eliminación
+      if (result.isConfirmed) {
+        const response = await axios.delete(`${API_BASE_URL}/estadoSol/${id}`);
+  
+        if (response.status === 200) {
+          setEstadoSols(EstadoSols.filter(comunicacion => comunicacion.id !== id));
+  
+          // Mostrar éxito con SweetAlert2
+          Swal.fire(
+            '¡Eliminado!',
+            'El registro ha sido eliminado exitosamente.',
+            'success'
+          );
+        } else {
+          // Mostrar error si la eliminación no fue exitosa
+          Swal.fire(
+            'Error',
+            'Hubo un problema al eliminar el registro.',
+            'error'
+          );
+          console.error('Error al eliminar el registro:', response.data);
+        }
       }
     } catch (error) {
-      console.error('Error durante la eliminación:', error); // Handle general errors
+      // Mostrar error si ocurrió durante la solicitud
+      Swal.fire(
+        'Error',
+        'Ocurrió un error durante la eliminación.',
+        'error'
+      );
+      console.error('Error durante la eliminación:', error);
     }
   };
 

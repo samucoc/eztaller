@@ -73,3 +73,8 @@ export const setLoggedIn = (loggedIn) => ({
   export const setNotificacionesVistas = () => ({
     type: 'SET_NOTIFICACIONES_VISTAS',
   });
+
+  export const setToken = (token) => ({
+    type: 'SET_TOKEN',
+    payload: token
+  });

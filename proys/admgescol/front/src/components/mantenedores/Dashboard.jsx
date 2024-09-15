@@ -45,12 +45,13 @@ const Dashboard = ({ userDNI, empresaId }) => {
   const [empresas, setEmpresas] = useState([]);
   const [cargos, setCargos] = useState([]);
   const classes = useStyles();
+  const token = useSelector((state) => state.token);
 
   const empresaIdS = useSelector((state) => state.empresaId); // Obtener empresaId de Redux
 
   const fetchDocuments = async (newType) => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/documentos`); // Replace with your API endpoint
+      const response = await axios.get(`${API_BASE_URL}/documentos/all/${token}`); // Replace with your API endpoint
       !newType ? setDocuments(response.data) : setDocuments(response.data.filter((doc) => doc.tipo_doc_id === newType ));
     } catch (error) {
       console.error('Error fetching documents:', error);
@@ -58,7 +59,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
   };
   const fetchTipoDocumentos = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/tipo_doc`);
+      const response = await axios.get(`${API_BASE_URL}/tipo_doc/all/${token}`); // Replace with your API endpoint
       setTipoDocumentos(response.data);
     } catch (error) {
       console.error('Error fetching tipo_doc:', error);
@@ -66,7 +67,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
   };
   const fetchTrabajadores = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+      const response = await axios.get(`${API_BASE_URL}/trabajadores/all/${token}`); // Replace with your API endpoint
       
       // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
       const sortedTrabajadores = response.data.sort((a, b) => {
@@ -91,7 +92,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
   };
   const fetchEmpresas = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/empresas`);
+      const response = await axios.get(`${API_BASE_URL}/empresas/all/${token}`); // Replace with your API endpoint
       setEmpresas(response.data);
     } catch (error) {
       console.error('Error fetching trabajadores:', error);
@@ -99,7 +100,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
   };
   const fetchCargos = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/cargos`);
+      const response = await axios.get(`${API_BASE_URL}/cargos/all/${token}`); // Replace with your API endpoint
       setCargos(response.data);
     } catch (error) {
       console.error('Error fetching cargos:', error);
@@ -169,16 +170,49 @@ const Dashboard = ({ userDNI, empresaId }) => {
 
   const deleteDocument = async (id) => {
     try {
-      const response = await axios.delete(`${API_BASE_URL}/documentos/${id}`); // Delete request with document ID
-
-      if (response.status === 200) { // Check for successful deletion (replace with your API's success code)
-        setDocuments(documents.filter(doc => doc.id !== id)); // Filter out deleted document
-        console.log('Document eliminado exitosamente');
-      } else {
-        console.error('Error al eliminar el documento:', response.data); // Handle deletion errors
+      // Mostrar confirmación con SweetAlert2
+      const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'Cancelar',
+      });
+  
+      // Si el usuario confirma la eliminación
+      if (result.isConfirmed) {
+        const response = await axios.delete(`${API_BASE_URL}/documentos/${id}`);
+  
+        if (response.status === 200) {
+          setDocuments(documents.filter(comunicacion => comunicacion.id !== id));
+  
+          // Mostrar éxito con SweetAlert2
+          Swal.fire(
+            '¡Eliminado!',
+            'El registro ha sido eliminado exitosamente.',
+            'success'
+          );
+        } else {
+          // Mostrar error si la eliminación no fue exitosa
+          Swal.fire(
+            'Error',
+            'Hubo un problema al eliminar el registro.',
+            'error'
+          );
+          console.error('Error al eliminar el registro:', response.data);
+        }
       }
     } catch (error) {
-      console.error('Error durante la eliminación:', error); // Handle general errors
+      // Mostrar error si ocurrió durante la solicitud
+      Swal.fire(
+        'Error',
+        'Ocurrió un error durante la eliminación.',
+        'error'
+      );
+      console.error('Error durante la eliminación:', error);
     }
   };
 

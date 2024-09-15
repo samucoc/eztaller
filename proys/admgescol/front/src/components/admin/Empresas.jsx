@@ -10,6 +10,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { setEmpresaId } from '../../actions';
+import Swal from 'sweetalert2';
 
 const Empresas = ({ empresaId }) => {
   const [showForm, setShowForm] = useState(false);
@@ -19,6 +20,7 @@ const Empresas = ({ empresaId }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
+  const token = useSelector((state) => state.token);
 
   const dispatch = useDispatch();
   const empresaIdS = useSelector((state) => state.empresaId);
@@ -30,7 +32,7 @@ const Empresas = ({ empresaId }) => {
   useEffect(() => {
     const fetchEmpresas = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/empresas`);
+        const response = await axios.get(`${API_BASE_URL}/empresas/all/${token}`); // Replace with your API endpoint
         setEmpresas(response.data);
       } catch (error) {
         console.error('Error fetching Empresas:', error);
@@ -39,7 +41,7 @@ const Empresas = ({ empresaId }) => {
 
     const fetchComunas = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/comunas`);
+        const response = await axios.get(`${API_BASE_URL}/comunas/all/${token}`); // Replace with your API endpoint
         setComunas(response.data);
       } catch (error) {
         console.error('Error fetching Comunas:', error);
@@ -52,14 +54,48 @@ const Empresas = ({ empresaId }) => {
 
   const deleteEmpresa = async (id) => {
     try {
-      const response = await axios.delete(`${API_BASE_URL}/empresas/${id}`);
-      if (response.status === 200) {
-        setEmpresas(empresas.filter(empresa => empresa.id !== id));
-        console.log('Empresa eliminada exitosamente');
-      } else {
-        console.error('Error al eliminar la Empresa:', response.data);
+      // Mostrar confirmación con SweetAlert2
+      const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarlo',
+        cancelButtonText: 'Cancelar',
+      });
+  
+      // Si el usuario confirma la eliminación
+      if (result.isConfirmed) {
+        const response = await axios.delete(`${API_BASE_URL}/empresas/${id}`);
+  
+        if (response.status === 200) {
+          setEmpresas(empresas.filter(comunicacion => comunicacion.id !== id));
+  
+          // Mostrar éxito con SweetAlert2
+          Swal.fire(
+            '¡Eliminado!',
+            'El registro ha sido eliminado exitosamente.',
+            'success'
+          );
+        } else {
+          // Mostrar error si la eliminación no fue exitosa
+          Swal.fire(
+            'Error',
+            'Hubo un problema al eliminar el registro.',
+            'error'
+          );
+          console.error('Error al eliminar el registro:', response.data);
+        }
       }
     } catch (error) {
+      // Mostrar error si ocurrió durante la solicitud
+      Swal.fire(
+        'Error',
+        'Ocurrió un error durante la eliminación.',
+        'error'
+      );
       console.error('Error durante la eliminación:', error);
     }
   };

@@ -8,13 +8,14 @@ import { Box, Button } from '@mui/material';
 
 const Breadcrumbs = () => {
   const [razonSocial, setRazonSocial] = useState('');
-  const [usuario, setUsuario] = useState([]);
+  const [usuarioNombre, setUsuarioNombre] = useState([]);
 
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   let id;
   const currentOption = useSelector((state) => state.currentOption);
+  const token = useSelector((state) => state.token);
 
   const {
     loggedIn,
@@ -107,7 +108,8 @@ const Breadcrumbs = () => {
   };
 
   if (empresaId && roleSession !== "3"){
-    axios
+    if (!razonSocial){
+      axios
         .get(`${API_BASE_URL}/empresas/show/${empresaId}`)
         .then((response) => {
           setRazonSocial(response.data.NombreFantasia);
@@ -116,7 +118,7 @@ const Breadcrumbs = () => {
           console.error('Error fetching razonSocial:', error);
           setRazonSocial('');
         });
-
+    }  
     return (
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
         <nav aria-label="breadcrumb">
@@ -144,15 +146,15 @@ const Breadcrumbs = () => {
     );
   }
   else if (roleSession === "3"){
-    if (!usuario){
+    if (!usuarioNombre){
       axios
-      .get(`${API_BASE_URL}/users/showByRut/${userDNI}`)
+      .get(`${API_BASE_URL}/users/showByRut/${userDNI}/${token}`) // Replace with your API endpoint
       .then((response) => {
-        setUsuario(response.data);
+        setUsuarioNombre(response.data.trabajador.nombres);
       })
       .catch((error) => {
         console.error('Error fetching user data:', error);
-        setUsuario('');
+        setUsuarioNombre('');
       });
     }
     return (
@@ -164,11 +166,11 @@ const Breadcrumbs = () => {
                 Menú
               </span>
             </li>
-            <li className="breadcrumb-item">
+            {/* <li className="breadcrumb-item">
                 <span role="button" onClick={handleHomeClick}>
-                  {usuario?.trabajador?.nombres}
+                  {usuarioNombre}
                 </span>
-            </li>
+            </li> */}
             <li className="breadcrumb-item active" aria-current="page">
               {breadcrumbLabel}
             </li>

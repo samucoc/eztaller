@@ -4,7 +4,8 @@ namespace App\Controllers\Api\V1;
 
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\TrabajadorModel;
-
+use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
 class UserController extends ResourceController
 {
     protected $modelName = 'App\Models\UserModel';
@@ -32,8 +33,15 @@ class UserController extends ResourceController
      *
      * @return mixed
      */
-    public function index()
+    public function index($token=null)
     {
+        $authHeader = new \App\Controllers\Api\V1\TokenController();
+        $tokenValidation = $this->validateToken( $token);
+
+
+        if ($tokenValidation->getStatusCode() !== 200) {
+            return $tokenValidation; // Return error response if token is invalid
+        }
         $data = $this->model->findAll();
 
         foreach ($data as $key => $value) {
@@ -62,8 +70,13 @@ class UserController extends ResourceController
         return $this->respond($data);
     }
 
-    public function showByRut($rut = null)
+    public function showByRut($rut = null, $token=null)
     {
+        $tokenValidation = $this->validateToken( $token);
+        if ($tokenValidation->getStatusCode() !== 200) {
+            return $tokenValidation; // Return error response if token is invalid
+        }
+
         // Buscar al usuario por su RUT en lugar de por ID
         $data = $this->model->where('userDNI', $rut)->first();
     
@@ -263,11 +276,27 @@ class UserController extends ResourceController
 
             if (!empty($trabajador)) {
                 $trabajador = $trabajador[0]; // Obtener el primer resultado como objeto
+            
+                // Generate JWT token
+                $key = "s54adf769sd48sd468sadf46"; // Ensure you have this key in your .env file
+                $issuedAt = new \DateTimeImmutable();
+                $expire = $issuedAt->modify('+1 hour')->getTimestamp(); // Token expiration time
+                $serverName = getenv('serverName'); // Change this to your server name
+
+                $token = [
+                    'iat' => $issuedAt->getTimestamp(),
+                    'iss' => $serverName,
+                    'exp' => $expire,
+                    'userDNI' => $user->userDNI,
+                    'role_id' => $user->role_id,
+                ];
+                $jwt = JWT::encode($token, $key, 'HS256');
 
                 $response = [
                     'status' => 200,
                     'error' => null,
                     'messages' => 'Login successful',
+                    'token' => $jwt, // Include the JWT token in the response
                     'userDNI' => $user->userDNI,
                     'role_id' => $user->role_id,
                     'foto' => $trabajador->foto,
@@ -392,4 +421,38 @@ class UserController extends ResourceController
             return $this->fail('Invalid email');
         }
     }
+
+    public function validateToken($authHeader)
+    {
+        
+        if (!$authHeader) {
+            return $this->failUnauthorized('Authorization header missing');
+        }
+
+        $token = $authHeader;
+
+        try {
+            // Get the secret key from config or environment
+            $secretKey = "s54adf769sd48sd468sadf46";
+            
+            // Decode and validate the token
+            $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
+            
+            // Now you can access the decoded token data
+            $userDNI = $decoded->userDNI;
+            $role_id = $decoded->role_id;
+            
+            // You could also perform additional checks here (e.g., expiration)
+            
+            return $this->respond([
+                'status' => 200,
+                'userDNI' => $userDNI,
+                'role_id' => $role_id
+            ]);
+        } catch (\Exception $e) {
+            return $this->failUnauthorized('Invalid token: ' . $e->getMessage());
+        }
+    }
+
+    
 }

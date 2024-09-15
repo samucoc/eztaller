@@ -3,6 +3,8 @@
 namespace App\Controllers\Api\V1;
 
 use CodeIgniter\RESTful\ResourceController;
+use \Firebase\JWT\JWT;
+use \Firebase\JWT\Key;
 
 class RoleController extends ResourceController
 {
@@ -25,8 +27,14 @@ class RoleController extends ResourceController
      *
      * @return mixed
      */
-    public function index()
+    public function index($token = null)
     {
+        $response = $this->validateToken($token);
+    
+        if ($response === null) {
+            return $this->failUnauthorized('Token is invalid');
+        }
+    
         $data = $this->model->findAll();
         return $this->respond($data);
     }
@@ -131,6 +139,37 @@ class RoleController extends ResourceController
             return $this->respondDeleted($id, RESOURCE_DELETED);
         } else {
             return $this->fail($this->model->errors());
+        }
+    }
+    public function validateToken($authHeader)
+    {
+        
+        if (!$authHeader) {
+            return $this->failUnauthorized('Authorization header missing');
+        }
+
+        $token = $authHeader;
+
+        try {
+            // Get the secret key from config or environment
+            $secretKey = "s54adf769sd48sd468sadf46";
+            
+            // Decode and validate the token
+            $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
+            
+            // Now you can access the decoded token data
+            $userDNI = $decoded->userDNI;
+            $role_id = $decoded->role_id;
+            
+            // You could also perform additional checks here (e.g., expiration)
+            
+            return $this->respond([
+                'status' => 200,
+                'userDNI' => $userDNI,
+                'role_id' => $role_id
+            ]);
+        } catch (\Exception $e) {
+            return $this->failUnauthorized('Invalid token: ' . $e->getMessage());
         }
     }
 }
