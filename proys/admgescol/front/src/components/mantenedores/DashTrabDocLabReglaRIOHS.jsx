@@ -225,7 +225,7 @@
                   <Button
                     variant="outlined"
                     color="primary"
-                    onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${d.ruta}`)}
+                    onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${d.ruta}?${new Date().getTime()}`)}
                     startIcon={<Visibility sx={{ color: 'green' }} />}
                   >
                     Ver Documento
