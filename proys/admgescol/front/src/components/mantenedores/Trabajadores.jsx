@@ -229,7 +229,7 @@ const Trabajadores = ({ empresaId }) => {
     ? filteredTrabajadores.filter(trabajador => trabajador.empresa_id === selectedEmpresa)
     : filteredTrabajadores;
 
-  filteredTrabajadores = filteredTrabajadores.filter((trabajador) => trabajador.usuario.role_id === "3" )
+  filteredTrabajadores = filteredTrabajadores.filter((trabajador) => trabajador.usuario?.role_id === "3" )
 
   // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
   filteredTrabajadores = filteredTrabajadores.sort((a, b) => {

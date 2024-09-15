@@ -10,7 +10,7 @@ import Login from './components/config/Login';
 import Breadcrumbs from './components/config/Breadcrumbs';
 import { API_BASE_URL } from './components/config/apiConstants';
 import {
-  Box, Container, CssBaseline, IconButton, Drawer, useMediaQuery, Button
+  Box, Container, CssBaseline, IconButton, Drawer, useMediaQuery, Button, Grid
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { green } from '@mui/material/colors';
@@ -205,6 +205,16 @@ const App = () => {
               >
                 <Sidebar handleLogout={handleLogout} selectedEmpresa={empresaId} />
               </Drawer>
+              <Grid item xs={12} >
+                <Breadcrumbs currentOption={currentOption} selectedEmpresa={empresaId} />
+                <Panel
+                  currentOption={currentOption}
+                  userDNI={userDNI}
+                  empresaId={empresaId}
+                  setCurrentOption={handleOptionChange}
+                  className="panel-white-background"
+                />
+              </Grid>
             </>
           ) : (
             <Box className="sidebar-container">
