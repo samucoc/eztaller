@@ -105,7 +105,6 @@ const ManageEmpresa = () => {
               </>
             </Card>
           </Grid>
-
           {/* Comunicaciones Card */}
           <Grid item xs={12} md={4}>
             <Card
@@ -140,6 +139,7 @@ const ManageEmpresa = () => {
                     variant="contained"
                     color="primary"
                     sx={{ mt: 2 }}
+                    onClick={() => handleItemClick(`/LeyKarin`)} // Adjust path as per routing
                   >
                     Gestionar
                   </Button>

@@ -22,6 +22,8 @@ import DocumentosCard from './DocumentosCard';
 import SolicitudesCard from './SolicitudesCard';
 import Swal from 'sweetalert2';
 //import '../../css/manageUser.css'; // Si tienes estilos adicionales para DashTrab
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Importa los estilos de Quill
 
 const ManageUser = () => {
   const [value, setValue] = useState(0);
@@ -91,6 +93,13 @@ const ManageUser = () => {
     const { name, value } = e.target;
     const updatedImplicados = [...implicados];
     updatedImplicados[index] = { ...updatedImplicados[index], [name]: value };
+    setImplicados(updatedImplicados);
+  };
+
+  // Updated handler function
+  const handleChangeImplicadoDenunciaKarin = (index, value) => {
+    const updatedImplicados = [...implicados];
+    updatedImplicados[index] = { ...updatedImplicados[index], denuncia: value }; // Directly update the 'denuncia' field
     setImplicados(updatedImplicados);
   };
 
@@ -835,17 +844,16 @@ const ManageUser = () => {
                       }}
                     />
                   </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      variant="outlined"
+                  <Grid item xs={12} sm={12}>
+                    <ReactQuill 
                       fullWidth
                       id={`denuncia-${index}`}
                       label="Denuncia"
                       name="denuncia"
-                      multiline
-                      rows={4}
+                      theme="snow" 
                       value={implicado.denuncia}
-                      onChange={(e) => handleChangeImplicadoKarin(index, e)}
+                      onChange={(value) => handleChangeImplicadoDenunciaKarin(index, value)} // Change to pass value directly
+                      placeholder="Escribe la descripción aquí..." 
                       sx={{ color: 'black' }}
                       InputLabelProps={{ 
                         style: { color: 'black' }  // Set label color
@@ -853,7 +861,7 @@ const ManageUser = () => {
                       InputProps={{ 
                         style: { color: 'black' }  // Set input text color
                       }}
-                    />
+                    /> 
                   </Grid>
 
                   <Grid item xs={12}>

@@ -10,13 +10,16 @@ class DenunciaController extends ResourceController
     protected $modelName = 'App\Models\DenunciaModel';
     protected $format = 'json';
     private $datetimeNow;
-
+    private $denunImpliModel;
+    private $denunImpliArchModel;
     public function __construct()
     {
         $this->datetimeNow = new \DateTime('NOW', new \DateTimeZone('America/Santiago'));
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         header("Access-Control-Allow-Headers: Content-Type, Content-Length, Accept-Encoding, Authorization");
+        $this->denunImpliModel = new \App\Models\DenunciaImpliModel();
+        $this->denunImpliArchModel = new \App\Models\DenunciaImpliArchModel();
     }
 
     //request data is raw json
@@ -28,14 +31,18 @@ class DenunciaController extends ResourceController
      */
     public function index($token=null)
     {
-        $authHeader = new \App\Controllers\Api\V1\TokenController();
         $tokenValidation = $this->validateToken( $token);
-
 
         if ($tokenValidation->getStatusCode() !== 200) {
             return $tokenValidation; // Return error response if token is invalid
         }
         $data = $this->model->findAll();
+
+        foreach ($data as $key => $value) {
+            $data[$key]->implicados = $this->denunImpliModel->where('denuncia_id', $value->id)->findAll();
+            $data[$key]->adjuntos = $this->denunImpliArchModel->where('denun_impli_id', $value->id)->findAll();
+        }
+
         return $this->respond($data);
     }
 
@@ -50,7 +57,34 @@ class DenunciaController extends ResourceController
         if (empty($data)) {
             return $this->failNotFound(RESOURCE_NOT_FOUND);
         }
+        $data->implicados = $this->denunImpliModel->where('denuncia_id', $data->id)->findAll();
+        $data->adjuntos = $this->denunImpliArchModel->where('denun_impli_id', $data->id)->findAll();
+
         return $this->respond($data);
+    }
+
+    public function showByImplicados($id = null)
+    {
+        $data = $this->model->find($id);
+        if (empty($data)) {
+            return $this->failNotFound(RESOURCE_NOT_FOUND);
+        }
+        $data->implicados = $this->denunImpliModel->where('denuncia_id', $data->id)->findAll();
+        $data->adjuntos = $this->denunImpliArchModel->where('denun_impli_id', $data->id)->findAll();
+
+        return $this->respond($data->implicados);
+    }
+
+    public function showByAdjuntos($id = null)
+    {
+        $data = $this->model->find($id);
+        if (empty($data)) {
+            return $this->failNotFound(RESOURCE_NOT_FOUND);
+        }
+        $data->implicados = $this->denunImpliModel->where('denuncia_id', $data->id)->findAll();
+        $data->adjuntos = $this->denunImpliArchModel->where('denun_impli_id', $data->id)->findAll();
+
+        return $this->respond($data->adjuntos);
     }
 
     /**

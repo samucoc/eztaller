@@ -108,7 +108,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                 </ListItemIcon>
                 <ListItemText primary="Usuarios" />
               </ListItem>
-              <ListItem button 
+              <ListItem button onClick={() => handleOptionChange('LeyKarin')}
                   sx={{
                     padding: 0,
                     margin: 0,

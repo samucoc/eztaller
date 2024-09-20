@@ -54,6 +54,7 @@ const Breadcrumbs = () => {
     '/SolicitarPrestamo': 'Solicitud de Préstamo',
     '/SolicitarPermiso': 'Solicitud de Permiso',
     '/SolicitarVacaciones': 'Solicitud de Vacaciones',
+    '/LeyKarin': 'Ley Karin',
   };
 
   const currentPath = location.pathname;

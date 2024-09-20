@@ -222,6 +222,8 @@ $routes->group('Api', function ($routes) {
         // Routes for Denuncias
         $routes->group('denuncias-karin', ['namespace' => 'App\Controllers\Api\V1'], function ($routes) {
             $routes->get('all/(:segment)', 'DenunciaController::index/$1');
+            $routes->get('all/implicados/(:segment)', 'DenunciaController::showByImplicados/$1');
+            $routes->get('all/adjuntos/(:segment)', 'DenunciaController::showByAdjuntos/$1');
             $routes->get('new', 'DenunciaController::new');
             $routes->get('show/(:segment)', 'DenunciaController::show/$1');
             $routes->post('', 'DenunciaController::create');

@@ -1,0 +1,9 @@
+.chip-evidencias {
+    background-color: #1976d2 !important; /* Primary color for the 'Evidencias' chip */
+    color: white !important;
+  }
+  
+  .chip-sin-evidencias {
+    border-color: #ed6c02 !important; /* Warning color for the 'Sin Evidencias' chip */
+    color: #ed6c02 !important;
+  }

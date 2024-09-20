@@ -5,6 +5,7 @@ import Empresas from '../admin/Empresas';
 import ManageEmpresa from '../admin/ManageEmpresa';
 import ComunicacionesCard from '../admin/ComunicacionesCard';
 import SolicitudesCard from '../admin/SolicitudesCard';
+import LeyKarin from '../mantenedores/LeyKarin';
 
 import Documentos from '../mantenedores/Dashboard';
 import Usuarios from '../mantenedores/Users';
@@ -49,7 +50,8 @@ const Panel = ({ currentOption, empresaId }) => {
         <Route path="/ComunicacionesCard" element={<ComunicacionesCard />} />
         <Route path="/SolicitudesCard" element={<SolicitudesCard />} />
         <Route path="/Empresas/:id" element={<ManageEmpresa />} />
-
+        <Route path="/LeyKarin"  element={<LeyKarin />} />
+        
         <Route path="/Documentos" element={<Documentos />} />
         <Route path="/Usuarios" element={<Usuarios />} />
         <Route path="/Trabajadores" element={<Trabajadores />} />

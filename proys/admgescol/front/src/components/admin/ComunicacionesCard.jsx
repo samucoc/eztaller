@@ -1,46 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
-import ComunicacionesForm from './ComunicacionesForm';
 import { useSelector } from 'react-redux';
-import { Grid, Card, CardContent, Typography, Button, Box, FormControl, InputLabel, Select, MenuItem  } from '@material-ui/core'; // Import Material-UI components
+import {
+  Grid, Card, CardContent, Typography, Button, Box,
+  FormControl, InputLabel, Select, MenuItem
+} from '@material-ui/core'; // Import Material-UI components
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import Swal from 'sweetalert2';
 import useAuthAxios from '../../axiosSetup'; // Import the configured axios instance
+import ComunicacionesForm from './ComunicacionesForm';
 
 const ComunicacionesCard = () => {
   const [showForm, setShowForm] = useState(false);
   const [selectedComunicacion, setSelectedComunicacion] = useState(null);
   const [comunicaciones, setComunicaciones] = useState([]);
-  const userID = useSelector((state) => state.userDNI); // Assuming userID is stored in Redux
-  const empresaId = useSelector((state) => state.empresaId); // Assuming userID is stored in Redux
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  const api = useAuthAxios(); // Use the configured axios instance
+
+  const userID = useSelector((state) => state.userDNI); // Assuming userID is stored in Redux
+  const empresaId = useSelector((state) => state.empresaId); // Assuming empresaId is stored in Redux
   const token = useSelector((state) => state.token);
+  const api = useAuthAxios(); // Use the configured axios instance
 
   // Fetch Comunicaciones on component mount
   useEffect(() => {
     const fetchComunicaciones = async () => {
       try {
-        const response = await api.get('/comunicaciones/all/'+token); // Replace with your API endpoint
+        const response = await api.get(`/comunicaciones/all/${token}`);
         setComunicaciones(response.data.filter((empr) => empr.empresa_id === empresaId));
       } catch (error) {
         console.error('Error fetching comunicaciones:', error);
       }
     };
 
-    fetchComunicaciones();
-  }, []);
+    if (token && empresaId) {
+      fetchComunicaciones();
+    }
+  }, [token, empresaId, api]);
 
   const deleteComunicacion = async (id) => {
     try {
-      // Mostrar confirmación con SweetAlert2
       const result = await Swal.fire({
         title: '¿Estás seguro?',
-        text: "¡No podrás revertir esto!",
+        text: '¡No podrás revertir esto!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -48,37 +51,19 @@ const ComunicacionesCard = () => {
         confirmButtonText: 'Sí, eliminarlo',
         cancelButtonText: 'Cancelar',
       });
-  
-      // Si el usuario confirma la eliminación
+
       if (result.isConfirmed) {
-        const response = await axios.delete(`${API_BASE_URL}/comunicaciones/${id}`);
-  
+        const response = await api.delete(`/comunicaciones/${id}`);
+
         if (response.status === 200) {
-          setComunicaciones(comunicaciones.filter(comunicacion => comunicacion.id !== id));
-  
-          // Mostrar éxito con SweetAlert2
-          Swal.fire(
-            '¡Eliminado!',
-            'El registro ha sido eliminado exitosamente.',
-            'success'
-          );
+          setComunicaciones(comunicaciones.filter((comunicacion) => comunicacion.id !== id));
+          Swal.fire('¡Eliminado!', 'El registro ha sido eliminado exitosamente.', 'success');
         } else {
-          // Mostrar error si la eliminación no fue exitosa
-          Swal.fire(
-            'Error',
-            'Hubo un problema al eliminar el registro.',
-            'error'
-          );
-          console.error('Error al eliminar el registro:', response.data);
+          Swal.fire('Error', 'Hubo un problema al eliminar el registro.', 'error');
         }
       }
     } catch (error) {
-      // Mostrar error si ocurrió durante la solicitud
-      Swal.fire(
-        'Error',
-        'Ocurrió un error durante la eliminación.',
-        'error'
-      );
+      Swal.fire('Error', 'Ocurrió un error durante la eliminación.', 'error');
       console.error('Error durante la eliminación:', error);
     }
   };
@@ -86,10 +71,12 @@ const ComunicacionesCard = () => {
   const addOrUpdateComunicacion = async (comunicacionData) => {
     try {
       const isUpdate = selectedComunicacion !== null;
-      const url = isUpdate ? `${API_BASE_URL}/comunicaciones/${selectedComunicacion.id}` : `${API_BASE_URL}/comunicaciones`;
+      const url = isUpdate
+        ? `/comunicaciones/${selectedComunicacion.id}`
+        : '/comunicaciones';
       const method = isUpdate ? 'PUT' : 'POST';
 
-      const response = await axios({
+      const response = await api({
         method,
         url,
         data: comunicacionData,
@@ -99,16 +86,15 @@ const ComunicacionesCard = () => {
         const updatedComunicacion = response.data;
 
         if (isUpdate) {
-          setComunicaciones(comunicaciones.map(comunicacion => comunicacion.id === updatedComunicacion.id ? updatedComunicacion : comunicacion));
+          setComunicaciones(comunicaciones.map((comunicacion) =>
+            comunicacion.id === updatedComunicacion.id ? updatedComunicacion : comunicacion
+          ));
         } else {
           setComunicaciones([...comunicaciones, updatedComunicacion]);
         }
 
         setShowForm(false);
         setSelectedComunicacion(null);
-        console.log(isUpdate ? 'Comunicacion actualizada exitosamente' : 'Comunicacion agregada exitosamente');
-      } else {
-        console.error(isUpdate ? 'Error al actualizar la comunicacion:' : 'Error al agregar la comunicacion:', response.data);
       }
     } catch (error) {
       console.error('Error durante la creación/actualización:', error);
@@ -131,10 +117,10 @@ const ComunicacionesCard = () => {
 
   const handleItemsPerPageChange = (event) => {
     setItemsPerPage(Number(event.target.value));
-    setCurrentPage(1); // Reset to first page when changing items per page
+    setCurrentPage(1);
   };
 
-  const currentEmpresas = comunicaciones.slice(
+  const paginatedComunicaciones = comunicaciones.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -162,8 +148,8 @@ const ComunicacionesCard = () => {
           onCancel={handleCancel}
         />
       ) : (
-        <Grid container spacing={2}  sx={{ overflowY: 'auto', maxHeight: '500px' }}>
-          {comunicaciones.map((comunicacion) => (
+        <Grid container spacing={2} sx={{ overflowY: 'auto', maxHeight: '500px' }}>
+          {paginatedComunicaciones.map((comunicacion) => (
             <Grid item xs={12} sm={6} key={comunicacion.id}>
               <Card>
                 <CardContent>
@@ -192,42 +178,42 @@ const ComunicacionesCard = () => {
               </Card>
             </Grid>
           ))}
-            <div className="d-flex justify-content-between align-items-center mt-3">
-              <div className="pagination">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  style={{ marginRight: '10px' }}
-                >
-                  Anterior
-                </Button>
-                <span>Página {currentPage} de {totalPages}</span>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  style={{ marginLeft: '10px' }}
-                >
-                  Siguiente
-                </Button>
-              </div>
-              <FormControl variant="outlined" className="ml-auto">
-                <InputLabel id="items-per-page-label">Items por página</InputLabel>
-                <Select
-                  labelId="items-per-page-label"
-                  value={itemsPerPage}
-                  onChange={handleItemsPerPageChange}
-                  label="Items por página"
-                >
-                  <MenuItem value={5}>5</MenuItem>
-                  <MenuItem value={10}>10</MenuItem>
-                  <MenuItem value={25}>25</MenuItem>
-                </Select>
-              </FormControl>
+          <div className="d-flex justify-content-between align-items-center mt-3">
+            <div className="pagination">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                style={{ marginRight: '10px' }}
+              >
+                Anterior
+              </Button>
+              <span>Página {currentPage} de {totalPages}</span>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                style={{ marginLeft: '10px' }}
+              >
+                Siguiente
+              </Button>
             </div>
+            <FormControl variant="outlined" className="ml-auto">
+              <InputLabel id="items-per-page-label">Items por página</InputLabel>
+              <Select
+                labelId="items-per-page-label"
+                value={itemsPerPage}
+                onChange={handleItemsPerPageChange}
+                label="Items por página"
+              >
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={10}>10</MenuItem>
+                <MenuItem value={25}>25</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
         </Grid>
       )}
     </div>

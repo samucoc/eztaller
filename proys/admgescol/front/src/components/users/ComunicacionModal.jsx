@@ -45,7 +45,7 @@ const ComunicacionModal = ({ modalData, onCancel }) => {
         subheader={modalData?.fechahora ? formatDate(modalData?.fechahora) : 'Fecha no disponible'}
       />
       <CardContent>
-        <Typography variant="body1" color="textSecondary"dangerouslySetInnerHTML={{ __html: modalData?.descripcion }} />
+        <Typography variant="body1" color="textSecondary" dangerouslySetInnerHTML={{ __html: modalData?.descripcion }} />
         <Typography sx={{ mt: 2 }}>
           <strong>Publicado por:</strong> {getTrabajadorNombre(modalData?.user_id)}
         </Typography>
