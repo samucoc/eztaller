@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  List, ListItem, ListItemText, ListItemIcon, Divider, Typography, Avatar, Button, Box
+  List, ListItem, ListItemText, ListItemIcon, Divider, Typography, Avatar, Button, Box, IconButton, Collapse, 
 } from '@mui/material';
 import {
-  Business, Description, Group, AccountCircle, Settings, Home, ExitToApp, EventNote, BeachAccess, Receipt, Gavel,
-  Folder, People, Person, AdminPanelSettings, LocationCity, Work, Wc, FolderOpen, Assignment, Verified, Mail, MonetizationOn, AttachMoney, 
+  Business, Description, Group, AccountCircle, Settings, Home, ExitToApp, EventNote, BeachAccess, Receipt, Gavel, 
+  Folder, People, Person, AdminPanelSettings, LocationCity, Work, Wc, FolderOpen, Assignment, Verified, Mail, ExpandLess, 
+  MonetizationOn, AttachMoney, ExpandMore,  
 } from '@mui/icons-material';
 import { green } from '@mui/material/colors';
 import { grey } from '@mui/material/colors';
@@ -37,6 +38,13 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
     navigate(`/${option}`);
   };
 
+  const [openSA, setOpenSA] = useState(false);
+
+  const handleToggleSA = () => {
+    setOpenSA(!openSA);
+  };
+
+
   return (
     <Box
       sx={{
@@ -55,7 +63,6 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
         <List>
           {role === 1 && (
             <>
-              <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Funcionalidades</Typography>
               <ListItem button onClick={() => handleOptionChange('Empresas')}
                   sx={{
                     padding: 0,
@@ -95,19 +102,6 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                 </ListItemIcon>
                 <ListItemText primary="Trabajadores" />
               </ListItem>
-              <ListItem button onClick={() => handleOptionChange('Usuarios')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <Person sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Usuarios" />
-              </ListItem>
               <ListItem button onClick={() => handleOptionChange('LeyKarin')}
                   sx={{
                     padding: 0,
@@ -121,99 +115,77 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                 </ListItemIcon>
                 <ListItemText primary="Ley Karin" />
               </ListItem>
+              <ListItem button onClick={() => handleOptionChange('Usuarios')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Person sx={{ color: grey[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Usuarios" />
+              </ListItem>
               <Divider sx={{ my: 2 }} />
-              <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Mantenedores</Typography>
-              <ListItem button onClick={() => handleOptionChange('Roles')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <AdminPanelSettings sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Roles" />
+              <ListItem
+                button
+                onClick={handleToggleSA}
+                sx={{ padding: 0, margin: 0 }}
+              >
+                <ListItemText>
+                  <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Mantenedores</Typography>
+                </ListItemText>
+                <IconButton>
+                  {openSA ? <ExpandLess sx={{ color: grey[800] }} /> : <ExpandMore sx={{ color: grey[800] }} />}
+                </IconButton>
               </ListItem>
-              <ListItem button onClick={() => handleOptionChange('Comunas')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <LocationCity sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Comunas" />
-              </ListItem>
-              <ListItem button onClick={() => handleOptionChange('Cargos')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <Work sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Cargos" />
-              </ListItem>
-              <ListItem button onClick={() => handleOptionChange('Sexo')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <Wc sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Sexo" />
-              </ListItem>
-              <ListItem button onClick={() => handleOptionChange('TipoDocs')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <FolderOpen sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Tipo Documentos" />
-              </ListItem>
-              <ListItem button onClick={() => handleOptionChange('TipoSol')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <Assignment sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Tipo Solicitudes" />
-              </ListItem>
-              <ListItem button onClick={() => handleOptionChange('EstadoSol')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <Verified sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Estados Solicitudes" />
-              </ListItem>
+
+              <Collapse in={openSA} timeout="auto" unmountOnExit>
+                <ListItem button onClick={() => handleOptionChange('Roles')} sx={{ padding: 0, margin: 0 }}>
+                  <ListItemIcon>
+                    <AdminPanelSettings sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Roles" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('Comunas')} sx={{ padding: 0, margin: 0 }}>
+                  <ListItemIcon>
+                    <LocationCity sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Comunas" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('Cargos')} sx={{ padding: 0, margin: 0 }}>
+                  <ListItemIcon>
+                    <Work sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Cargos" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('Sexo')} sx={{ padding: 0, margin: 0 }}>
+                  <ListItemIcon>
+                    <Wc sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Sexo" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('TipoDocs')} sx={{ padding: 0, margin: 0 }}>
+                  <ListItemIcon>
+                    <FolderOpen sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Tipo Documentos" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('TipoSol')} sx={{ padding: 0, margin: 0 }}>
+                  <ListItemIcon>
+                    <Assignment sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Tipo Solicitudes" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('EstadoSol')} sx={{ padding: 0, margin: 0 }}>
+                  <ListItemIcon>
+                    <Verified sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Estados Solicitudes" />
+                </ListItem>
+              </Collapse>
             </>
             
           )}

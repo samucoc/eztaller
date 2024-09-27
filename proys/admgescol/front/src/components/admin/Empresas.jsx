@@ -3,10 +3,12 @@ import axios from 'axios';
 import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import EmpresaForm from './EmpresaForm';
 import ManageEmpresa from './ManageEmpresa';
-import { Button, TextField, MenuItem, Select, FormControl, InputLabel } from '@material-ui/core';
+import { Button, TextField, MenuItem, Select, FormControl, InputLabel, Menu } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
+import ListIcon from '@mui/icons-material/List';
+import '../../css/Empresas.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { setEmpresaId } from '../../actions';
@@ -165,6 +167,18 @@ const Empresas = ({ empresaId }) => {
 
   const totalPages = Math.ceil(filteredEmpresas.length / itemsPerPage);
 
+  const [anchorElOpcion, setAnchorElOpcion] = useState(null);
+
+  const handleClickOpcion = (event) => {
+    setAnchorElOpcion(event.currentTarget);
+  };
+
+  const handleCloseOpcion = () => {
+    setAnchorElOpcion(null);
+  };
+
+
+  console.log(selectedEmpresa)
   return (
     <div className="container empresas">
       {selectedEmpresa && !showForm ? (
@@ -172,38 +186,42 @@ const Empresas = ({ empresaId }) => {
       ) : (
         <>
           <h3>Empresas</h3>
-          <div className="d-flex justify-content-between mb-3">
-            <div></div>
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<AddIcon />}
-              onClick={() => {
-                setSelectedEmpresa(null);
-                setShowForm(true);
-              }}
-            >
-              Agregar Empresa
-            </Button>
-          </div>
-          <TextField
-            label="Buscar Empresa"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Buscar por Razón Social o Nombre Fantasía"
-          />
           {showForm ? (
             <EmpresaForm
               onSubmit={addOrUpdateEmpresa}
               initialEmpresa={selectedEmpresa}
-              onCancel={() => setShowForm(false)}
+              onCancel={() => {
+                                setShowForm(false)
+                                setSelectedEmpresa(null)
+                              }
+                        }
               comunas={comunas}
             />
           ) : (
             <>
+              <div className="d-flex justify-content-between mb-3">
+                <div></div>
+                <Button
+                  variant="contained"
+                  startIcon={<AddIcon />}
+                  onClick={() => {
+                    setSelectedEmpresa(null);
+                    setShowForm(true);
+                  }}
+                  className="crear-empresa-btn" 
+                  >
+                  Crear Empresa
+                </Button>
+              </div>
+              <TextField
+                label="Buscar Empresa"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Buscar por Razón Social o Nombre Fantasía"
+              />
               <div className="row" style={{ overflowY: 'auto', maxHeight: '500px' }}>
                 {currentEmpresas.map(empresa => (
                   <div key={empresa.id} className="col-12">
@@ -217,7 +235,7 @@ const Empresas = ({ empresaId }) => {
                         {/* Button group */}
                         <div className="d-flex">
                           <Button
-                            variant="contained"
+                            variant="outlined"
                             color="primary"
                             startIcon={<EditIcon />}
                             onClick={() => manageEmpresa(empresa.id)}
@@ -226,23 +244,33 @@ const Empresas = ({ empresaId }) => {
                             Gestionar
                           </Button>
                           <Button
-                            variant="contained"
+                            variant="text"
                             color="primary"
-                            startIcon={<EditIcon />}
-                            onClick={() => editEmpresa(empresa)}
+                            startIcon={<ListIcon />}
+                            onClick={handleClickOpcion}
                             style={{ marginLeft: '10px' }}
+
+                          ></Button>
+                          <Menu
+                            anchorEl={anchorElOpcion}
+                            open={Boolean(anchorElOpcion)}
+                            onClose={handleCloseOpcion}
                           >
-                            Editar
-                          </Button>
-                          <Button
-                            variant="contained"
-                            color="secondary"
-                            startIcon={<DeleteIcon />}
-                            onClick={() => deleteEmpresa(empresa.id)}
-                            style={{ marginLeft: '10px' }}
-                          >
-                            Eliminar
-                          </Button>
+                            <MenuItem 
+                              startIcon={<EditIcon />}
+                              onClick={() => {
+                                              editEmpresa(empresa)
+                                              setAnchorElOpcion(null)
+                                              }
+                                }
+                              style={{ marginLeft: '10px' }}>Editar
+                            </MenuItem>
+                            <MenuItem 
+                              startIcon={<DeleteIcon />}
+                              onClick={() => deleteEmpresa(empresa.id)}
+                              style={{ marginLeft: '10px' }}>Eliminar
+                            </MenuItem>
+                          </Menu>
                         </div>
                       </div>
                     </div>

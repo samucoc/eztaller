@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem'; // Importa MenuItem desde Material-UI
+import {  TextField, Button, Grid, Card, CardContent, Typography, RadioGroup, FormControlLabel, Radio, 
+         FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import '../../css/Empresas.css';
 
 const EmpresaForm = ({ onSubmit, onCancel, initialEmpresa, comunas }) => {
   const [empresaData, setEmpresaData] = useState({
@@ -28,153 +27,215 @@ const EmpresaForm = ({ onSubmit, onCancel, initialEmpresa, comunas }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="rut"
-            label="Rut"
-            name="rut"
-            value={empresaData.rut}
-            onChange={handleChange}
-          />
+    <Card sx={{ maxWidth: 600, margin: 'auto', padding: 2 }}>
+    <CardContent>
+      <Typography variant="h5" gutterBottom>
+        Crear Empresa
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="RazonSocial"
+              label="Razón Social"
+              name="RazonSocial"
+              value={empresaData.RazonSocial}
+              onChange={handleChange}
+              sx={{ color: 'black' }}
+              InputLabelProps={{ 
+                style: { color: 'black' }  // Set label color
+              }}
+              InputProps={{ 
+                style: { color: 'black' }  // Set input text color
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="NombreFantasia"
+              label="Nombre Fantasia"
+              name="NombreFantasia"
+              value={empresaData.NombreFantasia}
+              onChange={handleChange}
+              sx={{ color: 'black' }}
+              InputLabelProps={{ 
+                style: { color: 'black' }  // Set label color
+              }}
+              InputProps={{ 
+                style: { color: 'black' }  // Set input text color
+              }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="rut"
+              label="Rut"
+              name="rut"
+              value={empresaData.rut}
+              onChange={handleChange}
+              sx={{ color: 'black' }}
+              InputLabelProps={{ 
+                style: { color: 'black' }  // Set label color
+              }}
+              InputProps={{ 
+                style: { color: 'black' }  // Set input text color
+              }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="dv"
+              label="Dígito Verificador"
+              name="dv"
+              value={empresaData.dv}
+              onChange={handleChange}
+              sx={{ color: 'black' }}
+              InputLabelProps={{ 
+                style: { color: 'black' }  // Set label color
+              }}
+              InputProps={{ 
+                style: { color: 'black' }  // Set input text color
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="direccion"
+              label="Dirección"
+              name="direccion"
+              value={empresaData.direccion}
+              onChange={handleChange}
+              sx={{ color: 'black' }}
+              InputLabelProps={{ 
+                style: { color: 'black' }  // Set label color
+              }}
+              InputProps={{ 
+                style: { color: 'black' }  // Set input text color
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              select
+              id="comuna_id"
+              label="Comuna"
+              name="comuna_id"
+              value={empresaData.comuna_id}
+              onChange={handleChange}
+              sx={{ color: 'black' }}
+              InputLabelProps={{ 
+                style: { color: 'black' }  // Set label color
+              }}
+              InputProps={{ 
+                style: { color: 'black' }  // Set input text color
+              }}
+            >
+              {comunas.map((comuna) => (
+                <MenuItem key={comuna.id} value={comuna.id}>
+                  {comuna.nombre}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="contactoRRHH"
+              label="Responsable"
+              name="contactoRRHH"
+              value={empresaData.contactoRRHH}
+              onChange={handleChange}
+              sx={{ color: 'black' }}
+              InputLabelProps={{ 
+                style: { color: 'black' }  // Set label color
+              }}
+              InputProps={{ 
+                style: { color: 'black' }  // Set input text color
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="correoContacto"
+              label="Email"
+              name="correoContacto"
+              value={empresaData.correoContacto}
+              onChange={handleChange}
+              sx={{ color: 'black' }}
+              InputLabelProps={{ 
+                style: { color: 'black' }  // Set label color
+              }}
+              InputProps={{ 
+                style: { color: 'black' }  // Set input text color
+              }}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              required
+              fullWidth
+              id="telefonoConcacto"
+              label="Contacto Telefónico"
+              name="telefonoConcacto"
+              value={empresaData.telefonoConcacto}
+              onChange={handleChange}
+              sx={{ color: 'black' }}
+              InputLabelProps={{ 
+                style: { color: 'black' }  // Set label color
+              }}
+              InputProps={{ 
+                style: { color: 'black' }  // Set input text color
+              }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              className="crear-empresa-btn" 
+              >
+              Crear Empresa
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              fullWidth
+              variant="contained"
+              onClick={onCancel}
+            >
+              Cancelar
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="dv"
-            label="Dígito Verificador"
-            name="dv"
-            value={empresaData.dv}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="NombreFantasia"
-            label="Nombre Fantasia"
-            name="NombreFantasia"
-            value={empresaData.NombreFantasia}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="RazonSocial"
-            label="Razón Social"
-            name="RazonSocial"
-            value={empresaData.RazonSocial}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="direccion"
-            label="Dirección"
-            name="direccion"
-            value={empresaData.direccion}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            select
-            id="comuna_id"
-            label="Comuna"
-            name="comuna_id"
-            value={empresaData.comuna_id}
-            onChange={handleChange}
-          >
-            {comunas.map((comuna) => (
-              <MenuItem key={comuna.id} value={comuna.id}>
-                {comuna.nombre}
-              </MenuItem>
-            ))}
-          </TextField>
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="contactoRRHH"
-            label="Contacto RRHH"
-            name="contactoRRHH"
-            value={empresaData.contactoRRHH}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="telefonoConcacto"
-            label="Teléfono de Contacto"
-            name="telefonoConcacto"
-            value={empresaData.telefonoConcacto}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="correoContacto"
-            label="Correo de Contacto"
-            name="correoContacto"
-            value={empresaData.correoContacto}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-          >
-            Guardar
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            fullWidth
-            variant="contained"
-            onClick={onCancel}
-          >
-            Cancelar
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            fullWidth
-            variant="outlined"
-            onClick={onCancel} // Cambiar esto a la función para volver a la lista de Empresas
-          >
-            Volver a la lista de Empresas
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
+      </form>
+    </CardContent>
+  </Card>
+
   );
 };
 

@@ -27,11 +27,10 @@ const DocumentosCard = ({ empresaId }) => {
           <Card sx={{ flexGrow: 1 }}>
             <CardContent>
               <Typography variant="h6" component="div">
-                Liquidaciones
+                Liquidaciones de sueldo
               </Typography>
               <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-                Sube archivos PDF con liquidaciones de sueldo. El sistema identifica el RUT en cada hoja y lo asigna automáticamente al trabajador correspondiente
-              </Typography>
+                Sube archivos PDF con liquidaciones de sueldo. El sistema identifica el RUT en cada hoja y lo asigna automáticamente al trabajador correspondiente.              </Typography>
               <Button 
                 variant="contained" 
                 color="primary" 
@@ -39,7 +38,7 @@ const DocumentosCard = ({ empresaId }) => {
                 startIcon={<AttachMoneyIcon />}
                 onClick={handleLiquidaciones}
               >
-                Gestionar Liquidaciones
+                Subir Liquidaciones
               </Button>
             </CardContent>
           </Card>
@@ -49,8 +48,7 @@ const DocumentosCard = ({ empresaId }) => {
                 Documentos Generales
               </Typography>
               <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-                Sube documentos que se asignan simultáneamente a todos los trabajadores o a un grupo específico según el tipo de cargo. Como reglamentos o funciones generales
-              </Typography>
+                Sube contratos, anexos o registros de carga horaria o amonestaciones. Debes seleccionar manualmente el trabajador correspondiente.              </Typography>
               <Button 
                 variant="contained" 
                 color="primary" 
@@ -59,7 +57,7 @@ const DocumentosCard = ({ empresaId }) => {
                 onClick={handleGestionarGenerales}
 
               >
-                Gestionar Documentos Generales
+                Subir Documentos Generales
               </Button>
             </CardContent>
           </Card>
@@ -69,7 +67,7 @@ const DocumentosCard = ({ empresaId }) => {
                 Documentos Individuales
               </Typography>
               <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-                Sube contratos, anexos o registros de carga horaria o amonestaciones. Debes seleccionar manualmente al trabajador correspondiente.
+                Sube documentos que se asignan simultáneamente a todos los trabajadores  o a un grupo específico según el tipo de cargo. Como reglamentos o funciones generales
               </Typography>
               <Button 
                 variant="contained" 

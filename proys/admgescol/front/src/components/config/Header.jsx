@@ -94,9 +94,6 @@ const Header = ({ onLogout }) => {
           sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} // Estilos adicionales opcionales
         >
           <img src="logo.png" alt="Logo" width="60" />
-          <Typography variant="h6" className="title">
-            GRHIN
-          </Typography>
         </Box>
         <Box sx={{ flexGrow: 1 }} />
         {/* Campanita de notificaciones */}

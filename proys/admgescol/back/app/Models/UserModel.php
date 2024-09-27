@@ -21,6 +21,7 @@ class UserModel extends Model
         'userPhone',
         'userEmail',
         'userPassword',
+        'userStatus',
         'userPasswordRecoveryToken',
         'userPasswordRecoveryTokenExpirationDatetime'
     ];

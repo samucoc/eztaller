@@ -3,12 +3,15 @@ import axios from 'axios';
 import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import DocumentForm from './DashboardForm'; // Assuming you have a DocumentForm component
 import {
-  TextField, Button, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody,
+  TextField, Button, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Tooltip, 
   TablePagination, Dialog, DialogTitle, DialogContent, FormControl, InputLabel, Select, MenuItem
 } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { Autocomplete } from '@mui/material';
+import { Chip } from '@mui/material';
+
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import EditIcon from '@material-ui/icons/Edit';
-import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import AddIcon from '@material-ui/icons/Add';
 import Swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
@@ -16,6 +19,8 @@ import { useSelector } from 'react-redux'; // Importar useSelector
 import DashboardTipoDoc from '../mantenedores/DashboardTipoDoc';
 import { makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
+import '../../css/Dashboard.css';
+import '../../css/Empresas.css';
 
 const Dashboard = ({ userDNI, empresaId }) => {
   const useStyles = makeStyles({
@@ -131,7 +136,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
 
 
   const handleEmpresaChange = (e) => setSelectedEmpresa(e.target.value);
-  const handleTrabajadorChange = (e) => setTrabajador(e.target.value);
+  const handleTrabajadorChange = (value) => setTrabajador(value);
   const handleYearChange = (e) => setYear(e.target.value);
   const handleMonthChange = (e) => setMonth(e.target.value);
   const handleDocTypeChange = (e) => setDocType(e.target.value);
@@ -363,20 +368,13 @@ const Dashboard = ({ userDNI, empresaId }) => {
     return moment(dateString.date, 'YYYY-MM-DD HH:mm:ss.SSSSSS').format('DD-MM-YYYY HH:mm:ss');
   };
 
+  const uniqueRuts = [...new Set(filteredDocuments.map((doc) => doc.trabajador))];
+
+
   return (
     <div className="container Documentos">
-      <h3>Documentos</h3>
-      <div className="d-flex justify-content-between mb-3">
-        <div></div> {/* Espacio en blanco */}
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddIcon />}
-          onClick={() => setShowForm(true)}
-        >
-          Agregar Documento
-        </Button>
-      </div>
+      <h3>Consultar Documentos</h3>
+
       {showForm ? (
         <DocumentForm
           onSubmit={addDocumentPrev}
@@ -387,100 +385,112 @@ const Dashboard = ({ userDNI, empresaId }) => {
       ) : (
         <>
           <DashboardTipoDoc tipoDocumentos={tipoDocumentos} onDocTypeChange={handleDocTypeChangeTable} />
-            {empresaIdS && empresas.filter((empresa) => empresa.id === empresaIdS).length === 1 ? (
-              // Mostrar un campo oculto y no el Select
-              <input type="hidden" value={selectedEmpresa} />
-            ) : (
-              <FormControl variant="outlined" style={{ marginRight: '1rem', minWidth: '120px' }}>
-              <>
-                <InputLabel id="empresa-select-label">Empresa</InputLabel>
+          <div className="form-control-container">
+            <div className="form-control-left">
+              {empresaIdS && empresas.filter((empresa) => empresa.id === empresaIdS).length === 1 ? (
+                // Mostrar un campo oculto y no el Select
+                <input type="hidden" value={selectedEmpresa} />
+              ) : (
+                <FormControl variant="outlined" style={{ marginRight: '1rem', minWidth: '120px' }}>
+                <>
+                  <InputLabel id="empresa-select-label">Empresa</InputLabel>
+                  <Select
+                    labelId="empresa-select-label"
+                    id="empresa-select"
+                    value={selectedEmpresa}
+                    onChange={handleEmpresaChange}
+                    label="Empresa"
+                  >
+                    <MenuItem value="">
+                      <em>Elija Empresa</em>
+                    </MenuItem>
+                    {empresas.map((empresa) => (
+                      <MenuItem key={empresa.id} value={empresa.id}>
+                        {empresa.RazonSocial}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </>
+                </FormControl>
+              )}
+              {/* Trabajador - Autocomplete */}
+              <Autocomplete
+                id="trabajador-autocomplete"
+                options={uniqueRuts}
+                getOptionLabel={(option) => getTrabajadorNombre(option)}
+                onChange={(event, value) => handleTrabajadorChange(value)}
+                renderInput={(params) => (
+                  <TextField {...params} label="Trabajador" variant="outlined" style={{ minWidth: '360px' }} />
+                )}
+                sx={{ color: 'black' }}
+                InputLabelProps={{ 
+                  style: { color: 'black' }  // Set label color
+                }}
+                InputProps={{ 
+                  style: { color: 'black' }  // Set input text color
+                }}
+              />
+
+              {/* Año */}
+              <FormControl variant="outlined" style={{ minWidth: '120px' }}>
+                <InputLabel id="year-select-label">Año</InputLabel>
                 <Select
-                  labelId="empresa-select-label"
-                  id="empresa-select"
-                  value={selectedEmpresa}
-                  onChange={handleEmpresaChange}
-                  label="Empresa"
+                  labelId="year-select-label"
+                  id="year-select"
+                  value={year}
+                  onChange={handleYearChange}
+                  label="Año"
+                  sx={{ color: 'black' }}
+                  InputLabelProps={{ 
+                    style: { color: 'black' }  // Set label color
+                  }}
+                  InputProps={{ 
+                    style: { color: 'black' }  // Set input text color
+                  }}
                 >
                   <MenuItem value="">
-                    <em>Elija Empresa</em>
+                    <em>Seleccionar año...</em>
                   </MenuItem>
-                  {empresas.map((empresa) => (
-                    <MenuItem key={empresa.id} value={empresa.id}>
-                      {empresa.RazonSocial}
+                  {getLastTenYears().map((year) => (
+                    <MenuItem key={year} value={year}>
+                      {year}
                     </MenuItem>
                   ))}
                 </Select>
-              </>
               </FormControl>
-            )}
-          <FormControl variant="outlined" style={{ marginRight: '1rem', minWidth: '120px' }}>
-            <InputLabel id="trabajador-select-label">Trabajador</InputLabel>
-            <Select
-              labelId="trabajador-select-label"
-              id="trabajador-select"
-              value={trabajador}
-              onChange={handleTrabajadorChange}
-              label="Trabajador"
-            >
-              <MenuItem value="">
-                <em>Seleccionar trabajador...</em>
-              </MenuItem>
-              {trabajadores
-                .filter((trab) => trab.empresa_id === selectedEmpresa)
-                .map((trab) => (
-                  <MenuItem key={trab.rut} value={trab.rut}>
-                    {trab.apellido_paterno} {trab.apellido_materno}, {trab.nombres} 
+
+              {/* Mes */}
+              <FormControl variant="outlined" style={{ minWidth: '120px' }}>
+                <InputLabel id="month-select-label">Mes</InputLabel>
+                <Select
+                  labelId="month-select-label"
+                  id="month-select"
+                  value={month}
+                  onChange={handleMonthChange}
+                  label="Mes"
+                  sx={{ color: 'black' }}
+                  InputLabelProps={{ 
+                    style: { color: 'black' }  // Set label color
+                  }}
+                  InputProps={{ 
+                    style: { color: 'black' }  // Set input text color
+                  }}
+                >
+                  <MenuItem value="">
+                    <em>Seleccionar mes...</em>
                   </MenuItem>
-                ))}
-            </Select>
-          </FormControl>
+                  {/* Meses del año */}
+                  {['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+                    .map((mes, index) => (
+                      <MenuItem key={index + 1} value={index + 1}>
+                        {mes}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+            </div>
+          </div>
 
-          <FormControl variant="outlined" style={{ marginRight: '1rem', minWidth: '120px' }}>
-            <InputLabel id="year-select-label">Año</InputLabel>
-            <Select
-              labelId="year-select-label"
-              id="year"
-              value={year}
-              onChange={handleYearChange}
-              label="Año"
-            >
-              <MenuItem value="">
-                <em>Seleccionar año...</em>
-              </MenuItem>
-              {getLastTenYears().map((year) => (
-                <MenuItem key={year} value={year}>
-                  {year}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
-          <FormControl variant="outlined" style={{ marginRight: '1rem', minWidth: '120px' }}>
-            <InputLabel id="month-select-label">Mes</InputLabel>
-            <Select
-              labelId="month-select-label"
-              id="month-select"
-              value={month}
-              onChange={handleMonthChange}
-              label="Mes"
-            >
-              <MenuItem value="">
-                <em>Seleccionar mes...</em>
-              </MenuItem>
-              <MenuItem value="1">Enero</MenuItem>
-              <MenuItem value="2">Febrero</MenuItem>
-              <MenuItem value="3">Marzo</MenuItem>
-              <MenuItem value="4">Abril</MenuItem>
-              <MenuItem value="5">Mayo</MenuItem>
-              <MenuItem value="6">Junio</MenuItem>
-              <MenuItem value="7">Julio</MenuItem>
-              <MenuItem value="8">Agosto</MenuItem>
-              <MenuItem value="9">Septiembre</MenuItem>
-              <MenuItem value="10">Octubre</MenuItem>
-              <MenuItem value="11">Noviembre</MenuItem>
-              <MenuItem value="12">Diciembre</MenuItem>
-            </Select>
-          </FormControl>
           <Paper className={classes.root}>
             <TableContainer 
               className={classes.container}
@@ -490,7 +500,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
                   <TableRow>
                     <TableCell>Mes - Año</TableCell>
                     <TableCell>Trabajador</TableCell>
-                    <TableCell>Fecha</TableCell>
+                    <TableCell>Tipo</TableCell>
                     <TableCell>Nombre</TableCell>
                     <TableCell>Firmado</TableCell>
                     <TableCell>Acciones</TableCell>
@@ -503,27 +513,39 @@ const Dashboard = ({ userDNI, empresaId }) => {
                     <TableRow key={doc.id} hover >
                       <TableCell>{getTrabajadorNombre(doc.trabajador)}</TableCell>
                       <TableCell>{getMonthName(parseInt(doc.mes))} - {doc.agno}</TableCell>
-                      <TableCell>{formatDate(doc.created_at)}</TableCell>
+                      <TableCell>{getTipoDocumentoNombre(doc.tipo_doc_id)}</TableCell>
                       <TableCell>{doc.nombre}</TableCell>
-                      <TableCell>{doc.firma === "1"? "Firmado" : "Sin Firmar"}</TableCell>
                       <TableCell>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${doc.ruta}`)}
-                          startIcon={<VisibilityIcon />}
-                          style={{ marginRight: '0.5rem' }}
-                        >
-                          Ver
-                        </Button>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          onClick={() => deleteDocument(doc.id)}
-                          startIcon={<DeleteIcon />}
-                        >
-                          Eliminar
-                        </Button>
+                        {doc.firma === "1" ? (
+                          <Chip label="Firmado" color="primary" />
+                        ) : (
+                          <Chip label="Pendiente" sx={{ backgroundColor: '#dc3545', color: 'white' }} />
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        <Tooltip title={'Eliminar Documento'}>
+                          <span>
+                            <Button
+                              variant="text"
+                              color="secondary"
+                              onClick={() => deleteDocument(doc.id)}
+                              startIcon={<DeleteOutlinedIcon style={{width:'48px', height: '48px'}}/>}
+                            >
+                            </Button>
+                          </span>
+                        </Tooltip>   
+                        <Tooltip title={'Visualizar Documento'}>
+                          <span>
+                            <Button
+                              variant="text"
+                              color="primary"
+                              onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${doc.ruta}`)}
+                              startIcon={<VisibilityOutlinedIcon style={{width:'48px', height: '48px'}}/>}
+                              style={{ marginRight: '0.5rem' }}
+                            >
+                            </Button>
+                          </span>
+                        </Tooltip>   
                       </TableCell>
                     </TableRow>
                   ))}

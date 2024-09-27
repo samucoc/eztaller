@@ -1,0 +1,10 @@
+/* styles.css */
+.crear-empresa-btn {
+    background-color: #00796B !important;
+    color: white !important;
+  }
+  
+  .crear-empresa-btn:hover {
+    background-color: #005f56 !important;
+  }
+  

@@ -23,9 +23,9 @@ const DashboardTipoDoc = ({ tipoDocumentos, onDocTypeChange }) => {
       {tipoDocumentos.map((tipo) => (
         <Tab
           key={tipo.id}
-          label={tipo.nombre}
+          label={tipo.nombre ? tipo.nombre : tipo.roleName}
           value={tipo.id}
-          sx={{ marginX: 2.5, width: '150px'}} // Adds 20px horizontal margin to each Tab
+          sx={{ marginX: 2.5, width: '200px'}} // Adds 20px horizontal margin to each Tab
         />
       ))}
     </Tabs>
