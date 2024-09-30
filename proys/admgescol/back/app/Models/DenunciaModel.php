@@ -23,6 +23,9 @@ class DenunciaModel extends Model
         'denuncianteRelacionTrabajo',
         'denuncianteLugarDenuncia',
         'denuncianteAnonimato' ,
+        'denuncia' ,
+        'victimaOtestigo',
+        'check'
     ];
 
     // Dates

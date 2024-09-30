@@ -454,5 +454,42 @@ class UserController extends ResourceController
         }
     }
 
+    public function activar($id = null){
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "update users set userStatus = '1' where id = ?";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$id]);
+   
+        if ($data) {
+            // Registrar notificación
+            $notificacionController = new \App\Controllers\Api\V1\NotificacionController();
+            $mensaje = "Usuario con id {$id} ha sido activada correctamente.";
+            $notificacionController->logNotification('1', 'update', 'Usuario - status', $mensaje);
+
+            return $this->respondUpdated($data, RESOURCE_UPDATED);
+        } else {
+            return $this->fail($this->model->errors());
+        }
+    }
+
     
+    public function desactivar($id = null){
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "update users set userStatus = '0' where id = ?";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$id]);
+   
+        if ($data) {
+            // Registrar notificación
+            $notificacionController = new \App\Controllers\Api\V1\NotificacionController();
+            $mensaje = "Usuario con id {$id} ha sido desactivada correctamente.";
+            $notificacionController->logNotification('1', 'update', 'Usuario - status', $mensaje);
+
+            return $this->respondUpdated($data, RESOURCE_UPDATED);
+        } else {
+            return $this->fail($this->model->errors());
+        }
+    }
 }

@@ -61,31 +61,27 @@ const ManageEmpresa = () => {
             {empresa?.RazonSocial}
           </Typography>
           <br />
-          <Typography variant="h6" component="h3">
-            ¿Qué deseas realizar?
-          </Typography>
+         
         </Box>
 
         {/* Cards as Buttons using Grid */}
         <Grid container >
           {/* Documentos Card */}
           <Grid item xs={12} md={12}>
-            <Typography variant="h6" sx={{ color: 'black' }}>Documentos</Typography>
             <DocumentosCard empresaId={empresa?.id} />
           </Grid>
 
           {/* Consultar Documentos y Gestión de Trabajos Card */}
           <Grid item xs={12} md={12}>
             <Typography variant="h6" sx={{ color: 'black' }}>
-              Consultar Documentos y Gestión de Trabajos
+              Consultar Datos
             </Typography>
             <ConsultarGestionCard empresaId={empresa?.id} />
           </Grid>
 
           {/* Solicitudes Card */}
-          <Grid item xs={12} md={4}>
-            <Card
-            >
+          <Grid item xs={12} md={4} sx={{ backgroundColor: '#f5f5f5'}}>
+            <Card sx={{ backgroundColor: '#f5f5f5', flexGrow: 1, mx: 1 }}>
               <>
                 <CardContent>
                   <Typography variant="h6" sx={{ color: 'black' }}>Solicitudes</Typography>
@@ -107,15 +103,14 @@ const ManageEmpresa = () => {
           </Grid>
           {/* Comunicaciones Card */}
           <Grid item xs={12} md={4}>
-            <Card
-            >
+            <Card sx={{ flexGrow: 1, mx: 1 }}>
               <>
                 <CardContent>
                   <Typography variant="h6" sx={{ color: 'black' }}>Comunicaciones</Typography>
                   <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>Publica las últimas noticias sobre tu establecimiento</Typography>
                   <br/>
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
                     sx={{ mt: 2 }}
                     onClick={() => handleItemClick(`/ComunicacionesCard`)} // Adjust path as per routing
@@ -128,15 +123,14 @@ const ManageEmpresa = () => {
           </Grid>
           {/* Ley Karin Card */}
           <Grid item xs={12} md={4}>
-            <Card
-            >
+            <Card sx={{ flexGrow: 1, mx: 1 }}>
               <>
                 <CardContent>
                   <Typography variant="h6" sx={{ color: 'black' }}>Denuncias Ley Karin</Typography>
-                  <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>Gestiona las denuncias.</Typography>
+                  <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>Revisa las ultimas denuncias con respecto a esta ley</Typography>
                   <br/>
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     color="primary"
                     sx={{ mt: 2 }}
                     onClick={() => handleItemClick(`/LeyKarin`)} // Adjust path as per routing

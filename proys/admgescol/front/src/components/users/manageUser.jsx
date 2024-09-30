@@ -24,6 +24,7 @@ import Swal from 'sweetalert2';
 //import '../../css/manageUser.css'; // Si tienes estilos adicionales para DashTrab
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Importa los estilos de Quill
+import { Chip } from '@mui/material'; // Importar Chip de Material-UI
 
 const ManageUser = () => {
   const [value, setValue] = useState(0);
@@ -405,15 +406,41 @@ const ManageUser = () => {
       case '3':
         return 'Permiso';
       case '4':
-        return 'BEneficios';
+        return 'Beneficio';
       default:
         return 'Desconocido';
     }
   };
   
-  const isPermiso = (tipo_sol_id) => {
-    return getTipoSolicitud(tipo_sol_id) === 'Permiso'; // Adjust if necessary
+  const getStatusSolicitud = (tipo_sol_id) => {
+    switch (tipo_sol_id) {
+      case '1':
+        return 'En proceso';
+      case '2':
+        return 'Aceptada';
+      case '3':
+        return 'Rechazada';
+      default:
+        return 'Desconocido';
+    }
   };
+  
+    const isPermiso = (tipo_sol_id) => {
+      return getTipoSolicitud(tipo_sol_id) === 'Permiso'; // Adjust if necessary
+    };
+  
+    const isBeneficio = (tipo_sol_id) => {
+      return getTipoSolicitud(tipo_sol_id) === 'Beneficio'; // Adjust if necessary
+    };
+
+    const formatFechaSolicitud = (fecha) => {
+      const date = new Date(fecha);
+      const day = String(date.getDate()).padStart(2, '0'); // Obtiene el día y añade un 0 si es necesario
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses empiezan desde 0, por lo que se suma 1
+      const year = date.getFullYear(); // Obtiene el año
+    
+      return `${day}-${month}-${year}`;
+    };
 
   return (
     <div className="container empresas">
@@ -428,104 +455,82 @@ const ManageUser = () => {
       </Box>
 
       {/* Cards as Buttons using Grid */}
-      <Grid container >
-        <Grid item xs={12}>
+      <Grid container>
+        <Grid item xs={12} sx={{mb:2, mt:2}}>
           <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
-            ¿Qué deseas realizar?
+            ¿Qué quieres consultar?
           </Typography>
         </Grid>
 
         {/* Documentos Card */}
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={12} sx={{mb:2, mt:2}}>
           <Card
             sx={{
               minWidth: 200,
-              border: value === 2 ? '2px solid #3f51b5' : '1px solid #ccc',
               backgroundColor: value === 2 ? '#e8eaf6' : '#fff',
             }}
           >
             <CardContent>
-              <Typography variant="h6" sx={{ color: 'black' }}>
-                Consultar Documentos
-              </Typography>
               <DocumentosCard usuario={usuario} />
             </CardContent>
           </Card>
+        </Grid>
+
+        <Grid item xs={12}>
+          <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
+            Realiza una solicitud
+          </Typography>
         </Grid>
 
         {/* Botones de Solicitudes */}
         <Grid item xs={12} md={12}>
           <Card>
             <CardContent>
-              <Typography variant="h6" sx={{ color: 'black' }}>
-                Solicitudes
-              </Typography>
               <SolicitudesCard usuario={usuario} />
             </CardContent>
           </Card>
         </Grid>
 
-        <Grid item xs={12}>
-          <Typography variant="h6" component="h3" sx={{ mb: 2 }}>
-            ¿Qué deseas revisar?
-          </Typography>
-        </Grid>
-
-        <Grid item xs={12} md={4}>
-          <Card>
-            <CardContent >
-              <Typography variant="h6" sx={{ color: 'black' }}>
-                Comunicaciones
-              </Typography>
-              <List sx={{ height: 200, overflowY: 'auto' }}>
-                {comunicaciones.map((comunicacion) => (
-                  <ListItem key={comunicacion.id} onClick={() => handleOpenModalCom(comunicacion)}>
-                    <ListItemText
-                      primary={comunicacion.titulo}
-                      secondary={`Publicado por: ${getTrabajadorNombre(comunicacion.user_id)}`} // Display both title and user_id
-                    />
-                  </ListItem>
-                ))}
-              </List>
-              <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  startIcon={<Mail />}
-                  onClick={() => handleMenuItemClick('/ComunicacionesUsers')}
-                >
-                  Ver Comunicaciones
-                </Button>
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
         {/* Estados de Solicitudes */}
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={12}>
           <Card>
             <CardContent>
               <Typography variant="h6" sx={{ color: 'black' }}>
                 Estados de Solicitudes
               </Typography>
-              <List sx={{ height: 200,  overflowY: 'auto' }}>
+              <List sx={{ height: 200, overflowY: 'auto' }}>
                 {solicitudes.map((soli) => {
                   const tipoSolicitud = getTipoSolicitud(soli.tipo_sol_id); // Obtén el tipo de solicitud
+                  const estadoSolicitud = soli.status; // Obtén el estado de la solicitud
+                  const fechaSolicitud = formatFechaSolicitud(soli.fecha); // Obtén la fecha de la solicitud
+
+                  // Definir la estructura para el estado
+                  const chipColor = soli.status === '3' ? 'error' : soli.status === '2' ? 'primary' : 'info';
+                  const estadoTexto = getStatusSolicitud(estadoSolicitud) + ` - ${fechaSolicitud}`;
+
+                  // Estructura del comentario
+                  let comentario;
+                  if (isPermiso(soli.tipo_sol_id) || isBeneficio(soli.tipo_sol_id) ) {
+                    comentario = `${estadoTexto} - Solicitud de ${tipoSolicitud}`;
+                  } else {
+                    comentario = soli.estado === '3'
+                      ? `${estadoTexto} - Solicitud de ${tipoSolicitud}. Monto ${soli.monto}. Motivo: ${soli.comentario_status}`
+                      : `${estadoTexto} - Solicitud de ${tipoSolicitud}. Monto ${soli.monto}`;
+                  }
+
                   return (
                     <ListItem key={soli.id}>
-                        <Button 
-                          variant="contained" 
-                          color="primary" 
-                          sx={{ marginRight: 2 }}
-                        >
-                          {tipoSolicitud}
-                        </Button>
-                        <ListItemText
-                          primary={
-                            isPermiso(soli.tipo_sol_id)
-                              ? `Comentario: ${soli.comentario}` // Show only comentario for "Permiso"
-                              : `Monto: ${soli.monto} | Cuotas: ${soli.cuotas} | Comentario: ${soli.comentario}` // Show all details otherwise
-                          }
-                        />
+                      {/* Mostrar Chip con el estado */}
+                      <Chip
+                        label={getStatusSolicitud(estadoSolicitud)}
+                        color={chipColor}
+                        sx={{ marginRight: 2 }}
+                      />
+
+                      {/* Texto de la solicitud */}
+                      <ListItemText
+                        primary={comentario}
+                      />
                     </ListItem>
                   );
                 })}
@@ -553,6 +558,39 @@ const ManageUser = () => {
             </CardContent>
           </Card>
         </Grid>
+
+        {/* Comunicaciones */}
+        <Grid item xs={12} md={8}>
+          <Card>
+            <CardContent >
+              <Typography variant="h6" sx={{ color: 'black' }}>
+                Comunicaciones
+              </Typography>
+              <List sx={{ height: 200, overflowY: 'auto' }}>
+                {comunicaciones.map((comunicacion) => (
+                  <ListItem key={comunicacion.id} onClick={() => handleOpenModalCom(comunicacion)}>
+                    <ListItemText
+                      primary={comunicacion.titulo}
+                      secondary={`Publicado por: ${getTrabajadorNombre(comunicacion.user_id)}`} // Display both title and user_id
+                    />
+                  </ListItem>
+                ))}
+              </List>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  startIcon={<Mail />}
+                  onClick={() => handleMenuItemClick('/ComunicacionesUsers')}
+                >
+                  Revisar más noticias
+                </Button>
+              </Box>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* Ley karin */}
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent >
@@ -562,17 +600,17 @@ const ManageUser = () => {
               <List sx={{ height: 200, overflowY: 'auto' }}>
                   <ListItem >
                     <ListItemText
-                      primary="La Ley Karin busca garantizar espacios laborales seguros y libres de acoso, estableciendo la obligación de prevenir los actos que vayan en contra de este objetivo, protegiendo los derechos de los trabajadores y promoviendo un entorno laboral saludable."
+                      primary="Si has experimentado acoso, llena el formulario"
                     />
                   </ListItem>
               </List>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   color="primary"
-                  onClick={handleOpenKarin}
+                  onClick={() => handleMenuItemClick('/LeyKarinModel')}
                   >
-                  Ingresar Denuncia
+                  Realizar Denuncia
                 </Button>
               </Box>
             </CardContent>
@@ -587,333 +625,333 @@ const ManageUser = () => {
         aria-describedby="modal-modal-description"
         sx={{ zIndex : 1040}}
       >
-      <Card sx={{ maxWidth: 800, maxHeight: 850, overflowY: 'auto', margin: 'auto', padding: 2 }}>
-        <CardContent>
-          <Typography variant="h5" gutterBottom>
-            Formulario de Denuncia
-          </Typography>
-          <form onSubmit={handleSubmitKarin}>
-            <Typography variant="h6" gutterBottom>
-              Identificación del Denunciante
+        <Card sx={{ maxWidth: 800, maxHeight: 850, overflowY: 'auto', margin: 'auto', padding: 2 }}>
+          <CardContent>
+            <Typography variant="h5" gutterBottom>
+              Formulario de Denuncia
             </Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="nombre"
-                  label="Nombre"
-                  name="nombre"
-                  value={denunciante.nombre}
-                  onChange={handleChangeDenuncianteKarin}
-                  sx={{ color: 'black' }}
-                  InputLabelProps={{ 
-                    style: { color: 'black' }  // Set label color
-                  }}
-                  InputProps={{ 
-                    style: { color: 'black' }  // Set input text color
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="apellidos"
-                  label="Apellidos"
-                  name="apellidos"
-                  value={denunciante.apellidos}
-                  onChange={handleChangeDenuncianteKarin}
-                  sx={{ color: 'black' }}
-                  InputLabelProps={{ 
-                    style: { color: 'black' }  // Set label color
-                  }}
-                  InputProps={{ 
-                    style: { color: 'black' }  // Set input text color
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="rut"
-                  label="RUT"
-                  name="rut"
-                  value={denunciante.rut}
-                  onChange={handleChangeDenuncianteKarin}
-                  helperText="Formato: 12345678-9"
-                  sx={{ color: 'black' }}
-                  InputLabelProps={{ 
-                    style: { color: 'black' }  // Set label color
-                  }}
-                  InputProps={{ 
-                    style: { color: 'black' }  // Set input text color
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="celular"
-                  label="Celular"
-                  name="celular"
-                  value={denunciante.celular}
-                  onChange={handleChangeDenuncianteKarin}
-                  inputProps={{ maxLength: 9 }}
-                  sx={{ color: 'black' }}
-                  InputLabelProps={{ 
-                    style: { color: 'black' }  // Set label color
-                  }}
-                  InputProps={{ 
-                    style: { color: 'black' }  // Set input text color
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  value={denunciante.email}
-                  onChange={handleChangeDenuncianteKarin}
-                  sx={{ color: 'black' }}
-                  InputLabelProps={{ 
-                    style: { color: 'black' }  // Set label color
-                  }}
-                  InputProps={{ 
-                    style: { color: 'black' }  // Set input text color
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="confirmarEmail"
-                  label="Confirmar Email"
-                  name="confirmarEmail"
-                  value={denunciante.confirmarEmail}
-                  onChange={handleChangeDenuncianteKarin}
-                  sx={{ color: 'black' }}
-                  InputLabelProps={{ 
-                    style: { color: 'black' }  // Set label color
-                  }}
-                  InputProps={{ 
-                    style: { color: 'black' }  // Set input text color
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="relacionTrabajo"
-                  label="Relación con el trabajo"
-                  name="relacionTrabajo"
-                  value={denunciante.relacionTrabajo}
-                  onChange={handleChangeDenuncianteKarin}
-                  sx={{ color: 'black' }}
-                  InputLabelProps={{ 
-                    style: { color: 'black' }  // Set label color
-                  }}
-                  InputProps={{ 
-                    style: { color: 'black' }  // Set input text color
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="lugarDenuncia"
-                  label="Lugar de la denuncia"
-                  name="lugarDenuncia"
-                  value={denunciante.lugarDenuncia}
-                  onChange={handleChangeDenuncianteKarin}
-                  sx={{ color: 'black' }}
-                  InputLabelProps={{ 
-                    style: { color: 'black' }  // Set label color
-                  }}
-                  InputProps={{ 
-                    style: { color: 'black' }  // Set input text color
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={denunciante.anonimato}
-                      onChange={(e) =>
-                        setDenunciante({ ...denunciante, anonimato: e.target.checked })
-                      }
-                      name="anonimato"
-                      color="primary"
-                    />
-                  }
-                  label="¿Desea denunciar manteniendo reserva de su identidad o de forma anónima?"
-                />
-              </Grid>
-            </Grid>
-
-            <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-              Datos de las Personas Implicadas en la Denuncia
-            </Typography>
-            <Grid container spacing={2}>
-              {Array.isArray(implicados) && implicados.map((implicado, index) => (
-                <React.Fragment key={index}>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      id={`nombreImplicado-${index}`}
-                      label="Nombre del Implicado"
-                      name="nombre"
-                      value={implicado.nombre}
-                      onChange={(e) => handleChangeImplicadoKarin(index, e)}
-                      sx={{ color: 'black' }}
-                      InputLabelProps={{ 
-                        style: { color: 'black' }  // Set label color
-                      }}
-                      InputProps={{ 
-                        style: { color: 'black' }  // Set input text color
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      id={`apellidosImplicado-${index}`}
-                      label="Apellidos del Implicado"
-                      name="apellidos"
-                      value={implicado.apellidos}
-                      onChange={(e) => handleChangeImplicadoKarin(index, e)}
-                      sx={{ color: 'black' }}
-                      InputLabelProps={{ 
-                        style: { color: 'black' }  // Set label color
-                      }}
-                      InputProps={{ 
-                        style: { color: 'black' }  // Set input text color
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      id={`lugarImplicado-${index}`}
-                      label="Lugar de la Denuncia"
-                      name="lugar"
-                      value={implicado.lugar}
-                      onChange={(e) => handleChangeImplicadoKarin(index, e)}
-                      sx={{ color: 'black' }}
-                      InputLabelProps={{ 
-                        style: { color: 'black' }  // Set label color
-                      }}
-                      InputProps={{ 
-                        style: { color: 'black' }  // Set input text color
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      id={`cargoImplicado-${index}`}
-                      label="Cargo del Implicado"
-                      name="cargo"
-                      value={implicado.cargo}
-                      onChange={(e) => handleChangeImplicadoKarin(index, e)}
-                      sx={{ color: 'black' }}
-                      InputLabelProps={{ 
-                        style: { color: 'black' }  // Set label color
-                      }}
-                      InputProps={{ 
-                        style: { color: 'black' }  // Set input text color
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={12}>
-                    <ReactQuill 
-                      fullWidth
-                      id={`denuncia-${index}`}
-                      label="Denuncia"
-                      name="denuncia"
-                      theme="snow" 
-                      value={implicado.denuncia}
-                      onChange={(value) => handleChangeImplicadoDenunciaKarin(index, value)} // Change to pass value directly
-                      placeholder="Escribe la descripción aquí..." 
-                      sx={{ color: 'black' }}
-                      InputLabelProps={{ 
-                        style: { color: 'black' }  // Set label color
-                      }}
-                      InputProps={{ 
-                        style: { color: 'black' }  // Set input text color
-                      }}
-                    /> 
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <Button
-                      variant="outlined"
-                      color="secondary"
-                      onClick={() => removeImplicado(index)}
-                      fullWidth
-                    >
-                      Eliminar Implicado
-                    </Button>
-                  </Grid>
-                </React.Fragment>
-              ))}
-              <Grid item xs={12}>
-                <Button variant="contained" component="label" fullWidth>
-                  Adjuntar Archivos
-                  <input
-                    type="file"
-                    hidden
-                    onChange={(e) => handleFileChangeKarin(e)}
-                    multiple
+            <form onSubmit={handleSubmitKarin}>
+              <Typography variant="h6" gutterBottom>
+                Identificación del Denunciante
+              </Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="nombre"
+                    label="Nombre"
+                    name="nombre"
+                    value={denunciante.nombre}
+                    onChange={handleChangeDenuncianteKarin}
+                    sx={{ color: 'black' }}
+                    InputLabelProps={{ 
+                      style: { color: 'black' }  // Set label color
+                    }}
+                    InputProps={{ 
+                      style: { color: 'black' }  // Set input text color
+                    }}
                   />
-                </Button>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="apellidos"
+                    label="Apellidos"
+                    name="apellidos"
+                    value={denunciante.apellidos}
+                    onChange={handleChangeDenuncianteKarin}
+                    sx={{ color: 'black' }}
+                    InputLabelProps={{ 
+                      style: { color: 'black' }  // Set label color
+                    }}
+                    InputProps={{ 
+                      style: { color: 'black' }  // Set input text color
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="rut"
+                    label="RUT"
+                    name="rut"
+                    value={denunciante.rut}
+                    onChange={handleChangeDenuncianteKarin}
+                    helperText="Formato: 12345678-9"
+                    sx={{ color: 'black' }}
+                    InputLabelProps={{ 
+                      style: { color: 'black' }  // Set label color
+                    }}
+                    InputProps={{ 
+                      style: { color: 'black' }  // Set input text color
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="celular"
+                    label="Celular"
+                    name="celular"
+                    value={denunciante.celular}
+                    onChange={handleChangeDenuncianteKarin}
+                    inputProps={{ maxLength: 9 }}
+                    sx={{ color: 'black' }}
+                    InputLabelProps={{ 
+                      style: { color: 'black' }  // Set label color
+                    }}
+                    InputProps={{ 
+                      style: { color: 'black' }  // Set input text color
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email"
+                    name="email"
+                    value={denunciante.email}
+                    onChange={handleChangeDenuncianteKarin}
+                    sx={{ color: 'black' }}
+                    InputLabelProps={{ 
+                      style: { color: 'black' }  // Set label color
+                    }}
+                    InputProps={{ 
+                      style: { color: 'black' }  // Set input text color
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="confirmarEmail"
+                    label="Confirmar Email"
+                    name="confirmarEmail"
+                    value={denunciante.confirmarEmail}
+                    onChange={handleChangeDenuncianteKarin}
+                    sx={{ color: 'black' }}
+                    InputLabelProps={{ 
+                      style: { color: 'black' }  // Set label color
+                    }}
+                    InputProps={{ 
+                      style: { color: 'black' }  // Set input text color
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="relacionTrabajo"
+                    label="Relación con el trabajo"
+                    name="relacionTrabajo"
+                    value={denunciante.relacionTrabajo}
+                    onChange={handleChangeDenuncianteKarin}
+                    sx={{ color: 'black' }}
+                    InputLabelProps={{ 
+                      style: { color: 'black' }  // Set label color
+                    }}
+                    InputProps={{ 
+                      style: { color: 'black' }  // Set input text color
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="lugarDenuncia"
+                    label="Lugar de la denuncia"
+                    name="lugarDenuncia"
+                    value={denunciante.lugarDenuncia}
+                    onChange={handleChangeDenuncianteKarin}
+                    sx={{ color: 'black' }}
+                    InputLabelProps={{ 
+                      style: { color: 'black' }  // Set label color
+                    }}
+                    InputProps={{ 
+                      style: { color: 'black' }  // Set input text color
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={denunciante.anonimato}
+                        onChange={(e) =>
+                          setDenunciante({ ...denunciante, anonimato: e.target.checked })
+                        }
+                        name="anonimato"
+                        color="primary"
+                      />
+                    }
+                    label="¿Desea denunciar manteniendo reserva de su identidad o de forma anónima?"
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={addImplicado}
-                  fullWidth
-                >
-                  Agregar Implicado
-                </Button>
-              </Grid>
-            </Grid>
 
-            <Grid container spacing={2} sx={{ mt: 2 }}>
-              <Grid item xs={6}>
-                <Button type="submit" fullWidth variant="contained" color="primary">
-                  Enviar
-                </Button>
+              <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
+                Datos de las Personas Implicadas en la Denuncia
+              </Typography>
+              <Grid container spacing={2}>
+                {Array.isArray(implicados) && implicados.map((implicado, index) => (
+                  <React.Fragment key={index}>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        variant="outlined"
+                        fullWidth
+                        id={`nombreImplicado-${index}`}
+                        label="Nombre del Implicado"
+                        name="nombre"
+                        value={implicado.nombre}
+                        onChange={(e) => handleChangeImplicadoKarin(index, e)}
+                        sx={{ color: 'black' }}
+                        InputLabelProps={{ 
+                          style: { color: 'black' }  // Set label color
+                        }}
+                        InputProps={{ 
+                          style: { color: 'black' }  // Set input text color
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        variant="outlined"
+                        fullWidth
+                        id={`apellidosImplicado-${index}`}
+                        label="Apellidos del Implicado"
+                        name="apellidos"
+                        value={implicado.apellidos}
+                        onChange={(e) => handleChangeImplicadoKarin(index, e)}
+                        sx={{ color: 'black' }}
+                        InputLabelProps={{ 
+                          style: { color: 'black' }  // Set label color
+                        }}
+                        InputProps={{ 
+                          style: { color: 'black' }  // Set input text color
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        variant="outlined"
+                        fullWidth
+                        id={`lugarImplicado-${index}`}
+                        label="Lugar de la Denuncia"
+                        name="lugar"
+                        value={implicado.lugar}
+                        onChange={(e) => handleChangeImplicadoKarin(index, e)}
+                        sx={{ color: 'black' }}
+                        InputLabelProps={{ 
+                          style: { color: 'black' }  // Set label color
+                        }}
+                        InputProps={{ 
+                          style: { color: 'black' }  // Set input text color
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        variant="outlined"
+                        fullWidth
+                        id={`cargoImplicado-${index}`}
+                        label="Cargo del Implicado"
+                        name="cargo"
+                        value={implicado.cargo}
+                        onChange={(e) => handleChangeImplicadoKarin(index, e)}
+                        sx={{ color: 'black' }}
+                        InputLabelProps={{ 
+                          style: { color: 'black' }  // Set label color
+                        }}
+                        InputProps={{ 
+                          style: { color: 'black' }  // Set input text color
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={12}>
+                      <ReactQuill 
+                        fullWidth
+                        id={`denuncia-${index}`}
+                        label="Denuncia"
+                        name="denuncia"
+                        theme="snow" 
+                        value={implicado.denuncia}
+                        onChange={(value) => handleChangeImplicadoDenunciaKarin(index, value)} // Change to pass value directly
+                        placeholder="Escribe la descripción aquí..." 
+                        sx={{ color: 'black' }}
+                        InputLabelProps={{ 
+                          style: { color: 'black' }  // Set label color
+                        }}
+                        InputProps={{ 
+                          style: { color: 'black' }  // Set input text color
+                        }}
+                      /> 
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <Button
+                        variant="outlined"
+                        color="secondary"
+                        onClick={() => removeImplicado(index)}
+                        fullWidth
+                      >
+                        Eliminar Implicado
+                      </Button>
+                    </Grid>
+                  </React.Fragment>
+                ))}
+                <Grid item xs={12}>
+                  <Button variant="contained" component="label" fullWidth>
+                    Adjuntar Archivos
+                    <input
+                      type="file"
+                      hidden
+                      onChange={(e) => handleFileChangeKarin(e)}
+                      multiple
+                    />
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={addImplicado}
+                    fullWidth
+                  >
+                    Agregar Implicado
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <Button fullWidth variant="outlined" onClick={handleCloseKarin}>
-                  Cancelar
-                </Button>
+
+              <Grid container spacing={2} sx={{ mt: 2 }}>
+                <Grid item xs={6}>
+                  <Button type="submit" fullWidth variant="contained" color="primary">
+                    Enviar
+                  </Button>
+                </Grid>
+                <Grid item xs={6}>
+                  <Button fullWidth variant="outlined" onClick={handleCloseKarin}>
+                    Cancelar
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
-          </form>
-        </CardContent>
-      </Card>
+            </form>
+          </CardContent>
+        </Card>
       </Modal>
 
       <Modal open={openModalCom} onClose={handleCloseModalCom}>
@@ -924,25 +962,24 @@ const ManageUser = () => {
             left: '50%',
             transform: 'translate(-50%, -50%)',
             width: 600,
+            maxHeight: '80vh', // Limita la altura máxima al 80% de la ventana para permitir el scroll
             bgcolor: 'background.paper',
             border: '2px solid #000',
             boxShadow: 24,
             p: 4,
-            overflowY: 'auto', // Make sure the content is scrollable if needed
+            overflowY: 'auto', // Asegura que el contenido sea desplazable verticalmente
           }}
         >
           {modalContentCom ? (
             <>
               <Typography variant="h6" component="h2">
-                {modalContentCom.titulo} {/* Adjust this based on the actual structure */}
+                {modalContentCom.titulo} {/* Ajusta según la estructura real */}
               </Typography>
-              <Typography variant="h8" component="h4">
-                {modalContentCom.descripcion} {/* Adjust this based on the actual structure */}
-              </Typography>
+              <Typography variant="body1" color="textSecondary" dangerouslySetInnerHTML={{ __html: modalContentCom?.descripcion }} />
               <Typography variant="body1" component="p">
-                Enviado por: {getTrabajadorNombre(modalContentCom.user_id)} {/* Adjust this based on the actual structure */}
+                Enviado por: {getTrabajadorNombre(modalContentCom.user_id)} {/* Ajusta según la estructura real */}
               </Typography>
-              {/* Add more fields as needed */}
+              {/* Añade más campos si es necesario */}
             </>
           ) : (
             <Typography variant="body1">No hay contenido disponible.</Typography>

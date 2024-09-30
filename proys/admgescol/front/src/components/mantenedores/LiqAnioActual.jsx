@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Dialog, DialogTitle, DialogContent, Paper, Typography, Box } from '@mui/material';
 import { Modal, TextField } from '@mui/material';
 import Swal from 'sweetalert2';
+import { Chip } from '@mui/material';
 
 import { Visibility } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
@@ -27,6 +28,7 @@ const LiqAnioActual = () => {
   const [selectedDocument, setSelectedDocument] = useState(null);
   const [password, setPassword] = useState('');
   const [signedDocuments, setSignedDocuments] = useState(new Set()); // Keep track of signed documents
+  const [tipoDocumentos, setTipoDocumentos] = useState([]);
 
   const contractsPerPage = 10;
   const indexOfLastContract = currentPage * contractsPerPage;
@@ -52,7 +54,7 @@ const LiqAnioActual = () => {
 
     const fetchTrabajadores = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/trabajadores`);
+        const response = await axios.get(`${API_BASE_URL}/trabajadores/all/${token}`); // Replace with your API endpoint
         
         // Ordenar trabajadores por apellido_paterno, apellido_materno, y luego nombre
         const sortedTrabajadores = response.data.sort((a, b) => {
@@ -76,6 +78,16 @@ const LiqAnioActual = () => {
       }
     };
 
+    const fetchTipoDocumentos = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/tipo_doc/all/${token}`); // Replace with your API endpoint
+        setTipoDocumentos(response.data);
+      } catch (error) {
+        console.error('Error fetching tipo_doc:', error);
+      }
+    };
+
+    fetchTipoDocumentos();
     fetchTrabajadores();
     fetchData();
   }, []);
@@ -197,6 +209,10 @@ const LiqAnioActual = () => {
     }
   };
 
+  const getTipoDocumentoNombre = (tipoDocId) => {
+    const tipoDoc = tipoDocumentos.find((tipo) => tipo.id === tipoDocId);
+    return tipoDoc ? tipoDoc.nombre : 'Desconocido';
+  };
 
   return (
     <div>
@@ -208,8 +224,10 @@ const LiqAnioActual = () => {
           <TableHead>
             <TableRow>
               <TableCell sx={{ color: 'black' }}>Trabajador</TableCell>
-              <TableCell sx={{ color: 'black' }}>Mes - Año</TableCell>
+              <TableCell sx={{ color: 'black' }}>Fecha</TableCell>
+              <TableCell sx={{ color: 'black' }}>Tipo</TableCell>
               <TableCell sx={{ color: 'black' }}>Nombre</TableCell>
+              <TableCell sx={{ color: 'black' }}>Status</TableCell>
               <TableCell sx={{ color: 'black' }}>Acciones</TableCell>
             </TableRow>
           </TableHead>
@@ -218,14 +236,20 @@ const LiqAnioActual = () => {
               <TableRow key={d.ruta}>
                 <TableCell sx={{ color: 'black' }}>{getTrabajadorNombre(d.trabajador)}</TableCell>
                 <TableCell sx={{ color: 'black' }}>{getMonthName(d.mes)} - {d.agno}</TableCell>
+                <TableCell sx={{ color: 'black' }}>{getTipoDocumentoNombre(d.tipo_doc_id)}</TableCell>
                 <TableCell sx={{ color: 'black' }}>{d.nombre}</TableCell>
-                <TableCell sx={{ color: 'black' }}>{d.agno}</TableCell>
-                <TableCell sx={{ color: 'black' }}>{d.nombre}</TableCell>
+                <TableCell sx={{ color: 'black' }}>
+                  {d.firmado !== "0" ? (
+                    <Chip label="Firmado" color="primary" />
+                  ) : (
+                    <Chip label="Pendiente" sx={{ backgroundColor: '#dc3545', color: 'white' }} />
+                  )}
+                </TableCell>
                 <TableCell>
                   <Button
                     variant="outlined"
                     color="primary"
-                    onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${d.ruta}?${new Date().getTime()}`)}
+                    onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${d.ruta_pdf}?${new Date().getTime()}`)}
                     startIcon={<Visibility sx={{ color: 'green' }} />}
                   >
                     Ver Documento

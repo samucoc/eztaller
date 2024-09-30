@@ -23,6 +23,13 @@ const DocumentosCard = ({ empresaId }) => {
   return (
     <Card sx={{ mb: 3 }}>
       <CardContent>
+        <Typography variant="h4" component="div">
+          Cargar Documentos
+        </Typography>
+        <br></br>
+        <Typography variant="h5" component="div">
+          ¿Qué quieres realizar?
+        </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
           <Card sx={{ flexGrow: 1 }}>
             <CardContent>
@@ -45,7 +52,7 @@ const DocumentosCard = ({ empresaId }) => {
           <Card sx={{ flexGrow: 1 }}>
             <CardContent>
               <Typography variant="h6" component="div">
-                Documentos Generales
+                Documentos Individuales
               </Typography>
               <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
                 Sube contratos, anexos o registros de carga horaria o amonestaciones. Debes seleccionar manualmente el trabajador correspondiente.              </Typography>
@@ -54,17 +61,17 @@ const DocumentosCard = ({ empresaId }) => {
                 color="primary" 
                 sx={{ mt: 1 }} 
                 startIcon={<FolderIcon />}
-                onClick={handleGestionarGenerales}
+                onClick={handleGestionarIndividuales}
 
               >
-                Subir Documentos Generales
+                Subir Documentos Individuales
               </Button>
             </CardContent>
           </Card>
           <Card sx={{ flexGrow: 1 }}>
             <CardContent>
               <Typography variant="h6" component="div">
-                Documentos Individuales
+                Documentos Generales
               </Typography>
               <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
                 Sube documentos que se asignan simultáneamente a todos los trabajadores  o a un grupo específico según el tipo de cargo. Como reglamentos o funciones generales
@@ -74,10 +81,10 @@ const DocumentosCard = ({ empresaId }) => {
                 color="primary" 
                 sx={{ mt: 1 }} 
                 startIcon={<DescriptionIcon />}
-                onClick={handleGestionarIndividuales}
+                onClick={handleGestionarGenerales}
 
               >
-                Gestionar Documentos Individuales
+                Subir Documentos Generales
               </Button>
             </CardContent>
           </Card>

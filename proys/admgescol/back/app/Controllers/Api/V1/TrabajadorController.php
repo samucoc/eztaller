@@ -268,10 +268,10 @@ class TrabajadorController extends ResourceController
     public function update($id = null)
     {
 
-        // $validateEntry = $this->model->find($id);
-        // if (empty($validateEntry)) {
-        //     return $this->failNotFound(RESOURCE_NOT_FOUND);
-        // }
+        $validateEntry = $this->model->find($id);
+        if (empty($validateEntry)) {
+            return $this->failNotFound(RESOURCE_NOT_FOUND);
+        }
 
         //divide in PATCH and PUT cases
 
@@ -283,7 +283,7 @@ class TrabajadorController extends ResourceController
         } elseif ($this->request->getMethod() == 'put') {
             $data = $this->request->getJSON();
         }
-
+        $data->foto = '';
         $data->updated_at = $this->datetimeNow->format('Y-m-d H:i:s');
 
         if ($this->model->update($id, $data)) {
@@ -345,4 +345,42 @@ class TrabajadorController extends ResourceController
 
 
     
+    public function activar($id = null){
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "update trabajadores set estado_id = '1' where id = ?";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$id]);
+   
+        if ($data) {
+            // Registrar notificación
+            $notificacionController = new \App\Controllers\Api\V1\NotificacionController();
+            $mensaje = "trabajador con id {$id} ha sido activada correctamente.";
+            $notificacionController->logNotification('1', 'update', 'trabajadores - status', $mensaje);
+
+            return $this->respondUpdated($data, RESOURCE_UPDATED);
+        } else {
+            return $this->fail($this->model->errors());
+        }
+    }
+
+    
+    public function desactivar($id = null){
+        $db = \Config\Database::connect();
+        // Preparar la consulta SQL
+        $query = "update trabajadores set estado_id = '0' where id = ?";
+        // Ejecutar la consulta utilizando Query Builder de CodeIgniter
+        $data = $db->query($query, [$id]);
+   
+        if ($data) {
+            // Registrar notificación
+            $notificacionController = new \App\Controllers\Api\V1\NotificacionController();
+            $mensaje = "trabajador con id {$id} ha sido desactivada correctamente.";
+            $notificacionController->logNotification('1', 'update', 'trabajadores - status', $mensaje);
+
+            return $this->respondUpdated($data, RESOURCE_UPDATED);
+        } else {
+            return $this->fail($this->model->errors());
+        }
+    }
 }

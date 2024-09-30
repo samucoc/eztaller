@@ -16,7 +16,7 @@ const Comunicaciones = () => {
   const userID = useSelector((state) => state.userDNI); // Assuming userID is stored in Redux
   const empresaId = useSelector((state) => state.empresaId); // Assuming empresaId is stored in Redux
   const [trabajadores, setTrabajadores] = useState([]);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const token = useSelector((state) => state.token);
 
@@ -131,19 +131,7 @@ const Comunicaciones = () => {
                 Siguiente
               </Button>
             </div>
-            <FormControl variant="outlined" className="ml-auto">
-              <InputLabel id="items-per-page-label">Items por página</InputLabel>
-              <Select
-                labelId="items-per-page-label"
-                value={itemsPerPage}
-                onChange={handleItemsPerPageChange}
-                label="Items por página"
-              >
-                <MenuItem value={5}>5</MenuItem>
-                <MenuItem value={10}>10</MenuItem>
-                <MenuItem value={25}>25</MenuItem>
-              </Select>
-            </FormControl>
+
           </div>
       </Grid>
       )}

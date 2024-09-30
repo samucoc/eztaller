@@ -22,8 +22,12 @@ const ConsultarGestionCard = ({ empresaId }) => {
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
           <Card sx={{ flexGrow: 1, mx: 1 }}>
             <CardContent>
+              <Typography variant="h6" sx={{ color: 'black' }}>Documentos de la Empresa</Typography>
+              <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>              
+                Aquí puedes revisar todos los documentos subidos al sistema
+              </Typography>
               <Button
-                variant="contained"
+                variant="outlined"
                 color="primary"
                 sx={{ width: '100%' }}
                 startIcon={<DescriptionIcon />}
@@ -35,9 +39,13 @@ const ConsultarGestionCard = ({ empresaId }) => {
           </Card>
           <Card sx={{ flexGrow: 1, mx: 1 }}>
             <CardContent>
+              <Typography variant="h6" sx={{ color: 'black' }}>Listado de Trabajadores</Typography>
+              <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>              
+                Aquí puedes revisar y actualizar los datos de tus trabajadores       
+              </Typography>
               <Button
-                variant="contained"
-                color="secondary"
+                variant="outlined"
+                color="primary"
                 sx={{ width: '100%' }}
                 startIcon={<GroupIcon />}
                 onClick={handleConsultarTrabajadores}

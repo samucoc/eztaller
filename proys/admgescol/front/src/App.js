@@ -57,7 +57,7 @@ const App = () => {
 
   const checkTokenValidity = async (dispatch, navigate) => {
     try {
-      await axios.post(`${API_BASE_URL}/token/check-token`, {token});
+      await axios.post(`${API_BASE_URL}/token/check-token`, {token, userDNI, roleSession});
     } catch (error) {
       // Token is invalid or request failed
       console.error('Token invalid or check-token request failed:', error);

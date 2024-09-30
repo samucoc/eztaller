@@ -10,9 +10,14 @@ import AddIcon from '@material-ui/icons/Add';
 import Swal from 'sweetalert2';
 import useAuthAxios from '../../axiosSetup'; // Import the configured axios instance
 import ComunicacionesForm from './ComunicacionesForm';
+import ComunicacionView from './ComunicacionesView';
+import '../../css/Empresas.css';
+
+
 
 const ComunicacionesCard = () => {
   const [showForm, setShowForm] = useState(false);
+  const [showForm1, setShowForm1] = useState(false);
   const [selectedComunicacion, setSelectedComunicacion] = useState(null);
   const [comunicaciones, setComunicaciones] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -28,8 +33,12 @@ const ComunicacionesCard = () => {
     const fetchComunicaciones = async () => {
       try {
         const response = await api.get(`/comunicaciones/all/${token}`);
-        setComunicaciones(response.data.filter((empr) => empr.empresa_id === empresaId));
-      } catch (error) {
+        setComunicaciones(
+          response.data
+            .filter((empr) => empr.empresa_id === empresaId)
+            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // Ordenar de reciente a antigua
+        );
+        } catch (error) {
         console.error('Error fetching comunicaciones:', error);
       }
     };
@@ -101,6 +110,11 @@ const ComunicacionesCard = () => {
     }
   };
 
+  const handleView = (comunicacion) => {
+    setSelectedComunicacion(comunicacion);
+    setShowForm1(true);
+  };
+
   const handleEdit = (comunicacion) => {
     setSelectedComunicacion(comunicacion);
     setShowForm(true);
@@ -130,92 +144,103 @@ const ComunicacionesCard = () => {
   return (
     <div className="container Comunicaciones">
       <h3>Comunicaciones</h3>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
-        <div></div>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<AddIcon />}
-          onClick={() => setShowForm(true)}
-        >
-          Agregar Comunicación
-        </Button>
-      </Box>
+
       {showForm ? (
         <ComunicacionesForm
           onSubmit={addOrUpdateComunicacion}
           initialComunicacion={selectedComunicacion}
           onCancel={handleCancel}
         />
-      ) : (
-        <Grid container spacing={2} sx={{ overflowY: 'auto', maxHeight: '500px' }}>
-          {paginatedComunicaciones.map((comunicacion) => (
-            <Grid item xs={12} sm={6} key={comunicacion.id}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6">{comunicacion.titulo}</Typography>
-                  <Typography variant="body2" dangerouslySetInnerHTML={{ __html: comunicacion.descripcion }} />
-                  <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => handleEdit(comunicacion)}
-                      startIcon={<EditIcon />}
-                      sx={{ mr: 1 }}
-                    >
-                      Editar
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => deleteComunicacion(comunicacion.id)}
-                      startIcon={<DeleteIcon />}
-                    >
-                      Eliminar
-                    </Button>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-          <div className="d-flex justify-content-between align-items-center mt-3">
-            <div className="pagination">
+      ) : showForm1 ? (
+        <ComunicacionView
+          modalData={selectedComunicacion}
+          onCancel={handleCancel}
+        />
+        ) : (
+          <>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
+              <div></div>
               <Button
                 variant="contained"
-                color="primary"
-                onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-                style={{ marginRight: '10px' }}
+                className="crear-empresa-btn" 
+                startIcon={<AddIcon />}
+                onClick={() => setShowForm(true)}
               >
-                Anterior
+                Nueva Comunicación
               </Button>
-              <span>Página {currentPage} de {totalPages}</span>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                style={{ marginLeft: '10px' }}
-              >
-                Siguiente
-              </Button>
-            </div>
-            <FormControl variant="outlined" className="ml-auto">
-              <InputLabel id="items-per-page-label">Items por página</InputLabel>
-              <Select
-                labelId="items-per-page-label"
-                value={itemsPerPage}
-                onChange={handleItemsPerPageChange}
-                label="Items por página"
-              >
-                <MenuItem value={5}>5</MenuItem>
-                <MenuItem value={10}>10</MenuItem>
-                <MenuItem value={25}>25</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-        </Grid>
-      )}
+            </Box>
+            <Grid container spacing={2} sx={{ overflowY: 'auto', maxHeight: '500px' }}>
+              {paginatedComunicaciones.map((comunicacion) => (
+                <Grid item xs={12} sm={6} key={comunicacion.id}>
+                  <Card>
+                    <CardContent>
+                      <Typography variant="h6">{comunicacion.titulo}</Typography>
+                      <Typography 
+                        variant="body2" 
+                        dangerouslySetInnerHTML={{ 
+                          __html: comunicacion.descripcion.length > 500 
+                            ? comunicacion.descripcion.substring(0, 500) + "..." 
+                            : comunicacion.descripcion 
+                        }} 
+                      />
+                      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          onClick={() => handleView(comunicacion)}
+                          sx={{ mr: 1 }}
+                        >
+                          Leer Más
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          onClick={() => handleEdit(comunicacion)}
+                          startIcon={<EditIcon />}
+                          sx={{ mr: 1 }}
+                        >
+                        </Button>
+                        <Button
+                          variant="outlined"
+                          color="secondary"
+                          onClick={() => deleteComunicacion(comunicacion.id)}
+                          startIcon={<DeleteIcon />}
+                        >
+                        </Button>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+              <div className="d-flex justify-content-between align-items-center mt-3">
+                <div className="d-flex">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    style={{ marginRight: '10px' }}
+                  >
+                    Anterior
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    style={{ marginLeft: '10px' }}
+                  >
+                    Siguiente
+                  </Button>
+                </div>
+
+                <span className="mx-auto">Página {currentPage} de {totalPages}</span>
+                
+              </div>
+
+            </Grid>          
+          </>
+        )}
     </div>
   );
 };

@@ -14,31 +14,35 @@ import Box from '@mui/material/Box';
 import { useSelector, useDispatch } from 'react-redux';
 import { setNotificaciones } from '../../actions';
 import axios from 'axios';
-import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
+import { Avatar, Menu, MenuItem } from '@mui/material';
+import { API_BASE_URL } from '../config/apiConstants';
+import { useNavigate, Link } from 'react-router-dom';
 import '../../css/Header.css';
-import { useParams, useNavigate, Link  } from 'react-router-dom';
 
 const Header = ({ onLogout }) => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
-  const userDNI = useSelector((state) => state.userDNI); // Assuming userDNI is stored in Redux
-  const notificacionesNoVistas = useSelector((state) => state.notificacionesNoVistas);
-  const notificaciones = useSelector((state) => state.notificaciones); // Todas las notificaciones
-  const roleSession = useSelector((state) => state.roleSession); // Obteniendo roleSession desde Redux
-  const href = roleSession === "3" ? '/UserDashboard' : '/Empresas'; // Verificando si es 3 o no
-  const navigate = useNavigate();
-  const token = useSelector((state) => state.token);
+  const [profileAnchorEl, setProfileAnchorEl] = useState(null); // Para el perfil
+  const userDNI = useSelector((state) => state.userDNI);
+  const username = useSelector((state) => state.username); // Asumiendo que el nombre de usuario está en Redux
+  const nombre = useSelector((state) => state.nombre);
 
-  // Fetch notificaciones in Header
+  const notificacionesNoVistas = useSelector((state) => state.notificacionesNoVistas);
+  const notificaciones = useSelector((state) => state.notificaciones);
+  const roleSession = useSelector((state) => state.roleSession);
+  const token = useSelector((state) => state.token);
+  const navigate = useNavigate();
+
+  // Iniciales del nombre de usuario
+  const userInitials = username ? username.slice(0, 2).toUpperCase() : '';
+
   useEffect(() => {
     const fetchNotificaciones = async () => {
       try {
-        const response = await axios.get(`${API_BASE_URL}/notificaciones/all/${token}`); // Replace with your API endpoint
+        const response = await axios.get(`${API_BASE_URL}/notificaciones/all/${token}`);
         const sortedNotificaciones = response.data
           .filter((noti) => noti.trabajador === userDNI && (noti.vista === 'false' || noti.vista === null))
           .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-        
-        // Dispatch action to store notifications in Redux
         dispatch(setNotificaciones(sortedNotificaciones));
       } catch (error) {
         console.error('Error fetching notifications:', error);
@@ -58,27 +62,30 @@ const Header = ({ onLogout }) => {
 
   const handleNotificacionesVistas = async () => {
     try {
-      // Enviar una solicitud para marcar las notificaciones como vistas en el backend
       await axios.get(`${API_BASE_URL}/notificaciones/notificaciones-marcadas/${userDNI}`);
-  
-      // Después de marcar las notificaciones como vistas, actualiza el estado en el frontend
-      // Aquí se asume que el backend responde con la lista actualizada de notificaciones
       const response = await axios.get(`${API_BASE_URL}/notificaciones`);
       const sortedNotificaciones = response.data
         .filter((noti) => noti.trabajador === userDNI && (noti.vista === 'false' || noti.vista === null))
         .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-  
-      // Dispatch action to update notifications in Redux
       dispatch(setNotificaciones(sortedNotificaciones));
       handleClose();
     } catch (error) {
       console.error('Error marking notifications as viewed:', error);
     }
   };
-  
-  // Function to handle button clicks for navigation
-  const handleItemClick = (path) => {
-    navigate(path); // Use navigate to change route
+
+  // Funciones para el menú de perfil
+  const handleProfileClick = (event) => {
+    setProfileAnchorEl(event.currentTarget);
+  };
+
+  const handleProfileClose = () => {
+    setProfileAnchorEl(null);
+  };
+
+  const handleViewProfile = () => {
+    navigate('/Perfiles');
+    handleProfileClose();
   };
 
   const open = Boolean(anchorEl);
@@ -87,15 +94,16 @@ const Header = ({ onLogout }) => {
   return (
     <AppBar position="static" className="app-bar">
       <Toolbar>
-      <Box
+        <Box
           component={Link}
-          to={href} // Navegación dinámica basada en roleSession
+          to={roleSession === "3" ? '/UserDashboard' : '/Empresas'}
           className="logo-container"
-          sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }} // Estilos adicionales opcionales
+          sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
         >
-          <img src="logo.png" alt="Logo" width="60" />
+          <img src="logo.png" alt="Logo" width="120" />
         </Box>
         <Box sx={{ flexGrow: 1 }} />
+        
         {/* Campanita de notificaciones */}
         <IconButton color="inherit" onClick={handleBellClick}>
           <Badge badgeContent={notificacionesNoVistas} color="secondary">
@@ -103,13 +111,35 @@ const Header = ({ onLogout }) => {
           </Badge>
         </IconButton>
 
-        <Button
-          variant="outlined"
-          className="logout-button"
-          onClick={onLogout}
+        {/* Nombre de usuario en letras verdes */}
+        <span style={{ color: 'white', fontWeight: 'bold', marginLeft: '10px' }}>
+          {nombre}
+        </span>
+
+        {/* Botón de perfil */}
+        <IconButton onClick={handleProfileClick} sx={{ ml: 2 }}>
+          <Avatar sx={{ bgcolor: 'primary.main' }}>{userInitials}</Avatar>
+        </IconButton>
+        
+        <Menu
+          anchorEl={profileAnchorEl}
+          open={Boolean(profileAnchorEl)}
+          onClose={handleProfileClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
         >
-          Cerrar sesión
-        </Button>
+          <MenuItem disabled>
+            <Typography variant="body1">Bienvenido, {username}</Typography>
+          </MenuItem>
+          <MenuItem onClick={handleViewProfile}>Ver Perfil</MenuItem>
+          <MenuItem onClick={onLogout}>Cerrar Sesión</MenuItem>
+        </Menu>
       </Toolbar>
 
       {/* Popover para mostrar notificaciones */}
@@ -127,7 +157,7 @@ const Header = ({ onLogout }) => {
           horizontal: 'right',
         }}
       >
-        <Box sx={{ p: 2, width: '300px' , height: '300px' }}>
+        <Box sx={{ p: 2, width: '300px', height: '300px' }}>
           <Typography variant="h6">Notificaciones</Typography>
           <List>
             {notificaciones.length === 0 ? (

@@ -28,7 +28,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
       width: '100%',
     },
     container: {
-      maxHeight: 440,
+      maxHeight: 550,
     },
   });
   const [showForm, setShowForm] = useState(false); // State to control form visibility
@@ -539,7 +539,7 @@ const Dashboard = ({ userDNI, empresaId }) => {
                             <Button
                               variant="text"
                               color="primary"
-                              onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${doc.ruta}`)}
+                              onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${doc.ruta_pdf}`)}
                               startIcon={<VisibilityOutlinedIcon style={{width:'48px', height: '48px'}}/>}
                               style={{ marginRight: '0.5rem' }}
                             >

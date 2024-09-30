@@ -18,6 +18,7 @@ class DocumentoFirmadoModel extends Model
         'documento_id' ,
         'trabajador' ,
         'token' ,
+        'ruta_pdf' ,
     ];
 
     // Dates

@@ -1,5 +1,5 @@
 .liquidaciones-to-pdf {
-    max-width: 600px;
+    max-width: 100% !important;
     margin: auto;
   }
   .MuiPaper-root{
@@ -31,14 +31,14 @@
     color: black !important;
   }
   
-  .liquidaciones-to-pdf .MuiButton-containedPrimary {
+  /* .liquidaciones-to-pdf .MuiButton-containedPrimary {
     background-color: #3f51b5 !important;
     color: white !important;
   }
   
   .liquidaciones-to-pdf .MuiButton-containedPrimary:hover {
     background-color: #303f9f !important;
-  }
+  } */
   
   .liquidaciones-to-pdf .MuiTypography-root {
     color: black !important;

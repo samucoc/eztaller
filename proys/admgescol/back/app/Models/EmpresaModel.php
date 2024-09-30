@@ -23,7 +23,8 @@ class EmpresaModel extends Model
         'comuna_id' ,
         'contactoRRHH' ,
         'telefonoConcacto' ,
-        'correoContacto' 
+        'correoContacto'  ,
+        'empresaStatus' 
     ];
 
     // Dates

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Importa axios
 import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
-import { Button, TextField, FormControl, InputLabel, Select, MenuItem, Card, CardContent, Typography } from '@mui/material';
+import { Button, TextField, FormControl, InputLabel, Select, MenuItem, Card, CardContent, Typography, Grid } from '@mui/material';
 import * as XLSX from 'xlsx';
 
 const ExportToXlsx = ({ exportData }) => {
@@ -95,82 +95,96 @@ const ExportToXlsx = ({ exportData }) => {
         <Card sx={{ maxWidth: 600, margin: 'auto', padding: 2 }}>
             <CardContent>
                 <Typography variant="h5" gutterBottom>
-                    Exportar a XLSX
+                Asistente de exportación de documentos
+                </Typography>
+                <Typography variant="h7" gutterBottom>
+                ¿Qué tipo de solicitud quieres exportar?
                 </Typography>
                 <FormControl fullWidth sx={{ mb: 2 }}>
-                    <InputLabel id="export-type-label">Tipo de Solicitud</InputLabel>
-                    <Select
+                <InputLabel id="export-type-label">Tipo de Solicitud</InputLabel>
+                <Select
                     labelId="export-type-label"
                     value={exportType}
                     onChange={(e) => setExportType(e.target.value)}
                     label="Tipo de Solicitud"
-                        sx={{ color: 'black',  mb: 2  }}
-                        InputLabelProps={{ 
-                            style: { color: 'black' }  // Set label color
-                        }}
-                        InputProps={{ 
-                            style: { color: 'black' }  // Set input text color
-                        }}
-                    >
+                    sx={{ color: 'black' }}
+                    InputLabelProps={{
+                    style: { color: 'black' }, // Set label color
+                    }}
+                    InputProps={{
+                    style: { color: 'black' }, // Set input text color
+                    }}
+                >
                     <MenuItem value="anticipos">Anticipos</MenuItem>
                     <MenuItem value="beneficios">Beneficios</MenuItem>
                     <MenuItem value="permisos">Permisos</MenuItem>
                     <MenuItem value="prestamos">Préstamos</MenuItem>
-                    </Select>
+                </Select>
                 </FormControl>
-                <TextField
+                <Typography variant="h7" gutterBottom>
+                ¿Cuál es el rango de fechas que quieres exportar?
+                </Typography>
+                <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                    <TextField
                     label="Desde"
                     type="date"
                     InputLabelProps={{ shrink: true }}
                     fullWidth
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    sx={{ color: 'black',  mb: 2  }}
-                    InputLabelProps={{ 
-                    style: { color: 'black' }  // Set label color
+                    sx={{ color: 'black', mb: 2 }}
+                    InputLabelProps={{
+                        style: { color: 'black' }, // Set label color
                     }}
-                    InputProps={{ 
-                    style: { color: 'black' }  // Set input text color
+                    InputProps={{
+                        style: { color: 'black' }, // Set input text color
                     }}
-                    
-                />
-                <TextField
+                    />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <TextField
                     label="Hasta"
                     type="date"
                     InputLabelProps={{ shrink: true }}
                     fullWidth
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    sx={{ color: 'black',  mb: 2  }}
-                    InputLabelProps={{ 
-                    style: { color: 'black' }  // Set label color
+                    sx={{ color: 'black', mb: 2 }}
+                    InputLabelProps={{
+                        style: { color: 'black' }, // Set label color
                     }}
-                    InputProps={{ 
-                    style: { color: 'black' }  // Set input text color
+                    InputProps={{
+                        style: { color: 'black' }, // Set input text color
                     }}
-                />
+                    />
+                </Grid>
+                </Grid>
                 <FormControl fullWidth sx={{ mb: 2 }}>
+                    <Typography variant="h7" gutterBottom>
+                        ¿Que status de la solicitud quieres exportar?                    
+                    </Typography>
                     <InputLabel id="status-label">Estado de Solicitud</InputLabel>
                     <Select
-                    labelId="status-label"
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                    label="Estado de Solicitud"
-                    sx={{ color: 'black',  mb: 2  }}
-                    InputLabelProps={{ 
-                        style: { color: 'black' }  // Set label color
-                    }}
-                    InputProps={{ 
-                        style: { color: 'black' }  // Set input text color
-                    }}
+                        labelId="status-label"
+                        value={status}
+                        onChange={(e) => setStatus(e.target.value)}
+                        label="Seleccionar estado de solicitud"
+                        sx={{ color: 'black' }}
+                        InputLabelProps={{
+                        style: { color: 'black' }, // Set label color
+                        }}
+                        InputProps={{
+                        style: { color: 'black' }, // Set input text color
+                        }}
                     >
-                    <MenuItem value="1">Pendiente</MenuItem>
-                    <MenuItem value="2">Aprobada</MenuItem>
-                    <MenuItem value="3">Rechazada</MenuItem>
+                        <MenuItem value="1">Pendiente</MenuItem>
+                        <MenuItem value="2">Aprobada</MenuItem>
+                        <MenuItem value="3">Rechazada</MenuItem>
                     </Select>
                 </FormControl>
                 <Button variant="contained" color="info" onClick={handleExport} fullWidth>
-                    Exportar a XLSX
+                Exportar a XLSX
                 </Button>
             </CardContent>
         </Card>

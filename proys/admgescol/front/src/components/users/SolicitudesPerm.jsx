@@ -179,8 +179,8 @@ const SolicitudesPerm = () => {
                     style: { color: 'black' }  // Set input text color
                   }}
                   >
-                  <MenuItem value="0">Con goce de sueldo</MenuItem>
-                  <MenuItem value="1">Sin goce de sueldo</MenuItem>
+                  <MenuItem value="1">Con goce de sueldo</MenuItem>
+                  <MenuItem value="2">Sin goce de sueldo</MenuItem>
                 </Select>
               </FormControl>
             </Grid>

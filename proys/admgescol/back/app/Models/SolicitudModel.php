@@ -15,7 +15,7 @@ class SolicitudModel extends Model
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'trabajador', 'tipo_sol_id', 'empresa_id',  'fecha', 'fecha_fin', 'cuotas', 'monto', 'comentario','status','goce','horas','time','timeEnd','comentario_status'
+        'trabajador', 'tipo_sol_id', 'empresa_id',  'fecha', 'fecha_inicio', 'fecha_fin', 'cuotas', 'monto', 'comentario','status','goce','horas','time','timeEnd','comentario_status'
     ];
 
     // Dates

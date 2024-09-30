@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/LiquidacionesToPdf.css';
+import '../../css/Empresas.css';
+
 import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import {
   Card, CardContent, Container,
@@ -223,30 +225,31 @@ const DocumentosToPdf = () => {
                 </TextField>
               </Box>
             )}
-            <Box mb={3}>
-              <FormControl fullWidth variant="outlined" margin="normal">
-                <InputLabel id="tipo_doc-label">Tipo Documento</InputLabel>
-                <Select
-                  labelId="tipo_doc-label"
-                  id="tipo_doc_id"
-                  value={tipo_doc_id}
-                  onChange={handleTipoDocChange}
-                  label="Tipo Documento"
-                >
-                  <MenuItem value="">
-                    <em>Seleccionar Tipo Documento...</em>
-                  </MenuItem>
-                  {tipoDocumentos
-                    .filter( (tipo) => tipo.id === "5" || tipo.id === "6" )
-                    .map((tipo) => (
-                    <MenuItem value={tipo.id} key={tipo.id}>
-                      {tipo.nombre}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
+
             <Grid container spacing={2} mb={3}>
+                <Grid item xs={12}>
+                    <FormControl fullWidth variant="outlined" margin="normal">
+                    <InputLabel id="tipo_doc-label">Tipo Documento</InputLabel>
+                    <Select
+                      labelId="tipo_doc-label"
+                      id="tipo_doc_id"
+                      value={tipo_doc_id}
+                      onChange={handleTipoDocChange}
+                      label="Tipo Documento"
+                    >
+                      <MenuItem value="">
+                        <em>Seleccionar Tipo Documento...</em>
+                      </MenuItem>
+                      {tipoDocumentos
+                        .filter( (tipo) => tipo.id === "5" || tipo.id === "6" )
+                        .map((tipo) => (
+                        <MenuItem value={tipo.id} key={tipo.id}>
+                          {tipo.nombre}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
                 <Grid item xs={6}>
                   <FormControl fullWidth variant="outlined" margin="normal">
                     <InputLabel id="month-label">Mes</InputLabel>
@@ -358,12 +361,12 @@ const DocumentosToPdf = () => {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
+                className="crear-empresa-btn" 
                 fullWidth
                 disabled={loading}
                 startIcon={loading && <CircularProgress size={20} />}
               >
-                {loading ? 'Enviando...' : 'Generar PDF'}
+                {loading ? 'Enviando...' : 'Cargar Archivo General'}
               </Button>
             </Box>
           </form>

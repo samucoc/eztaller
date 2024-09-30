@@ -36,7 +36,22 @@ class TrabajadorModel extends Model
         'telefono_emergencia' ,
         'estado_id' ,
         'fecha_ingreso' ,
-        'tipo_contrato'
+        'tipo_contrato',
+        'region_id',
+        'emailEmpresa',
+        'contacto_emergencia_2',
+        'telefono_emergencia_2',
+        'email_emergencia_2',
+        'email_emergencia',
+        'nro_cuenta',
+        'tipo_cuenta',
+        'bancos',
+        'salud',
+        'plan_salud', 
+        'afp',
+        'ingreso',
+        'plazo_contrato',
+        'horas_trabajo',
     ];
 
     // Dates

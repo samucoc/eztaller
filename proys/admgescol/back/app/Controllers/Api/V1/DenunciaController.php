@@ -109,28 +109,21 @@ class DenunciaController extends ResourceController
         $data = [];
 
         $denuncianteNombre = $this->request->getPost('denuncianteNombre');
-        $denuncianteApellidos = $this->request->getPost('denuncianteApellidos');
         $denuncianteRut = $this->request->getPost('denuncianteRut');
-        $denuncianteCelular = $this->request->getPost('denuncianteCelular');
         $denuncianteEmail = $this->request->getPost('denuncianteEmail');
-        $denuncianteRelacionTrabajo = $this->request->getPost('denuncianteRelacionTrabajo');
-        $denuncianteLugarDenuncia = $this->request->getPost('denuncianteLugarDenuncia');
         $denuncianteAnonimato = $this->request->getPost('denuncianteAnonimato');
+        $denuncia = $this->request->getPost('denuncia');
         $implicados = $this->request->getPost('implicados');
         
         // Insertar la denuncia principal
         $data['created_at'] = $this->datetimeNow->format('Y-m-d H:i:s');
         $data['updated_at'] = $this->datetimeNow->format('Y-m-d H:i:s');
         $data['denuncianteNombre'] = $denuncianteNombre;
-        $data['denuncianteApellidos'] = $denuncianteApellidos;
         $data['denuncianteRut'] = $denuncianteRut;
-        $data['denuncianteCelular'] = $denuncianteCelular;
         $data['denuncianteEmail'] = $denuncianteEmail;
-        $data['denuncianteRelacionTrabajo'] = $denuncianteRelacionTrabajo;
-        $data['denuncianteLugarDenuncia'] = $denuncianteLugarDenuncia;
         $data['denuncianteAnonimato'] = $denuncianteAnonimato;
+        $data['denuncia'] = $denuncia;
         $data['implicados'] = $implicados;
-        var_dump($this->request->getPost('implicados'));
 
         if ($this->model->insert($data)) {
             // Obtener el ID de la denuncia recién insertada
@@ -139,7 +132,6 @@ class DenunciaController extends ResourceController
             $archivoModel = new \App\Models\DenunciaImpliArchModel();
             // Procesar archivos relacionados con el implicado
             $archivoFiles = $this->request->getFiles();
-            var_dump($archivoFiles);
             if (isset($archivoFiles['archivos'])) {
                 foreach ($archivoFiles['archivos'] as $archivo) {
                     // Procesar la subida del archivo
@@ -172,10 +164,7 @@ class DenunciaController extends ResourceController
                     $implicadoData = [
                         'denuncia_id' => $denunciaId,
                         'nombre'      => $implicado['nombre'],
-                        'apellidos'   => $implicado['apellidos'],
-                        'lugar'       => $implicado['lugar'],
                         'cargo'       => $implicado['cargo'],
-                        'denuncia'    => $implicado['denuncia'],
                         'created_at'  => $this->datetimeNow->format('Y-m-d H:i:s'),
                         'updated_at'  => $this->datetimeNow->format('Y-m-d H:i:s')
                     ];

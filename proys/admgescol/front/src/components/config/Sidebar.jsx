@@ -45,6 +45,25 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
   };
 
 
+  const [openA, setOpenA] = useState(false);
+
+  const handleToggleA = () => {
+    setOpenA(!openA);
+  };
+
+  const [openU, setOpenU] = useState(false);
+
+  const handleToggleU = () => {
+    setOpenU(!openU);
+  };
+
+  const [openUS, setOpenUS] = useState(false);
+
+  const handleToggleUS = () => {
+    setOpenUS(!openUS);
+  };
+
+
   return (
     <Box
       sx={{
@@ -191,7 +210,6 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
           )}
           {role === 2 && (
             <>
-              <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Funcionalidades</Typography>
               <ListItem button onClick={() => handleOptionChange('Empresas/' + selectedEmpresa)}
                   sx={{
                     padding: 0,
@@ -203,9 +221,42 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                 <ListItemIcon>
                   <Business sx={{ color: grey[700] }} />
                 </ListItemIcon>
-                <ListItemText primary="Empresa" />
+                <ListItemText primary="Inicio" />
               </ListItem>
-              <ListItem button onClick={() => handleOptionChange('Documentos')}
+              <ListItem
+                button
+                onClick={handleToggleA}
+                sx={{
+                  padding: 0,
+                  margin: 0,
+                  '&.Mui-selected': {
+                    backgroundColor: 'transparent',
+                  },
+                }}>
+                <ListItemIcon>
+                  <Description sx={{ color: grey[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Documentos" />
+                <IconButton>
+                  {openA ? <ExpandLess sx={{ color: grey[800] }} /> : <ExpandMore sx={{ color: grey[800] }} />}
+                </IconButton>
+              </ListItem>
+              <Collapse in={openA} timeout="auto" unmountOnExit>
+                <ListItem button onClick={() => handleOptionChange('DocumentosCard')} sx={{ padding: 0, margin: 0 }}>
+                  <ListItemIcon>
+                    <Description sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Cargar Documentos" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('Documentos')} sx={{ padding: 0, margin: 0 }}>
+                  <ListItemIcon>
+                    <Description sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Consultar Documentos" />
+                </ListItem>
+              </Collapse>
+
+              <ListItem button onClick={() => handleOptionChange('SolicitudesCard')}
                   sx={{
                     padding: 0,
                     margin: 0,
@@ -216,8 +267,23 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                 <ListItemIcon>
                   <Description sx={{ color: grey[700] }} />
                 </ListItemIcon>
-                <ListItemText primary="Documentos" />
+                <ListItemText primary="Solicitudes" />
               </ListItem>
+              
+              <ListItem button onClick={() => handleOptionChange('ComunicacionesCard')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Description sx={{ color: grey[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Comunicaciones" />
+              </ListItem>
+              
               <ListItem button onClick={() => handleOptionChange('Trabajadores')}
                   sx={{
                     padding: 0,
@@ -231,7 +297,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                 </ListItemIcon>
                 <ListItemText primary="Trabajadores" />
               </ListItem>
-              <ListItem button 
+              <ListItem button onClick={() => handleOptionChange('LeyKarin')}
                   sx={{
                     padding: 0,
                     margin: 0,
@@ -249,8 +315,7 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
           {(role === 3) && (
             <>
             {/* Sección de Consultar Documentos */}
-            <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Consultar Documentos</Typography>
-              <ListItem button onClick={() => handleOptionChange('ContratosUser')}
+              <ListItem button onClick={() => handleOptionChange('UserDashboard')}
                   sx={{
                     padding: 0,
                     margin: 0,
@@ -259,111 +324,151 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                     },
                   }}>
                 <ListItemIcon>
-                  <Description sx={{ color: grey[700] }} />
+                  <Business sx={{ color: grey[700] }} />
                 </ListItemIcon>
-                <ListItemText primary="Contratos y Anexos" />
+                <ListItemText primary="Inicio" />
               </ListItem>
-              <ListItem button onClick={() => handleOptionChange('LiquidacionesUser')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <Receipt sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Liquidaciones" />
+
+              <ListItem
+                button
+                onClick={handleToggleU}
+                sx={{ padding: 0, margin: 0 }}
+              >
+                <ListItemText>
+                  <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Documentos</Typography>
+                </ListItemText>
+                <IconButton>
+                  {openU ? <ExpandLess sx={{ color: grey[800] }} /> : <ExpandMore sx={{ color: grey[800] }} />}
+                </IconButton>
               </ListItem>
-              <ListItem button onClick={() => handleOptionChange('ReglamentosUser')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <Gavel sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Reglamentos" />
-              </ListItem>
-              <ListItem button onClick={() => handleOptionChange('OtrosUser')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <FolderOpen sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Otros" />
-              </ListItem>
+
+              <Collapse in={openU} timeout="auto" unmountOnExit>
+
+                <ListItem button onClick={() => handleOptionChange('LiquidacionesUser')}
+                    sx={{
+                      padding: 0,
+                      margin: 0,
+                      '&.Mui-selected': {
+                        backgroundColor: 'transparent',
+                      },
+                    }}>
+                  <ListItemIcon>
+                    <Receipt sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Consultar Liquidaciones" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('ContratosUser')}
+                    sx={{
+                      padding: 0,
+                      margin: 0,
+                      '&.Mui-selected': {
+                        backgroundColor: 'transparent',
+                      },
+                    }}>
+                  <ListItemIcon>
+                    <Description sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Consultar Contratos y Anexos" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('ReglamentosUser')}
+                    sx={{
+                      padding: 0,
+                      margin: 0,
+                      '&.Mui-selected': {
+                        backgroundColor: 'transparent',
+                      },
+                    }}>
+                  <ListItemIcon>
+                    <Gavel sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Consultar Reglamentos" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('OtrosUser')}
+                    sx={{
+                      padding: 0,
+                      margin: 0,
+                      '&.Mui-selected': {
+                        backgroundColor: 'transparent',
+                      },
+                    }}>
+                  <ListItemIcon>
+                    <FolderOpen sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Consultar Otros Documentos" />
+                </ListItem>
+              </Collapse>
+             
             
-              <Divider sx={{ my: 2 }} />
             
               {/* Sección de Realizar Solicitudes */}
-              <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Realizar Solicitudes</Typography>
-              <ListItem button onClick={() => handleOptionChange('SolicitarAnticipo')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <MonetizationOn sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Solicitar Anticipo" />
+              <ListItem
+                button
+                onClick={handleToggleUS}
+                sx={{ padding: 0, margin: 0 }}
+              >
+                <ListItemText>
+                  <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Solicitudes</Typography>
+                </ListItemText>
+                <IconButton>
+                  {openUS ? <ExpandLess sx={{ color: grey[800] }} /> : <ExpandMore sx={{ color: grey[800] }} />}
+                </IconButton>
               </ListItem>
-              <ListItem button onClick={() => handleOptionChange('SolicitarPrestamo')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <AttachMoney sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Solicitar Préstamo" />
-              </ListItem>
-              <ListItem button onClick={() => handleOptionChange('SolicitarPermiso')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <EventNote sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Solicitar Permiso" />
-              </ListItem>
-              <ListItem button onClick={() => handleOptionChange('SolicitarVacaciones')}
-                  sx={{
-                    padding: 0,
-                    margin: 0,
-                    '&.Mui-selected': {
-                      backgroundColor: 'transparent',
-                    },
-                  }}>
-                <ListItemIcon>
-                  <BeachAccess sx={{ color: grey[700] }} />
-                </ListItemIcon>
-                <ListItemText primary="Solicitar Beneficios" />
-              </ListItem>
-            
-              <Divider sx={{ my: 2 }} />
-            
+              <Collapse in={openUS} timeout="auto" unmountOnExit>
+                <ListItem button onClick={() => handleOptionChange('SolicitarAnticipo')}
+                    sx={{
+                      padding: 0,
+                      margin: 0,
+                      '&.Mui-selected': {
+                        backgroundColor: 'transparent',
+                      },
+                    }}>
+                  <ListItemIcon>
+                    <MonetizationOn sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Anticipo" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('SolicitarPrestamo')}
+                    sx={{
+                      padding: 0,
+                      margin: 0,
+                      '&.Mui-selected': {
+                        backgroundColor: 'transparent',
+                      },
+                    }}>
+                  <ListItemIcon>
+                    <AttachMoney sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Préstamo" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('SolicitarPermiso')}
+                    sx={{
+                      padding: 0,
+                      margin: 0,
+                      '&.Mui-selected': {
+                        backgroundColor: 'transparent',
+                      },
+                    }}>
+                  <ListItemIcon>
+                    <EventNote sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Permiso" />
+                </ListItem>
+                <ListItem button onClick={() => handleOptionChange('SolicitarVacaciones')}
+                    sx={{
+                      padding: 0,
+                      margin: 0,
+                      '&.Mui-selected': {
+                        backgroundColor: 'transparent',
+                      },
+                    }}>
+                  <ListItemIcon>
+                    <BeachAccess sx={{ color: grey[700] }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Beneficios" />
+                </ListItem>
+              </Collapse>
+
               {/* Sección de Comunicaciones */}
-              <Typography variant="subtitle1" sx={{ color: grey[800], mb: 1 }}>Comunicaciones</Typography>
               <ListItem button onClick={() => handleOptionChange('ComunicacionesUsers')}
                   sx={{
                     padding: 0,
@@ -376,6 +481,19 @@ const Sidebar = ({ handleLogout, selectedEmpresa }) => {
                   <Mail sx={{ color: grey[700] }} />
                 </ListItemIcon>
                 <ListItemText primary="Comunicaciones" />
+              </ListItem>
+              <ListItem button onClick={() => handleOptionChange('LeyKarinModel')}
+                  sx={{
+                    padding: 0,
+                    margin: 0,
+                    '&.Mui-selected': {
+                      backgroundColor: 'transparent',
+                    },
+                  }}>
+                <ListItemIcon>
+                  <Gavel sx={{ color: grey[700] }} />
+                </ListItemIcon>
+                <ListItemText primary="Ley Karin" />
               </ListItem>
             </>
             

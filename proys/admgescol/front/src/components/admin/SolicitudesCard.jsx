@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Tabs, Tab, Button, Box, Typography, Paper, Table, TableHead, TableBody, TableRow, TableCell, TablePagination } from '@mui/material';
+import {  TextField, Tabs, Tab, Button, Box, Typography, Paper, Table, TableHead, TableBody, TableRow, TableCell, TablePagination } from '@mui/material';
 import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ExportToXlsx } from './ExportToXlsx'; // Import your new component
+import { Chip } from '@mui/material'; // Importar Chip de Material-UI
+import { Autocomplete } from '@mui/material';
+import '../../css/Dashboard.css';
+import '../../css/Empresas.css';
 
 const SolicitudesCard = ({ empresaId }) => {
   const [solicitudes, setSolicitudes] = useState({
@@ -24,18 +28,21 @@ const SolicitudesCard = ({ empresaId }) => {
   const [endDate, setEndDate] = useState('');
   const [status, setStatus] = useState('');
   const token = useSelector((state) => state.token);
+  const [trabajador, setTrabajador] = useState('');
 
   // Pagination state
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const empresaIdS = useSelector((state) => state.empresaId);
+  const handleTrabajadorChange = (value) => setTrabajador(value);
 
   useEffect(() => {
     const fetchSolicitudes = async () => {
       try {
         const response = await axios.get(`${API_BASE_URL}/solicitudes/all/${token}`); // Replace with your API endpoint
-        const solicitudesData = response.data.filter((soli) => soli.empresa_id == empresaIdS);
-
+        const solicitudesData = response.data
+        .filter((soli) => soli.empresa_id == empresaIdS)
+        .sort((a, b) => new Date(b.fecha) - new Date(a.fecha)); 
         // Filter and categorize the data
         const categorizedSolicitudes = {
           anticipos: [],
@@ -53,8 +60,17 @@ const SolicitudesCard = ({ empresaId }) => {
 
         // Fetch trabajadores data
         try {
-          const trabajadoresResponse = await axios.get(`${API_BASE_URL}/trabajadores/all/${token}`); // Replace with your API endpoint
-          setTrabajadores(trabajadoresResponse.data);
+        // Fetch trabajadores data
+        const trabajadoresResponse = await axios.get(`${API_BASE_URL}/trabajadores/all/${token}`);
+        
+        // Ordenar trabajadores por apellido_paterno, apellido_materno y nombre
+        const sortedTrabajadores = trabajadoresResponse.data.sort((a, b) => {
+          const fullNameA = `${a.apellido_paterno} ${a.apellido_materno} ${a.nombres}`.toLowerCase();
+          const fullNameB = `${b.apellido_paterno} ${b.apellido_materno} ${b.nombres}`.toLowerCase();
+          return fullNameA.localeCompare(fullNameB); // Compara nombres completos
+        });
+
+        setTrabajadores(sortedTrabajadores);
           const statusResponse = await axios.get(`${API_BASE_URL}/estadoSol/all/${token}`); // Replace with your API endpoint
           setStatuses(statusResponse.data);
         } catch (error) {
@@ -104,15 +120,57 @@ const SolicitudesCard = ({ empresaId }) => {
     return status ? `${status.nombre}` : 'Desconocido';
   };
 
+  const uniqueRuts = [...new Set(trabajadores.map((doc) => doc.rut))];
+
+
   const renderTable = (type) => {
     const fields = {
       anticipos: ['trabajador', 'fecha', 'monto', 'cuotas', 'comentario', 'status'],
-      beneficios: ['trabajador', 'fecha', 'fecha_fin', 'comentario', 'status'],
-      permisos: ['trabajador', 'fecha', 'goce', 'horas', 'time', 'timeEnd', 'comentario', 'status'],
+      beneficios: ['trabajador', 'fecha_inicio', 'fecha_fin', 'dias', 'comentario', 'status'],
+      permisos: ['trabajador', 'fecha', 'dias_1', 'horas', 'goce', 'comentario', 'status'],
       prestamos: ['trabajador', 'fecha', 'monto', 'cuotas', 'comentario', 'status'],
     };
+    
+    const headers = {
+      anticipos: {
+        trabajador: 'Trabajador',
+        fecha: 'Fecha',
+        monto: 'Monto',
+        cuotas: 'Cuotas',
+        comentario: 'Comentario',
+        status: 'Estado',
+      },
+      beneficios: {
+        trabajador: 'Trabajador',
+        fecha_inicio: 'Inicio',
+        fecha_fin: 'Regreso',
+        dias: 'Días', // Cabecera para días
+        comentario: 'Comentario',
+        status: 'Estado',
+      },
+      permisos: {
+        trabajador: 'Trabajador',
+        fecha: 'Fecha',
+        dias_1: 'Días',
+        horas: 'Horas',
+        goce: 'Goce',
+        comentario: 'Comentario',
+        status: 'Estado',
+      },
+      prestamos: {
+        trabajador: 'Trabajador',
+        fecha: 'Fecha',
+        monto: 'Monto',
+        cuotas: 'Cuotas',
+        comentario: 'Comentario',
+        status: 'Estado',
+      },
+    };
+    
 
-    const solicitudesData = solicitudes[type];
+    let solicitudesData = solicitudes[type];
+    solicitudesData = solicitudesData.filter((doc) => trabajador ? doc.trabajador === trabajador : true);
+
     const paginatedData = solicitudesData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
     return (
@@ -122,7 +180,7 @@ const SolicitudesCard = ({ empresaId }) => {
             <TableRow>
               {fields[type].map(field => (
                 <TableCell key={field} sx={{ color: 'black' }}>
-                  {field.charAt(0).toUpperCase() + field.slice(1)}
+                  {headers[type][field]} {/* Usar el objeto de mapeo para obtener la cabecera */}
                 </TableCell>
               ))}
               <TableCell sx={{ color: 'black' }}>Acciones</TableCell>
@@ -139,13 +197,89 @@ const SolicitudesCard = ({ empresaId }) => {
                       </TableCell>
                     );
                   }
-                  if (field === 'status') {
+
+                  if (field === 'dias_1') {
                     return (
                       <TableCell key={field} sx={{ color: 'black' }}>
-                        {getStatusNombre(solicitud[field])}
+                        1                     
                       </TableCell>
                     );
                   }
+
+                  if (field === 'status') {
+                    const status = solicitud[field];
+                    let chipColor = 'default'; // Color por defecto
+
+                    // Determinar el color y el texto del chip según el estado
+                    switch (status) {
+                      case '1': // Pendiente
+                        chipColor = 'warning'; // Color amarillo
+                        break;
+                      case '2': // Aceptado
+                        chipColor = 'success'; // Color verde
+                        break;
+                      case '3': // Rechazado
+                        chipColor = 'error'; // Color rojo
+                        break;
+                      default:
+                        chipColor = 'default'; // Color por defecto si no coincide
+                    }
+
+                    return (
+                      <TableCell key={field} sx={{ color: 'black' }}>
+                        <Chip label={getStatusNombre(status)} color={chipColor} />
+                      </TableCell>
+                    );
+                  }
+
+                  if (field === 'dias') {
+                    const dias = Math.round((new Date(solicitud.fecha_fin) - new Date(solicitud.fecha_inicio)) / (1000 * 60 * 60 * 24) ); // Calcular días
+                    return (
+                      <TableCell key={field} sx={{ color: 'black' }}>
+                        {dias}
+                      </TableCell>
+                    );
+                  }
+
+                  // Formato para las fechas
+                  if (field === 'fecha') {
+                    return (
+                      <TableCell key={field} sx={{ color: 'black' }}>
+                        {new Date(solicitud.fecha).toLocaleDateString()} {/* Formato de fecha */}
+                      </TableCell>
+                    );
+                  }
+
+                  // Formato para las fechas
+                  if (field === 'goce') {
+                    const goce = solicitud[field];
+                    let temp 
+                    goce == 1 ? temp = "Sí" : temp = "No"
+                    return (
+                      <TableCell key={field} sx={{ color: 'black' }}>
+                        {temp} {/* Formato de fecha */}
+                      </TableCell>
+                    );
+                  }
+
+                  // Formato para las fechas
+                  if (field === 'fecha_inicio') {
+                    return (
+                      <TableCell key={field} sx={{ color: 'black' }}>
+                        {new Date(solicitud.fecha_inicio).toLocaleDateString()} {/* Formato de fecha */}
+                      </TableCell>
+                    );
+                  }
+
+                  if (field === 'fecha_fin') {
+                    return (
+                      <TableCell key={field} sx={{ color: 'black' }}>
+                        {new Date(solicitud.fecha_fin).toLocaleDateString()} {/* Formato de fecha_fin */}
+                      </TableCell>
+                    );
+                  }
+
+                  // Para otros campos, simplemente devolver el valor
                   return (
                     <TableCell key={field} sx={{ color: 'black' }}>
                       {solicitud[field]}
@@ -156,10 +290,11 @@ const SolicitudesCard = ({ empresaId }) => {
                   {solicitud.status === '1' && (
                     <>
                       <Button 
-                        variant="contained" 
+                        variant="text" 
                         onClick={() => handleReject(3, solicitud.id)} 
                         sx={{ 
                           ml: 1, 
+                          mr: 1, 
                           backgroundColor: 'white', 
                           color: 'red', 
                           border: 'none',
@@ -183,26 +318,22 @@ const SolicitudesCard = ({ empresaId }) => {
                     </>
                   )}
                   {solicitud.status === '2' && (
-                    <Button 
-                      variant="contained" 
-                      disabled
-                      sx={{ 
-                        backgroundColor: 'gray', 
-                        color: 'green', 
-                        border: '1px solid green' 
+                    <Button
+                      variant="text"
+                      sx={{
+                        color: 'green', // Color verde para "Aceptado"
+                        fontWeight: 'bold' // Para resaltar el texto
                       }}
                     >
                       Aceptado
                     </Button>
                   )}
                   {solicitud.status === '3' && (
-                    <Button 
-                      variant="contained" 
-                      disabled
-                      sx={{ 
-                        backgroundColor: 'gray', 
-                        color: 'red', 
-                        border: '1px solid red' 
+                    <Button
+                      variant="text"
+                      sx={{
+                        color: 'red', // Color rojo para "Rechazado"
+                        fontWeight: 'bold' // Para resaltar el texto
                       }}
                     >
                       Rechazado
@@ -234,15 +365,27 @@ const SolicitudesCard = ({ empresaId }) => {
 
   const handleAccept = async (type, id) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/solicitudes/change-status/${id}/2`);
-      if (response.status === 200) {
-        Swal.fire({
-          title: 'Éxito',
-          text: 'Solicitud aceptada correctamente.',
-          icon: 'success'
-        }).then(() => {
-          navigate(`/Empresas/${empresaId}`); // Redirect to empresa page
-        });
+      // Mostrar un cuadro de entrada para el comentario
+      const { value: comentario } = await Swal.fire({
+        title: 'Aprobar Solicitud',
+        text: '¿Desea aprobar solicitud?',
+        showCancelButton: true,
+        confirmButtonText: 'Aprobar',
+        cancelButtonText: 'Cancelar'
+      });
+
+      // Si el usuario proporciona un comentario y confirma
+      if (comentario) {
+        const response = await axios.post(`${API_BASE_URL}/solicitudes/change-status/${id}/2`);
+        if (response.status === 200) {
+          Swal.fire({
+            title: 'Éxito',
+            text: 'Solicitud aceptada correctamente.',
+            icon: 'success'
+          }).then(() => {
+            navigate(`/Empresas/${empresaId}`); // Redirect to empresa page
+          });
+        }
       }
     } catch (error) {
       Swal.fire({
@@ -309,13 +452,33 @@ const SolicitudesCard = ({ empresaId }) => {
         <Tab label="Exportar XLSX" value="export" />
       </Tabs>
       <Box sx={{ p: 2 }}>
+          <Autocomplete
+            id="trabajador-autocomplete"
+            options={uniqueRuts}
+            getOptionLabel={(option) => getTrabajadorNombre(option)}
+            onChange={(event, value) => handleTrabajadorChange(value)}
+            renderInput={(params) => (
+              <TextField 
+                {...params} 
+                label="Trabajador" 
+                variant="outlined" 
+                sx={{
+                  minWidth: '360px',
+                  '& .MuiInputLabel-root': { color: 'black' },  // Color de la etiqueta
+                  '& .MuiOutlinedInput-root': { 
+                    '& input': { color: 'black' }, // Color del texto
+                    '& fieldset': { borderColor: 'black' }, // Color del borde
+                  },
+                }} 
+              />
+            )}
+          />
         {value === 'export' ? (
           <ExportToXlsx
             exportData={solicitudes}
-
           />
         ) : (
-          renderTable(value)
+            renderTable(value)
         )}
       </Box>
     </Paper>

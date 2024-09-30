@@ -47,7 +47,7 @@ const DocumentosCard = ({ usuario }) => {
                         <ListItemIcon>
                         <MoneyIcon sx={{ color: '#3f51b5' }} />
                         </ListItemIcon>
-                        <ListItemText primary="Solicitud de Anticipo" />
+                        <ListItemText primary="Anticipo" />
           </ListItem>
         </Grid>
 
@@ -69,7 +69,7 @@ const DocumentosCard = ({ usuario }) => {
                         <ListItemIcon>
                         <CreditCardIcon sx={{ color: '#3f51b5' }} />
                         </ListItemIcon>
-                        <ListItemText primary="Solicitud de Préstamo" />
+                        <ListItemText primary="Préstamo" />
           </ListItem>
         </Grid>
 
@@ -91,7 +91,7 @@ const DocumentosCard = ({ usuario }) => {
                         <ListItemIcon>
                         <AccessTimeIcon sx={{ color: '#3f51b5' }} />
                         </ListItemIcon>
-                        <ListItemText primary="Solicitud de Permiso" />
+                        <ListItemText primary="Permiso" />
           </ListItem>
         </Grid>
 
@@ -113,7 +113,7 @@ const DocumentosCard = ({ usuario }) => {
                         <ListItemIcon>
                         <BeachAccess sx={{ color: '#3f51b5' }} />
                         </ListItemIcon>
-                        <ListItemText primary="Solicitud de Beneficios" />
+                        <ListItemText primary="Beneficios" />
           </ListItem>
         </Grid>
       </Grid>

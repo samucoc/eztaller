@@ -140,7 +140,8 @@ class DocumentoController extends ResourceController
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
         $query = "SELECT documentos.*, 
-                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado,
+                        documentos_firmados.ruta_pdf
                     FROM documentos
                     LEFT JOIN documentos_firmados 
                         ON documentos_firmados.documento_id = documentos.id 
@@ -169,7 +170,8 @@ class DocumentoController extends ResourceController
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
         $query = "SELECT documentos.*, 
-                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado,
+                        documentos_firmados.ruta_pdf
                     FROM documentos
                     LEFT JOIN documentos_firmados 
                         ON documentos_firmados.documento_id = documentos.id 
@@ -190,7 +192,8 @@ class DocumentoController extends ResourceController
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
         $query = "SELECT documentos.*, 
-                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado,
+                        documentos_firmados.ruta_pdf
                     FROM documentos
                     LEFT JOIN documentos_firmados 
                         ON documentos_firmados.documento_id = documentos.id 
@@ -223,7 +226,8 @@ class DocumentoController extends ResourceController
         $db = \Config\Database::connect();
         // Preparar la consulta SQL
         $query = "SELECT documentos.*, 
-                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado,
+                        documentos_firmados.ruta_pdf
                     FROM documentos
                     LEFT JOIN documentos_firmados 
                         ON documentos_firmados.documento_id = documentos.id 
@@ -250,7 +254,8 @@ class DocumentoController extends ResourceController
         // Preparar la consulta SQL
         //$query = "SELECT * FROM documentos WHERE tipo_doc_id = '1' and trabajador = ? and empresa_id = ? and agno = '".date("Y")."'";
         $query = "SELECT documentos.*, 
-                        COALESCE(documentos_firmados.documento_id, 0) AS firmado
+                        COALESCE(documentos_firmados.documento_id, 0) AS firmado,
+                        documentos_firmados.ruta_pdf
                     FROM documentos
                     LEFT JOIN documentos_firmados 
                         ON documentos_firmados.documento_id = documentos.id 
@@ -939,15 +944,18 @@ class DocumentoController extends ResourceController
     
         $tp = new DocumentoModel();
         $tp = $tp->find($documentId);
-
+    
         if ($tp) {
-
             $db = \Config\Database::connect();
-            // Preparar la consulta SQL
-            $query = "insert into documentos_firmados(documento_id, trabajador, token) values(?,?,?)";
+    
+            // Anexar la hoja al PDF con los datos necesarios
+            $nuevoPdfRuta = $this->anexarHojaAlPDF($tp->ruta, $userDNI, $timestamp, $clientIp, $receivedToken, $tp->trabajador);
+    
+            // Preparar la consulta SQL para insertar en documentos_firmados
+            $query = "INSERT INTO documentos_firmados(documento_id, trabajador, token, ruta_pdf) VALUES(?, ?, ?, ?)";
             // Ejecutar la consulta utilizando Query Builder de CodeIgniter
-            $data = $db->query($query, [$documentId, $userDNI, $receivedToken]);
-       
+            $data = $db->query($query, [$documentId, $userDNI, $receivedToken, $nuevoPdfRuta]);
+    
             if ($data) {
                 $tp->id = $documentId;
     
@@ -955,9 +963,6 @@ class DocumentoController extends ResourceController
                 $notificacionController = new \App\Controllers\Api\V1\NotificacionController();
                 $mensaje = "Documento con rut {$tp->trabajador} ha sido firmado correctamente.";
                 $notificacionController->logNotification($tp->trabajador, 'insert', 'documento - firma', $mensaje);
-    
-                // Anexar la hoja al PDF con los datos necesarios
-                $this->anexarHojaAlPDF($tp->ruta, $userDNI, $timestamp, $clientIp, $receivedToken);
     
                 return $this->respondUpdated($tp, RESOURCE_UPDATED);
             } else {
@@ -967,45 +972,56 @@ class DocumentoController extends ResourceController
             return $this->failNotFound('Documento no encontrado.');
         }
     }
-
-    private function anexarHojaAlPDF($pdfRuta, $usuario, $fechaHora, $ip, $expectedToken)
+    
+    private function anexarHojaAlPDF($pdfRuta, $usuario, $fechaHora, $ip, $expectedToken, $rutTrabajador)
     {
+        // Inicializar FPDI para agregar la nueva hoja
         $pdf = new Fpdi();
         $pdf->AddPage();
         $pdf->SetFont('Arial', 'B', 10);
-
-        // Título de la hoja
+    
+        // Título de la nueva hoja
         $pdf->Cell(0, 5, 'Datos de Firma', 0, 1, 'C');
         $pdf->Ln(10);
-
-        // Agregar los datos
+    
+        // Agregar los datos del usuario
         $pdf->SetFont('Arial', '', 7);
         $pdf->Cell(0, 5, "Usuario: $usuario", 0, 1);
         $pdf->Cell(0, 5, "Fecha y Hora de Firma: $fechaHora", 0, 1);
         $pdf->Cell(0, 5, "IP: $ip", 0, 1);
         $pdf->Cell(0, 5, "Token: $expectedToken", 0, 1);
-
+    
         // Guardar la nueva hoja en un archivo temporal
         $tempPdf = tempnam(sys_get_temp_dir(), 'pdf');
         $pdf->Output('F', $tempPdf);
-
-        // Combinar el archivo temporal con el PDF original
+    
+        // Inicializar FPDI para combinar ambos PDFs
         $pdf = new Fpdi();
         $pdf->AddPage();
-        $pdf->setSourceFile($pdfRuta);
+        $pdf->setSourceFile($pdfRuta); // PDF original
         $tplIdx = $pdf->importPage(1);
         $pdf->useTemplate($tplIdx);
+        
+        // Agregar la nueva hoja con los datos de firma
         $pdf->AddPage();
         $pdf->setSourceFile($tempPdf);
         $tplIdx = $pdf->importPage(1);
         $pdf->useTemplate($tplIdx);
-
-        // Guardar el PDF combinado
-        file_put_contents($pdfRuta, $pdf->Output('S'));
-
+    
+        // Crear un nuevo nombre para el PDF, incluyendo el RUT del trabajador
+        $nuevoPdfRuta = str_replace('.pdf', "_$rutTrabajador.pdf", $pdfRuta);
+    
+        // Guardar el nuevo PDF en lugar de sobrescribir el original
+        file_put_contents($nuevoPdfRuta, $pdf->Output('S'));
+    
         // Eliminar el archivo temporal
         unlink($tempPdf);
+    
+        // Retornar la ruta del nuevo archivo generado
+        return $nuevoPdfRuta;
     }
+    
+
     
     public function generateSecurityToken($documentId, $userDNI, $timestamp, $secretKey) {
         // Crear un string único basado en los datos proporcionados

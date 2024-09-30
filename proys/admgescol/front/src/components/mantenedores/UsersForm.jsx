@@ -9,6 +9,7 @@ import { useTheme } from '@mui/material/styles';
 import '../../css/Empresas.css';
 import { useSelector } from 'react-redux'; // Importar useSelector
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const UserForm = ({ onSubmit, onCancel, initialUser }) => {
   const [formData, setFormData] = useState({
@@ -26,7 +27,8 @@ const UserForm = ({ onSubmit, onCancel, initialUser }) => {
   useEffect(() => {
     fetchRoles();
   }, []);
-  
+  const navigate = useNavigate();
+
   const fetchRoles = async () => {
     try {
       const response = await axios.get(`${API_BASE_URL}/roles/all/${token}`);
@@ -48,6 +50,9 @@ const UserForm = ({ onSubmit, onCancel, initialUser }) => {
           text: 'Usuario desactivado con éxito.',
           confirmButtonText: 'OK',
       });
+      navigate('/Usuarios')
+      onCancel()
+
     } catch (error) {
       Swal.fire({
           icon: 'error',
@@ -71,6 +76,9 @@ const UserForm = ({ onSubmit, onCancel, initialUser }) => {
           text: 'Usuario activado con éxito.',
           confirmButtonText: 'OK',
       });
+      navigate('/Usuarios')
+      onCancel()
+
     } catch (error) {
       Swal.fire({
           icon: 'error',

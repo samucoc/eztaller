@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Empresas from '../admin/Empresas';
 import ManageEmpresa from '../admin/ManageEmpresa';
 import ComunicacionesCard from '../admin/ComunicacionesCard';
+import DocumentosCard from '../admin/DocumentosCard';
 import SolicitudesCard from '../admin/SolicitudesCard';
 import LeyKarin from '../mantenedores/LeyKarin';
 
@@ -31,6 +32,9 @@ import SolicitarPrestamo from '../users/SolicitudesPrest';
 import SolicitarPermiso from '../users/SolicitudesPerm';
 import SolicitarVacaciones from '../users/SolicitudesVac';
 import ComunicacionesUsers from '../users/Comunicaciones';
+import LeyKarinModel from '../users/LeyKarinModel';
+
+import Perfiles from './Perfiles';
 
 import { useDispatch } from 'react-redux';
 import { setCurrentOption } from '../../actions';
@@ -49,6 +53,7 @@ const Panel = ({ currentOption, empresaId }) => {
         <Route path="/Empresas" element={<Empresas empresaId={empresaId}/>} />
         <Route path="/ComunicacionesCard" element={<ComunicacionesCard />} />
         <Route path="/SolicitudesCard" element={<SolicitudesCard />} />
+        <Route path="/DocumentosCard" element={<DocumentosCard />} />
         <Route path="/Empresas/:id" element={<ManageEmpresa />} />
         <Route path="/LeyKarin"  element={<LeyKarin />} />
         
@@ -76,6 +81,9 @@ const Panel = ({ currentOption, empresaId }) => {
         <Route path="/SolicitarPermiso" element={<SolicitarPermiso />} />
         <Route path="/SolicitarVacaciones" element={<SolicitarVacaciones />} />
         <Route path="/ComunicacionesUsers" element={<ComunicacionesUsers />} />
+        <Route path="/LeyKarinModel" element={<LeyKarinModel />} />
+        
+        <Route path="/Perfiles" element={<Perfiles />} />
 
 
       </Routes>

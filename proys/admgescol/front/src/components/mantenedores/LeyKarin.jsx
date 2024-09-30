@@ -94,8 +94,7 @@ const LeyKarin = () => {
     const denunciaMonth = denunciaDate.getMonth() + 1; // getMonth() retorna 0-indexed
 
     return (
-      (Denuncia.denuncianteApellidos.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      Denuncia.denuncianteNombre.toLowerCase().includes(searchTerm.toLowerCase())) &&
+      (Denuncia.denuncianteNombre.toLowerCase().includes(searchTerm.toLowerCase())) &&
       (year ? denunciaYear === parseInt(year, 10) : true) &&
       (month ? denunciaMonth === parseInt(month, 10) : true)
     );
@@ -191,7 +190,7 @@ const LeyKarin = () => {
               {filteredDenuncias.map((Denuncia) => (
                 <TableRow key={Denuncia.id}>
                   <TableCell>{Denuncia.id}</TableCell>
-                  <TableCell>{Denuncia.denuncianteApellidos}, {Denuncia.denuncianteNombre}</TableCell>
+                  <TableCell>{Denuncia.denuncianteNombre}</TableCell>
                   <TableCell>
                     {new Date(Denuncia.created_at.date).toLocaleDateString('es-ES', {
                       year: 'numeric',

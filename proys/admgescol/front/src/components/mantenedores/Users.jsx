@@ -21,7 +21,7 @@ const Users = () => {
       width: '100%',
     },
     container: {
-      maxHeight: 440,
+      maxHeight: 550,
     },
   });
   const [showForm, setShowForm] = useState(false); // State to control form visibility
@@ -167,7 +167,11 @@ const Users = () => {
         <UsersForm
           onSubmit={addUser}
           initialUser={selectedUser}
-          onCancel={handleCancel}
+          onCancel={ () => {
+                            handleCancel();     
+                            fetchUsers(null);
+                          }
+                      }
         />
       ) : (
         <>
@@ -229,7 +233,7 @@ const Users = () => {
                         <Button variant="text" color="primary" onClick={() => editUser(User)} startIcon={<EditIcon style={{width:'48px', height: '48px'}}/>}></Button>
                       </Tooltip>
                       <Tooltip title={'Eliminar Usuario'}>
-                        <Button variant="text" color="secondary" onClick={() => deleteUser(User.id)} startIcon={<DeleteOutlinedIcon style={{width:'48px', height: '48px'}}/>}></Button>
+                        <Button variant="text" color="secondary" disabled={User.userStatus === "0"} onClick={() => deleteUser(User.id)} startIcon={<DeleteOutlinedIcon style={{width:'48px', height: '48px'}}/>}></Button>
                       </Tooltip>
                     </TableCell>
                   </TableRow>

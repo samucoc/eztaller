@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 
 const Empresas = ({ empresaId }) => {
   const [showForm, setShowForm] = useState(false);
+  const [showMenu, setshowMenu] = useState(false);
   const [selectedEmpresa, setSelectedEmpresa] = useState(null);
   const [empresas, setEmpresas] = useState([]);
   const [comunas, setComunas] = useState([]);
@@ -30,26 +31,26 @@ const Empresas = ({ empresaId }) => {
   const { id } = useParams();
 
   const navigate = useNavigate();
+  const fetchEmpresas = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/empresas/all/${token}`); // Replace with your API endpoint
+      setEmpresas(response.data);
+    } catch (error) {
+      console.error('Error fetching Empresas:', error);
+    }
+  };
+
+  const fetchComunas = async () => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/comunas/all/${token}`); // Replace with your API endpoint
+      setComunas(response.data);
+    } catch (error) {
+      console.error('Error fetching Comunas:', error);
+    }
+  };
+
 
   useEffect(() => {
-    const fetchEmpresas = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/empresas/all/${token}`); // Replace with your API endpoint
-        setEmpresas(response.data);
-      } catch (error) {
-        console.error('Error fetching Empresas:', error);
-      }
-    };
-
-    const fetchComunas = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/comunas/all/${token}`); // Replace with your API endpoint
-        setComunas(response.data);
-      } catch (error) {
-        console.error('Error fetching Comunas:', error);
-      }
-    };
-
     fetchEmpresas();
     fetchComunas();
   }, []);
@@ -169,19 +170,23 @@ const Empresas = ({ empresaId }) => {
 
   const [anchorElOpcion, setAnchorElOpcion] = useState(null);
 
-  const handleClickOpcion = (event) => {
-    setAnchorElOpcion(event.currentTarget);
+  const handleClickOpcion = (event, empresa) => {
+    setAnchorElOpcion(event.currentTarget);  // Open the menu at the clicked button
+    setSelectedEmpresa(empresa);  
+    setshowMenu(true)           // Store the selected empresa
   };
-
+  
   const handleCloseOpcion = () => {
-    setAnchorElOpcion(null);
+    setAnchorElOpcion(null); // Close the menu
+    setSelectedEmpresa(null); // Clear the selected empresa
+    setshowMenu(false)           // Store the selected empresa
+
   };
 
 
-  console.log(selectedEmpresa)
   return (
     <div className="container empresas">
-      {selectedEmpresa && !showForm ? (
+      {selectedEmpresa && !showForm && !showMenu? (
         <ManageEmpresa empresa={selectedEmpresa} />
       ) : (
         <>
@@ -193,6 +198,7 @@ const Empresas = ({ empresaId }) => {
               onCancel={() => {
                                 setShowForm(false)
                                 setSelectedEmpresa(null)
+                                fetchEmpresas()
                               }
                         }
               comunas={comunas}
@@ -240,6 +246,7 @@ const Empresas = ({ empresaId }) => {
                             startIcon={<EditIcon />}
                             onClick={() => manageEmpresa(empresa.id)}
                             style={{ marginLeft: '10px' }}
+                            disabled={empresa.empresaStatus === "0"} // Disable when empresaStatus is 0
                           >
                             Gestionar
                           </Button>
@@ -247,7 +254,7 @@ const Empresas = ({ empresaId }) => {
                             variant="text"
                             color="primary"
                             startIcon={<ListIcon />}
-                            onClick={handleClickOpcion}
+                            onClick={(event) => handleClickOpcion(event, empresa)} // Pass the empresa to handleClickOpcion
                             style={{ marginLeft: '10px' }}
 
                           ></Button>
@@ -259,7 +266,9 @@ const Empresas = ({ empresaId }) => {
                             <MenuItem 
                               startIcon={<EditIcon />}
                               onClick={() => {
-                                              editEmpresa(empresa)
+                                              if (selectedEmpresa) {
+                                                editEmpresa(selectedEmpresa); // Use the selectedEmpresa
+                                              }
                                               setAnchorElOpcion(null)
                                               }
                                 }
@@ -267,7 +276,12 @@ const Empresas = ({ empresaId }) => {
                             </MenuItem>
                             <MenuItem 
                               startIcon={<DeleteIcon />}
-                              onClick={() => deleteEmpresa(empresa.id)}
+                              onClick={() => {
+                                if (selectedEmpresa) {
+                                  deleteEmpresa(selectedEmpresa.id); // Use the selectedEmpresa's id
+                                }
+                                handleCloseOpcion();
+                              }}
                               style={{ marginLeft: '10px' }}>Eliminar
                             </MenuItem>
                           </Menu>

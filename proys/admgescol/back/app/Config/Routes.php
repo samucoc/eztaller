@@ -65,6 +65,8 @@ $routes->group('Api', function ($routes) {
             $routes->post('', 'UserController::create');
             $routes->put('(:num)', 'UserController::update/$1');
             $routes->delete('(:num)', 'UserController::delete/$1');
+            $routes->get('desactivar-usuario/(:segment)', 'UserController::desactivar/$1');
+            $routes->get('activar-usuario/(:segment)', 'UserController::activar/$1');
         });
 
         // Routes for Documentos
@@ -104,6 +106,8 @@ $routes->group('Api', function ($routes) {
             $routes->post('uploadFoto/(:segment)', 'TrabajadorController::uploadFoto/$1');
             $routes->put('(:segment)', 'TrabajadorController::update/$1');
             $routes->delete('(:segment)', 'TrabajadorController::delete/$1');
+            $routes->get('desactivar-trabajador/(:segment)', 'TrabajadorController::desactivar/$1');
+            $routes->get('activar-trabajador/(:segment)', 'TrabajadorController::activar/$1');
         });
 
         // Routes for TrabajadoresTienenDocumentos
@@ -145,6 +149,8 @@ $routes->group('Api', function ($routes) {
             $routes->put('(:segment)', 'EmpresaController::update/$1');
             $routes->delete('(:segment)', 'EmpresaController::delete/$1');
             $routes->get('trabajadores/(:segment)', 'EmpresaController::showByRut/$1');
+            $routes->get('desactivar-empresa/(:segment)', 'EmpresaController::desactivar/$1');
+            $routes->get('activar-empresa/(:segment)', 'EmpresaController::activar/$1');
         });
 
         // Routes for Sexo

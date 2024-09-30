@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/LiquidacionesToPdf.css';
+import '../../css/Empresas.css';
+
 import { API_BASE_URL, API_DOWNLOAD_URL } from '../config/apiConstants'; // Assuming API_BASE_URL is defined here
 import {
   Card, CardContent, Container,
@@ -218,6 +220,89 @@ const DocumentosToPdf = () => {
                 </TextField>
               </Box>
             )}
+
+            <Grid container spacing={2} mb={3}>
+              <Grid item xs={12}>
+                <Box mb={3}>
+                  <FormControl fullWidth variant="outlined" margin="normal">
+                    <InputLabel id="trabajador-label">Trabajador</InputLabel>
+                    <Select
+                      labelId="trabajador-label"
+                      id="trabajador"
+                      value={trabajador}
+                      onChange={handleTrabajadorChange}
+                      label="Trabajador"
+                    >
+                      <MenuItem value="0">
+                        <em>Seleccionar trabajador...</em>
+                      </MenuItem>
+                      {trabajadores
+                        .filter((trabajador) => trabajador.empresa_id === empresaIdS?empresaIdS:empresa_id)
+                        .map((trabajador) => (
+                          <MenuItem key={trabajador.rut} value={trabajador.rut}>
+                            {trabajador.apellido_paterno} {trabajador.apellido_materno}, {trabajador.nombres} 
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Box>
+              </Grid>
+              <Grid item xs={6}>
+                <FormControl fullWidth variant="outlined" margin="normal">
+                  <InputLabel id="month-label">Mes</InputLabel>
+                  <Select
+                    labelId="month-label"
+                    id="month"
+                    value={month}
+                    onChange={handleMonthChange}
+                    label="Mes"
+                    sx={{
+                      color: 'black',
+                      '& .MuiSelect-select': {
+                        color: 'black',
+                      },
+                    }}
+                  >
+                    <MenuItem value="">
+                      <em>Seleccionar mes...</em>
+                    </MenuItem>
+                    <MenuItem value="1">Enero</MenuItem>
+                    <MenuItem value="2">Febrero</MenuItem>
+                    <MenuItem value="3">Marzo</MenuItem>
+                    <MenuItem value="4">Abril</MenuItem>
+                    <MenuItem value="5">Mayo</MenuItem>
+                    <MenuItem value="6">Junio</MenuItem>
+                    <MenuItem value="7">Julio</MenuItem>
+                    <MenuItem value="8">Agosto</MenuItem>
+                    <MenuItem value="9">Septiembre</MenuItem>
+                    <MenuItem value="10">Octubre</MenuItem>
+                    <MenuItem value="11">Noviembre</MenuItem>
+                    <MenuItem value="12">Diciembre</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={6}>
+                <FormControl variant="outlined" style={{ marginRight: '1rem', minWidth: '120px' }}>
+                  <InputLabel id="year-select-label">Año</InputLabel>
+                  <Select
+                    labelId="year-select-label"
+                    id="year"
+                    value={year}
+                    onChange={handleYearChange}
+                    label="Año"
+                  >
+                    <MenuItem value="">
+                      <em>Seleccionar año...</em>
+                    </MenuItem>
+                    {getLastTenYears().map((year) => (
+                      <MenuItem key={year} value={year}>
+                        {year}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
             <Box mb={3}>
               <FormControl fullWidth variant="outlined" margin="normal">
                 <InputLabel id="tipo_doc-label">Tipo Documento</InputLabel>
@@ -240,87 +325,6 @@ const DocumentosToPdf = () => {
                   ))}
                 </Select>
               </FormControl>
-            </Box>
-            <Grid container spacing={2} mb={3}>
-                <Grid item xs={6}>
-                  <FormControl fullWidth variant="outlined" margin="normal">
-                    <InputLabel id="month-label">Mes</InputLabel>
-                    <Select
-                      labelId="month-label"
-                      id="month"
-                      value={month}
-                      onChange={handleMonthChange}
-                      label="Mes"
-                      sx={{
-                        color: 'black',
-                        '& .MuiSelect-select': {
-                          color: 'black',
-                        },
-                      }}
-                    >
-                      <MenuItem value="">
-                        <em>Seleccionar mes...</em>
-                      </MenuItem>
-                      <MenuItem value="1">Enero</MenuItem>
-                      <MenuItem value="2">Febrero</MenuItem>
-                      <MenuItem value="3">Marzo</MenuItem>
-                      <MenuItem value="4">Abril</MenuItem>
-                      <MenuItem value="5">Mayo</MenuItem>
-                      <MenuItem value="6">Junio</MenuItem>
-                      <MenuItem value="7">Julio</MenuItem>
-                      <MenuItem value="8">Agosto</MenuItem>
-                      <MenuItem value="9">Septiembre</MenuItem>
-                      <MenuItem value="10">Octubre</MenuItem>
-                      <MenuItem value="11">Noviembre</MenuItem>
-                      <MenuItem value="12">Diciembre</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={6}>
-                  <FormControl variant="outlined" style={{ marginRight: '1rem', minWidth: '120px' }}>
-                    <InputLabel id="year-select-label">Año</InputLabel>
-                    <Select
-                      labelId="year-select-label"
-                      id="year"
-                      value={year}
-                      onChange={handleYearChange}
-                      label="Año"
-                    >
-                      <MenuItem value="">
-                        <em>Seleccionar año...</em>
-                      </MenuItem>
-                      {getLastTenYears().map((year) => (
-                        <MenuItem key={year} value={year}>
-                          {year}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-              </Grid>
-
-            <Box mb={3}>
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel id="trabajador-label">Trabajador</InputLabel>
-              <Select
-                labelId="trabajador-label"
-                id="trabajador"
-                value={trabajador}
-                onChange={handleTrabajadorChange}
-                label="Trabajador"
-              >
-                <MenuItem value="0">
-                  <em>Seleccionar trabajador...</em>
-                </MenuItem>
-                {trabajadores
-                  .filter((trabajador) => trabajador.empresa_id === empresaIdS?empresaIdS:empresa_id)
-                  .map((trabajador) => (
-                    <MenuItem key={trabajador.rut} value={trabajador.rut}>
-                      {trabajador.apellido_paterno} {trabajador.apellido_materno}, {trabajador.nombres} 
-                    </MenuItem>
-                  ))}
-              </Select>
-            </FormControl>
             </Box>
             <Box mb={3}>
               <TextField
@@ -352,12 +356,12 @@ const DocumentosToPdf = () => {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
+                className="crear-empresa-btn" 
                 fullWidth
                 disabled={loading}
                 startIcon={loading && <CircularProgress size={20} />}
               >
-                {loading ? 'Enviando...' : 'Generar PDF'}
+                {loading ? 'Enviando...' : 'Carga Archivo Individual'}
               </Button>
             </Box>
           </form>

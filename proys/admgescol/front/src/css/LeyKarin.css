@@ -7,3 +7,11 @@
     border-color: #ed6c02 !important; /* Warning color for the 'Sin Evidencias' chip */
     color: #ed6c02 !important;
   }
+
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+  }
+
+  

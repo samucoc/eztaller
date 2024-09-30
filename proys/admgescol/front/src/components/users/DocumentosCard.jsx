@@ -29,29 +29,7 @@ const DocumentosCard = ({ usuario }) => {
   return (
     <List>
       <Grid container spacing={2}>
-        {/* Contratos y Anexos */}
-        <Grid item xs={12} sm={6} md={3}>
-            <ListItem
-                button
-                sx={{
-                    border: '1px solid rgba(63, 81, 181, 0.5)', // Borde azul con 50% de transparencia
-                    borderRadius: '4px',          // Añade esquinas redondeadas
-                padding: '10px 15px',         // Agrega padding para darle apariencia de botón
-                marginBottom: '10px',         // Agrega margen inferior para separación
-                '&:hover': {
-                    backgroundColor: '#f0f0f0', // Cambia el color de fondo al pasar el mouse
-                },
-                }}
-                onClick={handleContratos}
-
-            >   
-           <ListItemIcon>
-              <DescriptionIcon sx={{ color: '#3f51b5' }} />
-            </ListItemIcon>
-            <ListItemText primary="Contratos y Anexos" />
-          </ListItem>
-        </Grid>
-
+        
         {/* Liquidaciones */}
         <Grid item xs={12} sm={6} md={3}>
             <ListItem
@@ -72,6 +50,29 @@ const DocumentosCard = ({ usuario }) => {
               <ReceiptIcon sx={{ color: '#3f51b5' }} />
             </ListItemIcon>
             <ListItemText primary="Liquidaciones" />
+          </ListItem>
+        </Grid>
+
+        {/* Contratos y Anexos */}
+        <Grid item xs={12} sm={6} md={3}>
+            <ListItem
+                button
+                sx={{
+                    border: '1px solid rgba(63, 81, 181, 0.5)', // Borde azul con 50% de transparencia
+                    borderRadius: '4px',          // Añade esquinas redondeadas
+                padding: '10px 15px',         // Agrega padding para darle apariencia de botón
+                marginBottom: '10px',         // Agrega margen inferior para separación
+                '&:hover': {
+                    backgroundColor: '#f0f0f0', // Cambia el color de fondo al pasar el mouse
+                },
+                }}
+                onClick={handleContratos}
+
+            >   
+           <ListItemIcon>
+              <DescriptionIcon sx={{ color: '#3f51b5' }} />
+            </ListItemIcon>
+            <ListItemText primary="Contratos y Anexos" />
           </ListItem>
         </Grid>
 

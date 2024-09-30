@@ -1,0 +1,226 @@
+CRITICAL - 2024-09-29 04:46:42 --> Attempt to assign property "updated_at" on null
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 287.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-29 04:48:43 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\BaseModel.php(910): CodeIgniter\BaseModel->transformDataToArray(null, 'update')
+ 3 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], null)
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-29 04:49:05 --> There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 1680.
+ 1 SYSTEMPATH\BaseModel.php(1680): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\BaseModel.php(910): CodeIgniter\BaseModel->transformDataToArray(null, 'update')
+ 3 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], null)
+ 4 APPPATH\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', null)
+ 5 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+ 6 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 7 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-29 04:49:51 --> Attempt to assign property "updated_at" on null
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 287.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-29 04:51:11 --> Attempt to assign property "updated_at" on null
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 287.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-29 04:52:48 --> Attempt to assign property "updated_at" on null
+in APPPATH\Controllers\Api\V1\TrabajadorController.php on line 287.
+ 1 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+ 2 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 3 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-29 04:52:59 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), `direccion` = NULL, `comuna_id` = NULL, `telefono` = NULL, `email` = 'MACUÑA' at line 1 in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `trabaja...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `trabaja...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `trabaja...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabaja...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(943): CodeIgniter\Model->doUpdate(Array, Array)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(755): CodeIgniter\BaseModel->update(Array, Array)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+#10 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2024-09-29 04:52:59 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), `direccion` = NULL, `comuna_id` = NULL, `telefono` = NULL, `email` = 'MACUÑA' at line 1
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `fecha_ingreso` = :fecha_ingreso:, `tipo_contrato` = :tipo_contrato:, `region_id` = :region_id:, `emailEmpresa` = :emailEmpresa:, `contacto_emergencia_2` = :contacto_emergencia_2:, `telefono_emergencia_2` = :telefono_emergencia_2:, `email_emergencia_2` = :email_emergencia_2:, `email_emergencia` = :email_emergencia:, `nro_cuenta` = :nro_cuenta:, `tipo_cuenta` = :tipo_cuenta:, `bancos` = :bancos:, `salud` = :salud:, `plan_salud` = :plan_salud:, `afp` = :afp:, `ingreso` = :ingreso:, `plazo_contrato` = :plazo_contrato:, `horas_trabajo` = :horas_trabajo:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 2 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 3 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 4 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 5 APPPATH\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-29 04:53:47 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), `direccion` = 'ffff', `comuna_id` = '1', `telefono` = NULL, `email` = 'MACUÑ' at line 1 in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `trabaja...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `trabaja...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `trabaja...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabaja...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(943): CodeIgniter\Model->doUpdate(Array, Array)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(755): CodeIgniter\BaseModel->update(Array, Array)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+#10 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2024-09-29 04:53:47 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), `direccion` = 'ffff', `comuna_id` = '1', `telefono` = NULL, `email` = 'MACUÑ' at line 1
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `fecha_ingreso` = :fecha_ingreso:, `tipo_contrato` = :tipo_contrato:, `region_id` = :region_id:, `emailEmpresa` = :emailEmpresa:, `contacto_emergencia_2` = :contacto_emergencia_2:, `telefono_emergencia_2` = :telefono_emergencia_2:, `email_emergencia_2` = :email_emergencia_2:, `email_emergencia` = :email_emergencia:, `nro_cuenta` = :nro_cuenta:, `tipo_cuenta` = :tipo_cuenta:, `bancos` = :bancos:, `salud` = :salud:, `plan_salud` = :plan_salud:, `afp` = :afp:, `ingreso` = :ingreso:, `plazo_contrato` = :plazo_contrato:, `horas_trabajo` = :horas_trabajo:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 2 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 3 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 4 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 5 APPPATH\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-29 04:54:27 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), `direccion` = '2222', `comuna_id` = '2', `telefono` = '2222', `email` = 'MACU' at line 1 in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `trabaja...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `trabaja...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `trabaja...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabaja...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(943): CodeIgniter\Model->doUpdate(Array, Array)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(755): CodeIgniter\BaseModel->update(Array, Array)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+#10 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2024-09-29 04:54:27 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), `direccion` = '2222', `comuna_id` = '2', `telefono` = '2222', `email` = 'MACU' at line 1
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `fecha_ingreso` = :fecha_ingreso:, `tipo_contrato` = :tipo_contrato:, `region_id` = :region_id:, `emailEmpresa` = :emailEmpresa:, `contacto_emergencia_2` = :contacto_emergencia_2:, `telefono_emergencia_2` = :telefono_emergencia_2:, `email_emergencia_2` = :email_emergencia_2:, `email_emergencia` = :email_emergencia:, `nro_cuenta` = :nro_cuenta:, `tipo_cuenta` = :tipo_cuenta:, `bancos` = :bancos:, `salud` = :salud:, `plan_salud` = :plan_salud:, `afp` = :afp:, `ingreso` = :ingreso:, `plazo_contrato` = :plazo_contrato:, `horas_trabajo` = :horas_trabajo:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 2 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 3 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 4 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 5 APPPATH\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-29 04:55:37 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), `direccion` = '2222', `comuna_id` = '2', `telefono` = '2222', `email` = 'MACU' at line 1 in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `trabaja...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `trabaja...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `trabaja...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabaja...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(943): CodeIgniter\Model->doUpdate(Array, Array)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(755): CodeIgniter\BaseModel->update(Array, Array)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+#10 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2024-09-29 04:55:37 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), `direccion` = '2222', `comuna_id` = '2', `telefono` = '2222', `email` = 'MACU' at line 1
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `fecha_ingreso` = :fecha_ingreso:, `tipo_contrato` = :tipo_contrato:, `region_id` = :region_id:, `emailEmpresa` = :emailEmpresa:, `contacto_emergencia_2` = :contacto_emergencia_2:, `telefono_emergencia_2` = :telefono_emergencia_2:, `email_emergencia_2` = :email_emergencia_2:, `email_emergencia` = :email_emergencia:, `nro_cuenta` = :nro_cuenta:, `tipo_cuenta` = :tipo_cuenta:, `bancos` = :bancos:, `salud` = :salud:, `plan_salud` = :plan_salud:, `afp` = :afp:, `ingreso` = :ingreso:, `plazo_contrato` = :plazo_contrato:, `horas_trabajo` = :horas_trabajo:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 2 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 3 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 4 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 5 APPPATH\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-29 04:56:10 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), `direccion` = '2222', `comuna_id` = '2', `telefono` = '2222', `email` = 'MACU' at line 1 in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `trabaja...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `trabaja...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `trabaja...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabaja...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(943): CodeIgniter\Model->doUpdate(Array, Array)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(755): CodeIgniter\BaseModel->update(Array, Array)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+#10 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2024-09-29 04:56:10 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), `direccion` = '2222', `comuna_id` = '2', `telefono` = '2222', `email` = 'MACU' at line 1
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `fecha_ingreso` = :fecha_ingreso:, `tipo_contrato` = :tipo_contrato:, `region_id` = :region_id:, `emailEmpresa` = :emailEmpresa:, `contacto_emergencia_2` = :contacto_emergencia_2:, `telefono_emergencia_2` = :telefono_emergencia_2:, `email_emergencia_2` = :email_emergencia_2:, `email_emergencia` = :email_emergencia:, `nro_cuenta` = :nro_cuenta:, `tipo_cuenta` = :tipo_cuenta:, `bancos` = :bancos:, `salud` = :salud:, `plan_salud` = :plan_salud:, `afp` = :afp:, `ingreso` = :ingreso:, `plazo_contrato` = :plazo_contrato:, `horas_trabajo` = :horas_trabajo:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 2 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 3 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 4 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 5 APPPATH\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-29 04:56:42 --> Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 335.
+ 1 SYSTEMPATH\Database\Query.php(335): strtr('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `fecha_ingreso` = :fecha_ingreso:, `tipo_contrato` = :tipo_contrato:, `region_id` = :region_id:, `emailEmpresa` = :emailEmpresa:, `contacto_emergencia_2` = :contacto_emergencia_2:, `telefono_emergencia_2` = :telefono_emergencia_2:, `email_emergencia_2` = :email_emergencia_2:, `email_emergencia` = :email_emergencia:, `nro_cuenta` = :nro_cuenta:, `tipo_cuenta` = :tipo_cuenta:, `bancos` = :bancos:, `salud` = :salud:, `plan_salud` = :plan_salud:, `afp` = :afp:, `ingreso` = :ingreso:, `plazo_contrato` = :plazo_contrato:, `horas_trabajo` = :horas_trabajo:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 2 SYSTEMPATH\Database\Query.php(310): CodeIgniter\Database\Query->matchNamedBinds('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `fecha_ingreso` = :fecha_ingreso:, `tipo_contrato` = :tipo_contrato:, `region_id` = :region_id:, `emailEmpresa` = :emailEmpresa:, `contacto_emergencia_2` = :contacto_emergencia_2:, `telefono_emergencia_2` = :telefono_emergencia_2:, `email_emergencia_2` = :email_emergencia_2:, `email_emergencia` = :email_emergencia:, `nro_cuenta` = :nro_cuenta:, `tipo_cuenta` = :tipo_cuenta:, `bancos` = :bancos:, `salud` = :salud:, `plan_salud` = :plan_salud:, `afp` = :afp:, `ingreso` = :ingreso:, `plazo_contrato` = :plazo_contrato:, `horas_trabajo` = :horas_trabajo:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(605): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `foto` = :foto:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `fecha_ingreso` = :fecha_ingreso:, `tipo_contrato` = :tipo_contrato:, `region_id` = :region_id:, `emailEmpresa` = :emailEmpresa:, `contacto_emergencia_2` = :contacto_emergencia_2:, `telefono_emergencia_2` = :telefono_emergencia_2:, `email_emergencia_2` = :email_emergencia_2:, `email_emergencia` = :email_emergencia:, `nro_cuenta` = :nro_cuenta:, `tipo_cuenta` = :tipo_cuenta:, `bancos` = :bancos:, `salud` = :salud:, `plan_salud` = :plan_salud:, `afp` = :afp:, `ingreso` = :ingreso:, `plazo_contrato` = :plazo_contrato:, `horas_trabajo` = :horas_trabajo:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 6 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 7 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 8 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 9 APPPATH\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+10 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+11 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+12 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-29 04:58:51 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), `updated_at` = '2024-09-29 04:58:51'
+WHERE `trabajadores`.`id` IN ('224')' at line 1 in C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `trabaja...', 0)
+#1 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(691): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `trabaja...')
+#2 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseConnection.php(605): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `trabaja...')
+#3 C:\laragon\www\eztaller\proys\admgescol\back\system\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabaja...', Array, false)
+#4 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+#5 C:\laragon\www\eztaller\proys\admgescol\back\system\BaseModel.php(943): CodeIgniter\Model->doUpdate(Array, Array)
+#6 C:\laragon\www\eztaller\proys\admgescol\back\system\Model.php(755): CodeIgniter\BaseModel->update(Array, Array)
+#7 C:\laragon\www\eztaller\proys\admgescol\back\app\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+#8 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+#9 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+#10 C:\laragon\www\eztaller\proys\admgescol\back\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\eztaller\proys\admgescol\back\public\index.php(78): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2024-09-29 04:58:51 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), `updated_at` = '2024-09-29 04:58:51'
+WHERE `trabajadores`.`id` IN ('224')' at line 1
+in SYSTEMPATH\Database\BaseConnection.php on line 645.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2462): CodeIgniter\Database\BaseConnection->query('UPDATE `trabajadores` SET `empresa_id` = :empresa_id:, `user_id` = :user_id:, `rut` = :rut:, `dv` = :dv:, `apellido_paterno` = :apellido_paterno:, `apellido_materno` = :apellido_materno:, `nombres` = :nombres:, `fecha_nac` = :fecha_nac:, `nacionalidad` = :nacionalidad:, `cargo_id` = :cargo_id:, `direccion` = :direccion:, `comuna_id` = :comuna_id:, `telefono` = :telefono:, `email` = :email:, `contacto_emergencia` = :contacto_emergencia:, `telefono_emergencia` = :telefono_emergencia:, `estado_id` = :estado_id:, `fecha_ingreso` = :fecha_ingreso:, `tipo_contrato` = :tipo_contrato:, `region_id` = :region_id:, `emailEmpresa` = :emailEmpresa:, `contacto_emergencia_2` = :contacto_emergencia_2:, `telefono_emergencia_2` = :telefono_emergencia_2:, `email_emergencia_2` = :email_emergencia_2:, `email_emergencia` = :email_emergencia:, `nro_cuenta` = :nro_cuenta:, `tipo_cuenta` = :tipo_cuenta:, `bancos` = :bancos:, `salud` = :salud:, `plan_salud` = :plan_salud:, `afp` = :afp:, `ingreso` = :ingreso:, `plazo_contrato` = :plazo_contrato:, `horas_trabajo` = :horas_trabajo:, `foto` = :foto:, `updated_at` = :updated_at:
+WHERE `trabajadores`.`id` IN :trabajadores.id:', [...], false)
+ 2 SYSTEMPATH\Model.php(395): CodeIgniter\Database\BaseBuilder->update()
+ 3 SYSTEMPATH\BaseModel.php(943): CodeIgniter\Model->doUpdate([...], [...])
+ 4 SYSTEMPATH\Model.php(755): CodeIgniter\BaseModel->update([...], [...])
+ 5 APPPATH\Controllers\Api\V1\TrabajadorController.php(289): CodeIgniter\Model->update('224', Object(stdClass))
+ 6 SYSTEMPATH\CodeIgniter.php(934): App\Controllers\Api\V1\TrabajadorController->update('224')
+ 7 SYSTEMPATH\CodeIgniter.php(499): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Api\V1\TrabajadorController))
+ 8 SYSTEMPATH\CodeIgniter.php(368): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(78): CodeIgniter\CodeIgniter->run()

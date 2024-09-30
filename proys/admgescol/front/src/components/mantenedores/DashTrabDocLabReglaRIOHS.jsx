@@ -7,7 +7,8 @@
   import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Dialog, DialogTitle, DialogContent, Paper, Typography, Box } from '@mui/material';
   import { Modal, TextField } from '@mui/material';
   import Swal from 'sweetalert2';
-  
+  import { Chip } from '@mui/material';
+
   import { Visibility } from '@mui/icons-material';
   import { useNavigate } from 'react-router-dom';
   
@@ -28,7 +29,8 @@
     const [selectedDocument, setSelectedDocument] = useState(null);
     const [password, setPassword] = useState('');
     const [signedDocuments, setSignedDocuments] = useState(new Set()); // Keep track of signed documents
-  
+    const [tipoDocumentos, setTipoDocumentos] = useState([]);
+
     const contractsPerPage = 10;
     const indexOfLastContract = currentPage * contractsPerPage;
     const indexOfFirstContract = indexOfLastContract - contractsPerPage;
@@ -77,6 +79,16 @@
       }
     };
 
+    const fetchTipoDocumentos = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/tipo_doc/all/${token}`); // Replace with your API endpoint
+        setTipoDocumentos(response.data);
+      } catch (error) {
+        console.error('Error fetching tipo_doc:', error);
+      }
+    };
+
+    fetchTipoDocumentos();
     fetchTrabajadores();
     fetchData();
   }, []);
@@ -198,6 +210,11 @@
     }
   };
 
+  const getTipoDocumentoNombre = (tipoDocId) => {
+    const tipoDoc = tipoDocumentos.find((tipo) => tipo.id === tipoDocId);
+    return tipoDoc ? tipoDoc.nombre : 'Desconocido';
+  };
+
   return (
     <div>
       <Typography variant="h4" component="h1" gutterBottom sx={{ color: 'black' }}>
@@ -216,40 +233,46 @@
           <TableBody>
             {currentContracts.map((d) => (
               <TableRow key={d.ruta}>
-                <TableCell sx={{ color: 'black' }}>{getTrabajadorNombre(d.trabajador)}</TableCell>
-                <TableCell sx={{ color: 'black' }}>{getMonthName(d.mes)} - {d.agno}</TableCell>
-                <TableCell sx={{ color: 'black' }}>{d.nombre}</TableCell>
-                <TableCell sx={{ color: 'black' }}>{d.agno}</TableCell>
-                <TableCell sx={{ color: 'black' }}>{d.nombre}</TableCell>
-                <TableCell>
+              <TableCell sx={{ color: 'black' }}>{getTrabajadorNombre(d.trabajador)}</TableCell>
+              <TableCell sx={{ color: 'black' }}>{getMonthName(d.mes)} - {d.agno}</TableCell>
+              <TableCell sx={{ color: 'black' }}>{getTipoDocumentoNombre(d.tipo_doc_id)}</TableCell>
+              <TableCell sx={{ color: 'black' }}>{d.nombre}</TableCell>
+              <TableCell sx={{ color: 'black' }}>
+                {d.firmado !== "0" ? (
+                  <Chip label="Firmado" color="primary" />
+                ) : (
+                  <Chip label="Pendiente" sx={{ backgroundColor: '#dc3545', color: 'white' }} />
+                )}
+              </TableCell>
+              <TableCell>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${d.ruta_pdf}?${new Date().getTime()}`)}
+                  startIcon={<Visibility sx={{ color: 'green' }} />}
+                >
+                  Ver Documento
+                </Button>
+                {d.firmado === "0" ? (
                   <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => handleClickOpen(`${API_DOWNLOAD_URL}/${d.ruta}?${new Date().getTime()}`)}
-                    startIcon={<Visibility sx={{ color: 'green' }} />}
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => handleOpenSignModal(d)}
+                    sx={{ ml: 2 }}
                   >
-                    Ver Documento
+                    Firmar Documento
                   </Button>
-                  {d.firmado === "0" ? (
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => handleOpenSignModal(d)}
-                      sx={{ ml: 2 }}
-                    >
-                      Firmar Documento
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="contained"
-                      color="success"
-                      sx={{ ml: 2 }}
-                    >
-                      Firmado
-                    </Button>
-                  )}
-                </TableCell>
-              </TableRow>
+                ) : (
+                  <Button
+                    variant="contained"
+                    color="success"
+                    sx={{ ml: 2 }}
+                  >
+                    Firmado
+                  </Button>
+                )}
+              </TableCell>
+            </TableRow>
             ))}
           </TableBody>
         </Table>
